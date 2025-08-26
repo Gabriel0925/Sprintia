@@ -51,18 +51,15 @@ entry_height = 45
 button_height = 50
 button_width = 180
 
-#variables
+# variables
 date_actuelle = date.today()
 
-#heure
+# heure
 maintenant = datetime.now()
 heure_actuelle_objet = maintenant.time()
-heure_debut = Time(hour=18, minute=0)
-heure_fin = Time(hour=23, minute=59)
 
-# variable global
+# variable globale
 periode_séléctionner = "1 semaine"
-
 
 def sidebar_exercice(account_id):
     boite1 = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner3)
@@ -228,6 +225,35 @@ def password_valide(password):
     if val:
         return val
 
+def navbar_mon_compte(account_id, mode_actuel):
+    sidebar_paramètre(account_id)
+    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
+    navbar.pack(pady=20)
+
+    def mise_mode(choix):
+        choix = mode_activité.get()
+        if choix == "Mon compte":
+            app.after(0, lambda: [vider_fenetre(app), mon_compte(account_id)])
+        elif choix == "Modifier":
+            app.after(0, lambda: [vider_fenetre(app), modifier_compte(account_id)])
+        elif choix == "Supprimer mon compte":
+            app.after(0, lambda: [vider_fenetre(app), supprimer_compte(account_id)])
+        elif choix == "Mot de passe oublié":
+            app.after(0, lambda: [vider_fenetre(app), modifier_password(account_id)])
+
+    mode_activité = ctk.CTkSegmentedButton(master=navbar, values=["Mon compte", "Modifier", "Supprimer mon compte", "Mot de passe oublié"],
+                                           height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
+                                           corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
+                                           fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
+                                           text_color=couleur1)
+    mode_activité.pack(side="left")
+    mode_activité.set(mode_actuel)
+    button_back = ctk.CTkButton(master=navbar, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3),
+                                    command=lambda: [vider_fenetre(app), parametre(account_id)])
+    button_back.pack(side="left", padx=10)
+
 def aide_objectif(account_id):
     try:
         curseur.execute("SELECT aide FROM Aide_objectif WHERE account_id = ?", (account_id,))
@@ -304,9 +330,9 @@ def aide_rpe(account_id):
             appris = "fait"
             curseur.execute("INSERT INTO Aide_rpe (account_id, aide)VALUES (?, ?)", (account_id, appris))
             con.commit()
-            messagebox.showinfo("C'est quoi le RPE ?", "Le RPE, ou Taux d'Effort Perçu, c'est une manière subjective de mesurer l'intensité de ton entraînement. En gros, tu notes l'effort que tu ressens sur une échelle de 1 à 10.")
+            messagebox.showinfo("C'est quoi le RPE ?", "Le RPE, c'est une manière subjective de mesurer l'intensité de ton entraînement. En gros, tu notes l'effort que tu ressens sur une échelle de 1 à 10.")
             messagebox.showinfo("Information importante", "Pour la distance, utilise un point au lieu d’une virgule. Par exemple, écris 9.62 pour indiquer 9,62 km.")
-            messagebox.showinfo("Information importante", "Lorsque tu indiques la durée, il faut arrondir les minutes à l’unité supérieure. Par exemple, si ta séance a duré 20 minutes et 44 secondes, tu devras noter 21 !")
+            messagebox.showinfo("Information importante", "Lorsque tu indiques la durée, il faut arrondir les minutes. Par exemple, si ta séance a duré 20 minutes et 44 secondes, tu devras noter 21 !")
     except sqlite3.Error as e:
         messagebox.showerror("Erreur", "Erreur de base de données !")
     except Exception as e:
@@ -332,7 +358,7 @@ def a_propos(account_id):
 
     frame_slogan = ctk.CTkFrame(master=app, fg_color="transparent")
     frame_slogan.pack(padx=10, pady=(20, 10))
-    slogan = ctk.CTkLabel(master=frame_slogan, text="Sprintia est conçue pour t'aidé avant et après un entraînement",
+    slogan = ctk.CTkLabel(master=frame_slogan, text="Sprintia est conçue pour t'aider avant et après un entraînement",
                           font=(font_principale, taille2))
     slogan.pack()
 
@@ -346,7 +372,7 @@ def a_propos(account_id):
     version = ctk.CTkLabel(master=frame_version, text="Version Sprintia : ",
                           font=(font_principale, taille2), text_color=couleur1)
     version.pack(side="left", padx=10, pady=5)
-    num_version = ctk.CTkLabel(master=frame_version, text="3.1 BÊTA 6 Affûtage | Version Septembre 2025",
+    num_version = ctk.CTkLabel(master=frame_version, text="3.1 BÊTA 7 Affûtage | Version Septembre 2025",
                           font=(font_principale, taille2), text_color=couleur1)
     num_version.pack(side="left", padx=10, pady=5)
     nom_dev = ctk.CTkLabel(master=frame_dev, text="Sprintia est développé par Gabriel Chapet",
@@ -370,7 +396,9 @@ def a_propos(account_id):
                             text="J'adore le sport, la tech et l'imformatique. Ce que j'adore dans le sport," \
                             " c'est les algorithmes qui vont m'aider à m'entraîner et à progresser dans mon sport, sans avoir de coach." \
                             " Je développe Sprintia pour vous aider à vous entraîner gratuitement sans matériel. Le seul matériel requis" \
-                            " pour faire fonctionner les algorithmes c'est une montre avec un chrono ou même un smartphone peut suffire pour utiliser Sprintia.",
+                            " pour faire fonctionner les algorithmes c'est une montre avec un chrono ou même un smartphone peut suffire pour utiliser Sprintia." \
+                            " Mais pour avoir un suivi plus complet, tu peux utiliser ton téléphone pour le GPS en course, vélo au moins tu pourras intégrer plus de données" \
+                            " dans Sprintia !",
                             font=(font_principale, taille3),  wraplength=950)
     quisuisje.pack(padx=10, pady=10)
 
@@ -448,7 +476,7 @@ def supprimer_activité(account_id, période_str):
                     con.commit()
                     messagebox.showinfo("Suppression réussie", "Activité supprimée avec succès.")
                     vider_fenetre(app)
-                    supprimer_activité(account_id, période_str)
+                    exercice(account_id)
                 else:
                     messagebox.showerror("Erreur", "L'ID de l'activité saisie n'existe pas ou n'appartient pas à votre compte.")
                     return
@@ -597,7 +625,7 @@ def ajouter_activité_course(account_id):
                 return
             date = date_obj.strftime('%Y-%m-%d')
         except ValueError:
-            messagebox.showerror("Erreur", "Format de date invalide. Utilisez JJ-MM-AAAA.")
+            messagebox.showerror("Erreur", "Format de date invalide ! Utilisez JJ-MM-AAAA ! Avec des tirets !")
 
         sport = "Course"
         try:
@@ -618,13 +646,13 @@ def ajouter_activité_course(account_id):
         climat = Options_climat.get(climat_entry.get().strip())
         fatigue = Options_fatigue.get(fatigue_entry.get().strip())
         if fatigue is None:
-            messagebox.showerror("Erreur", "Valeur de fatigue invalide !")
+            messagebox.showerror("Fatigue est vide", "La fatigue est obligatoire !")
             return
         if douleur is None:
-            messagebox.showerror("Erreur", "Valeur de douleur invalide !")
+            messagebox.showerror("Douleur est vide", "La douleur est obligatoire !")
             return
         if climat is None:
-            messagebox.showerror("Erreur", "Valeur de climat invalide !")
+            messagebox.showerror("Climat est vide", "Le climat est obligatoire !")
             return
         distance = None
         denivele = None
@@ -833,10 +861,10 @@ def ajouter_activité_intérieur(account_id):
         douleur = Options_douleur.get(douleur_entry.get().strip())
         fatigue = Options_fatigue.get(fatigue_entry.get().strip())
         if fatigue is None:
-            messagebox.showerror("Erreur", "Valeur de fatigue invalide !")
+            messagebox.showerror("Fatigue est vide", "La fatigue est obligatoire !")
             return
         if douleur is None:
-            messagebox.showerror("Erreur", "Valeur de douleur invalide !")
+            messagebox.showerror("Douleur est vide", "La douleur est obligatoire !")
             return
                                             
         charge_de_base = duree * rpe
@@ -1030,16 +1058,16 @@ def ajouter_activité_musculation(account_id):
         lieu = Options_lieu.get(lieu_entry.get().strip())
         équipement = matos_entry.get().strip()
         if fatigue is None:
-            messagebox.showerror("Erreur", "Valeur de fatigue invalide !")
+            messagebox.showerror("Fatigue est vide", "La fatigue est obligatoire !")
             return
         if douleur is None:
-            messagebox.showerror("Erreur", "Valeur de douleur invalide !")
+            messagebox.showerror("Douleur est vide", "La douleur est obligatoire !")
             return
         if lieu is None:
-            messagebox.showerror("Erreur", "Valeur du lieu invalide !")
+            messagebox.showerror("Lieu est vide", "Le lieu est obligatoire !")
             return
         if équipement is None:
-            messagebox.showerror("Erreur", "Valeur du type d'entraînement invalide !")
+            messagebox.showerror("Le type est vide", "Le type est obligatoire !")
             return
         sport = "Musculation"
                                             
@@ -1257,16 +1285,16 @@ def ajouter_activité_fooball(account_id):
         climat = Options_climat.get(climat_entry.get().strip())
         fatigue = Options_fatigue.get(fatigue_entry.get().strip())
         if fatigue is None:
-            messagebox.showerror("Erreur", "Valeur de fatigue invalide !")
+            messagebox.showerror("Fatigue est vide", "La fatigue est obligatoire !")
             return
         if douleur is None:
-            messagebox.showerror("Erreur", "Valeur de douleur invalide !")
+            messagebox.showerror("Douleur est vide", "La douleur est obligatoire !")
             return
         if climat is None:
-            messagebox.showerror("Erreur", "Valeur de climat invalide !")
+            messagebox.showerror("Climat est vide", "Le climat est obligatoire !")
             return
         if type_de_séances is None:
-            messagebox.showerror("Erreur", "Type de séance de foot invalide !")
+            messagebox.showerror("Type de séances de foot est vide", "Le type de séance de foot est obligatoire !")
             return
 
         if type_de_séances == "Entraînement":  
@@ -1433,6 +1461,7 @@ def ajouter_activité_extérieur(account_id):
             date = date_obj.strftime('%Y-%m-%d')
         except ValueError:
             messagebox.showerror("Erreur", "Format de date invalide. Utilisez JJ-MM-AAAA.")
+            return
         
         sport = sport_entry.get().strip()
         if not sport:
@@ -1456,13 +1485,13 @@ def ajouter_activité_extérieur(account_id):
         climat = Options_climat.get(climat_entry.get().strip())
         fatigue = Options_fatigue.get(fatigue_entry.get().strip())
         if fatigue is None:
-            messagebox.showerror("Erreur", "Valeur de fatigue invalide !")
+            messagebox.showerror("Fatigue est vide", "La fatigue est obligatoire !")
             return
         if douleur is None:
-            messagebox.showerror("Erreur", "Valeur de douleur invalide !")
+            messagebox.showerror("Douleur est vide", "La douleur est obligatoire !")
             return
         if climat is None:
-            messagebox.showerror("Erreur", "Valeur de climat invalide !")
+            messagebox.showerror("Climat est vide", "Le climat est obligatoire !")
             return
         distance = None
         denivele = None
@@ -1518,24 +1547,20 @@ def ajouter_activité_extérieur(account_id):
     bouton_valider.pack(side="left", padx=10)
     aide_rpe(account_id)
 
-def imc(account_id):
-    sidebar_outil(account_id)
-
+def navbar_outil(account_id, mode_actuel):
     navbar = ctk.CTkFrame(master=app, fg_color="transparent")
     navbar.pack(pady=20)
 
     def mise_mode(choix):
         choix = mode_activité.get()
-        if choix == "Prédicteur de performance":
-            app.after(0, lambda: [vider_fenetre(app), predicteur_temps(account_id)])
-        elif choix == "Zones cardiaque":
-            app.after(0, lambda: [vider_fenetre(app), zone_fc(account_id)])
-        elif choix == "Calculateur IMC":
-            app.after(0, lambda: [vider_fenetre(app), imc(account_id)])
-        elif choix == "Estimation VMA":
-            app.after(0, lambda: [vider_fenetre(app), VMA(account_id)])
-        elif choix == "Estimation VO2max":
-            app.after(0, lambda: [vider_fenetre(app), VO2MAX(account_id)])
+        navigation = {
+            "Prédicteur de performance": lambda: [vider_fenetre(app), predicteur_temps(account_id)],
+            "Zones cardiaque": lambda: [vider_fenetre(app), zone_fc(account_id)],
+            "Calculateur IMC": lambda: [vider_fenetre(app), imc(account_id)],
+            "Estimation VMA": lambda: [vider_fenetre(app), VMA(account_id)],
+            "Estimation VO2max": lambda: [vider_fenetre(app), VO2MAX(account_id)]
+        }
+        app.after(0, navigation[choix])
 
     mode_activité = ctk.CTkSegmentedButton(master=navbar, 
                                             values=["Prédicteur de performance", "Zones cardiaque", "Calculateur IMC", "Estimation VMA", "Estimation VO2max"],
@@ -1544,7 +1569,11 @@ def imc(account_id):
                                             fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
                                             text_color=couleur1)
     mode_activité.pack(side="left")
-    mode_activité.set("Calculateur IMC")
+    mode_activité.set(mode_actuel)
+
+def imc(account_id):
+    sidebar_outil(account_id)
+    navbar_outil(account_id, "Calculateur IMC")
 
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
@@ -1607,31 +1636,7 @@ def imc(account_id):
 
 def VO2MAX(account_id):
     sidebar_outil(account_id)
-
-    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
-    navbar.pack(pady=20)
-
-    def mise_mode(choix):
-        choix = mode_activité.get()
-        if choix == "Prédicteur de performance":
-            app.after(0, lambda: [vider_fenetre(app), predicteur_temps(account_id)])
-        elif choix == "Zones cardiaque":
-            app.after(0, lambda: [vider_fenetre(app), zone_fc(account_id)])
-        elif choix == "Calculateur IMC":
-            app.after(0, lambda: [vider_fenetre(app), imc(account_id)])
-        elif choix == "Estimation VMA":
-            app.after(0, lambda: [vider_fenetre(app), VMA(account_id)])
-        elif choix == "Estimation VO2max":
-            app.after(0, lambda: [vider_fenetre(app), VO2MAX(account_id)])
-
-    mode_activité = ctk.CTkSegmentedButton(master=navbar, 
-                                            values=["Prédicteur de performance", "Zones cardiaque", "Calculateur IMC", "Estimation VMA", "Estimation VO2max"],
-                                            height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
-                                            corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
-                                            fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
-                                            text_color=couleur1)
-    mode_activité.pack(side="left")
-    mode_activité.set("Estimation VO2max")
+    navbar_outil(account_id, "Estimation VO2max")
 
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
@@ -1847,31 +1852,7 @@ def VO2MAX(account_id):
 
 def VMA(account_id):
     sidebar_outil(account_id)
-
-    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
-    navbar.pack(pady=20)
-
-    def mise_mode(choix):
-        choix = mode_activité.get()
-        if choix == "Prédicteur de performance":
-            app.after(0, lambda: [vider_fenetre(app), predicteur_temps(account_id)])
-        elif choix == "Zones cardiaque":
-            app.after(0, lambda: [vider_fenetre(app), zone_fc(account_id)])
-        elif choix == "Calculateur IMC":
-            app.after(0, lambda: [vider_fenetre(app), imc(account_id)])
-        elif choix == "Estimation VMA":
-            app.after(0, lambda: [vider_fenetre(app), VMA(account_id)])
-        elif choix == "Estimation VO2max":
-            app.after(0, lambda: [vider_fenetre(app), VO2MAX(account_id)])
-
-    mode_activité = ctk.CTkSegmentedButton(master=navbar, 
-                                            values=["Prédicteur de performance", "Zones cardiaque", "Calculateur IMC", "Estimation VMA", "Estimation VO2max"],
-                                            height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
-                                            corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
-                                            fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
-                                            text_color=couleur1)
-    mode_activité.pack(side="left")
-    mode_activité.set("Estimation VMA")
+    navbar_outil(account_id, "Estimation VMA")
 
     Info = ctk.CTkLabel(master=app ,text="Pour une estimation plus précise, utilise la distance parcourue à fond en 6 minutes.", font=(font_secondaire, taille2))
     Info.pack(padx=50, pady=10)
@@ -1898,15 +1879,17 @@ def VMA(account_id):
     def calcul_VMA():
         try:
             distance = float(distance_entry.get().strip())
-            temps_autre = float(temps_entry.get().strip())
-            temps = temps_autre/60
-
-            if distance <= 0 or temps <=0:
-                messagebox.showerror("Erreur", "La distance et le temps doivent être supérieur à 0 !")
-                return
-            if not distance or not temps:
-                messagebox.showerror("Erreur", "La distance et le temps ne peuvent pas être vides !")
-                return
+            try:
+                temps_autre = int(temps_entry.get().strip())
+                temps = temps_autre/60
+                if distance <= 0 or temps <=0:
+                    messagebox.showerror("Erreur", "La distance et le temps doivent être supérieur à 0 !")
+                    return
+                if distance <= 0 or temps <=0:
+                    messagebox.showerror("Erreur", "La distance et le temps doivent être supérieur à 0 !")
+                    return
+            except ValueError:
+                messagebox.showerror("Erreur", "Les minutes doivent être un nombre entier !")
             else:
                 vma = distance / temps
 
@@ -1952,31 +1935,7 @@ def VMA(account_id):
 
 def zone_fc(account_id):
     sidebar_outil(account_id)
-
-    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
-    navbar.pack(pady=20)
-
-    def mise_mode(choix):
-        choix = mode_activité.get()
-        if choix == "Prédicteur de performance":
-            app.after(0, lambda: [vider_fenetre(app), predicteur_temps(account_id)])
-        elif choix == "Zones cardiaque":
-            app.after(0, lambda: [vider_fenetre(app), zone_fc(account_id)])
-        elif choix == "Calculateur IMC":
-            app.after(0, lambda: [vider_fenetre(app), imc(account_id)])
-        elif choix == "Estimation VMA":
-            app.after(0, lambda: [vider_fenetre(app), VMA(account_id)])
-        elif choix == "Estimation VO2max":
-            app.after(0, lambda: [vider_fenetre(app), VO2MAX(account_id)])
-
-    mode_activité = ctk.CTkSegmentedButton(master=navbar, 
-                                            values=["Prédicteur de performance", "Zones cardiaque", "Calculateur IMC", "Estimation VMA", "Estimation VO2max"],
-                                            height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
-                                            corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
-                                            fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
-                                            text_color=couleur1)
-    mode_activité.pack(side="left")
-    mode_activité.set("Zones cardiaque")
+    navbar_outil(account_id, "Zones cardiaque")
 
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
@@ -2030,31 +1989,7 @@ def zone_fc(account_id):
 
 def predicteur_temps(account_id):
     sidebar_outil(account_id)
-
-    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
-    navbar.pack(pady=20)
-
-    def mise_mode(choix):
-        choix = mode_activité.get()
-        if choix == "Prédicteur de performance":
-            app.after(0, lambda: [vider_fenetre(app), predicteur_temps(account_id)])
-        elif choix == "Zones cardiaque":
-            app.after(0, lambda: [vider_fenetre(app), zone_fc(account_id)])
-        elif choix == "Calculateur IMC":
-            app.after(0, lambda: [vider_fenetre(app), imc(account_id)])
-        elif choix == "Estimation VMA":
-            app.after(0, lambda: [vider_fenetre(app), VMA(account_id)])
-        elif choix == "Estimation VO2max":
-            app.after(0, lambda: [vider_fenetre(app), VO2MAX(account_id)])
-
-    mode_activité = ctk.CTkSegmentedButton(master=navbar, 
-                                            values=["Prédicteur de performance", "Zones cardiaque", "Calculateur IMC", "Estimation VMA", "Estimation VO2max"],
-                                            height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
-                                            corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
-                                            fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
-                                            text_color=couleur1)
-    mode_activité.pack(side="left")
-    mode_activité.set("Prédicteur de performance")
+    navbar_outil(account_id, "Prédicteur de performance")
 
     Info = ctk.CTkLabel(master=app ,text="N'oublie pas que cette prédiction est une estimation basée sur la\nthéorie"\
                          " et peut varier en fonction de nombreux facteurs\nle jour de la course !", font=(font_secondaire, taille2),
@@ -2210,8 +2145,8 @@ def signaler_bug(account_id):
         body = f"Message de l'utilisateur:\n{avis}"
         mailto_link = f"mailto:{email_receiver}?subject={quote(subject)}&body={quote(body)}"
         try:
+            messagebox.showinfo("Première étape terminée", "Ton application de mail par défaut va s'ouvrir ! Il ne te resteras plus qu'à cliquer sur envoyer.")
             webbrowser.open(mailto_link)
-            messagebox.showinfo("Première étape terminée", "Ton application mail par défaut s'est ouverte !")
         except Exception as e:
             messagebox.showerror("Erreur", "Impossible d'ouvrir ton application mail. Vérifie que tu as une application pour gérer tes mails !")
     frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
@@ -2257,8 +2192,8 @@ def proposer_fonction(account_id):
         body = f"Message de l'utilisateur:\n{avis}"
         mailto_link = f"mailto:{email_receiver}?subject={quote(subject)}&body={quote(body)}"
         try:
+            messagebox.showinfo("Première étape terminée", "Ton application de mail par défaut va s'ouvrir ! Il ne te resteras plus qu'à cliquer sur envoyer.")
             webbrowser.open(mailto_link)
-            messagebox.showinfo("Première étape terminée", "Ton application mail par défaut s'est ouverte !")
         except Exception as e:
             messagebox.showerror("Erreur", "Impossible d'ouvrir ton application mail. Vérifie que tu as une application pour gérer tes mails. !")
     frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
@@ -2305,7 +2240,7 @@ def quoi_de_neuf(account_id):
     button_back.pack(side="left", padx=(3, 10))
 
     PatchNote = ctk.CTkLabel(patch_note, font=(font_principale, taille3), text_color=couleur1, wraplength=950, anchor="w", corner_radius=corner1,
-        text="""Type : Mise à jour mineure\n
+        text="""Type : Mise à jour mineure\nDate de sortie : 31 Août 2025\n
     🆕 Nouvelles fonctionnalités
     • Option “Tous” : affiche désormais l’historique complet des entraînements.
     • "Quoi de neuf dans Sprintia 3.1" : nouvelle section dans les paramètres (accessible directement dans l’app).
@@ -2339,7 +2274,8 @@ def quoi_de_neuf(account_id):
     • Sprintia va désormais te tutoyer pour être plus proche de son utilisateur.
     • Gestion des erreurs du format de la date à l'ajout d'un objectif et d'une compétition.
     • Correction de bug lors de la suppression du bug.
-    • Sécurité amélioré.
+    • Sécurité des données amélioré.
+    • Amélioration légère de l'interface du graphique de Charge d'entraînement.
     • Optimisations du code pour la Side-Bar."""
     , justify="left")
     PatchNote.pack(expand=True, fill="both", padx=5, pady=5)
@@ -2374,8 +2310,8 @@ def avis (account_id):
         body = f"Message de l'utilisateur:\n{avis}"
         mailto_link = f"mailto:{email_receiver}?subject={quote(subject)}&body={quote(body)}"
         try:
+            messagebox.showinfo("Première étape terminée", "Ton application de mail par défaut va s'ouvrir ! Il ne te resteras plus qu'à cliquer sur envoyer.")
             webbrowser.open(mailto_link)
-            messagebox.showinfo("Première étape terminée", "Ton application mail par défaut s'est ouverte !")
         except Exception as e:
             messagebox.showerror("Erreur", "Impossible d'ouvrir ton application mail. Vérifie que tu as une application pour gérer tes mails. !")
     frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
@@ -2522,38 +2458,11 @@ def mettre_en_pause_les_analyses(account_id):
     button_retour.pack(side="left", padx=5, pady=10)
 
 def modifier_password(account_id):
-    sidebar_paramètre(account_id)
-
-    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
-    navbar.pack(pady=20)
+    navbar_mon_compte(account_id, "Mot de passe oublié")
     frame2 = ctk.CTkFrame(master=app, fg_color="transparent")        
     frame2.pack(pady=(10, 20))
     carte = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)        
     carte.pack(pady=(10, 20))
-
-    def mise_mode(choix):
-        choix = mode_activité.get()
-        if choix == "Mon compte":
-            app.after(0, lambda: [vider_fenetre(app), mon_compte(account_id)])
-        elif choix == "Modifier":
-            app.after(0, lambda: [vider_fenetre(app), modifier_compte(account_id)])
-        elif choix == "Supprimer mon compte":
-            app.after(0, lambda: [vider_fenetre(app), supprimer_compte(account_id)])
-        elif choix == "Mot de passe oublié":
-            app.after(0, lambda: [vider_fenetre(app), modifier_password(account_id)])
-
-    mode_activité = ctk.CTkSegmentedButton(master=navbar, values=["Mon compte", "Modifier", "Supprimer mon compte", "Mot de passe oublié"],
-                                           height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
-                                           corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
-                                           fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
-                                           text_color=couleur1)
-    mode_activité.pack(side="left")
-    mode_activité.set("Mot de passe oublié")
-    button_back = ctk.CTkButton(master=navbar, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=lambda: [vider_fenetre(app), parametre(account_id)])
-    button_back.pack(side="left", padx=10)
 
     info = ctk.CTkLabel(master=frame2 ,text="Mot de passe oublié ? Pas de panique, remplis le formulaire ci-dessus et ton mot de passe sera modifié",
                          font=(font_secondaire, taille2), wraplength=800)
@@ -2562,11 +2471,11 @@ def modifier_password(account_id):
     app.bind('<Return>', lambda event: new_username(account_id))
     password_entry = ctk.CTkEntry(master=carte, placeholder_text="Nouveau mot de passe", border_color=couleur1, fg_color=couleur1,
                                   height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=370)
+                                  text_color="white", width=370, show="*")
     password_entry.pack(pady=(12, 5), padx=11)
     password_entry2 = ctk.CTkEntry(master=carte, placeholder_text="Confirme ton nouveau mot de passe", border_color=couleur1, fg_color=couleur1,
                                   height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=370)
+                                  text_color="white", width=370, show="*")
     password_entry2.pack(pady=(5, 12), padx=11)
     def new_username(account_id):
         new_password = password_entry.get()
@@ -2598,11 +2507,7 @@ def modifier_password(account_id):
     button_check.pack(padx=10, pady=15)
 
 def modifier_compte(account_id):
-    sidebar_paramètre(account_id)
-
-    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
-    navbar.pack(pady=20)
-    
+    navbar_mon_compte(account_id, "Modifier")
     info_pack = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)
     info_pack.pack(pady=10)
 
@@ -2626,30 +2531,6 @@ def modifier_compte(account_id):
     result = curseur.fetchall()
     username = result[0][0]
 
-    def mise_mode(choix):
-        choix = mode_activité.get()
-        if choix == "Mon compte":
-            app.after(0, lambda: [vider_fenetre(app), mon_compte(account_id)])
-        elif choix == "Modifier":
-            app.after(0, lambda: [vider_fenetre(app), modifier_compte(account_id)])
-        elif choix == "Supprimer mon compte":
-            app.after(0, lambda: [vider_fenetre(app), supprimer_compte(account_id)])
-        elif choix == "Mot de passe oublié":
-            app.after(0, lambda: [vider_fenetre(app), modifier_password(account_id)])
-
-    mode_activité = ctk.CTkSegmentedButton(master=navbar, values=["Mon compte", "Modifier", "Supprimer mon compte", "Mot de passe oublié"],
-                                           height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
-                                           corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
-                                           fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
-                                           text_color=couleur1)
-    mode_activité.pack(side="left")
-    mode_activité.set("Modifier")
-    button_back = ctk.CTkButton(master=navbar, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=lambda: [vider_fenetre(app), parametre(account_id)])
-    button_back.pack(side="left", padx=10)
-
     app.bind('<Return>', lambda event: enregistré())
     if bio is None:
         width_entry = 275
@@ -2670,7 +2551,7 @@ def modifier_compte(account_id):
     sport_label = ctk.CTkLabel(master=frame_sport, text="Ton sport favoris : ", font=(font_secondaire, taille2), text_color=couleur1,
                                width=LABEL_WIDTH)
     sport_label.pack(side="left")
-    sport_favoris_entry = ctk.CTkEntry(master=frame_sport, placeholder_text=f"{sport}", border_color=couleur1, fg_color=couleur1,
+    sport_favoris_entry = ctk.CTkEntry(master=frame_sport, placeholder_text=f"{sport if sport is not None else "Ajoute un sport favoris."}", border_color=couleur1, fg_color=couleur1,
                                   height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
                                   text_color="white", width=width_entry)
     sport_favoris_entry.pack(side="left", padx=(0, 12))
@@ -2679,7 +2560,7 @@ def modifier_compte(account_id):
                               width=LABEL_WIDTH)
     bio_label.pack(side="left", anchor="n")
     if bio is None:
-        bio_entry = ctk.CTkEntry(master=frame_bio, placeholder_text=f"{bio}", border_color=couleur1, fg_color=couleur1,
+        bio_entry = ctk.CTkEntry(master=frame_bio, placeholder_text=f"{bio if bio is not None else "Ajoute une bio."}", border_color=couleur1, fg_color=couleur1,
                                       height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
                                       text_color="white", width=width_entry)
         bio_entry.pack(side="left", padx=(0, 10), pady=(0,11))
@@ -2728,38 +2609,11 @@ def modifier_compte(account_id):
     button_enregistrer.pack(side="left", padx=10)
 
 def supprimer_compte(account_id):
-    sidebar_paramètre(account_id)
-
-    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
-    navbar.pack(pady=20)
+    navbar_mon_compte(account_id, "Supprimer mon compte")
     info = ctk.CTkFrame(master=app, fg_color="transparent")
     info.pack()
     carte = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)        
     carte.pack(pady=(10, 20))
-
-    def mise_mode(choix):
-        choix = mode_activité.get()
-        if choix == "Mon compte":
-            app.after(0, lambda: [vider_fenetre(app), mon_compte(account_id)])
-        elif choix == "Modifier":
-            app.after(0, lambda: [vider_fenetre(app), modifier_compte(account_id)])
-        elif choix == "Supprimer mon compte":
-            app.after(0, lambda: [vider_fenetre(app), supprimer_compte(account_id)])
-        elif choix == "Mot de passe oublié":
-            app.after(0, lambda: [vider_fenetre(app), modifier_password(account_id)])
-
-    mode_activité = ctk.CTkSegmentedButton(master=navbar, values=["Mon compte", "Modifier", "Supprimer mon compte", "Mot de passe oublié"],
-                                           height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
-                                           corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
-                                           fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
-                                           text_color=couleur1)
-    mode_activité.pack(side="left")
-    mode_activité.set("Supprimer mon compte")
-    button_retour = ctk.CTkButton(master=navbar, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=lambda: [vider_fenetre(app), parametre(account_id)])
-    button_retour.pack(side="left", padx=10)
 
     info = ctk.CTkLabel(master=info ,text="Ton compte est sur le point d'être supprimé. Ça veut dire que toutes tes données " \
     "et ton accès à à Sprintia sera perdu, et il n'y aura pas de retour en arrière possible.", font=(font_secondaire, taille2), wraplength=800)
@@ -2783,15 +2637,24 @@ def supprimer_compte(account_id):
         if option == "oui":
             try:
                 curseur.execute("DELETE FROM Pauses_v2 WHERE account_id = ?", (account_id,))
+
                 curseur.execute("DELETE FROM Objectif WHERE account_id = ?", (account_id,))
                 curseur.execute("DELETE FROM Compétition WHERE account_id = ?", (account_id,))
+
                 curseur.execute("DELETE FROM Activité WHERE account_id = ?", (account_id,))
                 curseur.execute("DELETE FROM Activité_extérieur WHERE account_id = ?", (account_id,))
                 curseur.execute("DELETE FROM Activité_running WHERE account_id = ?", (account_id,))
                 curseur.execute("DELETE FROM Activité_intérieur WHERE account_id = ?", (account_id,))
                 curseur.execute("DELETE FROM Activité_musculation WHERE account_id = ?", (account_id,))
                 curseur.execute("DELETE FROM Activité_football WHERE account_id = ?", (account_id,))
+
                 curseur.execute("DELETE FROM Account WHERE id = ?", (account_id,))
+
+                curseur.execute("DELETE FROM Aide_rpe WHERE account_id = ?", (account_id,))
+                curseur.execute("DELETE FROM Aide_bienvenue WHERE account_id = ?", (account_id,))
+                curseur.execute("DELETE FROM Aide_objectif WHERE account_id = ?", (account_id,))
+                curseur.execute("DELETE FROM Aide_compétition WHERE account_id = ?", (account_id,))
+                curseur.execute("DELETE FROM Aide_podcast WHERE account_id = ?", (account_id,))
                 con.commit()
                 messagebox.showinfo("Opération réussi", "Compte supprimé avec succès ! Au revoir !")
                 vider_fenetre(app)
@@ -2951,7 +2814,7 @@ def supprimer_compétition(account_id):
                                              text_color=couleur_text, wraplength=130)
                     label.grid(row=row_idx + 1, column=col_idx, padx=6, pady=15, sticky="ew")
         else:
-            pas_données = ctk.CTkLabel(master=tableau_frame, text="Aucun objectif futur n'a été enregistré.", font=("Arial", 14))
+            pas_données = ctk.CTkLabel(master=tableau_frame, text="Aucun objectif futur n'a été enregistré.", font=(font_principale, taille2))
             pas_données.grid(row=1, column=0, columnspan=len(headers), pady=20)
 
         def supression(account_id):
@@ -2966,7 +2829,7 @@ def supprimer_compétition(account_id):
                     con.commit()
                     messagebox.showinfo("Suppression réussie", "Compétition supprimée avec succès.")
                     vider_fenetre(app)
-                    supprimer_compétition(account_id)
+                    compétition(account_id)
                 else:
                     messagebox.showerror("Erreur", "L'ID de la compétition saisie n'existe pas ou n'appartient pas à ton compte !")
             except sqlite3.Error as e:
@@ -3676,7 +3539,7 @@ def supprimer_objectif(account_id):
                                              text_color=couleur_text, wraplength=130)
                     label.grid(row=row_idx + 1, column=col_idx, padx=6, pady=15, sticky="ew")
         else:
-            pas_données = ctk.CTkLabel(master=tableau_frame, text="Aucun objectif futur n'a été enregistré.", font=("Arial", 14))
+            pas_données = ctk.CTkLabel(master=tableau_frame, text="Aucun objectif futur n'a été enregistré.", font=(font_principale, taille2))
             pas_données.grid(row=1, column=0, columnspan=len(headers), pady=20)
 
         def supression(account_id):
@@ -3691,7 +3554,7 @@ def supprimer_objectif(account_id):
                     con.commit()
                     messagebox.showinfo("Suppression réussie", "Objectif supprimé avec succès.")
                     vider_fenetre(app)
-                    supprimer_objectif(account_id)
+                    objectifs(account_id)
                 else:
                     messagebox.showerror("Erreur", "L'ID de l'objectif saisi n'existe pas ou n'appartient pas à ton compte !")
             except sqlite3.Error as e:
@@ -4006,7 +3869,7 @@ def indulgence_de_course(account_id):
                 zone = ctk.CTkLabel(master=h1_zone, text="🚀 Zone optimale pour progresser", font=(font_secondaire, taille2),
                                             width=300, wraplength=300, text_color="#00BA47")
                 zone.pack(fill="both", expand=True, padx=10, pady=10)              
-                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Tu es entrain de progresser en course, bravo !", font=(font_principale, taille3),
+                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Tu es entrain de progresser en course, bravo ! Tu as fais le plus dur !", font=(font_principale, taille3),
                                                 width=300, wraplength=300)
                 interprétation_zone.pack(fill="both", expand=True, padx=10, pady=10)
                         
@@ -4018,11 +3881,11 @@ def indulgence_de_course(account_id):
                 zone = ctk.CTkLabel(master=h1_zone, text="🤕 Zone optimale pour se blesser", font=(font_secondaire, taille2),
                                             width=300, wraplength=300, text_color="#c60000")
                 zone.pack(fill="both", expand=True, padx=10, pady=10)              
-                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Ton volume kilométrique hebdomadaire est actuellement très élevés.", font=(font_principale, taille3),
+                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Ton volume kilométrique hebdomadaire est actuellement très élevés par rapport à d'habitude.", font=(font_principale, taille3),
                                                 width=300, wraplength=300)
                 interprétation_zone.pack(fill="both", expand=True, padx=10, pady=10)
                         
-                conseil_pour_progresser = ctk.CTkLabel(master=conseil, text="Prends 3 à 4 jours de pause sans courir pour permettre à ton corps de bien récupérer. La course à pied sollicite énormément tes muscles et articulations, et enchaîner sans repos augmente le risque de blessure. Ce temps de récupération est essentiel pour revenir plus fort et éviter la surcharge.", font=(font_principale, taille3),
+                conseil_pour_progresser = ctk.CTkLabel(master=conseil, text="Prends quelques jours de pause sans courir pour permettre à ton corps de bien récupérer. La course à pied sollicite énormément tes muscles et articulations, et enchaîner sans repos augmente le risque de blessure. Ce temps de récupération est essentiel pour revenir plus fort et éviter la surcharge.", font=(font_principale, taille3),
                                                 width=300, wraplength=500)
                 conseil_pour_progresser.pack(fill="both", expand=True, padx=10, pady=10)
 
@@ -4038,10 +3901,10 @@ def indulgence_de_course(account_id):
                 conseil_pour_progresser.pack(fill="both", expand=True, padx=10, pady=10)
 
             else:
-                zone = ctk.CTkLabel(master=h1_zone, text="⬇️  Zone optimale pour perdre du niveau", font=(font_secondaire, taille2),
+                zone = ctk.CTkLabel(master=h1_zone, text="⏬ Zone optimale pour perdre du niveau", font=(font_secondaire, taille2),
                                             width=300, wraplength=300, text_color="#C01802")
                 zone.pack(fill="both", expand=True, padx=10, pady=10)              
-                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Ton volume kilométrique hebdomadaire est actuellement en dessous des niveaux optimaux pour progresser.", font=(font_principale, taille3),
+                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Ton volume kilométrique hebdomadaire est actuellement en dessous des niveaux optimaux pour progresser. Tu en fais moins que d'habitude !", font=(font_principale, taille3),
                                                 width=300, wraplength=300)
                 interprétation_zone.pack(fill="both", expand=True, padx=10, pady=10)
                         
@@ -4298,7 +4161,7 @@ def charge_entraînement(account_id):
             fig, ax = plt.subplots(figsize=(12, 4))
             sns.lineplot(x=dates_graphique, y=charges_graphique, marker="o", color="black")
 
-            ax.axhline(y=charge_chronique, color=couleur1, linestyle="-")
+            ax.axhline(y=charge_chronique, color=couleur1, linestyle="--", label="Charge chronique")
             ax.set_title("Évolution de la charge chronique")
             ax.set_xlabel("Date")
             ax.set_ylabel("Charge chronique")
@@ -4326,10 +4189,7 @@ def charge_entraînement(account_id):
     c_quoi.pack(fill="both", expand=True, padx=10, pady=(5, 10))
 
 def mon_compte(account_id):
-    sidebar_paramètre(account_id)
-
-    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
-    navbar.pack(pady=20)
+    navbar_mon_compte(account_id, "Mon compte")
     info = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur1)
     info.pack(padx=15, pady=20)
 
@@ -4343,32 +4203,8 @@ def mon_compte(account_id):
     result3 = curseur.fetchall()
     username = result3[0][0]
 
-    def mise_mode(choix):
-        choix = mode_activité.get()
-        if choix == "Mon compte":
-            app.after(0, lambda: [vider_fenetre(app), mon_compte(account_id)])
-        elif choix == "Modifier":
-            app.after(0, lambda: [vider_fenetre(app), modifier_compte(account_id)])
-        elif choix == "Supprimer mon compte":
-            app.after(0, lambda: [vider_fenetre(app), supprimer_compte(account_id)])
-        elif choix == "Mot de passe oublié":
-            app.after(0, lambda: [vider_fenetre(app), modifier_password(account_id)])
-
-    mode_activité = ctk.CTkSegmentedButton(master=navbar, values=["Mon compte", "Modifier", "Supprimer mon compte", "Mot de passe oublié"],
-                                           height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
-                                           corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
-                                           fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
-                                           text_color=couleur1)
-    mode_activité.pack(side="left")
-    mode_activité.set("Mon compte")
-    button_back = ctk.CTkButton(master=navbar, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=lambda: [vider_fenetre(app), parametre(account_id)])
-    button_back.pack(side="left", padx=10)
-
     info = ctk.CTkLabel(master=info ,text=
-                        f"Ton ID : {account_id}\n\nTon pseudo : {username}\n\nTon sport favoris : {sport}\n\nTa bio : {bio}", 
+                        f"Ton ID : {account_id}\n\nTon pseudo : {username}\n\nTon sport favoris : {sport if sport is not None else "Tu n'as pas de sport."}\n\nTa bio : {bio if bio is not None else "Tu n'as pas de bio."}", 
                         font=(font_principale, taille2), justify="left", wraplength=800)
     info.pack(padx=20, pady=20)
 
@@ -4377,10 +4213,10 @@ def parametre(account_id):
 
     def actu():
         messagebox.showinfo("Information", "Ton navigateur par défaut va s'ouvrir pour que tu puisses avoir accès aux actualités sur Sprintia.")
-        webbrowser.open("https://drive.google.com/drive/folders/1oXhp9ooEboUpcfmAUhxVXqRBPN188BuM?usp=drive_link")
+        webbrowser.open("https://github.com/Gabriel0925/Sprintia/tree/main/Actu")
     def beta_testeur():
-        messagebox.showwarning("Information", "Tu vas bientôt recevoir l’accès à la version bêta de Sprintia. Merci pour ton soutien ! Juste un rappel important : une version bêta n’est pas adaptée à tous les utilisateurs. Je t’invite à bien consulter la documentation avant de commencer.")
-        webbrowser.open("https://drive.google.com/drive/folders/14R9-V4i5CZkLo3bmow5ocwOdjRaiQ7GE?usp=drive_link")
+        messagebox.showwarning("Information", "Ton navigateur va s'ouvrir pour que tu puisses télécharger le programme bêta. Juste un rappel important : une version bêta n’est pas adaptée à tous les utilisateurs. Je t’invite à bien consulter la documentation avant de commencer.")
+        webbrowser.open("https://github.com/Gabriel0925/Sprintia/tree/main/Programme%20B%C3%8ATA")
 
     Titre = ctk.CTkLabel(master=app ,text="Paramètres", font=(font_secondaire, taille1), text_color=couleur_text)
     Titre.pack(padx=50, pady=20)
@@ -4507,7 +4343,7 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql):
     mode_activité.pack(side="left")
     mode_activité.set(type_de_catégorie)
     if type_de_catégorie == "Musculation":
-        wraplength_tableau = 110
+        wraplength_tableau = 100
     elif type_de_catégorie == "Tous":
         wraplength_tableau = 180
     elif type_de_catégorie == "Course":
@@ -4516,9 +4352,9 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql):
         wraplength_tableau = 130
 
     if type_de_catégorie == "Musculation":
-        padx_tableau = 3
+        padx_tableau = 2
     elif type_de_catégorie == "Tous":
-        padx_tableau = 10
+        padx_tableau = 15
     elif type_de_catégorie == "Course":
         padx_tableau = 2
     elif type_de_catégorie == "Intérieur":
@@ -4560,11 +4396,10 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql):
             else:
                 pas_donnees = ctk.CTkLabel(master=tableau_frame, text="Aucune activité enregistrée pour cette période.", font=(font_principale, taille1))
                 pas_donnees.grid(row=1, column=0, columnspan=len(headers), pady=20)
-
         except sqlite3.Error as e:
             messagebox.showerror("Erreur", "Erreur de base de données lors de la récupération de ton historique !")
         except Exception as e:
-            messagebox.showerror("Erreur", f"{e}")
+            messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
     combo_periode.configure(command=mettre_a_jour_historique)
     combo_periode.set(periode_séléctionner)
     mettre_a_jour_historique(periode_séléctionner)
@@ -4891,8 +4726,8 @@ def maj_base_de_données():
     sport2_deuxième_étape = "piste"
     sport3_première_étape = "tapis"
     sport3_deuxième_étape = "course"
+    appris = "fait"
     try:
-        appris = "fait"
         # Le %% ça créer une recherche et le LIKE ça va faire une recherche qui contient "course" et "pied" ça veut dire que peut importe ce qu'il y a au milieu ca le transferera quand meme
         curseur.execute("INSERT INTO Activité_running (account_id, date_activité, sport, durée, distance, dénivelé, rpe, charge, nom) SELECT account_id, date_activité, sport, durée, distance, dénivelé, rpe, charge, nom FROM Activité WHERE LOWER(sport) LIKE ? AND LOWER(sport) LIKE ?", (f"%{sport_première_étape}%", f"%{sport_deuxième_étape}%"))
         curseur.execute("INSERT INTO Activité_running (account_id, date_activité, sport, durée, distance, dénivelé, rpe, charge, nom) SELECT account_id, date_activité, sport, durée, distance, dénivelé, rpe, charge, nom FROM Activité WHERE LOWER(sport) LIKE ? AND LOWER(sport) LIKE ?", (f"%{sport2_première_étape}%", f"%{sport2_deuxième_étape}%"))
@@ -4905,9 +4740,9 @@ def maj_base_de_données():
         con.commit()
         mettre_à_jour_base_de_donées()
     except sqlite3.Error as e:
-        messagebox.showwarning("Erreur", "Erreur de base de données lors de la mise à jour de la base de donnée !")
+        messagebox.showerror("Erreur", "Erreur de base de donnée lors de la mise à jour de ta base de données !")
     except Exception as e:
-        messagebox.showwarning("Erreur", "Une erreur inattendu s'est produite, réessaye !")
+        messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
 
 if __name__ == "__main__":
     try:
@@ -4917,7 +4752,7 @@ if __name__ == "__main__":
         curseur.execute('''CREATE TABLE IF NOT EXISTS Account (id INTEGER PRIMARY KEY AUTOINCREMENT,username TEXT UNIQUE NOT NULL,password TEXT NOT NULL, sport TEXT, bio TEXT)''')
         
         curseur.execute('''CREATE TABLE IF NOT EXISTS Activité (id_activité INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER,date_activité TEXT,sport TEXT,durée INTEGER,rpe INTEGER,charge INTEGER,FOREIGN KEY (account_id)REFERENCES Account (id) );''')
-        curseur.execute('''CREATE TABLE IF NOT EXISTS Activité_extérieur (id_activité INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER,date_activité TEXT,sport TEXT,durée INTEGER,dénivelé INTEGER,rpe INTEGER,charge INTEGER,nom TEXT,FOREIGN KEY (account_id)REFERENCES Account (id) );''')
+        curseur.execute('''CREATE TABLE IF NOT EXISTS Activité_extérieur (id_activité INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER,date_activité TEXT,sport TEXT,durée INTEGER,distance NUMERIC,dénivelé INTEGER,rpe INTEGER,charge INTEGER,nom TEXT,FOREIGN KEY (account_id)REFERENCES Account (id) );''')
         curseur.execute('''CREATE TABLE IF NOT EXISTS Activité_running (id_activité INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER,date_activité TEXT,sport TEXT,durée INTEGER,distance NUMERIC, vitesse_max NUMERIC, dénivelé INTEGER,rpe INTEGER,charge INTEGER,nom TEXT, allure TEXT,FOREIGN KEY (account_id)REFERENCES Account (id) );''')
         curseur.execute('''CREATE TABLE IF NOT EXISTS Activité_intérieur (id_activité INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER,date_activité TEXT,sport TEXT,durée INTEGER,rpe INTEGER,charge INTEGER,nom TEXT,FOREIGN KEY (account_id)REFERENCES Account (id) );''')
         curseur.execute('''CREATE TABLE IF NOT EXISTS Activité_musculation (id_activité INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER,date_activité TEXT,sport TEXT,durée INTEGER,muscle_travaillé TEXT, répétitions TEXT, série TEXT, volume NUMERIC, équipement TEXT, lieu  TEXT,rpe INTEGER,charge INTEGER,FOREIGN KEY (account_id)REFERENCES Account (id) );''')
@@ -4939,14 +4774,20 @@ if __name__ == "__main__":
         app.geometry("1050x600")
         app.title("Sprintia")
         try:
-            curseur.execute("SELECT action FROM Maj_base_de_donnée")
-            result_maj = curseur.fetchone()
-            if result_maj and result_maj[0] == "fait": # result[0] = parce que fetchone renvoie ('fait',)
-                mettre_à_jour_base_de_donées()
+            curseur.execute("SELECT username FROM Account")
+            result_premiere = curseur.fetchone()
+            if result_premiere:
+                curseur.execute("SELECT action FROM Maj_base_de_donnée")
+                result_maj = curseur.fetchone()
+                if result_maj and result_maj[0] == "fait": # result[0] = parce que fetchone renvoie ('fait',)
+                    mettre_à_jour_base_de_donées()
+                else:
+                    maj_base_de_données()
             else:
-                maj_base_de_données()
+                curseur.execute("INSERT INTO Maj_base_de_donnée (action) VALUES ('fait')")
+                mettre_à_jour_base_de_donées()
         except sqlite3.Error as e:
-            messagebox.showerror("Erreur", "Erreur de base de données.")
+            messagebox.showerror("Erreur", "Erreur de base de données !")
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
         app.protocol("WM_DELETE_WINDOW", fermer_app)
