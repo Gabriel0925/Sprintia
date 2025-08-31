@@ -372,7 +372,7 @@ def a_propos(account_id):
     version = ctk.CTkLabel(master=frame_version, text="Version Sprintia : ",
                           font=(font_principale, taille2), text_color=couleur1)
     version.pack(side="left", padx=10, pady=5)
-    num_version = ctk.CTkLabel(master=frame_version, text="3.1 BÊTA 7 Affûtage | Version Septembre 2025",
+    num_version = ctk.CTkLabel(master=frame_version, text="3.1 | Version Septembre 2025",
                           font=(font_principale, taille2), text_color=couleur1)
     num_version.pack(side="left", padx=10, pady=5)
     nom_dev = ctk.CTkLabel(master=frame_dev, text="Sprintia est développé par Gabriel Chapet",
@@ -2265,7 +2265,8 @@ def quoi_de_neuf(account_id):
     • Programme bêta disponible depuis les paramètres.
     • Accès à un podcast qui présente les nouveautés de Sprintia.
     • Accès aux actu sur Sprintia.
-    • Après l’enregistrement d’une activité, d'un objectif ou d'une compétition, vous revenez automatiquement à la page précédente — pour gagner du temps.\n
+    • Sprintia est disponible sur GitHub.
+    • Après l’enregistrement d’une activité, d'un objectif ou d'une compétition, tu reviens automatiquement à la page précédente — pour gagner du temps.\n
     🐛 Corrections de bugs
     • Bio trop longue : problème résolu dans le profil et la modification de profil.
     • Coupure visuelle corrigée dans les en-têtes et le nom d’historique d’activité (Extérieur).
@@ -2273,7 +2274,7 @@ def quoi_de_neuf(account_id):
     • Diverses corrections d’orthographe et fautes dans l’app.
     • Sprintia va désormais te tutoyer pour être plus proche de son utilisateur.
     • Gestion des erreurs du format de la date à l'ajout d'un objectif et d'une compétition.
-    • Correction de bug lors de la suppression du bug.
+    • Correction de bug lors de la suppression d'une activité.
     • Sécurité des données amélioré.
     • Amélioration légère de l'interface du graphique de Charge d'entraînement.
     • Optimisations du code pour la Side-Bar."""
@@ -3806,7 +3807,7 @@ def indulgence_de_course(account_id):
     distance_moyenne_du_mois.pack(fill="both", expand=True, padx=10, pady=10)  
     pause = verifier_pause(account_id)
     if pause == "blessure":
-        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillé : actuellement en pause", font=(font_secondaire, taille2),
+        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillée : actuellement en pause", font=(font_secondaire, taille2),
                                         width=300, wraplength=300)
         Distance_maximal_conseillé.pack(fill="both", expand=True, padx=10, pady=10)
         zone = ctk.CTkLabel(master=h1_zone, text="⛑️ Mode blessure : suivi désactivé", font=(font_secondaire, taille2),
@@ -3819,7 +3820,7 @@ def indulgence_de_course(account_id):
                                     width=300, wraplength=500)
         conseil_pour_progresser.pack(fill="both", expand=True, padx=10, pady=10)
     elif pause == "vacances":
-        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillé : actuellement en pause", font=(font_secondaire, taille2),
+        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillée : actuellement en pause", font=(font_secondaire, taille2),
                                         width=300, wraplength=300)
         Distance_maximal_conseillé.pack(fill="both", expand=True, padx=10, pady=10)
         zone = ctk.CTkLabel(master=h1_zone, text="🏖️ Mode vacances : pas d'analyse !", font=(font_secondaire, taille2),
@@ -3832,7 +3833,7 @@ def indulgence_de_course(account_id):
                                     width=300, wraplength=500)
         conseil_pour_progresser.pack(fill="both", expand=True, padx=10, pady=10)
     elif pause == "suspendre":
-        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillé : actuellement en pause", font=(font_secondaire , taille3),
+        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillée : actuellement en pause", font=(font_secondaire , taille3),
                                         width=300, wraplength=300)
         Distance_maximal_conseillé.pack(fill="both", expand=True, padx=10, pady=10)
         zone = ctk.CTkLabel(master=h1_zone, text="💤 Mode suspension activé : aucune analyse en cours", font=(font_secondaire, taille2),
@@ -3846,7 +3847,7 @@ def indulgence_de_course(account_id):
         conseil_pour_progresser.pack(fill="both", expand=True, padx=10, pady=10)
     else:
         if distance_moyenne_des_derniers_28_jours == 0:
-            Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillé :\nDonnées insuffisantes", font=(font_secondaire, taille2),
+            Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillée :\nDonnées insuffisantes", font=(font_secondaire, taille2),
                                             width=300, wraplength=300)
             Distance_maximal_conseillé.pack(fill="both", expand=True, padx=10, pady=10)
 
@@ -3869,7 +3870,7 @@ def indulgence_de_course(account_id):
                 zone = ctk.CTkLabel(master=h1_zone, text="🚀 Zone optimale pour progresser", font=(font_secondaire, taille2),
                                             width=300, wraplength=300, text_color="#00BA47")
                 zone.pack(fill="both", expand=True, padx=10, pady=10)              
-                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Tu es entrain de progresser en course, bravo ! Tu as fais le plus dur !", font=(font_principale, taille3),
+                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Tu es en train de progresser en course, bravo ! Tu as fais le plus dur !", font=(font_principale, taille3),
                                                 width=300, wraplength=300)
                 interprétation_zone.pack(fill="both", expand=True, padx=10, pady=10)
                         
@@ -3881,7 +3882,7 @@ def indulgence_de_course(account_id):
                 zone = ctk.CTkLabel(master=h1_zone, text="🤕 Zone optimale pour se blesser", font=(font_secondaire, taille2),
                                             width=300, wraplength=300, text_color="#c60000")
                 zone.pack(fill="both", expand=True, padx=10, pady=10)              
-                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Ton volume kilométrique hebdomadaire est actuellement très élevés par rapport à d'habitude.", font=(font_principale, taille3),
+                interprétation_zone = ctk.CTkLabel(master=interprétation, text="Ton volume kilométrique hebdomadaire est actuellement très élevé par rapport à d'habitude.", font=(font_principale, taille3),
                                                 width=300, wraplength=300)
                 interprétation_zone.pack(fill="both", expand=True, padx=10, pady=10)
                         
