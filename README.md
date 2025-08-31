@@ -12,12 +12,15 @@ Sprintia est conçue pour t'aider avant et après un entraînement grâce à des
 ⚡ Fonctionnalités principales
 
 1. Charge d'entraînement
+   
 La charge d'entraînement sert à optimiser ta progression sans te cramer, en trouvant le juste équilibre entre l'effort fourni et la récupération nécessaire.
 
 2. Indulgence de course
+   
 L’indulgence de course t’aide à ajuster ton kilométrage des 7 derniers jours pour rester dans une progression optimale, sans dépasser ta limite.
 
 3. Prédicteur de performance
+   
 Estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir de tes courses récentes.
 
 📚 Guide rapide d’installation de Sprintia
