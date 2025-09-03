@@ -372,7 +372,7 @@ def a_propos(account_id):
     version = ctk.CTkLabel(master=frame_version, text="Version Sprintia : ",
                           font=(font_principale, taille2), text_color=couleur1)
     version.pack(side="left", padx=10, pady=5)
-    num_version = ctk.CTkLabel(master=frame_version, text="3.1 | Version Septembre 2025",
+    num_version = ctk.CTkLabel(master=frame_version, text="3.1.1 | Septembre 2025",
                           font=(font_principale, taille2), text_color=couleur1)
     num_version.pack(side="left", padx=10, pady=5)
     nom_dev = ctk.CTkLabel(master=frame_dev, text="Sprintia est développé par Gabriel Chapet",
@@ -403,10 +403,17 @@ def a_propos(account_id):
     quisuisje.pack(padx=10, pady=10)
 
 def verifier_pause(account_id):
-    #AND date_fin IS NULL = Cible uniquement les pause non terminés.
-    curseur.execute("""SELECT type FROM Pauses_v2 WHERE account_id = ? AND date_fin IS NULL""", (account_id,))
-    result = curseur.fetchone()
-    return result[0] if result else None
+    try:
+        curseur.execute("SELECT type FROM Pauses WHERE account_id = ?", (account_id,))
+        result = curseur.fetchone()
+        if result is not None :
+            return result[0]
+        else:
+            return None
+    except sqlite3.Error as e:
+        messagebox.showerror("Erreur", "Erreur de base de données lors de la vérification du type de pause activé !")
+    except Exception as e:
+        messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
 
 def supprimer_activité(account_id, période_str):
     vider_fenetre(app)
@@ -567,18 +574,18 @@ def ajouter_activité_course(account_id):
     type_entry.pack(side="left", padx=10)
     type_entry.set("Type de séance")
 
-    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE", font=(font_principale, taille3), text_color=couleur_text)
+    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE : 5", font=(font_principale, taille3), text_color=couleur_text)
     rpe_label.pack(side="left", padx=(75, 0))
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
-    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_=1, to=10, number_of_steps=9, command=valeur_rpe,
+    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur1, button_color=couleur1, button_hover_color=couleur1_hover,
                               corner_radius=10, button_length=15, fg_color=couleur_text)
-    rpe_entry.pack(side="left", padx=10)
+    rpe_entry.pack(side="left", padx=(10, 0))
     distance_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Distance (km)", border_color=couleur1, fg_color=couleur1,
                                   height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
                                   text_color="white", width=275)
-    distance_entry.pack(side="left", padx=(75, 10))
+    distance_entry.pack(side="left", padx=(55, 10))
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs3, values=list(Options_fatigue.keys()), font=(font_principale, taille3), height=button_height,
                                     state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
@@ -798,18 +805,18 @@ def ajouter_activité_intérieur(account_id):
                                   text_color="white", width=275)
     duree_entry.pack(side="left", padx=10)
 
-    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE", font=(font_principale, taille3), text_color=couleur_text)
+    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE : 5", font=(font_principale, taille3), text_color=couleur_text)
     rpe_label.pack(side="left", padx=(75, 0))
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
-    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_=1, to=10, number_of_steps=9, command=valeur_rpe,
+    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur1, button_color=couleur1, button_hover_color=couleur1_hover,
                               corner_radius=10, button_length=15, fg_color=couleur_text)
-    rpe_entry.pack(side="left", padx=10)
+    rpe_entry.pack(side="left", padx=(10, 0))
     nom_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Type", border_color=couleur1, fg_color=couleur1,
                                   height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
                                   text_color="white", width=275)
-    nom_entry.pack(side="left", padx=(75, 10))
+    nom_entry.pack(side="left", padx=(55, 10))
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs3, values=list(Options_fatigue.keys()), font=(font_principale, taille3), height=button_height, 
                                     state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
@@ -968,18 +975,18 @@ def ajouter_activité_musculation(account_id):
     matos_entry.pack(side="left", padx=10)
     matos_entry.set("Type d'entraînement")
 
-    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE", font=(font_principale, taille3), text_color=couleur_text)
+    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE : 5", font=(font_principale, taille3), text_color=couleur_text)
     rpe_label.pack(side="left", padx=(75, 0))
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
-    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_=1, to=10, number_of_steps=9, command=valeur_rpe,
+    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur1, button_color=couleur1, button_hover_color=couleur1_hover,
                               corner_radius=10, button_length=15, fg_color=couleur_text)
-    rpe_entry.pack(side="left", padx=10)
+    rpe_entry.pack(side="left", padx=(10, 0))
     muscle_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Muscle travaillé", border_color=couleur1, fg_color=couleur1,
                                   height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
                                   text_color="white", width=275)
-    muscle_entry.pack(side="left", padx=(75, 10))
+    muscle_entry.pack(side="left", padx=(55, 10))
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs3, values=list(Options_fatigue.keys()), font=(font_principale, taille3), height=button_height, 
                                     state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
@@ -1176,18 +1183,18 @@ def ajouter_activité_fooball(account_id):
     type_entry.pack(side="left", padx=10)
     type_entry.set("Type de séance de foot")
 
-    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE", font=(font_principale, taille3), text_color=couleur_text)
+    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE : 5", font=(font_principale, taille3), text_color=couleur_text)
     rpe_label.pack(side="left", padx=(75, 0))
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
-    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_=1, to=10, number_of_steps=9, command=valeur_rpe,
+    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur1, button_color=couleur1, button_hover_color=couleur1_hover,
                               corner_radius=10, button_length=15, fg_color=couleur_text)
-    rpe_entry.pack(side="left", padx=10)
+    rpe_entry.pack(side="left", padx=(10, 0))
     humeur_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Humeur d'après match", border_color=couleur1, fg_color=couleur1,
                                   height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
                                   text_color="white", width=275)
-    humeur_entry.pack(side="left", padx=(75, 10))
+    humeur_entry.pack(side="left", padx=(55, 10))
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs3, values=list(Options_fatigue.keys()), font=(font_principale, taille3), height=button_height, 
                                     state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
@@ -1405,18 +1412,18 @@ def ajouter_activité_extérieur(account_id):
                                   text_color="white", width=275)
     duree_entry.pack(side="left", padx=10)
 
-    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE", font=(font_principale, taille3), text_color=couleur_text)
+    rpe_label = ctk.CTkLabel(master=frame_champs2, text="RPE : 5", font=(font_principale, taille3), text_color=couleur_text)
     rpe_label.pack(side="left", padx=(75, 0))
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
-    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_=1, to=10, number_of_steps=9, command=valeur_rpe,
+    rpe_entry = ctk.CTkSlider(master=frame_champs2, width=400, height=20, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur1, button_color=couleur1, button_hover_color=couleur1_hover,
                               corner_radius=10, button_length=15, fg_color=couleur_text)
-    rpe_entry.pack(side="left", padx=10)
+    rpe_entry.pack(side="left", padx=(10, 0))
     nom_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Type", border_color=couleur1, fg_color=couleur1,
                                   height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
                                   text_color="white", width=275)
-    nom_entry.pack(side="left", padx=(75, 10))
+    nom_entry.pack(side="left", padx=(55, 10))
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs3, values=list(Options_fatigue.keys()), font=(font_principale, taille3), height=button_height, 
                                     state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
@@ -2094,12 +2101,17 @@ def predicteur_temps(account_id):
     button_check.pack(padx=10, pady=10)
 
 def activer_pause(account_id, type_pause):
-    curseur.execute("SELECT id FROM Pauses_v2 WHERE account_id = ? AND date_fin IS NULL", (account_id,))
     try:
-        #date('now') pour prendre direct la date aujourd'hui (c'est une fonction SQLite)
-        curseur.execute("""INSERT INTO Pauses_v2 (account_id, type, date_debut)VALUES (?, ?, date('now'))""", (account_id, type_pause))
-        con.commit()
-        messagebox.showinfo("Enregistré", f"Pause {type_pause} activée !")
+        curseur.execute("SELECT type FROM Pauses WHERE account_id = ?", (account_id,))
+        result = curseur.fetchone()
+        if result is not None:
+            curseur.execute("UPDATE Pauses SET type = ? WHERE account_id = ?", (type_pause, account_id))
+            con.commit()
+            messagebox.showinfo("Enregistré", f"Pause {type_pause} activée !")
+        else:
+            curseur.execute("INSERT INTO Pauses (account_id, type) VALUES (?, ?)", (account_id, type_pause))
+            con.commit()
+            messagebox.showinfo("Enregistré", f"Pause {type_pause} activée !")
     except sqlite3.Error as e:
         messagebox.showerror("Erreur", f"Erreur de base de données lors de l'activation de la pause {type_pause}.")
     except Exception as e:
@@ -2107,9 +2119,9 @@ def activer_pause(account_id, type_pause):
 
 def arreter_pause(account_id):
     try:
-        curseur.execute("""UPDATE Pauses_v2 SET date_fin = date('now')WHERE account_id = ? AND date_fin IS NULL""", (account_id,))
+        curseur.execute("UPDATE Pauses SET type = NULL WHERE account_id = ?", (account_id,))
         con.commit()
-        messagebox.showinfo("Enregistré", "Reprise d'activité enregistrée !")
+        messagebox.showinfo("Enregistré", "Reprise d'activité enregistrée ! Les analyses sont désormais activées !")
     except sqlite3.Error as e:
         messagebox.showerror("Erreur", "Erreur de base de données lors de l'activation de la reprise d'activité.")
     except Exception as e:
@@ -2214,7 +2226,7 @@ def quoi_de_neuf(account_id):
 
     def podcast_open():
         messagebox.showinfo("Information", "Ton navigateur par défaut va s'ouvrir pour que tu puisses écouter le podcast.")
-        webbrowser.open("https://drive.google.com/file/d/1wC3-FAmNuZtU5cx16RAwxUJ633HTNqIC/view?usp=drive_link")
+        webbrowser.open("https://drive.google.com/file/d/1-RFvKta7NfZfH6FKOiX_u6wlaSeFOzfh/view?usp=sharing")
 
     boite2 = ctk.CTkFrame(app, fg_color=couleur_fond)
     boite2.pack(side="right", expand=True, fill="both")
@@ -2226,7 +2238,7 @@ def quoi_de_neuf(account_id):
                                            scrollbar_button_hover_color=couleur1_hover)
     patch_note.pack(expand=True, fill="both", pady=10, padx=10)
 
-    Titre = ctk.CTkLabel(header, text="Quoi de neuf dans Sprintia 3.1", text_color=couleur_text, font=(font_secondaire, taille1))
+    Titre = ctk.CTkLabel(header, text="Quoi de neuf dans Sprintia 3.1.1", text_color=couleur_text, font=(font_secondaire, taille1))
     Titre.pack(side="left", padx=5)
     button_back = ctk.CTkButton(header, text="🎙️  Podcast", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, height=button_height, text_color=couleur1,
@@ -2239,45 +2251,19 @@ def quoi_de_neuf(account_id):
                                     command=lambda: [vider_fenetre(app), parametre(account_id)])
     button_back.pack(side="left", padx=(3, 10))
 
-    PatchNote = ctk.CTkLabel(patch_note, font=(font_principale, taille3), text_color=couleur1, wraplength=950, anchor="w", corner_radius=corner1,
-        text="""Type : Mise à jour mineure\nDate de sortie : 31 Août 2025\n
-    🆕 Nouvelles fonctionnalités
-    • Option “Tous” : affiche désormais l’historique complet des entraînements.
-    • "Quoi de neuf dans Sprintia 3.1" : nouvelle section dans les paramètres (accessible directement dans l’app).
-    • Interprétation de l’IMC : ajout d’une phrase explicative au calculateur.
-    • Zones de VMA : calcul et affichage par pourcentage, sur le modèle des zones de FC.
-    • Nouveau statut “Pas commencé” pour les objectifs.
-    • Nouvelle raison “Suspendre” pour la mise en pause des analyses.
-    • Nouvelle donnée “Score” pour le football.
-    • Nouveau mode Course pour l'enregistrement de données spécifique à la course.
-    • Indulgence de course : cet algorithme va t'aider à ajuster ton kilométrage des 7 derniers jours pour rester dans une progression optimale.
-    • Modification complète d’un objectif ou d’une compétition via un seul bouton (date, lieu, statut…).\n
-    📊 Améliorations
-    • Filtres persistants : mémorisation des choix (ex. conserver “1 mois” lors du passage d’Extérieur à Musculation).
-    • Conseils et interprétations enrichis dans Charge d’entraînement.
-    • Zones de FC : affichage de la FC Max.
-    • Estimation VO₂max : ajout d’une interprétation des zones.
-    • Aide intégrée : explications sur le diverses choses lors de la première utilisation de Sprintia.
-    • Tableaux réorganisés pour plus de cohérence.
-    • Affichage clair en cas d’absence de données dans Objectifs et Compétitions (remplace “None” ou cellules vides).
-    • Nettoyage de la base de données pour plus de rapidité.
-    • Mettre un autre type de pause même si une pause est déjà active (ex : passer de 'blessure' à 'vacances').
-    • Programme bêta disponible depuis les paramètres.
-    • Accès à un podcast qui présente les nouveautés de Sprintia.
-    • Accès aux actu sur Sprintia.
-    • Sprintia est disponible sur GitHub.
-    • Après l’enregistrement d’une activité, d'un objectif ou d'une compétition, tu reviens automatiquement à la page précédente — pour gagner du temps.\n
-    🐛 Corrections de bugs
-    • Bio trop longue : problème résolu dans le profil et la modification de profil.
-    • Coupure visuelle corrigée dans les en-têtes et le nom d’historique d’activité (Extérieur).
-    • Longueur excessive des noms d’activité corrigée lors de la suppression.
-    • Diverses corrections d’orthographe et fautes dans l’app.
-    • Sprintia va désormais te tutoyer pour être plus proche de son utilisateur.
-    • Gestion des erreurs du format de la date à l'ajout d'un objectif et d'une compétition.
-    • Correction de bug lors de la suppression d'une activité.
-    • Sécurité des données amélioré.
-    • Amélioration légère de l'interface du graphique de Charge d'entraînement.
-    • Optimisations du code pour la Side-Bar."""
+    PatchNote = ctk.CTkLabel(patch_note, font=(font_principale, taille2), text_color=couleur1, wraplength=950, anchor="w", corner_radius=corner1,
+        text="""Type : Patch Majeur\nDate de sortie : 03 Septembre 2025\n
+📊 Améliorations
+    • Migration automatique de la base de données : Le processus de mise à jour de la base de données est maintenant géré automatiquement, 
+        quelle que soit la version de départ de votre installation. Les utilisateurs des versions 2.0 et 3.0 peuvent désormais mettre à jour 
+        directement vers la version 3.1.1 sans manipulation supplémentaire.
+    • La valeur par défaut du RPE est 5 ce qui évite de provoquer un décalage.\n
+🐛 Corrections de bugs et optimisation
+    • Correction du format de date dans l’historique pour les modes Course/Musculation/Football → JJ-MM-AAAA.
+    • Correction de plusieurs textes coupés dans les interprétations de la charge d'entraînement.
+    • Amélioration de la cohérence lors de l’enregistrement des données.
+    • Correction du bug bloquant les changements de statut de pause :
+      Il est désormais possible de passer directement d’un statut à un autre (ex. : blessure → vacances, suspendre → blessure,...) sans bug."""
     , justify="left")
     PatchNote.pack(expand=True, fill="both", padx=5, pady=5)
     aide_podcast(account_id)
@@ -2343,22 +2329,20 @@ def mettre_en_pause_les_analyses_depuis_indulgence(account_id):
     frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
     frame_boutons.pack(pady=(0, 10))
 
-    curseur.execute("SELECT type FROM Pauses_v2 WHERE account_id = ? AND date_fin IS NULL", (account_id,))
-    result = curseur.fetchall()
-    if result == []:
-        info_statut = ctk.CTkLabel(master=frame, text="Ton statut d'entraînement actuel : Actif", font=(font_principale, taille2))
-        info_statut.pack(padx=0, pady=10)
-    elif result == [('vacances',)]:
+    result = verifier_pause(account_id)
+    if result == "vacances":
         info_statut_actif = ctk.CTkLabel(master=frame, text=f"Ton statut d'entraînement actuel: Vacances", font=(font_principale, taille2))
         info_statut_actif.pack(padx=0, pady=10)
-    elif result == [('blessure',)]:
+    elif result == "blessure":
         info_statut_actif = ctk.CTkLabel(master=frame, text=f"Ton statut d'entraînement actuel : Blessure", font=(font_principale, taille2))
         info_statut_actif.pack(padx=0, pady=10)
-    elif result == [('suspendre',)]:
+    elif result == "suspendre":
         info_statut_actif = ctk.CTkLabel(master=frame, text=f"Ton statut d'entraînement actuel : Suspendre", font=(font_principale, taille2))
         info_statut_actif.pack(padx=0, pady=10)
     else:
-        messagebox.showerror("Erreur", "Statut inconnu !")
+        info_statut = ctk.CTkLabel(master=frame, text="Ton statut d'entraînement actuel : Actif", font=(font_principale, taille2))
+        info_statut.pack(padx=0, pady=10)
+
     app.bind('<Return>', lambda event: enregistrer_activité(account_id))
     options = {"Vacances": "Vacances", "Blessure": "Blessure", "Suspendre": "Suspendre", "Reprendre les analyses": "Reprendre"}
     combo_statut = ctk.CTkComboBox(master=frame, values=list(options.keys()), font=(font_principale, taille3), height=button_height, 
@@ -2374,12 +2358,20 @@ def mettre_en_pause_les_analyses_depuis_indulgence(account_id):
         try:
             if statut == "Vacances":
                 activer_pause(account_id, "vacances")
+                vider_fenetre(app)
+                charge_entraînement(account_id)
             elif statut == "Blessure":
                 activer_pause(account_id, "blessure")
+                vider_fenetre(app)
+                charge_entraînement(account_id)
             elif statut == "Suspendre":
                 activer_pause(account_id, "suspendre")
+                vider_fenetre(app)
+                charge_entraînement(account_id)
             elif statut == "Reprendre":
                 arreter_pause(account_id)
+                vider_fenetre(app)
+                charge_entraînement(account_id)
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
     button_check = ctk.CTkButton(master=frame_boutons, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
@@ -2408,22 +2400,20 @@ def mettre_en_pause_les_analyses(account_id):
     frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
     frame_boutons.pack(pady=(0, 10))
 
-    curseur.execute("SELECT type FROM Pauses_v2 WHERE account_id = ? AND date_fin IS NULL", (account_id,))
-    result = curseur.fetchall()
-    if result == []:
-        info_statut = ctk.CTkLabel(master=frame, text="Ton statut d'entraînement actuel : Actif", font=(font_principale, taille2))
-        info_statut.pack(padx=0, pady=10)
-    elif result == [('vacances',)]:
+    result = verifier_pause(account_id)
+    if result == "vacances":
         info_statut_actif = ctk.CTkLabel(master=frame, text=f"Ton statut d'entraînement actuel: Vacances", font=(font_principale, taille2))
         info_statut_actif.pack(padx=0, pady=10)
-    elif result == [('blessure',)]:
+    elif result == "blessure":
         info_statut_actif = ctk.CTkLabel(master=frame, text=f"Ton statut d'entraînement actuel : Blessure", font=(font_principale, taille2))
         info_statut_actif.pack(padx=0, pady=10)
-    elif result == [('suspendre',)]:
+    elif result == "suspendre":
         info_statut_actif = ctk.CTkLabel(master=frame, text=f"Ton statut d'entraînement actuel : Suspendre", font=(font_principale, taille2))
         info_statut_actif.pack(padx=0, pady=10)
     else:
-        messagebox.showerror("Erreur", "Statut inconnu !")
+        info_statut = ctk.CTkLabel(master=frame, text="Ton statut d'entraînement actuel : Actif", font=(font_principale, taille2))
+        info_statut.pack(padx=0, pady=10)
+
     app.bind('<Return>', lambda event: enregistrer_activité(account_id))
     options = {"Vacances": "Vacances", "Blessure": "Blessure", "Suspendre": "Suspendre", "Reprendre les analyses": "Reprendre"}
     combo_statut = ctk.CTkComboBox(master=frame, values=list(options.keys()), font=(font_principale, taille3), height=button_height, 
@@ -2439,12 +2429,20 @@ def mettre_en_pause_les_analyses(account_id):
         try:
             if statut == "Vacances":
                 activer_pause(account_id, "vacances")
+                vider_fenetre(app)
+                charge_entraînement(account_id)
             elif statut == "Blessure":
                 activer_pause(account_id, "blessure")
+                vider_fenetre(app)
+                charge_entraînement(account_id)
             elif statut == "Suspendre":
                 activer_pause(account_id, "suspendre")
+                vider_fenetre(app)
+                charge_entraînement(account_id)
             elif statut == "Reprendre":
                 arreter_pause(account_id)
+                vider_fenetre(app)
+                charge_entraînement(account_id)
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
     button_check = ctk.CTkButton(master=frame_boutons, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
@@ -2637,7 +2635,7 @@ def supprimer_compte(account_id):
         option = options_suppr[options_choisi]
         if option == "oui":
             try:
-                curseur.execute("DELETE FROM Pauses_v2 WHERE account_id = ?", (account_id,))
+                curseur.execute("DELETE FROM Pauses WHERE account_id = ?", (account_id,))
 
                 curseur.execute("DELETE FROM Objectif WHERE account_id = ?", (account_id,))
                 curseur.execute("DELETE FROM Compétition WHERE account_id = ?", (account_id,))
@@ -4043,7 +4041,7 @@ def charge_entraînement(account_id):
         interpretation_statut = ctk.CTkLabel(master=interprétation, text="Tu es blessé pour le moment", font=(font_principale, taille3),
                                     width=300, wraplength=280)
         interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)              
-        conseil_statut = ctk.CTkLabel(master=conseil, text="Prends vraiment le temps de laisser ton corps se régénérer en profondeur, afin de revenir encore plus fort et plus déterminé que jamais.", font=(font_principale, taille3),
+        conseil_statut = ctk.CTkLabel(master=conseil, text="Prends vraiment le temps de laisser ton corps se régénérer en profondeur, afin de revenir encore plus fort que jamais.", font=(font_principale, taille3),
                                         width=300, wraplength=280)
         conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
     elif pause == "vacances":
@@ -4066,10 +4064,10 @@ def charge_entraînement(account_id):
         catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="💤 Mode suspension activé : aucune analyse en cours.", font=(font_principale, taille3),
                                         width=300, wraplength=280, text_color="#6AC100")
         catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)
-        interpretation_statut = ctk.CTkLabel(master=interprétation, text="Tes analyses sont temporairement en pause pendant ce mode suspension.", font=(font_principale, taille3),
+        interpretation_statut = ctk.CTkLabel(master=interprétation, text="Tes analyses sont temporairement en pause pendant ce mode.", font=(font_principale, taille3),
                                     width=300, wraplength=280)
         interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)
-        conseil_statut = ctk.CTkLabel(master=conseil, text="Profite-en pour te reposer sans pression, on reprend les suivis dès ton retour à l’entraînement !", font=(font_principale, taille3),
+        conseil_statut = ctk.CTkLabel(master=conseil, text="Profite-en pour te reposer, on reprend les suivis dès ton retour à l’entraînement !", font=(font_principale, taille3),
                                         width=300, wraplength=280)
         conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
     else :
@@ -4245,7 +4243,7 @@ def parametre(account_id):
                            text_color=couleur1, 
                            command=lambda: [vider_fenetre(app), a_propos(account_id)])
     button_info.pack(side="left", pady=0, padx=10)
-    button_nouveauté = ctk.CTkButton(master=frame_bouton2, text="✨ Quoi de neuf dans Sprintia 3.1", fg_color=couleur2, hover_color=couleur2_hover,
+    button_nouveauté = ctk.CTkButton(master=frame_bouton2, text="✨ Quoi de neuf dans Sprintia 3.1.1", fg_color=couleur2, hover_color=couleur2_hover,
                            corner_radius=corner2, width=300, height=button_height, font=(font_principale, taille3),
                            text_color=couleur1,
                            command=lambda: [vider_fenetre(app), quoi_de_neuf(account_id)])
@@ -4284,7 +4282,7 @@ def parametre(account_id):
 def interface_exercice(account_id, type_de_catégorie, headers, requête_sql):
     global periode_séléctionner #global = pour dire que la variable existe en dehors de la fonction et que je vais la modifier
     sidebar_exercice(account_id)
-
+    
     boite2 = ctk.CTkFrame(master=app, fg_color="transparent", corner_radius=corner3)
     boite2.pack(side="top", fill="x", pady=20)
     topbar = ctk.CTkFrame(master=boite2, fg_color="transparent", corner_radius=corner3)
@@ -4354,16 +4352,22 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql):
 
     if type_de_catégorie == "Musculation":
         padx_tableau = 2
+        conversion_format_date = 0
     elif type_de_catégorie == "Tous":
         padx_tableau = 15
+        conversion_format_date = 1
     elif type_de_catégorie == "Course":
         padx_tableau = 2
+        conversion_format_date = 0
     elif type_de_catégorie == "Intérieur":
         padx_tableau = 15
+        conversion_format_date = 1
     elif type_de_catégorie == "Football":
         padx_tableau = 8
+        conversion_format_date = 0
     elif type_de_catégorie == "Extérieur":
         padx_tableau = 10
+        conversion_format_date = 1
 
     def mettre_a_jour_historique(selection):
         global periode_séléctionner
@@ -4385,12 +4389,8 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql):
             if activites:
                 for ligne, activite in enumerate(activites):
                     for colonne, data in enumerate(activite):
-                        try:
-                            if colonne == 1:
-                                data = datetime.strptime(str(data), '%Y-%m-%d').strftime('%d-%m-%Y')
-                        except:
-                            if colonne == 0:
-                                data = datetime.strptime(str(data), '%Y-%m-%d').strftime('%d-%m-%Y')
+                        if colonne == conversion_format_date:
+                            data = datetime.strptime(str(data), '%Y-%m-%d').strftime('%d-%m-%Y')
                         label = ctk.CTkLabel(master=tableau_frame, text=str(data if data is not None else "-"), font=(font_principale, taille3),
                                              text_color=couleur_text, wraplength=130)
                         label.grid(row=ligne + 1, column=colonne, padx=10, pady=15, sticky="ew")
@@ -4610,9 +4610,80 @@ def inscription():
     label_image.pack()
 
 def mettre_à_jour_base_de_donées():
+    # De Sprintia 2.0 à 3.0
     try:
-        curseur.execute("DROP TABLE Pauses")
+        curseur.execute("ALTER TABLE Compétition ADD COLUMN lieu TEXT")
+    except sqlite3.OperationalError:
+        pass  
+    try:
+        curseur.execute("ALTER TABLE Objectif ADD COLUMN niveau_fin TEXT")
+    except sqlite3.OperationalError:
+        pass  
+    try:
+        curseur.execute("ALTER TABLE Compétition ADD COLUMN priorité TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Account ADD COLUMN sport TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Account ADD COLUMN bio TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN muscle_travaillé TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN répétitions TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN série TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN volume TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN équipement TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN lieu TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN humeur TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN but TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN passe_décisive TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité ADD COLUMN type_de_séances TEXT")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        curseur.execute("ALTER TABLE Activité DROP COLUMN allure")
     except sqlite3.Error as e:
+        pass
+    # De Sprintia 3.0 à 3.1
+    try:
+        curseur.execute("INSERT INTO Pauses (id, account_id, type) SELECT id, account_id, type FROM Pauses_v2")
+        con.commit()
+    except sqlite3.Error as e:
+        pass
+    try:
+        curseur.execute("DROP TABLE Pauses_v2")
+    except:
         pass
     try:
         curseur.execute("DROP TABLE Aide")
@@ -4761,7 +4832,7 @@ if __name__ == "__main__":
         
         curseur.execute('''CREATE TABLE IF NOT EXISTS Compétition (id INTEGER PRIMARY KEY AUTOINCREMENT,nom TEXT NOT NULL,date TEXT NOT NULL,sport TEXT NOT NULL,objectif TEXT NOT NULL, lieu TEXT,priorité TEXT,account_id INTEGER,FOREIGN KEY (account_id) REFERENCES Account(id))''')
         curseur.execute('''CREATE TABLE IF NOT EXISTS Objectif (id INTEGER PRIMARY KEY AUTOINCREMENT,sport TEXT NOT NULL,date TEXT NOT NULL,objectif TEXT NOT NULL,fréquence TEXT NOT NULL,niveau_début TEXT NOT NULL,niveau_fin TEXT,statut TEXT, account_id INTEGER,FOREIGN KEY (account_id) REFERENCES Account(id))''')
-        curseur.execute('''CREATE TABLE IF NOT EXISTS Pauses_v2 (id INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER NOT NULL,type TEXT CHECK(type IN ('vacances', 'blessure', 'suspendre')),date_debut TEXT DEFAULT CURRENT_DATE,date_fin TEXT,FOREIGN KEY (account_id) REFERENCES Account(id)  )''')
+        curseur.execute('''CREATE TABLE IF NOT EXISTS Pauses (id INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER NOT NULL,type TEXT,FOREIGN KEY (account_id) REFERENCES Account(id)  )''')
 
         curseur.execute('''CREATE TABLE IF NOT EXISTS Aide_rpe (account_id INTEGER NOT NULL,aide TEXT, FOREIGN KEY (account_id) REFERENCES Account(id)  )''')
         curseur.execute('''CREATE TABLE IF NOT EXISTS Aide_bienvenue (account_id INTEGER NOT NULL,aide TEXT, FOREIGN KEY (account_id) REFERENCES Account(id)  )''')
