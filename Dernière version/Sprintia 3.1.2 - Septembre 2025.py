@@ -13,6 +13,12 @@ import webbrowser
 from urllib.parse import quote #pour remplir les champs (destinataire,...) dans une app mail
 from tkinter import messagebox
 
+# Maj
+numérotation_version = "3.1.2"
+date_version = "Version Septembre 2025"
+date_de_sortie_maj = "07 Septembre 2025"
+type_maj = "Patch Majeur"   
+
 # Couleur
 mode_actuel = ctk.get_appearance_mode()
 if mode_actuel == "Dark":
@@ -286,22 +292,6 @@ def aide_compétition(account_id):
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
 
-def aide_podcast(account_id):
-    try:
-        curseur.execute("SELECT aide FROM Aide_podcast WHERE account_id = ?", (account_id,))
-        result = curseur.fetchone()
-        if result and result[0] == "fait": # result[0] = parce que fetchone renvoie ('fait',)
-            pass
-        else:
-            appris = "fait"
-            curseur.execute("INSERT INTO Aide_podcast (account_id, aide)VALUES (?, ?)", (account_id, appris))
-            con.commit()
-            messagebox.showinfo("Pas envie de lire le patch note ? Pas de problème ! On a une solution pour vous.", "Découvrez toutes les nouveautés de la mise à jour Sprintia 3.1 en écoutant notre Podcast.")
-    except sqlite3.Error as e:
-        messagebox.showerror("Erreur", "Erreur de base de données !")
-    except Exception as e:
-        messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-
 def aide_bienvenue(account_id):
     try:
         curseur.execute("SELECT aide FROM Aide_bienvenue WHERE account_id = ?", (account_id,))
@@ -312,9 +302,9 @@ def aide_bienvenue(account_id):
             appris = "fait"
             curseur.execute("INSERT INTO Aide_bienvenue (account_id, aide)VALUES (?, ?)", (account_id, appris))
             con.commit()
-            messagebox.showinfo("Bienvenue dans Sprintia 3.1", "Découvre une nouvelle manière de t’entraîner en course à pied grâce à l’indulgence de course.")
-            messagebox.showinfo("Bienvenue dans Sprintia 3.1", "Découvre un nouveau mode Course pour l'enregistrement des données spécifique à ce sport.")
-            messagebox.showinfo("Bienvenue dans Sprintia 3.1", "Découvre toutes les nouveautés de Sprintia 3.1 dans le Patch Note dans les paramètres.")
+            messagebox.showinfo(f"Bienvenue dans Sprintia {numérotation_version}", "Découvre une nouvelle manière de t’entraîner en course à pied grâce à l’indulgence de course.")
+            messagebox.showinfo(f"Bienvenue dans Sprintia {numérotation_version}", "Découvre un nouveau mode Course pour l'enregistrement des données spécifique à ce sport.")
+            messagebox.showinfo(f"Bienvenue dans Sprintia {numérotation_version}", "Découvre toutes les nouveautés de Sprintia 3.1 dans le Patch Note dans les paramètres.")
     except sqlite3.Error as e:
         messagebox.showerror("Erreur", "Erreur de base de données !")
     except Exception as e:
@@ -372,7 +362,7 @@ def a_propos(account_id):
     version = ctk.CTkLabel(master=frame_version, text="Version Sprintia : ",
                           font=(font_principale, taille2), text_color=couleur1)
     version.pack(side="left", padx=10, pady=5)
-    num_version = ctk.CTkLabel(master=frame_version, text="3.1.1 | Septembre 2025",
+    num_version = ctk.CTkLabel(master=frame_version, text=f"{numérotation_version} | {date_version}",
                           font=(font_principale, taille2), text_color=couleur1)
     num_version.pack(side="left", padx=10, pady=5)
     nom_dev = ctk.CTkLabel(master=frame_dev, text="Sprintia est développé par Gabriel Chapet",
@@ -2224,10 +2214,6 @@ def proposer_fonction(account_id):
 def quoi_de_neuf(account_id):
     sidebar_paramètre(account_id)
 
-    def podcast_open():
-        messagebox.showinfo("Information", "Ton navigateur par défaut va s'ouvrir pour que tu puisses écouter le podcast.")
-        webbrowser.open("https://drive.google.com/file/d/1-RFvKta7NfZfH6FKOiX_u6wlaSeFOzfh/view?usp=sharing")
-
     boite2 = ctk.CTkFrame(app, fg_color=couleur_fond)
     boite2.pack(side="right", expand=True, fill="both")
     header = ctk.CTkFrame(boite2, fg_color="transparent")
@@ -2238,35 +2224,21 @@ def quoi_de_neuf(account_id):
                                            scrollbar_button_hover_color=couleur1_hover)
     patch_note.pack(expand=True, fill="both", pady=10, padx=10)
 
-    Titre = ctk.CTkLabel(header, text="Quoi de neuf dans Sprintia 3.1.1", text_color=couleur_text, font=(font_secondaire, taille1))
+    Titre = ctk.CTkLabel(header, text=f"Quoi de neuf dans Sprintia {numérotation_version}", text_color=couleur_text, font=(font_secondaire, taille1))
     Titre.pack(side="left", padx=5)
-    button_back = ctk.CTkButton(header, text="🎙️  Podcast", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=podcast_open)
-    button_back.pack(side="left", padx=(20, 3))
     button_back = ctk.CTkButton(header, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                                     command=lambda: [vider_fenetre(app), parametre(account_id)])
-    button_back.pack(side="left", padx=(3, 10))
+    button_back.pack(side="left", padx=(20, 10))
 
     PatchNote = ctk.CTkLabel(patch_note, font=(font_principale, taille2), text_color=couleur1, wraplength=950, anchor="w", corner_radius=corner1,
-        text="""Type : Patch Majeur\nDate de sortie : 03 Septembre 2025\n
-📊 Améliorations
-    • Migration automatique de la base de données : Le processus de mise à jour de la base de données est maintenant géré automatiquement, 
-        quelle que soit la version de départ de votre installation. Les utilisateurs des versions 2.0 et 3.0 peuvent désormais mettre à jour 
-        directement vers la version 3.1.1 sans manipulation supplémentaire.
-    • La valeur par défaut du RPE est 5 ce qui évite de provoquer un décalage.\n
+        text=f"""Type : {type_maj}\nDate de sortie : {date_de_sortie_maj}\n
 🐛 Corrections de bugs et optimisation
-    • Correction du format de date dans l’historique pour les modes Course/Musculation/Football → JJ-MM-AAAA.
-    • Correction de plusieurs textes coupés dans les interprétations de la charge d'entraînement.
-    • Amélioration de la cohérence lors de l’enregistrement des données.
-    • Correction du bug bloquant les changements de statut de pause :
-      Il est désormais possible de passer directement d’un statut à un autre (ex. : blessure → vacances, suspendre → blessure,...) sans bug."""
+    • Correction d'un bug de calcul de la distance moyenne dans l'indulgence de course, ce qui faisait baisser la distance maximale hebdomadaire conseillée. Les analyses sont désormais plus précises.
+    • Amélioration de la maintenance de l'app pour les futures mises à jour."""
     , justify="left")
     PatchNote.pack(expand=True, fill="both", padx=5, pady=5)
-    aide_podcast(account_id)
 
 def avis (account_id):
     sidebar_paramètre(account_id)
@@ -3713,9 +3685,9 @@ def indulgence_de_course(account_id):
 
     D28J = date_actuelle - timedelta(days=28)
     D28J_str = D28J.strftime('%Y-%m-%d')
-    curseur.execute("SELECT distance FROM activité_running WHERE account_id = ? AND date_activité >= ?", (account_id, D28J_str))
+    curseur.execute("SELECT distance FROM Activité_running WHERE account_id = ? AND date_activité >= ?", (account_id, D28J_str))
     distance28J = [row[0] for row in curseur.fetchall()]
-    distance_moyenne_des_derniers_28_jours = sum(distance28J) / len(distance28J) if distance28J else 0
+    distance_moyenne_des_derniers_28_jours = sum(distance28J) / 4 if distance28J else 0.00
     if distance_moyenne_des_derniers_28_jours < 10:
         distance_maximumconseillé_début = distance_moyenne_des_derniers_28_jours*1.18
         distance_maximumconseillé_fin = distance_moyenne_des_derniers_28_jours*1.25
@@ -3800,12 +3772,12 @@ def indulgence_de_course(account_id):
                                     width=300, wraplength=300)
     distance_7J.pack(fill="both", expand=True, padx=10, pady=10)
 
-    distance_moyenne_du_mois = ctk.CTkLabel(distance_moyenne_28J, text=f"Distance moyenne (28 jours) : {distance_moyenne_des_derniers_28_jours:.2f} km", font=(font_principale, taille2),
+    distance_moyenne_du_mois = ctk.CTkLabel(distance_moyenne_28J, text=f"Distance moyenne hebdo. (4 semaines) :\n{distance_moyenne_des_derniers_28_jours:.2f} km par semaine", font=(font_principale, taille2),
                                 width=300, wraplength=500)
     distance_moyenne_du_mois.pack(fill="both", expand=True, padx=10, pady=10)  
     pause = verifier_pause(account_id)
     if pause == "blessure":
-        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillée : actuellement en pause", font=(font_secondaire, taille2),
+        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdo. conseillée : actuellement en pause", font=(font_secondaire, taille2),
                                         width=300, wraplength=300)
         Distance_maximal_conseillé.pack(fill="both", expand=True, padx=10, pady=10)
         zone = ctk.CTkLabel(master=h1_zone, text="⛑️ Mode blessure : suivi désactivé", font=(font_secondaire, taille2),
@@ -3818,7 +3790,7 @@ def indulgence_de_course(account_id):
                                     width=300, wraplength=500)
         conseil_pour_progresser.pack(fill="both", expand=True, padx=10, pady=10)
     elif pause == "vacances":
-        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillée : actuellement en pause", font=(font_secondaire, taille2),
+        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdo. conseillée : actuellement en pause", font=(font_secondaire, taille2),
                                         width=300, wraplength=300)
         Distance_maximal_conseillé.pack(fill="both", expand=True, padx=10, pady=10)
         zone = ctk.CTkLabel(master=h1_zone, text="🏖️ Mode vacances : pas d'analyse !", font=(font_secondaire, taille2),
@@ -3831,7 +3803,7 @@ def indulgence_de_course(account_id):
                                     width=300, wraplength=500)
         conseil_pour_progresser.pack(fill="both", expand=True, padx=10, pady=10)
     elif pause == "suspendre":
-        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillée : actuellement en pause", font=(font_secondaire , taille3),
+        Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdo. conseillée : actuellement en pause", font=(font_secondaire , taille3),
                                         width=300, wraplength=300)
         Distance_maximal_conseillé.pack(fill="both", expand=True, padx=10, pady=10)
         zone = ctk.CTkLabel(master=h1_zone, text="💤 Mode suspension activé : aucune analyse en cours", font=(font_secondaire, taille2),
@@ -3845,7 +3817,7 @@ def indulgence_de_course(account_id):
         conseil_pour_progresser.pack(fill="both", expand=True, padx=10, pady=10)
     else:
         if distance_moyenne_des_derniers_28_jours == 0:
-            Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdomadaire conseillée :\nDonnées insuffisantes", font=(font_secondaire, taille2),
+            Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdo. conseillée :\nDonnées insuffisantes", font=(font_secondaire, taille2),
                                             width=300, wraplength=300)
             Distance_maximal_conseillé.pack(fill="both", expand=True, padx=10, pady=10)
 
@@ -3860,7 +3832,7 @@ def indulgence_de_course(account_id):
                                             width=300, wraplength=500)
             conseil_pour_progresser.pack(fill="both", expand=True, padx=10, pady=10)
         else:
-            Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance hebdomadaire conseillée entre :\n{distance_maximumconseillé_début:.1f} et {distance_maximumconseillé_fin:.1f} km", font=(font_secondaire, taille2),
+            Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdo. conseillée :\n{distance_maximumconseillé_début:.1f} et {distance_maximumconseillé_fin:.1f} km", font=(font_secondaire, taille2),
                                             width=300, wraplength=300)
             Distance_maximal_conseillé.pack(fill="both", expand=True, padx=10, pady=10)
 
@@ -4243,7 +4215,7 @@ def parametre(account_id):
                            text_color=couleur1, 
                            command=lambda: [vider_fenetre(app), a_propos(account_id)])
     button_info.pack(side="left", pady=0, padx=10)
-    button_nouveauté = ctk.CTkButton(master=frame_bouton2, text="✨ Quoi de neuf dans Sprintia 3.1.1", fg_color=couleur2, hover_color=couleur2_hover,
+    button_nouveauté = ctk.CTkButton(master=frame_bouton2, text=f"✨ Quoi de neuf dans Sprintia {numérotation_version}", fg_color=couleur2, hover_color=couleur2_hover,
                            corner_radius=corner2, width=300, height=button_height, font=(font_principale, taille3),
                            text_color=couleur1,
                            command=lambda: [vider_fenetre(app), quoi_de_neuf(account_id)])
