@@ -14,10 +14,10 @@ from urllib.parse import quote #pour remplir les champs (destinataire,...) dans 
 from tkinter import messagebox
 
 # Maj
-numérotation_version = "3.1.2"
+numérotation_version = "3.1.3"
 date_version = "Version Septembre 2025"
-date_de_sortie_maj = "07 Septembre 2025"
-type_maj = "Patch Majeur"   
+date_de_sortie_maj = "10 Septembre 2025"
+type_maj = "Patch Mineur"   
 
 # Couleur
 mode_actuel = ctk.get_appearance_mode()
@@ -88,7 +88,7 @@ def sidebar_exercice(account_id):
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
     button_performance.pack(side="top", padx=(10, 40), pady=2)
-    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outil", font=(font_principale, taille3), corner_radius=corner1,
+    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), predicteur_temps(account_id)])
@@ -119,7 +119,7 @@ def sidebar_performance(account_id):
                                     anchor="w",
                                     command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
     button_performance.pack(side="top", padx=(10, 40), pady=2)
-    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outil", font=(font_principale, taille3), corner_radius=corner1, width=button_width,
+    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils", font=(font_principale, taille3), corner_radius=corner1, width=button_width,
                                     fg_color="transparent", hover_color=couleur2_hover, text_color=couleur1, height=button_height,
                                     anchor="w",
                                     command=lambda: [vider_fenetre(app), predicteur_temps(account_id)])
@@ -150,7 +150,7 @@ def sidebar_outil(account_id):
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
     button_performance.pack(side="top", padx=(10, 40), pady=2)
-    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outil",  font=(font_principale, taille3), corner_radius=corner1,
+    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils",  font=(font_principale, taille3), corner_radius=corner1,
                                     fg_color=couleur1, hover_color=couleur1_hover, height=button_height, width=button_width,
                                     anchor="w",
                                     command=lambda: [vider_fenetre(app), predicteur_temps(account_id)])
@@ -181,7 +181,7 @@ def sidebar_paramètre(account_id):
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
     button_performance.pack(side="top", padx=(10, 40), pady=2)
-    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outil", font=(font_principale, taille3), corner_radius=corner1,
+    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), predicteur_temps(account_id)])
@@ -651,7 +651,6 @@ def ajouter_activité_course(account_id):
         if climat is None:
             messagebox.showerror("Climat est vide", "Le climat est obligatoire !")
             return
-        distance = None
         denivele = None
         allure = allure_entry.get().strip()
         if not allure:
@@ -670,6 +669,9 @@ def ajouter_activité_course(account_id):
                 return
         try:
             dist_str = distance_entry.get().strip()
+            if not dist_str:
+                messagebox.showerror("Distance manquante", "La distance est obligatoire !")
+                return
             if dist_str:
                 distance = float(dist_str)
                 if distance <= 0:
@@ -827,6 +829,8 @@ def ajouter_activité_intérieur(account_id):
         if len(nom) > 20:
             messagebox.showerror("Type trop long", "Le type de ton entraînement fait plus de 20 caractères")
             return
+        if not nom:
+            nom = None
         try:
             date_str = date_entry.get().strip()
             date_obj = datetime.strptime(date_str, '%d-%m-%Y')
@@ -1016,6 +1020,12 @@ def ajouter_activité_musculation(account_id):
         répétitions = rep_entry.get().strip()
         série = serie_entry.get().strip()
         volume = volume_entry.get().strip()
+        if not série:
+            série = None
+        if not muscle_travaillé:
+            muscle_travaillé = None
+        if not répétitions:
+            répétitions = None
         if volume:
             try:
                 volume_total = float(volume)
@@ -1063,8 +1073,8 @@ def ajouter_activité_musculation(account_id):
         if lieu is None:
             messagebox.showerror("Lieu est vide", "Le lieu est obligatoire !")
             return
-        if équipement is None:
-            messagebox.showerror("Le type est vide", "Le type est obligatoire !")
+        if équipement == "Type d'entraînement":
+            messagebox.showerror("Le type est vide", "Le type d'entraînement est obligatoire !")
             return
         sport = "Musculation"
                                             
@@ -1224,6 +1234,9 @@ def ajouter_activité_fooball(account_id):
         passe_décisive1 = passe_d_entry.get().strip()
         type_de_séances = type_entry.get().strip()
         score = score_entry.get().strip()
+        if type_de_séances == "Type de séance de foot":
+            messagebox.showerror("Type de séances de foot est vide", "Le type de séance de foot est obligatoire !")
+            return
         if humeur:
             pass
         else:
@@ -1449,6 +1462,8 @@ def ajouter_activité_extérieur(account_id):
         if len(nom) > 20:
             messagebox.showerror("Type trop long", "Le type de votre entraînement fait plus de 20 caractères")
             return
+        if not nom:
+            nom = None
         try:
             date_str = date_entry.get().strip()
             date_obj = datetime.strptime(date_str, '%d-%m-%Y')
@@ -2235,8 +2250,13 @@ def quoi_de_neuf(account_id):
     PatchNote = ctk.CTkLabel(patch_note, font=(font_principale, taille2), text_color=couleur1, wraplength=950, anchor="w", corner_radius=corner1,
         text=f"""Type : {type_maj}\nDate de sortie : {date_de_sortie_maj}\n
 🐛 Corrections de bugs et optimisation
-    • Correction d'un bug de calcul de la distance moyenne dans l'indulgence de course, ce qui faisait baisser la distance maximale hebdomadaire conseillée. Les analyses sont désormais plus précises.
-    • Amélioration de la maintenance de l'app pour les futures mises à jour."""
+    • Correction d'un bug pour l'enregistrement d'activité : 
+        - On pouvait enregistrer une activité sans avoir séléctionner un type d'entraînement.
+    • Correction d'un bug dans les tableaux d'historique d'entraînement.
+    • Amélioration des messages d'erreurs lors de l'ajout d'un objectif ou d'une compétition.
+    • Correction de diverses fautes d'orthographe.
+    • Correction d'un bug qui empêchait de valider avec la touche "Entrée" dans ajouter un objectif.
+    • Correction d'un problème d'affichage mineur dans l'indulgence de course, certains blocs dépassait légèrement de son conteneur."""
     , justify="left")
     PatchNote.pack(expand=True, fill="both", padx=5, pady=5)
 
@@ -2710,8 +2730,17 @@ def ajouter_compétition(account_id):
         else:
             lieu = lieu_avant
 
-        if not nom or not date_str or not sport or not objectif:
-            messagebox.showerror("Erreur", "Veuille à remplir tous les champs !")
+        if not nom:
+            messagebox.showerror("Erreur", "Le nom de la compétition ne peut pas être vide !")
+            return
+        if not date_str:
+            messagebox.showerror("Erreur", "La date de la compétition ne peut pas être vide !")
+            return
+        if not sport:
+            messagebox.showerror("Erreur", "Le sport de la compétition ne peut pas être vide !")
+            return
+        if not objectif:
+            messagebox.showerror("Erreur", "L'objectif de la compétition ne peut pas être vide !")
             return
         try:
             date_conversion = datetime.strptime(date_str, '%d-%m-%Y')
@@ -3223,8 +3252,29 @@ def ajouter_objectif(account_id):
         statut_choisi = statut_entry.get()
         statut = options_statut[statut_choisi]
 
-        if not sport or not date_str or not objectif or not fréquence or not niveau or not statut:
-            messagebox.showerror("Erreur", "Merci de remplir tous les champs !")
+        if niveau_choisi == "Niveau actuel":
+            messagebox.showerror("Erreur", "Merci de remplir le champs 'Niveau actuel' !")
+            return
+        if statut_choisi == "Statut de l'objectif":
+            messagebox.showerror("Erreur", "Merci de remplir le champs 'Statut de l'objectif' !")
+            return
+        if not sport:
+            messagebox.showerror("Erreur", "Merci de remplir le champs 'Sport' !")
+            return
+        if not date_str:
+            messagebox.showerror("Erreur", "Merci de remplir le champs 'Date' !")
+            return
+        if not objectif:
+            messagebox.showerror("Erreur", "Merci de remplir le champs 'Objectif' !")
+            return
+        if not fréquence:
+            messagebox.showerror("Erreur", "Merci de remplir le champs 'Fréquence' !")
+            return
+        if not niveau:
+            messagebox.showerror("Erreur", "Merci de remplir le champs 'Niveau actuel' !")
+            return
+        if not statut:
+            messagebox.showerror("Erreur", "Merci de remplir le champs 'Statut de l'objectif' !")
             return
         try:
             date_conversion = datetime.strptime(date_str, '%d-%m-%Y')
@@ -3741,16 +3791,16 @@ def indulgence_de_course(account_id):
     boite_analyse_kilométrage = ctk.CTkFrame(master=boite_distance_course_gauche, border_width=border2, border_color=couleur1, corner_radius=corner1, fg_color=couleur2)
     boite_analyse_kilométrage.pack(fill="both", expand=True, padx=15, pady=5)
     distance_7_jours = ctk.CTkFrame(master=boite_analyse_kilométrage, corner_radius=corner1, fg_color=couleur1)
-    distance_7_jours.pack(fill="both", expand=True, padx=10, pady=(10, 5))
+    distance_7_jours.pack(fill="both", expand=True, padx=12, pady=(12, 5))
     distance_maximum = ctk.CTkFrame(master=boite_analyse_kilométrage, corner_radius=corner1, fg_color=couleur1)
-    distance_maximum.pack(fill="both", expand=True, padx=10, pady=(5, 10))
+    distance_maximum.pack(fill="both", expand=True, padx=12, pady=(5, 12))
 
     boite_statut = ctk.CTkFrame(master=boite_distance_course_gauche, border_width=border2, border_color=couleur1, corner_radius=corner1, fg_color=couleur2)
     boite_statut.pack(fill="both", expand=True, padx=15, pady=(5, 15))
     h1_zone = ctk.CTkFrame(master=boite_statut, corner_radius=corner1, fg_color=couleur1)
-    h1_zone.pack(fill="both", expand=True, padx=10, pady=(10, 5))
+    h1_zone.pack(fill="both", expand=True, padx=12, pady=(12, 5))
     interprétation = ctk.CTkFrame(master=boite_statut, corner_radius=corner1, fg_color=couleur1)
-    interprétation.pack(fill="both", expand=True, pady=(5, 10), padx=10)
+    interprétation.pack(fill="both", expand=True, pady=(5, 12), padx=12)
 
     boite_distance_course_droit = ctk.CTkFrame(master=app, border_width=border2, border_color=couleur1, corner_radius=corner1,
                                              fg_color=couleur_fond)
@@ -3759,9 +3809,9 @@ def indulgence_de_course(account_id):
     boite_statut = ctk.CTkFrame(master=boite_distance_course_droit, border_width=border2, border_color=couleur1, corner_radius=corner1, fg_color=couleur2)
     boite_statut.pack(fill="both", expand=True, pady=15, padx=15)
     distance_moyenne_28J = ctk.CTkFrame(master=boite_statut, corner_radius=corner1, fg_color=couleur1)
-    distance_moyenne_28J.pack(fill="both", expand=True, padx=10, pady=(10, 5))
+    distance_moyenne_28J.pack(fill="both", expand=True, padx=12, pady=(12, 5))
     conseil = ctk.CTkFrame(master=boite_statut, corner_radius=corner1, fg_color=couleur1)
-    conseil.pack(fill="both", expand=True, pady=(5, 10), padx=10)
+    conseil.pack(fill="both", expand=True, pady=(5, 12), padx=12)
     
     info = ctk.CTkFrame(master=boite_distance_course_droit, corner_radius=corner1, fg_color=couleur1)
     info.pack(fill="both", expand=True, padx=15, pady=(0, 15))
@@ -3774,7 +3824,7 @@ def indulgence_de_course(account_id):
 
     distance_moyenne_du_mois = ctk.CTkLabel(distance_moyenne_28J, text=f"Distance moyenne hebdo. (4 semaines) :\n{distance_moyenne_des_derniers_28_jours:.2f} km par semaine", font=(font_principale, taille2),
                                 width=300, wraplength=500)
-    distance_moyenne_du_mois.pack(fill="both", expand=True, padx=10, pady=10)  
+    distance_moyenne_du_mois.pack(fill="both", expand=True, padx=12, pady=12)  
     pause = verifier_pause(account_id)
     if pause == "blessure":
         Distance_maximal_conseillé = ctk.CTkLabel(distance_maximum, text=f"Distance maximale hebdo. conseillée : actuellement en pause", font=(font_secondaire, taille2),
