@@ -14,10 +14,10 @@ from urllib.parse import quote #pour remplir les champs (destinataire,...) dans 
 from tkinter import messagebox
 
 # Maj
-numérotation_version = "3.1.3"
+numérotation_version = "3.1.4"
 date_version = "Version Septembre 2025"
-date_de_sortie_maj = "10 Septembre 2025"
-type_maj = "Patch Mineur"   
+date_de_sortie_maj = "20 Septembre 2025"
+type_maj = "Patch Majeur"   
 
 # Couleur
 mode_actuel = ctk.get_appearance_mode()
@@ -2250,13 +2250,8 @@ def quoi_de_neuf(account_id):
     PatchNote = ctk.CTkLabel(patch_note, font=(font_principale, taille2), text_color=couleur1, wraplength=950, anchor="w", corner_radius=corner1,
         text=f"""Type : {type_maj}\nDate de sortie : {date_de_sortie_maj}\n
 🐛 Corrections de bugs et optimisation
-    • Correction d'un bug pour l'enregistrement d'activité : 
-        - On pouvait enregistrer une activité sans avoir séléctionner un type d'entraînement.
-    • Correction d'un bug dans les tableaux d'historique d'entraînement.
-    • Amélioration des messages d'erreurs lors de l'ajout d'un objectif ou d'une compétition.
-    • Correction de diverses fautes d'orthographe.
-    • Correction d'un bug qui empêchait de valider avec la touche "Entrée" dans ajouter un objectif.
-    • Correction d'un problème d'affichage mineur dans l'indulgence de course, certains blocs dépassait légèrement de son conteneur."""
+    • Correction d'un bug majeur de calcul de charge d'entraînement. Les analyses sont désormais bien plus précises.
+    • Correction d'un bug persistant qui empêchait de valider avec la touche "Entrée" dans ajouter un objectif."""
     , justify="left")
     PatchNote.pack(expand=True, fill="both", padx=5, pady=5)
 
@@ -3247,15 +3242,13 @@ def ajouter_objectif(account_id):
         date_str = date_entry.get().strip()
         objectif = objectif_entry.get().strip()
         fréquence = fréquence_entry.get().strip()
-        niveau_choisi = niveau_entry.get()
-        niveau = options_niveau[niveau_choisi]
-        statut_choisi = statut_entry.get()
-        statut = options_statut[statut_choisi]
+        niveau = niveau_entry.get()
+        statut = statut_entry.get()
 
-        if niveau_choisi == "Niveau actuel":
+        if niveau == "Niveau actuel":
             messagebox.showerror("Erreur", "Merci de remplir le champs 'Niveau actuel' !")
             return
-        if statut_choisi == "Statut de l'objectif":
+        if statut == "Statut de l'objectif":
             messagebox.showerror("Erreur", "Merci de remplir le champs 'Statut de l'objectif' !")
             return
         if not sport:
@@ -4001,9 +3994,9 @@ def charge_entraînement(account_id):
         curseur.execute("SELECT date_activité, charge FROM Activité WHERE account_id = ? AND date_activité >= ? ORDER BY date_activité ASC", (account_id, cc_str))
         data_pour_graphique = curseur.fetchall()
 
-        charge_aigue = sum(charges_aigue) / len(charges_aigue) if charges_aigue else 0
+        charge_aigue = sum(charges_aigue) if charges_aigue else 0
         #On prend le 2ème élément des data pour graphique pour avoir les charges et ne pas prendre les dates
-        charge_chronique = sum([row[1] for row in data_pour_graphique]) / len(data_pour_graphique) if data_pour_graphique else 0
+        charge_chronique = sum([row[1] for row in data_pour_graphique]) / 4 if data_pour_graphique else 0
     except sqlite3.Error as e:
         messagebox.showerror("Erreur", "Erreur de base de données lors du calcul de charge d'entraînement !")
     except Exception as e:
@@ -4046,10 +4039,10 @@ def charge_entraînement(account_id):
     #rappel pour mettre le test a droite "anchor="w""
     h1 = ctk.CTkLabel(master=h1_boite_charge_entraînement, font=(font_secondaire, taille2), text="Analyse")
     h1.pack(padx=10, pady=(5, 0))
-    result_analyse = ctk.CTkLabel(master=aigue, text=f"Charge aiguë (7 jours) : {charge_aigue:.1f}", font=(font_principale , taille3),
+    result_analyse = ctk.CTkLabel(master=aigue, text=f"Charge (7 jours) : {charge_aigue:.1f}", font=(font_principale , taille3),
                                     width=300, wraplength=280)
     result_analyse.pack(fill="both", expand=True, padx=10, pady=10)
-    result_analyse2 = ctk.CTkLabel(master=chronique, text=f"Charge chronique (28 jours) : {charge_chronique:.1f}", font=(font_principale, taille3),
+    result_analyse2 = ctk.CTkLabel(master=chronique, text=f"Charge moyenne hebdo.\n(4 semaines) : {charge_chronique:.1f}", font=(font_principale, taille3),
                                     width=300, wraplength=280)
     result_analyse2.pack(fill="both", expand=True, padx=10, pady=10)
     pause = verifier_pause(account_id)
