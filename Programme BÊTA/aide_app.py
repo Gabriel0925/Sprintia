@@ -50,20 +50,3 @@ def aide_bienvenue(account_id):
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
 
-def aide_rpe(account_id):
-    try:
-        curseur.execute("SELECT aide FROM Aide_rpe WHERE account_id = ?", (account_id,))
-        result = curseur.fetchone()
-        if result and result[0] == "fait": # result[0] = parce que fetchone renvoie ('fait',)
-            pass
-        else:
-            appris = "fait"
-            curseur.execute("INSERT INTO Aide_rpe (account_id, aide)VALUES (?, ?)", (account_id, appris))
-            con.commit()
-            messagebox.showinfo("C'est quoi le RPE ?", "Le RPE, c'est une manière subjective de mesurer l'intensité de ton entraînement. En gros, tu notes l'effort que tu ressens sur une échelle de 1 à 10.")
-            messagebox.showinfo("Information importante", "Pour la distance, utilise un point au lieu d’une virgule. Par exemple, écris 9.62 pour indiquer 9,62 km.")
-            messagebox.showinfo("Information importante", "Lorsque tu indiques la durée, il faut arrondir les minutes. Par exemple, si ta séance a duré 20 minutes et 44 secondes, tu devras noter 21 !")
-    except sqlite3.Error as e:
-        messagebox.showerror("Erreur", "Erreur de base de données !")
-    except Exception as e:
-        messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")

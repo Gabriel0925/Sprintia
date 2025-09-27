@@ -1250,7 +1250,7 @@ def indulgence_de_course(account_id, app, sidebar_performance, exercice, charge_
 
     D28J = date_actuelle - timedelta(days=28)
     D28J_str = D28J.strftime('%Y-%m-%d')
-    curseur.execute("SELECT distance FROM Activité_running WHERE account_id = ? AND date_activité >= ?", (account_id, D28J_str))
+    curseur.execute("SELECT distance FROM Historique_activité WHERE account_id = ? AND catégorie = 'course' AND date_activité >= ?", (account_id, D28J_str))
     distance28J = [row[0] for row in curseur.fetchall()]
     distance_moyenne_des_derniers_28_jours = sum(distance28J) / 4 if distance28J else 0.00
     if distance_moyenne_des_derniers_28_jours < 10:
@@ -1271,7 +1271,7 @@ def indulgence_de_course(account_id, app, sidebar_performance, exercice, charge_
 
     D7J = date_actuelle - timedelta(days=7)
     D7J_str = D7J.strftime('%Y-%m-%d')
-    curseur.execute("SELECT distance FROM activité_running WHERE account_id = ? AND date_activité >= ?", (account_id, D7J_str))
+    curseur.execute("SELECT distance FROM Historique_activité WHERE account_id = ? AND catégorie = 'course' AND date_activité >= ?", (account_id, D7J_str))
     distance7J = [row[0] for row in curseur.fetchall()]
     distance_des_derniers_7_jours = sum(distance7J) if distance7J else 0
 
@@ -1511,17 +1511,17 @@ def charge_d_entraînement(account_id, app, sidebar_performance, exercice, charg
     try:
         ca = date_actuelle - timedelta(days=7)
         ca_str = ca.strftime('%Y-%m-%d')
-        curseur.execute("SELECT charge FROM Activité WHERE account_id = ? AND date_activité >= ?", (account_id, ca_str))
+        curseur.execute("SELECT charge FROM Historique_activité WHERE account_id = ? AND date_activité >= ?", (account_id, ca_str))
         charges_aigue = [row[0] for row in curseur.fetchall()]
 
         cc = date_actuelle - timedelta(days=28)
         cc_str = cc.strftime('%Y-%m-%d')
-        curseur.execute("SELECT date_activité, charge FROM Activité WHERE account_id = ? AND date_activité >= ? ORDER BY date_activité ASC", (account_id, cc_str))
+        curseur.execute("SELECT date_activité, charge FROM Historique_activité WHERE account_id = ? AND date_activité >= ? ORDER BY date_activité ASC", (account_id, cc_str))
         data_pour_graphique = curseur.fetchall()
 
-        charge_aigue = sum(charges_aigue) / len(charges_aigue) if charges_aigue else 0
+        charge_aigue = sum(charges_aigue) if charges_aigue else 0
         #On prend le 2ème élément des data pour graphique pour avoir les charges et ne pas prendre les dates
-        charge_chronique = sum([row[1] for row in data_pour_graphique]) / len(data_pour_graphique) if data_pour_graphique else 0
+        charge_chronique = sum([row[1] for row in data_pour_graphique]) / 4 if data_pour_graphique else 0
     except sqlite3.Error as e:
         messagebox.showerror("Erreur", "Erreur de base de données lors du calcul de charge d'entraînement !")
     except Exception as e:
@@ -1564,10 +1564,10 @@ def charge_d_entraînement(account_id, app, sidebar_performance, exercice, charg
     #rappel pour mettre le test a droite "anchor="w""
     h1 = ctk.CTkLabel(master=h1_boite_charge_entraînement, font=(font_secondaire, taille2), text="Analyse")
     h1.pack(padx=10, pady=(5, 0))
-    result_analyse = ctk.CTkLabel(master=aigue, text=f"Charge aiguë (7 jours) : {charge_aigue:.1f}", font=(font_principale , taille3),
+    result_analyse = ctk.CTkLabel(master=aigue, text=f"Charge (7 jours) : {charge_aigue:.1f}", font=(font_principale , taille3),
                                     width=300, wraplength=280)
     result_analyse.pack(fill="both", expand=True, padx=10, pady=10)
-    result_analyse2 = ctk.CTkLabel(master=chronique, text=f"Charge chronique (28 jours) : {charge_chronique:.1f}", font=(font_principale, taille3),
+    result_analyse2 = ctk.CTkLabel(master=chronique, text=f"Charge moyenne hebdo.\n(4 semaines) : {charge_chronique:.1f}", font=(font_principale, taille3),
                                     width=300, wraplength=280)
     result_analyse2.pack(fill="both", expand=True, padx=10, pady=10)
     pause = verifier_pause(account_id)

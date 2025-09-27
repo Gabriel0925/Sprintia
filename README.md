@@ -64,3 +64,9 @@ L’application nécessite Python 3.0 minimum pour s’exécuter correctement.
 ⚠️ Tablettes :
 - Non optimisée pour les interfaces tactiles.
 - Utilisable uniquement sur une tablette Windows, grâce à la compatibilité avec son OS.
+
+🔄️ Comment mettre à jour Sprintia ?
+
+1️⃣ Tu dois juste supprimer tous les fichiers dans ton dossier Sprintia sauf le fichier 'data_base.db' !
+
+2️⃣ Ensuite, tu n'as plus qu'à glisser les nouveaux fichiers (que tu trouves sur mon GitHub) dans ton dossier Sprintia

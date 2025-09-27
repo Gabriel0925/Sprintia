@@ -2,7 +2,7 @@ from app_ressource import *
 from update_database import con, curseur, création
 from sidebar import sidebar_exercice, sidebar_performance, sidebar_outil, sidebar_paramètre
 from exercice_app import exercice_accueil
-from outil_app import prédicteur_performance        
+from outil_app import outils        
 from performance_app import charge_d_entraînement
 from parametre_app import parametres
 
@@ -10,7 +10,7 @@ def parametre(account_id):
     parametres(account_id, connexion, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)
 
 def predicteur_temps(account_id):
-    prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)
+    outils(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)
 
 def charge_entraînement(account_id):
     charge_d_entraînement(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -61,7 +61,7 @@ def connexion():
     password_entry = ctk.CTkEntry(carte_connexion, placeholder_text="Mot de passe", show="*", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1)
-    password_entry.pack(fill="x", pady=(2, 12), padx=10)
+    password_entry.pack(fill="x", pady=2, padx=10)
 
     def verifier_identifiants():
         username = username_entry.get().strip()
@@ -146,7 +146,7 @@ def inscription():
     password_confirm= ctk.CTkEntry(carte_inscription, placeholder_text="Confirmer mot de passe", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1, show="*")
-    password_confirm.pack(fill="x", pady=(2, 12), padx=10)
+    password_confirm.pack(fill="x", pady=2, padx=10)
     
     def verifier_identifiants_connexion():
         username = username_entry.get().strip()
@@ -189,13 +189,32 @@ def inscription():
     label_image = ctk.CTkLabel(img, image=CTk_image, text="")
     label_image.pack()
 
+def auto_connect():
+    try:
+        curseur.execute("SELECT statut FROM Auto_connect")
+        result_statut = curseur.fetchone()
+        statut = result_statut[0] if result_statut else None
+        if statut == "déconnexion":
+            connexion()
+        elif statut == "" or statut is None:
+            connexion()
+        else:
+            account_id = result_statut[0] 
+            exercice(account_id)  
+    except sqlite3.Error as e:
+        messagebox.showerror("Erreur", "Erreur de base de données lors du lancement de Auto-connect !")
+    except Exception as e:
+        messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
+
 if __name__ == "__main__":
     ctk.set_appearance_mode("System")
     app = ctk.CTk(fg_color=couleur_fond)
     app.geometry("1050x600")
     app.title("Sprintia")
     création()
-    connexion()
+    auto_connect()
     app.protocol("WM_DELETE_WINDOW", lambda: fermer_app(app, con))
     app.bind("<Control-w>", lambda event: fermer_app(app, con))
+    app.after(450, lambda: app.state("zoomed"))
+    app.bind("<Escape>", lambda event: app.state("normal"))
     app.mainloop()

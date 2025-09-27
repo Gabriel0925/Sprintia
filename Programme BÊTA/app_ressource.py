@@ -2,6 +2,7 @@ import customtkinter as ctk
 from PIL.ImageOps import expand
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import Image
+import tkcalendar
 import sqlite3
 import hashlib
 import math
@@ -10,14 +11,15 @@ from datetime import date
 from datetime import time as Time
 import matplotlib.pyplot as plt
 import seaborn as sns
+import random
 import webbrowser
 from urllib.parse import quote #pour remplir les champs (destinataire,...) dans une app mail
 from tkinter import messagebox
 
 # Version Sprintia
 version_numéro = "3.2"
-version_entière = "3.2 BÊTA 1 | Version Novembre 2025"
-date_de_sortie = "12 Septembre 2025"
+version_entière = "3.2 BÊTA 2 | Version Novembre 2025"
+date_de_sortie = "27 Septembre 2025"
 type_de_maj = "Mise à jour mineur"
 
 # Couleur
@@ -30,7 +32,7 @@ couleur_text = "#fbfcfb"
 mode_image = "Logo Sprintia Sombre.png"
 
 # Police d'écriture
-taille1 = 28
+taille1 = 30
 taille2 = 20
 taille3 = 16
 font_principale = "DejaVu Sans"

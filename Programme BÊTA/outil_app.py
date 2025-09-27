@@ -1,33 +1,11 @@
 from app_ressource import * 
 from update_database import con, curseur
 
-def navbar_outil(account_id, mode_actuel, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
-    navbar = ctk.CTkFrame(master=app, fg_color="transparent")
-    navbar.pack(pady=20)
-
-    def mise_mode(choix):
-        choix = mode_activité.get()
-        navigation = {
-            "Prédicteur de performance": lambda: [vider_fenetre(app), prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)],
-            "Zones cardiaque": lambda: [vider_fenetre(app), zone_fc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)],
-            "Calculateur IMC": lambda: [vider_fenetre(app), imc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)],
-            "Estimation VMA": lambda: [vider_fenetre(app), VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)],
-            "Estimation VO2max": lambda: [vider_fenetre(app), VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)]
-        }
-        app.after(0, navigation[choix])
-
-    mode_activité = ctk.CTkSegmentedButton(master=navbar, 
-                                            values=["Prédicteur de performance", "Zones cardiaque", "Calculateur IMC", "Estimation VMA", "Estimation VO2max"],
-                                            height=button_height, selected_color=couleur_fond, selected_hover_color=couleur2_hover, 
-                                            corner_radius=corner1, command=mise_mode, font=(font_principale, taille3),
-                                            fg_color=couleur2, unselected_color=couleur2, unselected_hover_color=couleur2_hover,
-                                            text_color=couleur1)
-    mode_activité.pack(side="left")
-    mode_activité.set(mode_actuel)
-
 def imc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
-    navbar_outil(account_id, "Calculateur IMC", app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)
+
+    Titre = ctk.CTkLabel(app ,text="Calculateur IMC", font=(font_secondaire, taille1), text_color=couleur_text)
+    Titre.pack(padx=10, pady=10)
 
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
@@ -90,7 +68,9 @@ def imc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
 
 def VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
-    navbar_outil(account_id, "Estimation VO2max", app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)
+
+    Titre = ctk.CTkLabel(app ,text="Estimation VO2max", font=(font_secondaire, taille1), text_color=couleur_text)
+    Titre.pack(padx=10, pady=10)
 
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
@@ -306,12 +286,14 @@ def VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predi
 
 def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
-    navbar_outil(account_id, "Estimation VMA", app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)
+
+    Titre = ctk.CTkLabel(app ,text="Estimation VMA", font=(font_secondaire, taille1), text_color=couleur_text)
+    Titre.pack(padx=10, pady=10)
 
     boite1 = ctk.CTkFrame(master=app, fg_color=couleur_fond)
-    boite1.pack(side="top", fill="both", expand=True, pady=(10, 0), padx=10)
+    boite1.pack(side="top", fill="both", expand=True, pady=(5, 0), padx=10)
     carte_connexion = ctk.CTkFrame(boite1, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
-    carte_connexion.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=20) 
+    carte_connexion.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=10) 
     app.bind('<Return>', lambda event: calcul_VMA())
     
     distance_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Distance (km)", border_color=couleur_fond, fg_color=couleur_fond,
@@ -354,20 +336,16 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
     distance_entry.pack(pady=2, padx=12)
     temps_entry.pack(pady=2, padx=12)
 
-    cadre_result = ctk.CTkFrame(master=boite1, corner_radius=corner1, fg_color=couleur2)
-    cadre_result.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=20)
+    cadre_result = ctk.CTkFrame(master=boite1, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)
+    cadre_result.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=10)
     frame_result = ctk.CTkFrame(cadre_result, fg_color=couleur2, corner_radius=corner1)
     frame_result.pack(side="top", expand=True, fill="both", pady=(12, 10), padx=10)
     frame_bouton = ctk.CTkFrame(cadre_result, corner_radius=corner1, fg_color=couleur2)
     frame_bouton.pack(side="top", pady=2)
 
-    boite3 = ctk.CTkFrame(master=app, fg_color=couleur_fond)
-    boite3.pack(side="top", fill="both", expand=True, pady=(5, 10))
-    frame = ctk.CTkFrame(master=boite3, fg_color=couleur_fond, corner_radius=corner1, border_width=border2, border_color=couleur1)
-    frame.pack(fill="both", expand=True, padx=20, pady=10)
-    tableau_frame = ctk.CTkScrollableFrame(master=frame, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
+    tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
                                            scrollbar_button_hover_color=couleur2_hover)
-    tableau_frame.pack(fill="both", expand=True, padx=20, pady=5)
+    tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
 
     c_quoi_la_vma = "C'est quoi la VMA ?\n\nLa Vitesse Maximale Aérobie (VMA) est la vitesse de course à laquelle ton corps atteint sa consommation maximale d'oxygène (VO2max). " \
                     "Connaître ta VMA te permet de mieux structurer tes entraînements, " \
@@ -376,7 +354,7 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
                            font=(font_principale, taille2), text_color=couleur1, wraplength=650, justify="left", anchor="w")
     result.pack(padx=15, pady=5)
 
-    headers = ["Zone", "Allure", "Objectif", "Séance type"]
+    headers = ["Zone", "Allure", "Objectif", "Séances type"]
     contenu_tableau = [
             ["Zone 1", "Aucune donnée", "Travail de récupération", "1h à 70% de VMA"],
             ["Zone 2", "Aucune donnée", "Travailler son endurance (endurance fondamental)", "45 min à 80% de VMA"],
@@ -398,7 +376,7 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
         try:
             temps_autre = temps_entry.get().strip()
             if not distance or not temps_autre:
-                messagebox.showerror("Erreur", "La distance et le temps ne peuvent pas être vides !")
+                messagebox.showerror("Erreur", "La distance ou le temps ne peuvent pas être vides !")
                 return
             if ":" in temps_autre:
                 if len(temps_autre.split(":")) == 3:
@@ -506,17 +484,18 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
                 data_label.grid(row=row_index+1, column=col_index, padx=15, pady=5)
         return vma_estimée
 
-    for col, header_text in enumerate(headers):
-        header_label = ctk.CTkButton(tableau_frame, text=header_text, font=(font_secondaire, taille2),
-                                fg_color=couleur_fond, corner_radius=corner1, text_color=couleur1,
+    for col, header_text in enumerate(headers):       
+            header_label = ctk.CTkButton(tableau_frame, text=header_text, font=(font_secondaire, taille2),
+                                fg_color=couleur_fond, corner_radius=corner2, text_color=couleur1,
                                 height=40, border_width=border2, border_color=couleur2, hover_color=couleur_fond)
-        header_label.grid(row=0, column=col, padx=10, pady=15)
-        tableau_frame.grid_columnconfigure(col, weight=1)
+            header_label.grid(row=0, column=col, padx=10, pady=15)
+            tableau_frame.grid_columnconfigure(col, weight=1)
+
     for row_index, contenu_tableau_text in enumerate(contenu_tableau):
         for col_index, data in enumerate(contenu_tableau_text):
-            data_label = ctk.CTkLabel(tableau_frame, text=data, font=(font_principale, taille3),
-                                    text_color=couleur_text, wraplength=200)
-            data_label.grid(row=row_index+1, column=col_index, padx=15, pady=5)
+            label = ctk.CTkLabel(master=tableau_frame, text=str(data if data is not None else "-"), font=(font_principale, taille3),
+                                text_color=couleur_text, wraplength=200)
+            label.grid(row=row_index + 1, column=col_index, padx=15, pady=15, sticky="ew")
 
     def sauvegarder_vma():
         try:
@@ -559,11 +538,13 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
                                     corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                                     command=lambda: calcul_VMA())
-    button_check.pack(fill="x", padx=12, pady=(2, 12))
+    button_check.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
 def zone_fc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
-    navbar_outil(account_id, "Zones cardiaque", app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)
+
+    Titre = ctk.CTkLabel(app ,text="Zones cardiaque", font=(font_secondaire, taille1), text_color=couleur_text)
+    Titre.pack(padx=10, pady=10)
 
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
@@ -617,7 +598,9 @@ def zone_fc(account_id, app, sidebar_outil, exercice, charge_entraînement, pred
 
 def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
-    navbar_outil(account_id, "Prédicteur de performance", app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)
+
+    Titre = ctk.CTkLabel(app ,text="Prédicteur de performance", font=(font_secondaire, taille1), text_color=couleur_text)
+    Titre.pack(padx=10, pady=10)
 
     Info = ctk.CTkLabel(master=app ,text="N'oublie pas que cette prédiction est une estimation basée sur la\nthéorie"\
                          " et peut varier en fonction de nombreux facteurs\nle jour de la course !", font=(font_secondaire, taille2),
@@ -720,3 +703,53 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
                                     font=(font_principale, taille3),
                            command=lambda: calcul_temps(account_id))
     button_check.pack(padx=10, pady=10)
+
+def outils(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
+    sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
+
+    Titre = ctk.CTkLabel(app ,text="Outils", font=(font_secondaire, taille1), text_color=couleur_text)
+    Titre.pack(padx=10, pady=10)
+
+    frame_bouton = ctk.CTkFrame(app, fg_color="transparent")
+    frame_bouton.pack(pady=(20,0), padx=10)
+    frame_bouton1 = ctk.CTkFrame(frame_bouton, fg_color="transparent")
+    frame_bouton1.pack(pady=(20,0), padx=10)
+    frame_bouton2 = ctk.CTkFrame(frame_bouton, fg_color="transparent")
+    frame_bouton2.pack(pady=(10,0), padx=10)
+    frame_bouton3 = ctk.CTkFrame(frame_bouton, fg_color="transparent")
+    frame_bouton3.pack(pady=(10,20), padx=10)
+
+    button_autre = ctk.CTkButton(frame_bouton1, text="⏱️ Prédicteur de performance\n_______________________\n\nDécouvre ton temps au semi-marathon,...",
+                                    corner_radius=corner2, width=500, font=(font_principale, taille2), fg_color=couleur2, 
+                                    hover_color=couleur2_hover, text_color=couleur1, 
+                                    command=lambda: [vider_fenetre(app), prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
+    button_autre.pack(side="left", padx=10)
+    button_info = ctk.CTkButton(frame_bouton1, text="❤️ Zones cardiaque\n_______________________\n\nDécouvre tes zones de fréquence cardiaque", 
+                                    fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, width=500, font=(font_principale, taille2),
+                                    text_color=couleur1, 
+                                    command=lambda: [vider_fenetre(app), zone_fc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
+    button_info.pack(side="left", padx=(0, 10))
+    button_nouveauté = ctk.CTkButton(frame_bouton2, text="⚖️ Calculateur IMC\n_______________________\n\nDécouvre ton IMC avec une interprétation", 
+                                    fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, width=500, font=(font_principale, taille2),
+                                    text_color=couleur1,
+                                    command=lambda: [vider_fenetre(app), imc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
+    button_nouveauté.pack(side="left", padx=10)
+    button_avis = ctk.CTkButton(frame_bouton2, text="🚀 Estimation VMA\n_______________________\n\nDécouvre ta VMA et tes zones d'allure", 
+                                    fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, width=500, font=(font_principale, taille2),
+                                    text_color=couleur1, 
+                                    command=lambda: [vider_fenetre(app), VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
+    button_avis.pack(side="left", padx=(0, 10))
+    button_avis = ctk.CTkButton(frame_bouton3, text="🫁 Estimation VO2max\n_______________________\n\nDécouvre ton VO2max via ta vma", 
+                                    fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, width=500, font=(font_principale, taille2),
+                                    text_color=couleur1, 
+                                    command=lambda: [vider_fenetre(app), VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
+    button_avis.pack(side="left", padx=10)   
+    button_avis = ctk.CTkButton(frame_bouton3, text="🍗 Protéine quotidienne\n_______________________\n\nDécouvre la qté. de protéines à consommer", 
+                                    fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, width=500, font=(font_principale, taille2),
+                                    text_color=couleur1)
+    button_avis.pack(side="left", padx=(0, 10))

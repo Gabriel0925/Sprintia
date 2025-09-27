@@ -5,36 +5,43 @@ def a_propos(account_id, app, sidebar_paramètre, exercice, charge_entraînement
     sidebar_paramètre(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(app ,text="À propos", font=(font_secondaire, taille1))
-    Titre.pack(pady=20)
+    Titre.pack(padx=10, pady=10)
 
-    frame_slogan = ctk.CTkFrame(app, fg_color="transparent")
-    frame_slogan.pack(padx=10, pady=(20, 10))
-    slogan = ctk.CTkLabel(frame_slogan, text="Sprintia est conçue pour t'aider avant et après un entraînement\n\n" \
-    "Sprintia est développé par Gabriel Chapet",
-                          font=(font_principale, taille2))
-    slogan.pack()
+    conteneur = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
+                                           scrollbar_button_hover_color=couleur2_hover)
+    conteneur.pack(fill="both", expand=True, padx=10, pady=10)
 
-    conteneur = ctk.CTkFrame(app, fg_color=couleur_fond, corner_radius=corner1,
-                             border_width=border1, border_color=couleur1)
-    conteneur.pack(fill="both", expand=True, padx=25, pady=25)
-    sous_titre= ctk.CTkLabel(conteneur, text="Pourquoi j'ai créé Sprintia ?", font=(font_secondaire, taille1))
-    sous_titre.pack(pady=10)
+    sous_titre3= ctk.CTkLabel(conteneur, text="Sprintia c'est quoi ?", font=(font_secondaire, taille2)
+                            , justify="left")
+    sous_titre3.pack(pady=15)
+    c_quoi = ctk.CTkLabel(conteneur, 
+                            text="Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes qui te permettront de mieux t’entraîner :\n" \
+                            "\n◉ Charge d'entraînement :\n " \
+                            "La charge d'entraînement va permettre aux sportifs d’adapter l’intensité et le volume de leurs entraînement futur et à venir. La charge d’entraînement permet de quantifier le stress physique imposé à un corps durant une période de une semaine.\n" \
+                            "\n◉ Indulgence de course :\n " \
+                            "L’indulgence de course t’aide à ajuster ton kilométrage des 7 derniers jours pour rester dans une progression optimale pour tes futures entraînement, sans dépasser ta limite. Tu peux ainsi continuer à t’améliorer tout en réduisant les risques de blessure.\n" \
+                            "\n◉ Prédicteur de performance :\n " \
+                            "Le prédicteur de performance estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir d’une course récente.",
+                            font=(font_principale, taille2),  wraplength=950, justify="left")
+    c_quoi.pack(padx=10, pady=10)
+    sous_titre= ctk.CTkLabel(conteneur, text="Pourquoi j'ai créé Sprintia ?", font=(font_secondaire, taille2),
+                            justify="left")
+    sous_titre.pack(pady=15)
     pourquoi = ctk.CTkLabel(conteneur, text="J'ai lancé Sprintia parce que pour moi, on n'a pas besoin de dépenser des fortunes pour avoir de la qualité. C'est un peu comme avec" \
                         " les montres connectées : on ne devrait pas être obligé d'acheter la toute dernière et la plus chère pour pouvoir profiter des dernières fonctionnalités." \
-                        " De plus, certains constructeurs de montre connectées ce permettre de mettre un abonnement pour pouvoir bénificié de tout les fonctionnalités !" \
+                        " De plus, certains constructeurs de montre connectées ce permettre de mettre un abonnement mensuel pour pouvoir bénificié de toutes les fonctionnalités !" \
                         " Du coup, j'ai décidé de créer Sprintia pour faire les choses à ma manière !",
-                        font=(font_principale, taille2), wraplength=950)
+                        font=(font_principale, taille2), wraplength=950, justify="left")
     pourquoi.pack(padx=10)
-    sous_titre2= ctk.CTkLabel(conteneur, text="Qui suis-je ?", font=(font_secondaire, taille1))
-    sous_titre2.pack(pady=10)
+    sous_titre2= ctk.CTkLabel(conteneur, text="Qui suis-je ?", font=(font_secondaire, taille2)
+                            , justify="left")
+    sous_titre2.pack(pady=15)
     quisuisje = ctk.CTkLabel(conteneur, 
                             text="J'adore le sport, la tech et l'imformatique. Ce que j'adore dans le sport," \
                             " c'est les algorithmes qui vont m'aider à m'entraîner et à progresser dans mon sport, sans avoir de coach." \
-                            " Je développe Sprintia pour vous aider à vous entraîner gratuitement sans matériel. Le seul matériel requis" \
-                            " pour faire fonctionner les algorithmes c'est une montre avec un chrono ou même un smartphone peut suffire pour utiliser Sprintia." \
-                            " Mais pour avoir un suivi plus complet, tu peux utiliser ton téléphone pour le GPS en course, vélo au moins tu pourras intégrer plus de données" \
-                            " dans Sprintia !",
-                            font=(font_principale, taille2),  wraplength=950)
+                            " Je développe Sprintia pour vous aider à vous entraîner gratuitement." \
+                            " Sprintia est développé par Gabriel Chapet.",
+                            font=(font_principale, taille2),  wraplength=950, justify="left")
     quisuisje.pack(padx=10, pady=10)
 
 def correction_bug(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre):
@@ -91,7 +98,10 @@ def correction_bug(account_id, app, sidebar_paramètre, exercice, charge_entraî
     text=f"""🐛 Corrections de bugs et optimisation\n
     • Cliquer sur la croix (d'une boite de dialogue) ferme désormais la boîte de dialogue, au lieu d’ouvrir quand même l’application (ex : le site des actu de Sprintia).
     • Correction de fautes d'orthographe dans l'application.
-    • Optimisation du code.
+    • Optimisation du code pour améliorer la maintenance.
+    • Correction d'un bug qui ne supprime pas une activité.
+    • Correction d'un bug qui empêchait le retour à la ligne dans 'Contribue à améliorer Sprintia'.
+    • Amélioration des vérifications d'enregistrement d'activité pour éviter les erreurs ou les bugs.
     • Correction d'un bug qui empêchait de valider avec la touche "Entrée" dans ajouter un objectif.
     • Correction d'un problème d'affichage mineur dans la charge d'entraînement, certains blocs dépassait légèrement de son conteneur.
     • Refonte back-end : découpage du gros fichier en plusieurs modules pour un code plus organisé."""
@@ -152,11 +162,20 @@ def amélioration(account_id, app, sidebar_paramètre, exercice, charge_entraîn
             text=f"""📊 Améliorations\n
     • Ajout d’une boîte de dialogue de confirmation avant l’ouverture d’app externe.
     • Ajustement de l'interface utilisateur avec Matérial 3 Expressive désormais plus présent.
-    • La sidebar adopte un nouveau look plus proche l'adn de Sprintia.
-    • Simplication et amélioration de l'ergonomie pour la modification de ton compte.
+    • La sidebar adopte un nouveau look plus proche de l'adn de Sprintia.
+    • Simplification et amélioration de l'ergonomie pour la modification de ton compte.
     • Plus besoin d'éditeur de code pour lancer Sprintia, désormais tu n'as qu'à double-cliquer sur le fichier "Sprintia.vbs".
     • Tu peux désormais créer un raccourci sur ton bureau pour lancer Sprintia plus rapidement et avec une icône.
     • 80 caractères maximum pour ta bio.
+    • Nouveau style de tableau.
+    • Les mots ne sont plus coupé dans les 'TextBox'.
+    • Caractères maximum pour certains champs quand tu ajoutes une activité.
+    • Ajout de plus de 10 choix de type d'entraînement pour plus que l'utilisateur ne soit plus perdu.
+    • Ajout d'un calendrier pour choisir la date quand tu ajoutes une activité.
+    • Tous les formats de date sont acceptés (JJ-MM-AAAA, JJ/MM/AAAA, JJ.MM.AAAA, JJ MM AAAA, JJ_MM_AAAA, JJ,MM,AAAA).
+    • Quand tu saisis une distance, tu peux mettre des virgules, des espaces, des tirais du bas, "km" ou "KM" (ex : 10,5 km, 10 5, 10_5, 10.5).
+    • Sprintia s'ouvre directement en plein écran.
+    • La touche "Échap" permet de quitter le mode plein écran.
     • Design unifié peut importe si ton ordinateur est en mode sombre ou clair les couleurs ne s'adapteront plus ça permet de renforcer l'identité visuel de Sprintia.
     • Les boutons de retour inutiles ont été supprimés."""
     , justify="left")
@@ -220,7 +239,14 @@ def nouvelle_fonction(account_id, app, sidebar_paramètre, exercice, charge_entr
         3. Formats de temps élargis (hh:mm:ss, mm:ss, minutes).
         4. Tableau des zones enrichi avec allures, objectifs et exemples de séances.
         5. Nouveaux boutons : Sauvegarder & Historique.
-        6. Texte explicatif sur la VMA et son utilité."""
+        6. Texte explicatif sur la VMA et son utilité.\n
+    • Auto-connect : plus besoin de te reconnecter à chaque lancement de Sprintia, tu restes connecté automatiquement.
+    • Nouveau mode 'Libre' quand tu ajoutes une activité : les modes 'Extérieur' et 'Intérieur' se sont assemblés pour former le mode 'Libre' :
+        1. Le mode 'Libre' peut-être utilisé si ton activité ne correspond pas aux modes 'Course', 'Musculation' ou 'Football'.\n
+    • Arrivé de ton coach de sport qui est intégré à plusieurs endroits dans Sprintia :
+        1. Il peut te donner des conseils, des infos, des phrases de motivation, et des tips sur Sprintia.
+        2. Tu peux personnaliser le nom de ce coach.
+        3. Choisis un style de coach (bienveillant, strict mais motivant, pote, inshape)\n"""
     , justify="left")
     PatchNote.pack(expand=True, fill="both", padx=5, pady=5)
 
@@ -249,12 +275,11 @@ def avis(account_id, app, sidebar_paramètre, exercice, charge_entraînement, pr
                            corner_radius=corner1, height=button_height, font=(font_principale, taille3), border_width=border1, border_color=couleur2,  width=200,
                             command=lambda: [vider_fenetre(app), avis(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_avis.pack(side="left", padx=2)
-
-    app.bind('<Return>', lambda event: envoyer())
+    
     avis_entry = ctk.CTkTextbox(app, corner_radius=corner1, fg_color=couleur2, font=(font_principale, taille2),
                                 scrollbar_button_color=couleur1, scrollbar_button_hover_color=couleur1_hover, text_color=couleur1,
                                 border_color=couleur1, border_width=border1)
-    avis_entry.pack(expand=True, fill="both", padx=80, pady=20)
+    avis_entry.pack(expand=True, fill="both", padx=10, pady=(10, 5))
     avis_entry.insert("0.0", "Ton avis :\n")
 
     def envoyer():
@@ -277,10 +302,10 @@ def avis(account_id, app, sidebar_paramètre, exercice, charge_entraînement, pr
         except Exception as e:
             messagebox.showerror("Erreur", "Impossible d'ouvrir ton application mail. Vérifie que tu as une application pour gérer tes mails !")
     button_check = ctk.CTkButton(app, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner1, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+                                    corner_radius=corner1, height=height_expressive, text_color=couleur1,
+                                    font=(font_principale, taille2), border_width=border1, border_color=couleur2,
                                     command=lambda: envoyer())
-    button_check.pack(padx=5, pady=(10, 40))
+    button_check.pack(padx=5, pady=(5, 10))
 
 def proposer_fonction(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_paramètre(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -307,12 +332,11 @@ def proposer_fonction(account_id, app, sidebar_paramètre, exercice, charge_entr
                             corner_radius=corner2, height=button_height, font=(font_principale, taille3), text_color=couleur1, width=200,
                             command=lambda: [vider_fenetre(app), avis(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_avis.pack(side="left", padx=2)
-
-    app.bind('<Return>', lambda event: envoyer())
+    
     avis_entry = ctk.CTkTextbox(app, corner_radius=corner1, fg_color=couleur2, font=(font_principale, taille2),
                                 scrollbar_button_color=couleur1, scrollbar_button_hover_color=couleur1_hover, text_color=couleur1,
                                 border_color=couleur1, border_width=border1)
-    avis_entry.pack(expand=True, fill="both", padx=80, pady=20)
+    avis_entry.pack(expand=True, fill="both", padx=10, pady=(10, 5))
     avis_entry.insert("0.0", "Description de ta fonctionnalité :\n")
 
     def envoyer():
@@ -335,10 +359,10 @@ def proposer_fonction(account_id, app, sidebar_paramètre, exercice, charge_entr
         except Exception as e:
             messagebox.showerror("Erreur", "Impossible d'ouvrir ton application mail. Vérifie que tu as une application pour gérer tes mails !")
     button_check = ctk.CTkButton(app, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner1, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+                                    corner_radius=corner1, height=height_expressive, text_color=couleur1,
+                                    font=(font_principale, taille2), border_width=border1, border_color=couleur2,
                                     command=lambda: envoyer())
-    button_check.pack(padx=5, pady=(10, 40))
+    button_check.pack(padx=5, pady=(5, 10))
 
 def signaler_bug(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_paramètre(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -366,11 +390,10 @@ def signaler_bug(account_id, app, sidebar_paramètre, exercice, charge_entraîne
                             command=lambda: [vider_fenetre(app), avis(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_avis.pack(side="left", padx=2)
 
-    app.bind('<Return>', lambda event: envoyer())
     avis_entry = ctk.CTkTextbox(app, corner_radius=corner1, fg_color=couleur2, font=(font_principale, taille2),
                                 scrollbar_button_color=couleur1, scrollbar_button_hover_color=couleur1_hover, text_color=couleur1,
                                 border_color=couleur1, border_width=border1)
-    avis_entry.pack(expand=True, fill="both", padx=80, pady=20)
+    avis_entry.pack(expand=True, fill="both", padx=10, pady=(10, 5))
     avis_entry.insert("0.0", "Description du bug :\n")
 
     def envoyer():
@@ -393,23 +416,16 @@ def signaler_bug(account_id, app, sidebar_paramètre, exercice, charge_entraîne
         except Exception as e:
             messagebox.showerror("Erreur", "Impossible d'ouvrir ton application mail. Vérifie que tu as une application pour gérer tes mails !")
     button_check = ctk.CTkButton(app, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner1, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+                                    corner_radius=corner1, height=height_expressive, text_color=couleur1,
+                                    font=(font_principale, taille2), border_width=border1, border_color=couleur2,
                                     command=lambda: envoyer())
-    button_check.pack(padx=5, pady=(10, 40))
+    button_check.pack(padx=5, pady=(5, 10))
 
 def modifier_password(account_id, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_paramètre(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
-    frame_titre = ctk.CTkFrame(app, fg_color="transparent")
-    frame_titre.pack(pady=20, padx=10)
-    Titre = ctk.CTkLabel(frame_titre ,text="Mot de passe oublié", font=(font_secondaire, taille1))
-    Titre.pack(side="left", padx=5)
-    button_back = ctk.CTkButton(frame_titre, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=lambda: [vider_fenetre(app), mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_back.pack(side="left", padx=20)
+    Titre = ctk.CTkLabel(app ,text="Mot de passe oublié", font=(font_secondaire, taille1))
+    Titre.pack(padx=10, pady=10)
 
     frame2 = ctk.CTkFrame(app, fg_color="transparent")        
     frame2.pack(pady=(10, 20))
@@ -424,11 +440,12 @@ def modifier_password(account_id, inscription, app, sidebar_paramètre, exercice
     password_entry = ctk.CTkEntry(carte, placeholder_text="Nouveau mot de passe", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=widht_expressive, show="*")
-    password_entry.pack(pady=(12, 5), padx=11)
+    password_entry.pack(pady=(12, 2), padx=12)
     password_entry2 = ctk.CTkEntry(carte, placeholder_text="Confirme ton nouveau mot de passe", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=widht_expressive, show="*")
-    password_entry2.pack(pady=(5, 12), padx=11)
+    password_entry2.pack(pady=2, padx=12)
+
     def new_username(account_id):
         new_password = password_entry.get()
         new_password2 = password_entry2.get()
@@ -452,10 +469,18 @@ def modifier_password(account_id, inscription, app, sidebar_paramètre, exercice
                 messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
         else:
             messagebox.showerror("Erreur", "Les mots de passe saisis ne correspondent pas !")
-    button_check = ctk.CTkButton(carte, text="Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
+
+    frame_bouton = ctk.CTkFrame(carte, fg_color="transparent")
+    frame_bouton.pack(expand=True, fill="both", padx=12, pady=(0, 12))
+    button_check = ctk.CTkButton(frame_bouton, text="Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
                             corner_radius=corner1, height=button_height, font=(font_principale, taille2), text_color=couleur1,
                             command=lambda: new_username(account_id))
-    button_check.pack(fill="x", pady=(2, 12), padx=10)
+    button_check.pack(side="left", expand=True, fill="x", pady=2, padx=(10, 2))
+    button_back = ctk.CTkButton(frame_bouton, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille2),
+                                    command=lambda: [vider_fenetre(app), mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
+    button_back.pack(side="left", expand=True, fill="x", pady=2, padx=(2, 10))
 
 def supprimer_compte(account_id, inscription, app):
     try:
@@ -497,7 +522,7 @@ def mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charg
     sidebar_paramètre(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     titre = ctk.CTkLabel(app ,text="Mon compte", font=(font_secondaire, taille1))
-    titre.pack(pady=20)
+    titre.pack(padx=10, pady=10)
 
     boite = ctk.CTkFrame(app, fg_color=couleur2, corner_radius=corner2, border_width=border1, border_color=couleur1)
     boite.pack(expand=True, fill="both", padx=80, pady=(20, 60))
@@ -558,7 +583,8 @@ def mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charg
     label_bio.pack(expand=True, fill="both", padx=(20, 10), pady=15)
     ta_bio = ctk.CTkTextbox(sous_boite3_info2, width=LABEL_MIN_WIDTH, font=(font_principale, taille2), height=150,
                             fg_color=couleur_fond, corner_radius=corner1, border_color=couleur_fond, text_color=couleur1,
-                            scrollbar_button_color=couleur1, scrollbar_button_hover_color=couleur1_hover)
+                            scrollbar_button_color=couleur1, scrollbar_button_hover_color=couleur1_hover,
+                            wrap="word")
     ta_bio.insert("0.0", f"{bio if bio is not None else "Aucune bio..."}")
     ta_bio.pack(padx=(15, 20), pady=15)
 
@@ -607,6 +633,16 @@ def mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charg
                                     command=lambda: [vider_fenetre(app), modifier_password(account_id, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_mot_de_passe_oublié.pack(side="left", padx=2)
 
+def auto_connect_deconnexion(connexion):
+    try:
+        curseur.execute("UPDATE Auto_connect SET statut = 'déconnexion'")
+        con.commit()
+    except sqlite3.Error as e:
+        pass
+    except Exception as e:
+        pass
+    connexion()
+
 def parametres(account_id, connexion, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_paramètre(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
     
@@ -631,7 +667,7 @@ def parametres(account_id, connexion, inscription, app, sidebar_paramètre, exer
         #webbrowser.open("https://github.com/Gabriel0925/Sprintia/tree/main/Programme%20B%C3%8ATA")
 
     Titre = ctk.CTkLabel(app ,text="Paramètres", font=(font_secondaire, taille1), text_color=couleur_text)
-    Titre.pack(padx=50, pady=20)
+    Titre.pack(padx=10, pady=10)
 
     frame_bouton = ctk.CTkFrame(app, fg_color="transparent")
     frame_bouton.pack(pady=(20,0), padx=10)
@@ -679,8 +715,13 @@ def parametres(account_id, connexion, inscription, app, sidebar_paramètre, exer
                                     text_color=couleur1, 
                                     command=beta_testeur)
     button_avis.pack(side="left", padx=(0, 10))      
+    button_coach = ctk.CTkButton(frame_bouton4, text="👨🏻 Coach\n_______________________\n\nPersonnalise ton coach", 
+                                    fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, width=500, font=(font_principale, taille2),
+                                    text_color=couleur1)
+    button_coach.pack(side="left", padx=10)      
     button_deco = ctk.CTkButton(frame_bouton4, text="🚪Déconnexion\n_______________________\n\nSe déconnecter, couper le lien", 
                                     fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, width=500, font=(font_principale, taille2),
-                                    text_color=couleur1, command=lambda: [vider_fenetre(app), connexion()])
-    button_deco.pack(side="left", padx=10)
+                                    text_color=couleur1, command=lambda: [vider_fenetre(app), auto_connect_deconnexion(connexion)])
+    button_deco.pack(side="left", padx=(0, 10))
