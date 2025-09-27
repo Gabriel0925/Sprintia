@@ -207,7 +207,7 @@ def auto_connect():
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
 
 if __name__ == "__main__":
-    ctk.set_appearance_mode("System")
+    ctk.set_appearance_mode("Dark")
     app = ctk.CTk(fg_color=couleur_fond)
     app.geometry("1050x600")
     app.title("Sprintia")
