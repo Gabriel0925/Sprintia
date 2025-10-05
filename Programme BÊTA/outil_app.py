@@ -1,7 +1,12 @@
 from app_ressource import * 
 from update_database import con, curseur
 
-def imc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
+def proteine_quotidienne():
+    messagebox.showinfo("Bientôt disponible", "Cette fonction seras disponible dans quelques semaines !\n" \
+    "Pour le moment, on peaufine cette fonctionnalité !")
+    return
+
+def calculateur_imc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(app ,text="Calculateur IMC", font=(font_secondaire, taille1), text_color=couleur_text)
@@ -66,7 +71,7 @@ def imc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
                                     command=lambda: calcul_imc())
     button_check.pack(padx=10, pady=10)
 
-def VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
+def estimation_VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(app ,text="Estimation VO2max", font=(font_secondaire, taille1), text_color=couleur_text)
@@ -278,13 +283,19 @@ def VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predi
                                  anchor="w", justify="left")
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
+            return
     button_check = ctk.CTkButton(master=app, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                            command=lambda: calcul_VO2MAX(account_id))
     button_check.pack(padx=10, pady=20)
 
-def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
+def historique_vma():
+    messagebox.showinfo("Bientôt disponible", "Cette fonction seras disponible dans quelques semaines !\n" \
+    "Pour le moment, enregistre ta VMA pour pouvoir utiliser les nouveaux algorythmes dès qu'ils seront sorties !")
+    return
+
+def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(app ,text="Estimation VMA", font=(font_secondaire, taille1), text_color=couleur_text)
@@ -333,15 +344,15 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
                                     command=remplissage_placeholder)
     test_spécifique.pack(pady=(12, 2), padx=12)
     test_spécifique.set("Sélectionne un test")
-    distance_entry.pack(pady=2, padx=12)
-    temps_entry.pack(pady=2, padx=12)
+    distance_entry.pack(expand=True, fill="both", pady=2, padx=12)
+    temps_entry.pack(expand=True, fill="both", pady=2, padx=12)
 
     cadre_result = ctk.CTkFrame(master=boite1, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)
     cadre_result.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=10)
     frame_result = ctk.CTkFrame(cadre_result, fg_color=couleur2, corner_radius=corner1)
     frame_result.pack(side="top", expand=True, fill="both", pady=(12, 10), padx=10)
     frame_bouton = ctk.CTkFrame(cadre_result, corner_radius=corner1, fg_color=couleur2)
-    frame_bouton.pack(side="top", pady=2)
+    frame_bouton.pack(side="top", pady=(2, 5))
 
     tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
                                            scrollbar_button_hover_color=couleur2_hover)
@@ -352,7 +363,7 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
                     "d'optimiser tes performances et de prévenir les blessures en évitant le surentraînement."
     result = ctk.CTkLabel(master=frame_result, text=f"{c_quoi_la_vma}",
                            font=(font_principale, taille2), text_color=couleur1, wraplength=650, justify="left", anchor="w")
-    result.pack(padx=15, pady=5)
+    result.pack(expand=True, fill="both", padx=15, pady=5)
 
     headers = ["Zone", "Allure", "Objectif", "Séances type"]
     contenu_tableau = [
@@ -508,7 +519,10 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
         try:
             curseur.execute("SELECT date from Historique_vma WHERE account_id = ?", (account_id,))
             dernière_date = curseur.fetchone()
-            dernière_date = dernière_date[0]
+            if dernière_date == None:
+                pass
+            else:
+                dernière_date = dernière_date[0]
             
             # Formate l'objet date_actuelle en chaîne de caractères 'AAAA-MM-JJ'
             date_actuelle_formatée = date_actuelle.strftime('%Y-%m-%d')
@@ -522,7 +536,7 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
             messagebox.showerror("Erreur", "Une erreur s'est produite lors de la sauvegarde de ta VMA.")
             return
         except Exception as e:
-            messagebox.showerror("Erreur", "Une erreur innatendu s'est produite, réessaye !")
+            messagebox.showerror("Erreur", f"Une erreur innatendu s'est produite, réessaye !{e}")
             return
 
     button_sauvegarde = ctk.CTkButton(frame_bouton, text="💾 Sauvegarder", fg_color=couleur2, hover_color=couleur2_hover,
@@ -531,7 +545,8 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
     button_sauvegarde.pack(side="left", padx=2, pady=(2, 10))
     button_historique = ctk.CTkButton(frame_bouton, text="📊 Historique", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3))
+                                    font=(font_principale, taille3),
+                                    command=historique_vma)
     button_historique.pack(side="left", padx=2, pady=(2, 10))
 
     button_check = ctk.CTkButton(carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
@@ -540,7 +555,7 @@ def VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicte
                                     command=lambda: calcul_VMA())
     button_check.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
-def zone_fc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
+def zone_cardiaque(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(app ,text="Zones cardiaque", font=(font_secondaire, taille1), text_color=couleur_text)
@@ -728,28 +743,29 @@ def outils(account_id, app, sidebar_outil, exercice, charge_entraînement, predi
                                     fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, width=500, font=(font_principale, taille2),
                                     text_color=couleur1, 
-                                    command=lambda: [vider_fenetre(app), zone_fc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
+                                    command=lambda: [vider_fenetre(app), zone_cardiaque(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_info.pack(side="left", padx=(0, 10))
     button_nouveauté = ctk.CTkButton(frame_bouton2, text="⚖️ Calculateur IMC\n_______________________\n\nDécouvre ton IMC avec une interprétation", 
                                     fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, width=500, font=(font_principale, taille2),
                                     text_color=couleur1,
-                                    command=lambda: [vider_fenetre(app), imc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
+                                    command=lambda: [vider_fenetre(app), calculateur_imc(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_nouveauté.pack(side="left", padx=10)
     button_avis = ctk.CTkButton(frame_bouton2, text="🚀 Estimation VMA\n_______________________\n\nDécouvre ta VMA et tes zones d'allure", 
                                     fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, width=500, font=(font_principale, taille2),
                                     text_color=couleur1, 
-                                    command=lambda: [vider_fenetre(app), VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
+                                    command=lambda: [vider_fenetre(app), estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_avis.pack(side="left", padx=(0, 10))
     button_avis = ctk.CTkButton(frame_bouton3, text="🫁 Estimation VO2max\n_______________________\n\nDécouvre ton VO2max via ta vma", 
                                     fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, width=500, font=(font_principale, taille2),
                                     text_color=couleur1, 
-                                    command=lambda: [vider_fenetre(app), VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
+                                    command=lambda: [vider_fenetre(app), estimation_VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_avis.pack(side="left", padx=10)   
     button_avis = ctk.CTkButton(frame_bouton3, text="🍗 Protéine quotidienne\n_______________________\n\nDécouvre la qté. de protéines à consommer", 
                                     fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, width=500, font=(font_principale, taille2),
-                                    text_color=couleur1)
+                                    text_color=couleur1,
+                                    command=proteine_quotidienne)
     button_avis.pack(side="left", padx=(0, 10))

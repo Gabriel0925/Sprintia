@@ -18,7 +18,7 @@ from tkinter import messagebox
 
 # Version Sprintia
 version_numéro = "3.2"
-version_entière = "3.2 BÊTA 2 | Version Novembre 2025"
+version_entière = "3.2 BÊTA 3 | Version Novembre 2025"
 date_de_sortie = "27 Septembre 2025"
 type_de_maj = "Mise à jour mineur"
 
@@ -54,6 +54,7 @@ button_width = 180 # c'est pour les boutons de la sidebar
 
 # variables
 date_actuelle = date.today()
+date_actuelle_format = date_actuelle.strftime("%d-%m-%Y")
 
 # heure
 maintenant = datetime.now()
@@ -72,31 +73,38 @@ def fermer_app(app, con):
     app.quit()
 
 def password_valide(password):
-    SpecialSymbol =['$', '@', '#', '%', '?', '!']
+    SpecialSymbol =["!",  "@",  "#",  "$",  "%",  "^",  "&", "*", "(", ")", "-", "_", "=", "+", "[", "]",  "{", "}", ";", ":", ",", "<", ">", ".", "?"]
     val = True
 
     if len(password) < 6:
         messagebox.showerror("Mot de passe invalide", "La longueur doit être d'au moins 6 caractères !")
         val = False
+        return val
 
     if len(password) > 20:
         messagebox.showerror("Mot de passe invalide", "La longueur ne doit pas dépasser 20 caractères !")
         val = False
+        return val
 
     if not any(char.isdigit() for char in password):
         messagebox.showerror("Mot de passe invalide", "Le mot de passe doit contenir au moins un chiffre !")
         val = False
+        return val
 
     if not any(char.isupper() for char in password):
         messagebox.showerror("Mot de passe invalide", "Le mot de passe doit contenir au moins une lettre majuscule !")
         val = False
+        return val
 
     if not any(char.islower() for char in password):
         messagebox.showerror("Mot de passe invalide", "Le mot de passe doit contenir au moins une lettre minuscule !")
         val = False
+        return val
 
     if not any(char in SpecialSymbol for char in password):
-        messagebox.showerror("Mot de passe invalide", "Le mot de passe doit contenir au moins un des symboles spéciaux : $@#%?!")
+        messagebox.showerror("""Mot de passe invalide", "Le mot de passe doit contenir au moins un des symboles spéciaux :\n" \
+        "!",  "@",  "#",  "$",  "%",  "^",  "&", "*", "(", ")", "-", "_", "=", "+", "[", "]",  "{", "}", ";", ":", ",", "<", ">", ".", "?""")
         val = False
+        return val
     if val:
         return val

@@ -66,7 +66,6 @@ def connexion():
     def verifier_identifiants():
         username = username_entry.get().strip()
         password = password_entry.get().strip()
-
         if not username or not password:
             messagebox.showerror("Champs manquants", "Le pseudo et le mot de passe ne peuvent pas être vides")
             return
@@ -97,7 +96,7 @@ def connexion():
     CTk_image = ctk.CTkImage(light_image=image_redimensionner, dark_image=image_redimensionner, size=(largeur_img, hauteur_img))
     label_image = ctk.CTkLabel(img, image=CTk_image, text="")
     label_image.pack()
-
+ 
 def inscription():
     cadre_inscription = ctk.CTkFrame(app, fg_color=couleur_fond)        
     cadre_inscription.pack(fill="both", expand=True)

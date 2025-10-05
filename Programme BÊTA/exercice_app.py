@@ -17,6 +17,21 @@ def c_quoi_rpe():
                         "◉ RPE : 9 = Très Difficile\n" \
                         "◉ RPE : 10 = Effort Maximal")
 
+def choisir_nb_aléatoire_analyse():
+    try:
+        curseur_coach.execute(f"SELECT nb_min_analyse FROM choisir_nb_aléatoire")
+        nb_min = curseur_coach.fetchone()[0]
+        curseur_coach.execute(f"SELECT nb_max_analyse FROM choisir_nb_aléatoire")
+        nb_max = curseur_coach.fetchone()[0]
+    except sqlite3.Error as e:
+        messagebox.showerror("Erreur", "Erreur lors du choix du nombre pour génération du texte pour le coach !")
+        return
+    except Exception as e:
+        messagebox.showerror("Erreur", "Une erreur inattendue s'est produite, réessaye !")
+        return
+    nombre = random.randint(nb_min, nb_max)
+    return nombre
+
 def choisir_nb_aléatoire():
     try:
         curseur_coach.execute(f"SELECT nb_minimum FROM choisir_nb_aléatoire")
@@ -38,14 +53,43 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
                                        rep_entry, serie_entry, volume_entry,Options_lieu, lieu_entry, matos_entry, humeur_entry,
                                        passe_d_entry, score_entry, but_entry, activité):
     
+    curseur.execute("SELECT nom_du_coach, avatar FROM Coach WHERE account_id = ?", (account_id,))
+    ton_coach = curseur.fetchone()
+    if ton_coach:
+        nom_du_coach = ton_coach[0]
+        avatar_du_coach = ton_coach[1]
+    else:
+        nom_du_coach = None
+        avatar_du_coach = None
+
     def générer_une_phrase():
         generation = ["question", "emoji", "phrase_de_motivation", "conseil_info", "promo_sprintia"]
         text_generer = ""
         text_totale_generer = ""
+        try:
+            curseur.execute("SELECT style_du_coach FROM Coach WHERE account_id = ?", (account_id,))
+            style = curseur.fetchone()
+            if style:
+                if style[0] == "Inshape":
+                    table_personnalité = "ajouter_activité_inshape"
+                elif style[0] == "Strict & Motivant":
+                    table_personnalité = "ajouter_activité_strict_motivant"
+                elif style[0] == "Copain":
+                    table_personnalité = "ajouter_activité_copain"
+                else:
+                    table_personnalité = "ajouter_activité_bienveillant"
+            else:
+                    table_personnalité = "ajouter_activité_bienveillant"
+        except sqlite3.Error as e:
+            messagebox.showerror("Erreur", "Erreur de génération de texte pour le coach !")
+            return
+        except Exception as e:
+            messagebox.showerror("Erreur", f"Une erreur inattendue s'est produite, réessaye !{e}")
+            return
         for text_coach in generation:
             nombre = choisir_nb_aléatoire()
             try:
-                curseur_coach.execute(f"SELECT {text_coach} FROM ajouter_activité_bienveillant WHERE id = ?", (nombre,))
+                curseur_coach.execute(f"SELECT {text_coach} FROM {table_personnalité} WHERE id = ?", (nombre,))
                 text_generer = curseur_coach.fetchone()[0]
             except sqlite3.Error as e:
                 messagebox.showerror("Erreur", "Erreur de génération de texte pour le coach !")
@@ -54,7 +98,7 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
                 messagebox.showerror("Erreur", "Une erreur inattendue s'est produite, réessaye !")
                 return
             text_totale_generer = text_totale_generer+text_generer
-        if len(text_totale_generer) >= 650:
+        if len(text_totale_generer) >= 800:
             return générer_une_phrase()
         return text_totale_generer
 
@@ -70,7 +114,7 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
     frame_bouton.pack(expand=True, fill="both", padx=12, pady=12)
                                     
     embleme_coach = ctk.CTkLabel(master=frame_embleme_coach, 
-                                    text="👨🏻 Coach",
+                                    text=f"{avatar_du_coach if avatar_du_coach else "👨"} {nom_du_coach if nom_du_coach else "JRM Coach"}",
                                     font=(font_secondaire, taille2), text_color=couleur1, wraplength=300, justify="left", anchor="w")
     embleme_coach.pack(expand=True, fill="both")
     phrase_du_coach = ctk.CTkLabel(master=frame_phrase_du_coach, 
@@ -82,10 +126,10 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
                                     corner_radius=corner1, height=button_height, text_color=couleur1, border_color=couleur2, border_width=border1,
                                     font=(font_principale, taille3), 
                                     command=lambda : vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
-                                       Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
-                                       sport_entry, distance_entry, denivele_entry, allure_entry, vmax_entry, muscle_entry,
-                                       rep_entry, serie_entry, volume_entry,Options_lieu, lieu_entry, matos_entry, humeur_entry,
-                                       passe_d_entry, score_entry, but_entry, activité))
+                                    Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
+                                    sport_entry, distance_entry, denivele_entry, allure_entry, vmax_entry, muscle_entry,
+                                    rep_entry, serie_entry, volume_entry,Options_lieu, lieu_entry, matos_entry, humeur_entry,
+                                    passe_d_entry, score_entry, but_entry, activité))
     bouton_valider.pack(expand=True, fill="both", side="left")
 
 def enregistrement_activité(account_id, app, exercice, date, duree, rpe, douleur, fatigue, climat, nom, sport, distance, denivele, allure, vmax, 
@@ -218,7 +262,7 @@ def vérification_data_de_base_activité(account_id, app, exercice, date_entry, 
     muscle_travaillé = répétitions = série = volume_total = lieu = humeur = but = passe_décisive = type_de_séances = score = type = None
 
     try:
-        date_str = date_entry.get().strip().replace('/', '-').replace('.', '-').replace(',', '-').replace(' ', '-').replace('_', '-')
+        date_str = date_entry.get().strip().replace('/', '-').replace('.', '-').replace(',', '-').replace('_', '-').replace('💡', '').replace(' ', '')
         if not date_str:
             messagebox.showerror("Date est vide", "La date est obligatoire !")
             return
@@ -227,7 +271,7 @@ def vérification_data_de_base_activité(account_id, app, exercice, date_entry, 
             messagebox.showerror("Erreur de date", "La date ne peut pas être dans le futur !")
             return
         date = date_obj.strftime('%Y-%m-%d')
-    except ValueError:
+    except ValueError as e:
         messagebox.showerror("Erreur de format", "Format de date invalide. Utilisez JJ-MM-AAAA.")
         return
     try:
@@ -369,7 +413,8 @@ def vérification_data_de_base_activité(account_id, app, exercice, date_entry, 
             messagebox.showerror("Erreur", "L'allure ne doit pas dépasser 20 caractères !")
             return
         if not allure:
-            allure = None
+            messagebox.showerror("Allure est vide", "L'allure est obligatoire dans le mode 'Course' !")
+            return
         vmax_str = vmax_entry.get().strip().replace(",", ".").replace(" ", "").replace("km/h", "").replace("-", "")
         if not vmax_str:
             vmax = None
@@ -396,7 +441,8 @@ def vérification_data_de_base_activité(account_id, app, exercice, date_entry, 
             messagebox.showerror("Erreur", "Les muscles travaillés ne doivent pas dépasser 150 caractères !")
             return
         if not muscle_travaillé:
-            muscle_travaillé = None
+            messagebox.showerror("Muscle travaillé est vide", "Muscle travaillé est obligatoire dans le mode 'Course' !")
+            return
         if len(répétitions) > 10:
             messagebox.showerror("Erreur", "Les répétitions ne doivent pas dépasser 10 caractères !")
             return
@@ -666,6 +712,7 @@ def ajouter_activité_course(account_id, app, sidebar_exercice, exercice, charge
                                   height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
+    date_entry.insert(0, f"💡 {date_actuelle_format}")
     button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
@@ -687,13 +734,15 @@ def ajouter_activité_course(account_id, app, sidebar_exercice, exercice, charge
     type_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     type_entry.set("Type d'entraî.")
 
-    rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 5", font=(font_principale, taille2), text_color=couleur_fond)
+    rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 1", font=(font_principale, taille2), text_color=couleur_fond)
     rpe_label.pack(expand=True, fill="x", side="left", padx=12)
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
     rpe_entry = ctk.CTkSlider(master=frame_champs3, width=400, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur_fond, button_color=couleur_fond, button_hover_color=couleur2_hover,
-                              corner_radius=5, button_length=20, fg_color=couleur1)
+                              corner_radius=5, button_length=20, fg_color=couleur1, 
+                              # La variable DoubleVar met la valeur du RPE à 1
+                              variable=ctk.DoubleVar(value=1))
     rpe_entry.pack(expand=True, fill="x", side="left", padx=12)
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_fatigue.keys()), font=(font_principale, taille2), height=height_expressive, 
@@ -818,6 +867,7 @@ def ajouter_activité_musculation(account_id, app, sidebar_exercice, exercice, c
                                   height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
+    date_entry.insert(0, f"💡 {date_actuelle_format}")
     button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
@@ -839,13 +889,15 @@ def ajouter_activité_musculation(account_id, app, sidebar_exercice, exercice, c
                                   text_color=couleur1, width=200)
     muscle_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
-    rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 5", font=(font_principale, taille2), text_color=couleur_fond)
+    rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 1", font=(font_principale, taille2), text_color=couleur_fond)
     rpe_label.pack(expand=True, fill="x", side="left", padx=12)
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
     rpe_entry = ctk.CTkSlider(master=frame_champs3, width=400, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur_fond, button_color=couleur_fond, button_hover_color=couleur2_hover,
-                              corner_radius=5, button_length=20, fg_color=couleur1)
+                              corner_radius=5, button_length=20, fg_color=couleur1, 
+                              # La variable DoubleVar met la valeur du RPE à 1
+                              variable=ctk.DoubleVar(value=1))
     rpe_entry.pack(expand=True, fill="x", side="left", padx=12)
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_fatigue.keys()), font=(font_principale, taille2), height=height_expressive, 
@@ -970,6 +1022,7 @@ def ajouter_activité_fooball(account_id, app, sidebar_exercice, exercice, charg
                                   height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
+    date_entry.insert(0, f"💡 {date_actuelle_format}")
     button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
@@ -991,13 +1044,15 @@ def ajouter_activité_fooball(account_id, app, sidebar_exercice, exercice, charg
                                   text_color=couleur1, width=200)
     humeur_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
-    rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 5", font=(font_principale, taille2), text_color=couleur_fond)
+    rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 1", font=(font_principale, taille2), text_color=couleur_fond)
     rpe_label.pack(expand=True, fill="x", side="left", padx=12)
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
     rpe_entry = ctk.CTkSlider(master=frame_champs3, width=400, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur_fond, button_color=couleur_fond, button_hover_color=couleur2_hover,
-                              corner_radius=5, button_length=20, fg_color=couleur1)
+                              corner_radius=5, button_length=20, fg_color=couleur1, 
+                              # La variable DoubleVar met la valeur du RPE à 1
+                              variable=ctk.DoubleVar(value=1))
     rpe_entry.pack(expand=True, fill="x", side="left", padx=12)
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_fatigue.keys()), font=(font_principale, taille2), height=height_expressive, 
@@ -1123,6 +1178,7 @@ def ajouter_activité_libre(account_id, app, sidebar_exercice, exercice, charge_
                                   height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
+    date_entry.insert(0, f"💡 {date_actuelle_format}")
     button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
@@ -1146,13 +1202,15 @@ def ajouter_activité_libre(account_id, app, sidebar_exercice, exercice, charge_
                                   text_color=couleur1, width=180)
     denivele_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
-    rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 5", font=(font_principale, taille2), text_color=couleur_fond)
+    rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 1", font=(font_principale, taille2), text_color=couleur_fond)
     rpe_label.pack(expand=True, fill="x", side="left", padx=12)
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
     rpe_entry = ctk.CTkSlider(master=frame_champs3, width=400, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur_fond, button_color=couleur_fond, button_hover_color=couleur2_hover,
-                              corner_radius=5, button_length=20, fg_color=couleur1)
+                              corner_radius=5, button_length=20, fg_color=couleur1, 
+                              # La variable DoubleVar met la valeur du RPE à 1
+                              variable=ctk.DoubleVar(value=1))
     rpe_entry.pack(expand=True, fill="x", side="left", padx=12)
 
     type_entry = ctk.CTkComboBox(master=frame_champs4, values=options_type, font=(font_principale, taille2), height=height_expressive, 
@@ -1203,6 +1261,34 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql, ap
     global periode_séléctionner #global = pour dire que la variable existe en dehors de la fonction et que je vais la modifier
     sidebar_exercice(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
+    try:
+        date_debut_période = date_actuelle - timedelta(days=7)
+        période_pour_requete = date_debut_période.strftime('%Y-%m-%d')
+        curseur.execute("SELECT nom_du_coach, avatar FROM Coach WHERE account_id = ?", (account_id,))
+        ton_coach = curseur.fetchone()
+        curseur.execute("SELECT durée, rpe FROM Historique_activité WHERE account_id = ? AND date_activité >= ? ORDER BY date_activité DESC", (account_id, période_pour_requete))
+        stats = curseur.fetchall()
+        if stats is not None:
+            total_durée = sum([statistique[0] for statistique in stats if statistique[0] is not None])
+            total_rpe = sum([statistique[1] for statistique in stats if statistique[1] is not None])
+            nombre_activités = len(stats)
+            moyenne_rpe = total_rpe / nombre_activités if nombre_activités > 0 else 0
+        else:
+            total_durée = 0
+            moyenne_rpe = 0
+    except sqlite3.Error as e:
+        messagebox.showerror("Erreur", "Une erreur est survenue lors de la récupération des informations du coach.")
+        return
+    except Exception as e:
+        messagebox.showerror("Erreur", "Une erreur innatendue s'est produite !")
+        return
+    if ton_coach:
+        nom_du_coach = ton_coach[0]
+        avatar_du_coach = ton_coach[1]
+    else:
+        nom_du_coach = None
+        avatar_du_coach = None
+
     boite_titre = ctk.CTkFrame(master=app, fg_color="transparent", corner_radius=corner3)
     boite_titre.pack(side="top", fill="x", padx=10, pady=10)
 
@@ -1215,8 +1301,12 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql, ap
     boite_semi_header3 = ctk.CTkFrame(master=boite, fg_color=couleur2, corner_radius=corner2)
     boite_semi_header3.pack(expand=True, fill="x", side="right", padx=(0, 2), pady=2)
 
+    frame_analyse_coach = ctk.CTkFrame(app, fg_color="transparent", corner_radius=corner1, border_width=border1, border_color=couleur1,
+                                       height=125)
+    frame_analyse_coach.pack(fill="both", padx=10, pady=(5, 2))
+
     tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
-                                           scrollbar_button_hover_color=couleur2_hover)
+                                              scrollbar_button_hover_color=couleur2_hover)
     tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
 
     info = ctk.CTkLabel(master=boite_titre, text="Historique d'activité", font=(font_secondaire, taille1), text_color=couleur_text)
@@ -1276,6 +1366,15 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql, ap
         recherche = "musculation"
     elif type_de_catégorie == "Libre":
         recherche = "libre"
+
+    label_coach1 = ctk.CTkLabel(frame_analyse_coach, text=f"{avatar_du_coach if avatar_du_coach is not None else "👨"} {nom_du_coach if nom_du_coach else "JRM Coach"}", wraplength=975, font=(font_principale, taille2), 
+                                text_color=couleur1, justify="left")
+    label_coach1.pack(padx=12, pady=(12, 4), anchor="w")
+    label_coach2 = ctk.CTkLabel(frame_analyse_coach, 
+                                text=f"Cette semaine tu as effectué {total_durée:.0f} minutes d'activité en {nombre_activités:.0f} activités."\
+                                f" Ton RPE moyen cette semaine est de {moyenne_rpe:.1f}. Le plus important ce n'est pas les stats mais le plaisir que ça t'as procuré toute au long de la semaine !", 
+                                wraplength=1000, justify="left", font=(font_principale, taille3), text_color=couleur1)
+    label_coach2.pack(padx=12, pady=(4, 12), anchor="w")
 
     def mettre_a_jour_historique(selection):
         global periode_séléctionner

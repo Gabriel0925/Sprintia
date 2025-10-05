@@ -376,10 +376,13 @@ def création():
     curseur.execute("CREATE TABLE IF NOT EXISTS Maj_base_de_donnée2 (action TEXT)")
 
     # Historique VMA
-    curseur.execute("CREATE TABLE IF NOT EXISTS Historique_vma (account_id INTEGER NOT NULL, date TEXT NOT NULL, vma NUMERIC NOT NULL, FOREIGN KEY (account_id) REFERENCES Account(id))")
+    curseur.execute("CREATE TABLE IF NOT EXISTS Historique_vma (id INTEGER PRIMARY KEY AUTOINCREMENT, account_id INTEGER NOT NULL, date TEXT NOT NULL, vma NUMERIC NOT NULL, FOREIGN KEY (account_id) REFERENCES Account(id))")
 
     # Connection automatique
     curseur.execute("CREATE TABLE IF NOT EXISTS Auto_connect (statut TEXT)")
+
+    # Personalisation Coach
+    curseur.execute("CREATE TABLE IF NOT EXISTS Coach (account_id INTEGER NOT NULL, nom_du_coach TEXT, style_du_coach TEXT, avatar TEXT)")
 
     con.commit()
     maj_de_la_BDD_de_Sprintia_1_1_vers_Sprintia_1_2()
