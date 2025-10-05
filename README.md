@@ -1,5 +1,4 @@
 ℹ️ Petite information
-![alt text](<Sprintia en images/Bienvenue.png>)
 Dans le monde du sport, un coach est un partenaire de confiance. C'est pour cette raison que j'ai choisi de te tutoyer dans l'application Sprintia et dans ce README. L'objectif est de créer une relation plus proche et personnelle avec toi, comme celle que tu aurais avec un coach sportif.
 
 📌 Sprintia c'est quoi ?

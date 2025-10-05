@@ -19,7 +19,7 @@ from tkinter import messagebox
 # Version Sprintia
 version_numéro = "3.2"
 version_entière = "3.2 BÊTA 3 | Version Novembre 2025"
-date_de_sortie = "27 Septembre 2025"
+date_de_sortie = "05 Octobre 2025"
 type_de_maj = "Mise à jour mineur"
 
 # Couleur
