@@ -1,6 +1,6 @@
 # Bienvenue sur Sprintia
 
-## Quelques images de Sprintia
+## Quelques images de Sprintia :
 ![Capture d'écran de Sprintia](Bienvenue.png)
 
 ![Capture d'écran de Sprintia](<Charge d'entraînement.png>)
