@@ -21,16 +21,16 @@ Dans le monde du sport, un coach est un partenaire de confiance. C'est pour cett
 Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes qui te permettront de mieux t’entraîner :
 
 ### ◉ Charge d'entraînement
-	La charge d'entraînement va permettre aux sportifs d’adapter l’intensité et le volume de leurs entraînement futur et à venir. La charge 	d’entraînement permet de quantifier le stress physique imposé à un corps durant une période de une semaine.
+La charge d'entraînement va permettre aux sportifs d’adapter l’intensité et le volume de leurs entraînement futur et à venir. La charge 	d’entraînement permet de quantifier le stress physique imposé à un corps durant une période de une semaine.
 
 ### ◉ Indulgence de course
-	L’indulgence de course t’aide à ajuster ton kilométrage des 7 derniers jours pour rester dans une progression optimale pour tes futures 	entraînement, sans dépasser ta limite. Tu peux ainsi continuer à t’améliorer tout en réduisant les risques de blessure. 
+L’indulgence de course t’aide à ajuster ton kilométrage des 7 derniers jours pour rester dans une progression optimale pour tes futures 	entraînement, sans dépasser ta limite. Tu peux ainsi continuer à t’améliorer tout en réduisant les risques de blessure. 
 
 ### ◉ Prédicteur de performance
-	Le prédicteur de performance estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir d’une course récente.
+Le prédicteur de performance estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir d’une course récente.
 
 ### ◉ JRM Coach
-	Un coach totalement personalisable que ce soit le nom du coach, l'avatar, mais également le style, tu peux choisir : "Bienveillant", "Copain", "Strict & Motivant", "Inshape". Ce coach va te motiver et te donner des conseils/tips sur le sport.
+Un coach totalement personalisable que ce soit le nom du coach, l'avatar, mais également le style, tu peux choisir : "Bienveillant", "Copain", "Strict & Motivant", "Inshape". Ce coach va te motiver et te donner des conseils/tips sur le sport.
 
 
 ## 💻 Systèmes d'exploitation compatibles
@@ -50,7 +50,7 @@ Pour commencer, si Python n’est pas déjà installé sur ton ordinateur, tél�
 
 ◉ Crée un nouveau dossier dans tes documents sur ton PC, tu peux le nommer comme tu veux, mais "Sprintia" est recommandé pour éviter toute confusion.
 
-◉ Télécharge tous les fichiers que tu peux trouver sur mon GitHub dans le dossier “Programme BÊTA" sauf le README.md c'est la doc que tu es entrain de lire.
+◉ Télécharge tous les fichiers que tu peux trouver sur mon GitHub dans le dossier “Programme BÊTA" puis "Fichier code Sprintia".
 
 ◉ Ensuite, tu vas dans tes téléchargements dans l'explorateur de fichiers de ton PC puis tu copie tous les fichiers qui tu viens de télécharger puis tu colles tous ces fichiers dans le dossier que tu as crée au début du tuto que tu as probablement nommé "Sprintia"
 
@@ -69,4 +69,4 @@ Pour commencer, si Python n’est pas déjà installé sur ton ordinateur, tél�
 
 🎉 Désormais, je te laisse profiter de Sprintia ! Bon entraînement !
 
-Le projet sera cloturé avec la version 3.2 qui arrive dans le mois de Novembre.
+# Le projet sera cloturé avec la version 3.2 qui arrive dans le mois de Novembre.
