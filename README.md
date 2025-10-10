@@ -1,8 +1,14 @@
-# Bienvenue dans Sprintia
+# Bienvenue sur Sprintia
+
+## Quelques images de Sprintia
 ![Capture d'écran de Sprintia](Bienvenue.png)
+
 ![Capture d'écran de Sprintia](<Charge d'entraînement.png>)
+
 ![Capture d'écran de Sprintia](<Indulgence de course.png>)
+
 ![Capture d'écran de Sprintia](<Estimation VMA + Zones.png>)
+
 ![Capture d'écran de Sprintia](<Prédicteur de performance.png>)
 
 
@@ -39,9 +45,13 @@ Crée un nouveau dossier. Tu peux le nommer comme tu veux, mais Sprintia est rec
 
 Télécharge tous les fichiers qu’il y a dans le dossier “Dernière version puis tu les mets dans le dossier que tu as créé dans ton PC à l’étape 2.
 
-### 2️⃣ Ouverture du projet ● Important : ouvre le dossier complet dans ton éditeur de code (Visual Studio Code, PyCharm, Thonny,...), pas uniquement le fichier Sprintia. (Sinon, le programme ne trouvera pas les images et ne pourra pas fonctionner correctement.) Si tu n’as pas d’éditeur de code, suis ce tuto pour l’installer. Au début de la vidéo, il t’explique comment installer Python si c’est déjà fait tu peux sauter ce passage de la vidéo. Le lien ➡️ : https://www.youtube.com/watch?v=RHJHqMBN-LI
+### 2️⃣ Ouverture du projet 
 
-### 3️⃣ Installation des bibliothèques Va dans le dossier nommé “Services Sprintia”, puis télécharge le fichier “Sprintia Setup.py” puis lance le programme et suis les instructions. Une fois toutes ces étapes sont terminées, ouvre le dossier Sprintia dans Visual Studio Code. Lance le programme “Sprintia”, puis découvre Sprintia !
+● Important : ouvre le dossier complet dans ton éditeur de code (Visual Studio Code, PyCharm, Thonny,...), pas uniquement le fichier Sprintia. (Sinon, le programme ne trouvera pas les images et ne pourra pas fonctionner correctement.) Si tu n’as pas d’éditeur de code, suis ce tuto pour l’installer. Au début de la vidéo, il t’explique comment installer Python si c’est déjà fait tu peux sauter ce passage de la vidéo. Le lien ➡️ : https://www.youtube.com/watch?v=RHJHqMBN-LI
+
+### 3️⃣ Installation des bibliothèques
+
+ Va dans le dossier nommé “Services Sprintia”, puis télécharge le fichier “Sprintia Setup.py” puis lance le programme et suis les instructions. Une fois toutes ces étapes sont terminées, ouvre le dossier Sprintia dans Visual Studio Code. Lance le programme “Sprintia”, puis découvre Sprintia !
 
 ## 💻 Systèmes d'exploitation compatibles
 
