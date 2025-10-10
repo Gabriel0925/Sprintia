@@ -1,34 +1,52 @@
-ℹ️ Petite information
+# Bienvenue sur Sprintia
+
+## Quelques images de Sprintia :
+
+![Capture d'écran de Sprintia](image.png)
+
+![Capture d'écran de Sprintia](image-1.png)
+
+![Capture d'écran de Sprintia](image-2.png)
+
+![Capture d'écran de Sprintia](image-3.png)
+
+![Capture d'écran de Sprintia](image-4.png)
+
+## ℹ️ Petite information
 
 Dans le monde du sport, un coach est un partenaire de confiance. C'est pour cette raison que j'ai choisi de te tutoyer dans l'application Sprintia et dans ce README. L'objectif est de créer une relation comme celle que tu pourrais avoir avec un coach sportif.
 
-📌 Sprintia c'est quoi ?
+## 📌 Sprintia c'est quoi ?
 
 Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes qui te permettront de mieux t’entraîner :
 
-◉ Charge d'entraînement
+### ◉ Charge d'entraînement
 	La charge d'entraînement va permettre aux sportifs d’adapter l’intensité et le volume de leurs entraînement futur et à venir. La charge 	d’entraînement permet de quantifier le stress physique imposé à un corps durant une période de une semaine.
 
-◉ Indulgence de course
+### ◉ Indulgence de course
 	L’indulgence de course t’aide à ajuster ton kilométrage des 7 derniers jours pour rester dans une progression optimale pour tes futures 	entraînement, sans dépasser ta limite. Tu peux ainsi continuer à t’améliorer tout en réduisant les risques de blessure. 
 
-◉ Prédicteur de performance
-	Le prédicteur de performance estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir d’une course 	récente.
+### ◉ Prédicteur de performance
+	Le prédicteur de performance estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir d’une course récente.
+
+### ◉ JRM Coach
+	Un coach totalement personalisable que ce soit le nom du coach, l'avatar, mais également le style, tu peux choisir : "Bienveillant", "Copain", "Strict & Motivant", "Inshape". Ce coach va te motiver et te donner des conseils/tips sur le sport.
 
 
-💻 Systèmes d'exploitation compatibles
+## 💻 Systèmes d'exploitation compatibles
 
 Sprintia est optimisée pour fonctionner sur :
+
 ✅ Windows 10 et Windows 11
 ✅ Tablettes sous Windows (grâce à la compatibilité avec Windows).
 
 🐍 Version de Python L’application nécessite Python 3.10 minimum pour s’exécuter correctement.
 
-📚 Guide rapide d’installation de Sprintia
+## 📚 Guide rapide d’installation de Sprintia
 
 Pour commencer, si Python n’est pas déjà installé sur ton ordinateur, télécharge-le et installe-le depuis le site officiel : https://www.python.org/downloads/
 
-1️⃣ Création du dossier de Sprintia Ouvre ton explorateur de fichiers.
+### 1️⃣ Création du dossier de Sprintia Ouvre ton explorateur de fichiers.
 
 ◉ Crée un nouveau dossier dans tes documents sur ton PC, tu peux le nommer comme tu veux, mais "Sprintia" est recommandé pour éviter toute confusion.
 
@@ -38,7 +56,7 @@ Pour commencer, si Python n’est pas déjà installé sur ton ordinateur, tél�
 
 ◉ Désormais, tu n’as plus qu’a double-cliquer sur le fichier nommé "Sprintia.vbs" avec l’icône de Sprintia. Pour information, si c’est la première fois que tu lances Sprintia il se peut que Sprintia prenne du temps à s’ouvrir.
 
-💡 Petit tips (optionnel mais pratique) ⬇️
+### 💡 Petit tips (optionnel mais pratique) ⬇️
 
 ◉ Fais un clic-droit sur "Sprintia.vbs" puis "Afficher d'autres options" puis "Envoyer vers" puis clique sur "Bureau (créer un raccourci)"
 
@@ -50,3 +68,5 @@ Pour commencer, si Python n’est pas déjà installé sur ton ordinateur, tél�
 ◉ Bravo ! Tu as réussi à faire le tips maintenant tu n'auras plus qu'a double-clic sur Sprintia avec l'icône et hop, Sprintia se lancera !
 
 🎉 Désormais, je te laisse profiter de Sprintia ! Bon entraînement !
+
+Le projet sera cloturé avec la version 3.2 qui arrive dans le mois de Novembre.
