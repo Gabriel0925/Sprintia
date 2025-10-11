@@ -68,5 +68,3 @@ Pour commencer, si Python n’est pas déjà installé sur ton ordinateur, tél�
 ◉ Bravo ! Tu as réussi à faire le tips maintenant tu n'auras plus qu'a double-clic sur Sprintia avec l'icône et hop, Sprintia se lancera !
 
 🎉 Désormais, je te laisse profiter de Sprintia ! Bon entraînement !
-
-# Le projet sera cloturé avec la version 3.2 qui arrive dans le mois de Novembre.
