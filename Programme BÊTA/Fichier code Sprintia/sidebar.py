@@ -16,17 +16,17 @@ def sidebar_exercice(account_id, app, exercice, charge_entraînement, predicteur
                                     fg_color=couleur_fond, hover_color=couleur2_hover, height=button_height, width=button_width, text_color=couleur1,
                                     anchor="w", command=lambda: [vider_fenetre(app), exercice(account_id)])
     button_exercice.pack(side="top", padx=(10, 40), pady=2)
-    button_performance = ctk.CTkButton(master=element_nav, text="🚀 Performance", font=(font_principale, taille3), corner_radius=corner2,
+    button_performance = ctk.CTkButton(master=element_nav, text="🚀 Performance", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
     button_performance.pack(side="top", padx=(10, 40), pady=2)
-    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils", font=(font_principale, taille3), corner_radius=corner2,
+    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), predicteur_temps(account_id)])
     button_outils.pack(side="top", padx=(10, 40), pady=2)
-    button_autre = ctk.CTkButton(master=element_nav, text="⚙️ Paramètres", font=(font_principale, taille3), corner_radius=corner2,
+    button_autre = ctk.CTkButton(master=element_nav, text="⚙️ Paramètres", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), parametre(account_id)])
@@ -43,7 +43,7 @@ def sidebar_performance(account_id, app, exercice, charge_entraînement, predict
 
     titre_dans_sidebar = ctk.CTkLabel(master=titre_sidebar, text="Sprintia", font=(font_secondaire, taille1), text_color=couleur_fond)
     titre_dans_sidebar.pack()
-    button_exercice = ctk.CTkButton(master=element_nav, text="💪 Exercice", font=(font_principale, taille3), corner_radius=corner2,
+    button_exercice = ctk.CTkButton(master=element_nav, text="💪 Exercice", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1, command=lambda: [vider_fenetre(app), exercice(account_id)])
     button_exercice.pack(side="top", padx=(10, 40), pady=2)
@@ -52,12 +52,12 @@ def sidebar_performance(account_id, app, exercice, charge_entraînement, predict
                                     anchor="w",
                                     command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
     button_performance.pack(side="top", padx=(10, 40), pady=2)
-    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils", font=(font_principale, taille3), corner_radius=corner2, width=button_width,
+    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils", font=(font_principale, taille3), corner_radius=corner1, width=button_width,
                                     fg_color="transparent", hover_color=couleur2_hover, text_color=couleur1, height=button_height,
                                     anchor="w",
                                     command=lambda: [vider_fenetre(app), predicteur_temps(account_id)])
     button_outils.pack(side="top", padx=(10, 40), pady=2)
-    button_autre = ctk.CTkButton(master=element_nav, text="⚙️ Paramètres", font=(font_principale, taille3), corner_radius=corner2, width=button_width,
+    button_autre = ctk.CTkButton(master=element_nav, text="⚙️ Paramètres", font=(font_principale, taille3), corner_radius=corner1, width=button_width,
                                     fg_color="transparent", hover_color=couleur2_hover, text_color=couleur1, height=button_height,
                                     anchor="w",
                                     command=lambda: [vider_fenetre(app), parametre(account_id)])
@@ -74,11 +74,11 @@ def sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_te
 
     titre_dans_sidebar = ctk.CTkLabel(master=titre_sidebar, text="Sprintia", font=(font_secondaire, taille1), text_color=couleur_fond)
     titre_dans_sidebar.pack()
-    button_exercice = ctk.CTkButton(master=element_nav, text="💪 Exercice", font=(font_principale, taille3), corner_radius=corner2,
+    button_exercice = ctk.CTkButton(master=element_nav, text="💪 Exercice", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1, command=lambda: [vider_fenetre(app), exercice(account_id)])
     button_exercice.pack(side="top", padx=(10, 40), pady=2)
-    button_performance = ctk.CTkButton(master=element_nav, text="🚀 Performance", font=(font_principale, taille3), corner_radius=corner2,
+    button_performance = ctk.CTkButton(master=element_nav, text="🚀 Performance", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
@@ -88,7 +88,7 @@ def sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_te
                                     anchor="w",
                                     command=lambda: [vider_fenetre(app), predicteur_temps(account_id)])
     button_outils.pack(side="top", padx=(10, 40), pady=2)
-    button_autre = ctk.CTkButton(master=element_nav, text="⚙️ Paramètres", font=(font_principale, taille3), corner_radius=corner2, width=button_width,
+    button_autre = ctk.CTkButton(master=element_nav, text="⚙️ Paramètres", font=(font_principale, taille3), corner_radius=corner1, width=button_width,
                                     fg_color="transparent", hover_color=couleur2_hover, text_color=couleur1, height=button_height,
                                     anchor="w",
                                     command=lambda: [vider_fenetre(app), parametre(account_id)])
@@ -105,16 +105,16 @@ def sidebar_paramètre(account_id, app, exercice, charge_entraînement, predicte
 
     titre_dans_sidebar = ctk.CTkLabel(master=titre_sidebar, text="Sprintia", font=(font_secondaire, taille1), text_color=couleur_fond)
     titre_dans_sidebar.pack()
-    button_exercice = ctk.CTkButton(master=element_nav, text="💪 Exercice", font=(font_principale, taille3), corner_radius=corner2,
+    button_exercice = ctk.CTkButton(master=element_nav, text="💪 Exercice", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1, command=lambda: [vider_fenetre(app), exercice(account_id)])
     button_exercice.pack(side="top", padx=(10, 40), pady=2)
-    button_performance = ctk.CTkButton(master=element_nav, text="🚀 Performance", font=(font_principale, taille3), corner_radius=corner2,
+    button_performance = ctk.CTkButton(master=element_nav, text="🚀 Performance", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
     button_performance.pack(side="top", padx=(10, 40), pady=2)
-    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils", font=(font_principale, taille3), corner_radius=corner2,
+    button_outils = ctk.CTkButton(master=element_nav, text="🔧 Outils", font=(font_principale, taille3), corner_radius=corner1,
                                     height=button_height, fg_color="transparent", hover_color=couleur2_hover, width=button_width, anchor="w",
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), predicteur_temps(account_id)])

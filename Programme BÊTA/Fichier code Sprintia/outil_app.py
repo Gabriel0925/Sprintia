@@ -15,14 +15,14 @@ def calculateur_imc(account_id, app, sidebar_outil, exercice, charge_entraîneme
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
     app.bind('<Return>', lambda event: calcul_imc())
-    poids_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Poids (kg)", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    poids_entry.pack(pady=(11, 5), padx=10)
-    taille_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Taille (cm)", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    taille_entry.pack(pady=(5, 11), padx=10)
+    poids_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Poids (kg)", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    poids_entry.pack(expand=True, fill="both", pady=(12, 2), padx=12)
+    taille_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Taille (cm)", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    taille_entry.pack(expand=True, fill="both", pady=2, padx=12)
 
     cadre_result = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2)
     cadre_result.pack(pady=10)
@@ -33,8 +33,8 @@ def calculateur_imc(account_id, app, sidebar_outil, exercice, charge_entraîneme
 
     def calcul_imc():
         try:
-            poids = float(poids_entry.get().strip())
-            taille_conversion = float(taille_entry.get().strip())
+            poids = float(poids_entry.get().strip().replace(',', '.').replace(' ', '').replace('_', '').replace('kg', '').replace('KG', ''))
+            taille_conversion = float(taille_entry.get().strip().replace(',', '.').replace(' ', '').replace('_', '').replace('cm', '').replace('CM', ''))
             taille = taille_conversion/100
 
             if poids <= 0 or taille <= 0:
@@ -65,11 +65,11 @@ def calculateur_imc(account_id, app, sidebar_outil, exercice, charge_entraîneme
                                  anchor="w", justify="left")
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye.")
-    button_check = ctk.CTkButton(master=app, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+    button_check = ctk.CTkButton(master=carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille2),
                                     command=lambda: calcul_imc())
-    button_check.pack(padx=10, pady=10)
+    button_check.pack(expand=True, fill="both", pady=(2, 12), padx=12)
 
 def estimation_VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -80,22 +80,21 @@ def estimation_VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraîne
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
     app.bind('<Return>', lambda event: calcul_VO2MAX(account_id))
-    vma_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="VMA", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    vma_entry.pack(pady=(11, 5), padx=10)
+    vma_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="VMA", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    vma_entry.pack(expand=True, fill="both", pady=(12, 2), padx=12)
 
-    combo_genre = ctk.CTkComboBox(master=carte_connexion, values=["Homme", "Femme"], font=(font_principale, taille3), height=button_height, 
-                                    state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur1, dropdown_font=(font_principale, taille3),
-                                    dropdown_hover_color = couleur1_hover, text_color="white", dropdown_text_color="white")
-    combo_genre.pack(pady=5, padx=10)
-    combo_genre.set("Sélectionne ton genre")
-
-    age_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Âge", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    age_entry.pack(pady=(5, 11), padx=10)
+    combo_genre = ctk.CTkComboBox(master=carte_connexion, values=["Homme", "Femme"], font=(font_principale, taille2), height=height_expressive, 
+                                    state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
+                                    corner_radius=corner1, width=280, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
+    combo_genre.pack(expand=True, fill="both", pady=2, padx=12)
+    combo_genre.set("Genre")
+    age_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Âge", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    age_entry.pack(expand=True, fill="both", pady=2, padx=12)
 
     cadre_result = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2)
     cadre_result.pack(pady=10)
@@ -106,8 +105,8 @@ def estimation_VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraîne
 
     def calcul_VO2MAX(account_id):
         try:
-            vma = float(vma_entry.get().strip())
-            age = float(age_entry.get().strip())
+            vma = float(vma_entry.get().strip().replace(',', '.').replace(' ', '').replace('_', '').replace('vma', '').replace('VMA', ''))
+            age = int(age_entry.get().strip())
             genre = combo_genre.get().strip()
 
             if vma <= 0:
@@ -284,19 +283,22 @@ def estimation_VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraîne
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
             return
-    button_check = ctk.CTkButton(master=app, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+    button_check = ctk.CTkButton(master=carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                            command=lambda: calcul_VO2MAX(account_id))
-    button_check.pack(padx=10, pady=20)
-
-def historique_vma():
-    messagebox.showinfo("Bientôt disponible", "Cette fonction seras disponible dans quelques semaines !\n" \
-    "Pour le moment, enregistre ta VMA pour pouvoir utiliser les nouveaux algorythmes dès qu'ils seront sorties !")
-    return
+    button_check.pack(expand=True, fill="both", pady=(2, 12), padx=12)
 
 def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
+
+    def info_vma():
+        result = messagebox.askyesno("Confimation", "Veux-tu que ton navigateur s'ouvre pour en savoir plus sur la VMA ?")
+        if result:
+            webbrowser.open("https://conseilsport.decathlon.fr/quest-ce-que-la-vma-en-sport")
+            return
+        else:
+            return
 
     Titre = ctk.CTkLabel(app ,text="Estimation VMA", font=(font_secondaire, taille1), text_color=couleur_text)
     Titre.pack(padx=10, pady=10)
@@ -309,11 +311,11 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
     
     distance_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Distance (km)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=275)
+                                  text_color=couleur1, width=280)
     distance_entry.pack_forget()
-    temps_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Temps", border_color=couleur_fond, fg_color=couleur_fond,
+    temps_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Durée", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=275)
+                                  text_color=couleur1, width=280)
     temps_entry.pack_forget()
     
     def remplissage_placeholder(choice):
@@ -339,7 +341,7 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
     test_spécifique = ctk.CTkComboBox(master=carte_connexion, values=["Test demi-Cooper (6 min) (Recommandé)", "Test Cooper (12 min)", "Test Luc Léger (2 km)", "Course de référence (moins précise)"],
                                     font=(font_principale, taille3), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=275, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1,
                                     command=remplissage_placeholder)
     test_spécifique.pack(pady=(12, 2), padx=12)
@@ -350,7 +352,7 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
     cadre_result = ctk.CTkFrame(master=boite1, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)
     cadre_result.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=10)
     frame_result = ctk.CTkFrame(cadre_result, fg_color=couleur2, corner_radius=corner1)
-    frame_result.pack(side="top", expand=True, fill="both", pady=(12, 10), padx=10)
+    frame_result.pack(side="top", expand=True, fill="both", pady=12, padx=12)
     frame_bouton = ctk.CTkFrame(cadre_result, corner_radius=corner1, fg_color=couleur2)
     frame_bouton.pack(side="top", pady=(2, 5))
 
@@ -484,7 +486,7 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
             widget.destroy()
         for col, header_text in enumerate(headers):
             header_label = ctk.CTkButton(tableau_frame, text=header_text, font=(font_secondaire, taille2),
-                                fg_color=couleur_fond, corner_radius=corner1, text_color=couleur1,
+                                fg_color=couleur_fond, corner_radius=corner2, text_color=couleur1,
                                 height=40, border_width=border2, border_color=couleur2, hover_color=couleur_fond)
             header_label.grid(row=0, column=col, padx=10, pady=15)
             tableau_frame.grid_columnconfigure(col, weight=1)
@@ -508,46 +510,10 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
                                 text_color=couleur_text, wraplength=200)
             label.grid(row=row_index + 1, column=col_index, padx=15, pady=15, sticky="ew")
 
-    def sauvegarder_vma():
-        try:
-            vma_estimée = calcul_VMA()
-        except:
-            return
-        if not vma_estimée:
-            messagebox.showerror("Erreur", "Tu dois d'abord calculer ta VMA avant de la sauvegarder !")
-            return
-        try:
-            curseur.execute("SELECT date from Historique_vma WHERE account_id = ?", (account_id,))
-            dernière_date = curseur.fetchone()
-            if dernière_date == None:
-                pass
-            else:
-                dernière_date = dernière_date[0]
-            
-            # Formate l'objet date_actuelle en chaîne de caractères 'AAAA-MM-JJ'
-            date_actuelle_formatée = date_actuelle.strftime('%Y-%m-%d')
-            if dernière_date == date_actuelle_formatée:
-                messagebox.showerror("Erreur", "Tu as déjà sauvegardé une VMA aujourd'hui ! Réessaie demain.")
-                return
-            curseur.execute("INSERT INTO Historique_vma (account_id, vma, date) VALUES (?, ?, ?)", (account_id, vma_estimée, date_actuelle))
-            con.commit()
-            messagebox.showinfo("Succès", "Ta VMA a été sauvegardée dans ton historique !")
-        except sqlite3.IntegrityError:
-            messagebox.showerror("Erreur", "Une erreur s'est produite lors de la sauvegarde de ta VMA.")
-            return
-        except Exception as e:
-            messagebox.showerror("Erreur", f"Une erreur innatendu s'est produite, réessaye !{e}")
-            return
-
-    button_sauvegarde = ctk.CTkButton(frame_bouton, text="💾 Sauvegarder", fg_color=couleur2, hover_color=couleur2_hover,
+    button_sauvegarde = ctk.CTkButton(frame_bouton, text="ℹ️ En savoir plus sur la VMA", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner1, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3), command=sauvegarder_vma)
-    button_sauvegarde.pack(side="left", padx=2, pady=(2, 10))
-    button_historique = ctk.CTkButton(frame_bouton, text="📊 Historique", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=historique_vma)
-    button_historique.pack(side="left", padx=2, pady=(2, 10))
+                                    font=(font_principale, taille3), command=info_vma)
+    button_sauvegarde.pack(padx=2, pady=(2, 10))
 
     button_check = ctk.CTkButton(carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner1, height=button_height, text_color=couleur1,
@@ -564,10 +530,10 @@ def zone_cardiaque(account_id, app, sidebar_outil, exercice, charge_entraînemen
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
     app.bind('<Return>', lambda event: calcul_zone(account_id))
-    age_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Âge", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    age_entry.pack(pady=10, padx=10)
+    age_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Âge", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    age_entry.pack(expand=True, fill="both", pady=(12, 2), padx=12)
 
     cadre_result = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2)
     cadre_result.pack(pady=10)
@@ -605,11 +571,11 @@ def zone_cardiaque(account_id, app, sidebar_outil, exercice, charge_entraînemen
                                  anchor="w", justify="left")
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_check = ctk.CTkButton(master=app, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+    button_check = ctk.CTkButton(carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                            command=lambda: calcul_zone(account_id))
-    button_check.pack(padx=10, pady=10)
+    button_check.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
 def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -625,14 +591,14 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
     carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
     app.bind('<Return>', lambda event: calcul_temps(account_id))
-    vma_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="VMA", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    vma_entry.pack(pady=(11, 5), padx=10)
-    distance_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Distance (km)", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    distance_entry.pack(pady=(5, 11), padx=10)
+    vma_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="VMA", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    vma_entry.pack(expand=True, fill="both", pady=(12, 2), padx=12)
+    distance_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Distance (km)", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    distance_entry.pack(expand=True, fill="both", pady=2, padx=12)
 
     cadre_result = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2)
     cadre_result.pack(pady=10)
@@ -643,8 +609,8 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
 
     def calcul_temps(account_id):
         try:
-            distance = float(distance_entry.get().strip())
-            vma = float(vma_entry.get().strip())
+            distance = float(distance_entry.get().strip().replace(',', '.').replace(' ', '').replace('_', '').replace('km', '').replace('KM', ''))
+            vma = float(vma_entry.get().strip().replace(',', '.').replace(' ', '').replace('_', '').replace('vma', '').replace('VMA', ''))
 
             if distance <= 0 or vma <=0:
                 messagebox.showerror("Erreur", "La distance et le temps doivent être supérieur à 0 !")
@@ -713,11 +679,11 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
                                  anchor="w", justify="left")
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_check = ctk.CTkButton(master=app, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+    button_check = ctk.CTkButton(master=carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                            command=lambda: calcul_temps(account_id))
-    button_check.pack(padx=10, pady=10)
+    button_check.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
 def outils(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_outil(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)

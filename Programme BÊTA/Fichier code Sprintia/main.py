@@ -50,6 +50,7 @@ def connexion():
     button_connection.pack(expand=True, fill="x", side="left", padx=2)
     button_inscription = ctk.CTkButton(frame_bouton, text="Inscription", fg_color=couleur2, hover_color=couleur2_hover,
                            corner_radius=corner2, height=button_height, font=(font_principale, taille3), text_color=couleur1,
+                           border_width=border2, border_color=couleur2,
                            command=lambda: [vider_fenetre(app), inscription()])
     button_inscription.pack(expand=True, fill="x", side="right", padx=2)
 
@@ -126,6 +127,7 @@ def inscription():
 
     button_connection = ctk.CTkButton(frame_bouton, text="Connexion", fg_color=couleur2, hover_color=couleur2_hover,
                            corner_radius=corner2, height=button_height, font=(font_principale, taille3), text_color=couleur1,
+                           border_width=border2, border_color=couleur2,
                            command=lambda: [vider_fenetre(app), connexion()])
     button_connection.pack(expand=True, fill="x", side="left", padx=1)
     button_inscription = ctk.CTkButton(frame_bouton, text="✔️  Inscription", fg_color=couleur_fond, hover_color=couleur2_hover, text_color=couleur1,
@@ -158,6 +160,16 @@ def inscription():
                 return
             if password != password_confirmation:
                 messagebox.showerror("Erreur", "Les mots de passe ne correspondent pas !")
+                return
+            if not password_entry:
+                messagebox.showerror("Champs manquants", "Le mot de passe ne peut pas être vide !")
+                return
+            if not password_confirmation:
+                messagebox.showerror("Champs manquants", "La confirmation du mot de passe ne peut pas être vide !")
+                return
+            pseudo = username.lower()
+            if pseudo in mot_sensible:
+                messagebox.showerror("Pseudo invalide", "Le pseudo contient un mot sensible !")
                 return
             if (password_valide(password)):
                 sha256 = hashlib.sha256()
@@ -204,7 +216,7 @@ def auto_connect():
         messagebox.showerror("Erreur", "Erreur de base de données lors du lancement de Auto-connect !")
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-
+ 
 if __name__ == "__main__":
     ctk.set_appearance_mode("Dark")
     app = ctk.CTk(fg_color=couleur_fond)

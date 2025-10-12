@@ -2,11 +2,16 @@ from app_ressource import *
 from update_database import con, curseur
 from aide_app import aide_objectif, aide_compétition
 
-
 def verifier_pause(account_id):
     #AND date_fin IS NULL = Cible uniquement les pause non terminés.
-    curseur.execute("""SELECT type FROM Pauses_v2 WHERE account_id = ? AND date_fin IS NULL""", (account_id,))
-    result = curseur.fetchone()
+    try:
+        curseur.execute("SELECT type FROM Pauses WHERE account_id = ?", (account_id,))
+        result = curseur.fetchone()
+    except sqlite3.Error as e:
+        messagebox.showerror("Erreur", "Erreur de base de données lors de la vérification du mode d'analyse !")
+    except Exception as e:
+        messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
+    
     return result[0] if result else None
 
 def activer_pause(account_id, type_pause):
@@ -36,55 +41,91 @@ def arreter_pause(account_id):
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
 
+def pop_up_calendrier(app, date_entry):
+    pop_up_calendrier = ctk.CTkToplevel(app, fg_color=couleur2)
+    pop_up_calendrier.grab_set()
+    pop_up_calendrier.title("Calendrier")
+    pop_up_calendrier.geometry("400x400")
+    pop_up_calendrier.resizable(False, False)
+    pop_up_calendrier.bind("<Control-w>", lambda event: pop_up_calendrier.destroy())
+
+    affichage_calendrier = tkcalendar.Calendar(pop_up_calendrier, selectmode="day", date_pattern="dd/MM/yyyy", 
+                                               background=couleur_fond, foreground="white", headersbackground=couleur_fond, 
+                                               normalbackground=couleur2, weekendbackground=couleur2,
+                                               othermonthbackground=couleur_fond, othermonthwebackground=couleur_fond,
+                                               bordercolor=couleur1, headersforeground=couleur1, selectbackground=couleur1,
+                                               selectforeground="white", font=(font_principale, taille3))
+    affichage_calendrier.pack(expand=True, fill="both", padx=5, pady=5)
+
+    pop_up_calendrier.bind('<Return>', lambda event: valider_date(date_entry))
+
+    def valider_date(date_entry):
+        date_selectionnee = affichage_calendrier.get_date()
+        pop_up_calendrier.destroy()
+        date_entry.delete(0, 'end')
+        date_entry.insert(0, f"{date_selectionnee}")
+        return
+    bouton_valider = ctk.CTkButton(pop_up_calendrier, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_secondaire, taille2), command=lambda: valider_date(date_entry))
+    bouton_valider.pack(expand=True, fill="both", padx=5, pady=5)
+
 def ajouter_compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     frame = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame.pack(pady=(20, 10))
-    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1)
-    frame_tout.pack()
-    frame1 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame1.pack(pady=(10, 5), padx=10)
-    frame2 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame2.pack(pady=(5, 5), padx=10)
-    frame3 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame3.pack(pady=(5, 10), padx=10)
-    frame4 = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame4.pack(pady=20)
-
+    frame.pack(pady=10)
     Titre = ctk.CTkLabel(master=frame ,text="Ajouter une compétition", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=20, side="left")
+    Titre.pack(padx=10, pady=0)
+
+    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1, border_width=border2, border_color=couleur1)
+    frame_tout.pack(pady=(20, 0), padx=10)
+    frame1 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
+    frame1.pack(expand=True, fill="both", padx=12, pady=(12, 2))
+    frame2 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
+    frame2.pack(expand=True, fill="both", padx=12, pady=2)
+    frame3 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
+    frame3.pack(expand=True, fill="both", padx=12, pady=2)
+    frame4 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame4.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
     option = ["Événement Principal", "Événement Secondaire", "Événement tertiaire"]
     app.bind('<Return>', lambda event: sql_ajouté(account_id))
 
-    date_entry = ctk.CTkEntry(master=frame1, placeholder_text="Date (JJ-MM-AAAA)", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    date_entry.pack(side="left", padx=(0, 5))    
-    sport_entry = ctk.CTkEntry(master=frame1, placeholder_text="Sport", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    sport_entry.pack(side="right", padx=(5, 0))
+    sport_entry = ctk.CTkEntry(master=frame1, placeholder_text="Sport", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=320)
+    sport_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    frame_pour_date = ctk.CTkFrame(master=frame1, fg_color=couleur_fond, corner_radius=corner1)
+    frame_pour_date.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    date_entry = ctk.CTkEntry(master=frame_pour_date, placeholder_text="Date", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=160)
+    date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
+    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
+                                            hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
+                                            border_color=couleur2, border_width=border1,
+                                            command=lambda: pop_up_calendrier(app, date_entry))
+    button_pop_up_calendrier.pack(expand=True, fill="both", side="left", padx=(0, 12), pady=12)
 
-    nom_entry = ctk.CTkEntry(master=frame2, placeholder_text="Nom de la compétition", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    nom_entry.pack(side="left", padx=(0, 5))
-    objectif_entry = ctk.CTkEntry(master=frame2, placeholder_text="Objectif", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    objectif_entry.pack(side="right", padx=(5, 0))
+    nom_entry = ctk.CTkEntry(master=frame2, placeholder_text="Nom de la compétition", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=320)
+    nom_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    objectif_entry = ctk.CTkEntry(master=frame2, placeholder_text="Objectif", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=320)
+    objectif_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
-    lieu_entry = ctk.CTkEntry(master=frame3, placeholder_text="Lieu (optionnel)", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    lieu_entry.pack(side="left", padx=(0, 5))
-    priorite_entry = ctk.CTkComboBox(master=frame3, values=option, font=(font_principale, taille3), height=button_height, 
-                                    state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur1, dropdown_font=(font_principale, taille3),
-                                    dropdown_hover_color = couleur1_hover, text_color="white", dropdown_text_color="white")
-    priorite_entry.pack(side="right", padx=(5, 0))
+    lieu_entry = ctk.CTkEntry(master=frame3, placeholder_text="Lieu (optionnel)", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=320)
+    lieu_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    priorite_entry = ctk.CTkComboBox(master=frame3, values=option, font=(font_principale, taille2), height=height_expressive, 
+                                    state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
+                                    corner_radius=corner1, width=320, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
+    priorite_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     priorite_entry.set("Priorité")
 
     def sql_ajouté(account_id):
@@ -131,49 +172,47 @@ def ajouter_compétition(account_id, app, sidebar_performance, exercice, charge_
                 messagebox.showerror("Erreur", "Erreur de base de données lors de l'ajout de la compétition !")
             except Exception as e:
                 messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_enregistrer = ctk.CTkButton(master=frame4, text="Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+    button_enregistrer = ctk.CTkButton(master=frame4, text="💾 Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), width=320,
                                     command=lambda: sql_ajouté(account_id))
-    button_enregistrer.pack(side="left", padx=5)
+    button_enregistrer.pack(expand=True, fill="both", side="left", padx=2)
     button_back = ctk.CTkButton(master=frame4, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), width=320,
                            command=lambda: [vider_fenetre(app), compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_back.pack(side="left", padx=5)
+    button_back.pack(expand=True, fill="both", side="left", padx=2)
 
 def supprimer_compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(master=app ,text="Supprimer une compétition", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=20)
+    Titre.pack(padx=10, pady=10)
 
-    frame1 = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame1.pack(pady=10)
+    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1, border_width=border2, border_color=couleur1)
+    frame_tout.pack(pady=(20, 0), padx=10)
+    frame1 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame1.pack(pady=(12, 2), padx=12)
+    frame2 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame2.pack(pady=(2, 12), padx=12)
 
     app.bind('<Return>', lambda event: supression(account_id))
-    choix_entry = ctk.CTkEntry(master=frame1, placeholder_text="ID de la compétition à supprimer", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=350)
-    choix_entry.pack(pady=10, side="left", padx=10)
-
-    frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame_boutons.pack(pady=(0, 10))
-    boite3 = ctk.CTkFrame(master=app, fg_color=couleur_fond)
-    boite3.pack(side="top", fill="both", expand=True, pady=10)
-    frame = ctk.CTkFrame(master=boite3, fg_color=couleur_fond, corner_radius=corner1, border_width=border2, border_color=couleur1)
-    frame.pack(fill="both", expand=True, padx=10, pady=10)
-    tableau_frame = ctk.CTkScrollableFrame(master=frame, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
-                                           scrollbar_button_hover_color=couleur2_hover)
-    tableau_frame.pack(fill="both", expand=True, padx=20, pady=5)
+    choix_entry = ctk.CTkEntry(master=frame1, placeholder_text="ID de la compétition", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    choix_entry.pack(expand=True, fill="both")
+    
+    tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
+                                              scrollbar_button_hover_color=couleur2_hover)
+    tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
     try:
         curseur.execute("SELECT id, sport, nom, date, lieu FROM Compétition WHERE account_id = ?", (account_id,))
         result = curseur.fetchall()
         headers = ["ID", "Sport", "Nom", "Date", "Lieu"]
         for col_idx, header_text in enumerate(headers):
-            label = ctk.CTkLabel(master=tableau_frame, text=header_text, font=(font_secondaire, taille2),
-                                     fg_color=couleur1, corner_radius=corner1, text_color=couleur_text,
-                                     height=40, wraplength=140)
+            label = ctk.CTkButton(tableau_frame, text=header_text, font=(font_secondaire, taille2),
+                                    fg_color=couleur_fond, corner_radius=corner2, text_color=couleur1,
+                                    height=40, border_width=border2, border_color=couleur2, hover_color=couleur_fond)
             label.grid(row=0, column=col_idx, padx=5, pady=15, sticky="ew")
             tableau_frame.grid_columnconfigure(col_idx, weight=1)
         if result:
@@ -212,16 +251,16 @@ def supprimer_compétition(account_id, app, sidebar_performance, exercice, charg
         messagebox.showerror("Erreur", "Erreur de base de données lors de la récupération de tes compétitions !")
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_check = ctk.CTkButton(master=frame_boutons, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+    button_check = ctk.CTkButton(master=frame2, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                                  command=lambda: supression(account_id))
-    button_check.pack(side="left", padx=5, pady=20)
-    button_retour = ctk.CTkButton(master=frame_boutons, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+    button_check.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    button_retour = ctk.CTkButton(master=frame2, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                                  command=lambda: [vider_fenetre(app), compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_retour.pack(side="left", padx=5, pady=20)
+    button_retour.pack(expand=True, fill="both", side="left")
 
 def modifier_compétition_étape2(account_id, result_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):    
     id_modifier = result_id[0][0]
@@ -243,51 +282,58 @@ def modifier_compétition_étape2(account_id, result_id, app, sidebar_performanc
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
 
     frame = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame.pack(pady=(20, 10))
-    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1)
-    frame_tout.pack()
-    frame1 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame1.pack(pady=(10, 5), padx=10)
-    frame2 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame2.pack(pady=(5, 5), padx=10)
-    frame3 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame3.pack(pady=(5, 10), padx=10)
-    frame4 = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame4.pack(pady=20)
-
+    frame.pack(pady=10)
     Titre = ctk.CTkLabel(master=frame ,text="Modifier une compétition", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=20, side="left")
+    Titre.pack(padx=10, pady=0)
+
+    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1, border_width=border2, border_color=couleur1)
+    frame_tout.pack(pady=(20, 0), padx=10)
+    frame1 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
+    frame1.pack(expand=True, fill="both", padx=12, pady=(12, 2))
+    frame2 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
+    frame2.pack(expand=True, fill="both", padx=12, pady=2)
+    frame3 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
+    frame3.pack(expand=True, fill="both", padx=12, pady=2)
+    frame4 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame4.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
     option = ["Événement Principal", "Événement Secondaire", "Événement tertiaire"]
     app.bind('<Return>', lambda event: sql_ajouté(account_id))
 
-    date_entry = ctk.CTkEntry(master=frame1, placeholder_text=f"{date_value}", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    date_entry.pack(side="left", padx=(0, 5))    
-    sport_entry = ctk.CTkEntry(master=frame1, placeholder_text=f"{sport_value}", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    sport_entry.pack(side="right", padx=(5, 0))
+    sport_entry = ctk.CTkEntry(master=frame1, placeholder_text=f"{sport_value}", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=320)
+    sport_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    frame_pour_date = ctk.CTkFrame(master=frame1, fg_color=couleur_fond, corner_radius=corner1)
+    frame_pour_date.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    date_entry = ctk.CTkEntry(master=frame_pour_date, placeholder_text=f"{date_value}", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=160)
+    date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
+    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
+                                            hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
+                                            border_color=couleur2, border_width=border1,
+                                            command=lambda: pop_up_calendrier(app, date_entry))
+    button_pop_up_calendrier.pack(expand=True, fill="both", side="left", padx=(0, 12), pady=12)
 
-    nom_entry = ctk.CTkEntry(master=frame2, placeholder_text=f"{nom_value}", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    nom_entry.pack(side="left", padx=(0, 5))
-    objectif_entry = ctk.CTkEntry(master=frame2, placeholder_text=f"{objectif_value}", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    objectif_entry.pack(side="right", padx=(5, 0))
+    nom_entry = ctk.CTkEntry(master=frame2, placeholder_text=f"{nom_value}", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=320)
+    nom_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    objectif_entry = ctk.CTkEntry(master=frame2, placeholder_text=f"{objectif_value}", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=320)
+    objectif_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
-    lieu_entry = ctk.CTkEntry(master=frame3, placeholder_text=f"{lieu_value}", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    lieu_entry.pack(side="left", padx=(0, 5))
-    priorite_entry = ctk.CTkComboBox(master=frame3, values=option, font=(font_principale, taille3), height=button_height, 
-                                    state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur1, dropdown_font=(font_principale, taille3),
-                                    dropdown_hover_color = couleur1_hover, text_color="white", dropdown_text_color="white")
-    priorite_entry.pack(side="right", padx=(5, 0))
+    lieu_entry = ctk.CTkEntry(master=frame3, placeholder_text=f"{lieu_value}", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=320)
+    lieu_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    priorite_entry = ctk.CTkComboBox(master=frame3, values=option, height=height_expressive, font=(font_principale, taille2),
+                                    state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
+                                    corner_radius=corner1, width=320, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
+    priorite_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     priorite_entry.set("Priorité")
 
     def sql_ajouté(account_id):
@@ -330,51 +376,49 @@ def modifier_compétition_étape2(account_id, result_id, app, sidebar_performanc
                 messagebox.showerror("Erreur", "Erreur de base de données lors de la modification de la compétition !")
             except Exception as e:
                 messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_enregistrer = ctk.CTkButton(master=frame4, text="Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+    button_enregistrer = ctk.CTkButton(master=frame4, text="💾 Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), width=320,
                                     command=lambda: sql_ajouté(account_id))
-    button_enregistrer.pack(side="left", padx=5)
+    button_enregistrer.pack(expand=True, fill="both", side="left", padx=2)
     button_back = ctk.CTkButton(master=frame4, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), width=320,
                            command=lambda: [vider_fenetre(app), modifier_compétition_étape1(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_back.pack(side="left", padx=5)
+    button_back.pack(expand=True, fill="both", side="left", padx=2)
     aide_compétition(account_id)
 
 def modifier_compétition_étape1(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(master=app ,text="Modifier une compétition", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=20)
+    Titre.pack(padx=10, pady=10)
 
-    frame1 = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame1.pack(padx=50, pady=(20, 0))
+    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1, border_width=border2, border_color=couleur1)
+    frame_tout.pack(pady=(20, 0), padx=10)
+    frame1 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame1.pack(pady=(12, 2), padx=12)
+    frame2 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame2.pack(pady=(2, 12), padx=12)
 
     app.bind('<Return>', lambda event: valider(account_id))
-    choix_entry = ctk.CTkEntry(frame1, placeholder_text="ID de la compétition à modifier", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=300)
-    choix_entry.pack(pady=10, side="left", padx=5)
+    choix_entry = ctk.CTkEntry(frame1, placeholder_text="ID de la compétition", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    choix_entry.pack(expand=True, fill="both")
 
-    frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame_boutons.pack(pady=(0, 10))
-    boite3 = ctk.CTkFrame(master=app, fg_color=couleur_fond)
-    boite3.pack(side="top", fill="both", expand=True, pady=10)
-    frame = ctk.CTkFrame(master=boite3, fg_color=couleur_fond, corner_radius=corner1, border_width=border2, border_color=couleur1)
-    frame.pack(fill="both", expand=True, padx=10, pady=10)
-    tableau_frame = ctk.CTkScrollableFrame(master=frame, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
-                                           scrollbar_button_hover_color=couleur2_hover)
-    tableau_frame.pack(fill="both", expand=True, padx=20, pady=5)
+    tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
+                                              scrollbar_button_hover_color=couleur2_hover)
+    tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
     try:
-        curseur.execute("SELECT id, nom, date, sport, lieu, priorité FROM Compétition WHERE account_id = ?", (account_id,))
+        curseur.execute("SELECT id, nom, date, sport, lieu, priorité FROM Compétition WHERE account_id = ?AND date >= ? ORDER BY date ASC", (account_id, date_actuelle))
         result = curseur.fetchall()
         headers = ["ID", "Nom", "Date", "Sport", "Lieu", "Priorité"]
 
         for col_idx, header_text in enumerate(headers): #_idx= index de colonne
-            label = ctk.CTkLabel(master=tableau_frame, text=header_text, font=(font_secondaire, taille2),
-                                 fg_color=couleur1, corner_radius=corner1, text_color=couleur_text,
-                                 height=40, wraplength=140)
+            label = ctk.CTkButton(tableau_frame, text=header_text, font=(font_secondaire, taille2),
+                                    fg_color=couleur_fond, corner_radius=corner2, text_color=couleur1,
+                                    height=40, border_width=border2, border_color=couleur2, hover_color=couleur_fond)
             label.grid(row=0, column=col_idx, padx=5, pady=15, sticky="ew")
             tableau_frame.grid_columnconfigure(col_idx, weight=1)
         if result:
@@ -419,30 +463,34 @@ def modifier_compétition_étape1(account_id, app, sidebar_performance, exercice
         messagebox.showerror("Erreur", "Erreur de base de données lors de la récupération de tes compétitions !")
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, veuillez réessayer !")
-    button_check = ctk.CTkButton(master=frame_boutons, text="Suivant", fg_color=couleur2, hover_color=couleur2_hover,
-                           corner_radius=corner2, height=button_height, font=(font_principale, taille3),
-                           text_color=couleur1,
-                           command=lambda: valider(account_id))
-    button_check.pack(side="left", padx=5, pady=20)
-    button_retour = ctk.CTkButton(master=frame_boutons, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                           corner_radius=corner2, height=button_height, font=(font_principale, taille3),
-                           text_color=couleur1,
+    button_check = ctk.CTkButton(master=frame2, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3),
+                                 command=lambda: valider(account_id))
+    button_check.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    button_retour = ctk.CTkButton(master=frame2, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3),
                            command=lambda: [vider_fenetre(app), compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_retour.pack(side="left", padx=5, pady=20)
+    button_retour.pack(expand=True, fill="both", side="left")
 
 def toute_compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
-    Titre = ctk.CTkLabel(master=app, text="Toutes les compétitions", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=(25, 10))
+    petite_boite = ctk.CTkFrame(master=app, fg_color="transparent")
+    petite_boite.pack(padx=10, pady=10)
+    Titre = ctk.CTkLabel(petite_boite, text="Toutes les compétitions", font=(font_secondaire, taille1))
+    Titre.pack(side="left")
+    button_retour = ctk.CTkButton(petite_boite, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), border_width=border2, border_color=couleur2,
+                                    command=lambda: [vider_fenetre(app), compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
+    button_retour.pack(side="left", padx=(10, 0))
 
-    boite3 = ctk.CTkFrame(master=app, fg_color=couleur_fond)
-    boite3.pack(side="top", fill="both", expand=True, pady=10)
-    frame = ctk.CTkFrame(master=boite3, fg_color=couleur_fond, corner_radius=corner1, border_width=border2, border_color=couleur1)
-    frame.pack(fill="both", expand=True, padx=10, pady=10)
-    tableau_frame = ctk.CTkScrollableFrame(master=frame, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
-                                           scrollbar_button_hover_color=couleur2_hover)
-    tableau_frame.pack(fill="both", expand=True, padx=20, pady=5)
+
+    tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
+                                              scrollbar_button_hover_color=couleur2_hover)
+    tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
     try:
             curseur.execute("SELECT nom, date, sport, objectif, lieu, priorité FROM Compétition WHERE account_id = ? ORDER BY date ASC", (account_id,))
             compétition_result = curseur.fetchall()
@@ -450,9 +498,9 @@ def toute_compétition(account_id, app, sidebar_performance, exercice, charge_en
             headers = ["Nom", "Date", "Sport", "Objectif", "Lieu", "Priorité"]
 
             for col_idx, header_text in enumerate(headers): #_idx= index de colonne
-                label = ctk.CTkLabel(master=tableau_frame, text=header_text, font=(font_secondaire, taille2),
-                                     fg_color=couleur1, corner_radius=corner1, text_color=couleur_text,
-                                     height=40, wraplength=140)
+                label = ctk.CTkButton(master=tableau_frame, text=header_text, font=(font_secondaire, taille2),
+                                    fg_color=couleur_fond, corner_radius=corner2, text_color=couleur1,
+                                    height=40, border_width=border2, border_color=couleur2, hover_color=couleur_fond)
                 label.grid(row=0, column=col_idx, padx=5, pady=15, sticky="ew")
                 tableau_frame.grid_columnconfigure(col_idx, weight=1)
 
@@ -472,11 +520,6 @@ def toute_compétition(account_id, app, sidebar_performance, exercice, charge_en
         messagebox.showerror("Erreur", "Erreur de base de données lors de la récupération de tes compétitions !")
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_retour = ctk.CTkButton(master=app, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                           command=lambda: [vider_fenetre(app), compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_retour.pack(padx=10, pady=20)
 
 def compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -518,15 +561,18 @@ def compétition(account_id, app, sidebar_performance, exercice, charge_entraîn
     tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
 
     button_ajouter = ctk.CTkButton(master=frame_boutons, text="➕  Ajouter", fg_color=couleur2, hover_color=couleur2_hover,
-                           corner_radius=corner2, height=button_height, font=(font_principale, taille3), text_color=couleur1,
+                           corner_radius=corner2, height=button_height, font=(font_principale, taille3), text_color=couleur1, border_width=border2,
+                           border_color=couleur2,
                            command=lambda: [vider_fenetre(app), ajouter_compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_ajouter.pack(side="left", padx=2)
     button_modifier = ctk.CTkButton(master=frame_boutons, text="✏️  Modifier", fg_color=couleur2, hover_color=couleur2_hover,
-                           corner_radius=corner2, height=button_height, font=(font_principale, taille3), text_color=couleur1,
+                           corner_radius=corner2, height=button_height, font=(font_principale, taille3), text_color=couleur1, border_width=border2,
+                           border_color=couleur2,
                            command=lambda: [vider_fenetre(app), modifier_compétition_étape1(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_modifier.pack_forget()
     button_delete = ctk.CTkButton(master=frame_boutons, text="🗑️  Supprimer", fg_color=couleur2, hover_color=couleur2_hover,
-                           corner_radius=corner2, height=button_height, font=(font_principale, taille3), text_color=couleur1,
+                           corner_radius=corner2, height=button_height, font=(font_principale, taille3), text_color=couleur1, border_width=border2,
+                           border_color=couleur2,
                            command=lambda: [vider_fenetre(app), supprimer_compétition(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_delete.pack_forget()
     try:
@@ -565,53 +611,61 @@ def ajouter_objectif(account_id, app, sidebar_performance, exercice, charge_entr
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     frame = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame.pack(pady=(20, 10))
-    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1)
-    frame_tout.pack()
+    frame.pack(pady=10)
+    Titre = ctk.CTkLabel(master=frame ,text="Ajouter un objectif", font=(font_secondaire, taille1))
+    Titre.pack(padx=10, pady=0)
+
+    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1, border_width=border2, border_color=couleur1)
+    frame_tout.pack(pady=(20, 0), padx=10)
     frame1 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame1.pack(pady=(10, 5), padx=10)
+    frame1.pack(expand=True, fill="both", padx=12, pady=(12, 2))
     frame2 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame2.pack(pady=(5, 5), padx=10)
+    frame2.pack(expand=True, fill="both", padx=12, pady=2)
     frame3 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame3.pack(pady=(5, 10), padx=10)
-    frame4 = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame4.pack(pady=20)
+    frame3.pack(expand=True, fill="both", padx=12, pady=2)
+    frame4 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame4.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
     options_statut = {"Pas encore démarré":"Pas encore démarré", "En cours": "En cours", "Atteint" : "Atteint", "Non-atteint" : "Non-atteint"}
     options_niveau = {"Débutant": "Débutant", "Fondations": "Fondations", "Intermédiaire" : "Intermédiaire", "Avancé": "Avancé", "Expert": "Expert", "Maîtrise": "Maîtrise"}
-    Titre = ctk.CTkLabel(master=frame ,text="Ajouter un objectif", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=20)
 
     app.bind('<Return>', lambda event: sql_ajouté(account_id))
-    sport_entry = ctk.CTkEntry(master=frame1, placeholder_text="Sport", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    sport_entry.pack(side="left", padx=(0, 5))
-    date_entry = ctk.CTkEntry(master=frame1, placeholder_text="Date (JJ-MM-AAAA)", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    date_entry.pack(side="right", padx=(5, 0))
+    sport_entry = ctk.CTkEntry(master=frame1, placeholder_text="Sport", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=320)
+    sport_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    frame_pour_date = ctk.CTkFrame(master=frame1, fg_color=couleur_fond, corner_radius=corner1)
+    frame_pour_date.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    date_entry = ctk.CTkEntry(master=frame_pour_date, placeholder_text="Date", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=160)
+    date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
+    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
+                                            hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
+                                            border_color=couleur2, border_width=border1,
+                                            command=lambda: pop_up_calendrier(app, date_entry))
+    button_pop_up_calendrier.pack(expand=True, fill="both", side="left", padx=(0, 12), pady=12)
 
-    objectif_entry = ctk.CTkEntry(master=frame2, placeholder_text="Objectif", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    objectif_entry.pack(side="left", padx=(0, 5))
-    fréquence_entry = ctk.CTkEntry(master=frame2, placeholder_text="Fréquence (ex: 2x/semaine)", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    fréquence_entry.pack(side="right", padx=(5, 0))
+    objectif_entry = ctk.CTkEntry(master=frame2, placeholder_text="Objectif", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=320)
+    objectif_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    fréquence_entry = ctk.CTkEntry(master=frame2, placeholder_text="Fréquence d'entraî.", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=320)
+    fréquence_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
-    niveau_entry = ctk.CTkComboBox(master=frame3, values=list(options_niveau.keys()), font=(font_principale, taille3), height=button_height, 
-                                    state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur1, dropdown_font=(font_principale, taille3),
-                                    dropdown_hover_color = couleur1_hover, text_color="white", dropdown_text_color="white")
-    niveau_entry.pack(side="left", padx=(0, 5))
+    niveau_entry = ctk.CTkComboBox(master=frame3, values=list(options_niveau.keys()), font=(font_principale, taille2), height=height_expressive, 
+                                    state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
+                                    corner_radius=corner1, width=320, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
+    niveau_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     niveau_entry.set("Niveau actuel")
-    statut_entry = ctk.CTkComboBox(master=frame3, values=list(options_statut.keys()), font=(font_principale, taille3), height=button_height, 
-                                    state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur1, dropdown_font=(font_principale, taille3),
-                                    dropdown_hover_color = couleur1_hover, text_color="white", dropdown_text_color="white")
-    statut_entry.pack(side="right", padx=(5, 0))
+    statut_entry = ctk.CTkComboBox(master=frame3, values=list(options_statut.keys()), font=(font_principale, taille2), height=height_expressive, 
+                                    state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
+                                    corner_radius=corner1, width=320, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
+    statut_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     statut_entry.set("Statut de l'objectif")
 
     def sql_ajouté(account_id):
@@ -665,16 +719,16 @@ def ajouter_objectif(account_id, app, sidebar_performance, exercice, charge_entr
                 messagebox.showerror("Erreur", "Erreur de base de données lors de l'ajout de ton objectif !")
             except Exception as e:
                 messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_enregistrer = ctk.CTkButton(master=frame4, text="Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+    button_enregistrer = ctk.CTkButton(master=frame4, text="💾 Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), width=320,
                                         command=lambda: sql_ajouté(account_id))
-    button_enregistrer.pack(side="left", padx=5)
+    button_enregistrer.pack(expand=True, fill="both", side="left", padx=2)
     button_back = ctk.CTkButton(master=frame4, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), width=320,
                            command=lambda: [vider_fenetre(app), objectifs(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_back.pack(side="left", padx=5)
+    button_back.pack(expand=True, fill="both", side="left", padx=2)
 
 def modifier_objectif_étape2(account_id, result_id, app,sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):    
     id_modifier = result_id[0][0]
@@ -695,54 +749,61 @@ def modifier_objectif_étape2(account_id, result_id, app,sidebar_performance, ex
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
 
     frame = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame.pack(pady=(20, 10))
-    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1)
-    frame_tout.pack()
+    frame.pack(pady=10)
+    Titre = ctk.CTkLabel(master=frame ,text="Modifier un objectif", font=(font_secondaire, taille1))
+    Titre.pack(padx=10, pady=0)
+
+    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1, border_width=border2, border_color=couleur1)
+    frame_tout.pack(pady=(20, 0), padx=10)
     frame1 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame1.pack(pady=(10, 5), padx=10)
+    frame1.pack(expand=True, fill="both", padx=12, pady=(12, 2))
     frame2 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame2.pack(pady=(5, 5), padx=10)
+    frame2.pack(expand=True, fill="both", padx=12, pady=2)
     frame3 = ctk.CTkFrame(master=frame_tout, fg_color=couleur2, corner_radius=corner1)
-    frame3.pack(pady=(5, 10), padx=10)
-    frame4 = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame4.pack(pady=20)
+    frame3.pack(expand=True, fill="both", padx=12, pady=2)
+    frame4 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame4.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
     options_statut = {"Pas encore démarré":"Pas encore démarré", "En cours": "En cours", "Atteint" : "Atteint", "Non-atteint" : "Non-atteint"}
     options_niveau = {"Débutant": "Débutant", "Fondations": "Fondations", "Intermédiaire" : "Intermédiaire", "Avancé": "Avancé", "Expert": "Expert", "Maîtrise": "Maîtrise"}
-    
-    Titre = ctk.CTkLabel(master=frame ,text="Modifier un objectif", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=20)
 
     app.bind('<Return>', lambda event: sql_ajouté(account_id))
-    sport_entry = ctk.CTkEntry(master=frame1, placeholder_text=f"{sport_value}", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    sport_entry.pack(side="left", padx=(0, 5))
-    date_entry = ctk.CTkEntry(master=frame1, placeholder_text=f"{date_value}", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    date_entry.pack(side="right", padx=(5, 0))
+    sport_entry = ctk.CTkEntry(master=frame1, placeholder_text=f"{sport_value}", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=320)
+    sport_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    frame_pour_date = ctk.CTkFrame(master=frame1, fg_color=couleur_fond, corner_radius=corner1)
+    frame_pour_date.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    date_entry = ctk.CTkEntry(master=frame_pour_date, placeholder_text=f"{date_value}", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=160)
+    date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
+    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
+                                            hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
+                                            border_color=couleur2, border_width=border1,
+                                            command=lambda: pop_up_calendrier(app, date_entry))
+    button_pop_up_calendrier.pack(expand=True, fill="both", side="left", padx=(0, 12), pady=12)
 
-    objectif_entry = ctk.CTkEntry(master=frame2, placeholder_text=f"{objectif_value}", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    objectif_entry.pack(side="left", padx=(0, 5))
-    fréquence_entry = ctk.CTkEntry(master=frame2, placeholder_text=f"{frequence_value}", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    fréquence_entry.pack(side="right", padx=(5, 0))
+    objectif_entry = ctk.CTkEntry(master=frame2, placeholder_text=f"{objectif_value}", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=320)
+    objectif_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    fréquence_entry = ctk.CTkEntry(master=frame2, placeholder_text=f"{frequence_value}", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
+                                  text_color=couleur1, width=320)
+    fréquence_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
-    niveau_entry = ctk.CTkComboBox(master=frame3, values=list(options_niveau.keys()), font=(font_principale, taille3), height=button_height, 
-                                    state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur1, dropdown_font=(font_principale, taille3),
-                                    dropdown_hover_color = couleur1_hover, text_color="white", dropdown_text_color="white")
-    niveau_entry.pack(side="left", padx=(0, 5))
+    niveau_entry = ctk.CTkComboBox(master=frame3, values=list(options_niveau.keys()), font=(font_principale, taille2), height=height_expressive, 
+                                    state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
+                                    corner_radius=corner1, width=320, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
+    niveau_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     niveau_entry.set("Level final")
-    statut_entry = ctk.CTkComboBox(master=frame3, values=list(options_statut.keys()), font=(font_principale, taille3), height=button_height, 
-                                    state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur1, dropdown_font=(font_principale, taille3),
-                                    dropdown_hover_color = couleur1_hover, text_color="white", dropdown_text_color="white")
-    statut_entry.pack(side="right", padx=(5, 0))
+    statut_entry = ctk.CTkComboBox(master=frame3, values=list(options_statut.keys()), font=(font_principale, taille2), height=height_expressive, 
+                                    state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
+                                    corner_radius=corner1, width=320, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
+    statut_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     statut_entry.set("Statut de l'objectif")
 
     def sql_ajouté(account_id):
@@ -788,51 +849,49 @@ def modifier_objectif_étape2(account_id, result_id, app,sidebar_performance, ex
                 messagebox.showerror("Erreur", "Erreur de base de données lors de la modification de ton objectif !")
             except Exception as e:
                 messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_enregistrer = ctk.CTkButton(master=frame4, text="Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+    button_enregistrer = ctk.CTkButton(master=frame4, text="💾 Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), width=320,
                                         command=lambda: sql_ajouté(account_id))
-    button_enregistrer.pack(side="left", padx=5)
+    button_enregistrer.pack(expand=True, fill="both", side="left", padx=2)
     button_back = ctk.CTkButton(master=frame4, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), width=320,
                            command=lambda: [vider_fenetre(app), modifier_objectif_étape1(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_back.pack(side="left", padx=5)
+    button_back.pack(expand=True, fill="both", side="left", padx=2)
     aide_objectif(account_id)
 
 def modifier_objectif_étape1(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(master=app ,text="Modifier un objectif", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=20)
+    Titre.pack(padx=10, pady=10)
 
-    frame1 = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame1.pack(padx=50, pady=(20, 0))
+    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1, border_width=border2, border_color=couleur1)
+    frame_tout.pack(pady=(20, 0), padx=10)
+    frame1 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame1.pack(pady=(12, 2), padx=12)
+    frame2 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame2.pack(pady=(2, 12), padx=12)
 
     app.bind('<Return>', lambda event: valider(account_id))
-    choix_entry = ctk.CTkEntry(frame1, placeholder_text="ID de l'objectif à modifier", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    choix_entry.pack(pady=10, side="left", padx=5)
+    choix_entry = ctk.CTkEntry(frame1, placeholder_text="ID de l'objectif", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    choix_entry.pack(expand=True, fill="both")
 
-    frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame_boutons.pack(pady=(0, 10))
-    boite3 = ctk.CTkFrame(master=app, fg_color=couleur_fond)
-    boite3.pack(side="top", fill="both", expand=True, pady=10)
-    frame = ctk.CTkFrame(master=boite3, fg_color=couleur_fond, corner_radius=corner1, border_width=border2, border_color=couleur1)
-    frame.pack(fill="both", expand=True, padx=10, pady=10)
-    tableau_frame = ctk.CTkScrollableFrame(master=frame, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
-                                           scrollbar_button_hover_color=couleur2_hover)
-    tableau_frame.pack(fill="both", expand=True, padx=20, pady=5)
+    tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
+                                              scrollbar_button_hover_color=couleur2_hover)
+    tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
     try:
-        curseur.execute("SELECT id, sport, date, niveau_début, niveau_fin, statut FROM Objectif WHERE account_id = ?", (account_id,))
+        curseur.execute("SELECT id, sport, date, niveau_début, niveau_fin, statut FROM Objectif WHERE account_id = ?AND date >= ? ORDER BY date ASC", (account_id, date_actuelle))
         result = curseur.fetchall()
         headers = ["ID", "Sport", "Date", "Level début", "Level fin", "Statut"]
 
         for col_idx, header_text in enumerate(headers): #_idx= index de colonne
-                label = ctk.CTkLabel(master=tableau_frame, text=header_text, font=(font_secondaire, taille2),
-                                     fg_color=couleur1, corner_radius=corner1, text_color=couleur_text,
-                                     height=40, wraplength=140)
+                label = ctk.CTkButton(tableau_frame, text=header_text, font=(font_secondaire, taille2),
+                                    fg_color=couleur_fond, corner_radius=corner2, text_color=couleur1,
+                                    height=40, border_width=border2, border_color=couleur2, hover_color=couleur_fond)
                 label.grid(row=0, column=col_idx, padx=5, pady=15, sticky="ew")
                 tableau_frame.grid_columnconfigure(col_idx, weight=1)
         if result:
@@ -877,49 +936,47 @@ def modifier_objectif_étape1(account_id, app, sidebar_performance, exercice, ch
         messagebox.showerror("Erreur", "Erreur de base de données lors de la récupération de tes objectifs !")
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, veuillez réessayer !")
-    button_check = ctk.CTkButton(master=frame_boutons, text="Suivant", fg_color=couleur2, hover_color=couleur2_hover,
-                           corner_radius=corner2, height=button_height, font=(font_principale, taille3),
-                           text_color=couleur1,
-                           command=lambda: valider(account_id))
-    button_check.pack(side="left", padx=5, pady=20)
-    button_retour = ctk.CTkButton(master=frame_boutons, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                           corner_radius=corner2, height=button_height, font=(font_principale, taille3),
-                           text_color=couleur1,
+    button_check = ctk.CTkButton(master=frame2, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3),
+                                 command=lambda: valider(account_id))
+    button_check.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    button_retour = ctk.CTkButton(master=frame2, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3),
                            command=lambda: [vider_fenetre(app), objectifs(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_retour.pack(side="left", padx=5, pady=20)
+    button_retour.pack(expand=True, fill="both", side="left")
 
 def supprimer_objectif(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(master=app ,text="Supprimer un objectif", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=20)
+    Titre.pack(padx=10, pady=10)
 
-    frame1 = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame1.pack(pady=10)
+    frame_tout = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner1, border_width=border2, border_color=couleur1)
+    frame_tout.pack(pady=(20, 0), padx=10)
+    frame1 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame1.pack(pady=(12, 2), padx=12)
+    frame2 = ctk.CTkFrame(master=frame_tout, fg_color="transparent")
+    frame2.pack(pady=(2, 12), padx=12)
 
     app.bind('<Return>', lambda event: supression(account_id))
-    choix_entry = ctk.CTkEntry(master=frame1, placeholder_text="ID de l'objectif à supprimer", border_color=couleur1, fg_color=couleur1,
-                                  height=entry_height, font=(font_principale, taille3), corner_radius=corner1, placeholder_text_color ="white",
-                                  text_color="white", width=275)
-    choix_entry.pack(pady=10, side="left", padx=10)
+    choix_entry = ctk.CTkEntry(master=frame1, placeholder_text="ID de l'objectif", border_color=couleur_fond, fg_color=couleur_fond,
+                                  height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
+                                  text_color=couleur1, width=280)
+    choix_entry.pack(expand=True, fill="both")
 
-    frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame_boutons.pack(pady=(0, 10))
-    boite3 = ctk.CTkFrame(master=app, fg_color=couleur_fond)
-    boite3.pack(side="top", fill="both", expand=True, pady=10)
-    frame = ctk.CTkFrame(master=boite3, fg_color=couleur_fond, corner_radius=corner1, border_width=border2, border_color=couleur1)
-    frame.pack(fill="both", expand=True, padx=10, pady=10)
-    tableau_frame = ctk.CTkScrollableFrame(master=frame, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
-                                           scrollbar_button_hover_color=couleur2_hover)
-    tableau_frame.pack(fill="both", expand=True, padx=20, pady=5)
+    tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
+                                              scrollbar_button_hover_color=couleur2_hover)
+    tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
     try:
         curseur.execute("SELECT id, sport, date, objectif, statut FROM Objectif WHERE account_id = ?", (account_id,))
         result = curseur.fetchall()
         headers = ["ID", "Sport", "Date", "Objectif", "Statut"]
         for col_idx, header_text in enumerate(headers):
-            label = ctk.CTkLabel(master=tableau_frame, text=header_text, font=(font_secondaire, taille2),
-                                     fg_color=couleur1, corner_radius=corner1, text_color=couleur_text,
-                                     height=40, wraplength=130)
+            label = ctk.CTkButton(tableau_frame, text=header_text, font=(font_secondaire, taille2),
+                                    fg_color=couleur_fond, corner_radius=corner2, text_color=couleur1,
+                                    height=40, border_width=border2, border_color=couleur2, hover_color=couleur_fond)
             label.grid(row=0, column=col_idx, padx=6, pady=15, sticky="ew")
             tableau_frame.grid_columnconfigure(col_idx, weight=1)
         if result:
@@ -958,30 +1015,33 @@ def supprimer_objectif(account_id, app, sidebar_performance, exercice, charge_en
         messagebox.showerror("Erreur", "Erreur de base de données lors de la récupération de tes objectifs !")
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_check = ctk.CTkButton(master=frame_boutons, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+    button_check = ctk.CTkButton(master=frame2, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                                  command=lambda: supression(account_id))
-    button_check.pack(side="left", padx=5, pady=20)
-    button_retour = ctk.CTkButton(master=frame_boutons, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+    button_check.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    button_retour = ctk.CTkButton(master=frame2, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                                  command=lambda: [vider_fenetre(app), objectifs(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_retour.pack(side="left", padx=5, pady=20)
+    button_retour.pack(expand=True, fill="both", side="left")
 
 def tout_objectif(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
-    Titre = ctk.CTkLabel(master=app, text="Tous les objectifs", font=(font_secondaire, taille1))
-    Titre.pack(padx=50, pady=(25, 10))
+    petite_boite = ctk.CTkFrame(master=app, fg_color="transparent")
+    petite_boite.pack(padx=10, pady=10)
+    Titre = ctk.CTkLabel(petite_boite, text="Tous les objectifs", font=(font_secondaire, taille1))
+    Titre.pack(side="left")
+    button_retour = ctk.CTkButton(petite_boite, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+                                    font=(font_principale, taille3), border_width=border2, border_color=couleur2,
+                                    command=lambda: [vider_fenetre(app), objectifs(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
+    button_retour.pack(side="left", padx=(10, 0))
 
-    boite3 = ctk.CTkFrame(master=app, fg_color=couleur_fond)
-    boite3.pack(side="top", fill="both", expand=True, pady=10)
-    frame = ctk.CTkFrame(master=boite3, fg_color=couleur_fond, corner_radius=corner1, border_width=border2, border_color=couleur1)
-    frame.pack(fill="both", expand=True, padx=10, pady=10)
-    tableau_frame = ctk.CTkScrollableFrame(master=frame, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
-                                           scrollbar_button_hover_color=couleur2_hover)
-    tableau_frame.pack(fill="both", expand=True, padx=20, pady=5)
+    tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
+                                              scrollbar_button_hover_color=couleur2_hover)
+    tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
     try:
             curseur.execute("SELECT sport, date, objectif, fréquence, niveau_début, niveau_fin, statut FROM Objectif WHERE account_id = ? ORDER BY date ASC", (account_id,))
             objectif_result = curseur.fetchall()
@@ -989,9 +1049,9 @@ def tout_objectif(account_id, app, sidebar_performance, exercice, charge_entraî
             headers = ["Sport", "Date", "Objectif", "Fréquence", "Level début", "Level fin", "Statut"]
 
             for col_idx, header_text in enumerate(headers): #_idx= index de colonne
-                label = ctk.CTkLabel(master=tableau_frame, text=header_text, font=(font_secondaire, taille2),
-                                     fg_color=couleur1, corner_radius=corner1, text_color=couleur_text,
-                                     height=40, wraplength=140)
+                label = ctk.CTkButton(master=tableau_frame, text=header_text, font=(font_secondaire, taille2),
+                                    fg_color=couleur_fond, corner_radius=corner2, text_color=couleur1,
+                                    height=40, border_width=border2, border_color=couleur2, hover_color=couleur_fond)
                 label.grid(row=0, column=col_idx, padx=5, pady=15, sticky="ew")
                 tableau_frame.grid_columnconfigure(col_idx, weight=1)
             if objectif_result:
@@ -1010,11 +1070,6 @@ def tout_objectif(account_id, app, sidebar_performance, exercice, charge_entraî
         messagebox.showerror("Erreur", "Erreur de base de données lors de la récupération de tes objectifs !")
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_retour = ctk.CTkButton(master=app, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=lambda: [vider_fenetre(app), objectifs(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_retour.pack(padx=10, pady=20)
 
 def objectifs(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -1057,17 +1112,20 @@ def objectifs(account_id, app, sidebar_performance, exercice, charge_entraîneme
 
     button_ajouter = ctk.CTkButton(master=frame_boutons, text="➕  Ajouter", fg_color=couleur2, hover_color=couleur2_hover,
                            corner_radius=corner2, height=button_height, font=(font_principale, taille3),
-                           text_color=couleur1,
+                           text_color=couleur1, border_width=border2,
+                           border_color=couleur2,
                            command=lambda: [vider_fenetre(app), ajouter_objectif(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_ajouter.pack(side="left", padx=2)
     button_modifier = ctk.CTkButton(master=frame_boutons, text="✏️  Modifier", fg_color=couleur2, hover_color=couleur2_hover,
                            corner_radius=corner2, height=button_height, font=(font_principale, taille3),
-                           text_color=couleur1,
+                           text_color=couleur1, border_width=border2,
+                           border_color=couleur2,
                            command=lambda: [vider_fenetre(app), modifier_objectif_étape1(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_modifier.pack_forget()
     button_delete = ctk.CTkButton(master=frame_boutons, text="🗑️ Supprimer", fg_color=couleur2, hover_color=couleur2_hover,
                            corner_radius=corner2, height=button_height, font=(font_principale, taille3),
-                           text_color=couleur1,
+                           text_color=couleur1, border_width=border2,
+                           border_color=couleur2,
                            command=lambda: [vider_fenetre(app), supprimer_objectif(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_delete.pack_forget()
 
@@ -1102,20 +1160,25 @@ def objectifs(account_id, app, sidebar_performance, exercice, charge_entraîneme
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
 
-def mettre_en_pause_les_analyses_depuis_indulgence(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
+def mettre_en_pause_les_analyses(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre, mode):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
     Titre = ctk.CTkLabel(master=app ,text="Mettre en pause les analyses", font=(font_secondaire, taille1), text_color=couleur_text)
-    Titre.pack(padx=50, pady=20)
+    Titre.pack(padx=10, pady=10)
+
     info = ctk.CTkLabel(master=app ,text="Si tu as besoin de souffler, ou que tu t'es blessé, tu peux\nmettre en pause les " \
     "analyses pour te reposer et récupérer.", font=(font_principale, taille2))
-    info.pack(padx=50, pady=(25, 10))
+    info.pack(padx=10, pady=10)
 
-    frame = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame.pack(pady=10)
+    frame = ctk.CTkFrame(app, fg_color="transparent")
+    frame.pack(pady=10, padx=10)
 
-    frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame_boutons.pack(pady=(0, 10))
+    frame_tout = ctk.CTkFrame(app, fg_color=couleur2, corner_radius=corner1, border_width=border2, border_color=couleur1)
+    frame_tout.pack(pady=10)
+    frame1 = ctk.CTkFrame(frame_tout, fg_color="transparent")
+    frame1.pack(expand=True, fill="both", padx=12, pady=(12, 2))
+    frame2 = ctk.CTkFrame(frame_tout, fg_color="transparent")
+    frame2.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
     result = verifier_pause(account_id)
     if result == "vacances":
@@ -1132,17 +1195,16 @@ def mettre_en_pause_les_analyses_depuis_indulgence(account_id, app, sidebar_perf
         info_statut.pack(padx=0, pady=10)
 
     app.bind('<Return>', lambda event: enregistrer_activité(account_id))
-    options = {"Vacances": "Vacances", "Blessure": "Blessure", "Suspendre": "Suspendre", "Reprendre les analyses": "Reprendre"}
-    combo_statut = ctk.CTkComboBox(master=frame, values=list(options.keys()), font=(font_principale, taille3), height=button_height, 
-                                    state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur1, dropdown_font=(font_principale, taille3),
-                                    dropdown_hover_color = couleur1_hover, text_color="white", dropdown_text_color="white")
-    combo_statut.pack(pady=10)
-    combo_statut.set("Séléctionne la raison")
+    options = ["Vacances", "Blessure", "Suspendre", "Reprendre les analyses"]
+    combo_statut = ctk.CTkComboBox(master=frame1, values=options, font=(font_principale, taille2), height=height_expressive, 
+                                    state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
+                                    corner_radius=corner1, width=350, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
+    combo_statut.pack()
+    combo_statut.set("Raison")
 
     def enregistrer_activité(account_id):
-        statut_choisi = combo_statut.get()
-        statut = options[statut_choisi]
+        statut = combo_statut.get().strip()
         try:
             if statut == "Vacances":
                 activer_pause(account_id, "vacances")
@@ -1156,93 +1218,32 @@ def mettre_en_pause_les_analyses_depuis_indulgence(account_id, app, sidebar_perf
                 activer_pause(account_id, "suspendre")
                 vider_fenetre(app)
                 charge_entraînement(account_id)
-            elif statut == "Reprendre":
+            elif statut == "Reprendre les analyses":
                 arreter_pause(account_id)
                 vider_fenetre(app)
                 charge_entraînement(account_id)
+            else:
+                messagebox.showerror("Erreur", "Le champ 'Raison' ne peut pas être vide ! Merci de choisir une raison !")
+                return
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_check = ctk.CTkButton(master=frame_boutons, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
+    button_check = ctk.CTkButton(master=frame2, text="💾 Enregistrer", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                                     command=lambda: enregistrer_activité(account_id))
-    button_check.pack(side="left", padx=5, pady=10)
-    button_retour = ctk.CTkButton(master=frame_boutons, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=lambda: [vider_fenetre(app), indulgence_de_course(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_retour.pack(side="left", padx=5, pady=10)
-
-def mettre_en_pause_les_analyses(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
-    sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
-
-    Titre = ctk.CTkLabel(master=app ,text="Mettre en pause les analyses", font=(font_secondaire, taille1), text_color=couleur_text)
-    Titre.pack(padx=50, pady=20)
-    info = ctk.CTkLabel(master=app ,text="Si tu as besoin de souffler, ou que tu t'es blessé, tu peux\nmettre en pause les " \
-    "analyses pour te reposer et récupérer.", font=(font_principale, taille2))
-    info.pack(padx=50, pady=(25, 10))
-
-    frame = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame.pack(pady=10)
-
-    frame_boutons = ctk.CTkFrame(master=app, fg_color="transparent")
-    frame_boutons.pack(pady=(0, 10))
-
-    result = verifier_pause(account_id)
-    if result == "vacances":
-        info_statut_actif = ctk.CTkLabel(master=frame, text=f"Ton statut d'entraînement actuel: Vacances", font=(font_principale, taille2))
-        info_statut_actif.pack(padx=0, pady=10)
-    elif result == "blessure":
-        info_statut_actif = ctk.CTkLabel(master=frame, text=f"Ton statut d'entraînement actuel : Blessure", font=(font_principale, taille2))
-        info_statut_actif.pack(padx=0, pady=10)
-    elif result == "suspendre":
-        info_statut_actif = ctk.CTkLabel(master=frame, text=f"Ton statut d'entraînement actuel : Suspendre", font=(font_principale, taille2))
-        info_statut_actif.pack(padx=0, pady=10)
+    button_check.pack(expand=True, fill="both", side="left", padx=(0, 2))
+    if mode == "indulgence":
+        button_retour = ctk.CTkButton(master=frame2, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                        corner_radius=corner1, height=button_height, text_color=couleur1,
+                                        font=(font_principale, taille3),
+                                        command=lambda: [vider_fenetre(app), indulgence_de_course(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
+        button_retour.pack(expand=True, fill="both", side="left", padx=0)
     else:
-        info_statut = ctk.CTkLabel(master=frame, text="Ton statut d'entraînement actuel : Actif", font=(font_principale, taille2))
-        info_statut.pack(padx=0, pady=10)
-
-    app.bind('<Return>', lambda event: enregistrer_activité(account_id))
-    options = {"Vacances": "Vacances", "Blessure": "Blessure", "Suspendre": "Suspendre", "Reprendre les analyses": "Reprendre"}
-    combo_statut = ctk.CTkComboBox(master=frame, values=list(options.keys()), font=(font_principale, taille3), height=button_height, 
-                                    state="readonly", border_width=border1, border_color=couleur1, button_color=couleur1, fg_color=couleur1,
-                                    corner_radius=corner2, width=275, dropdown_fg_color=couleur1, dropdown_font=(font_principale, taille3),
-                                    dropdown_hover_color = couleur1_hover, text_color="white", dropdown_text_color="white")
-    combo_statut.pack(pady=10)
-    combo_statut.set("Séléctionne la raison")
-
-    def enregistrer_activité(account_id):
-        statut_choisi = combo_statut.get()
-        statut = options[statut_choisi]
-        try:
-            if statut == "Vacances":
-                activer_pause(account_id, "vacances")
-                vider_fenetre(app)
-                charge_entraînement(account_id)
-            elif statut == "Blessure":
-                activer_pause(account_id, "blessure")
-                vider_fenetre(app)
-                charge_entraînement(account_id)
-            elif statut == "Suspendre":
-                activer_pause(account_id, "suspendre")
-                vider_fenetre(app)
-                charge_entraînement(account_id)
-            elif statut == "Reprendre":
-                arreter_pause(account_id)
-                vider_fenetre(app)
-                charge_entraînement(account_id)
-        except Exception as e:
-            messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_check = ctk.CTkButton(master=frame_boutons, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=lambda: enregistrer_activité(account_id))
-    button_check.pack(side="left", padx=5, pady=10)
-    button_retour = ctk.CTkButton(master=frame_boutons, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3),
-                                    command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
-    button_retour.pack(side="left", padx=5, pady=10)
+        button_retour = ctk.CTkButton(master=frame2, text="🔙 Retour", fg_color=couleur2, hover_color=couleur2_hover,
+                                        corner_radius=corner1, height=button_height, text_color=couleur1,
+                                        font=(font_principale, taille3),
+                                        command=lambda: [vider_fenetre(app), charge_entraînement(account_id)])
+        button_retour.pack(expand=True, fill="both", side="left", padx=0)
 
 def indulgence_de_course(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -1273,7 +1274,7 @@ def indulgence_de_course(account_id, app, sidebar_performance, exercice, charge_
     mode_activité.set("Indulgence de course")
     button_autre = ctk.CTkButton(master=boite_semi_header2, text="⏸️ Mettre en pause les analyses", fg_color=couleur2, hover_color=couleur2_hover,
                                     font=(font_principale, taille3), text_color=couleur1, height=button_height, corner_radius=corner1,
-                                    command=lambda: [vider_fenetre(app), mettre_en_pause_les_analyses_depuis_indulgence(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)])
+                                    command=lambda: [vider_fenetre(app), mettre_en_pause_les_analyses(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre, "indulgence")])
     button_autre.pack(expand=True, fill="x", side="right", padx=(2, 5), pady=5)
 
     D28J = date_actuelle - timedelta(days=28)
@@ -1463,6 +1464,7 @@ def indulgence_de_course(account_id, app, sidebar_performance, exercice, charge_
 
 def aide_ajout_activité():
     messagebox.showinfo("Aide", "Pour ajouter une activité, rends-toi dans l'onglet 'Exercice' dans la barre latérale à gauche puis appuis sur le bouton 'Ajouter'.")
+    return
 
 def charge_d_entraînement(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre):
     sidebar_performance(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -1478,7 +1480,7 @@ def charge_d_entraînement(account_id, app, sidebar_performance, exercice, charg
     canvas = None
     def fermer_graphique_pause(account_id):
         plt.close(fig)
-        mettre_en_pause_les_analyses(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre)
+        mettre_en_pause_les_analyses(account_id, app, sidebar_performance, exercice, charge_entraînement, predicteur_temps, parametre, "charge")
     def fermer_graphique_mode():    
         nonlocal fig
         if fig:
@@ -1537,188 +1539,145 @@ def charge_d_entraînement(account_id, app, sidebar_performance, exercice, charg
         messagebox.showerror("Erreur", "Erreur de base de données lors du calcul de charge d'entraînement !")
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
+
     parent_frame = ctk.CTkFrame(master=app, fg_color="transparent")
     parent_frame.pack(fill="both", expand=True, pady=10)
 
-    boite_charge_entraînement = ctk.CTkFrame(master=parent_frame, border_width=border2, border_color=couleur1, corner_radius=corner1,
-                                             fg_color=couleur_fond)
-    boite_charge_entraînement.pack(fill="both", expand=True, side="left", padx=10, pady=(0, 10))
-    h1_boite_charge_entraînement = ctk.CTkFrame(master=boite_charge_entraînement, fg_color=couleur_fond)
-    h1_boite_charge_entraînement.pack(pady=5)
+    boite_charge_entraînement = ctk.CTkFrame(master=parent_frame, corner_radius=corner1, fg_color="transparent")
+    boite_charge_entraînement.pack(fill="both", expand=True, side="left", padx=(10, 2), pady=(0, 10))
 
-    boite_analyse = ctk.CTkFrame(master=boite_charge_entraînement, border_width=border2, border_color=couleur1, corner_radius=corner1, fg_color=couleur2)
-    boite_analyse.pack(fill="both", expand=True, padx=15, pady=5)
-    aigue = ctk.CTkFrame(master=boite_analyse, corner_radius=corner1, fg_color=couleur1)
-    aigue.pack(fill="both", expand=True, padx=12, pady=(12, 5))
-    chronique = ctk.CTkFrame(master=boite_analyse, corner_radius=corner1, fg_color=couleur1)
-    chronique.pack(fill="both", expand=True, padx=12, pady=5)
-    ratio_frame = ctk.CTkFrame(master=boite_analyse, corner_radius=corner1, fg_color=couleur1)
-    ratio_frame.pack(fill="both", expand=True, padx=12, pady=(5, 12))
+    boite_analyse = ctk.CTkFrame(master=boite_charge_entraînement, corner_radius=corner1, fg_color="transparent")
+    boite_analyse.pack(fill="both", expand=True)
 
-    boite_statut = ctk.CTkFrame(master=boite_charge_entraînement, border_width=border2, border_color=couleur1, corner_radius=corner1, fg_color=couleur2)
-    boite_statut.pack(fill="both", expand=True, padx=15, pady=(5, 15))
-    h1_result_optimale = ctk.CTkFrame(master=boite_statut, corner_radius=corner1, fg_color=couleur1)
-    h1_result_optimale.pack(fill="both", expand=True, padx=12, pady=(12, 5))
-    interprétation = ctk.CTkFrame(master=boite_statut, corner_radius=corner1, fg_color=couleur1)
-    interprétation.pack(fill="both", expand=True, padx=10, pady=5)
-    conseil = ctk.CTkFrame(master=boite_statut, corner_radius=corner1, fg_color=couleur1)
-    conseil.pack(fill="both", expand=True, pady=(5, 12), padx=12)
+    aigue = ctk.CTkFrame(master=boite_analyse, corner_radius=corner1, fg_color=couleur_fond, border_color=couleur2, border_width=border2)
+    aigue.pack(fill="both", expand=True, pady=(0,2))
+    h1_result_optimale = ctk.CTkFrame(master=boite_analyse, corner_radius=corner1, fg_color=couleur_fond, border_color=couleur2, border_width=border2)
+    h1_result_optimale.pack(fill="both", expand=True, pady=2)
+    interprétation_conseil = ctk.CTkFrame(master=boite_analyse, corner_radius=corner1, fg_color=couleur_fond, border_color=couleur1, border_width=border2)
+    interprétation_conseil.pack(fill="both", expand=True, pady=(2,0))
     
-    boite = ctk.CTkFrame(master=parent_frame, border_width=border2, border_color=couleur1, corner_radius=corner1,
-                                             fg_color=couleur_fond)
-    boite.pack(fill="both", expand=True, side="right", padx=10, pady=(0, 10))
-    graphique = ctk.CTkFrame(master=boite, corner_radius=corner1, fg_color="white")
-    graphique.pack(fill="x", padx=15, pady=(15, 12))
-    info = ctk.CTkFrame(master=boite, corner_radius=corner1, fg_color=couleur1)
-    info.pack(fill="both", expand=True, padx=15, pady=(0, 15))
+    boite = ctk.CTkFrame(master=parent_frame, corner_radius=corner1, fg_color="transparent")
+    boite.pack(fill="both", expand=True, side="right", padx=10, pady=(2, 10))
+    graphique = ctk.CTkFrame(master=boite, corner_radius=corner1, fg_color=couleur2, border_color=couleur1, border_width=border2)
+    graphique.pack(fill="x", padx=0, pady=(0, 2))
+    info = ctk.CTkFrame(master=boite, corner_radius=corner1, fg_color=couleur2, border_color=couleur1, border_width=border2)
+    info.pack(fill="both", expand=True, padx=0, pady=(2, 0))
 
-    #rappel pour mettre le test a droite "anchor="w""
-    h1 = ctk.CTkLabel(master=h1_boite_charge_entraînement, font=(font_secondaire, taille2), text="Analyse")
-    h1.pack(padx=10, pady=(5, 0))
-    result_analyse = ctk.CTkLabel(master=aigue, text=f"Charge (7 jours) : {charge_aigue:.1f}", font=(font_principale , taille3),
-                                    width=300, wraplength=280)
-    result_analyse.pack(fill="both", expand=True, padx=10, pady=10)
-    result_analyse2 = ctk.CTkLabel(master=chronique, text=f"Charge moyenne hebdo.\n(4 semaines) : {charge_chronique:.1f}", font=(font_principale, taille3),
-                                    width=300, wraplength=280)
-    result_analyse2.pack(fill="both", expand=True, padx=10, pady=10)
+    result_analyse = ctk.CTkLabel(master=aigue, text=f"Charge (7 jours) : {charge_aigue:.1f}", font=(font_principale , taille2),
+                                    width=300, wraplength=280, text_color=couleur1)
+    result_analyse.pack(fill="both", expand=True, padx=12, pady=12)
+    info_nom_coach = ctk.CTkLabel(master=interprétation_conseil, text="👨 JRM Coach", font=(font_secondaire, taille2), wraplength=280, text_color=couleur1,
+                                  justify="left")
+    info_nom_coach.pack(fill="both", expand=True, pady=(12, 0), padx=12)
+
     pause = verifier_pause(account_id)
+
     if pause == "blessure":
-        result_analyse3 = ctk.CTkLabel(master=ratio_frame, text="Ratio : actuellement en pause", font=(font_secondaire, taille2),
-                        width=300, wraplength=280)
-        result_analyse3.pack(fill="both", expand=True, padx=10, pady=10)
-        catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="⛑️ Mode blessure : suivi désactivé", font=(font_principale, taille3),
-                                        width=300, wraplength=280, text_color="#c60000")
-        catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)           
-        interpretation_statut = ctk.CTkLabel(master=interprétation, text="Tu es blessé pour le moment", font=(font_principale, taille3),
-                                    width=300, wraplength=280)
-        interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)              
-        conseil_statut = ctk.CTkLabel(master=conseil, text="Prends vraiment le temps de laisser ton corps se régénérer en profondeur, afin de revenir encore plus fort que jamais.", font=(font_principale, taille3),
-                                        width=300, wraplength=280)
-        conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
+        catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="⛑️ Mode blessure : suivi désactivé", font=(font_principale, taille2),
+                                        width=300, wraplength=280, text_color=couleur1)
+        catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)           
+        interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="Tu es blessé pour le moment\n\n" \
+        "Prends vraiment le temps de laisser ton corps se régénérer en profondeur, afin de revenir encore plus fort que jamais.", font=(font_principale, taille2),
+                                    width=300, wraplength=280, justify="left", text_color=couleur1)
+        interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12)
     elif pause == "vacances":
-        result_analyse3 = ctk.CTkLabel(master=ratio_frame, text="Ratio : actuellement en pause", font=(font_secondaire, taille2),
-                        width=300, wraplength=280)
-        result_analyse3.pack(fill="both", expand=True, padx=10, pady=10)
-        catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="🏖️ Mode vacances : pas d'analyse !", font=(font_principale, taille3),
-                                        width=300, wraplength=280, text_color="#6AC100")
-        catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)          
-        interpretation_statut = ctk.CTkLabel(master=interprétation, text="Tu es actuellement en vacances.", font=(font_principale, taille3),
-                                    width=300, wraplength=280)
-        interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)               
-        conseil_statut = ctk.CTkLabel(master=conseil, text="Profite de cette pause pour te ressourcer, apprécier les moments de détente et les repas, et reviens encore plus motivé !", font=(font_principale, taille3),
-                                        width=300, wraplength=280)
-        conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
+        catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="🏖️ Mode vacances : pas d'analyse !", font=(font_principale, taille2),
+                                        width=300, wraplength=280, text_color=couleur1)
+        catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)          
+        interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="Tu es actuellement en vacances.\n\n" \
+        "Profite de cette pause pour te ressourcer, apprécier les moments de détente et les repas, et reviens encore plus motivé !", font=(font_principale, taille2),
+                                    width=300, wraplength=280, justify="left", text_color=couleur1)
+        interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12)  
     elif pause == "suspendre":
-        result_analyse3 = ctk.CTkLabel(master=ratio_frame, text="Ratio : actuellement en pause", font=(font_secondaire, taille2),
-                        width=300, wraplength=280)
-        result_analyse3.pack(fill="both", expand=True, padx=10, pady=10)
-        catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="💤 Mode suspension activé : aucune analyse en cours.", font=(font_principale, taille3),
-                                        width=300, wraplength=280, text_color="#6AC100")
-        catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)
-        interpretation_statut = ctk.CTkLabel(master=interprétation, text="Tes analyses sont temporairement en pause pendant ce mode.", font=(font_principale, taille3),
-                                    width=300, wraplength=280)
-        interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)
-        conseil_statut = ctk.CTkLabel(master=conseil, text="Profite-en pour te reposer, on reprend les suivis dès ton retour à l’entraînement !", font=(font_principale, taille3),
-                                        width=300, wraplength=280)
-        conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
+        catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="💤 Mode suspension activé : aucune analyse en cours.", font=(font_principale, taille2),
+                                        width=300, wraplength=280, text_color=couleur1)
+        catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)
+        interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="Tes analyses sont temporairement en pause pendant ce mode.\n\n" \
+        "Profite-en pour te reposer, on reprend les suivis dès ton retour à l’entraînement !", font=(font_principale, taille2), text_color=couleur1,
+                                    width=300, wraplength=280, justify="left")
+        interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12)
     else :
         if charge_chronique > 0:
             ratio = charge_aigue / charge_chronique
         else:
             ratio = None
         if ratio is not None:
-            result_analyse3 = ctk.CTkLabel(master=ratio_frame, text=f"Ratio : {ratio:.2f}", font=(font_secondaire, taille2),
-                            width=300, wraplength=280)
-            result_analyse3.pack(fill="both", expand=True, padx=10, pady=10)
             if ratio < 0.5: 
                 catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="🛌 Récupération active", font=(font_secondaire, taille2),
-                                                width=300, wraplength=280, text_color="#75B7DD")
-                catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-                interpretation_statut = ctk.CTkLabel(master=interprétation, text="Charge très basse. Tu laisse ton corps se reposer mais jusqu'à quand !", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)                
-                conseil_statut = ctk.CTkLabel(master=conseil, text="Fais une activité physique régulière pour reprendre en main ton entraînement et éviter de perdre ton niveau actuel.", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
+                                                width=300, wraplength=280, text_color=couleur1)
+                catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)             
+                interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="Charge très basse. Tu laisse ton corps se reposer mais jusqu'à quand !\n\n" \
+                "Fais une activité physique régulière pour reprendre en main ton entraînement et éviter de perdre ton niveau actuel.", font=(font_principale, taille2),
+                                                width=300, wraplength=280, justify="left", text_color=couleur1)
+                interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12)  
             elif 0.5 <= ratio <= 0.8:
                 catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="😴 Sous-entraînement", font=(font_secondaire, taille2),
-                                                width=300, wraplength=280, text_color="#CBC500")
-                catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-                interpretation_statut = ctk.CTkLabel(master=interprétation, text="Tu es entrain de perdre du niveau, attention !", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-                conseil_statut = ctk.CTkLabel(master=conseil, text="Tu pourrais augmenter légèrement l'intensité de tes entraînements si tu veux basculer en mode maintien et stabiliser tes performances.", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
+                                                width=300, wraplength=280, text_color=couleur1)
+                catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)             
+                interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="Tu es entrain de perdre du niveau, attention !\n\n" \
+                "Tu pourrais augmenter légèrement l'intensité de tes entraînements si tu veux basculer en mode maintien et stabiliser tes performances.", font=(font_principale, taille2),
+                                                width=300, wraplength=280, justify="left", text_color=couleur1)
+                interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12)  
             elif 0.8 <= ratio <= 0.9:
                 catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="🔄 Maintien", font=(font_secondaire, taille2),
-                                                width=300, wraplength=280, text_color="#00C073")
-                catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-                interpretation_statut = ctk.CTkLabel(master=interprétation, text="Charge adaptée pour conserver ton niveau", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-                conseil_statut = ctk.CTkLabel(master=conseil, text="Allonge de 5 minutes tes séances pour basculer en mode progression optimale et améliorer tes performances.", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
+                                                width=300, wraplength=280, text_color=couleur1)
+                catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)             
+                interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="Charge adaptée pour conserver ton niveau\n\n" \
+                "Allonge de 5 minutes tes séances pour basculer en mode progression optimale et améliorer tes performances.", font=(font_principale, taille2),
+                                                width=300, wraplength=280, justify="left", text_color=couleur1)
+                interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12) 
             elif 0.9 <= ratio <= 1.1:
                 catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="🟢 Progression optimale", font=(font_secondaire, taille2),
-                                                width=300, wraplength=280, text_color="#00BA47")
-                catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-                interpretation_statut = ctk.CTkLabel(master=interprétation, text="Charge idéale pour améliorer tes performances", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-                conseil_statut = ctk.CTkLabel(master=conseil, text="Continue comme ça pour progresser ! Garde cette même régularité dans tes entraînements pour rester en mode progression optimale.", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
+                                                width=300, wraplength=280, text_color=couleur1)
+                catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)             
+                interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="Charge idéale pour améliorer tes performances\n\n" \
+                "Continue comme ça pour progresser ! Garde cette même régularité dans tes entraînements pour rester en mode progression optimale.", font=(font_principale, taille2),
+                                                width=300, wraplength=280, justify="left", text_color=couleur1)
+                interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12)
             elif 1.1 < ratio <= 1.3:
                 catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="💪 Progression élévée", font=(font_secondaire, taille2),
-                                                width=300, wraplength=280, text_color="#99c800")#3d71a5
-                catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-                interpretation_statut = ctk.CTkLabel(master=interprétation, text="Tu progresse vite mais fait attention aux blessures",
-                                                    font=(font_principale, taille3), width=300, wraplength=280)
-                interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)                
-                conseil_statut = ctk.CTkLabel(master=conseil, text="Surveille bien la fatigue de ton corps pour éviter les blessures : en gardant cette charge deux semaines, le risque reste limité.", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
+                                                width=300, wraplength=280, text_color=couleur1)
+                catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)             
+                interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="Tu progresse vite mais fait attention aux blessures\n\n" \
+                "Surveille bien la fatigue de ton corps pour éviter les blessures : en gardant cette charge deux semaines, le risque reste limité.",
+                                                    font=(font_principale, taille2), width=300, wraplength=280, justify="left", text_color=couleur1)
+                interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12) 
             else:
                 catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="⚠️ Surentraînement", font=(font_secondaire, taille2),
-                                                width=300, wraplength=280, text_color="#c60000")
-                catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-                interpretation_statut = ctk.CTkLabel(master=interprétation, text="Risque élevé de blessure", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)                
-                conseil_statut = ctk.CTkLabel(master=conseil, text="Prends 2 à 3 jours de pause pour laisser ton corps récupérer et réduire les risques de blessure.", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-                conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)
+                                                width=300, wraplength=280, text_color=couleur1)
+                catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)             
+                interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="Risque élevé de blessure\n\n" \
+                "Prends 2 à 3 jours de pause pour laisser ton corps récupérer et réduire les risques de blessure.", font=(font_principale, taille2),
+                                                width=300, wraplength=280, justify="left", text_color=couleur1)
+                interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12) 
         else:
-            result_analyse3 = ctk.CTkLabel(master=ratio_frame, text="Ratio : 0.0", font=(font_secondaire, taille2),
-                                                width=300, wraplength=280)
-            result_analyse3.pack(fill="both", expand=True, padx=10, pady=10)
             catégorie_statut = ctk.CTkLabel(master=h1_result_optimale, text="🚫 Données insuffisantes", font=(font_secondaire, taille2),
-                                                width=300, wraplength=280, text_color="#c60000")
-            catégorie_statut.pack(fill="both", expand=True, padx=10, pady=10)             
-            interpretation_statut = ctk.CTkLabel(master=interprétation, text="L'interprétation ne peut pas être déterminée.", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-            interpretation_statut.pack(fill="both", expand=True, padx=10, pady=10)                
-            conseil_statut = ctk.CTkLabel(master=conseil, text="Fais une séance de sport pour lancer les analyses et évaluer ta charge actuelle.", font=(font_principale, taille3),
-                                                width=300, wraplength=280)
-            conseil_statut.pack(fill="both", expand=True, padx=10, pady=10)   
+                                                width=300, wraplength=280, text_color=couleur1)
+            catégorie_statut.pack(fill="both", expand=True, padx=12, pady=12)             
+            interpretation_statut = ctk.CTkLabel(master=interprétation_conseil, text="L'interprétation ne peut pas être déterminée.\n\n" \
+            "Fais une séance de sport pour lancer les analyses et évaluer ta charge actuelle.", font=(font_principale, taille2),
+                                                width=300, wraplength=280, justify="left", text_color=couleur1)
+            interpretation_statut.pack(fill="both", expand=True, padx=12, pady=12)  
     try:   
         if data_pour_graphique:
             dates_graphique = [datetime.strptime(row[0], '%Y-%m-%d') for row in data_pour_graphique]
             charges_graphique = [row[1] for row in data_pour_graphique]
 
             fig, ax = plt.subplots(figsize=(12, 4))
-            sns.lineplot(x=dates_graphique, y=charges_graphique, marker="o", color="black")
+            # Fond bleu clair pour la figure et la zone du graphique
+            fig.patch.set_facecolor(couleur2)
+            ax.set_facecolor(couleur2)
+
+            sns.lineplot(x=dates_graphique, y=charges_graphique, marker="o", color=couleur1, ax=ax)
 
             ax.axhline(y=charge_chronique, color=couleur1, linestyle="--", label="Charge chronique")
+
             ax.set_title("Évolution de la charge chronique")
             ax.set_xlabel("Date")
-            ax.set_ylabel("Charge chronique")
-
+            ax.set_ylabel("Charge chronique") 
             canvas = FigureCanvasTkAgg(fig, master=graphique)
             canvas.draw()
-            canvas.get_tk_widget().pack(fill="both", expand=True , pady=15, padx=15)
+            canvas.get_tk_widget().pack(fill="both", expand=True , pady=20, padx=20)
         else:
             not_data = ctk.CTkFrame(master=graphique, corner_radius=corner1, fg_color=couleur1)
             not_data.pack(expand=True, fill="both", padx=10, pady=10)
@@ -1731,9 +1690,12 @@ def charge_d_entraînement(account_id, app, sidebar_performance, exercice, charg
             button_creer_activite.pack(padx=(20, 2), pady=20)
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    titre_c_quoi = ctk.CTkLabel(master=info, text="C'est quoi la charge d'entraînement ?", font=(font_secondaire, taille2), wraplength=600)
-    titre_c_quoi.pack(fill="both", expand=True, pady=(10, 10), padx=10)
+
+    titre_c_quoi = ctk.CTkLabel(master=info, text="C'est quoi la charge d'entraînement ?", font=(font_secondaire, taille2), wraplength=600,
+                                text_color=couleur1, justify="left")
+    titre_c_quoi.pack(fill="both", expand=True, pady=12, padx=12)
     c_quoi = ctk.CTkLabel(master=info, 
                             text="La charge d'entraînement sert à optimiser ta progression sans te cramer, en trouvant le juste équilibre entre l'effort fourni et la récupération nécessaire. C'est ton meilleur ami pour éviter les blessures et planifier tes séances sportives intelligemment.",
-                            font=(font_principale, taille3), wraplength=600)
-    c_quoi.pack(fill="both", expand=True, padx=10, pady=(5, 10))
+                            font=(font_principale, taille2), wraplength=600, justify="left",
+                            text_color=couleur1)
+    c_quoi.pack(fill="both", expand=True, padx=12, pady=(5, 12))

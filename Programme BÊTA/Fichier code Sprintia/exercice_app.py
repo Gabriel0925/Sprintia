@@ -17,21 +17,6 @@ def c_quoi_rpe():
                         "◉ RPE : 9 = Très Difficile\n" \
                         "◉ RPE : 10 = Effort Maximal")
 
-def choisir_nb_aléatoire_analyse():
-    try:
-        curseur_coach.execute(f"SELECT nb_min_analyse FROM choisir_nb_aléatoire")
-        nb_min = curseur_coach.fetchone()[0]
-        curseur_coach.execute(f"SELECT nb_max_analyse FROM choisir_nb_aléatoire")
-        nb_max = curseur_coach.fetchone()[0]
-    except sqlite3.Error as e:
-        messagebox.showerror("Erreur", "Erreur lors du choix du nombre pour génération du texte pour le coach !")
-        return
-    except Exception as e:
-        messagebox.showerror("Erreur", "Une erreur inattendue s'est produite, réessaye !")
-        return
-    nombre = random.randint(nb_min, nb_max)
-    return nombre
-
 def choisir_nb_aléatoire():
     try:
         curseur_coach.execute(f"SELECT nb_minimum FROM choisir_nb_aléatoire")
@@ -72,7 +57,7 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
             if style:
                 if style[0] == "Inshape":
                     table_personnalité = "ajouter_activité_inshape"
-                elif style[0] == "Strict & Motivant":
+                elif style[0] == "Strict":
                     table_personnalité = "ajouter_activité_strict_motivant"
                 elif style[0] == "Copain":
                     table_personnalité = "ajouter_activité_copain"
@@ -84,7 +69,7 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
             messagebox.showerror("Erreur", "Erreur de génération de texte pour le coach !")
             return
         except Exception as e:
-            messagebox.showerror("Erreur", f"Une erreur inattendue s'est produite, réessaye !{e}")
+            messagebox.showerror("Erreur", "Une erreur inattendue s'est produite, réessaye !")
             return
         for text_coach in generation:
             nombre = choisir_nb_aléatoire()
@@ -98,7 +83,7 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
                 messagebox.showerror("Erreur", "Une erreur inattendue s'est produite, réessaye !")
                 return
             text_totale_generer = text_totale_generer+text_generer
-        if len(text_totale_generer) >= 800:
+        if len(text_totale_generer) >= 500:
             return générer_une_phrase()
         return text_totale_generer
 
@@ -119,7 +104,8 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
     embleme_coach.pack(expand=True, fill="both")
     phrase_du_coach = ctk.CTkLabel(master=frame_phrase_du_coach, 
                                     text=f"{text_totale_generer}",
-                                    font=(font_principale, taille3), text_color=couleur1, wraplength=300, justify="left", anchor="w")
+                                    font=(font_principale, taille3), text_color=couleur1, 
+                                    wraplength=350, justify="left", anchor="w")
     phrase_du_coach.pack(expand=True, fill="both")
 
     bouton_valider = ctk.CTkButton(master=frame_bouton, text="💾 Enregistrer ton activité", fg_color=couleur2, hover_color=couleur2_hover,
@@ -130,7 +116,7 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
                                     sport_entry, distance_entry, denivele_entry, allure_entry, vmax_entry, muscle_entry,
                                     rep_entry, serie_entry, volume_entry,Options_lieu, lieu_entry, matos_entry, humeur_entry,
                                     passe_d_entry, score_entry, but_entry, activité))
-    bouton_valider.pack(expand=True, fill="both", side="left")
+    bouton_valider.pack(expand=True, fill="both", side="left", pady=(5, 0))
 
 def enregistrement_activité(account_id, app, exercice, date, duree, rpe, douleur, fatigue, climat, nom, sport, distance, denivele, allure, vmax, 
                             équipement, muscle_travaillé, répétitions, série, volume_total, lieu, humeur, but, passe_décisive, type_de_séances, score, type,
@@ -251,7 +237,7 @@ def enregistrement_activité(account_id, app, exercice, date, duree, rpe, douleu
     
     vider_fenetre(app)
     exercice(account_id)
-
+ 
 def vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
                                        Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
                                        sport_entry, distance_entry, denivele_entry, allure_entry, vmax_entry, muscle_entry,
@@ -382,12 +368,12 @@ def vérification_data_de_base_activité(account_id, app, exercice, date_entry, 
             if not deniv_str:
                 distance = None
             if deniv_str:
-                denivele = int(deniv_str)
+                denivele = float(deniv_str)
                 if denivele < 0:
                     messagebox.showerror("Erreur de dénivelé", "Le dénivelé doit être supérieur à 0 !")
                     return       
         except ValueError:
-            messagebox.showerror("Erreur de dénivelé", "Dénivelé invalide (entier positif requis) !")
+            messagebox.showerror("Erreur de dénivelé", "Dénivelé invalide entier positif uniquement !")
             return
     if mode == "Course":
         sport = "Course"
@@ -429,13 +415,21 @@ def vérification_data_de_base_activité(account_id, app, exercice, date_entry, 
                 return
     if mode == "Musculation":
         muscle_travaillé = muscle_entry.get().strip()
-        répétitions = rep_entry.get().strip()
-        série = serie_entry.get().strip()
+        répétitions = rep_entry.get().strip().replace(",", ".").replace(" ", "").replace("séries", "").replace("-", "")
+        série = serie_entry.get().strip().replace(",", ".").replace(" ", "").replace("répétitions", "").replace("-", "")
         volume = volume_entry.get().strip().replace(",", ".").replace(" ", "").replace("kg", "").replace("-", "")
         if len(série) > 20:
             messagebox.showerror("Erreur", "Les séries ne doivent pas dépasser 20 caractères !")
             return
-        if not série:
+        if série:
+            try:
+                série = int(série)
+                if série < 0:
+                    raise ValueError
+            except ValueError:
+                messagebox.showerror("Erreur", "Les série doivent être un nombre entier positif !")
+                return
+        else:
             série = None
         if len(muscle_travaillé) > 150:
             messagebox.showerror("Erreur", "Les muscles travaillés ne doivent pas dépasser 150 caractères !")
@@ -443,9 +437,17 @@ def vérification_data_de_base_activité(account_id, app, exercice, date_entry, 
         if not muscle_travaillé:
             messagebox.showerror("Muscle travaillé est vide", "Muscle travaillé est obligatoire dans le mode 'Course' !")
             return
-        if len(répétitions) > 10:
-            messagebox.showerror("Erreur", "Les répétitions ne doivent pas dépasser 10 caractères !")
+        if len(répétitions) > 20:
+            messagebox.showerror("Erreur", "Les répétitions ne doivent pas dépasser 20 caractères !")
             return
+        if répétitions:
+            try:
+                répétitions = int(répétitions)
+                if répétitions < 0:
+                    raise ValueError
+            except ValueError:
+                messagebox.showerror("Erreur", "Les répétitions doivent être un nombre entier positif !")
+                return
         if not répétitions:
             répétitions = None
         if volume:
@@ -712,7 +714,7 @@ def ajouter_activité_course(account_id, app, sidebar_exercice, exercice, charge
                                   height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
-    date_entry.insert(0, f"💡 {date_actuelle_format}")
+    date_entry.insert(0, f"💡 {date_actuelle_format.replace("-", "/")}")
     button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
@@ -867,7 +869,7 @@ def ajouter_activité_musculation(account_id, app, sidebar_exercice, exercice, c
                                   height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
-    date_entry.insert(0, f"💡 {date_actuelle_format}")
+    date_entry.insert(0, f"💡 {date_actuelle_format.replace("-", "/")}")
     button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
@@ -924,7 +926,7 @@ def ajouter_activité_musculation(account_id, app, sidebar_exercice, exercice, c
                                   text_color=couleur1, width=200)
     rep_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
-    serie_entry = ctk.CTkEntry(master=frame_champs6, placeholder_text="Nb. total de série", border_color=couleur_fond, fg_color=couleur_fond,
+    serie_entry = ctk.CTkEntry(master=frame_champs6, placeholder_text="Nb. total de séries", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=220)
     serie_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
@@ -1022,7 +1024,7 @@ def ajouter_activité_fooball(account_id, app, sidebar_exercice, exercice, charg
                                   height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
-    date_entry.insert(0, f"💡 {date_actuelle_format}")
+    date_entry.insert(0, f"💡 {date_actuelle_format.replace("-", "/")}")
     button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
@@ -1178,7 +1180,7 @@ def ajouter_activité_libre(account_id, app, sidebar_exercice, exercice, charge_
                                   height=36, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
-    date_entry.insert(0, f"💡 {date_actuelle_format}")
+    date_entry.insert(0, f"💡 {date_actuelle_format.replace("-", "/")}")
     button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
@@ -1261,21 +1263,12 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql, ap
     global periode_séléctionner #global = pour dire que la variable existe en dehors de la fonction et que je vais la modifier
     sidebar_exercice(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
 
+    besoin_phrase_coach = True
     try:
         date_debut_période = date_actuelle - timedelta(days=7)
         période_pour_requete = date_debut_période.strftime('%Y-%m-%d')
-        curseur.execute("SELECT nom_du_coach, avatar FROM Coach WHERE account_id = ?", (account_id,))
+        curseur.execute("SELECT nom_du_coach, avatar, style_du_coach FROM Coach WHERE account_id = ?", (account_id,))
         ton_coach = curseur.fetchone()
-        curseur.execute("SELECT durée, rpe FROM Historique_activité WHERE account_id = ? AND date_activité >= ? ORDER BY date_activité DESC", (account_id, période_pour_requete))
-        stats = curseur.fetchall()
-        if stats is not None:
-            total_durée = sum([statistique[0] for statistique in stats if statistique[0] is not None])
-            total_rpe = sum([statistique[1] for statistique in stats if statistique[1] is not None])
-            nombre_activités = len(stats)
-            moyenne_rpe = total_rpe / nombre_activités if nombre_activités > 0 else 0
-        else:
-            total_durée = 0
-            moyenne_rpe = 0
     except sqlite3.Error as e:
         messagebox.showerror("Erreur", "Une erreur est survenue lors de la récupération des informations du coach.")
         return
@@ -1285,9 +1278,21 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql, ap
     if ton_coach:
         nom_du_coach = ton_coach[0]
         avatar_du_coach = ton_coach[1]
+        style_du_coach = ton_coach[2]
     else:
         nom_du_coach = None
         avatar_du_coach = None
+        style_du_coach = "Bienveillant"
+    
+    try:
+        curseur_coach.execute(f"SELECT {style_du_coach} FROM analyse_activité")
+        phrase_coach = curseur_coach.fetchone()[0]
+    except sqlite3.Error as e:
+        messagebox.showerror("Erreur", "Une erreur est survenue lors de la génération de l'analyse du coach !")
+        return
+    except Exception as e:
+        messagebox.showerror("Erreur", "Une erreur innatendue s'est produite !")
+        return
 
     boite_titre = ctk.CTkFrame(master=app, fg_color="transparent", corner_radius=corner3)
     boite_titre.pack(side="top", fill="x", padx=10, pady=10)
@@ -1303,11 +1308,11 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql, ap
 
     frame_analyse_coach = ctk.CTkFrame(app, fg_color="transparent", corner_radius=corner1, border_width=border1, border_color=couleur1,
                                        height=125)
-    frame_analyse_coach.pack(fill="both", padx=10, pady=(5, 2))
+    frame_analyse_coach.pack(side="top", fill="x", padx=10, pady=(5, 0))
 
     tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
                                               scrollbar_button_hover_color=couleur2_hover)
-    tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(5, 10))
+    tableau_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(2, 10))
 
     info = ctk.CTkLabel(master=boite_titre, text="Historique d'activité", font=(font_secondaire, taille1), text_color=couleur_text)
     info.pack()
@@ -1358,21 +1363,101 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql, ap
         wraplength_tableau = 140
         padx_tableau = 3
         conversion_format_date = 1
+        
     if type_de_catégorie == "Course":
         recherche = "course"
+        data_rechercher = "durée, distance, dénivelé"
+        parametre_rechercher = "account_id = ? AND catégorie = ? AND date_activité >= ? ORDER BY date_activité DESC"
+        resultat_rechercher = (account_id, recherche, période_pour_requete)
     elif type_de_catégorie == "Football":
         recherche = "football"
+        data_rechercher = "durée, but, passe_décisive"
+        parametre_rechercher = "account_id = ? AND catégorie = ? AND date_activité >= ? ORDER BY date_activité DESC"
+        resultat_rechercher = (account_id, recherche, période_pour_requete)
     elif type_de_catégorie == "Musculation":
         recherche = "musculation"
+        data_rechercher = "durée, répétitions, série, volume"
+        parametre_rechercher = "account_id = ? AND catégorie = ? AND date_activité >= ? ORDER BY date_activité DESC"
+        resultat_rechercher = (account_id, recherche, période_pour_requete)
     elif type_de_catégorie == "Libre":
         recherche = "libre"
+        data_rechercher = "durée, rpe, distance, dénivelé"
+        parametre_rechercher = "account_id = ? AND catégorie = ? AND date_activité >= ? ORDER BY date_activité DESC"
+        resultat_rechercher = (account_id, recherche, période_pour_requete)
+    else:
+        data_rechercher = "durée, rpe"
+        parametre_rechercher = "account_id = ? AND date_activité >= ? ORDER BY date_activité DESC"
+        resultat_rechercher = (account_id, période_pour_requete)
 
+    try:
+        curseur.execute(f"SELECT {data_rechercher} FROM Historique_activité WHERE {parametre_rechercher}", resultat_rechercher)
+        stats = curseur.fetchall()
+        if stats is not None:
+            if type_de_catégorie == "Course":
+                total_durée = sum([statistique[0] for statistique in stats if statistique[0] is not None])
+                total_distance = sum([statistique[1] for statistique in stats if statistique[1] is not None])
+                total_dénivelé = sum([statistique[2] for statistique in stats if statistique[2] is not None])
+                nombre_activités = len(stats)
+                analyse = f"Au cours des sept derniers jours, tu as effectué {total_durée:.0f} minutes d'activité en {nombre_activités:.0f} activités."\
+                          f" Ta distance totale est de {total_distance:.2f} km avec un dénivelé total de {total_dénivelé:.0f} m."
+            elif type_de_catégorie == "Football":
+                total_durée = sum([statistique[0] for statistique in stats if statistique[0] is not None])
+                total_but = sum([statistique[1] for statistique in stats if statistique[1] is not None])
+                total_passe_décisive = sum([statistique[2] for statistique in stats if statistique[2] is not None])
+                nombre_activités = len(stats)
+                analyse = f"Au cours des sept derniers jours, tu as effectué {total_durée:.0f} minutes d'activité en {nombre_activités:.0f} activités."\
+                          f" Tu as marqué {total_but:.0f} buts et réalisé {total_passe_décisive:.0f} passes décisives."
+            elif type_de_catégorie == "Musculation":
+                total_durée = sum([statistique[0] for statistique in stats if statistique[0] is not None])
+                total_répétitions = sum([statistique[1] for statistique in stats if statistique[1] is not None])
+                total_séries = sum([statistique[2] for statistique in stats if statistique[2] is not None])
+                total_volume = sum([statistique[3] for statistique in stats if statistique[3] is not None])
+                nombre_activités = len(stats)
+                analyse = f"Au cours des sept derniers jours, tu as effectué {total_durée:.0f} minutes d'activité en {nombre_activités:.0f} activités."\
+                          f" Tu as réalisé {total_répétitions:.0f} répétitions en {total_séries:.0f} séries pour un volume total de {total_volume:.0f} kg."
+            elif type_de_catégorie == "Libre":  
+                total_durée = sum([statistique[0] for statistique in stats if statistique[0] is not None])
+                total_rpe = sum([statistique[1] for statistique in stats if statistique[1] is not None])
+                total_distance = sum([statistique[2] for statistique in stats if statistique[2] is not None])
+                total_dénivelé = sum([statistique[3] for statistique in stats if statistique[3] is not None])
+                nombre_activités = len(stats)
+                moyenne_rpe = total_rpe / nombre_activités if nombre_activités > 0 else 0
+                analyse = f"Au cours des sept derniers jours, tu as effectué {total_durée:.0f} minutes d'activité en {nombre_activités:.0f} activités."\
+                          f" Ton RPE moyen cette semaine est de {moyenne_rpe:.1f}. Ta distance totale est de {total_distance:.2f} km avec un dénivelé total de {total_dénivelé:.0f} m"
+            else:
+                total_durée = sum([statistique[0] for statistique in stats if statistique[0] is not None])
+                total_rpe = sum([statistique[1] for statistique in stats if statistique[1] is not None])
+                nombre_activités = len(stats)
+                moyenne_rpe = total_rpe / nombre_activités if nombre_activités > 0 else 0
+                analyse = f"Au cours des sept derniers jours, tu as effectué {total_durée:.0f} minutes d'activité en {nombre_activités:.0f} activités."\
+                          f" Ton RPE moyen cette semaine est de {moyenne_rpe:.1f}."
+        else:
+            total_durée = 0
+            moyenne_rpe = 0
+            nombre_activités = 0
+            total_distance = 0
+            total_dénivelé = 0
+            total_but = 0
+            total_passe_décisive = 0
+            total_répétitions = 0
+            total_séries = 0
+            total_volume = 0
+        if nombre_activités == 0:
+            besoin_phrase_coach = None
+            analyse = "Tu n'as pas encore enregistré d'activité cette semaine. Commence dès maintenant pour que je puisse analyser ta semaine d'entraînement !" \
+            " N'oublie pas que la régularité est la clé du succès ! 💪"
+    except sqlite3.Error as e:
+        messagebox.showerror("Erreur", "Une erreur est survenue lors de la récupération des informations du coach.")
+        return
+    except Exception as e:
+        messagebox.showerror("Erreur", "Une erreur innatendue s'est produite !")
+        return
+        
     label_coach1 = ctk.CTkLabel(frame_analyse_coach, text=f"{avatar_du_coach if avatar_du_coach is not None else "👨"} {nom_du_coach if nom_du_coach else "JRM Coach"}", wraplength=975, font=(font_principale, taille2), 
                                 text_color=couleur1, justify="left")
     label_coach1.pack(padx=12, pady=(12, 4), anchor="w")
     label_coach2 = ctk.CTkLabel(frame_analyse_coach, 
-                                text=f"Cette semaine tu as effectué {total_durée:.0f} minutes d'activité en {nombre_activités:.0f} activités."\
-                                f" Ton RPE moyen cette semaine est de {moyenne_rpe:.1f}. Le plus important ce n'est pas les stats mais le plaisir que ça t'as procuré toute au long de la semaine !", 
+                                text=f"{analyse} {phrase_coach if besoin_phrase_coach is not None else ""}", 
                                 wraplength=1000, justify="left", font=(font_principale, taille3), text_color=couleur1)
     label_coach2.pack(padx=12, pady=(4, 12), anchor="w")
 

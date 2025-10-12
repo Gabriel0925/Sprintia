@@ -67,7 +67,7 @@ def maj_de_la_BDD_de_Sprintia_3_1_vers_Sprintia3_2():
 def maj_de_la_BDD_de_Sprintia_3_0_vers_Sprintia_3_1():
     voir_si_besoin_de_transfert_de_données("3_0-3_1")
     try:
-        curseur.execute("DROP TABLE Pauses")
+        curseur.execute("DROP TABLE Pauses_v2")
     except sqlite3.Error as e:
         pass
     try:
@@ -364,7 +364,7 @@ def création():
     # Planification
     curseur.execute("CREATE TABLE IF NOT EXISTS Compétition (id INTEGER PRIMARY KEY AUTOINCREMENT,nom TEXT NOT NULL,date TEXT NOT NULL,sport TEXT NOT NULL,objectif TEXT NOT NULL, lieu TEXT,priorité TEXT,account_id INTEGER,FOREIGN KEY (account_id) REFERENCES Account(id))")
     curseur.execute("CREATE TABLE IF NOT EXISTS Objectif (id INTEGER PRIMARY KEY AUTOINCREMENT,sport TEXT NOT NULL,date TEXT NOT NULL,objectif TEXT NOT NULL,fréquence TEXT NOT NULL,niveau_début TEXT NOT NULL,niveau_fin TEXT,statut TEXT, account_id INTEGER,FOREIGN KEY (account_id) REFERENCES Account(id))")
-    curseur.execute("CREATE TABLE IF NOT EXISTS Pauses_v2 (id INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER NOT NULL,type TEXT CHECK(type IN ('vacances', 'blessure', 'suspendre')),date_debut TEXT DEFAULT CURRENT_DATE,date_fin TEXT,FOREIGN KEY (account_id) REFERENCES Account(id))")
+    curseur.execute("CREATE TABLE IF NOT EXISTS Pauses (id INTEGER PRIMARY KEY AUTOINCREMENT,account_id INTEGER NOT NULL,type TEXT,FOREIGN KEY (account_id) REFERENCES Account(id))")
 
     # Aide
     curseur.execute("CREATE TABLE IF NOT EXISTS Aide_bienvenue (account_id INTEGER NOT NULL,aide TEXT, FOREIGN KEY (account_id) REFERENCES Account(id))")
@@ -374,9 +374,6 @@ def création():
     # Transfert de données
     curseur.execute("CREATE TABLE IF NOT EXISTS Maj_base_de_donnée (action TEXT)")
     curseur.execute("CREATE TABLE IF NOT EXISTS Maj_base_de_donnée2 (action TEXT)")
-
-    # Historique VMA
-    curseur.execute("CREATE TABLE IF NOT EXISTS Historique_vma (id INTEGER PRIMARY KEY AUTOINCREMENT, account_id INTEGER NOT NULL, date TEXT NOT NULL, vma NUMERIC NOT NULL, FOREIGN KEY (account_id) REFERENCES Account(id))")
 
     # Connection automatique
     curseur.execute("CREATE TABLE IF NOT EXISTS Auto_connect (statut TEXT)")

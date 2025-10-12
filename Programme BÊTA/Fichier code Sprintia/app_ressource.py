@@ -18,7 +18,7 @@ from tkinter import messagebox
 
 # Version Sprintia
 version_numéro = "3.2"
-version_entière = "3.2 BÊTA 3 | Version Novembre 2025"
+version_entière = "3.2 BÊTA 4 | Version Novembre 2025"
 date_de_sortie = "05 Octobre 2025"
 type_de_maj = "Mise à jour mineur"
 
@@ -62,6 +62,56 @@ heure_actuelle_objet = maintenant.time()
 
 # variable globale
 periode_séléctionner = "1 semaine"
+
+# Mots sensibles à filtrer pour pseudo utilisateur
+mot_sensible = [
+    # Insultes et discriminations
+    "connard", "pute", "salope", "nique", "merde", "enculé", "bite", "chienne",
+    "raciste", "nazi", "fasciste", "pd", "fiotte", "bougnoule", "handicapé", "con",
+    "conne", "débile", "idiot", "imbécile", "taré", "boloss", "lâche", "salaud",
+
+    # Violence et haine
+    "tueur", "violeur", "suicide", "meurtre", "terroriste", "guerre", "haine", "bombardement",
+    "assassinat", "massacre", "exécution", "crucifier", "lyncher", "tabasser", "drogue", "armes", "pistolet", "fusil", "grenade",
+    "attaque", "agression", "violence", "harcèlement",
+
+    # Sexualité explicite
+    "sexe", "porn", "fuck", "baise", "nik", "penis", "vagin", "cul", "chatte", "sexy",
+    "viol", "sodomie", "branlette", "masturbation", "orgasme", "doigter", "baiser",
+    "prostituée", "striptease", "pornstar", 
+
+    # Marques/noms protégés
+    "nike", "adidas", "apple", "samsung", "microsoft", "sprintia", "google", "facebook",
+    "amazon", "tesla", "coca-cola", "pepsi", "starbucks", "mcdonalds",
+    "youtube", "instagram", "twitter", "tiktok", "snapchat", "whatsapp",
+    "windows", "android", "ios", "playstation", "xbox", "nintendo", "uber", "airbnb",
+    "paypal", "visa", "mastercard", "bitcoin", "ethereum", "dogecoin", "twitch",
+    "netflix", "hulu", "disney", "spotify", "deezer", "pandora", "soundcloud",
+    "wordpress", "wix", "shopify", "squarespace", "godaddy", "bluehost",
+    "adobe", "photoshop", "illustrator", "premiere", "after effects", "lightroom",
+    "autodesk", "maya", "3ds max", "blender", "unity", "unreal engine",
+    "intel", "amd", "nvidia", "qualcomm", "broadcom", "arm", "mediatek",
+    "ford", "chevrolet", "toyota", "honda", "bmw", "mercedes", "audi", "volkswagen",
+    "ferrari", "lamborghini", "porsche", "tesla", "bugatti", "mclaren", "rolls-royce",
+    "harley-davidson", "ducati", "yamaha", "kawasaki", "suzuki", "bmw motorrad",
+    "gucci", "prada", "chanel", "louis vuitton", "hermes", "dior", "versace", "armani", "burberry",
+    "rolex"
+
+    # Sportifs célèbres
+    "messi", "ronaldo", "neymar", "mbappé", "lebron", "serena", "federer", "djokovic", "phelps",
+    "bolt", "ali", "jordan", "brady", "curry", "durant", "harden", "giannis", "kawhi", "lillard", "tatum",
+    "russell", "westbrook", "davis", "bryant", "wade", "pierce", "garnett", "nowitzki", "nash", "stockton", "malone", "robinson",
+    "sanchez", "aguero", "suarez", "ibrahimovic", "rooney", "beckham", "zidane", "ronaldo nazario", "ronaldo fenoméno",
+    "pele", "maradona", "cruyff", "platini", "beckenbauer", "muller", "gerrard", "lampard", "terry", "vidic", "ferdinand",
+    "pirlo", "totti", "del piero", "baggio", "kaka", "ronaldinho", "henry", "shearer", "owen", "fowler", "robbie", "carragher", "scholes", "giggs", "keane",
+    "vettel", "hamilton", "alonso", "verstappen", "kilian jornet", "usain bolt", "michael phelps", "lebron james", "serena williams", 
+    "roger federer", "lionel messi", "cristiano ronaldo",
+
+    # Autres termes inappropriés
+    "drogue", "cocaine", "alcoolique", "toxicomane",
+    "hitler", "staline", "putin", "trump", "macron", "biden", "obama", 
+    "politique", "religion", "secte", "cultes", "occultisme"
+]
 
 def vider_fenetre(app):
     for widget in app.winfo_children():
