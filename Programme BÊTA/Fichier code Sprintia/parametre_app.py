@@ -86,26 +86,26 @@ def JRM_coach(account_id, app, sidebar_paramètre, exercice, charge_entraînemen
     nom_dev.pack(side="right", padx=10, pady=5)
 
     boite_totale = ctk.CTkFrame(app, fg_color="transparent")
-    boite_totale.pack(expand=True, fill="both", padx=10, pady=10)
+    boite_totale.pack(padx=10, pady=10)
 
     boite1 = ctk.CTkFrame(boite_totale, fg_color=couleur2, corner_radius=corner1, border_color=couleur1, border_width=border1)
-    boite1.pack(side="left", expand=True, fill="both", padx=(10, 5), pady=10)
+    boite1.pack(side="left", fill="both", padx=(10, 5), pady=10)
 
     app.bind('<Return>', lambda event: verification(connexion, inscription))
     nom_coach_entry = ctk.CTkEntry(boite1, placeholder_text=f"{nom_coach_user if nom_coach_user else "Nom de ton coach"}", border_color=couleur_fond, fg_color=couleur_fond,
                                     height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                    text_color=couleur1, width=220)
+                                    text_color=couleur1, width=310)
     nom_coach_entry.pack(expand=True, fill="both", side="top", padx=12, pady=(12, 2))
     style_coach_entry = ctk.CTkComboBox(boite1, values=option_style, font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=220, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1,
                                     command=maj_exemple_coach)
     style_coach_entry.pack(expand=True, fill="both", side="top", padx=12, pady=2)
     style_coach_entry.set(f"{style_du_coach if style_du_coach else "Style de ton coach"}")
     avatar_coach_entry = ctk.CTkComboBox(boite1, values=option_avatar, font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=220, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1,
                                     command=maj_avatar_coach)
     avatar_coach_entry.pack(expand=True, fill="both", side="top", padx=12, pady=2)
@@ -162,7 +162,7 @@ def JRM_coach(account_id, app, sidebar_paramètre, exercice, charge_entraînemen
             return
     button_valider = ctk.CTkButton(boite1, text="💾 Enregistrer ton coach", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner1, height=button_height, text_color=couleur1, border_color=couleur2, border_width=border1,
-                                    font=(font_principale, taille3),
+                                    font=(font_principale, taille3), width=280,
                                     command=lambda : verification(connexion, inscription))
     button_valider.pack(expand=True, fill="both", side="top", padx=12, pady=(2, 12))
 
@@ -276,7 +276,7 @@ def correction_bug(account_id, app, sidebar_paramètre, exercice, charge_entraî
 
     PatchNote = ctk.CTkLabel(patch_note, font=(font_principale, taille2), text_color=couleur1, wraplength=925, anchor="w", corner_radius=corner1,
     text=f"""🐛 Corrections de bugs et optimisation\n
-    • Cliquer sur la croix (d'une boite de dialogue) ferme désormais la boîte de dialogue, au lieu d’ouvrir quand même l’application (ex : le site des actu de Sprintia).
+    • Cliquer sur la croix d'une boite de dialogue ferme désormais la boîte de dialogue, au lieu d’ouvrir quand même l’application (ex : le site des actus de Sprintia).
     • Correction de fautes d'orthographe dans l'application.
     • Optimisation du code pour améliorer la maintenance.
     • Amélioration de la sécurité.
@@ -287,6 +287,7 @@ def correction_bug(account_id, app, sidebar_paramètre, exercice, charge_entraî
     • Optimisation de l'interface en fonction de la taille de l'écran.
     • Correction d'un bug qui empêchait le retour à la ligne dans 'Contribue à améliorer Sprintia'.
     • Amélioration des vérifications d'enregistrement d'activité pour éviter les erreurs ou les bugs.
+    • Amélioration des vérifications d'enregistrement d'objectif/compétition pour éviter les erreurs ou les bugs.
     • Correction d'un bug qui empêchait de valider avec la touche "Entrée" dans ajouter un objectif.
     • Correction d'un problème d'affichage mineur dans la charge d'entraînement, certains blocs dépassait légèrement de son conteneur.
     • Refonte back-end : découpage du gros fichier en plusieurs modules pour un code plus organisé."""
@@ -352,17 +353,19 @@ def amélioration(account_id, app, sidebar_paramètre, exercice, charge_entraîn
     • Tu peux désormais créer un raccourci sur ton bureau pour lancer Sprintia plus rapidement et avec une icône.
     • 80 caractères maximum pour ta bio.
     • Nouveau style de tableau.
+    • Désormais, tu peux compléter les lignes déjà rempli sans tout effacer.
     • Suppresion de l'accès aux actualités de Sprintia parce que rien n'était posté.
     • Demande de l'ancien mot de passe lors de la modification du mot de passe.
-    • De nouveaux caractères sont prises en charge pour les mots de passe ("!",  "@",  "#",  "$",  "%",  "^",  "&", "*", "(", ")", "-", "_", "=", "+", "[", "]",  "{", "}", ";", ":", ",", "<", ">", ".", "?").
-    • Désormais, la Valeur de RPE par défaut est 1.
+    • De nouveaux caractères spéciaux sont prises en charge pour les mots de passe.
+    • Désormais, la valeur de RPE par défaut est 1.
     • Les mots ne sont plus coupé dans les 'TextBox'.
-    • Caractères maximum pour certains champs quand tu ajoutes une activité.
+    • Limite de caractère lors de l'enregistrement de données (ex : ajouter une activité, ajouter un objectif,...).
     • Ajout de plus de 10 choix de type d'entraînement pour plus que l'utilisateur ne soit plus perdu.
     • Ajout d'un calendrier pour choisir la date quand tu ajoutes une activité.
     • Tous les formats de date sont acceptés (JJ-MM-AAAA, JJ/MM/AAAA, JJ.MM.AAAA, JJ MM AAAA, JJ_MM_AAAA, JJ,MM,AAAA).
     • Quand tu saisis une distance, tu peux mettre des virgules, des espaces, des tirais du bas, "km" ou "KM" (ex : 10,5 km, 10 5, 10_5, 10.5).
     • Sprintia s'ouvre directement en plein écran.
+    • Amélioration du responsive.
     • La touche "Échap" permet de quitter le mode plein écran.
     • Design unifié peut importe si ton ordinateur est en mode sombre ou clair les couleurs ne s'adapteront plus ça permet de renforcer l'identité visuel de Sprintia.
     • Les boutons de retour inutiles ont été supprimés."""
@@ -423,22 +426,26 @@ def nouvelle_fonction(account_id, app, sidebar_paramètre, exercice, charge_entr
         text=f"""🆕 Nouvelles fonctionnalités\n
     • La fonction VMA fait peau neuve :
         1. Nouvelle interface : organisation en cadres,...
-        2. Plusieurs tests disponibles : demi-Cooper, Cooper, Luc Léger, course de référence.
+        2. Plusieurs tests disponibles : demi-Cooper, Cooper, Luc Léger, course de référence pour améliorer la précision.
         3. Formats de temps élargis (hh:mm:ss, mm:ss, minutes).
         4. Tableau des zones enrichi avec allures, objectifs et exemples de séances.
-        5. Nouveaux boutons : Sauvegarder & Historique.
-        6. Texte explicatif sur la VMA et son utilité.\n
+        5. Texte explicatif sur la VMA et son utilité.
+        6. Précision améliorer grâce à une nouvelle méthode de calcul pour le test : "Course de référence"
     • Auto-connect : plus besoin de te reconnecter à chaque lancement de Sprintia, tu restes connecté automatiquement.
-    • JRM Coach te donne désormais tes stats sur la semaine.
-    • Lors de la création de ton compte, tu ne peux plus choisir de mots jugé sensible par google (ex : connard,...).
+    • Ton Coach te donne désormais tes stats d'activité sur la semaine.
+    • Les onglets objectif et compétition mémorise désormais votre choix entre par exemple "Objectif futur" et "Objectif passé".
+    • Tu peux désormais modifier tes objectifs/compétitions passés.
+    • Lors de la création de ton compte, tu ne peux plus choisir de mots jugé sensible (ex : connard,...).
     • Remplissage automatique de certains champs lors d'un enregistrement d'une activité, on l'aperçoit grâce à cette icône "💡".
     • Nouveau mode 'Libre' quand tu ajoutes une activité : les modes 'Extérieur' et 'Intérieur' se sont assemblés pour former le mode 'Libre' :
-        1. Le mode 'Libre' peut-être utilisé si ton activité ne correspond pas aux modes 'Course', 'Musculation' ou 'Football'.\n
-    • Arrivé de ton coach de sport qui est intégré à plusieurs endroits dans Sprintia :
+        1. Le mode 'Libre' peut-être utilisé si ton activité ne correspond pas aux modes 'Course', 'Musculation' ou 'Football'.
+    • Arrivé de ton coach de sport (JRM Coach) qui est intégré à plusieurs endroits dans Sprintia :
         1. Il peut te donner des conseils, des infos, des phrases de motivation, et des tips sur Sprintia.
         2. Tu peux personnaliser le nom de ce coach.
         3. Choisis un style de coach (bienveillant, strict mais motivant, pote, inshape).
-        4. Tu peux même choisir son avatar !\n"""
+        4. Tu peux même choisir son avatar !
+        5. Ton Coach t'offre de nouvelles interprétations dans l'indulgence de course
+        6. Ton Coach arrive dans la charge d'entraînement\n"""
     , justify="left")
     PatchNote.pack(expand=True, fill="both", padx=5, pady=5)
 
@@ -468,10 +475,10 @@ def avis(account_id, app, sidebar_paramètre, exercice, charge_entraînement, pr
                             command=lambda: [vider_fenetre(app), avis(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_avis.pack(side="left", padx=2)
     
-    avis_entry = ctk.CTkTextbox(app, corner_radius=corner1, fg_color=couleur2, font=(font_principale, taille2),
+    avis_entry = ctk.CTkTextbox(app, width=700, height=300, corner_radius=corner1, fg_color=couleur2, font=(font_principale, taille2),
                                 scrollbar_button_color=couleur1, scrollbar_button_hover_color=couleur1_hover, text_color=couleur1,
                                 border_color=couleur1, border_width=border1, wrap="word")
-    avis_entry.pack(expand=True, fill="both", padx=10, pady=(10, 5))
+    avis_entry.pack(padx=10, pady=(10, 5))
     avis_entry.insert("0.0", "Ton avis :\n")
 
     def envoyer():
@@ -525,10 +532,10 @@ def proposer_fonction(account_id, app, sidebar_paramètre, exercice, charge_entr
                             command=lambda: [vider_fenetre(app), avis(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_avis.pack(side="left", padx=2)
     
-    avis_entry = ctk.CTkTextbox(app, corner_radius=corner1, fg_color=couleur2, font=(font_principale, taille2),
+    avis_entry = ctk.CTkTextbox(app, width=700, height=300, corner_radius=corner1, fg_color=couleur2, font=(font_principale, taille2),
                                 scrollbar_button_color=couleur1, scrollbar_button_hover_color=couleur1_hover, text_color=couleur1,
                                 border_color=couleur1, border_width=border1, wrap="word")
-    avis_entry.pack(expand=True, fill="both", padx=10, pady=(10, 5))
+    avis_entry.pack(padx=10, pady=(10, 5))
     avis_entry.insert("0.0", "Description de ta fonctionnalité :\n")
 
     def envoyer():
@@ -582,10 +589,10 @@ def signaler_bug(account_id, app, sidebar_paramètre, exercice, charge_entraîne
                             command=lambda: [vider_fenetre(app), avis(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
     button_avis.pack(side="left", padx=2)
 
-    avis_entry = ctk.CTkTextbox(app, corner_radius=corner1, fg_color=couleur2, font=(font_principale, taille2),
+    avis_entry = ctk.CTkTextbox(app, width=700, height=300, corner_radius=corner1, fg_color=couleur2, font=(font_principale, taille2),
                                 scrollbar_button_color=couleur1, scrollbar_button_hover_color=couleur1_hover, text_color=couleur1,
                                 border_color=couleur1, border_width=border1, wrap="word")
-    avis_entry.pack(expand=True, fill="both", padx=10, pady=(10, 5))
+    avis_entry.pack(padx=10, pady=(10, 5))
     avis_entry.insert("0.0", "Description du bug :\n")
 
     def envoyer():
@@ -675,7 +682,7 @@ def modifier_password(account_id, inscription, app, sidebar_paramètre, exercice
                     con.commit()
                     messagebox.showinfo("Enregistré", "Ton mots de passe à bien été modifié ! Tu n'as plus qu'à te connecter.")
                     vider_fenetre(app)
-                    auto_connect_deconnexion(connexion)
+                    auto_connect_deconnexion(connexion, app)
                 else:
                     return
         except sqlite3.Error as e:
@@ -697,33 +704,31 @@ def modifier_password(account_id, inscription, app, sidebar_paramètre, exercice
                                     command=lambda: [vider_fenetre(app), mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre, connexion)])
     button_back.pack(side="left", expand=True, fill="x", pady=2, padx=(1, 10))
 
-def supprimer_compte(account_id, inscription, app):
+def supprimer_compte(account_id, connexion, app):
     try:
         curseur.execute("DELETE FROM Account WHERE id = ?", (account_id,))
         curseur.execute("DELETE FROM Aide_bienvenue WHERE account_id = ?", (account_id,))
-        curseur.execute("DELETE FROM Aide_compétition WHERE account_id = ?", (account_id,))
-        curseur.execute("DELETE FROM Aide_objectif WHERE account_id = ?", (account_id,))
         curseur.execute("UPDATE Auto_connect SET statut = 'déconnexion'")
         curseur.execute("DELETE FROM Coach WHERE account_id = ?", (account_id,))
         curseur.execute("DELETE FROM Compétition WHERE account_id = ?", (account_id,))
         curseur.execute("DELETE FROM Historique_activité WHERE account_id = ?", (account_id,))
-        curseur.execute("DELETE FROM Historique_vma WHERE account_id = ?", (account_id,))
         curseur.execute("DELETE FROM Objectif WHERE account_id = ?", (account_id,))
         curseur.execute("DELETE FROM Pauses WHERE account_id = ?", (account_id,))
         con.commit()
         messagebox.showinfo("Opération réussi", "Compte supprimé avec succès ! Au revoir !")
-        vider_fenetre(app)
-        inscription()
+        auto_connect_deconnexion(connexion,app)
     except sqlite3.Error as e:
         messagebox.showerror("Erreur", "Erreur de base de données lors de la suppression du compte !")
+        return
     except Exception as e:            
         messagebox.showerror("Erreur", "Une erreur inattendue s'est produite, réessaye !")
+        return
 
 def mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre, connexion):
     def suppression_compte():
         reponse = messagebox.askyesno("Suppression de compte", "Es-tu sûr de vouloir supprimer ton compte ?\nToutes tes données seront perdues !")
         if reponse:
-            supprimer_compte(account_id, inscription, app)
+            supprimer_compte(account_id, connexion, app)
         else:
             return
     sidebar_paramètre(account_id, app, exercice, charge_entraînement, predicteur_temps, parametre)
@@ -731,25 +736,25 @@ def mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charg
     titre = ctk.CTkLabel(app ,text="Mon compte", font=(font_secondaire, taille1))
     titre.pack(padx=10, pady=10)
 
-    boite = ctk.CTkFrame(app, fg_color=couleur2, corner_radius=corner1, border_width=border1, border_color=couleur1)
-    boite.pack(expand=True, fill="both", padx=20, pady=20)
+    boite = ctk.CTkFrame(app, fg_color=couleur2, corner_radius=corner2, border_width=border1, border_color=couleur1)
+    boite.pack(padx=80, pady=(20, 60))
 
     sous_boite = ctk.CTkFrame(boite, fg_color="transparent", corner_radius=corner1)
-    sous_boite.pack(expand=True, fill="both", padx=20, pady=(15, 10))
+    sous_boite.pack(padx=20, pady=(15, 10))
     sous_boite_info1 = ctk.CTkFrame(sous_boite, fg_color=couleur2, corner_radius=corner1)
     sous_boite_info1.pack(side="left", expand=True, fill="both", padx=5, pady=5)
     sous_boite_info2 = ctk.CTkFrame(sous_boite, fg_color=couleur_fond, corner_radius=corner1)
     sous_boite_info2.pack(side="right", expand=True, fill="both", padx=5, pady=5)
 
     sous_boite2 = ctk.CTkFrame(boite, fg_color="transparent", corner_radius=corner1)
-    sous_boite2.pack(expand=True, fill="both", padx=20, pady=10)
+    sous_boite2.pack(padx=20, pady=10)
     sous_boite2_info1 = ctk.CTkFrame(sous_boite2, fg_color=couleur2, corner_radius=corner1)
     sous_boite2_info1.pack(side="left", expand=True, fill="both", padx=5, pady=5)
     sous_boite2_info2 = ctk.CTkFrame(sous_boite2, fg_color=couleur_fond, corner_radius=corner1)
     sous_boite2_info2.pack(side="right", expand=True, fill="both", padx=5, pady=5)
 
     sous_boite3 = ctk.CTkFrame(boite, fg_color="transparent", corner_radius=corner1)
-    sous_boite3.pack(expand=True, fill="both", padx=20, pady=5) 
+    sous_boite3.pack(padx=20, pady=5) 
     sous_boite3_info1 = ctk.CTkFrame(sous_boite3, fg_color=couleur2, corner_radius=corner1)
     sous_boite3_info1.pack(side="left", expand=True, fill="both", padx=5, pady=5)
     sous_boite3_info2 = ctk.CTkFrame(sous_boite3, fg_color=couleur_fond, corner_radius=corner1)
@@ -772,18 +777,20 @@ def mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charg
     label_username = ctk.CTkLabel(sous_boite_info1, text=f"👤 Pseudo : ", width=LABEL_MIN_WIDTH, wraplength=400, font=(font_secondaire, taille1),
                                   justify="left", anchor="w", text_color=couleur1)
     label_username.pack(expand=True, fill="both", padx=(20, 10), pady=15)
-    ton_username = ctk.CTkEntry(sous_boite_info2, placeholder_text=f"{username}", font=(font_principale, taille2), width=LABEL_MIN_WIDTH, 
+    ton_username = ctk.CTkEntry(sous_boite_info2, placeholder_text="Pseudo", font=(font_principale, taille2), width=LABEL_MIN_WIDTH, 
                                 placeholder_text_color=couleur1, fg_color=couleur_fond, corner_radius=corner1, border_color=couleur_fond,
                                 text_color=couleur1)
     ton_username.pack(expand=True, fill="both", padx=(15, 20), pady=15)
+    ton_username.insert(0, f"{username if username is not None else "Aucun pseudo..."}")
 
     label_sport = ctk.CTkLabel(sous_boite2_info1, text=f"🏅 Sport favoris :", width=LABEL_MIN_WIDTH, font=(font_secondaire, taille1),
                                justify="left", anchor="w", text_color=couleur1)
     label_sport.pack(expand=True, fill="both", padx=(20, 10), pady=15)
-    ton_sport = ctk.CTkEntry(sous_boite2_info2, placeholder_text=f"{sport if sport is not None else "Aucun sport favoris..."}", width=LABEL_MIN_WIDTH, font=(font_principale, taille2),
+    ton_sport = ctk.CTkEntry(sous_boite2_info2, placeholder_text="Sport favoris", width=LABEL_MIN_WIDTH, font=(font_principale, taille2),
                             placeholder_text_color=couleur1, fg_color=couleur_fond, corner_radius=corner1, border_color=couleur_fond,
                             text_color=couleur1)
     ton_sport.pack(expand=True, fill="both", padx=(15, 20), pady=15)
+    ton_sport.insert(0, f"{sport if sport is not None else "Aucun sport favoris..."}")
 
     label_bio = ctk.CTkLabel(sous_boite3_info1, text=f"📝 Bio : ", width=LABEL_MIN_WIDTH, font=(font_secondaire, taille1), anchor="w",
                              justify="left", wraplength=400, text_color=couleur1)
@@ -844,7 +851,7 @@ def mon_compte(account_id, inscription, app, sidebar_paramètre, exercice, charg
                                     command=lambda: [vider_fenetre(app), modifier_password(account_id, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre, connexion)])
     button_mot_de_passe_oublié.pack(side="left", padx=2)
 
-def auto_connect_deconnexion(connexion):
+def auto_connect_deconnexion(connexion, app):
     try:
         curseur.execute("UPDATE Auto_connect SET statut = 'déconnexion'")
         con.commit()
@@ -852,6 +859,7 @@ def auto_connect_deconnexion(connexion):
         pass
     except Exception as e:
         pass
+    vider_fenetre(app)
     connexion()
 
 def parametres(account_id, connexion, inscription, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre):
@@ -875,16 +883,6 @@ def parametres(account_id, connexion, inscription, app, sidebar_paramètre, exer
     except Exception as e:
         messagebox.showerror("Erreur", "Une erreur innatendu s'est produite !")
         return
-
-    def beta_testeur():
-        messagebox.showinfo("Information", "Tu es déjà bêta testeur ! Merci pour ton aide précieuse au développement de Sprintia.")
-        reponse = messagebox.askyesno("Confirmation", "Veux-tu regarder si une nouvelle bêta est disponible ?")
-        if reponse:
-            webbrowser.open("https://github.com/Gabriel0925/Sprintia/tree/main/Programme%20B%C3%8ATA")
-        else:
-            pass
-        #messagebox.showwarning("Information", "Ton navigateur va s'ouvrir pour que tu puisses télécharger le programme bêta. Juste un rappel important : une version bêta n’est pas adaptée à tous les utilisateurs. Je t’invite à bien consulter la documentation avant de commencer.")
-        #webbrowser.open("https://github.com/Gabriel0925/Sprintia/tree/main/Programme%20B%C3%8ATA")
 
     Titre = ctk.CTkLabel(app ,text="Paramètres", font=(font_secondaire, taille1), text_color=couleur_text)
     Titre.pack(padx=10, pady=10)
@@ -922,21 +920,15 @@ def parametres(account_id, connexion, inscription, app, sidebar_paramètre, exer
                                     corner_radius=corner2, width=500, font=(font_principale, taille2),
                                     text_color=couleur1, 
                                     command=lambda: [vider_fenetre(app), signaler_bug(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre)])
-    button_avis.pack(side="left", padx=(0, 10))  
-    button_avis = ctk.CTkButton(frame_bouton3, text="🧪 Rejoindre la bêta\n_______________________\n\nFonctionnalités en avant-première", 
-                                    fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner2, width=500, font=(font_principale, taille2),
-                                    text_color=couleur1, 
-                                    command=beta_testeur)
-    button_avis.pack(side="left", padx=10)      
+    button_avis.pack(side="left", padx=(0, 10))     
     button_coach = ctk.CTkButton(frame_bouton3, text=f"{avatar_du_coach if avatar_du_coach is not None else "👨"} {nom_coach_user if nom_coach_user is not None else "JRM Coach"}\n_______________________\n\nPersonnalise ton coach", 
                                     fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, width=500, font=(font_principale, taille2),
                                     text_color=couleur1,
                                     command=lambda: [vider_fenetre(app), JRM_coach(account_id, app, sidebar_paramètre, exercice, charge_entraînement, predicteur_temps, parametre, connexion, inscription)])
-    button_coach.pack(side="left", padx=(0, 10))      
-    button_deco = ctk.CTkButton(frame_bouton4, text="🚪Déconnexion\n_______________________\n\nSe déconnecter, couper le lien", 
+    button_coach.pack(side="left", padx=10)      
+    button_deco = ctk.CTkButton(frame_bouton3, text="🚪Déconnexion\n_______________________\n\nSe déconnecter, couper le lien", 
                                     fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner2, width=500, font=(font_principale, taille2),
-                                    text_color=couleur1, command=lambda: [vider_fenetre(app), auto_connect_deconnexion(connexion)])
-    button_deco.pack()
+                                    text_color=couleur1, command=lambda: [vider_fenetre(app), auto_connect_deconnexion(connexion, app)])
+    button_deco.pack(side="left", padx=(0, 10))

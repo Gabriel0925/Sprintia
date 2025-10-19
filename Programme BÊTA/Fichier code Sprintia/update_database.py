@@ -1,7 +1,7 @@
 from app_ressource import messagebox, sqlite3
 
 try:
-    con = sqlite3.connect("data_base_test.db")
+    con = sqlite3.connect("data_base.db")
     curseur = con.cursor()
 except sqlite3.Error as e:
     messagebox.showerror("Erreur", "Erreur de base de données lors de la connexion à la base de données !")
@@ -56,10 +56,9 @@ def voir_si_besoin_de_transfert_de_données(quel_maj):
 def maj_de_la_BDD_de_Sprintia_3_1_vers_Sprintia3_2():
     voir_si_besoin_de_transfert_de_données("3_1-3_2")
     try:
+        curseur.execute("DROP TABLE Aide_objectif")
+        curseur.execute("DROP TABLE Aide_compétition")
         curseur.execute("DROP TABLE Aide_podcast")
-    except sqlite3.Error as e:
-        pass
-    try:
         curseur.execute("DROP TABLE Aide_RPE")
     except sqlite3.Error as e:
         pass
@@ -368,8 +367,6 @@ def création():
 
     # Aide
     curseur.execute("CREATE TABLE IF NOT EXISTS Aide_bienvenue (account_id INTEGER NOT NULL,aide TEXT, FOREIGN KEY (account_id) REFERENCES Account(id))")
-    curseur.execute("CREATE TABLE IF NOT EXISTS Aide_objectif (account_id INTEGER NOT NULL,aide TEXT, FOREIGN KEY (account_id) REFERENCES Account(id))")
-    curseur.execute("CREATE TABLE IF NOT EXISTS Aide_compétition (account_id INTEGER NOT NULL,aide TEXT, FOREIGN KEY (account_id) REFERENCES Account(id))")
     
     # Transfert de données
     curseur.execute("CREATE TABLE IF NOT EXISTS Maj_base_de_donnée (action TEXT)")

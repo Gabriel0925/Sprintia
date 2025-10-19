@@ -12,22 +12,22 @@ def calculateur_imc(account_id, app, sidebar_outil, exercice, charge_entraîneme
     Titre = ctk.CTkLabel(app ,text="Calculateur IMC", font=(font_secondaire, taille1), text_color=couleur_text)
     Titre.pack(padx=10, pady=10)
 
-    carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
+    carte_connexion = ctk.CTkFrame(app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
     app.bind('<Return>', lambda event: calcul_imc())
-    poids_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Poids (kg)", border_color=couleur_fond, fg_color=couleur_fond,
+    poids_entry = ctk.CTkEntry(carte_connexion, placeholder_text="Poids (kg)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=280)
     poids_entry.pack(expand=True, fill="both", pady=(12, 2), padx=12)
-    taille_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Taille (cm)", border_color=couleur_fond, fg_color=couleur_fond,
+    taille_entry = ctk.CTkEntry(carte_connexion, placeholder_text="Taille (cm)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=280)
     taille_entry.pack(expand=True, fill="both", pady=2, padx=12)
 
-    cadre_result = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2)
+    cadre_result = ctk.CTkFrame(app, corner_radius=corner1, fg_color=couleur2)
     cadre_result.pack(pady=10)
 
-    result = ctk.CTkLabel(master=cadre_result, text="🔒 Ta confidentialité est notre priorité : nous calculons ton temps de course directement sur ton appareil et ne stockons pas cette donnée.",
+    result = ctk.CTkLabel(cadre_result, text="🔒 Ta confidentialité est notre priorité : nous calculons ton temps de course directement sur ton appareil et ne stockons pas cette donnée.",
                            font=(font_secondaire, taille2), text_color=couleur1, wraplength=800)
     result.pack(padx=50, pady=10)
 
@@ -65,7 +65,7 @@ def calculateur_imc(account_id, app, sidebar_outil, exercice, charge_entraîneme
                                  anchor="w", justify="left")
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye.")
-    button_check = ctk.CTkButton(master=carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+    button_check = ctk.CTkButton(carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille2),
                                     command=lambda: calcul_imc())
@@ -77,29 +77,29 @@ def estimation_VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraîne
     Titre = ctk.CTkLabel(app ,text="Estimation VO2max", font=(font_secondaire, taille1), text_color=couleur_text)
     Titre.pack(padx=10, pady=10)
 
-    carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
+    carte_connexion = ctk.CTkFrame(app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
     carte_connexion.pack(pady=(20, 5), padx=20) 
     app.bind('<Return>', lambda event: calcul_VO2MAX(account_id))
-    vma_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="VMA", border_color=couleur_fond, fg_color=couleur_fond,
+    vma_entry = ctk.CTkEntry(carte_connexion, placeholder_text="VMA", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=280)
     vma_entry.pack(expand=True, fill="both", pady=(12, 2), padx=12)
 
-    combo_genre = ctk.CTkComboBox(master=carte_connexion, values=["Homme", "Femme"], font=(font_principale, taille2), height=height_expressive, 
+    combo_genre = ctk.CTkComboBox(carte_connexion, values=["Homme", "Femme"], font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
                                     corner_radius=corner1, width=280, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     combo_genre.pack(expand=True, fill="both", pady=2, padx=12)
     combo_genre.set("Genre")
-    age_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Âge", border_color=couleur_fond, fg_color=couleur_fond,
+    age_entry = ctk.CTkEntry(carte_connexion, placeholder_text="Âge", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=280)
     age_entry.pack(expand=True, fill="both", pady=2, padx=12)
 
-    cadre_result = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2)
+    cadre_result = ctk.CTkFrame(app, corner_radius=corner1, fg_color=couleur2)
     cadre_result.pack(pady=10)
 
-    result = ctk.CTkLabel(master=cadre_result, text="🔒 Ta confidentialité est notre priorité : nous calculons ton temps de course\n directement sur ton appareil et ne stockons pas cette donnée.",
+    result = ctk.CTkLabel(cadre_result, text="🔒 Ta confidentialité est notre priorité : nous calculons ton temps de course\n directement sur ton appareil et ne stockons pas cette donnée.",
                            font=(font_secondaire, taille2), text_color=couleur1)
     result.pack(padx=50, pady=10)
 
@@ -283,7 +283,7 @@ def estimation_VO2MAX(account_id, app, sidebar_outil, exercice, charge_entraîne
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
             return
-    button_check = ctk.CTkButton(master=carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+    button_check = ctk.CTkButton(carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
                            command=lambda: calcul_VO2MAX(account_id))
@@ -303,17 +303,17 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
     Titre = ctk.CTkLabel(app ,text="Estimation VMA", font=(font_secondaire, taille1), text_color=couleur_text)
     Titre.pack(padx=10, pady=10)
 
-    boite1 = ctk.CTkFrame(master=app, fg_color=couleur_fond)
-    boite1.pack(side="top", fill="both", expand=True, pady=(5, 0), padx=10)
+    boite1 = ctk.CTkFrame(app, fg_color="transparent")
+    boite1.pack(side="top", pady=(5, 0), padx=10)
     carte_connexion = ctk.CTkFrame(boite1, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
-    carte_connexion.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=10) 
+    carte_connexion.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=(10, 5)) 
     app.bind('<Return>', lambda event: calcul_VMA())
     
-    distance_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Distance (km)", border_color=couleur_fond, fg_color=couleur_fond,
+    distance_entry = ctk.CTkEntry(carte_connexion, placeholder_text="Distance (km)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=280)
     distance_entry.pack_forget()
-    temps_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Durée", border_color=couleur_fond, fg_color=couleur_fond,
+    temps_entry = ctk.CTkEntry(carte_connexion, placeholder_text="Durée", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=280)
     temps_entry.pack_forget()
@@ -321,40 +321,43 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
     def remplissage_placeholder(choice):
         choice = test_spécifique.get()
         # On vide les champs pour les remplir ensuite
+        distance_entry.configure(state="normal")
+        temps_entry.configure(state="normal")
         distance_entry.delete(0, "end")
         temps_entry.delete(0, "end")
 
         # On remplit les champs en fonction du test sélectionné
         if choice == "Test demi-Cooper (6 min) (Recommandé)":
             temps_entry.insert(0, "6")
-            distance_entry.insert(0, "Distance (km)")
+            temps_entry.configure(state="disabled")
+            distance_entry.configure(placeholder_text="Distance (km)")
         elif choice == "Test Cooper (12 min)":
             temps_entry.insert(0, "12")
-            distance_entry.insert(0, "Distance (km)")
+            temps_entry.configure(state="disabled")
+            distance_entry.configure(placeholder_text="Distance (km)")
         elif choice == "Test Luc Léger (2 km)":
             distance_entry.insert(0, "2")
-            temps_entry.insert(0, "Temps (min)")
+            distance_entry.configure(state="disabled")
+            temps_entry.configure(placeholder_text="Temps (min)")
         else:
-            distance_entry.insert(0, "Distance (km)")
-            temps_entry.insert(0, "Temps (min)")
+            temps_entry.configure(placeholder_text="Temps (min)")
+            distance_entry.configure(placeholder_text="Distance (km)")
 
-    test_spécifique = ctk.CTkComboBox(master=carte_connexion, values=["Test demi-Cooper (6 min) (Recommandé)", "Test Cooper (12 min)", "Test Luc Léger (2 km)", "Course de référence (moins précise)"],
-                                    font=(font_principale, taille3), height=height_expressive, 
+    test_spécifique = ctk.CTkComboBox(carte_connexion, values=["Test demi-Cooper (6 min) (Recommandé)", "Test Cooper (12 min)", "Test Luc Léger (2 km)", "Course de référence (moins précise)"],
+                                    font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=275, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
-                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1,
+                                    corner_radius=corner1, width=280, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1, 
                                     command=remplissage_placeholder)
-    test_spécifique.pack(pady=(12, 2), padx=12)
-    test_spécifique.set("Sélectionne un test")
+    test_spécifique.pack(expand=True, fill="both", pady=(12, 2), padx=12)
+    test_spécifique.set("Test")
     distance_entry.pack(expand=True, fill="both", pady=2, padx=12)
     temps_entry.pack(expand=True, fill="both", pady=2, padx=12)
 
-    cadre_result = ctk.CTkFrame(master=boite1, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)
-    cadre_result.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=10)
+    cadre_result = ctk.CTkFrame(boite1, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)
+    cadre_result.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=(5, 10))
     frame_result = ctk.CTkFrame(cadre_result, fg_color=couleur2, corner_radius=corner1)
     frame_result.pack(side="top", expand=True, fill="both", pady=12, padx=12)
-    frame_bouton = ctk.CTkFrame(cadre_result, corner_radius=corner1, fg_color=couleur2)
-    frame_bouton.pack(side="top", pady=(2, 5))
 
     tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
                                            scrollbar_button_hover_color=couleur2_hover)
@@ -363,7 +366,7 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
     c_quoi_la_vma = "C'est quoi la VMA ?\n\nLa Vitesse Maximale Aérobie (VMA) est la vitesse de course à laquelle ton corps atteint sa consommation maximale d'oxygène (VO2max). " \
                     "Connaître ta VMA te permet de mieux structurer tes entraînements, " \
                     "d'optimiser tes performances et de prévenir les blessures en évitant le surentraînement."
-    result = ctk.CTkLabel(master=frame_result, text=f"{c_quoi_la_vma}",
+    result = ctk.CTkLabel(frame_result, text=f"{c_quoi_la_vma}",
                            font=(font_principale, taille2), text_color=couleur1, wraplength=650, justify="left", anchor="w")
     result.pack(expand=True, fill="both", padx=15, pady=5)
 
@@ -378,18 +381,21 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
     
     def calcul_VMA():
         type_test_spécifique = test_spécifique.get().strip()
-        if type_test_spécifique == "Sélectionne un test":
+        if type_test_spécifique == "Test":
             messagebox.showerror("Erreur", "Tu dois sélectionner un test !")
             return
         try:
-            distance = float(distance_entry.get().strip())
+            distance = float(distance_entry.get().strip().replace(',', '.').replace(' ', '').replace('_', '').replace('km', '').replace('KM', ''))
+            if not distance:
+                messagebox.showerror("Erreur", "La distance ne peut pas être vide !")
+                return
         except ValueError:
             messagebox.showerror("Erreur", "La distance doit être un nombre (km)")
             return
         try:
             temps_autre = temps_entry.get().strip()
-            if not distance or not temps_autre:
-                messagebox.showerror("Erreur", "La distance ou le temps ne peuvent pas être vides !")
+            if not temps_autre:
+                messagebox.showerror("Erreur", "Le temps ne peut pas être vide !")
                 return
             if ":" in temps_autre:
                 if len(temps_autre.split(":")) == 3:
@@ -449,16 +455,24 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
                 return
             vma_estimée = distance / (temps/60)
         else:
-            if distance > 20:
-                messagebox.showerror("Erreur", "Pour une course de référence, la distance ne doit pas dépasser 20 km !")
+            if  3 >= distance >= 42.2 :
+                messagebox.showerror("Erreur", "Pour une course de référence, la distance ne doit pas dépasser 42,20 km !")
                 return
-            if temps < 2:
-                messagebox.showerror("Erreur", "Pour une course de référence, le temps doit être supérieur à 2 minutes !")
+            if temps < 12:
+                messagebox.showerror("Erreur", "Pour une course de référence, le temps doit être supérieur à 12 minutes !")
                 return
-            # Formule basée sur le modèle de Peronnet & Thibault
             vitesse_moyenne = distance / (temps / 60) # Vitesse moyenne en km/h
-            facteur_correction = 0.95 + 0.05 * math.exp(-temps / 600) # math.exp() = fonction exponentielle "e"
-            vma_estimée = vitesse_moyenne / facteur_correction
+            if 3.0 >= distance >= 3.5:
+                coefficient_ajustement = 0.95
+            elif 3.5001 >= distance >= 6.0:
+                coefficient_ajustement = 0.92
+            elif 6.0001 >= distance >= 12.0:
+                coefficient_ajustement = 0.89
+            elif 12.0001 >= distance >= 22.0:
+                coefficient_ajustement = 0.82
+            else:
+                coefficient_ajustement = 0.77
+            vma_estimée = vitesse_moyenne / coefficient_ajustement
 
         debut_zone1 = vma_estimée * 0.50
         fin_zone1 = vma_estimée * 0.60
@@ -470,7 +484,7 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
         fin_zone4 = vma_estimée * 0.95
         debut_zone5 = vma_estimée * 0.95
 
-        servir_de_vma = "La VMA (Vitesse Maximale Aérobie) est un indicateur clé pour les coureurs et les sportifs d’endurance. La VMA permet de définir des zones d’intensité pour varier tes entraînements (voir tableau). Réévalue ta VMA tous les 2-3 mois pour ajuster tes allures d’entraînement."
+        servir_de_vma = "La VMA (Vitesse Maximale Aérobie) est un indicateur clé pour les coureurs et les sportifs d’endurance. Elle permet de définir des zones d’intensité pour varier tes entraînements (voir tableau). Réévalue ta VMA tous les 2-3 mois pour ajuster tes allures d’entraînement et voir si tu as progressé."
         result.configure(text=f"VMA estimée : {vma_estimée:.1f} km/h.\n\n{servir_de_vma}",
                              anchor="w", justify="left", wraplength=620)
         
@@ -506,14 +520,9 @@ def estimation_VMA(account_id, app, sidebar_outil, exercice, charge_entraînemen
 
     for row_index, contenu_tableau_text in enumerate(contenu_tableau):
         for col_index, data in enumerate(contenu_tableau_text):
-            label = ctk.CTkLabel(master=tableau_frame, text=str(data if data is not None else "-"), font=(font_principale, taille3),
+            label = ctk.CTkLabel(tableau_frame, text=str(data if data is not None else "-"), font=(font_principale, taille3),
                                 text_color=couleur_text, wraplength=200)
             label.grid(row=row_index + 1, column=col_index, padx=15, pady=15, sticky="ew")
-
-    button_sauvegarde = ctk.CTkButton(frame_bouton, text="ℹ️ En savoir plus sur la VMA", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner1, height=button_height, text_color=couleur1,
-                                    font=(font_principale, taille3), command=info_vma)
-    button_sauvegarde.pack(padx=2, pady=(2, 10))
 
     button_check = ctk.CTkButton(carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner1, height=button_height, text_color=couleur1,
@@ -527,20 +536,30 @@ def zone_cardiaque(account_id, app, sidebar_outil, exercice, charge_entraînemen
     Titre = ctk.CTkLabel(app ,text="Zones cardiaque", font=(font_secondaire, taille1), text_color=couleur_text)
     Titre.pack(padx=10, pady=10)
 
-    carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
-    carte_connexion.pack(pady=(20, 5), padx=20) 
+    boite1 = ctk.CTkFrame(app, fg_color="transparent")
+    boite1.pack(side="top", pady=(5, 0), padx=10)
+    carte_connexion = ctk.CTkFrame(boite1, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
+    carte_connexion.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=(10, 5)) 
+
     app.bind('<Return>', lambda event: calcul_zone(account_id))
-    age_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Âge", border_color=couleur_fond, fg_color=couleur_fond,
+
+    age_entry = ctk.CTkEntry(carte_connexion, placeholder_text="Âge", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=280)
     age_entry.pack(expand=True, fill="both", pady=(12, 2), padx=12)
 
-    cadre_result = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2)
-    cadre_result.pack(pady=10)
+    cadre_result = ctk.CTkFrame(boite1, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)
+    cadre_result.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=(5, 10))
+    frame_result = ctk.CTkFrame(cadre_result, fg_color=couleur2, corner_radius=corner1)
+    frame_result.pack(side="top", expand=True, fill="both", pady=12, padx=12)
 
-    result = ctk.CTkLabel(master=cadre_result, text="🔒 Ta confidentialité est notre priorité : nous calculons ton temps de course\n directement sur ton appareil et ne stockons pas cette donnée.",
-                           font=(font_secondaire, taille2), text_color=couleur1)
-    result.pack(padx=50, pady=10)
+    c_quoi_les_zones_fc = "C'est quoi les Zones de fréquence cardiaque ?\n\nLes Zones cardiaque te permet de calculer tes zones de fréquence cardiaque" \
+                        " en fonction de ton âge, pour optimiser ton entraînement. Les zones de fréquence cardiaque servent à optimiser " \
+                        "ton entraînement en fonction de tes objectifs (endurance, perte de poids, performance, etc.)"
+    result = ctk.CTkLabel(frame_result, 
+                            text=f"{c_quoi_les_zones_fc}",
+                            font=(font_principale, taille2), text_color=couleur1, wraplength=600, justify="left", anchor="w")
+    result.pack(expand=True, fill="both", padx=15, pady=5)
 
     def calcul_zone(account_id):
         try:
@@ -553,24 +572,25 @@ def zone_cardiaque(account_id, app, sidebar_outil, exercice, charge_entraînemen
                 messagebox.showerror("Erreur", "L'âge ne peut pas être vide !")
             debut_zone1 = fc_max*0.50
             fin_zone1 = fc_max*0.60
-            Zone1 = f"Zone 1 : Récupération active - {debut_zone1:.0f}bpm à {fin_zone1:.0f}bpm"
+            Zone1 = f"Zone 1 : Récupération | {debut_zone1:.0f} bpm à {fin_zone1:.0f} bpm"
             debut_zone2 = fc_max*0.60
             fin_zone2 = fc_max*0.70
-            Zone2 = f"Zone 2 : Fondamentale, endurance de base | {debut_zone2:.0f}bpm à {fin_zone2:.0f}bpm"
+            Zone2 = f"Zone 2 : Endurance fondamentale | {debut_zone2:.0f} bpm à {fin_zone2:.0f} bpm"
             debut_zone3 = fc_max*0.70
             fin_zone3 = fc_max*0.80
-            Zone3 = f"Zone 3 : Seuil aérobie, endurance active | {debut_zone3:.0f}bpm à {fin_zone3:.0f}bpm"
+            Zone3 = f"Zone 3 : Seuil aérobie | {debut_zone3:.0f} bpm à {fin_zone3:.0f} bpm"
             debut_zone4 = fc_max*0.80
             fin_zone4 = fc_max*0.90
-            Zone4 = f"Zone 4 :  Seuil anaérobie, résistance dure | {debut_zone4:.0f}bpm à {fin_zone4:.0f}bpm"
+            Zone4 = f"Zone 4 :  Seuil anaérobie | {debut_zone4:.0f} bpm à {fin_zone4:.0f} bpm"
             debut_zone5 = fc_max*0.90
-            Zone5 = f"Zone 5 : Vitesse maximale aérobie, puissance maximale | {debut_zone5:.0f}bpm à {fc_max:.0f}bpm"
-            FC_max = f"Fréquence cardiaque maximum : {fc_max:.0f}bpm"
+            Zone5 = f"Zone 5 : Puissance maximale | {debut_zone5:.0f} bpm à {fc_max:.0f} bpm"
+            FC_max = f"\nFréquence cardiaque maximum : {fc_max:.0f} bpm"
 
-            result.configure(text=f"Tes Zones de Fréquence Cardiaque\n\n{Zone1}\n{Zone2}\n{Zone3}\n{Zone4}\n{Zone5}\n{FC_max}",
+            result.configure(text=f"Tes Zones de Fréquence Cardiaque :\n\n{Zone1}\n{Zone2}\n{Zone3}\n{Zone4}\n{Zone5}\n{FC_max}",
                                  anchor="w", justify="left")
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
+            return
     button_check = ctk.CTkButton(carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
@@ -583,31 +603,35 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
     Titre = ctk.CTkLabel(app ,text="Prédicteur de performance", font=(font_secondaire, taille1), text_color=couleur_text)
     Titre.pack(padx=10, pady=10)
 
-    Info = ctk.CTkLabel(master=app ,text="N'oublie pas que cette prédiction est une estimation basée sur la\nthéorie"\
-                         " et peut varier en fonction de nombreux facteurs\nle jour de la course !", font=(font_secondaire, taille2),
-                         text_color=couleur_text)
-    Info.pack(padx=50, pady=10)
+    boite1 = ctk.CTkFrame(app, fg_color="transparent")
+    boite1.pack(side="top", pady=(5, 0), padx=10)
+    carte_connexion = ctk.CTkFrame(boite1, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
+    carte_connexion.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=(10, 5)) 
 
-    carte_connexion = ctk.CTkFrame(master=app, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)        
-    carte_connexion.pack(pady=(20, 5), padx=20) 
-    app.bind('<Return>', lambda event: calcul_temps(account_id))
-    vma_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="VMA", border_color=couleur_fond, fg_color=couleur_fond,
+    app.bind('<Return>', lambda event: calcul_temps())
+    vma_entry = ctk.CTkEntry(carte_connexion, placeholder_text="VMA", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=280)
     vma_entry.pack(expand=True, fill="both", pady=(12, 2), padx=12)
-    distance_entry = ctk.CTkEntry(master=carte_connexion, placeholder_text="Distance (km)", border_color=couleur_fond, fg_color=couleur_fond,
+    distance_entry = ctk.CTkEntry(carte_connexion, placeholder_text="Distance (km)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
                                   text_color=couleur1, width=280)
     distance_entry.pack(expand=True, fill="both", pady=2, padx=12)
 
-    cadre_result = ctk.CTkFrame(master=app, corner_radius=corner1, fg_color=couleur2)
-    cadre_result.pack(pady=10)
+    cadre_result = ctk.CTkFrame(boite1, corner_radius=corner1, fg_color=couleur2, border_width=border1, border_color=couleur1)
+    cadre_result.pack(side="left", expand=True, fill="both", pady=(10, 0), padx=(5, 10))
+    frame_result = ctk.CTkFrame(cadre_result, fg_color=couleur2, corner_radius=corner1)
+    frame_result.pack(side="top", expand=True, fill="both", pady=12, padx=12)
 
-    result = ctk.CTkLabel(master=cadre_result, text="🔒 Ta confidentialité est notre priorité : nous calculons ton temps de course\n directement sur ton appareil et ne stockons pas cette donnée.",
-                           font=(font_secondaire, taille2), text_color=couleur1)
-    result.pack(padx=50, pady=10)
+    c_quoi_le_predicteur_performance = "C'est quoi le Prédicteur de performance ?\n\nLe Prédicteur de performance te permet d'estimer ton temps de course en fonction de ta VMA et de la distance choisie." \
+                                        " C'est un outil pratique pour évaluer tes performances potentielles avant une course." \
+                                        " Mais, n'oublie pas que cette prédiction est une estimation basée sur la théorie et peut varier en fonction de nombreux facteurs le jour de la course !"
+    result = ctk.CTkLabel(frame_result, 
+                            text=f"{c_quoi_le_predicteur_performance}",
+                            font=(font_principale, taille2), text_color=couleur1, wraplength=600, justify="left", anchor="w")
+    result.pack(expand=True, fill="both", padx=15, pady=5)
 
-    def calcul_temps(account_id):
+    def calcul_temps():
         try:
             distance = float(distance_entry.get().strip().replace(',', '.').replace(' ', '').replace('_', '').replace('km', '').replace('KM', ''))
             vma = float(vma_entry.get().strip().replace(',', '.').replace(' ', '').replace('_', '').replace('vma', '').replace('VMA', ''))
@@ -625,7 +649,6 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
                 minute_calculer = (temps_calculer-heure)*60
                 minutes = int(minute_calculer)
                 seconde = (minute_calculer-minutes)*60
-                interpretation = f"Temps estimé : {heure:.0f}h {minutes:.0f}min {seconde:.0f}s"
             elif 2 <= distance <= 3:
                 vitesse_moyenne = vma*0.94
                 temps_calculer = distance/vitesse_moyenne
@@ -633,7 +656,6 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
                 minute_calculer = (temps_calculer-heure)*60
                 minutes = int(minute_calculer)
                 seconde = (minute_calculer-minutes)*60
-                interpretation = f"Temps estimé : {heure:.0f}h {minutes:.0f}min {seconde:.0f}s"
             elif 3 <= distance <= 6:
                 vitesse_moyenne = vma*0.82
                 temps_calculer = distance/vitesse_moyenne
@@ -641,7 +663,6 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
                 minute_calculer = (temps_calculer-heure)*60
                 minutes = int(minute_calculer)
                 seconde = (minute_calculer-minutes)*60
-                interpretation = f"Temps estimé : {heure:.0f}h {minutes:.0f}min {seconde:.0f}s"
             elif 6 <= distance <= 12:
                 vitesse_moyenne = vma*0.77
                 temps_calculer = distance/vitesse_moyenne
@@ -649,7 +670,6 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
                 minute_calculer = (temps_calculer-heure)*60
                 minutes = int(minute_calculer)
                 seconde = (minute_calculer-minutes)*60
-                interpretation = f"Temps estimé : {heure:.0f}h {minutes:.0f}min {seconde:.0f}s"
             elif 12 <= distance <= 25:
                 vitesse_moyenne = vma*0.72
                 temps_calculer = distance/vitesse_moyenne
@@ -657,7 +677,6 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
                 minute_calculer = (temps_calculer-heure)*60
                 minutes = int(minute_calculer)
                 seconde = (minute_calculer-minutes)*60
-                interpretation = f"Temps estimé : {heure:.0f}h {minutes:.0f}min {seconde:.0f}s"
             elif 21.0975 <= distance <= 42.195:
                 vitesse_moyenne = vma*0.62
                 temps_calculer = distance/vitesse_moyenne
@@ -665,7 +684,6 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
                 minute_calculer = (temps_calculer-heure)*60
                 minutes = int(minute_calculer)
                 seconde = (minute_calculer-minutes)*60
-                interpretation = f"Temps estimé : {heure:.0f}h {minutes:.0f}min {seconde:.0f}s"
             else:
                 vitesse_moyenne = vma*0.55
                 temps_calculer = distance/vitesse_moyenne
@@ -673,16 +691,20 @@ def prédicteur_performance(account_id, app, sidebar_outil, exercice, charge_ent
                 minute_calculer = (temps_calculer-heure)*60
                 minutes = int(minute_calculer)
                 seconde = (minute_calculer-minutes)*60
-                interpretation = f"Temps estimé : {heure:.0f}h {minutes:.0f}min {seconde:.0f}s"
+
+            interpretation = f"Temps estimé : {heure:.0f}h {minutes:.0f}min {seconde:.0f}s\n\nCette prédiction peut te servir de base pour te fixer des objectifs précis et"\
+                            " structurer tes séances : fractionné pour améliorer son vitesse ou sorties longues pour améliorer son endurance,..." \
+                            " Réévalue toutes les 2-3 semaines pour affiner ton entraînement."
 
             result.configure(text=f"{interpretation}",
                                  anchor="w", justify="left")
         except Exception as e:
             messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
-    button_check = ctk.CTkButton(master=carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
+            return
+    button_check = ctk.CTkButton(carte_connexion, text="Valider", fg_color=couleur2, hover_color=couleur2_hover,
                                     corner_radius=corner1, height=button_height, text_color=couleur1,
                                     font=(font_principale, taille3),
-                           command=lambda: calcul_temps(account_id))
+                           command=lambda: calcul_temps())
     button_check.pack(expand=True, fill="both", padx=12, pady=(2, 12))
 
 def outils(account_id, app, sidebar_outil, exercice, charge_entraînement, predicteur_temps, parametre):

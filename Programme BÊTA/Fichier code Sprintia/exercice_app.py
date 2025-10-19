@@ -1,6 +1,24 @@
 from app_ressource import * 
 from update_database import con, curseur, con_coach, curseur_coach
-from aide_app import aide_bienvenue
+
+def aide_bienvenue(account_id):
+    try:
+        curseur.execute("SELECT aide FROM Aide_bienvenue WHERE account_id = ?", (account_id,))
+        result = curseur.fetchone()
+        if result and result[0] == "fait": # result[0] = parce que fetchone renvoie ('fait',)
+            pass
+        else:
+            appris = "fait"
+            curseur.execute("INSERT INTO Aide_bienvenue (account_id, aide)VALUES (?, ?)", (account_id, appris))
+            con.commit()
+            messagebox.showinfo(f"Bienvenue dans Sprintia {version_entière}", "Découvre toutes les nouveautés de Sprintia 3.2 dans le patch note dans les paramètres !")
+            messagebox.showinfo("Info", "Toutes les nouveautés indiquées dans le patch note ne sont pas présentes d'un coup ! Elles arriveront au fur et à mesure des bêtas")
+    except sqlite3.Error as e:
+        messagebox.showerror("Erreur", "Erreur de base de données !")
+        return
+    except Exception as e:
+        messagebox.showerror("Erreur", "Une erreur inattendu s'est produite, réessaye !")
+        return
 
 def c_quoi_rpe():
     messagebox.showinfo("C'est quoi le RPE ?", 
@@ -16,6 +34,7 @@ def c_quoi_rpe():
                         "◉ RPE : 8 = Difficile\n" \
                         "◉ RPE : 9 = Très Difficile\n" \
                         "◉ RPE : 10 = Effort Maximal")
+
 
 def choisir_nb_aléatoire():
     try:
@@ -83,40 +102,28 @@ def coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entr
                 messagebox.showerror("Erreur", "Une erreur inattendue s'est produite, réessaye !")
                 return
             text_totale_generer = text_totale_generer+text_generer
-        if len(text_totale_generer) >= 500:
+        if len(text_totale_generer) > 500:
             return générer_une_phrase()
         return text_totale_generer
 
     text_totale_generer = générer_une_phrase()
 
     frame_coach = ctk.CTkFrame(boite, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur_fond)
-    frame_coach.pack(expand=True, fill="both", side="right", padx=(7, 15), pady=15)
+    frame_coach.pack(fill="both", side="right", padx=(7, 25), pady=25)
     frame_embleme_coach = ctk.CTkFrame(master=frame_coach, fg_color="transparent")
-    frame_embleme_coach.pack(expand=True, fill="both", padx=12, pady=12)
+    frame_embleme_coach.pack(fill="both", padx=12, pady=25)
     frame_phrase_du_coach = ctk.CTkFrame(master=frame_coach, fg_color="transparent")
-    frame_phrase_du_coach.pack(expand=True, fill="both", padx=12, pady=12)
-    frame_bouton = ctk.CTkFrame(master=frame_coach, fg_color="transparent")
-    frame_bouton.pack(expand=True, fill="both", padx=12, pady=12)
+    frame_phrase_du_coach.pack(fill="both", padx=12, pady=(25, 12))
                                     
     embleme_coach = ctk.CTkLabel(master=frame_embleme_coach, 
                                     text=f"{avatar_du_coach if avatar_du_coach else "👨"} {nom_du_coach if nom_du_coach else "JRM Coach"}",
-                                    font=(font_secondaire, taille2), text_color=couleur1, wraplength=300, justify="left", anchor="w")
+                                    font=(font_secondaire, taille2), text_color=couleur1, wraplength=310, justify="left", anchor="w")
     embleme_coach.pack(expand=True, fill="both")
     phrase_du_coach = ctk.CTkLabel(master=frame_phrase_du_coach, 
                                     text=f"{text_totale_generer}",
                                     font=(font_principale, taille3), text_color=couleur1, 
-                                    wraplength=350, justify="left", anchor="w")
+                                    wraplength=310, justify="left", anchor="w")
     phrase_du_coach.pack(expand=True, fill="both")
-
-    bouton_valider = ctk.CTkButton(master=frame_bouton, text="💾 Enregistrer ton activité", fg_color=couleur2, hover_color=couleur2_hover,
-                                    corner_radius=corner1, height=button_height, text_color=couleur1, border_color=couleur2, border_width=border1,
-                                    font=(font_principale, taille3), 
-                                    command=lambda : vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
-                                    Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
-                                    sport_entry, distance_entry, denivele_entry, allure_entry, vmax_entry, muscle_entry,
-                                    rep_entry, serie_entry, volume_entry,Options_lieu, lieu_entry, matos_entry, humeur_entry,
-                                    passe_d_entry, score_entry, but_entry, activité))
-    bouton_valider.pack(expand=True, fill="both", side="left", pady=(5, 0))
 
 def enregistrement_activité(account_id, app, exercice, date, duree, rpe, douleur, fatigue, climat, nom, sport, distance, denivele, allure, vmax, 
                             équipement, muscle_travaillé, répétitions, série, volume_total, lieu, humeur, but, passe_décisive, type_de_séances, score, type,
@@ -341,10 +348,8 @@ def vérification_data_de_base_activité(account_id, app, exercice, date_entry, 
             return
         except ValueError:
             pass
-        if 3 <= len(sport_input) <= 25:
-            pass
-        else:
-            messagebox.showerror("Erreur", "Le sport doit contenir entre 3 et 25 caractères !")
+        if len(sport_input) > 50:
+            messagebox.showerror("Erreur", "Le sport doit contenir entre 50 caractères !")
             return
         sport = sport_input
         distance = None
@@ -685,22 +690,24 @@ def ajouter_activité_course(account_id, app, sidebar_exercice, exercice, charge
     button_rpe.pack(expand=True, fill="x", side="right", padx=10, pady=5)
 
     boite = ctk.CTkFrame(app, fg_color="transparent")
-    boite.pack(expand=True, fill="both")
+    boite.pack()
     frame_activité = ctk.CTkFrame(boite, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)
-    frame_activité.pack(expand=True, fill="both",side="left", padx=15, pady=15)
+    frame_activité.pack(side="left", padx=(25, 5), pady=25)
 
     frame_champs1 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs1.pack(expand=True, fill="both", padx=12, pady=(12, 2))
+    frame_champs1.pack(padx=12, pady=(12, 2))
     frame_champs2 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs2.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs2.pack(padx=12, pady=2)
     frame_champs3 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs3.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs3.pack(padx=12, pady=20)
     frame_champs4 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs4.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs4.pack(padx=12, pady=2)
     frame_champs5 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs5.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs5.pack(padx=12, pady=2)
     frame_champs6 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs6.pack(expand=True, fill="both", padx=12, pady=(2, 12))
+    frame_champs6.pack(padx=12, pady=2)
+    frame_bouton = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
+    frame_bouton.pack(expand=True, fill="both", padx=12, pady=(0, 12))
 
     app.bind('<Return>', lambda event: vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
                                        Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
@@ -715,23 +722,23 @@ def ajouter_activité_course(account_id, app, sidebar_exercice, exercice, charge
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
     date_entry.insert(0, f"💡 {date_actuelle_format.replace("-", "/")}")
-    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
+    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=70, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
                                             command=lambda: pop_up_calendrier(app, date_entry))
     button_pop_up_calendrier.pack(expand=True, fill="both", side="left", padx=(0, 12), pady=12)
     duree_entry = ctk.CTkEntry(master=frame_champs1, placeholder_text="Durée", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=205)
+                                  text_color=couleur1, width=275)
     duree_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     distance_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Distance (km)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=180)
+                                  text_color=couleur1, width=310)
     distance_entry.pack(expand=True, fill="both", side="left", padx=2)
     type_entry = ctk.CTkComboBox(master=frame_champs2, values=Options_type, font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=180, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     type_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     type_entry.set("Type d'entraî.")
@@ -740,7 +747,7 @@ def ajouter_activité_course(account_id, app, sidebar_exercice, exercice, charge
     rpe_label.pack(expand=True, fill="x", side="left", padx=12)
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
-    rpe_entry = ctk.CTkSlider(master=frame_champs3, width=400, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
+    rpe_entry = ctk.CTkSlider(master=frame_champs3, width=500, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur_fond, button_color=couleur_fond, button_hover_color=couleur2_hover,
                               corner_radius=5, button_length=20, fg_color=couleur1, 
                               # La variable DoubleVar met la valeur du RPE à 1
@@ -749,35 +756,35 @@ def ajouter_activité_course(account_id, app, sidebar_exercice, exercice, charge
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_fatigue.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     fatigue_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     fatigue_entry.set("Fatigue post-entraî.")
     douleur_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_douleur.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     douleur_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     douleur_entry.set("Douleur post-entraî.")
 
     climat_entry = ctk.CTkComboBox(master=frame_champs5, values=list(Options_climat.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=180, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     climat_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     climat_entry.set("Climat à l'entraî.")
     allure_entry = ctk.CTkEntry(master=frame_champs5, placeholder_text="Allure (ex : 6:00 /km)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
-                                  text_color=couleur1, width=180)
+                                  text_color=couleur1, width=310)
     allure_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
 
     denivele_entry = ctk.CTkEntry(master=frame_champs6, placeholder_text="Dénivelé (m)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
-                                  text_color=couleur1, width=180)
+                                  text_color=couleur1, width=310)
     denivele_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     vmax_entry = ctk.CTkEntry(master=frame_champs6, placeholder_text="Vitesse max", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
-                                  text_color=couleur1, width=180)
+                                  text_color=couleur1, width=310)
     vmax_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     sport_entry = None
@@ -792,6 +799,16 @@ def ajouter_activité_course(account_id, app, sidebar_exercice, exercice, charge
     passe_d_entry = None
     score_entry = None
     but_entry = None 
+
+    bouton_valider = ctk.CTkButton(master=frame_bouton, text="💾 Enregistrer ton activité", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1, border_color=couleur2, border_width=border1,
+                                    font=(font_principale, taille3), 
+                                    command=lambda : vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
+                                    Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
+                                    sport_entry, distance_entry, denivele_entry, allure_entry, vmax_entry, muscle_entry,
+                                    rep_entry, serie_entry, volume_entry,Options_lieu, lieu_entry, matos_entry, humeur_entry,
+                                    passe_d_entry, score_entry, but_entry, "Course"))
+    bouton_valider.pack(expand=True, fill="both")
 
     coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
                                        Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
@@ -840,22 +857,24 @@ def ajouter_activité_musculation(account_id, app, sidebar_exercice, exercice, c
     button_rpe.pack(expand=True, fill="x", side="right", padx=10, pady=5)
 
     boite = ctk.CTkFrame(app, fg_color="transparent")
-    boite.pack(expand=True, fill="both")
+    boite.pack()
     frame_activité = ctk.CTkFrame(boite, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)
-    frame_activité.pack(expand=True, fill="both",side="left", padx=15, pady=15)
+    frame_activité.pack(side="left", padx=(25, 5), pady=25)
 
     frame_champs1 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs1.pack(expand=True, fill="both", padx=12, pady=(12, 2))
+    frame_champs1.pack(padx=12, pady=(12, 2))
     frame_champs2 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs2.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs2.pack(padx=12, pady=2)
     frame_champs3 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs3.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs3.pack(padx=12, pady=20)
     frame_champs4 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs4.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs4.pack(padx=12, pady=2)
     frame_champs5 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs5.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs5.pack(padx=12, pady=2)
     frame_champs6 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs6.pack(expand=True, fill="both", padx=12, pady=(2, 12))
+    frame_champs6.pack(padx=12, pady=2)
+    frame_bouton = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
+    frame_bouton.pack(expand=True, fill="both", padx=12, pady=(0, 12))
 
     app.bind('<Return>', lambda event: vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
                                        Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
@@ -870,32 +889,32 @@ def ajouter_activité_musculation(account_id, app, sidebar_exercice, exercice, c
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
     date_entry.insert(0, f"💡 {date_actuelle_format.replace("-", "/")}")
-    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
+    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=70, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
                                             command=lambda: pop_up_calendrier(app, date_entry))
     button_pop_up_calendrier.pack(expand=True, fill="both", side="left", padx=(0, 12), pady=12)
     duree_entry = ctk.CTkEntry(master=frame_champs1, placeholder_text="Durée", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=205)
+                                  text_color=couleur1, width=275)
     duree_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     matos_entry = ctk.CTkComboBox(master=frame_champs2, values=Options_matos, font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     matos_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     matos_entry.set("Type d'entraî.")
     muscle_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Muscle travaillé", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=200)
+                                  text_color=couleur1, width=310)
     muscle_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 1", font=(font_principale, taille2), text_color=couleur_fond)
     rpe_label.pack(expand=True, fill="x", side="left", padx=12)
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
-    rpe_entry = ctk.CTkSlider(master=frame_champs3, width=400, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
+    rpe_entry = ctk.CTkSlider(master=frame_champs3, width=500, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur_fond, button_color=couleur_fond, button_hover_color=couleur2_hover,
                               corner_radius=5, button_length=20, fg_color=couleur1, 
                               # La variable DoubleVar met la valeur du RPE à 1
@@ -904,35 +923,35 @@ def ajouter_activité_musculation(account_id, app, sidebar_exercice, exercice, c
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_fatigue.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     fatigue_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     fatigue_entry.set("Fatigue post-entraî.")
     douleur_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_douleur.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     douleur_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     douleur_entry.set("Douleur post-entraî.")
 
     lieu_entry = ctk.CTkComboBox(master=frame_champs5, values=list(Options_lieu.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     lieu_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     lieu_entry.set("Lieu de la séance")
     rep_entry = ctk.CTkEntry(master=frame_champs5, placeholder_text="Nb. total de répétitions", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=200)
+                                  text_color=couleur1, width=310)
     rep_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     serie_entry = ctk.CTkEntry(master=frame_champs6, placeholder_text="Nb. total de séries", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=220)
+                                  text_color=couleur1, width=310)
     serie_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     volume_entry = ctk.CTkEntry(master=frame_champs6, placeholder_text="Volume total (kg)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=220)
+                                  text_color=couleur1, width=310)
     volume_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     Options_climat = None
@@ -947,6 +966,16 @@ def ajouter_activité_musculation(account_id, app, sidebar_exercice, exercice, c
     passe_d_entry = None
     score_entry = None
     but_entry = None
+
+    bouton_valider = ctk.CTkButton(master=frame_bouton, text="💾 Enregistrer ton activité", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1, border_color=couleur2, border_width=border1,
+                                    font=(font_principale, taille3), 
+                                    command=lambda : vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
+                                    Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
+                                    sport_entry, distance_entry, denivele_entry, allure_entry, vmax_entry, muscle_entry,
+                                    rep_entry, serie_entry, volume_entry,Options_lieu, lieu_entry, matos_entry, humeur_entry,
+                                    passe_d_entry, score_entry, but_entry, "Musculation"))
+    bouton_valider.pack(expand=True, fill="both")
 
     coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
                                        Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
@@ -992,25 +1021,27 @@ def ajouter_activité_fooball(account_id, app, sidebar_exercice, exercice, charg
     button_rpe = ctk.CTkButton(master=navbar, text="📊 C'est quoi le RPE ?", fg_color=couleur2, hover_color=couleur2_hover,
                            corner_radius=corner1, height=button_height, font=(font_principale, taille3), text_color=couleur1,
                                         command=c_quoi_rpe)
-    button_rpe.pack(expand=True, fill="x", side="right", padx=10, pady=5)
+    button_rpe.pack(expand=True, fill="x", side="right", padx=(15, 5), pady=5)
 
     boite = ctk.CTkFrame(app, fg_color="transparent")
-    boite.pack(expand=True, fill="both")
+    boite.pack()
     frame_activité = ctk.CTkFrame(boite, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)
-    frame_activité.pack(expand=True, fill="both",side="left", padx=15, pady=15)
+    frame_activité.pack(side="left", padx=(25, 5), pady=25)
 
     frame_champs1 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs1.pack(expand=True, fill="both", padx=12, pady=(12, 2))
+    frame_champs1.pack(padx=12, pady=(12, 2))
     frame_champs2 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs2.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs2.pack(padx=12, pady=2)
     frame_champs3 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs3.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs3.pack(padx=12, pady=20)
     frame_champs4 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs4.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs4.pack(padx=12, pady=2)
     frame_champs5 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs5.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs5.pack(padx=12, pady=2)
     frame_champs6 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs6.pack(expand=True, fill="both", padx=12, pady=(2, 12))
+    frame_champs6.pack(padx=12, pady=2)
+    frame_bouton = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
+    frame_bouton.pack(padx=12, pady=(0, 12))
 
     app.bind('<Return>', lambda event: vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
                                        Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
@@ -1025,32 +1056,32 @@ def ajouter_activité_fooball(account_id, app, sidebar_exercice, exercice, charg
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
     date_entry.insert(0, f"💡 {date_actuelle_format.replace("-", "/")}")
-    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
+    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=70, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
                                             command=lambda: pop_up_calendrier(app, date_entry))
     button_pop_up_calendrier.pack(expand=True, fill="both", side="left", padx=(0, 12), pady=12)
     duree_entry = ctk.CTkEntry(master=frame_champs1, placeholder_text="Durée", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=205)
+                                  text_color=couleur1, width=275)
     duree_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     type_entry = ctk.CTkComboBox(master=frame_champs2, values=Options_type, font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     type_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     type_entry.set("Type d'entraî.")
     humeur_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Humeur post-match", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=200)
+                                  text_color=couleur1, width=310)
     humeur_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 1", font=(font_principale, taille2), text_color=couleur_fond)
     rpe_label.pack(expand=True, fill="x", side="left", padx=12)
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
-    rpe_entry = ctk.CTkSlider(master=frame_champs3, width=400, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
+    rpe_entry = ctk.CTkSlider(master=frame_champs3, width=500, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur_fond, button_color=couleur_fond, button_hover_color=couleur2_hover,
                               corner_radius=5, button_length=20, fg_color=couleur1, 
                               # La variable DoubleVar met la valeur du RPE à 1
@@ -1059,35 +1090,35 @@ def ajouter_activité_fooball(account_id, app, sidebar_exercice, exercice, charg
 
     fatigue_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_fatigue.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     fatigue_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     fatigue_entry.set("Fatigue post-entraî.")
     douleur_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_douleur.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     douleur_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     douleur_entry.set("Douleur post-entraî.")
 
     climat_entry = ctk.CTkComboBox(master=frame_champs5, values=list(Options_climat.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     climat_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     climat_entry.set("Climat à l'entraî.")
     score_entry = ctk.CTkEntry(master=frame_champs5, placeholder_text="Score (ex : 3-2)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=200)
+                                  text_color=couleur1, width=310)
     score_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     but_entry = ctk.CTkEntry(master=frame_champs6, placeholder_text="Nb. but", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=220)
+                                  text_color=couleur1, width=310)
     but_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     passe_d_entry = ctk.CTkEntry(master=frame_champs6, placeholder_text="Nb. passe décisive", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=220)
+                                  text_color=couleur1, width=310)
     passe_d_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     sport_entry = None
@@ -1102,6 +1133,16 @@ def ajouter_activité_fooball(account_id, app, sidebar_exercice, exercice, charg
     Options_lieu = None
     lieu_entry = None
     matos_entry = None
+
+    bouton_valider = ctk.CTkButton(master=frame_bouton, text="💾 Enregistrer ton activité", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1, border_color=couleur2, border_width=border1,
+                                    font=(font_principale, taille3), 
+                                    command=lambda : vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
+                                    Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
+                                    sport_entry, distance_entry, denivele_entry, allure_entry, vmax_entry, muscle_entry,
+                                    rep_entry, serie_entry, volume_entry,Options_lieu, lieu_entry, matos_entry, humeur_entry,
+                                    passe_d_entry, score_entry, but_entry, "Football"))
+    bouton_valider.pack(expand=True, fill="both")
 
     coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
                                        Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
@@ -1150,20 +1191,22 @@ def ajouter_activité_libre(account_id, app, sidebar_exercice, exercice, charge_
     button_rpe.pack(expand=True, fill="x", side="right", padx=10, pady=5)
 
     boite = ctk.CTkFrame(app, fg_color="transparent")
-    boite.pack(expand=True, fill="both")
+    boite.pack()
     frame_activité = ctk.CTkFrame(boite, corner_radius=corner1, border_width=border2, border_color=couleur1, fg_color=couleur2)
-    frame_activité.pack(expand=True, fill="both",side="left", padx=(15, 7), pady=15)
+    frame_activité.pack(side="left", padx=(25, 5), pady=25)
 
     frame_champs1 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs1.pack(expand=True, fill="both", padx=12, pady=(12, 2))
+    frame_champs1.pack(padx=12, pady=(12, 2))
     frame_champs2 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs2.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs2.pack(padx=12, pady=2)
     frame_champs3 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs3.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs3.pack(padx=12, pady=20)
     frame_champs4 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs4.pack(expand=True, fill="both", padx=12, pady=2)
+    frame_champs4.pack(padx=12, pady=2)
     frame_champs5 = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
-    frame_champs5.pack(expand=True, fill="both", padx=12, pady=(2, 12))
+    frame_champs5.pack(padx=12, pady=2)
+    frame_bouton = ctk.CTkFrame(master=frame_activité, fg_color="transparent")
+    frame_bouton.pack(expand=True, fill="both", padx=12, pady=(0, 12))
 
     allure_entry = None
     vmax_entry = None
@@ -1181,34 +1224,34 @@ def ajouter_activité_libre(account_id, app, sidebar_exercice, exercice, charge_
                                   text_color=couleur1, width=180)
     date_entry.pack(expand=True, fill="both", side="left", padx=(12,0), pady=12)
     date_entry.insert(0, f"💡 {date_actuelle_format.replace("-", "/")}")
-    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=75, height=36, corner_radius=corner1, fg_color=couleur2,
+    button_pop_up_calendrier = ctk.CTkButton(frame_pour_date, text="📅 Calendrier", width=70, height=36, corner_radius=corner1, fg_color=couleur2,
                                             hover_color=couleur2_hover, font=(font_principale, taille3), text_color=couleur1,
                                             border_color=couleur2, border_width=border1,
                                             command=lambda: pop_up_calendrier(app, date_entry))
     button_pop_up_calendrier.pack(expand=True, fill="both", side="left", padx=(0, 12), pady=12)
     sport_entry = ctk.CTkEntry(master=frame_champs1, placeholder_text="Sport", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=200)
+                                  text_color=couleur1, width=275)
     sport_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     duree_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Durée", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=170)
+                                  text_color=couleur1, width=205)
     duree_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     distance_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Distance (km)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color =couleur1,
-                                  text_color=couleur1, width=190)
+                                  text_color=couleur1, width=205)
     distance_entry.pack(expand=True, fill="both", side="left", padx=2)
     denivele_entry = ctk.CTkEntry(master=frame_champs2, placeholder_text="Dénivelé (m)", border_color=couleur_fond, fg_color=couleur_fond,
                                   height=height_expressive, font=(font_principale, taille2), corner_radius=corner1, placeholder_text_color=couleur1,
-                                  text_color=couleur1, width=180)
+                                  text_color=couleur1, width=205)
     denivele_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
 
     rpe_label = ctk.CTkLabel(master=frame_champs3, text="RPE : 1", font=(font_principale, taille2), text_color=couleur_fond)
     rpe_label.pack(expand=True, fill="x", side="left", padx=12)
     def valeur_rpe(valeur):
         rpe_label.configure(text=f"RPE : {valeur:.0f}")
-    rpe_entry = ctk.CTkSlider(master=frame_champs3, width=400, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
+    rpe_entry = ctk.CTkSlider(master=frame_champs3, width=500, height=30, from_= 1, to= 10, number_of_steps= 9, command=valeur_rpe,
                               progress_color=couleur_fond, button_color=couleur_fond, button_hover_color=couleur2_hover,
                               corner_radius=5, button_length=20, fg_color=couleur1, 
                               # La variable DoubleVar met la valeur du RPE à 1
@@ -1217,26 +1260,26 @@ def ajouter_activité_libre(account_id, app, sidebar_exercice, exercice, charge_
 
     type_entry = ctk.CTkComboBox(master=frame_champs4, values=options_type, font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     type_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     type_entry.set("Type d'entraî.")
     fatigue_entry = ctk.CTkComboBox(master=frame_champs4, values=list(Options_fatigue.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     fatigue_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     fatigue_entry.set("Fatigue post-entraî.")
 
     douleur_entry = ctk.CTkComboBox(master=frame_champs5, values=list(Options_douleur.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     douleur_entry.pack(expand=True, fill="both", side="left", padx=(0, 2))
     douleur_entry.set("Douleur post-entraî.")
     climat_entry = ctk.CTkComboBox(master=frame_champs5, values=list(Options_climat.keys()), font=(font_principale, taille2), height=height_expressive, 
                                     state="readonly", border_width=border1, border_color=couleur_fond, button_color=couleur_fond, fg_color=couleur_fond,
-                                    corner_radius=corner1, width=200, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
+                                    corner_radius=corner1, width=310, dropdown_fg_color=couleur_fond, dropdown_font=(font_principale, taille2),
                                     dropdown_hover_color = couleur2_hover, text_color=couleur1, dropdown_text_color=couleur1)
     climat_entry.pack(expand=True, fill="both", side="left", padx=(2, 0))
     climat_entry.set("Climat à l'entraî.")
@@ -1252,6 +1295,16 @@ def ajouter_activité_libre(account_id, app, sidebar_exercice, exercice, charge_
     passe_d_entry = None
     score_entry = None
     but_entry = None
+
+    bouton_valider = ctk.CTkButton(master=frame_bouton, text="💾 Enregistrer ton activité", fg_color=couleur2, hover_color=couleur2_hover,
+                                    corner_radius=corner1, height=button_height, text_color=couleur1, border_color=couleur2, border_width=border1,
+                                    font=(font_principale, taille3), 
+                                    command=lambda : vérification_data_de_base_activité(account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
+                                    Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
+                                    sport_entry, distance_entry, denivele_entry, allure_entry, vmax_entry, muscle_entry,
+                                    rep_entry, serie_entry, volume_entry,Options_lieu, lieu_entry, matos_entry, humeur_entry,
+                                    passe_d_entry, score_entry, but_entry, "Libre"))
+    bouton_valider.pack(expand=True, fill="both")
 
     coach_pour_ajouter_une_activité(boite, account_id, app, exercice, date_entry, duree_entry, rpe_entry, douleur_entry, fatigue_entry, 
                                        Options_fatigue, Options_douleur, Options_climat, climat_entry, type_entry, 
@@ -1298,7 +1351,7 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql, ap
     boite_titre.pack(side="top", fill="x", padx=10, pady=10)
 
     boite = ctk.CTkFrame(master=app, fg_color=couleur2, corner_radius=corner2)
-    boite.pack(side="top", fill="x", padx=10, pady=(10, 5))
+    boite.pack(side="top", padx=10, pady=(10, 5))
     boite_semi_header = ctk.CTkFrame(master=boite, fg_color=couleur2, corner_radius=corner2)
     boite_semi_header.pack(expand=True, fill="x", side="left", padx=(2, 10), pady=2)
     boite_semi_header2 = ctk.CTkFrame(master=boite, fg_color=couleur2, corner_radius=corner2)
@@ -1308,7 +1361,7 @@ def interface_exercice(account_id, type_de_catégorie, headers, requête_sql, ap
 
     frame_analyse_coach = ctk.CTkFrame(app, fg_color="transparent", corner_radius=corner1, border_width=border1, border_color=couleur1,
                                        height=125)
-    frame_analyse_coach.pack(side="top", fill="x", padx=10, pady=(5, 0))
+    frame_analyse_coach.pack(side="top", padx=10, pady=(5, 0))
 
     tableau_frame = ctk.CTkScrollableFrame(app, fg_color=couleur_fond, scrollbar_button_color=couleur2, 
                                               scrollbar_button_hover_color=couleur2_hover)

@@ -5,7 +5,6 @@ from PIL import Image
 import tkcalendar
 import sqlite3
 import hashlib
-import math
 from datetime import datetime, timedelta
 from datetime import date
 from datetime import time as Time
@@ -18,13 +17,13 @@ from tkinter import messagebox
 
 # Version Sprintia
 version_numéro = "3.2"
-version_entière = "3.2 BÊTA 4 | Version Novembre 2025"
-date_de_sortie = "12 Octobre 2025"
+version_entière = "3.2 BÊTA 5 | Version Novembre 2025"
+date_de_sortie = "19 Octobre 2025"
 type_de_maj = "Mise à jour mineur"
 
 # Couleur
-couleur1 = "#3d71a5"
-couleur1_hover = "#4a8bcb"
+couleur1 = "#366a9e" #366a9e #2f6192 #3d71a5
+couleur1_hover = "#4a8bcb" #4a8bcb
 couleur2 = "#8CB1C1"
 couleur2_hover = "#ABD1E1"
 couleur_fond = "#131d34"
@@ -62,6 +61,8 @@ heure_actuelle_objet = maintenant.time()
 
 # variable globale
 periode_séléctionner = "1 semaine"
+periode_séléctionner_performance_objectif = "Objectif futur"
+periode_séléctionner_performance_competition = "Compétition future"
 
 # Mots sensibles à filtrer pour pseudo utilisateur
 mot_sensible = [
