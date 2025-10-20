@@ -4,7 +4,7 @@ from tkinter import messagebox
 import webbrowser
 
 def installation_des_bibliothèques():
-    bibliothèques = [sys.executable, "-m", "pip", "install", "--upgrade", "customtkinter", "matplotlib", "seaborn", "pillow"]
+    bibliothèques = [sys.executable, "-m", "pip", "install", "-r", "requirements.txt"]
     try:
         subprocess.run(bibliothèques, check=True)
         messagebox.showinfo("Info", "Les bibliothèques nécessaires à Sprintia ont été installées ! Tu peux maintenant lancer l'application Sprintia !")
@@ -21,6 +21,6 @@ def hello():
     if reponse:
         installation_des_bibliothèques()
     else:
-        messagebox.showwarning("Attention", "Si tu refuses, tu risques de ne même pas pouvoir ouvrir Sprintia. Relance le programme, si tu veux utiliser Sprintia.")
+        messagebox.showwarning("Attention", "Si tu refuses, tu risques de ne même pas pouvoir ouvrir Sprintia. Relance le programme, si tu veux installer les bibliothèques nécessaire à Sprintia.")
 
 hello()
