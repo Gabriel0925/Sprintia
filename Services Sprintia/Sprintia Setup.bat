@@ -1,0 +1,1 @@
+python "%~dp0install_requirements.py"

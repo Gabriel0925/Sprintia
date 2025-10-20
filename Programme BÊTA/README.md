@@ -42,13 +42,25 @@ Sprintia est optimisée pour fonctionner sur :
 
 🐍 Version de Python L’application nécessite Python 3.10 minimum pour s’exécuter correctement.
 
-## 📚 Guide rapide d’installation de Sprintia
+## 📚 Guide d’installation de Sprintia
+
+Temps estimé : ~20 à 40 minutes (si tu connais un peu tout ça)
 
 Pour commencer, si Python n’est pas déjà installé sur ton ordinateur, télécharge-le et installe-le depuis le site officiel : https://www.python.org/downloads/
 
-### 1️⃣ Création du dossier de Sprintia Ouvre ton explorateur de fichiers.
+### 1️⃣ Installation des dépendances
 
-◉ Crée un nouveau dossier dans tes documents sur ton PC, tu peux le nommer comme tu veux, mais "Sprintia" est recommandé pour éviter toute confusion.
+◉  Télécharge tous les fichiers que tu peux trouver sur mon GitHub dans le dossier “Services Sprintia”
+
+◉  Créer un nouveau dossier dans tes documents sur ton PC, tu peux le nommer comme tu veux, mais "Services Sprintia" est recommandé pour éviter toute confusion.
+
+◉ Ensuite, tu n'as plus qu'à double-cliquer sur "Sprintia Setup"
+
+◉ Une fois les bibliothèques installées, tu peux supprimer le dossier “Services Sprintia” de ton PC.
+
+### 2️⃣ Création du dossier de Sprintia
+
+◉ Créer un nouveau dossier dans tes documents sur ton PC, tu peux le nommer comme tu veux, mais "Sprintia" est recommandé pour éviter toute confusion.
 
 ◉ Télécharge tous les fichiers que tu peux trouver sur mon GitHub dans le dossier “Programme BÊTA" puis "Fichier code Sprintia".
 
