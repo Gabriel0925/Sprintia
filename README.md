@@ -94,3 +94,7 @@ Mettre à jour Sprintia est assez simple, mais il faut bien respecter le tuto si
 Conseil : À chaque mise à jour, il est préférable de recréer le raccourci sur ton bureau.
 
 Et voilà, tu es à jour et tes données sont conservées !
+
+## 🤔 Pour les curieux·ses
+
+L’intégralité du code de Sprintia est disponible dans le dossier "Code source".
