@@ -1,12 +1,21 @@
 # Bienvenue sur Sprintia
 
+## Sommaire
+- [ℹ️ Petite information](#ℹ️-petite-information)
+- [📌 Sprintia c'est quoi ?](#-sprintia-cest-quoi-)
+- [⚡ Fonctionnalités principales](#-fonctionnalités-principales)
+- [💻 Compatibilité](#-compatibilité)
+- [📚 Guide rapide d’installation](#-guide-rapide-dinstallation)
+- [🛡️ Antivirus](#️-conseil-si-tu-as-un-antivirus)
+- [🔄️ Mise à jour](#️-comment-mettre-à-jour-sprintia)
+
 ## ℹ️ Petite information
 
 Dans le monde du sport, un coach est un partenaire de confiance. C'est pour cette raison que j'ai choisi de te tutoyer dans l'application Sprintia et dans ce README. L'objectif est de créer une relation plus proche et personnelle avec toi, comme celle que tu aurais avec un coach sportif.
 
 ## 📌 Sprintia c'est quoi ?
 
-Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes (gratuits).
+Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes 100 % gratuits.
 
 ## ⚡ Fonctionnalités principales
 
@@ -35,7 +44,17 @@ Sprintia, est compatible avec les PC qui tournent sous Windows.
 
 ◉ Télécharge le dossier compressé "Sprintia-V.zip" disponible sur mon GitHub. Le nom exact du dossier dépend de la version actuelle, (ex. "Sprintia-V3.1.5.zip").
 
-◉ Ensuite, tu vas dans tes téléchargements dans l'explorateur de fichiers de ton PC. Puis, tu fais un clic-droit sur le dossier compressé "Sprintia-V.zip" puis "Extraire tout". Une fênetre s'ouvrira puis tu devras cliquer sur le bouton "Parcourir" puis sélectionne "Documents".
+◉ Ensuite, tu vas dans tes téléchargements dans l'explorateur de fichiers de ton PC. Puis, tu fais un clic-droit sur le dossier compressé "Sprintia-V.zip" puis "Extraire tout". Une fenêtre s'ouvrira puis tu devras cliquer sur le bouton "Parcourir" puis sélectionne "Documents".
+
+### 2️⃣ Faire un raccourci bureau (optionnel mais pratique)
+
+◉ Rends-toi dans tes documents puis dans le dossier Sprintia. Fais un clic-droit sur "Sprintia.exe" puis "Afficher d'autres options" puis "Envoyer vers" puis clique sur "Bureau (créer un raccourci)"
+
+◉ Ensuite, va sur ton bureau tu verras un fichier nommé "Sprintia.exe - Raccourci" fais un clic-droit dessus puis "Renommer" et renomme le "Sprintia" ça seras plus propre.
+
+◉ Bravo ! Tu as réussi à faire le tips maintenant tu n'auras plus qu'a double-clic sur Sprintia avec l'icône et hop, Sprintia se lancera !
+
+### 3️⃣ Lancement de Sprintia
 
 ◉ Maintenant, tu n'as plus qu'à te rendre dans tes documents puis dans le dossier Sprintia. Désormais, tu n'as plus qu'à double-cliquer sur "Sprintia.exe".
 
@@ -43,19 +62,11 @@ Sprintia, est compatible avec les PC qui tournent sous Windows.
 
 ![Capture d'écran de la fênetre de sécurité Windows](<Images/Windows Security.png>)
 
-◉ Clique sur "Informations complémentaires", puis sur "Exécuter quand même" et voilà désormais tu peux utiliser Sprintia.
+◉ Clique sur "Informations complémentaires", puis sur "Exécuter quand même" et voilà désormais tu peux utiliser Sprintia, bon entraînement 😉.
 
-### 2️⃣ Petit tips (optionnel mais pratique)
+## 🛡️ Conseil si tu as un antivirus 
 
-◉ Fais un clic-droit sur "Sprintia.exe" puis "Afficher d'autres options" puis "Envoyer vers" puis clique sur "Bureau (créer un raccourci)"
-
-◉ Ensuite, va sur ton bureau tu verras un fichier nommé "Sprintia.exe - Raccourci" fais un clic-droit dessus puis "Renommer" et renomme le "Sprintia" ça seras plus propre.
-
-◉ Bravo ! Tu as réussi à faire le tips maintenant tu n'auras plus qu'a double-clic sur Sprintia avec l'icône et hop, Sprintia se lancera !
-
-## 🛡️ Antivirus
-
-Tu as un antivirus (Norton, Avast,...) ? Pour éviter que ton antivirus bloque "Sprintia.exe", je te conseille de faire ça ⬇️
+Tu utilises un antivirus (Norton, Avast, etc.) ? Pour éviter que ton antivirus bloque "Sprintia.exe", je te conseille de faire ça ⬇️
 
 ◉ Ajoute le dossier "Sprintia" (qu'il y a dans tes "Documents" sur ton PC) à la liste d'exclusions de ton logiciel antivirus.
 
@@ -72,5 +83,7 @@ Mettre à jour Sprintia est assez simple, mais il faut bien respecter le tuto si
 ◉ Télécharge le nouveau "Sprintia-V.zip" et extrais-le (comme à l'installation) dans tes Documents.
 
 ◉ Copie le fichier "data_base.db" que tu as mis sur ton Bureau et colle-le dans le nouveau dossier "Sprintia" de tes documents.
+
+Conseil : À chaque mise à jour, il est préférable de recréer le raccourci sur ton bureau.
 
 Et voilà, tu es à jour et tes données sont conservées !
