@@ -6,11 +6,7 @@ Dans le monde du sport, un coach est un partenaire de confiance. C'est pour cett
 
 ## 📌 Sprintia c'est quoi ?
 
-Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes (gratuits) :
-
-Charge d'entraînement
-Indulgence de course
-Prédicteur de performance
+Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes (gratuits).
 
 ## ⚡ Fonctionnalités principales
 
@@ -29,39 +25,39 @@ Estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, mara
 
 ![Capture d'écran de Sprintia](<Prédicteur de performance.png>)
 
+## 💻 Compatibilité
+
+Sprintia, est compatible avec les PC qui tournent sous Windows.
+
 ## 📚 Guide rapide d’installation de Sprintia
 
-Pour commencer, si Python n’est pas déjà installé sur ton ordinateur, télécharge-le et installe-le depuis le site officiel : https://www.python.org/downloads/
+◉ Télécharge le dossier compressé "Sprintia-V.zip" disponible sur mon GitHub. Le nom exact du dossier dépend de la version actuelle, (ex. "Sprintia-V3.1.5.zip").
 
-### 1️⃣ Création du dossier de Sprintia Ouvre ton explorateur de fichiers.
+◉ Ensuite, tu vas dans tes téléchargements dans l'explorateur de fichiers de ton PC. Puis, tu fais un clic-droit sur le dossier compressé "Sprintia-V.zip" puis "Extraire tout". Une fênetre s'ouvrira puis tu devras cliquer sur le bouton "Parcourir" puis sélectionne "Documents".
 
-Crée un nouveau dossier. Tu peux le nommer comme tu veux, mais Sprintia est recommandé pour éviter toute confusion.
+◉ Maintenant tu n'as plus qu'à te rendre dans tes documents puis dans le dossier Sprintia. Désormais, tu n'as plus qu'à double-cliquer sur "Sprintia.exe".
 
-Télécharge tous les fichiers qu’il y a dans le dossier “Dernière version puis tu les mets dans le dossier que tu as créé dans ton PC à l’étape 2.
+◉ Si une fenêtre de ce type (voir si-dessous) apparaît pas de panique, c'est parce que Microsoft ne connaît pas Sprintia.
 
-### 2️⃣ Ouverture du projet 
+![Capture d'écran de la fênetre de sécurité Windows](<Windows Security.png>)
 
-● Important : ouvre le dossier complet dans ton éditeur de code (Visual Studio Code, PyCharm, Thonny,...), pas uniquement le fichier Sprintia. (Sinon, le programme ne trouvera pas les images et ne pourra pas fonctionner correctement.) Si tu n’as pas d’éditeur de code, suis ce tuto pour l’installer. Au début de la vidéo, il t’explique comment installer Python si c’est déjà fait tu peux sauter ce passage de la vidéo. Le lien ➡️ : https://www.youtube.com/watch?v=RHJHqMBN-LI
+◉ Clique sur "Informations complémentaires", puis sur "Exécuter quand même" et voilà désormais tu peux utiliser Sprintia.
 
-### 3️⃣ Installation des bibliothèques
+## 🛡️ Antivirus
 
- Va dans le dossier nommé “Services Sprintia”, puis télécharge le fichier “Sprintia Setup.py” puis lance le programme et suis les instructions. Une fois toutes ces étapes sont terminées, ouvre le dossier Sprintia dans Visual Studio Code. Lance le programme “Sprintia”, puis découvre Sprintia !
+Tu as un antivirus (Norton, Avast,...) ? Pour éviter que ton antivirus bloque "Sprintia.exe", je te conseille de faire ça ⬇️
 
-## 💻 Systèmes d'exploitation compatibles
+◉ Ajouter le dossier "Sprintia" (qu'il y a dans tes "Documents" sur ton PC) à la liste d'exclusions de ton logiciel antivirus.
 
-Cette application, construite avec Custom Tkinter, est conçue pour fonctionner parfaitement sur les principaux systèmes d’exploitation de bureau. ✅ Windows : Toutes les versions modernes sont prises en charge.
+👉 Besoin d'aide pour la procédure ? Tu peux demander à [ChatGPT](https://chatgpt.com/) en lui disant : "Comment exclure le dossier Documents\Sprintia de [Nom de ton antivirus]" :)
 
-✅ macOS : Compatible avec les versions récentes.
+## 🔄️ Comment mettre à jour Sprintia ?
 
-✅ Linux : Fonctionne sur les distributions les plus courantes.
+Mettre à jour Sprintia est assez simple, mais il faut bien respecter le tuto sinon tu risques de supprimer par erreur toutes tes données.
 
-🐍 Version de Python L’application nécessite Python 3.0 minimum pour s’exécuter correctement.
+◉ Va dans le dossier "Sprintia" (dans tes Documents) et copie le fichier "data_base.db". Colle-le temporairement sur ton Bureau.
+◉ Supprime l'ancien dossier "Sprintia" de tes Documents.
+◉ Télécharge le nouveau "Sprintia-V.zip" et extrais-le (comme à l'installation) dans tes Documents.
+◉ Copie le fichier "data_base.db" que tu as mis sur ton Bureau et colle-le dans le nouveau dossier "Sprintia" de tes documents.
 
-🔹 Recommandation : utiliser Python 3.13 ou supérieur pour une compatibilité optimale.
-
-📱 Compatibilité mobile et tablette ❌ Smartphones (iOS / Android) : Non disponible.
-
-⚠️ Tablettes :
-
-Non optimisée pour les interfaces tactiles.
-Utilisable uniquement sur une tablette Windows, grâce à la compatibilité avec son OS.
+Et voilà, tu es à jour et tes données sont conservées !
