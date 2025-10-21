@@ -59,7 +59,7 @@ Tu as un antivirus (Norton, Avast,...) ? Pour éviter que ton antivirus bloque "
 
 ◉ Ajoute le dossier "Sprintia" (qu'il y a dans tes "Documents" sur ton PC) à la liste d'exclusions de ton logiciel antivirus.
 
-👉 Besoin d'aide pour la procédure ? Tu peux demander à [ChatGPT](https://chatgpt.com/) en lui disant : "Comment exclure le dossier Documents\Sprintia de [Nom de ton antivirus]" :)
+👉 Besoin d'aide pour la procédure ? Tu peux demander à <a href="https://chatgpt.com/" target="_blank">ChatGPT</a> en lui disant : "Comment exclure le dossier Documents\Sprintia de [Nom de ton antivirus]"
 
 ## 🔄️ Comment mettre à jour Sprintia ?
 
