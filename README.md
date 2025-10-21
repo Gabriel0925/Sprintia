@@ -9,6 +9,7 @@
 - [🛡️ Antivirus](#️-conseil-si-tu-as-un-antivirus)
 - [🔔 Rester à jour](#-comment-rester-à-jour-)
 - [🔄️ Mise à jour](#️-comment-mettre-à-jour-Sprintia-)
+- [🤔 Pour les curieux·ses](#-pour-les-curieuxses)
 
 ## ℹ️ Petite information
 
