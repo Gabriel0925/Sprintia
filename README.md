@@ -7,6 +7,7 @@
 - [💻 Compatibilité](#-compatibilité)
 - [📚 Guide rapide d’installation](#-guide-rapide-dinstallation)
 - [🛡️ Antivirus](#️-conseil-si-tu-as-un-antivirus)
+- [🔔 Rester à jour](#️-comment-rester-à-jour-)
 - [🔄️ Mise à jour](#️-comment-mettre-à-jour-Sprintia-)
 
 ## ℹ️ Petite information
@@ -71,6 +72,10 @@ Tu utilises un antivirus (Norton, Avast, etc.) ? Pour éviter que ton antivirus 
 ◉ Ajoute le dossier "Sprintia" (qu'il y a dans tes "Documents" sur ton PC) à la liste d'exclusions de ton logiciel antivirus.
 
 👉 Besoin d'aide pour la procédure ? Tu peux demander à [ChatGPT](https://chatgpt.com/) en lui disant : "Comment exclure le dossier Documents\Sprintia de [nom de ton antivirus]".
+
+## 🔔 Comment rester à jour ?
+
+Pour savoir si une nouvelle version est disponible, il suffit de checker les 'Releases' de ce dépôt de temps en temps. C'est là que je publie toutes les mises à jour !
 
 ## 🔄️ Comment mettre à jour Sprintia ?
 
