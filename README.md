@@ -1,17 +1,5 @@
 # Bienvenue sur Sprintia
 
-## Quelques images de Sprintia :
-![Capture d'écran de Sprintia](Bienvenue.png)
-
-![Capture d'écran de Sprintia](<Charge d'entraînement.png>)
-
-![Capture d'écran de Sprintia](<Indulgence de course.png>)
-
-![Capture d'écran de Sprintia](<Estimation VMA + Zones.png>)
-
-![Capture d'écran de Sprintia](<Prédicteur de performance.png>)
-
-
 ## ℹ️ Petite information
 
 Dans le monde du sport, un coach est un partenaire de confiance. C'est pour cette raison que j'ai choisi de te tutoyer dans l'application Sprintia et dans ce README. L'objectif est de créer une relation plus proche et personnelle avec toi, comme celle que tu aurais avec un coach sportif.
@@ -29,11 +17,17 @@ Prédicteur de performance
 ### Charge d'entraînement
 La charge d'entraînement sert à optimiser ta progression sans te cramer, en trouvant le juste équilibre entre l'effort fourni et la récupération nécessaire.
 
+![Capture d'écran de Sprintia](<Charge d'entraînement.png>)
+
 ### Indulgence de course
 L’indulgence de course t’aide à ajuster ton kilométrage des 7 derniers jours pour rester dans une progression optimale, sans dépasser ta limite.
 
+![Capture d'écran de Sprintia](<Indulgence de course.png>)
+
 ### Prédicteur de performance
 Estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir de tes courses récentes.
+
+![Capture d'écran de Sprintia](<Prédicteur de performance.png>)
 
 ## 📚 Guide rapide d’installation de Sprintia
 
