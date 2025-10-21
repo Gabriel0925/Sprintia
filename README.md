@@ -15,7 +15,7 @@ Dans le monde du sport, un coach est un partenaire de confiance. C'est pour cett
 
 ## 📌 Sprintia c'est quoi ?
 
-Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes 100 % gratuits.
+Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes 100 % gratuits. Que tu sois un sportif débutant, confirmé, expert,... Sprintia t’aide à progresser sans te blesser.
 
 ## ⚡ Fonctionnalités principales
 
@@ -75,6 +75,8 @@ Tu utilises un antivirus (Norton, Avast, etc.) ? Pour éviter que ton antivirus 
 ## 🔄️ Comment mettre à jour Sprintia ?
 
 Mettre à jour Sprintia est assez simple, mais il faut bien respecter le tuto sinon tu risques de supprimer par erreur toutes tes données.
+
+⚠️ Ne pas supprimer le fichier "data_base.db" sous peine de perdre tes données !
 
 ◉ Va dans le dossier "Sprintia" (dans tes Documents) et copie le fichier "data_base.db". Colle-le temporairement sur ton Bureau.
 
