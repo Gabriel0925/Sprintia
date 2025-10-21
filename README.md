@@ -13,17 +13,17 @@ Sprintia est conçue pour t'aider avant et après un entraînement grâce à des
 ### Charge d'entraînement
 La charge d'entraînement sert à optimiser ta progression sans te cramer, en trouvant le juste équilibre entre l'effort fourni et la récupération nécessaire.
 
-![Capture d'écran de Sprintia](<Charge d'entraînement.png>)
+![Capture d'écran de Sprintia](<Images/Charge d'entraînement.png>)
 
 ### Indulgence de course
 L’indulgence de course t’aide à ajuster ton kilométrage des 7 derniers jours pour rester dans une progression optimale, sans dépasser ta limite.
 
-![Capture d'écran de Sprintia](<Indulgence de course.png>)
+![Capture d'écran de Sprintia](<Images/Indulgence de course.png>)
 
 ### Prédicteur de performance
 Estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir de tes courses récentes.
 
-![Capture d'écran de Sprintia](<Prédicteur de performance.png>)
+![Capture d'écran de Sprintia](<Images/Prédicteur de performance.png>)
 
 ## 💻 Compatibilité
 
@@ -41,7 +41,7 @@ Sprintia, est compatible avec les PC qui tournent sous Windows.
 
 ◉ Si une fenêtre de ce type (voir si-dessous) apparaît pas de panique, c'est parce que Microsoft ne connaît pas Sprintia.
 
-![Capture d'écran de la fênetre de sécurité Windows](<Windows Security.png>)
+![Capture d'écran de la fênetre de sécurité Windows](<Images/Windows Security.png>)
 
 ◉ Clique sur "Informations complémentaires", puis sur "Exécuter quand même" et voilà désormais tu peux utiliser Sprintia.
 
