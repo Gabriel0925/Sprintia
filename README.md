@@ -7,7 +7,7 @@
 - [💻 Compatibilité](#-compatibilité)
 - [📚 Guide rapide d’installation](#-guide-rapide-dinstallation)
 - [🛡️ Antivirus](#️-conseil-si-tu-as-un-antivirus)
-- [🔄️ Mise à jour](#️-comment-mettre-à-jour-sprintia)
+- [🔄️ Mise à jour](#️-comment-mettre-à-jour-Sprintia-)
 
 ## ℹ️ Petite information
 
