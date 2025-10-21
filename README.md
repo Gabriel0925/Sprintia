@@ -6,10 +6,9 @@
 - [⚡ Fonctionnalités principales](#-fonctionnalités-principales)
 - [💻 Compatibilité](#-compatibilité)
 - [📚 Guide rapide d’installation](#-guide-rapide-dinstallation)
-- [🛡️ Antivirus](#️-conseil-si-tu-as-un-antivirus)
-- [🔔 Rester à jour](#️-comment-rester-à-jour-)
-
-- [🔄️ Mise à jour](#️-comment-mettre-à-jour-Sprintia-)
+- [🛡️ Antivirus](#-conseil-si-tu-as-un-antivirus)
+- [🔔 Rester à jour](#-comment-rester-à-jour-)
+- [🔄️ Mise à jour](##-comment-mettre-à-jour-Sprintia-)
 
 ## ℹ️ Petite information
 
