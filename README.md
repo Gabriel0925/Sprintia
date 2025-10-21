@@ -29,7 +29,9 @@ Estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, mara
 
 Sprintia, est compatible avec les PC qui tournent sous Windows.
 
-## 📚 Guide rapide d’installation de Sprintia
+## 📚 Guide rapide d’installation
+
+### 1️⃣ Installation
 
 ◉ Télécharge le dossier compressé "Sprintia-V.zip" disponible sur mon GitHub. Le nom exact du dossier dépend de la version actuelle, (ex. "Sprintia-V3.1.5.zip").
 
@@ -43,11 +45,19 @@ Sprintia, est compatible avec les PC qui tournent sous Windows.
 
 ◉ Clique sur "Informations complémentaires", puis sur "Exécuter quand même" et voilà désormais tu peux utiliser Sprintia.
 
+### 2️⃣ Petit tips (optionnel mais pratique)
+
+◉ Fais un clic-droit sur "Sprintia.exe" puis "Afficher d'autres options" puis "Envoyer vers" puis clique sur "Bureau (créer un raccourci)"
+
+◉ Ensuite, va sur ton bureau tu verras un fichier nommé "Sprintia.exe - Raccourci" fais un clic-droit dessus puis "Renommer" et renomme le "Sprintia" ça seras plus propre.
+
+◉ Bravo ! Tu as réussi à faire le tips maintenant tu n'auras plus qu'a double-clic sur Sprintia avec l'icône et hop, Sprintia se lancera !
+
 ## 🛡️ Antivirus
 
 Tu as un antivirus (Norton, Avast,...) ? Pour éviter que ton antivirus bloque "Sprintia.exe", je te conseille de faire ça ⬇️
 
-◉ Ajouter le dossier "Sprintia" (qu'il y a dans tes "Documents" sur ton PC) à la liste d'exclusions de ton logiciel antivirus.
+◉ Ajoute le dossier "Sprintia" (qu'il y a dans tes "Documents" sur ton PC) à la liste d'exclusions de ton logiciel antivirus.
 
 👉 Besoin d'aide pour la procédure ? Tu peux demander à [ChatGPT](https://chatgpt.com/) en lui disant : "Comment exclure le dossier Documents\Sprintia de [Nom de ton antivirus]" :)
 
