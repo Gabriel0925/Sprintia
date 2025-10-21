@@ -37,7 +37,7 @@ Sprintia, est compatible avec les PC qui tournent sous Windows.
 
 ◉ Ensuite, tu vas dans tes téléchargements dans l'explorateur de fichiers de ton PC. Puis, tu fais un clic-droit sur le dossier compressé "Sprintia-V.zip" puis "Extraire tout". Une fênetre s'ouvrira puis tu devras cliquer sur le bouton "Parcourir" puis sélectionne "Documents".
 
-◉ Maintenant tu n'as plus qu'à te rendre dans tes documents puis dans le dossier Sprintia. Désormais, tu n'as plus qu'à double-cliquer sur "Sprintia.exe".
+◉ Maintenant, tu n'as plus qu'à te rendre dans tes documents puis dans le dossier Sprintia. Désormais, tu n'as plus qu'à double-cliquer sur "Sprintia.exe".
 
 ◉ Si une fenêtre de ce type (voir si-dessous) apparaît pas de panique, c'est parce que Microsoft ne connaît pas Sprintia.
 
