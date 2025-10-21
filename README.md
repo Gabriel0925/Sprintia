@@ -66,8 +66,11 @@ Tu as un antivirus (Norton, Avast,...) ? Pour éviter que ton antivirus bloque "
 Mettre à jour Sprintia est assez simple, mais il faut bien respecter le tuto sinon tu risques de supprimer par erreur toutes tes données.
 
 ◉ Va dans le dossier "Sprintia" (dans tes Documents) et copie le fichier "data_base.db". Colle-le temporairement sur ton Bureau.
+
 ◉ Supprime l'ancien dossier "Sprintia" de tes Documents.
+
 ◉ Télécharge le nouveau "Sprintia-V.zip" et extrais-le (comme à l'installation) dans tes Documents.
+
 ◉ Copie le fichier "data_base.db" que tu as mis sur ton Bureau et colle-le dans le nouveau dossier "Sprintia" de tes documents.
 
 Et voilà, tu es à jour et tes données sont conservées !
