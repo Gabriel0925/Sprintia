@@ -24,7 +24,7 @@ Sprintia est conçue pour t'aider avant et après un entraînement grâce à des
 ## ⚡ Fonctionnalités principales
 
 ### Charge d'entraînement
-La charge d'entraînement sert à optimiser ta progression sans te cramer, en trouvant le juste équilibre entre l'effort fourni et la récupération nécessaire. La charge d'entraînement est adapté à tous les niveaux
+La charge d'entraînement sert à optimiser ta progression sans te cramer, en trouvant le juste équilibre entre l'effort fourni et la récupération nécessaire.
 
 ![Capture d'écran de Sprintia](<Images/Charge d'entraînement.png>)
 
