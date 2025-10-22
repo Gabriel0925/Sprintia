@@ -1,5 +1,7 @@
 # Bienvenue sur Sprintia
 
+## 🔥 Sprintia 3.2 arrive Jeudi 23 Octobre 2025 à 10h
+
 ## Sommaire
 - [ℹ️ Petite information](#ℹ️-petite-information)
 - [📌 Sprintia c'est quoi ?](#-sprintia-cest-quoi-)
@@ -22,7 +24,7 @@ Sprintia est conçue pour t'aider avant et après un entraînement grâce à des
 ## ⚡ Fonctionnalités principales
 
 ### Charge d'entraînement
-La charge d'entraînement sert à optimiser ta progression sans te cramer, en trouvant le juste équilibre entre l'effort fourni et la récupération nécessaire.
+La charge d'entraînement sert à optimiser ta progression sans te cramer, en trouvant le juste équilibre entre l'effort fourni et la récupération nécessaire. La charge d'entraînement est adapté à tous les niveaux
 
 ![Capture d'écran de Sprintia](<Images/Charge d'entraînement.png>)
 
@@ -32,9 +34,14 @@ L’indulgence de course t’aide à ajuster ton kilométrage des 7 derniers jou
 ![Capture d'écran de Sprintia](<Images/Indulgence de course.png>)
 
 ### Prédicteur de performance
-Estime tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir de tes courses récentes.
+Le prédicteur de performance te permet d'estimer tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir de tes courses récentes.
 
 ![Capture d'écran de Sprintia](<Images/Prédicteur de performance.png>)
+
+### JRM Coach
+Un coach entièrement personnalisable. Crée ton propre coach : choisis son nom, son style et même son avatar. Ton coach, à ton image, pour te motiver au quotidien !
+
+![Capture d'écran de Sprintia](<Images/JRM Coach.png>)
 
 ## 💻 Compatibilité
 
@@ -52,7 +59,7 @@ Sprintia, est compatible avec les PC qui tournent sous Windows.
 
 ◉ Rends-toi dans tes documents puis dans le dossier Sprintia. Fais un clic-droit sur "Sprintia.exe" puis "Afficher d'autres options" puis "Envoyer vers" puis clique sur "Bureau (créer un raccourci)"
 
-◉ Ensuite, va sur ton bureau tu verras un fichier nommé "Sprintia.exe - Raccourci" fais un clic-droit dessus puis "Renommer" et renomme le "Sprintia" ça seras plus propre.
+◉ Ensuite, va sur ton bureau tu verras un fichier nommé "Sprintia.exe - Raccourci" fais un clic-droit dessus puis "Renommer" et renomme le "Sprintia" ça sera plus propre.
 
 ◉ Bravo ! Tu as réussi à faire le tips maintenant tu n'auras plus qu'a double-clic sur Sprintia avec l'icône et hop, Sprintia se lancera !
 
@@ -60,9 +67,9 @@ Sprintia, est compatible avec les PC qui tournent sous Windows.
 
 ◉ Maintenant, tu n'as plus qu'à te rendre dans tes documents puis dans le dossier Sprintia. Désormais, tu n'as plus qu'à double-cliquer sur "Sprintia.exe".
 
-◉ Si une fenêtre de ce type (voir si-dessous) apparaît pas de panique, c'est parce que Microsoft ne connaît pas Sprintia.
+◉ Si une fenêtre de ce type (voir ci-dessous) apparaît pas de panique, c'est parce que Microsoft ne connaît pas Sprintia.
 
-![Capture d'écran de la fênetre de sécurité Windows](<Images/Windows Security.png>)
+![Capture d'écran de la fenêtre de sécurité Windows](<Images/Windows Security.png>)
 
 ◉ Clique sur "Informations complémentaires", puis sur "Exécuter quand même" et voilà désormais tu peux utiliser Sprintia, bon entraînement 😉.
 
