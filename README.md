@@ -1,7 +1,5 @@
 # Bienvenue sur Sprintia
 
-## 🔥 Sprintia 3.2 arrive Jeudi 23 Octobre 2025 à 10h
-
 ## Sommaire
 - [ℹ️ Petite information](#ℹ️-petite-information)
 - [📌 Sprintia c'est quoi ?](#-sprintia-cest-quoi-)
@@ -51,7 +49,7 @@ Sprintia, est compatible avec les PC qui tournent sous Windows.
 
 ### 1️⃣ Installation
 
-◉ Télécharge le dossier compressé "Sprintia-V.zip" disponible sur mon GitHub. Le nom exact du dossier dépend de la version actuelle, (ex. "Sprintia-V3.1.5.zip").
+◉ Télécharge le dossier compressé "Sprintia-V.zip" disponible sur mon GitHub. Le nom exact du dossier dépend de la version actuelle, (ex. "Sprintia-V3.2.zip").
 
 ◉ Ensuite, tu vas dans tes téléchargements dans l'explorateur de fichiers de ton PC. Puis, tu fais un clic-droit sur le dossier compressé "Sprintia-V.zip" puis "Extraire tout". Une fenêtre s'ouvrira puis tu devras cliquer sur le bouton "Parcourir" puis sélectionne "Documents".
 
@@ -83,7 +81,7 @@ Tu utilises un antivirus (Norton, Avast, etc.) ? Pour éviter que ton antivirus 
 
 ## 🔔 Comment rester à jour ?
 
-Pour savoir si une nouvelle version est disponible, il suffit de checker les 'Releases' de ce dépôt de temps en temps. C'est là que je publie toutes les mises à jour !
+Pour savoir si une nouvelle version est disponible, il te suffit de checker les 'Releases' de ce dépôt de temps en temps. C'est là que je publie toutes les mises à jour !
 
 ## 🔄️ Comment mettre à jour Sprintia ?
 
