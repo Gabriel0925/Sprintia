@@ -108,16 +108,18 @@ Et voilà, tu es à jour et tes données sont conservées !
 L’intégralité du code de Sprintia est disponible dans le dossier "Code source". 
 Donc pour installer Sprintia sur Linux ou sur macOS, tu dois :
 
+◉ Avoir Python installé sur ton ordinateur (ou l’installer si ce n’est pas déjà fait)
+
 ◉ Télécharger tous les fichiers du code source et les mettre dans un dossier nommé "Sprintia".
 
 ◉ Une fois à l'intérieur du dossier, fais un clic-droit puis "Ouvrir dans un Terminal".
 
 ◉ Installe les dépendances nécessaires avec cette commande :
-    ```bash
+    ```
     pip install -r requirements.txt
     ```
 
 ◉ Une fois les bibliothèques installées, lance l'application :
-    ```bash
+    ```
     python main.py
     ```
