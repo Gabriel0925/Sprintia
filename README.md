@@ -43,7 +43,9 @@ Un coach entièrement personnalisable. Crée ton propre coach : choisis son nom,
 
 ## 💻 Compatibilité
 
-Sprintia, est compatible avec les PC qui tournent sous Windows.
+Sprintia est une application de bureau (desktop app), compatible avec les PC qui tournent sous Windows.
+
+(💡 Info pour les curieux·ses : le code est aussi utilisable sur Linux et macOS, voir la dernière section).
 
 ## 📚 Guide rapide d’installation
 
@@ -57,15 +59,15 @@ Sprintia, est compatible avec les PC qui tournent sous Windows.
 
 ◉ Rends-toi dans tes documents puis dans le dossier Sprintia. Fais un clic-droit sur "Sprintia.exe" puis "Afficher d'autres options" puis "Envoyer vers" puis clique sur "Bureau (créer un raccourci)"
 
-◉ Ensuite, va sur ton bureau tu verras un fichier nommé "Sprintia.exe - Raccourci" fais un clic-droit dessus puis "Renommer" et renomme le "Sprintia" ça sera plus propre.
+◉ Ensuite, va sur ton bureau, tu verras un fichier nommé "Sprintia.exe - Raccourci" fais un clic-droit dessus puis "Renommer" et renomme le "Sprintia" ça sera plus propre.
 
-◉ Bravo ! Tu as réussi à faire le tips maintenant tu n'auras plus qu'a double-clic sur Sprintia avec l'icône et hop, Sprintia se lancera !
+◉ Bravo ! Tu as réussi l’astuce, maintenant tu n’auras plus qu’à double-cliquer sur Sprintia avec l'icône et hop, Sprintia se lancera !
 
 ### 3️⃣ Lancement de Sprintia
 
 ◉ Maintenant, tu n'as plus qu'à te rendre dans tes documents puis dans le dossier Sprintia. Désormais, tu n'as plus qu'à double-cliquer sur "Sprintia.exe".
 
-◉ Si une fenêtre de ce type (voir ci-dessous) apparaît pas de panique, c'est parce que Microsoft ne connaît pas Sprintia.
+◉ Si une fenêtre de ce type (voir ci-dessous) apparaît pas de panique, c'est parce que Microsoft ne reconnaît pas Sprintia.
 
 ![Capture d'écran de la fenêtre de sécurité Windows](<Images/Windows Security.png>)
 
@@ -87,7 +89,7 @@ Pour savoir si une nouvelle version est disponible, il te suffit de checker les 
 
 Mettre à jour Sprintia est assez simple, mais il faut bien respecter le tuto sinon tu risques de supprimer par erreur toutes tes données.
 
-⚠️ Ne pas supprimer le fichier "data_base.db" sous peine de perdre tes données !
+⚠️ Ne pas supprimer le fichier **"data_base.db"** sous peine de perdre tes données !
 
 ◉ Va dans le dossier "Sprintia" (dans tes Documents) et copie le fichier "data_base.db". Colle-le temporairement sur ton Bureau.
 
@@ -103,4 +105,19 @@ Et voilà, tu es à jour et tes données sont conservées !
 
 ## 🤔 Pour les curieux·ses
 
-L’intégralité du code de Sprintia est disponible dans le dossier "Code source".
+L’intégralité du code de Sprintia est disponible dans le dossier "Code source". 
+Donc pour installer Sprintia sur Linux ou sur macOS, tu dois :
+
+◉ Télécharger tous les fichiers du code source et les mettre dans un dossier nommé "Sprintia".
+
+◉ Une fois à l'intérieur du dossier, fais un clic-droit puis "Ouvrir dans un Terminal".
+
+◉ Installe les dépendances nécessaires avec cette commande :
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+◉ Une fois les bibliothèques installées, lance l'application :
+    ```bash
+    python main.py
+    ```
