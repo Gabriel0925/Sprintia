@@ -1,13 +1,15 @@
 # Bienvenue sur Sprintia
 
 ## Sommaire
+
 - [ℹ️ Petite information](#ℹ️-petite-information)
 - [📌 Sprintia c'est quoi ?](#-sprintia-cest-quoi-)
 - [⚡ Fonctionnalités principales](#-fonctionnalités-principales)
 - [💻 Compatibilité](#-compatibilité)
 - [📚 Guide rapide d’installation](#-guide-rapide-dinstallation)
 - [🛡️ Antivirus](#️-conseil-si-tu-as-un-antivirus)
-- [🔔 Projet cloturé](#-projet-cloturé)
+- [🔔 Rester à jour](#-comment-rester-à-jour-)
+- [🔄️ Mise à jour](#️-comment-mettre-à-jour-Sprintia-)
 - [🤔 Pour les curieux·ses](#-pour-les-curieuxses)
 
 ## ℹ️ Petite information
@@ -21,21 +23,25 @@ Sprintia est conçue pour t'aider avant et après un entraînement grâce à des
 ## ⚡ Fonctionnalités principales
 
 ### Charge d'entraînement
+
 La charge d'entraînement sert à optimiser ta progression sans te cramer, en trouvant le juste équilibre entre l'effort fourni et la récupération nécessaire.
 
 ![Capture d'écran de Sprintia](<Images/Charge d'entraînement.png>)
 
 ### Indulgence de course
+
 L’indulgence de course t’aide à ajuster ton kilométrage des 7 derniers jours pour rester dans une progression optimale, sans dépasser ta limite.
 
 ![Capture d'écran de Sprintia](<Images/Indulgence de course.png>)
 
 ### Prédicteur de performance
+
 Le prédicteur de performance te permet d'estimer tes temps sur n'importe quelle distance (5 km, 10 km, semi-marathon, marathon) à partir de tes courses récentes.
 
 ![Capture d'écran de Sprintia](<Images/Prédicteur de performance.png>)
 
 ### JRM Coach
+
 Un coach entièrement personnalisable. Crée ton propre coach : choisis son nom, son style et même son avatar. Ton coach, à ton image, pour te motiver au quotidien !
 
 ![Capture d'écran de Sprintia](<Images/JRM Coach.png>)
@@ -43,36 +49,35 @@ Un coach entièrement personnalisable. Crée ton propre coach : choisis son nom,
 ## 💻 Compatibilité
 
 Sprintia est une application de bureau (desktop app), compatible avec les PC qui tournent sous Windows.
-
-(💡 Info pour les curieux·ses : le code est aussi utilisable sur Linux et macOS, voir la dernière section).
+💡 Info pour les curieux·ses : Sprintia est aussi utilisable sur Linux et macOS, voir la dernière section.
 
 ## 📚 Guide rapide d’installation
 
-### 1️⃣ Installation et Premier Lancement
+### 1️⃣ Installation
 
-◉ Télécharge le dossier compressé **"Sprintia-V3.2.zip"** disponible sur mon GitHub.
+◉ Télécharge le dossier compressé "Sprintia-V.zip" disponible sur mon GitHub. Le nom exact du dossier dépend de la version actuelle, (ex. "Sprintia-V3.2.zip").
 
-◉ Ensuite, tu vas dans tes téléchargements. Fais un clic-droit sur **"Sprintia-V3.2.zip"** puis **"Extraire tout"**. Dans la fenêtre qui s'ouvrira, clique sur **"Parcourir"** et sélectionne **"Documents"**.
-
-◉ Maintenant, rends-toi dans tes documents, puis dans le dossier Sprintia. Double-clique sur **"Sprintia.exe"**.
-
-⚠️ **Alerte Sécurité Windows :** Si une fenêtre de ce type (voir ci-dessous) apparaît, pas de panique ! C'est parce que Microsoft ne reconnaît pas encore Sprintia.
-
-![Capture d'écran de la fenêtre de sécurité Windows](<Images/Windows Security.png>)
-
-◉ Clique sur **"Informations complémentaires"**, puis sur **"Exécuter quand même"** (ceci n'apparaîtra qu'une seule fois).
-
-Et voilà ! Tu peux désormais utiliser Sprintia, bon entraînement 😉.
+◉ Ensuite, tu vas dans tes téléchargements dans l'explorateur de fichiers de ton PC. Puis, tu fais un clic-droit sur le dossier compressé "Sprintia-V.zip" puis "Extraire tout". Une fenêtre s'ouvrira puis tu devras cliquer sur le bouton "Parcourir" puis sélectionne "Documents".
 
 ### 2️⃣ Faire un raccourci bureau (optionnel mais pratique)
 
-◉ Rends-toi dans le dossier Sprintia (dans tes Documents). Fais un clic-droit sur **"Sprintia.exe"** puis **"Afficher d'autres options"** puis **"Envoyer vers"** puis clique sur **"Bureau (créer un raccourci)"**.
+◉ Rends-toi dans tes documents puis dans le dossier Sprintia. Fais un clic-droit sur "Sprintia.exe" puis "Afficher d'autres options" puis "Envoyer vers" puis clique sur "Bureau (créer un raccourci)"
 
-◉ Va sur ton bureau. Tu verras un fichier nommé **"Sprintia.exe - Raccourci"**. Fais un clic-droit dessus puis **"Renommer"** et renomme le **"Sprintia"** (ça sera plus propre).
+◉ Ensuite, va sur ton bureau, tu verras un fichier nommé "Sprintia.exe - Raccourci" fais un clic-droit dessus puis "Renommer" et renomme le "Sprintia" ça sera plus propre.
 
-◉ Bravo ! Tu n’auras plus qu’à double-cliquer sur le raccourci pour lancer l'application.
+◉ Bravo ! Tu as réussi l’astuce, maintenant tu n’auras plus qu’à double-cliquer sur Sprintia avec l'icône et hop, Sprintia se lancera !
 
-## 🛡️ Conseil si tu as un antivirus 
+### 3️⃣ Lancement de Sprintia
+
+◉ Maintenant, tu n'as plus qu'à te rendre dans tes documents puis dans le dossier Sprintia. Désormais, tu n'as plus qu'à double-cliquer sur "Sprintia.exe".
+
+◉ Si une fenêtre de ce type (voir ci-dessous) apparaît pas de panique, c'est parce que Microsoft ne reconnaît pas Sprintia.
+
+![Capture d'écran de la fenêtre de sécurité Windows](<Images/Windows Security.png>)
+
+◉ Clique sur "Informations complémentaires", puis sur "Exécuter quand même" et voilà désormais tu peux utiliser Sprintia, bon entraînement 😉.
+
+## 🛡️ Conseil si tu as un antivirus
 
 Tu utilises un antivirus (Norton, Avast, etc.) ? Pour éviter que ton antivirus bloque "Sprintia.exe", je te conseille de faire ça ⬇️
 
@@ -80,14 +85,31 @@ Tu utilises un antivirus (Norton, Avast, etc.) ? Pour éviter que ton antivirus 
 
 👉 Besoin d'aide pour la procédure ? Tu peux demander à [ChatGPT](https://chatgpt.com/) en lui disant : "Comment exclure le dossier Documents\Sprintia de [nom de ton antivirus]".
 
-## 🔔 Projet cloturé
+## 🔔 Comment rester à jour ?
 
-La version finale (V3.2) marque la fin du développement de Sprintia.
-L’application est désormais fournie en l’état, sans mises à jour ultérieures.
+Pour savoir si une nouvelle version est disponible, il te suffit de checker les 'Releases' de ce dépôt de temps en temps. C'est là que je publie toutes les mises à jour !
+
+## 🔄️ Comment mettre à jour Sprintia ?
+
+Mettre à jour Sprintia est assez simple, mais il faut bien respecter le tuto sinon tu risques de supprimer par erreur toutes tes données.
+
+⚠️ Ne pas supprimer le fichier **"data_base.db"** sous peine de perdre tes données !
+
+◉ Va dans le dossier "Sprintia" (dans tes Documents) et copie le fichier "data_base.db". Colle-le temporairement sur ton Bureau.
+
+◉ Supprime l'ancien dossier "Sprintia" de tes Documents.
+
+◉ Télécharge le nouveau "Sprintia-V.zip" et extrais-le (comme à l'installation) dans tes Documents.
+
+◉ Copie le fichier "data_base.db" que tu as mis sur ton Bureau et colle-le dans le nouveau dossier "Sprintia" de tes documents.
+
+Conseil : À chaque mise à jour, il est préférable de recréer le raccourci sur ton bureau.
+
+Et voilà, tu es à jour et tes données sont conservées !
 
 ## 🤔 Pour les curieux·ses
 
-L’intégralité du code de Sprintia est disponible dans le dossier "Code source". 
+L’intégralité du code de Sprintia est disponible dans le dossier "Code source".
 Donc pour installer Sprintia sur Linux ou sur macOS, tu dois :
 
 ◉ Avoir Python installé sur ton ordinateur (ou l’installer si ce n’est pas déjà fait)
@@ -98,10 +120,14 @@ Donc pour installer Sprintia sur Linux ou sur macOS, tu dois :
 
 ◉ Installe les dépendances nécessaires avec cette commande :
     ```
+
     pip install -r requirements.txt
+
     ```
 
 ◉ Une fois les bibliothèques installées, lance l'application :
     ```
+
     python main.py
+
     ```
