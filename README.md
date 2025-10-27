@@ -120,14 +120,10 @@ Donc pour installer Sprintia sur Linux ou sur macOS, tu dois :
 
 ◉ Installe les dépendances nécessaires avec cette commande :
     ```
-
     pip install -r requirements.txt
-
     ```
 
 ◉ Une fois les bibliothèques installées, lance l'application :
     ```
-
     python main.py
-
     ```
