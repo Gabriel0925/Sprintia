@@ -1,24 +1,20 @@
-# Bienvenue sur Sprintia
+# Sprintia 4 🔥
 
-## Sommaire
+Sprintia 4 est en cours de développement, il devrait arriver en version stable vers fin février ! Petit teaser :
 
-- [ℹ️ Petite information](#ℹ️-petite-information)
-- [📌 Sprintia c'est quoi ?](#-sprintia-cest-quoi-)
-- [⚡ Fonctionnalités principales](#-fonctionnalités-principales)
-- [💻 Compatibilité](#-compatibilité)
-- [📚 Guide rapide d’installation](#-guide-rapide-dinstallation)
-- [🛡️ Antivirus](#️-conseil-si-tu-as-un-antivirus)
-- [🔔 Rester à jour](#-comment-rester-à-jour-)
-- [🔄️ Mise à jour](#️-comment-mettre-à-jour-Sprintia-)
-- [🤔 Pour les curieux·ses](#-pour-les-curieuxses)
-
-## ℹ️ Petite information
-
-Dans le monde du sport, un coach est un partenaire de confiance. C'est pour cette raison que j'ai choisi de te tutoyer dans l'application Sprintia et dans ce README. L'objectif est de créer une relation plus proche et personnelle avec toi, comme celle que tu aurais avec un coach sportif.
+Sprintia 4 est une refonte majeure, il est désormais accessible sur n'importe quel appareil. 
+Cette mise à jour permet à Sprintia de gagner en fluidité, les couleurs ont été mieux choisies pour 
+garantir une meilleure lisibilité et Sprintia 4 est également bien plus optimisé.
+                            
+Sprintia est une WebApp, vous pouvez l'installer en tant qu'appli native sur votre appareil. Plus de
+9 nouveaux outils sont disponibles. Vous pouvez estimer votre puissance moyenne en ski ou encore découvrir
+votre niveau de course et bien plus encore.
+                            
+Cette nouvelle version offre plus de personnalisation avec l'arrivée des thèmes.
 
 ## 📌 Sprintia c'est quoi ?
 
-Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes 100 % gratuits. Que tu sois un sportif débutant, confirmé, expert,... Sprintia t’aide à progresser sans te blesser.
+Sprintia est conçue pour t'aider avant et après un entraînement grâce à des algorithmes 100 % gratuits.
 
 ## ⚡ Fonctionnalités principales
 
@@ -46,12 +42,9 @@ Un coach entièrement personnalisable. Crée ton propre coach : choisis son nom,
 
 ![Capture d'écran de Sprintia](<Images/JRM Coach.png>)
 
-## 💻 Compatibilité
-
-Sprintia est une application de bureau (desktop app), compatible avec les PC qui tournent sous Windows.
-💡 Info pour les curieux·ses : Sprintia est aussi utilisable sur Linux et macOS, voir la dernière section.
-
 ## 📚 Guide rapide d’installation
+
+Sprintia est une application de bureau, compatible avec les PC qui tournent sous Windows.
 
 ### 1️⃣ Installation
 
@@ -84,28 +77,6 @@ Tu utilises un antivirus (Norton, Avast, etc.) ? Pour éviter que ton antivirus 
 ◉ Ajoute le dossier "Sprintia" (qu'il y a dans tes "Documents" sur ton PC) à la liste d'exclusions de ton logiciel antivirus.
 
 👉 Besoin d'aide pour la procédure ? Tu peux demander à [ChatGPT](https://chatgpt.com/) en lui disant : "Comment exclure le dossier Documents\Sprintia de [nom de ton antivirus]".
-
-## 🔔 Comment rester à jour ?
-
-Pour savoir si une nouvelle version est disponible, il te suffit de checker les 'Releases' de ce dépôt de temps en temps. C'est là que je publie toutes les mises à jour !
-
-## 🔄️ Comment mettre à jour Sprintia ?
-
-Mettre à jour Sprintia est assez simple, mais il faut bien respecter le tuto sinon tu risques de supprimer par erreur toutes tes données.
-
-⚠️ Ne pas supprimer le fichier **"data_base.db"** sous peine de perdre tes données !
-
-◉ Va dans le dossier "Sprintia" (dans tes Documents) et copie le fichier "data_base.db". Colle-le temporairement sur ton Bureau.
-
-◉ Supprime l'ancien dossier "Sprintia" de tes Documents.
-
-◉ Télécharge le nouveau "Sprintia-V.zip" et extrais-le (comme à l'installation) dans tes Documents.
-
-◉ Copie le fichier "data_base.db" que tu as mis sur ton Bureau et colle-le dans le nouveau dossier "Sprintia" de tes documents.
-
-Conseil : À chaque mise à jour, il est préférable de recréer le raccourci sur ton bureau.
-
-Et voilà, tu es à jour et tes données sont conservées !
 
 ## 🤔 Pour les curieux·ses
 
