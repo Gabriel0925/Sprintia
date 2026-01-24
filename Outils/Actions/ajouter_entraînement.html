@@ -80,16 +80,22 @@
         <h1>Ajouter un entraînement</h1> 
 
         <div class="conteneur-ensemble">
+            
+            <div class="box-result-deux" id="coach-ajoute-entrainement">
+                <p class="score-imc">JRM Coach :</p>
+                <p class="zone-imc" id="reponse-coach">
+                    Chargement...
+                </p> 
+            </div>
 
             <div class="conteneur-champs-outil">
 
-                <select id="profil-user" onclick="">
-                        <option value="Sprint">Sport : Exercice</option>
-                        <option value="Sprint">Sport : Course</option>
-                        <option value="Equilibre">Sport : Vélo</option>
-                        <option value="Endurant">Sport : Marche</option>
-                        <option value="Endurant">Sport : Musculation</option>
-                        <option value="Endurant">Sport : Ski</option>
+                <select id="profil-user" onclick="SelectionSport(value)">
+                        <option value="Libre">Sport : Libre</option>
+                        <option value="Course">Sport : Course</option>
+                        <option value="Velo">Sport : Vélo</option>
+                        <option value="Marche">Sport : Marche</option>
+                        <option value="Musculation">Sport : Musculation</option>
                 </select>
 
                 <div class="cote-cote">
@@ -121,22 +127,22 @@
                 <div class="cote-cote">                    
                     <div class="conteneur-input">
                         <input type="number" id="distance-entrainement-user" placeholder="Distance (km)">
-                        <div class="label-input">Distance (km)</div>
+                        <div class="label-input" id="invisible1">Distance (km)</div>
                     </div>
 
                     <div class="conteneur-input">
                         <input type="number" id="denivele-entrainement-user" placeholder="Dénivelé (m)">
-                        <div class="label-input">Dénivelé (m)</div>
+                        <div class="label-input" id="invisible2">Dénivelé (m)</div>
                     </div>
                 </div>
                 
                 <div class="conteneur-input">
                     <input type="number" id="muscle-entrainement-user" placeholder="Muscles travaillés">
-                    <div class="label-input">Muscles travaillés</div>
+                    <div class="label-input" id="invisible3">Muscles travaillés</div>
                 </div>
                 
 
-                <button onclick="">Valider</button>
+                <button onclick="">Sauvegarder</button>
             </div>
 
         </div>
@@ -179,6 +185,7 @@
 
     <!-- Pour le burger menu -->
     <script src="../../Assets/base-js/base.js"></script>
+    <script src="script_ajout_entrainement.js"></script>
 
     <!-- Pour le RPE -->
     <script>
