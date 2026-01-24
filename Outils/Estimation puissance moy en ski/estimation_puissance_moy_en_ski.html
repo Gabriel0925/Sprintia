@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Estimation puissance moy. en ski</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <h1>Estimation puissance moy. en ski</h1>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">
+                <div class="cote-cote">
+                    <div class="conteneur-input">
+                        <input type="number" id="poids-user" class="small" placeholder="Poids (kg)">
+                        <div class="label-input">Poids (kg)</div>
+                    </div>
+                    
+                    <div class="conteneur-input">
+                        <input type="number" id="taille-user" class="small" placeholder="Taille (cm)">
+                        <div class="label-input">Taille (cm)</div>
+                    </div>
+                </div>
+                
+                <div class="conteneur-input">
+                    <input type="number" id="duree-user" placeholder="Durée de la descente (min)">
+                    <div class="label-input">Durée de la descente (min)</div>
+                </div>
+                    
+                <div class="conteneur-input">
+                    <input type="number" id="denivele-user" placeholder="Dénivelé négatif (m)">
+                    <div class="label-input">Dénivelé négatif (m)</div>
+                </div>
+
+                <button onclick="EstimationPuissanceSki()">Valider</button>
+            </div>
+
+            <div class="box-result">
+                <p class="score-imc">Puissance moy. : 0 W</p>
+                <p class="zone-imc">
+                    Veuillez remplir le formulaire pour avoir une interprétation de votre puissance moyenne estimée sur une descente.
+                </p>
+            </div> 
+        </div>
+
+        <h2>Comment Sprintia calcule votre puissance moy. ?</h2>
+        <p class="text">
+            Sprintia utilise une formule qui permet d'estimer votre puissance moyenne en ski : P=(m*g*h)/t.
+        </p>
+        <ul class="liste-fonctionnalites">
+            <li>
+                m : C'est la masse totale du skieur avec l'équipement (ski, tenue, chaussures de ski,...) en kg. Sprintia ajoute automatiquement
+                le poids de l'équipement grâce à votre taille parce que des skis qui font 1m ne font pas le même poids que des skis qui font 2m50.
+            </li>
+            <li>
+                g : C'est la gravité, au lycée vous avez du voir la constante gravitationelle qui est égale à 9,81 m/s². Sprintia utilise
+                cette constante pour estimer votre puissance moyenne.
+            </li>
+            <li>
+                h : C'est le dénivelé descendu lors de votre sortie, ça s'appelle le dénivelé négatif en mètres.
+            </li>
+            <li>
+                t : Temps de la descente en seconde.
+            </li> 
+        </ul>
+
+        <h2>Est-ce une méthode universelle ?</h2>
+        <p class="text">
+            Non, cette méthode n'est pas universelle, il n'y a pas de méthode universelle, c'est pas comme la puissance en vélo.
+            Néanmoins, c'est la méthode de référence en physique pour calculer la puissance gravitationnelle.
+        </p>
+
+        <h2>Comment s'en servir ?</h2>
+        <p class="text">
+            Cet outil peut te permettre de d'analyser ta progression sur une piste. Plus vous progressez, plus vous êtes capable de descendre vite dans des
+            pentes plus ou moins raides. Si votre puissance moyenne en ski sur une descente augmente alors ça indique  :
+        </p>
+        <ul class="liste-fonctionnalites">
+            <li>
+                Vous progressez
+            </li>
+            <li>
+                Vous optimisez vos trajectoires dans les virages, les bosses,...
+            </li>
+        </ul>
+        <p class="text">
+            Vous pouvez évidemment gamifier un peu l'outil par exemple en comparant les résultats avec vos potes, votre famille,...
+        </p>
+
+        <h2>Les limites de cette méthode</h2>
+        <p class="text">
+            En vélo, nous pouvons mesurer une puissance précise tout simplement parce que quand nous faisons du vélo, nous appuyons sur des pédales
+            alors qu'en ski on glisse ce n'est pas la même chose. La 2ème limitation, c'est qu'avec cette méthode de calcul nous ne prenons pas en compte
+            les virages, les bosses,... Enfin, on néglige les frottements par exemple on néglige la poussée des bâtons.
+        </p>
+
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+    <script src="script_outil.js"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Prédicteur de performance</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <h1>Prédicteur de performance</h1>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">
+                <select id="profil-user" onclick="AlgoPredicteur('select')">
+                        <option value="Sprint">Votre profil : Sprinteur·se</option>
+                        <option value="Equilibre">Votre profil : Équilibré·e</option>
+                        <option value="Endurant">Votre profil : Endurant·e</option>
+                </select>
+                
+                <div class="cote-cote">
+                    <div class="conteneur-input">
+                        <input type="number" class="small" id="vma-user" placeholder="VMA (km/h)">
+                        <div class="label-input">VMA (km/h)</div>
+                    </div>
+                    
+                    <div class="conteneur-input">
+                        <input type="number" class="small" id="distance-user" placeholder="Distance (km)">
+                        <div class="label-input">Distance (km)</div>
+                    </div>
+                </div>
+
+                <button onclick="AlgoPredicteur('autre')">Valider</button>
+            </div>
+        </div>
+
+        <div class="conteneur-ensemble">
+            <div class="conteneur-box-deux">
+                <div class="box-result-deux">
+                    <p class="score-imc">Temps estimé</p>
+                    <p class="temps-recup" id="reponse-algo-temps">
+                        00 : 00 : 00
+                    </p>
+                </div>
+                <div class="box-result-deux">
+                    <p class="score-imc">Allure (min/km)</p>
+                    <p class="temps-recup" id="reponse-algo-allure"">
+                        00' 00"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <h2>C'est quoi le Prédicteur de performance ?</h2>
+        <p class="text">
+            Le Prédicteur de performance vous permet d'estimer votre temps de course sur une distance en fonction de votre VMA actuelle.
+            C'est un outil pratique pour évaluer vos performances avant une course. Mais n'oubliez pas, cette prédiction est une
+            estimation basée sur la théorie. Donc, cette prédiction peut varier le jour de la course en fonction de nombreux facteurs comme :
+            la météo, le dénivelé, votre forme physique,...
+        </p>
+        <h2>Comment s'en servir ?</h2>
+        <p class="text">
+            Cette prédiction peut vous servir de base pour vous fixer des objectifs réalisables et structurer vos séances d'entraînement.
+            Par exemple, si la prédiction est trop éloignée de votre objectif, faites plus de fractionné pour améliorer votre vitesse et
+            donc votre VMA.
+            <br><br>
+            Essayez de refaire cette prédiction toutes les 2-3 semaines pour affiner votre entraînement.
+        </p>
+        <h2>Exemples de séances de fractionné</h2>
+        <ul class="liste-fonctionnalites">
+            <li>6 x 400 m avec 2 minutes de repos entre chaque série.</li>
+            <li>6 x (30"/30") avec 2 minutes de repos entre chaque série.</li>
+            <li>6 x (45"/45") avec 2 minutes de repos entre chaque série.</li>
+        </ul>
+
+        <h2>Exemples de séances d'endurance</h2>
+        <ul class="liste-fonctionnalites">
+            <li>70 min de footing lent (endurance fondamentale).</li>
+            <li>60 min de footing lent (endurance fondamentale).</li>
+        </ul>
+
+        <h2>Quel profil choisir ?</h2>
+        <ul class="liste-fonctionnalites">
+            <li>Sprint : Vous êtes rapide mais la fatigue arrive vite après quelques kilomètres.</li>
+            <li>Équilibre : Vous courez régulièrement, vous êtes ni sprinteur ni endurant.</li>
+            <li>Endurant : Vous êtes capable de maintenir une allure pendant très longtemps.</li>
+        </ul>
+
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+    <script src="script_outil.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Niveau course à pied</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <div class="conteneur-option">
+            <h1>Niveau course à pied</h1>
+            <a href="historique_niveau_course.html"><i class="fs-icon_historique"></i></a>
+        </div>
+
+        <h2>Test de course</h2>
+        <p class="text">
+            Déterminez votre niveau de course actuel en<strong> courant la plus longue distance possible en 12 minutes.</strong>
+            Pour des mesures précises, ce test doit être effectué sur un terrain plat sans aucun obstacle (le mieux c'est une piste d'athlétisme).
+            Ne négligez pas l'échauffement : faîtes des gammes pendant 10 à 15 min et ensuite faîtes le test, ça améliorera votre performance.
+        </p>
+
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">
+                
+                <div class="conteneur-input">
+                    <input type="number" id="distance-user" placeholder="Distance (km)">
+                    <div class="label-input">Distance (km)</div>
+                </div>
+
+                <button onclick="StartNiveau()">Valider</button>
+            </div>
+
+            <div class="box-result" id="niveau-course">
+                <p class="score-imc">Niveau</p>
+                <p class="temps-recup">
+                    0
+                </p>
+            </div>
+        </div>
+
+        <div class="conteneur-centrage-marge">
+            <button class="animate" onclick="SauvegardeNiveauCourse()" id="button-sauvegarde-niveau">Sauvegarder mon niveau</button>
+        </div>
+
+        <div class="chart-container" id="conteneur-graphique">
+            <!--"aria-label" pr l'accesssibilité pr decrire a ceux qui ne voit pas-->
+            <canvas id="barCanvas" aria-label="chart" role="img"></canvas>
+        </div>
+ 
+        <h2>Comment s'en servir ?</h2>
+        <p class="text">
+            Ce score peut vous permettre de suivre votre progression, le mieux c'est de refaire ce test tous les 2 mois pour constatez si vos entraînements
+            portent leurs fruits ou si vous perdez du niveau. Vous pouvez gamifier un peu l'outil par exemple en 
+            comparant les résultats avec vos potes, votre famille,...
+        </p>
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+
+    <!-- Import de la bibliothèque pr le graphique -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>    
+    <!-- Import bibliothèque pour simplifier le code de indexed db -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    
+    <script src="script_outil.js" defer></script> <!-- defer permet d'obliger que le html sexecute completement et seulement ensuite il lance le script c'est pour le telechargement de la bibliotheque -->
+</body>
+</html>

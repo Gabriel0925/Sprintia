@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Estimation du temps de récupération</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <h1>Estimation du temps de récupération</h1>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">
+                <select id="methode-user" onclick="ComboBox()">
+                    <option value="occasionnel">Sportif·ve occasionnel·le</option>
+                    <option value="regulier">Sportif·ve régulier·e</option>
+                    <option value="athlete">Athlète confirmé·e</option>
+                </select>
+                
+                <div class="conteneur-input">
+                    <input type="number" id="duree-entrainement-user" placeholder="Durée de l'entraî. (min)">
+                    <div class="label-input">Durée de l'entraî. (min)</div>
+                </div>
+                
+                <div class="slider-cont">
+                    <div class="slider-name">RPE</div>
+                    <div class="slider">
+                        <input type="range" min="1" max="10" value="5">
+                        <progress min="1" max="10" value="5"></progress>
+                    </div>
+                    <div class="slider-value">5</div>
+                </div>
+
+                <button onclick="EstimationTempsRecuperation()">Valider</button>
+            </div>
+
+            <div class="box-result">
+                <p class="score-imc">Temps de récup. estimé</p>
+                <p class="temps-recup">
+                    00 h
+                </p>
+            </div>
+        </div>
+
+        <h2>C'est quoi le RPE ?</h2>
+        <p class="text">
+            Le RPE (Rated Perceived Exertion) c'est une échelle permettant de mesurer l'effort perçu de votre entraînement.
+            <ul class="liste-fonctionnalites">
+                <li>RPE de 1 à 3 : Facile</li>
+                <li>RPE de 4 à 6 : Modéré</li>
+                <li>RPE de 7 à 8 : Difficile</li>
+                <li>RPE de 9 à 10 : Effort maximal</li>
+            </ul>
+        </p>
+        <h2>Comment se servir de cet algorithme ?</h2>
+        <p class="text">
+            Après un entraînement intense, léger,... Votre corps a besoin de récupérer, cet algorithme estime la durée de récupération nécessaire
+            pour que votre corps se répare complètement. Or, votre corps n'a pas besoin d'être tout le temps à 100%. C'est pour cela que cet algorithme
+            donne un temps de récupération avant votre prochain gros entraînement.
+            <br><br>
+            Par exemple, si l'algorithme vous suggère 54h de récupération, ça veut dire qu'il ne faudrait pas faire de gros entraînements avant 54h.
+            Néanmoins, vous pouvez totalement faire un entraînement léger.
+        </p>
+
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+    <script src="script_outil.js"></script>
+
+    <!-- Pour le RPE -->
+    <script>
+        let Slider = document.querySelector(".slider input")
+        let Progress = document.querySelector(".slider progress")
+        let Display = document.querySelector(".slider-value")
+
+        Slider.addEventListener("input", function() {
+            Progress.value = this.value
+            Display.textContent = this.value
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,2883 @@
+/* Initialisation des variables */
+:root {
+    /* Couleurs */
+    --COULEUR_ACCENT: #0D9BD3; 
+    --COULEUR_ACCENT_HOVER: #7ad6fa;
+    --COULEUR_ACCENT_CONTRASTER: #51C4F0;
+    --COULEUR_ACCENT_CONTRASTER_HOVER: #9CE1FD;
+    
+    --COULEUR_BACKGROUND: #000000;       
+    --COULEUR_BACKGROUND_CARD: #232222;
+    --COULEUR_BACKGROUND_CARD_HOVER: #373636; 
+
+    --COULEUR_TEXT_PRINCIPAL: #FFFFFF;
+    --COULEUR_TEXT_SECONDAIRE: #BDBDBD;
+
+    /* Tailles & polices */
+    --H0: 2.5rem; 
+    --H1: 2rem;
+    --H2: 1.6rem;
+    --H3: 1.25rem;
+    --P: 1rem;
+    --P_SMALL: 0.875rem;
+
+    --LINE_HEIGHT: 1.5;
+    --FONT_FAMILY: "Zalando Sans SemiExpanded";
+    --FONT_WEIGHT_BUTTON: 500;
+
+    /* Arrondi des bordures */
+    --BORDER: 1.25rem;
+    --BORDER_SMALL: 0.625rem;
+
+    /* Marges intérieur/extérieur (Basé sur 0.5rem) */
+    --ESPACE_XXS: 0.25rem;   /* 4px */
+    --ESPACE_XS: 0.5rem;   /* 8px */
+    --ESPACE_S_SMALL: 0.9rem;     /* 16px */
+    --ESPACE_S: 1rem;     /* 16px */
+    --ESPACE_M: 1.5rem;   /* 24px */
+    --ESPACE_L: 2rem;     /* 32px */
+    --ESPACE_XL: 3rem;     /* 48px */
+
+    /* Autres */
+    --MAX_WIDTH: 1250px;
+    --EPAISSEUR_BORDER: 2.5px;
+    --DUREE_TRANSITION: 0.2s;
+
+    /* Flèche vers le bas ComBox outils */
+    --URL_FLECHE_ICON: url("../Outils/Icons/icon_fleche_sombre.svg");
+    --URL_FLECHE_ICON_REVERSE: url("../Outils/Icons/icon_fleche_clair.svg");
+    --URL_CALENDRIER_ICON: url("../Outils/Icons/icon_calendrier_clair.svg");
+
+    /* Couleur pour le hover des pastilles */
+    --COULEUR_PASTILLES_0: #0D9BD3; 
+    --COULEUR_PASTILLES_1: #fe504a; 
+    --COULEUR_PASTILLES_2: #ff6aff; 
+    --COULEUR_PASTILLES_3: #ba6fff; 
+    --COULEUR_PASTILLES_4: #0CBB5BFF; 
+    --COULEUR_PASTILLES_5: #0ac3a7; 
+    --COULEUR_PASTILLES_6: #7bb8de;  
+    --COULEUR_PASTILLES_7: #ea5084; 
+    
+    --COULEUR_PASTILLES_D1: #3a91ff;  
+    --COULEUR_PASTILLES_D2: #f782f0;  
+    
+    --COULEUR_PASTILLES_D3: #1498e4;  
+    --COULEUR_PASTILLES_D4: #fcaf6b;  
+    
+    --COULEUR_PASTILLES_D5: #a477fe;  
+    --COULEUR_PASTILLES_D6: #4ce58c; 
+ 
+    --COULEUR_PASTILLES_D7: #ffb423;  
+    --COULEUR_PASTILLES_D8: #e73f01;  
+}
+/* Pour les icônes */
+@font-face {
+    font-family: 'Font-Sprintia';
+    src:  url('../Assets/icons/Font-Sprintia.eot?7gygna');
+    src:  url('../Assets/icons/Font-Sprintia.eot?7gygna#iefix') format('embedded-opentype'),
+        url('../Assets/icons/Font-Sprintia.ttf?7gygna') format('truetype'),
+        url('../Assets/icons/Font-Sprintia.woff?7gygna') format('woff'),
+        url('../Assets/icons/Font-Sprintia.svg?7gygna#Font-Sprintia') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+/* Police Anton */
+@font-face {
+    font-display: swap;
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../Assets/fonts/anton-v27-latin-regular.woff2') format('woff2'); 
+}
+/* Police Zalando-sans-semiexpanded-regular */
+@font-face {
+    font-display: swap;
+    font-family: 'Zalando Sans SemiExpanded';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../Assets/fonts/zalando-sans-semiexpanded-v2-latin-regular.woff2') format('woff2'); 
+}
+/* Police Zalando-sans-semiexpanded-regular font-weight : 500 */
+@font-face {
+    font-display: swap;
+    font-family: 'Zalando Sans SemiExpanded';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../Assets/fonts/zalando-sans-semiexpanded-v2-latin-500.woff2') format('woff2'); 
+}
+/* Police Zalando-sans-semiexpanded-regular font-weight : 900 */
+@font-face {
+    font-display: swap;
+    font-family: 'Zalando Sans SemiExpanded';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../Assets/fonts/zalando-sans-semiexpanded-v2-latin-900.woff2') format('woff2'); 
+}
+i {
+    font-family: 'Font-Sprintia' !important;
+    /*speak: never;*/
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fs-icon_1RM:before {
+    content: "\e900";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_a_propos:before {
+    content: "\e901";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_accueil:before {
+    content: "\e902";
+}
+.fs-icon_add:before {
+    content: "\e903";
+}
+.fs-icon_charge_entrainement:before {
+    content: "\e904";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_coach:before {
+    content: "\e905";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_confidentialite:before {
+    content: "\e906";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_epingler:before {
+    content: "\e907";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_fermer:before {
+    content: "\e908";
+}
+.fs-icon_historique:before {
+    content: "\e909";
+}
+.fs-icon_ia:before {
+    content: "\e90a";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_IMC:before {
+    content: "\e90b";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_indulgence_course:before {
+    content: "\e90c";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_licence:before {
+    content: "\e90d";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_mail:before {
+    content: "\e90e";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_menu:before {
+    content: "\e90f";
+}
+.fs-icon_miles_km:before {
+    content: "\e910";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_mode_clair_sombre:before {
+    content: "\e911";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_modifier:before {
+    content: "\e912";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_niveau_course:before {
+    content: "\e913";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_outils:before {
+    content: "\e914";
+}
+.fs-icon_parametres:before {
+    content: "\e915";
+}
+.fs-icon_partager:before {
+    content: "\e916";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_pause:before {
+    content: "\e917";
+}
+.fs-icon_play:before {
+    content: "\e918";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_plus:before {
+    content: "\e919";
+    color: var(--COULEUR_BACKGROUND);
+}
+.fs-icon_predicteur_performance:before {
+    content: "\e91a";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_proteines:before {
+    content: "\e91b";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_puissance_max:before {
+    content: "\e91c";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_puissance_moy_ski:before {
+    content: "\e91d";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_sauvegarde:before {
+    content: "\e91e";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_supprimer:before {
+    content: "\e91f";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_telecharger:before {
+    content: "\e920";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_temps_recup:before {
+    content: "\e921";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_themes:before {
+    content: "\e922";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_transpiration:before {
+    content: "\e923";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_VMA:before {
+    content: "\e924";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_VO2MAX:before {
+    content: "\e925";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_zones_cardiaques:before {
+    content: "\e926";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+.fs-icon_zones_vitesse:before {
+    content: "\e927";
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+
+@keyframes scroll_effect_card {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ----- On reset le style ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    color: inherit;
+    /* Pour les barres de slide (pr Firefox) */
+    scrollbar-color: var(--COULEUR_TEXT_SECONDAIRE) transparent;
+    scrollbar-width: thin;
+}
+/* Pour les barres de slide (pr Chrome/Safari) */
+*::-webkit-scrollbar {/* Pour l'épaisseur */width: 6px;}
+*::-webkit-scrollbar-track {background: transparent;}
+*::-webkit-scrollbar-thumb {background: var(--COULEUR_TEXT_SECONDAIRE);}
+
+
+/* style button */
+button{
+    background-color: var(--COULEUR_ACCENT);
+    border: none;
+    color: var(--COULEUR_BACKGROUND);
+    margin: var(--ESPACE_XS);
+    padding: var(--ESPACE_S_SMALL);
+    border-radius: var(--BORDER);
+    cursor: pointer;
+    display: block;
+    align-items: center;
+    
+    font-family: var(--FONT_FAMILY);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    font-size: var(--P);
+    
+    /* desactive le style par defaut */
+    appearance: none;
+    outline: none;
+    -webkit-appearance: none;
+
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    button:hover{
+        background-color: var(--COULEUR_ACCENT);
+        box-shadow: 0px 0px 15px var(--COULEUR_ACCENT);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+button:active{
+    transform: scale(0.9);  
+    border-radius: var(--BORDER_SMALL);
+    background-color: var(--COULEUR_ACCENT_HOVER);
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* Bouton avec les icônes */
+button#button_afficher_plus,
+button.animate-icon{
+    display: flex;
+    align-items: center;
+}
+button#button_afficher_plus i{
+    margin: 0 var(--ESPACE_XXS);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    color: var(--COULEUR_BACKGROUND);
+    font-size: var(--H3);
+}
+
+/* Pour les boutons avec animation */
+button.animate {
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+
+/* pr button dans tableau */
+button.tableau {
+    background-color: transparent;
+    border: none;
+    color: #ef2e2e;
+    margin: 0px auto;
+    padding: var(--ESPACE_XS);
+    border-radius: var(--BORDER);
+    cursor: pointer;
+    align-items: center;
+    
+    font-family: var(--FONT_FAMILY);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    font-size: var(--P);
+    
+    /* desactive le style par defaut */
+    appearance: none;
+    outline: none;
+    -webkit-appearance: none;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    button.tableau:hover{
+        background-color: #ef2e2e;
+        color: #FFFFFF;
+        box-shadow: 0px 0px 0px #ef2e2e;
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+button.tableau:active{
+    transform: scale(0.95);
+    box-shadow: 0px 0px 0px #ef2e2e; /* sinon parfois il prend le style du bouton sans class*/
+    border-radius: var(--BORDER_SMALL);
+}
+
+/* Pour les boutons afficher plus */
+button.absent{
+    display: none !important;
+}
+button.notif {
+    margin-top: var(--ESPACE_M);
+}
+/* Style button en balise a */
+a.bouton-a-card {
+    font-size: var(--P);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    color: var(--COULEUR_BACKGROUND);
+    padding: var(--ESPACE_XS);
+    margin: var(--ESPACE_XS);
+    margin-top: auto; /* Pour coller les boutons en bas de la card */
+    text-align: center;
+    border-radius: var(--BORDER);
+    background-color: var(--COULEUR_ACCENT_CONTRASTER);
+    text-align: center;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+@media (hover: hover) and (pointer: fine) {
+    a.bouton-a-card:hover {
+        background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+a.bouton-a-card:active {
+    background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+
+body {
+    font-family: var(--FONT_FAMILY); 
+    line-height: var(--LINE_HEIGHT);
+    background-color: var(--COULEUR_BACKGROUND); 
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+
+
+/* Lien text vers adresse */
+a.lien {
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    text-decoration: underline;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    a.lien:hover{
+        letter-spacing: 1px;
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+        color: var(--COULEUR_ACCENT_HOVER);
+    }
+}
+/* Balise code avec son conteneur */
+div.conteneur-code {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    padding: var(--ESPACE_S);
+    border-radius: var(--BORDER);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+code {
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+
+
+/* ----- Footer ----- */
+footer {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: var(--ESPACE_S);
+    min-height: 70vh;
+    /* margin-top: auto; */
+    margin-top: var(--ESPACE_M);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+footer div.conteneur-lien-footer {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: auto;
+    margin-top: var(--ESPACE_S);
+}
+footer a.a_title{
+    font-size: var(--P);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    color: var(--COULEUR_TEXT_PRINCIPALE);
+    padding: var(--ESPACE_XS);
+}
+footer a.a_footer{
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    padding: var(--ESPACE_XS);
+    margin: var(--ESPACE_XXS);
+    border-radius: var(--BORDER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    footer a.a_footer:hover{
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        color: var(--COULEUR_ACCENT_CONTRASTER);
+        transform: translateX(5px);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+footer a.a_footer:active{
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    transform: scale(0.95);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+
+
+
+/* ----- Style de la Nav-Bar ----- */
+header {
+    position: sticky;
+    top: 0;
+    padding: var(--ESPACE_XXS);    
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    /* Le z-index sert que les cartes ne passe pas devant lors d'un hover */
+    z-index: 1000;
+    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+}
+header div.navbar {
+    width: 100%;
+    height: 70px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header div.navbar .logo a {
+    font-size: var(--H1);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    font-weight: 1000;
+    display: block;
+    margin: var(--ESPACE_XXS);
+    padding: var(--ESPACE_XS);
+    border-radius: var(--BORDER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+header div.navbar .logo a:active {
+    transform: scale(0.95);
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+header div.navbar ul.links {
+    display: flex;
+    margin: var(--ESPACE_XXS);
+}
+header div.navbar div.burger-menu-button {
+    font-size: var(--H0);
+    border-radius: var(--BORDER);
+    padding: var(--ESPACE_XS) var(--ESPACE_XXS);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    cursor: pointer;
+    display: none;
+    margin: var(--ESPACE_XXS);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* Pour que le bouton rétrécisse au moment du clic */
+header div.navbar div.burger-menu-button:active {
+    transform: scale(0.9);  
+    border-radius: var(--BORDER_SMALL);
+    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+header div.navbar ul.links li a {
+    color: var(--COULEUR_TEXT_PRINCIPAL); 
+    font-size: var(--H3);
+    margin: var(--ESPACE_S) var(--ESPACE_XXS);
+    min-width: 175px;
+    padding: var(--ESPACE_XS);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    border-radius: var(--BORDER);
+    transition: all ease-out var(--DUREE_TRANSITION);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+header div.navbar ul.links li a i {
+    font-size: var(--H2);
+    margin-right: var(--ESPACE_XS);
+    transition: all ease-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    header div.navbar ul.links li a:hover {
+        color: var(--COULEUR_ACCENT_CONTRASTER);
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transition: all ease-out var(--DUREE_TRANSITION);
+    }
+}
+header div.navbar ul.links li a:active {
+    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    transform: scale(0.9);
+    border-radius: var(--BORDER_SMALL);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+header div.navbar ul.links li a.actif {
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+header div.navbar ul.links li a.actif:active {
+    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    transform: scale(0.9);
+    border-radius: var(--BORDER_SMALL);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+
+
+
+/* ----- Menu Hamburger ----- */
+header .burger-menu {
+    display: none;
+    position: absolute;
+    right: var(--ESPACE_S);
+    margin-top: var(--ESPACE_M);
+    width: 200px;
+    max-height: 0px;    
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    border-radius: var(--BORDER);
+    overflow: hidden; 
+
+    transform: translateY(-40px) translateX(80px) scale(0.2);
+    transition: all var(--DUREE_TRANSITION) ease-in-out;
+}
+header .burger-menu.open {
+    max-height: 350px;
+    transform: translate(0, 0) scale(1); /* On remet la taille normale */
+    box-shadow: 0px 0px 10px var(--COULEUR_ACCENT_CONTRASTER);
+}
+/* Pour que le bouton rétrécisse au moment du clic */
+header .burger-menu.open:active {
+    transform: scale(0.95);
+    box-shadow: 0px 0px 10px var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+}
+header .burger-menu li {
+    color: var(--COULEUR_BACKGROUND);
+    opacity: 0;
+    transform: translate(50px, 8px) scale(0.7);
+    transition: all 0.33s ease-in-out;
+}
+header .burger-menu.open li {
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    opacity: 1;
+    transform: translate(0, 0) scale(1); /* on ramene transform à 0 */
+    transition: all 0.33s ease-in-out;
+}
+header .burger-menu li a {
+    color: var(--COULEUR_TEXT_PRINCIPAL); 
+    font-size: var(--H3);
+    min-width: 96%;
+    display: block;
+    text-align: left;
+    padding: var(--ESPACE_XS);
+    margin: var(--ESPACE_XXS);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    border-radius: var(--BORDER);
+    transition: all ease-out var(--DUREE_TRANSITION);
+    display: flex;
+    align-items: center;
+}
+header .burger-menu li a i {
+    font-size: var(--H2);
+    margin-right: var(--ESPACE_XS);
+    transition: all ease-out var(--DUREE_TRANSITION);
+}
+header .burger-menu li a:active {
+    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    transition: all ease-out var(--DUREE_TRANSITION);
+}
+header .burger-menu li a.actif-burger-menu {
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+}
+header .burger-menu li a.actif-burger-menu:active {
+    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    transition: all ease-out var(--DUREE_TRANSITION);
+}
+
+
+
+/* ----- Style page "Accueil" ----- */
+div.conteneur-about-marge h1{
+    font-size: var(--H2);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-about-marge h2{
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin-top: var(--ESPACE_M);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-about-marge p.txt_home{
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-mise-avant {
+    padding: var(--ESPACE_XS);
+    width: 100%;
+    height: 100%;
+    border-radius: var(--BORDER);
+    margin: var(--ESPACE_XS) 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%; 
+}
+/* Pour la marge du premier mise en avant */
+div.conteneur-mise-avant.first {
+    margin-top: var(--ESPACE_M);
+}
+div.conteneur-mise-avant.last {
+    margin-bottom: var(--ESPACE_M);
+}
+div.conteneur-mise-avant::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: var(--BORDER);
+    opacity: 0;
+    transition: all var(--DUREE_TRANSITION) ease-in-out;
+    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-mise-avant:hover::after {
+        opacity: 1;
+    }
+}
+div.conteneur-mise-avant p{
+    font-size: var(--H2);
+    line-height: 2;
+    text-align: left;
+    margin: var(--ESPACE_S) var(--ESPACE_XXS);
+    color: var(--COULEUR_BACKGROUND);    
+    font-weight: 1000;
+    padding: var(--ESPACE_XS);
+    border-radius: var(--BORDER);
+}
+/* Bouton voir plus */
+div.conteneur-centrage {
+    display: flex;
+    justify-content: center;
+}
+.button-more {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    background-color: var(--COULEUR_ACCENT);
+    padding: var(--ESPACE_S_SMALL);
+    border-radius: var(--BORDER);
+    margin: var(--ESPACE_S) var(--ESPACE_XS) var(--ESPACE_L) var(--ESPACE_S);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+@media (hover: hover) and (pointer: fine) {
+    .button-more:hover {
+        background-color: var(--COULEUR_ACCENT_HOVER);
+        box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+.button-more:active {
+    transform: scale(0.9);  
+    border-radius: var(--BORDER_SMALL);
+    background-color: var(--COULEUR_ACCENT_HOVER);
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+.icon-more i{
+    font-size: var(--H3);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    color: var(--COULEUR_BACKGROUND);
+    margin: 0 var(--ESPACE_XXS);
+    vertical-align: middle; /* Aligne l'image au centre verticalement */
+}
+p.txt_plus{
+    font-size: var(--P);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    color: var(--COULEUR_BACKGROUND);
+    margin: 0 var(--ESPACE_XXS);
+}
+
+
+
+/* ----- Style page "Outils" ----- */
+div.conteneur-outils {
+    margin: 0 auto;
+    max-width: var(--MAX_WIDTH);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+div.conteneur-outils div.card-outil { /* On masque par défaut les card outils qui ne sont pas "visible" */
+    display: none;
+}
+div.conteneur-outils div.card-outil.visible {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    margin: var(--ESPACE_S);
+    border-radius: var(--BORDER);
+    width: 370px;
+    flex-direction: column;
+    display: flex;
+    overflow: hidden; /* ça permet que tous ce qui dépasse sera invisible */
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-outils div.card-outil.visible:hover {
+        transform: translateY(-5px) scale(1.02);
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+/* Pour que la carte rétrécisse au moment du clic */
+div.conteneur-outils div.card-outil.visible:active {
+    transform: scale(0.95);
+}
+div.conteneur-outils div.card-outil a.lien-outils i {
+    width: 106px;
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    font-size: 70px;
+    padding: var(--ESPACE_XXS);
+    border-radius: var(--BORDER);
+    display: flex;
+    justify-content: center;
+    margin: var(--ESPACE_XS);
+}
+div.conteneur-outils div.card-outil a.lien-outils h1{
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    font-size: var(--H3);
+    margin: var(--ESPACE_XS);
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 2; /* Limite à 2 lignes */
+    line-clamp: 2; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden; /* Pour cacher ce qui dépasse */
+}
+div.conteneur-outils div.card-outil a.lien-outils p{
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    font-size: var(--P);
+    margin: var(--ESPACE_XS);
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 4; /* Limite à 4 lignes */
+    line-clamp: 4; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden; /* Pour cacher ce qui dépasse */
+}
+/* Style du combobox */
+div.conteneur-outils-marge {
+    margin: var(--ESPACE_S) auto;
+    max-width: var(--MAX_WIDTH);
+    padding: var(--ESPACE_XXS);
+}
+div.conteneur-outils1 {
+    margin: var(--ESPACE_S) auto;
+    max-width: var(--MAX_WIDTH);
+    display: flex;
+    align-items: center;
+}
+div.conteneur-outils1 h1,
+div.conteneur-outils-marge h1 {
+    font-size: var(--H2);
+    margin-left: var(--ESPACE_S);
+}
+div.conteneur-outils-marge h2 {
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin: var(--ESPACE_XS) var(--ESPACE_S);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-outils1 select {
+    background-color: var(--COULEUR_ACCENT);
+    color: var(--COULEUR_BACKGROUND);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    padding: var(--ESPACE_XS);
+    border: 0px;
+    margin-left: auto;
+    margin-right: var(--ESPACE_S);
+    border-radius: var(--BORDER);
+    width: 220px;
+    height: 50px;
+    font-size: var(--H3);
+    font-family: var(--FONT_FAMILY);
+    cursor: pointer;
+
+    /*ça enleve le style de base */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none; 
+    /* Pour la flèche */
+    background-image: var(--URL_FLECHE_ICON);
+    background-repeat: no-repeat;
+    background-position: right var(--ESPACE_XS) center; /* On met à droite l'icone */
+    background-size: var(--H3);
+
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-outils1 select:hover {
+        box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
+        background-color: var(--COULEUR_ACCENT_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-outils1 select:active {
+    background-color: var(--COULEUR_ACCENT_HOVER);
+    box-shadow: 0px 0px 10px var(--COULEUR_ACCENT_HOVER);
+    transform: scale(0.95);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* ":focus" c'est quand la boite est selectionné*/
+div.conteneur-outils1 select:focus {
+    /* Pour enlever une barre de base */
+    outline: none;
+    border: none;
+}
+
+
+/* Pour les raccourcies */
+div.shorcut {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    margin: var(--ESPACE_S) var(--ESPACE_XS);
+    width: 140px;
+    height: fit-content;
+    border-radius: var(--BORDER_SMALL);
+    overflow: hidden;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.shorcut:hover{
+        transform: translateY(-3px);
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    }
+}
+div.shorcut:active {
+    transform: scale(0.95); 
+}
+div.shorcut div.img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;
+    height: 100px;
+    border-top-left-radius: var(--BORDER_SMALL);
+    border-top-right-radius: var(--BORDER_SMALL);
+}
+div.shorcut div.img#icone-add{
+    background: linear-gradient(130deg, #28A745, #85D26B);
+}
+div.shorcut div.img#icone-historique{
+    background: linear-gradient(130deg, #2F3F47, #577482);
+}
+div.shorcut div.img#icone-pause{
+    background: linear-gradient(130deg, #e07c24, #ffa411);
+}
+div.shorcut div.img i{
+    font-size: 4.5rem;
+    color: #FFFFFF;
+}
+div.shorcut p.text-shorcut{
+    padding: var(--ESPACE_XS);
+    font-size: var(--P);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    display: block;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 2;
+    line-clamp: 2; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden;
+}
+
+
+/* Style des outils */
+div.conteneur-de-outil {
+    margin: var(--ESPACE_S) auto;
+    max-width: var(--MAX_WIDTH);
+    padding-left: var(--ESPACE_XXS);
+}
+div.conteneur-de-outil h1 {
+    font-size: var(--H2);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin-bottom: var(--ESPACE_M);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-de-outil h2 {
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin: var(--ESPACE_S) 0;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-de-outil p.text {
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    margin: var(--ESPACE_S) 0;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-de-outil div.conteneur-option {
+    display: flex;
+    align-items: center;
+}
+div.conteneur-de-outil div.conteneur-option a {
+    margin-left: auto;
+}
+div.conteneur-de-outil div.conteneur-option h1 {
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 1;
+    line-clamp: 1; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden;
+}
+div.conteneur-de-outil div.conteneur-option i {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    padding: var(--ESPACE_XS);
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: var(--H1);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-de-outil div.conteneur-option i:hover {
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    }
+}
+div.conteneur-de-outil div.conteneur-option i:active {
+    border-radius: var(--BORDER_SMALL);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+}
+/* conteneur des input + button */
+div.conteneur-de-outil div.conteneur-champs-outil {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    overflow: hidden;
+    margin: 0 var(--ESPACE_S);
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--BORDER);
+    padding: var(--ESPACE_XXS);
+    width: 420px;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+/* Pr le text de derniere sauvegarde */
+div.conteneur-de-outil div.conteneur-champs-outil p.text-info {
+    display: none;
+}
+/* On enleve si on a pas de sauvegarde */
+div.conteneur-de-outil div.conteneur-champs-outil p.text-info.visible {
+    display: block;
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    text-align: center;
+    margin: var(--ESPACE_XXS);
+}
+/* Pour les input small */
+div.cote-cote {
+    display: flex;
+    align-items: center;
+}
+/* Pour la div du/des inputs */
+div.conteneur-input {
+    position: relative;
+}
+/* désactive le style de base */
+div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+/* styles des champs */
+div.conteneur-de-outil div.conteneur-champs-outil input[type="number"].small {
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border: 0;
+    margin: var(--ESPACE_XS); /* !!! Attention si je modifie le margin il faut le modifier aussi dans le responsive !!! */
+    padding: var(--ESPACE_S);
+    border-radius: var(--BORDER);
+    width: 190px;
+    outline: none;
+    
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    font-family: var(--FONT_FAMILY);
+    font-size: var(--P);
+
+    appearance: none; /* désactive les styles systèmes */
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-de-outil div.conteneur-champs-outil input[type="number"] {
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border: 0;
+
+    /* !!! Attention la margin et le width sont liés !!! */
+    margin: var(--ESPACE_XS);
+    width: calc(100% - (var(--ESPACE_XS) * 2));
+    
+    padding: var(--ESPACE_S);
+    border-radius: var(--BORDER);
+    outline: none;
+    -moz-appearance: textfield; /* desactive les styles de base de firefox */
+    appearance: text-field;
+    
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    font-family: var(--FONT_FAMILY);
+    font-size: var(--P);
+    
+    z-index: 1111;
+
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* Pour les champs masqué suivant la méthode */
+div.conteneur-de-outil div.conteneur-champs-outil input[type="number"].invisible,
+div.conteneur-de-outil div.conteneur-champs-outil .label-input.invisible {
+    display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]:hover {
+        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]:focus {
+    box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* Pr rendre le placeholder invisible lors du label actif */
+div.conteneur-de-outil div.conteneur-champs-outil input::placeholder {
+    color: transparent !important; /* Il faut mettre le !important sinon ça ne marche pas */
+}
+/* Logique d'animations */
+div.conteneur-de-outil div.conteneur-champs-outil .label-input {
+    position: absolute;
+    font-size: var(--P);
+
+    top: 50%;
+    left: var(--ESPACE_XS);
+    transform: translateY(-50%);
+    pointer-events: none; /* Pour pouvoir cliquer sur le input */
+    margin-left: var(--ESPACE_S);
+
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    background-color: transparent;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-de-outil div.conteneur-champs-outil input:focus,
+div.conteneur-de-outil div.conteneur-champs-outil input:valid {
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+}
+div.conteneur-de-outil div.conteneur-champs-outil input:focus + .label-input,
+div.conteneur-de-outil div.conteneur-champs-outil input:not(:placeholder-shown) + .label-input {
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    margin-left: 0;
+    padding: var(--ESPACE_XXS);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-radius: var(--BORDER);
+    transform: translateY(-40px) scale(0.8);
+    z-index: 1111;
+}
+
+/* Pour les sliders comme pr le rpe */
+/* Pour chrome, safari */
+div.conteneur-de-outil div.conteneur-champs-outil .slider-cont { /* Le conteneur du slider */
+    display: flex;
+    margin: var(--ESPACE_XS);
+    padding: var(--ESPACE_XS) 0px;
+    align-items: center;
+}
+div.conteneur-de-outil div.conteneur-champs-outil .slider {
+    position: relative;
+    width: 100%;
+    height: 21px;
+}
+div.conteneur-de-outil div.conteneur-champs-outil .slider input{
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    z-index: 99;
+}
+/* Le point de la track du slider */
+div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 33px;
+    height: 23px;
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border: 2px solid var(--COULEUR_ACCENT_CONTRASTER);
+    border-radius: var(--BORDER);
+    cursor: pointer;
+    transform: scale(1.15);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-thumb:hover{
+        background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        transform: scale(1.3);
+        border: 2px solid var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+} 
+div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-thumb:active{
+    background-color: var(--COULEUR_ACCENT_CONTRASTER);
+    transform: scale(1.3);
+    border: 2px solid var(--COULEUR_ACCENT_CONTRASTER);
+    transition: all ease-in-out 0.05s;
+}
+div.conteneur-de-outil div.conteneur-champs-outil .slider progress {
+    width: 100%;
+    height: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: var(--BORDER);
+    overflow: hidden;
+}
+/* La track du slider */
+div.conteneur-de-outil div.conteneur-champs-outil .slider progress::-webkit-progress-bar {
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);  
+}
+div.conteneur-de-outil div.conteneur-champs-outil .slider progress::-webkit-progress-value {
+    background-color: var(--COULEUR_ACCENT_CONTRASTER); 
+    border-radius: var(--BORDER);
+    border: 0px;
+}
+/* Même chose mais pour firefox */
+/* Pr le point du slider */
+div.conteneur-de-outil div.conteneur-champs-outil .slider input::-moz-range-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 33px;
+    height: 23px;
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border: 2px solid var(--COULEUR_ACCENT_CONTRASTER);
+    border-radius: var(--BORDER);
+    cursor: pointer;
+    transform: scale(1.15);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-de-outil div.conteneur-champs-outil .slider input::-moz-range-thumb:hover{
+        background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        transform: scale(1.3);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-de-outil div.conteneur-champs-outil .slider progress {
+    width: 100%;
+    height: 20px;
+    appearance: none;
+    border-radius: var(--BORDER);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    overflow: hidden;
+    border: none;
+}
+/* la partie couleur rempli */
+div.conteneur-de-outil div.conteneur-champs-outil .slider progress::-moz-progress-bar{
+    background-color: var(--COULEUR_ACCENT_CONTRASTER);
+    border-radius: var(--BORDER);
+}
+/* !!! fin de la partie firefox */
+/* La valeur du slider */
+div.conteneur-de-outil div.conteneur-champs-outil .slider-value {
+    margin-left: var(--ESPACE_S);
+}
+/* le nom du slider */
+div.conteneur-de-outil div.conteneur-champs-outil .slider-name {
+    margin-right: var(--ESPACE_S);
+}
+
+
+/* Pour les input date */
+div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]{
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    border-radius: var(--BORDER);
+
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--FONT_FAMILY);
+    font-size: var(--P);
+    padding: var(--ESPACE_S);
+    margin: var(--ESPACE_XS);
+    
+    width: 190px;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]:focus{
+    box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+}
+/* Pour chrome, safari */
+div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]::-webkit-calendar-picker-indicator{ /*pour cacher l'icone */
+    display: none;
+    -webkit-appearance: none;
+}
+
+
+/* Pour les combobox */
+div.conteneur-de-outil div.conteneur-champs-outil select {
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin: var(--ESPACE_XS);
+    padding: var(--ESPACE_S);
+    border: 0px;
+    border-radius: var(--BORDER);
+    height: 55px;
+    font-size: var(--P);
+    font-family: var(--FONT_FAMILY);
+    cursor: pointer;
+
+    /*ça enleve le style de base */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none; 
+    /* Pour la flèche */
+    background-image: var(--URL_FLECHE_ICON_REVERSE);
+    background-repeat: no-repeat;
+    background-position: right var(--ESPACE_XS) center; /* On met à droite l'icone */
+    background-size: var(--H3);
+
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-de-outil div.conteneur-champs-outil select:hover {
+        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-de-outil div.conteneur-champs-outil select:active {
+    transform: scale(0.95);
+}
+/* ":focus" c'est quand la boite est selectionné*/
+div.conteneur-de-outil div.conteneur-champs-outil select:focus {
+    /* Pour enlever une barre de base */
+    outline: none;
+    border: none;
+    /* Style */
+    box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+}
+
+
+
+/* Pour outils Prédicteur de performance */
+/* Conteneur champs + réponse algo */
+div.conteneur-ensemble {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: var(--ESPACE_M) 0px;
+}
+div.conteneur-box-deux {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+div.conteneur-ensemble div.box-result-deux,
+div.conteneur-ensemble div.box-result-deux-small {
+    border-radius: var(--BORDER);
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT);
+    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    width: 420px;
+    min-height: 200px;
+    padding: var(--ESPACE_S);
+    margin: var(--ESPACE_S);
+    z-index: 1;
+    position: relative;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-ensemble div.box-result-deux::after,
+div.conteneur-ensemble div.box-result-deux-small::after {
+    content: "";
+    position: absolute;
+    border-radius: var(--BORDER);
+    /* Il prend tout l'espace disponible */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--DUREE_TRANSITION) ease-in-out;
+    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-ensemble div.box-result-deux:hover::after,
+    div.conteneur-ensemble div.box-result-deux-small:hover::after  {
+        opacity: 1;
+    }
+}
+/* Pour la charge d'entraînement */
+div.conteneur-ensemble div.box-result-deux-small {
+    width: 250px; 
+}
+/* pr l'ensemble de bouton */
+div.conteneur-action-charge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    width: fit-content;
+    margin: 0 auto;
+    border-radius: var(--BORDER);
+}
+div.conteneur-action-charge div.button-more{
+    margin: var(--ESPACE_XS);
+}
+div.conteneur-action-charge div.button-more:active{
+    box-shadow: none;
+}
+div.conteneur-action-charge div.button-more#add{
+    background-color: #28A745;
+}
+div.conteneur-action-charge div.button-more#historique{
+    background-color: #2F3F47;
+}
+div.conteneur-action-charge div.button-more#statut{
+    background-color: #e07c24;
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-action-charge div.button-more#add:hover{
+        box-shadow: 0px 0px 10px #28A745;
+    }
+    div.conteneur-action-charge div.button-more#historique:hover{
+        box-shadow: 0px 0px 10px #2F3F47;
+    }
+    div.conteneur-action-charge div.button-more#statut:hover{
+        box-shadow: 0px 0px 10px #e07c24;
+    }
+}
+div.conteneur-action-charge div.button-more p.txt_plus#bouton-action-charge{
+    color: #FFFFFF;
+}
+div.conteneur-action-charge div.button-more i#icone-action-charge{
+    color: #FFFFFF;
+}
+
+/* Pour graphique outil niveau de course */
+div.chart-container {
+    display: none;
+}
+div.chart-container.visible {
+    display: block;
+    margin: var(--ESPACE_L) var(--ESPACE_XXS);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+
+
+/* Pr les tableaux */
+table {
+    display: none;
+}
+table.visible {
+    display: table;
+    width: 100%;
+    border-collapse: collapse; /* Pr eviter les doubles bordures */
+}
+table.visible tr th,
+table.visible tr td {
+    border-bottom: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+}
+table.visible tr th {
+    padding: var(--ESPACE_XS);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    font-size: var(--P);
+    width: 33%;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+table.visible tr td {
+    padding: var(--ESPACE_XS);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    font-size: var(--P_SMALL);
+    text-align: center;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+
+/* Pour outils Zones cardiaques */
+div.conteneur-rep-zone {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+/* Box des zones */
+div.conteneur-rep-zone div.zone-cardio {
+    margin: var(--ESPACE_S);
+    padding: var(--ESPACE_S);
+    width: 200px;
+    height: 180px;
+    border-radius: var(--BORDER);
+    flex-direction: column;
+    display: flex;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+/* Gestion des colors */
+div.conteneur-rep-zone div.zone-cardio:nth-child(1) {
+    background-color: #3dbaf9;
+    box-shadow: 0px 0px 10px #3dbaf9;
+}
+div.conteneur-rep-zone div.zone-cardio:nth-child(2) {
+    background-color: #1fff80;
+    box-shadow: 0px 0px 10px #1fff80;
+}
+div.conteneur-rep-zone div.zone-cardio:nth-child(3) {
+    background-color: #e7e625;
+    box-shadow: 0px 0px 10px #e7e625;
+}
+div.conteneur-rep-zone div.zone-cardio:nth-child(4) {
+    background-color: #ff781e;
+    box-shadow: 0px 0px 10px #ff781e;
+}
+div.conteneur-rep-zone div.zone-cardio:nth-child(5) {
+    background-color: #ff4b4c;
+    box-shadow: 0px 0px 10px #ff4b4c;
+}
+/* Pour les txt des boite */
+div.conteneur-rep-zone div.zone-cardio p{
+    text-align: left;
+}
+div.conteneur-rep-zone div.zone-cardio p.zone{
+    font-size: var(--H2);
+    color: #000000;
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    margin: 0px 0px var(--ESPACE_S) 0px;
+}
+div.conteneur-rep-zone div.zone-cardio p.fonction-zone{
+    font-size: var(--P);
+    color: #000000;
+    margin: 0px 0px var(--ESPACE_S) 0px;
+}
+div.conteneur-tranche-unite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+}
+div.conteneur-rep-zone div.zone-cardio p.tranche-zone{
+    font-size: var(--H3);
+    color: #000000;
+    text-align: center;
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    margin-top: auto;
+}
+div.conteneur-rep-zone div.zone-cardio p.unite-zone{
+    font-size: var(--P);
+    color: #000000;
+    text-align: center;
+    margin-left: var(--ESPACE_XXS); 
+}
+
+
+/* Pour outils calculateur IMC */
+div.conteneur-ensemble div.box-result {
+    border-radius: var(--BORDER);
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT);
+    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    width: 420px;
+    padding: var(--ESPACE_S);
+    z-index: 1;
+    position: relative;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-ensemble div.box-result#niveau-course {
+    height: 140px;
+}
+div.conteneur-ensemble div.box-result::after {
+    content: "";
+    position: absolute;
+    border-radius: var(--BORDER);
+    /* Il prend tout l'espace disponible */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--DUREE_TRANSITION) ease-in-out;
+    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-ensemble div.box-result:hover::after {
+        opacity: 1;
+    }
+}
+div.conteneur-ensemble p {
+    color: var(--COULEUR_BACKGROUND);
+    font-size: var(--P);
+}
+div.conteneur-ensemble p.score-imc {
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    font-size: var(--H3);
+    margin-bottom: var(--ESPACE_XS);
+}
+div.conteneur-ensemble p.temps-recup {
+    font-family: Anton;
+    letter-spacing: 1px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--H0);
+    height: calc(100% - (var(--ESPACE_M) * 2));;
+    margin: var(--ESPACE_S) var(--ESPACE_M) var(--ESPACE_M) var(--ESPACE_M);
+}
+
+
+
+
+/* ----- Style page "Paramètres" ----- */
+
+/* Section pour les dernières nouveautés de Sprintia */
+div.max-widht-title {
+    max-width: var(--MAX_WIDTH);
+    margin: var(--ESPACE_S) auto;
+    padding: var(--ESPACE_XXS);
+}
+div.max-widht-title h1{
+    font-size: var(--H2);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin-left: var(--ESPACE_S);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.max-widht-title h2{
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin-left: var(--ESPACE_S);
+    margin-top: var(--ESPACE_M);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-derniere-nouveautes {
+    max-width: var(--MAX_WIDTH);
+    display: flex;
+    margin: var(--ESPACE_S) auto;
+    overflow-x: auto;
+}
+div.conteneur-derniere-nouveautes div.conteneur_scrolling {
+    display: inline-flex;
+    align-items: center;
+}
+/* Ne pas mettre "div.conteneur-derniere-nouveautes" pour que les cards de param et historique des versions soit identiques */
+div.conteneur_scrolling .card-nouveautes {
+    width: 250px;
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    padding: var(--ESPACE_XS);
+    border-radius: var(--BORDER);
+    margin: var(--ESPACE_XS);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: contain -10%;
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur_scrolling .card-nouveautes:hover {
+        transform: translateY(-5px) scale(1.02);
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur_scrolling .card-nouveautes:active {
+    transform: scale(0.95);
+}
+div.conteneur_scrolling .card-nouveautes-image p{
+    font-size: var(--H0);
+    text-align: left;
+    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    font-family: "Anton", sans-serif;
+    padding: var(--ESPACE_XXS);
+    color: var(--COULEUR_BACKGROUND);
+    border-radius: var(--BORDER);
+    margin-bottom: var(--ESPACE_S);
+    padding-left: var(--ESPACE_S);
+}
+div.conteneur_scrolling .card-nouveautes p.description-maj {
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    padding: var(--ESPACE_XXS);
+    cursor: pointer;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 2;
+    line-clamp: 2; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden; /* Pour cacher ce qui dépasse */
+}
+div.conteneur_scrolling .card-nouveautes div.date-maj {
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    font-size: var(--P_SMALL);
+    margin-top: var(--ESPACE_S);
+}
+/* Button more */
+div.conteneur-derniere-nouveautes .card-more {
+    display: flex;
+    min-width: 150px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--COULEUR_ACCENT);
+    padding: var(--ESPACE_S_SMALL);
+    border-radius: var(--BORDER);
+    margin: var(--ESPACE_S);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-derniere-nouveautes .card-more:hover {
+        background-color: var(--COULEUR_ACCENT_HOVER);
+        box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-derniere-nouveautes .card-more:active {
+    transform: scale(0.9);  
+    border-radius: var(--BORDER_SMALL);
+    background-color: var(--COULEUR_ACCENT_HOVER);
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-derniere-nouveautes .card-nouveautes-icon-more i{
+    font-size: var(--H3);
+    color: var(--COULEUR_BACKGROUND);
+    margin: 0 var(--ESPACE_XXS);
+    vertical-align: middle; /* Aligne l'image au centre verticalement */
+}
+div.conteneur-derniere-nouveautes p.txt_plus{
+    font-size: var(--P);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    margin: 0 var(--ESPACE_XXS);
+    color: var(--COULEUR_BACKGROUND);
+}
+/* Section choix param */
+div.conteneur-param {
+    max-width: var(--MAX_WIDTH);
+    margin: var(--ESPACE_S) auto;
+    padding: var(--ESPACE_S);
+}
+div.conteneur-param div.acces-param,
+div.conteneur-param div.acces-param1,
+div.conteneur-param div.acces-param2 {
+    display: flex; 
+    align-items: center;
+    margin: var(--ESPACE_XXS) 0px;
+    padding: var(--ESPACE_XS);
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-param div.acces-param1 {
+    border-top-left-radius: var(--BORDER);
+    border-top-right-radius: var(--BORDER);
+}
+div.conteneur-param div.acces-param2 {
+    border-bottom-left-radius: var(--BORDER);
+    border-bottom-right-radius: var(--BORDER);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-param div.acces-param:hover,
+    div.conteneur-param div.acces-param1:hover,
+    div.conteneur-param div.acces-param2:hover{
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transform: scale(1.01);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-param div.acces-param:active,
+div.conteneur-param div.acces-param1:active,
+div.conteneur-param div.acces-param2:active{
+    transform: scale(0.97);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-param i{
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    font-size: var(--H0);
+}
+div.conteneur-param div.acces-param p, 
+div.conteneur-param div.acces-param1 p,
+div.conteneur-param div.acces-param2 p{
+    margin-left: var(--ESPACE_M);
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+}
+
+
+/* ----- Style page "Historique des versions" ----- */
+div.conteneur-historique-versions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+/* Card mise en avant derniere version */
+.conteneur-historique-versions .box-last-maj{
+    background: var(--COULEUR_BACKGROUND_CARD);
+    border-radius: var(--BORDER);
+    max-width: 1150px;
+    margin: var(--ESPACE_S);
+    padding: var(--ESPACE_XS);
+    transition: all var(--DUREE_TRANSITION) ease-in-out;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+@media (hover: hover) and (pointer: fine) {
+    .conteneur-historique-versions .box-last-maj:hover{
+        transform: translateY(-5px) scale(1.02);
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+.conteneur-historique-versions .box-last-maj:active{
+    transform: scale(0.97);
+}
+/* Contenu supérieur */
+div.conteneur-historique-versions .box-last-maj div.content1 .card-nouveautes-image-last-maj {
+    font-size: var(--H0);
+    width: 250px;
+    text-align: left;
+    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    font-family: "Anton", sans-serif;
+    letter-spacing: 1px;
+    padding: var(--ESPACE_XS) var(--ESPACE_S);
+    color: var(--COULEUR_BACKGROUND);
+    border-radius: var(--BORDER);
+    margin-bottom: var(--ESPACE_S);
+}
+div.conteneur-historique-versions .box-last-maj div.content1 .card-nouveautes-image-last-maj p.date-last-maj{
+    font-size: var(--H3);
+}
+/* Contenu inférieur */
+.conteneur-historique-versions .box-last-maj div.content2 {
+    display: block;
+    margin-top: var(--ESPACE_XS);
+}
+.conteneur-historique-versions .box-last-maj div.content2 .description{
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    cursor: pointer;
+}
+.conteneur-historique-versions .box-last-maj div.content2 button{
+    font-size: var(--P);
+    font: var(--FONT_FAMILY);
+    color: var(--COULEUR_BACKGROUND);
+    cursor: pointer;
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    padding: var(--ESPACE_XS);
+    margin: 0;
+    margin-top: var(--ESPACE_XS);
+    text-align: center;
+
+    border-color: transparent;
+    border: 0px transparent;
+
+    border-radius: var(--BORDER);
+    background-color: var(--COULEUR_ACCENT_CONTRASTER);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    .conteneur-historique-versions .box-last-maj div.content2 button:hover {
+        background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+/* Card Historique versions */
+/* Les cards sont invisible de base */
+div.conteneur-historique-versions .card-nouveautes {
+    display: none;
+}
+/* Ne pas mettre "div.conteneur-derniere-nouveautes" pour que les cards de param et historique des versions soit identiques */
+div.conteneur-historique-versions .card-nouveautes.visible {
+    width: 370px;
+    display: block;
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    padding: var(--ESPACE_XS);
+    border-radius: var(--BORDER);
+    margin: var(--ESPACE_S) var(--ESPACE_XS) var(--ESPACE_S) var(--ESPACE_S);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-historique-versions .card-nouveautes.visible:hover {
+        transform: translateY(-5px) scale(1.02);
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-historique-versions .card-nouveautes.visible:active {
+    transform: scale(0.95);
+}
+div.conteneur-historique-versions .card-nouveautes-image p {
+    font-size: var(--H0);
+    text-align: left;
+    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    font-family: "Anton", sans-serif;
+    padding: var(--ESPACE_XXS);
+    color: var(--COULEUR_BACKGROUND);
+    border-radius: var(--BORDER);
+    margin-bottom: var(--ESPACE_S);
+    padding-left: var(--ESPACE_S);
+}
+div.conteneur-historique-versions .card-nouveautes p.description-maj {
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    padding: var(--ESPACE_XXS);
+    cursor: pointer;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 2;
+    line-clamp: 2; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden; /* Pour cacher ce qui dépasse */
+}
+div.conteneur-historique-versions .card-nouveautes div.date-maj {
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    font-size: var(--P_SMALL);
+    margin-top: var(--ESPACE_S);
+}
+/* Mise en page des patch notes */
+ul.liste-fonctionnalites {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    padding: var(--ESPACE_XS);
+    border-radius: var(--BORDER);
+    
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 8%;
+}
+ul.liste-fonctionnalites li {
+    list-style: initial;
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin: var(--ESPACE_S) var(--ESPACE_L);
+    
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+/* Pour les images des versions */
+div.gallery-version {
+    margin: var(--ESPACE_S) auto;
+    align-items: center;
+    column-count: 2;
+    column-gap: var(--ESPACE_S);
+}
+div.gallery-version img{    
+    width: 100%;
+    margin-bottom: var(--ESPACE_S);
+    border-radius: var(--BORDER_SMALL);
+    
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+
+
+
+/* ----- Style page "Thèmes" ----- */
+div.conteneur-about-marge2 {
+    margin: var(--ESPACE_S) auto;
+    max-width: var(--MAX_WIDTH);
+    padding-left: var(--ESPACE_XXS);
+}
+div.conteneur-about-marge2 h1 {
+    font-size: var(--H2);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin-bottom: var(--ESPACE_M);
+}
+div.conteneur-about-marge2 h2 {
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin: var(--ESPACE_S) 0;
+}
+div.conteneur-about-marge2 div.boite-ensemble-feature {
+    margin: 0 auto;
+    max-width: 900px;
+}
+div.conteneur-about-marge2 div.boite-ensemble-feature p.text-feature {
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+}
+div.conteneur-mode {
+    display: flex;
+    align-items: center;
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    padding: var(--ESPACE_XS);
+    border-radius: var(--BORDER);
+    margin: var(--ESPACE_M) var(--ESPACE_XS);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-mode i{
+    font-size: var(--H0);
+}
+div.conteneur-mode p.mode-choisis {
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin-right: auto;
+    margin-left: var(--ESPACE_M);
+}
+div.conteneur-mode p.mode-choisis#sans-icone {
+    margin-left: var(--ESPACE_XXS);
+}
+/* Zone du champs du toggle */
+div.conteneur-mode input[type="checkbox"].toggle{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    width: 60px;
+    height: 32px;
+    background-color: var(--COULEUR_ACCENT);
+    cursor: pointer;
+    border-radius: 5rem;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-mode input[type="checkbox"].toggle:active{
+    background-color: var(--COULEUR_ACCENT_HOVER);
+    transform: scale(0.9);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* C pr le rond du toggle */
+div.conteneur-mode input[type="checkbox"].toggle::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 72%;
+    transform: translate(-50%, -50%);
+    height: 24px;
+    width: 24px;
+    background-color: var(--COULEUR_BACKGROUND);
+    border-radius: 5rem;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* Style mode off */
+div.conteneur-mode input[type="checkbox"].toggle:checked{
+    background-color: var(--COULEUR_TEXT_SECONDAIRE);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* Pour que le rond glisse */
+div.conteneur-mode input[type="checkbox"].toggle:checked:after{
+    left: 28%;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* Section pour la couleur accentuation */
+ol.conteneur-color-acuentation{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+li.option-color {
+    width: 430px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    padding: var(--ESPACE_XS) var(--ESPACE_S);
+    border-radius: var(--BORDER);
+    margin: var(--ESPACE_XS);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+@media (hover: hover) and (pointer: fine) {
+    /* Changer la color du txt lors du survol donc quand il y a la couche du before egalement */
+    li.option-color:hover{
+        color: var(--COULEUR_BACKGROUND);
+    }
+}
+ol li.option-color:active{
+    transform: scale(0.95);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+/* 2ème couche du li lors du hover */
+ol li.option-color::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--COULEUR_ACCENT);
+    width: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: -1;
+    /* Ne pas mettre la durée transition ici sinon l'animation est vraiment trop rapide */
+    transition: all ease-in-out 0.3s;
+}
+@media (hover: hover) and (pointer: fine) {
+    ol li.option-color:hover::before{ /* ça affiche la couche du before */
+        width: 100%;
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+/* celui selectionné */
+ol li.option-color.selected{
+    color: var(--COULEUR_BACKGROUND); /* Changement couleur du texte */
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+ol li.option-color.selected::before{
+    width: 100%; /* le li selectionner direct à 100% pr diférencier */
+    transition: all ease-in-out 0.3s;
+}
+/* Couleur individuel en fonction de l'ordre des li */
+ol li.option-color.option-color:nth-child(1)::before{ /* ça prend le premier li ds le code */
+    background-color: var(--COULEUR_PASTILLES_0);
+}
+ol li.option-color:nth-child(2)::before{
+    background-color: var(--COULEUR_PASTILLES_1);
+}
+ol li.option-color:nth-child(3)::before{
+    background-color: var(--COULEUR_PASTILLES_2);
+}
+ol li.option-color:nth-child(4)::before{
+    background-color: var(--COULEUR_PASTILLES_3);
+}
+ol li.option-color:nth-child(5)::before{
+    background-color: var(--COULEUR_PASTILLES_4);
+}
+ol li.option-color:nth-child(6)::before{
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D7), var(--COULEUR_PASTILLES_D8));
+}
+ol li.option-color:nth-child(7)::before{
+    background-color: var(--COULEUR_PASTILLES_5);
+}
+ol li.option-color:nth-child(8)::before{
+    background-color: var(--COULEUR_PASTILLES_6);
+}
+ol li.option-color:nth-child(9)::before{
+    background-color: var(--COULEUR_PASTILLES_7);
+}
+ol li.option-color:nth-child(10)::before{
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D3), var(--COULEUR_PASTILLES_D4));
+}
+ol li.option-color:nth-child(11)::before{
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D1), var(--COULEUR_PASTILLES_D2));
+}
+ol li.option-color:nth-child(12)::before{
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D5), var(--COULEUR_PASTILLES_D6));
+}
+/* Style du bouton réinitialiser */
+div.conteneur-centrage-marge {
+    padding: var(--ESPACE_XS);
+    margin: var(--ESPACE_S);
+    justify-content: center;
+    display: flex;
+}
+
+
+/* ----- Style page "Confidentialité" ----- */
+div.conteneur-about-marge h1 {
+    font-size: var(--H2);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-about-marge p.info-maj-politique {
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    margin: var(--ESPACE_S) 0px;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-about-marge h2 {
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin: var(--ESPACE_S) 0px;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-about-marge p.text {
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    margin: var(--ESPACE_S) 0px;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+
+
+/* ----- Style page "À propos" ----- */
+
+/* Le "div.conteneur-about-marge" sert à garder le margin pour le responsive */
+div.conteneur-about-marge {
+    margin: var(--ESPACE_S) auto;
+    padding-left: var(--ESPACE_S);
+    max-width: var(--MAX_WIDTH);
+    padding: var(--ESPACE_XXS);
+}
+div.conteneur-about-marge div.about_container {
+    max-width: var(--MAX_WIDTH);
+    margin: var(--ESPACE_M) auto;
+}
+div.conteneur-about-marge div.about_container h1 {
+    font-size: var(--H2);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin: var(--ESPACE_S) 0px;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-about-marge div.about_container h2 {
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin: var(--ESPACE_S) 0px;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-about-marge div.about_container p.text-about {
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    margin: var(--ESPACE_S) 0px;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+/* Partie contribution pour amélioration Sprintia */
+div.conteneur-about-marge div.about_container div.container-contribue-amelioration {
+    display: flex;
+    justify-content: space-between;
+
+    animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
+    animation-timeline: view();
+    animation-range-start: cover 0%;
+    animation-range-end: cover 15%;
+}
+div.conteneur-about-marge div.about_container div.container-contribue-amelioration p.remerciement{
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    font-size: var(--P);
+    padding: 0 var(--ESPACE_XS) 0 0;
+}
+div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux {
+    border-radius: var(--BORDER);
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    cursor: pointer;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux:hover {
+        transform: translateY(-5px) scale(1.02);
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux:active {
+    transform: scale(0.95);
+}
+div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux i {
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    font-size: 70px;
+    width: 106px;
+    padding: var(--ESPACE_XXS);
+    border-radius: var(--BORDER);
+    display: flex;
+    justify-content: center;
+    margin: var(--ESPACE_XS);
+}
+div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux p.mon-email {
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    padding: var(--ESPACE_XS);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    margin: var(--ESPACE_XS);
+    font-size: var(--P);
+}
+div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux a.bouton-contact {
+    font-size: var(--P);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    display: block;
+    color: var(--COULEUR_BACKGROUND);
+    padding: var(--ESPACE_XS);
+    margin: var(--ESPACE_XS);
+    text-align: center;
+    border-radius: var(--BORDER);
+    background-color: var(--COULEUR_ACCENT_CONTRASTER);
+    text-align: center;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux a.bouton-contact:hover {
+        background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+
+
+
+/* ----- RESPONSIVE ----- */
+/* Footer */
+@media (max-width: 930px) {
+    footer {
+        display: block;
+    }
+}
+
+/* Card Outils page "Accueil" */
+@media (max-width: 1245px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 360px;
+    }
+}
+@media (max-width: 1205px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 340px;
+    }
+}
+@media (max-width: 1140px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 320px;
+    }
+}
+@media (max-width: 1080px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 430px;
+    }
+}
+@media (max-width: 975px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 400px;
+    }
+}
+@media (max-width: 905px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 370px;
+    }
+}
+@media (max-width: 845px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 340px;
+    }
+}
+@media (max-width: 790px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 320px;
+    }
+}
+@media (max-width: 742px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 430px;
+    }
+}
+@media (max-width: 500px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        margin: var(--ESPACE_S) 0px var(--ESPACE_S) 0px;
+        width: 400px;
+    }
+}
+@media (max-width: 420px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 355px;
+    }
+}
+@media (max-width: 380px) {
+    div.conteneur-historique-versions .card-nouveautes.visible{
+        width: 330px;
+    }
+}
+
+/* ----- Les cartes de la page "Outils" ----- */
+@media (max-width: 1225px) {
+    div.conteneur-outils div.card-outil {
+        width: 350px;
+    }
+}
+@media (max-width: 1165px) {
+    div.conteneur-outils div.card-outil {
+        width: 320px;
+    }
+}
+@media (max-width: 1075px) {
+    div.conteneur-outils div.card-outil {
+        width: 300px;
+    }
+}
+@media (max-width: 1010px) {
+    div.conteneur-outils div.card-outil {
+        width: 420px;
+    }
+}
+@media (max-width: 935px) {
+    div.conteneur-outils div.card-outil {
+        width: 380px;
+    }
+}
+@media (max-width: 855px) {
+    div.conteneur-outils div.card-outil {
+        width: 350px;
+    }
+}
+@media (max-width: 835px) {
+    div.conteneur-outils div.card-outil {
+        width: 325px;
+    }
+}
+@media (max-width: 745px) {
+    div.conteneur-outils div.card-outil {
+        width: 300px;
+    }
+}
+@media (max-width: 695px) {
+    div.conteneur-outils div.card-outil {
+        width: 280px;
+    }
+}
+@media (max-width: 655px) {
+    div.conteneur-outils div.card-outil {
+        width: 450px;
+    }
+}
+@media (max-width: 500px) {
+    div.conteneur-outils div.card-outil {
+        width: 370px;
+        margin: var(--ESPACE_S) 0px;
+    }
+}
+@media (max-width: 420px) {
+    div.conteneur-outils div.card-outil {
+        width: 355px;
+    }
+}
+@media (max-width: 380px) {
+    div.conteneur-outils div.card-outil {
+        width: 330px;
+    }
+    div.conteneur-outils1 select {
+        width: 195px;
+    }
+}
+
+
+/* ----- Pour la section paramètres ----- */
+@media (max-width: 750px) {
+    div.conteneur-about-marge div.about_container div.container-contribue-amelioration {
+        display: block;
+    }
+    div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux{
+        padding: var(--ESPACE_XS);
+        margin: var(--ESPACE_S) 0px;
+    }
+    div.conteneur-about-marge div.about_container div.container-contribue-amelioration  div.boite-du-reseaux i {
+        margin: 0;
+    }
+    div.conteneur-about-marge div.about_container div.container-contribue-amelioration  div.boite-du-reseaux a.bouton-contact{
+        margin: 0;
+    }
+    div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux p.mon-email {
+        margin-bottom: var(--ESPACE_S);
+        font-size: var(--H3);
+    }
+}
+
+/* ----- Pour la section Historique des versions ----- */
+@media (max-width: 630px) {
+    div.gallery-version {
+        column-count: 1;
+    }
+}
+@media (max-width: 540px) {
+    /* Pour la card derniere nouveauté */
+    .conteneur-historique-versions .box-last-maj div.content2 .description{
+        display: -webkit-box;
+        -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+        -webkit-line-clamp: 12;
+        line-clamp: 12; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+        overflow: hidden; /* Pour cacher ce qui dépasse */
+    }
+}
+@media (max-width: 480px) {
+    .conteneur-historique-versions .box-last-maj div.content2 button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 510px) {
+    .conteneur-historique-versions .box-last-maj {
+        margin: var(--ESPACE_S) 0px var(--ESPACE_S) 0px;
+    }
+}
+
+/* ----- Pour la section thèmes ----- */
+@media (max-width : 960px) {
+    li.option-color {
+        width: 410px;
+    }
+}
+@media (max-width : 920px) {
+    li.option-color {
+        width: 390px;
+    }
+}
+@media (max-width : 880px) {
+    li.option-color {
+        width: 370px;
+    }
+}
+@media (max-width : 840px) {
+    li.option-color {
+        width: 340px;
+    }
+}
+@media (max-width : 780px) {
+    li.option-color {
+        width: 320px;
+    }
+}
+@media (max-width : 739px) {
+    li.option-color {
+        width: 270px;
+    }
+}
+@media (max-width : 639px) {
+    li.option-color {
+        width: 240px;
+    }
+}
+@media (max-width : 580px) {
+    li.option-color {
+        width: 220px;
+    }
+}
+@media (max-width : 539px) {
+    li.option-color {
+        width: 100%;
+    }
+}
+@media (max-width : 400px) {
+    li.option-color {
+        margin: var(--ESPACE_XS) 0px;
+    }
+    div.conteneur-mode{
+        margin: var(--ESPACE_M) 0px;
+    }
+}
+
+/* ----- Pour la section à propos + conteneur scrolling ----- */
+@media (max-width: 1310px) {
+    div.conteneur-about-marge,
+    div.conteneur-about-marge2,
+    div.conteneur-de-outil {
+        max-width: var(--MAX_WIDTH);
+        margin: var(--ESPACE_XS) auto;
+        padding: var(--ESPACE_S);
+    }
+    div.conteneur-derniere-nouveautes {
+        margin: var(--ESPACE_S) var(--ESPACE_S);
+    }
+}
+@media (max-width: 420px) {
+    div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux p.mon-email {
+        /* Pour pas que l'email dépasse de la boite */
+        font-size: var(--P);
+        margin-left: auto;
+    }
+    div.conteneur-about-marge div.about_container div.container-contribue-amelioration p.remerciement{
+        padding: 0;
+    }
+}
+
+/* ----- Pour l'interieur des outils ----- */
+@media (max-width: 1047px) {
+    div.conteneur-ensemble div.box-result-deux#charge-entrainement {
+        width: 535px;
+        min-height: auto;
+    }
+}
+@media (max-width: 1008px) {
+    div.conteneur-de-outil div.conteneur-champs-outil,
+    div.conteneur-ensemble div.box-result {
+        margin: var(--ESPACE_S);
+        width: 420px;
+    }
+}
+@media (max-width: 959px) {
+    div.conteneur-ensemble div.box-result-deux {
+        min-height: auto;
+    }
+}
+@media (max-width: 668px) {
+    div.conteneur-ensemble div.box-result-deux {
+        width: 100%;
+    }
+}
+@media (max-width: 490px) {
+    div.conteneur-de-outil div.conteneur-champs-outil,
+    div.conteneur-ensemble div.box-result,
+    div.conteneur-ensemble div.box-result-deux {
+        width: 100%;
+        margin: var(--ESPACE_S) 0px;
+    }
+    div.cote-cote {
+        display: block;
+    }
+    div.conteneur-de-outil div.conteneur-champs-outil input[type="number"].small,
+    div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]{
+        width: calc(100% - (var(--ESPACE_XS) * 2));
+    }
+}
+/* Zones cardiaques */
+@media (max-width: 1206px) {
+    /* Box des zones */
+    div.conteneur-rep-zone div.zone-cardio {
+        width: 270px;
+    }
+    div.conteneur-rep-zone div.zone-cardio p.tranche-zone{
+        font-size: var(--H2);
+    }
+    div.conteneur-rep-zone div.zone-cardio p.unite-zone{
+        font-size: var(--H3);
+    }
+}
+@media (max-width: 1105px) {
+    /* Box des zones */
+    div.conteneur-rep-zone div.zone-cardio {
+        width: 300px;
+    }
+}
+@media (max-width: 705px) {
+    /* Box des zones */
+    div.conteneur-rep-zone div.zone-cardio {
+        width: 200px;
+    }
+    div.conteneur-rep-zone div.zone-cardio p.tranche-zone{
+        font-size: var(--H3);
+    }
+    div.conteneur-rep-zone div.zone-cardio p.unite-zone{
+        font-size: var(--P);
+    }
+}
+@media (max-width: 506px) {
+    /* Box des zones */
+    div.conteneur-rep-zone div.zone-cardio {
+        width: 200px;
+        margin: var(--ESPACE_XS);
+    }
+}
+@media (max-width: 460px) {
+    /* Box des zones */
+    div.conteneur-rep-zone div.zone-cardio {
+        margin: var(--ESPACE_S) 0;
+        width: 100%;
+    }
+    div.conteneur-rep-zone div.zone-cardio p.tranche-zone{
+        font-size: var(--H2);
+    }
+    div.conteneur-rep-zone div.zone-cardio p.unite-zone{
+        font-size: var(--H3);
+    }
+}
+
+
+/* ----- Charge d'entrainement ----- */
+@media (max-width : 600px) {
+    div.conteneur-ensemble div.box-result-deux-small {
+        width: 220px; 
+    }
+}
+@media (max-width: 580px) {
+    div.conteneur-ensemble div.box-result-deux#charge-entrainement {
+        width: 100%;
+    }
+}
+@media (max-width: 550px) {
+    div.conteneur-ensemble div.box-result-deux-small {
+        display: flex;
+        align-items: center;
+        min-height: auto;
+        flex: 1; /*Pour que les deux boîtes occupent tout l'espace disponible en tenant sur la même ligne*/
+        padding: var(--ESPACE_S);
+        margin: var(--ESPACE_S);
+    }
+    div.conteneur-ensemble p.score-imc#charge-entrainement-score {
+        font-size: var(--H3);
+        margin: 0;
+    }
+    div.conteneur-ensemble p.temps-recup.charge{
+        font-family: Anton;
+        letter-spacing: 1px;
+        font-size: var(--H2);
+        height: 100%;
+        vertical-align: middle;
+        margin: 0;
+        margin-left: var(--ESPACE_S_SMALL);
+    }
+}
+
+@media (max-width: 545px) {
+    /* Pr l'ensemble des boutons ajouter,... */
+    div.conteneur-action-charge .txt_plus#bouton-action-charge{
+        display: none;
+    }
+}
+@media (max-width: 440px) {
+    div.conteneur-ensemble div.box-result-deux-small {
+        flex: auto;
+        width: fit-content;
+        padding: var(--ESPACE_S);
+        margin: var(--ESPACE_S) var(--ESPACE_XXS);
+    }
+    div.conteneur-ensemble p.temps-recup.charge{
+        margin-left: auto;
+    }
+}
+
+
+
+/* ----- Le menu Hamburger ----- */
+@media (max-width: 990px) {
+    header div.navbar ul.links {
+        display: none;
+    }
+    header div.navbar div.burger-menu-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+    header .burger-menu {
+        display: block;
+    }
+}

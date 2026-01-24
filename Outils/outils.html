@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Outils</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-outils-marge">
+        <h1>Actions rapides</h1>
+
+        <div class="conteneur-derniere-nouveautes">
+            <div class="conteneur_scrolling">
+
+                <a href="Actions/ajouter_entraînement.html">
+                    <div class="shorcut">
+                        <div class="img" id="icone-add">
+                            <i class="fs-icon_add"></i>
+                        </div>
+                        <p class="text-shorcut">
+                            Ajouter un entraînement
+                        </p>
+                    </div>
+                </a>
+
+                <a href="Actions/historique_entrainement.html">
+                    <div class="shorcut">
+                        <div class="img" id="icone-historique">
+                            <i class="fs-icon_historique"></i>
+                        </div>
+                        <p class="text-shorcut">
+                            Historique entraînement
+                        </p>
+                    </div>
+                </a>
+
+                <a href="Actions/statut_analyses.html">
+                    <div class="shorcut">
+                        <div class="img" id="icone-pause">
+                            <i class="fs-icon_pause"></i>
+                        </div>
+                        <p class="text-shorcut">
+                            Suspendre les analyses
+                        </p>
+                    </div> 
+                </a>
+
+            </div>
+        </div>
+
+        <div class="conteneur-outils1">
+            <h1>Outils</h1>
+            <select id="filter" autocomplete="off">
+                    <option value="tous">Tous</option>
+                    <option value="progression">Progression</option>
+                    <option value="sante">Santé</option>
+                    <option value="course">Course à pied</option>
+                    <option value="musculation">Musculation</option>
+                    <option value="hiver">Sports d'hiver</option>
+                    <option value="autre">Autre</option>
+            </select>
+        </div>
+        <div class="conteneur-outils" id="data-table">
+
+            <div class="card-outil visible" data-category="progression">
+                <a class="lien-outils" href="Charge d'entraînement/charge_entrainement.html">
+                    <i class="fs-icon_charge_entrainement"></i>
+                    <h1>Charge d'entraînement</h1>
+                    <p>Découvrez la quantité de stress physique que vous imposez à votre corps de part vos entraînements.</p>
+                </a>
+                <a class="bouton-a-card" href="Charge d'entraînement/charge_entrainement.html">Essayer</a>
+            </div>
+            <div class="card-outil visible" data-category="progression">
+                <a class="lien-outils" href="Indulgence de course/indulgence_course.html">
+                    <i class="fs-icon_indulgence_course"></i>
+                    <h1>Indulgence de course</h1>
+                    <p>Découvrez une fourchette de distance hebdomadaire conseillé en fonction de tes dernières semaines de course.</p>
+                </a>
+                <a class="bouton-a-card" href="Indulgence de course/indulgence_course.html">Essayer</a>
+            </div>
+            <div class="card-outil visible" data-category="progression">
+                <a class="lien-outils" href="Estimation du temps de récupération/estimation_temps_recuperation.html">
+                    <i class="fs-icon_temps_recup"></i>
+                    <h1>Estimation du temps de récupération</h1>
+                    <p>Découvrez le temps de récupération optimal pour récupérer de votre dernier entraînement.</p>
+                </a>
+                <a class="bouton-a-card" href="Estimation du temps de récupération/estimation_temps_recuperation.html">Essayer</a>
+            </div>
+
+
+            <div class="card-outil visible" data-category="sante">
+                <a class="lien-outils" href="Zones cardiaques/zones_cardiaques.html">
+                    <i class="fs-icon_zones_cardiaques"></i>
+                    <h1>Zones cardiaques</h1>
+                    <p>Découvrez vos zones de fréquence cardiaque pour adapter l’intensité de vos entraînements.</p>
+                </a>
+                <a class="bouton-a-card" href="Zones cardiaques/zones_cardiaques.html">Essayer</a>
+            </div>
+            <div class="card-outil visible" data-category="sante">
+                <a class="lien-outils" href="Protéines quotidiennes/proteines_quotidienne.html">
+                    <i class="fs-icon_proteines"></i>
+                    <h1>Protéines quotidiennes</h1>
+                    <p>Découvrez la quantité de protéines à consommer par jour en fonction de votre objectif.</p>
+                </a>
+                <a class="bouton-a-card" href="Protéines quotidiennes/proteines_quotidienne.html">Essayer</a>
+            </div>
+            <div class="card-outil visible" data-category="sante">
+                <a class="lien-outils" href="Calculateur IMC/calculateur_imc.html">
+                    <i class="fs-icon_IMC"></i>
+                    <h1>Calculateur IMC</h1>
+                    <p>Calculez votre IMC et obtenez une interprétation de votre IMC. Parce que les chiffres, c’est bien, mais ça ne veut pas tout dire !</p>
+                </a>
+                <a class="bouton-a-card" href="Calculateur IMC/calculateur_imc.html">Essayer</a>
+            </div>
+
+
+            <div class="card-outil visible" data-category="course">
+                <a class="lien-outils" href="Niveau de course à pied/niveau_course.html">
+                    <i class="fs-icon_niveau_course"></i>
+                    <h1>Niveau course à pied</h1>
+                    <p>Évaluez votre niveau de course grâce à un test puis obtenez un score ainsi qu'une zone pour suivre vos progrès.</p>
+                </a>
+                <a class="bouton-a-card" href="Niveau de course à pied/niveau_course.html">Essayer</a>
+            </div>
+            <div class="card-outil visible" data-category="course">
+                <a class="lien-outils" href="Prédicteur de performance/predicteur_performance.html">
+                    <i class="fs-icon_predicteur_performance"></i>
+                    <h1>Prédicteur de performance</h1>
+                    <p>Découvrez votre temps au 10 km, semi-marathon, marathon,... Tout ça grâce à votre VMA.</p>
+                </a>
+                <a class="bouton-a-card" href="Prédicteur de performance/predicteur_performance.html">Essayer</a>
+            </div>
+            <div class="card-outil visible" data-category="course">
+                <a class="lien-outils" href="Estimation VMA/estimation_vma.html">
+                    <i class="fs-icon_VMA"></i>
+                    <h1>Estimation VMA</h1>
+                    <p>Estimez votre VMA et identifiez vos zones d’allure idéales pour structurer vos séances de fractionné,...</p>
+                </a>
+                <a class="bouton-a-card" href="Estimation VMA/estimation_vma.html">Essayer</a>
+            </div>
+
+
+            <div class="card-outil" data-category="course">
+                <a class="lien-outils" href="Estimation VO2max/estimation_VO2max.html">
+                    <i class="fs-icon_VO2MAX"></i>
+                    <h1>Estimation VO₂max</h1>
+                    <p>Estimez votre VO₂max et obtenez une analyse avec des zones adaptées à votre âge, le tout grâce à votre VMA.</p>
+                </a>
+                <a class="bouton-a-card" href="Estimation VO2max/estimation_VO2max.html">Essayer</a>
+            </div>            
+            <div class="card-outil" data-category="course">
+                <a class="lien-outils" href="Zones de vitesse/zones_vitesse.html">
+                    <i class="fs-icon_zones_vitesse"></i>
+                    <h1>Zones de vitesse</h1>
+                    <p>Découvrez vos zones de vitesse grâce à votre VMA pour optimiser vos entraînements.</p>
+                </a>
+                <a class="bouton-a-card" href="Zones d'allures/zones_allures.html">Essayer</a>
+            </div>
+            <div class="card-outil" data-category="course">
+                <a class="lien-outils" href="Estimation puissance max en course/estimation_puissance_max_course.html">
+                    <i class="fs-icon_puissance_max"></i>
+                    <h1>Estimation puissance max. en course</h1>
+                    <p>Estimez votre puissance max. en course (en watts) grâce à votre vitesse maximale sur une distance.</p>
+                </a>
+                <a class="bouton-a-card" href="Estimation puissance max en course/estimation_puissance_max_course.html">Essayer</a>
+            </div>
+
+
+            <div class="card-outil" data-category="musculation">
+                <a class="lien-outils" href="Estimation 1RM/estimation_1RM.html">
+                    <i class="fs-icon_1RM"></i>
+                    <h1>Estimation 1RM</h1>
+                    <p>Estimez la charge maximale que vous pouvez soulever en une seule répétition sur un exercice de musculation.</p>
+                </a>
+                <a class="bouton-a-card" href="Estimation 1RM/estimation_1RM.html">Essayer</a>
+            </div>
+            <div class="card-outil" data-category="hiver">
+                <a class="lien-outils" href="Estimation puissance moy en ski/estimation_puissance_moy_en_ski.html">
+                    <i class="fs-icon_puissance_moy_ski"></i>
+                    <h1>Estimation puissance moy. en ski</h1>
+                    <p>Estimez votre puissance moyenne en ski (en watts) sur une descente.</p>
+                </a>
+                <a class="bouton-a-card" href="Estimation puissance moy en ski/estimation_puissance_moy_en_ski.html">Essayer</a>
+            </div>             
+            <div class="card-outil" data-category="autre">
+                <a class="lien-outils" href="Estimation de la transpiration/estimation_transpiration.html">
+                    <i class="fs-icon_transpiration"></i>
+                    <h1>Estimation de la transpiration</h1>
+                    <p>Estimez votre transpiration sur un entraî. et découvrez la qté à boire pour une récupération optimale.</p>
+                </a>
+                <a class="bouton-a-card" href="Estimation de la transpiration/estimation_transpiration.html">Essayer</a>
+            </div>
+            
+            
+            <div class="card-outil" data-category="autre">
+                <a class="lien-outils" href="Convertisseur miles-km/convertisseur_miles_km.html">
+                    <i class="fs-icon_miles_km"></i>
+                    <h1>Convertisseur km/miles</h1>
+                    <p>Convertissez une distance des kilomètres en miles ou inversement.</p>
+                </a>
+                <a class="bouton-a-card" href="Convertisseur miles-km/convertisseur_miles_km.html">Essayer</a>
+            </div>
+
+            
+        </div>
+
+        <div class="conteneur-centrage-marge">
+            <button id="button_afficher_plus" class="animate" onclick="afficher_plus('outils')">
+                <i class="fs-icon_add"></i> 
+                Afficher plus
+            </button>
+        </div>
+        
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../index.html">Accueil</a>
+            <a class="a_footer" href="outils.html">Outils</a>
+            <a class="a_footer" href="../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../Assets/base-js/base.js"></script>
+    
+    <script>
+        // Pour gérer le tri des cartes d'outils
+        // Recup des elements html
+        const Filter = document.getElementById("filter")
+        const CardOutil = document.querySelectorAll("#data-table div.card-outil")
+        const ButtonAfficherPlus = document.getElementById("button_afficher_plus") 
+
+
+        Filter.addEventListener('change', function() {
+            const CategorieSelect = this.value
+
+            if (CategorieSelect === "tous") {
+                CardOutil.forEach(element => element.classList.remove("visible"));
+                ButtonAfficherPlus.classList.remove("absent")
+
+                let NbCardSaveMaj1 = sessionStorage.getItem("NbCardOutilSave")
+
+                let Compteur = 0
+                if (NbCardSaveMaj1) {
+                    RestaurationNbCard()
+                    return
+                } else {
+                    // Affiche les 9ere si rien en memoire
+                    for (let i = 0; i < 9; i++) {
+                        if (CardOutil[i]) {
+                            CardOutil[i].classList.add("visible")
+                        }
+                    }
+                }
+            } else {
+                ButtonAfficherPlus.classList.add("absent")
+
+                CardOutil.forEach(card => {
+                    const Category = card.getAttribute("data-category")
+
+                    if (Category === CategorieSelect) {
+                        card.classList.add("visible")
+                    } else {
+                        card.classList.remove("visible")
+                    }
+                })
+            }
+        })
+
+        function RestaurationNbCard() {
+            // Rafraichissement des datas des nbcardsave
+            let NbCardSaveMaj2 = sessionStorage.getItem("NbCardOutilSave")
+            // Au lancement de la page
+            if (NbCardSaveMaj2) {
+                for (let i = 0; i < parseInt(NbCardSaveMaj2); i++) {
+                    CardOutil[i].classList.add("visible")
+                }
+                if (parseInt(NbCardSaveMaj2) >= CardOutil.length) {
+                    ButtonAfficherPlus.classList.add("absent")
+                }
+            }
+        }
+        RestaurationNbCard()
+    </script>
+</body>
+</html>

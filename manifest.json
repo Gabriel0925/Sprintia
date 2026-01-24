@@ -1,0 +1,29 @@
+{
+    "id": "/",
+    "name": "Sprintia",
+    "short_name": "Sprintia",
+    "description": "Des outils gratuits pour analyser et optimiser vos entraînements.",
+    "lang": "fr",
+
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "orientation": "any",
+
+    "icons": [
+        {
+            "src": "/Assets/icons-sprintia/icon-any-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/Assets/icons-sprintia/icon-any-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

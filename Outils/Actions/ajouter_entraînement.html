@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Ajouter un entraînement</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>  
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <h1>Ajouter un entraînement</h1> 
+
+        <div class="conteneur-ensemble">
+
+            <div class="conteneur-champs-outil">
+
+                <select id="profil-user" onclick="">
+                        <option value="Sprint">Sport : Exercice</option>
+                        <option value="Sprint">Sport : Course</option>
+                        <option value="Equilibre">Sport : Vélo</option>
+                        <option value="Endurant">Sport : Marche</option>
+                        <option value="Endurant">Sport : Musculation</option>
+                        <option value="Endurant">Sport : Ski</option>
+                </select>
+
+                <div class="cote-cote">
+                    <div class="conteneur-input">
+                        <input type="date" id="date-entrainement-user">
+                        <div class="label-input" id="">Date</div>
+                    </div>
+                    
+                    <div class="conteneur-input">
+                        <input type="number" id="sport-entrainement-user" class="small" placeholder="Sport">
+                        <div class="label-input">Sport</div>
+                    </div>
+                </div>
+                
+                <div class="conteneur-input">
+                    <input type="number" id="duree-entrainement-user" placeholder="Durée (min)">
+                    <div class="label-input">Durée (min)</div>
+                </div>
+                
+                <div class="slider-cont">
+                    <div class="slider-name">RPE</div>
+                    <div class="slider">
+                        <input type="range" min="1" max="10" value="5">
+                        <progress min="1" max="10" value="5"></progress>
+                    </div>
+                    <div class="slider-value">5</div>
+                </div>
+
+                <div class="cote-cote">                    
+                    <div class="conteneur-input">
+                        <input type="number" id="distance-entrainement-user" placeholder="Distance (km)">
+                        <div class="label-input">Distance (km)</div>
+                    </div>
+
+                    <div class="conteneur-input">
+                        <input type="number" id="denivele-entrainement-user" placeholder="Dénivelé (m)">
+                        <div class="label-input">Dénivelé (m)</div>
+                    </div>
+                </div>
+                
+                <div class="conteneur-input">
+                    <input type="number" id="muscle-entrainement-user" placeholder="Muscles travaillés">
+                    <div class="label-input">Muscles travaillés</div>
+                </div>
+                
+
+                <button onclick="">Valider</button>
+            </div>
+
+        </div>
+
+        <h2>C'est quoi le RPE ?</h2>
+        <p class="text">
+            Le RPE (Rated Perceived Exertion) c'est une échelle permettant de mesurer l'effort perçu de votre entraînement.
+            <ul class="liste-fonctionnalites">
+                <li>RPE de 1 à 3 : Facile</li>
+                <li>RPE de 4 à 6 : Modéré</li>
+                <li>RPE de 7 à 8 : Difficile</li>
+                <li>RPE de 9 à 10 : Effort maximal</li>
+            </ul>
+        </p>
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+
+    <!-- Pour le RPE -->
+    <script>
+        let Slider = document.querySelector(".slider input")
+        let Progress = document.querySelector(".slider progress")
+        let Display = document.querySelector(".slider-value")
+
+        Slider.addEventListener("input", function() {
+            Progress.value = this.value
+            Display.textContent = this.value
+        })
+
+        let ChampDate = document.getElementById("date-entrainement-user")
+        let DateActuelle = new Date().toISOString() // ça renvoie ça "2026-01-24T13:55:37.171Z"
+        // Enlever la partie qui nous interrese pas
+        DateActuelle = DateActuelle.split("T") // ['2026-01-24', '13:57:55.505Z']
+        DateActuelle = DateActuelle[0] // '2026-01-24'
+
+        ChampDate.max = DateActuelle
+        ChampDate.value = DateActuelle
+    </script>
+</body>
+</html>

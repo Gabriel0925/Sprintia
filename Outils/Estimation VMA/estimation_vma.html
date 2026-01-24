@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Estimation VMA</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <h1>Estimation VMA</h1>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">
+                <select id="test-user" onclick="RemplirChamps()">
+                        <option value="demi-cooper">Test : Demi-Cooper</option>
+                        <option value="cooper">Test : Cooper</option>
+                        <option value="luc-leger">Test : Luc léger</option>
+                        <option value="course-reference">Course type (moins précis)</option>
+                </select>
+                <div class="cote-cote">
+                    <div class="conteneur-input">
+                        <input type="number" id="distance-user" class="small" placeholder="Distance (km)">
+                        <div class="label-input">Distance (km)</div>
+                    </div>
+                    
+                    <div class="conteneur-input">
+                        <input type="number" id="duree-user" class="small" placeholder="Durée (min)">
+                        <div class="label-input">Durée (min)</div>
+                    </div>
+                </div>
+
+                <button onclick="EstimationVMA()">Valider</button>
+            </div>
+
+            <div class="box-result">
+                <p class="score-imc">VMA estimée</p>
+                <p class="temps-recup">
+                    0 km/h
+                </p>
+            </div>
+        </div>
+
+        <h2>C'est quoi la VMA ?</h2>
+        <p class="text">
+            La VMA (vitesse maximale aérobie) est la vitesse de course à laquelle votre corps atteint sa consommation maximale d'oxygène.
+            C'est un indicateur clé pour les coureurs·es, il permet de définir des zones de vitesse/allure pour varier vos entraînements.
+            Réévaluez votre VMA tous les 2-3 mois pour ajuster vos allures d'entraînement et voir si vous avez progressé. Pour calculer vos zones
+            de vitesse je vous renvoie
+            <a class="lien" href="../Zones de vitesse/zones_vitesse.html">ici</a>.
+        </p>
+
+        <h2>Comment se servir de la VMA ?</h2>
+        <p class="text">
+            Premièrement, la VMA sert à définir vos allures d'entraînement parce qu'on ne court pas toujours à 100% de sa VMA mais pour en savoir
+            plus à ce sujet je vous renvoie à
+            <a class="lien" href="../Zones de vitesse/zones_vitesse.html">l'outil dédié</a>.
+        </p>
+        <p class="text">
+            Deuxièmement, votre VMA donne une indication purement théorique de votre potentiel sur une course (à condition d'avoir 
+            l'endurance nécessaire).
+            <br>
+            Pour finir, la VMA permet d'évaluer votre état de forme et votre progression au cours du temps.
+        </p>
+
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+    <script src="script_outil.js"></script>
+</body>
+</html>

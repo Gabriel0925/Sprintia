@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - À propos</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+
+    <!-- Pour les thèmes -->
+    <script src="../script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Outils/outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Outils/outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+
+    <div class="conteneur-about-marge">
+        <h1>À propos & Contact</h1>
+        <div class="about_container">
+            <h2>Pourquoi j'ai crée Sprintia ?</h2>
+            <p class="text-about">
+                J’ai créé Sprintia parce que je suis convaincu qu’on n’a pas besoin de dépenser une fortune pour accéder à des outils performants et utiles pour progresser dans son sport.
+                <br><br>
+                Avec Sprintia, vous trouvez des outils simples et efficaces (Prédicteur de performances, Estimation VO₂max, Protéines quotidienne,...) pour vous aider à optimiser vos entraînements, 
+                sans avoir besoin d'une montre de sport haut de gamme.        
+            </p>
+            <h2>Qui suis-je ?</h2>
+            <p class="text-about">
+                Je m'appelle Gabriel, j'adore le sport, la tech et l'informatique.
+                <br>
+                Ce que j'adore dans le sport c'est les algorithmes qui
+                vont m'aider à m'entraîner et à progresser dans mon sport, sans avoir de coach. Je développe Sprintia pour vous aider
+                à optimiser vos entraînements avec des outils simples et efficaces.
+            </p>
+            <h2>Contribuer à améliorer Sprintia</h2>
+            <div class="container-contribue-amelioration">
+                <p class="remerciement">
+                    Merci d'utiliser Sprintia ! N’hésitez pas à me signaler un bug ou à proposer de nouvelles fonctionnalités 
+                    chaque idée compte pour améliorer Sprintia.
+                </p>
+                <a onclick="contacter()">
+                    <div class="boite-du-reseaux">
+                        <i class="fs-icon_mail"></i>
+                        <p class="mon-email">sprintia09@gmail.com</p>
+                        <!--"%20" c'est pour les espaces et "%0A" c'est pour le retour à la ligne -->
+                        <a class="bouton-contact" onclick="contacter()">Me contacter</a>
+                    </div>
+                </a>
+            </div>
+
+            <h2>Réinitialiser Sprintia</h2>
+            <p class="text">
+                Si vous avez envie de supprimer l'entièreté de vos données sur Sprintia vous pouvez cliquer sur le bouton ci-dessous.
+                <strong>Attention, en réinitialisant Sprintia vous ne pourrez pas restaurer vos données.</strong>
+            </p>
+            <div class="conteneur-centrage">
+                <button onclick="SupprimerDatas()" class="animate" id="reinitialiser-sprintia">Réinitialiser Sprintia</button>
+            </div>
+
+        </div>
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../../Outils/outils.html">Outils</a>
+            <a class="a_footer" href="../parametres.html">Paramètres</a>
+            <a class="a_footer" href="../Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../../Outils/Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../../Outils/Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../../Outils/Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+    
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+    <script>
+        function contacter() {
+            // "navigator.userAgent" permet de recup la "version" du nav, il peut renvoyer "Chrome (Android)"
+            // le "i" c'est pr que ça prend en compte meme si le mot Android est en minuscule,...
+            if (/Android|iPhone|iPad/i.test(navigator.userAgent)) { 
+                // "encodeURIComponent" c'est pour que ça transforme une chaine de carac en lien web donc pr un espace = %20
+                // commande javascript qui permet d'envoyer vers une adresse
+                window.location.href = "mailto:sprintia09@gmail.com?subject=Contribution%20Sprintia&body=Description%20du%20bug/nouvelles%20fonctionnalités%20(soyez%20précis)%20:"
+            } else {
+                // pr pouvoir ouvrir la fenetre dans une nouvelle fenetre
+                window.open("https://mail.google.com/mail/?view=cm&fs=1&to=sprintia09@gmail.com&su=Contribution%20Sprintia&body=Description%20du%20bug/nouvelles%20fonctionnalités%20(soyez%20précis)%20:", '_blank')
+            }
+        }
+    </script>
+    <script src="script_suppresion_data.js"></script>
+</body>
+</html>

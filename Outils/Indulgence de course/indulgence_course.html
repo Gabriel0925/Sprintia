@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Indulgence de course</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <div class="conteneur-option">
+            <h1>Indulgence de course</h1>
+            <a href="parametre_indulgence_course.html"><i class="fs-icon_parametres"></i></a>
+        </div>
+        <p class="text" id="text-info-sauvegarde">
+            Par défaut cet outil sauvegarde automatiquement les données saisies dans les champs (sur votre appareil) pour vous faciliter 
+            la vie. Mais, vous pouvez désactiver cette fonctionnalité dans les paramètres de l'outil.
+        </p>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">                
+                <p class="text-info">
+                    Aucune sauvegarde
+                </p>
+                <div class="conteneur-input">
+                    <input autocomplete="off" type="number" id="distance28j-user" placeholder="Distance 28j (km)">
+                    <div class="label-input">Distance 28j (km)</div>
+                </div>
+                    
+                <div class="conteneur-input">
+                    <input autocomplete="off" type="number" id="distance7j-user" placeholder="Distance 7j (km)">
+                    <div class="label-input">Distance 7j (km)</div>
+                </div>
+
+                <button onclick="CalculIndulgence()">Valider</button>
+            </div>
+        </div>
+
+        <div class="conteneur-ensemble">
+            <div class="conteneur-box-deux">
+                <div class="box-result-deux">
+                    <p class="score-imc">JRM Coach :</p>
+                    <p class="zone-imc" id="reponse-coach-indulgence">
+                        Chargement...
+                    </p> 
+                </div>
+                <div class="box-result-deux">
+                    <p class="score-imc">Distance hebdo. conseillée</p>
+                    <p class="temps-recup" id="reponse-algo-indulgence">
+                        0 - 0 km
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <h2>C'est quoi l'Indulgence de course ?</h2>
+        <p class="text">
+            L’indulgence de course vous aide à ajuster votre kilométrage des 7 derniers jours pour rester dans une progression 
+            optimale, sans dépasser votre limite et ainsi éviter de vous blesser. <strong>Cet outil est conçu pour les débutants ou les 
+            personnes qui commencent la course à pied. Néanmoins, même un expert en course à pied peut utiliser cet algorithme pour optimiser 
+            son volume d'entraînement.</strong> N'oubliez jamais d'écouter les signaux de votre corps.
+        </p>
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+    <script src="script_outil.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Estimation puissance max. en course</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <h1>Estimation puissance max. en course</h1>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">
+                
+                <div class="conteneur-input">
+                    <input type="number" id="poids-user" placeholder="Poids (kg)">
+                    <div class="label-input">Poids (kg)</div>
+                </div>
+                    
+                <div class="conteneur-input">
+                    <input type="number" id="vmax-user" placeholder="Vitesse maximale (km/h)">
+                    <div class="label-input">Vitesse maximale (km/h)</div>
+                </div>
+
+                <button onclick="EstimationPuissanceMax()">Valider</button>
+            </div>
+
+            <div class="box-result">
+                <p class="score-imc">Puissance max. : 0 W</p>
+                <p class="zone-imc">
+                    Veuillez remplir le formulaire pour avoir une interprétation de votre puissance maximale estimée sur un sprint.
+                </p>
+            </div> 
+        </div>
+
+        <h2>Comment Sprintia estime votre puissance max. ?</h2>
+        <p class="text">
+            Sprintia utilise une formule basée sur votre vitesse de sprint ainsi que votre poids. Globalement, Sprintia multiplie votre poids 
+            par votre vitesse en appliquant un coefficient qui représente le coût énergétique d'un coureur moyen à chaque foulée.
+        </p>
+
+        <h2>Est-ce une méthode universelle ?</h2>
+        <p class="text">
+            Non, cette méthode n'est pas universelle. Néanmoins, c'est une estimation pour comparer vos performances d'une séance à l'autre.
+            Comme la plupart des algorithmes, ce qui compte vraiment, c'est la tendance pas la valeur brute.
+        </p>
+
+        <h2>Comment s'en servir ?</h2>
+        <p class="text">
+            Cet outil mesure votre explosivité, il permet d'analyser votre progression. Le mieux ça serait de faire vos sprints sur le même couloir
+            de la piste d'athlétisme. Si votre puissance augmente sur une même distance ça veut dire que votre foulée devient de plus en plus 
+            efficace notamment grâce à une plus grosse force dans les jambes. Vous pouvez évidemment gamifier un peu l'outil par exemple 
+            en comparant les résultats avec vos potes, votre famille,...
+        </p>
+
+        <h2>Les limites de cette méthode</h2>
+        <p class="text">
+            Cette formule considère que vous êtes dans des conditions idéales, elle ne prend pas en compte :
+        </p>
+        <ul class="liste-fonctionnalites">
+            <li>
+                Le dénivelé parce que courir à 20 km/h en montée ça demande plus de puissance que de courir à 20 km/h sur du plat.
+            </li>
+            <li>
+                Le vent n'est également pas pris en compte, un vent de face augmente la puissance mais ici, il n'est pas pris en compte.
+            </li>
+            <li>
+                Le terrain n'est pas pris en compte, si vous êtes sur du sable vous déployez plus de puissance que sur une piste d'athlétisme.
+            </li>
+        </ul>
+        <p class="text">
+            Donc, pour obtenir le résultat le plus précis, vous aurez compris qu'il faut faire un sprint sur un terrain plat
+            et par temps calme.
+        </p>
+
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+    <script src="script_outil.js"></script>
+</body>
+</html>

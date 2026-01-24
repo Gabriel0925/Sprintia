@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Zones cardiaques</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <h1>Zones cardiaques</h1>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">
+                <select id="methode-user" onclick="MethodeChoisie()">
+                    <option value="Reserve">Méthode : RFC (recommandé)</option>
+                    <option value="Max">Méthode : FC max</option>
+                </select>
+                
+                <div class="conteneur-input">
+                    <input type="number" id="age-user" placeholder="Âge">
+                    <div class="label-input">Âge</div>
+                </div>
+                    
+                <div class="conteneur-input">
+                    <input type="number" id="fc-repos-user" placeholder="FC repos">
+                    <div class="label-input" id="label-fc-user">FC repos</div>
+                </div>
+                    
+                <div class="conteneur-input">
+                    <input type="number" id="fc-max-user" placeholder="FC max (optionnelle)">
+                    <div class="label-input">FC max (optionnelle)</div>
+                </div>
+
+                <button onclick="ChoixFonction()">Valider</button>
+            </div>
+        </div>
+
+        <div class="conteneur-rep-zone">
+
+            <div class="zone-cardio">
+                <p class="zone">Zone 1</p>
+                <p class="fonction-zone">Récupération</p>
+                <div class="conteneur-tranche-unite">
+                    <p class="tranche-zone">0 - 0</p>
+                    <p class="unite-zone">bpm</p>
+                </div>
+            </div>
+
+            <div class="zone-cardio">
+                <p class="zone">Zone 2</p>
+                <p class="fonction-zone">Endurance fondamentale</p>
+                <div class="conteneur-tranche-unite">
+                    <p class="tranche-zone">0 - 0</p>
+                    <p class="unite-zone">bpm</p>
+                </div>
+            </div>
+
+            <div class="zone-cardio">
+                <p class="zone">Zone 3</p>
+                <p class="fonction-zone">Seuil aérobie</p>
+                <div class="conteneur-tranche-unite">
+                    <p class="tranche-zone">0 - 0</p>
+                    <p class="unite-zone">bpm</p>
+                </div>
+            </div>
+            
+            <div class="zone-cardio">
+                <p class="zone">Zone 4</p>
+                <p class="fonction-zone">Seuil anaérobie</p>
+                <div class="conteneur-tranche-unite">
+                    <p class="tranche-zone">0 - 0</p>
+                    <p class="unite-zone">bpm</p>
+                </div>
+            </div>
+
+            <div class="zone-cardio">
+                <p class="zone">Zone 5</p>
+                <p class="fonction-zone">Puissance maximale</p>
+                <div class="conteneur-tranche-unite">
+                    <p class="tranche-zone">0 - 0</p>
+                    <p class="unite-zone">bpm</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="explications">
+            <h2>Quand les utiliser ?</h2>
+            <ul class="liste-fonctionnalites">
+                <li>
+                    Zone 1 : Vous pouvez l'utiliser lors d'un effort très léger ou encore lors d'un retour au calme pendant une séance de fractionné.
+                </li>
+                <li>
+                    Zone 2 : C'est la zone d'endurance, elle est à utiliser lors de vos sorties longues. Si vous êtes dans cette zone vous pouvez tenir une 
+                    conversation sans être essouflé·e.
+                </li>
+                <li>
+                    Zone 3 : Cette zone est utile pour travailler votre endurance active. C'est de l'endurance mais avec plus d'effort.
+                </li>
+                <li>
+                    Zone 4 : Cette zone est utile pour faire progresser votre vitesse, elle améliore votre cardio.
+                </li>
+                <li>
+                    Zone 5 : Cette zone doit être utilisée pour les sprints, le fractionné court ou en compétition. Elle challenge votre
+                    organisme.
+                </li>
+            </ul>
+        </div>
+
+        <h2>Les Zones cardiaques c'est quoi ?</h2>
+        <p class="text">
+            Les zones de fréquence cardiaque sont essentielles en sport. Elles permettent d'adapter l'intensité de vos entraînements
+            en fonction de vos objectifs. Par exemple, pour une prépa marathon, le mieux c'est de faire de l'endurance fondamentale. 
+            L'endurance fondamentale, c'est du travail en zone 2 de fréquence cardiaque.
+        </p>
+        <h2>C'est quoi la réserve de fréquence cardiaque (RFC) ?</h2>
+        <p class="text">
+            La réserve de fréquence cardiaque correspond à la marge utilisable de votre coeur entre la FC repos et la FC max. Cette méthode est plus précise
+            parce que 2 personnes peuvent avoir la même FC max mais un coeur très différent en fonction de leur niveau d'entraînement. La RFC prend
+            en compte votre état de forme actuel. Si vous êtes malade, vous aurez une moins bonne RFC.
+        </p>
+        <h2>Comment calculer sa FC au repos ?</h2>
+        <p class="text">
+            Il y a plusieurs solutions, la première vous avez une montre connectée/sportive qui vous donne votre FC au repos. La seconde,
+            prenez votre pouls au poignet ou au cou et comptez le nombre de pulsation sur 30 secondes. Multipliez ensuite ce nombre par 2 pour 
+            avoir la fréquence cardiaque par minute. Le résultat de ce calcul sera votre FC au repos.
+        </p>
+        <h2>Comment améliorer la précision de la méthode FC max ?</h2>
+        <p class="text">
+            La méthode de calcul via l'âge et la FC max sera toujours moins précise que la méthode RFC mais si vous avez fait un test de 
+            FC max en laboratoire et que vous saisissez votre FC max dans le champ fait pour ça vous gagnez en précision. Même si ça sera
+            moins précis que la méthode RFC.
+        </p>
+        <h2>Pourquoi je n'utilise pas la méthode 220 - âge ?</h2>
+        <p class="text">
+            Pour connaître votre FC max, on vous a souvent conseillé de faire 220 - âge. En réalité, cette méthode n'a jamais été prouvée scientifiquement,
+            c'est pour ça que j'utilise la formule de Tanaka. Elle est plus fiable et elle est prouvée scientifiquement : 208 - (0.7 * âge).
+            Elle permet de gagner en précision surtout pour les jeunes et les plus âgés.
+        </p>
+
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+    <script src="script_outil.js"></script>
+</body>
+</html>

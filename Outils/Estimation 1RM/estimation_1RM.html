@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Sprintia - Estimation 1RM</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Clair.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="../../Assets/icons-sprintia/Logo-Sprintia-Head-Sombre.svg" media="(prefers-color-scheme: dark)">
+
+    <link rel="manifest" href="../../manifest.json">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sprintia">
+    <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
+    
+    <script src="../../Paramètres/script_themes.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="../../index.html">Sprintia</a>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-menu-button">
+                <i class="fs-icon_menu"></i>
+            </div>
+        </div>
+
+        <div class="burger-menu">
+            <ul class="links">
+                <li>
+                    <a href="../../index.html">
+                        <i class="fs-icon_accueil"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a class="actif-burger-menu" href="../outils.html">
+                        <i class="fs-icon_outils"></i>
+                        Outils
+                    </a>
+                </li>
+                <li>
+                    <a href="../../Paramètres/parametres.html">
+                        <i class="fs-icon_parametres"></i>
+                        Paramètres
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="conteneur-de-outil">
+        <h1>Estimation 1RM</h1>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">
+                <select id="methode-user" onclick="MethodeChoisie()">
+                    <option value="Epley">Méthode : Epley</option>
+                    <option value="Brzycki">Méthode : Brzycki</option>
+                </select>
+                
+                <div class="conteneur-input">
+                    <input type="number" id="charge-user" placeholder="Charge (kg)">
+                    <div class="label-input">Charge (kg)</div>
+                </div>
+                    
+                <div class="conteneur-input">
+                    <input type="number" id="rep-user" placeholder="Répétitions">
+                    <div class="label-input">Répétitions</div>
+                </div>
+
+                <button onclick="EstimationOneRep()">Valider</button>
+            </div>
+
+            <div class="box-result">
+                <p class="score-imc">Votre 1RM</p>
+                <p class="temps-recup">
+                    00 kg
+                </p>
+            </div>
+        </div>
+
+        <h2>Qu'est-ce que le 1RM ?</h2>
+        <p class="text">
+            Pour commencer, 1RM ça veut dire : "One Repetition Maximum". Globalement, il représente la charge maximale qu’une personne peut 
+            soulever pour une unique répétition sur un exercice donné. Cette valeur est très importante en musculation, elle permet de structurer des
+            programmes d'entraînement adapté à vos capacités.
+        </p>
+        <h2>Comment s'en servir ?</h2>
+        <p class="text">
+            En connaissant votre 1RM, vous pouvez déterminer les poids maximum appropriés pour vos séries lors de vos séances. Vous pouvez en
+            conséquence mesurer l'amélioration de votre force au fil du temps. Pour terminer, vous pouvez vous en servir pour adapter vos charges
+            pour éviter de soulever trop lourd inutilement.
+        </p>
+        <h2>Comment rendre l'outil précis ?</h2>
+        <p class="text">
+            Pour rendre l'outil plus précis, il faut d'abord calculer le nombre maximal de répétitions que vous pouvez effectuer avec une certaine charge (poids). 
+            Par exemple avec la méthode d'Epley, si vous pouvez soulever 50 kilogrammes pour 5 répétitions, votre 1RM est estimé à environ 58 kg.
+        </p>
+
+        <h2>Les méthodes de calcul</h2>
+        <ul class="liste-fonctionnalites">
+            <li>
+                La méthode Epley est la formule la plus répandue son calcul est relativement simple :
+                <br>
+                Poids x (1 + (Répétitions / 30)).
+            </li>
+            <li>
+                La méthode de Matt Brzycki est différente pour calculer le 1RM d'après lui il faut faire :
+                <br>
+                Poids / (1.0278 – (0.0278 x Répétitions))
+            </li>
+        </ul>
+        
+        <h2>Quelle méthode utiliser ?</h2>
+        <p class="text">
+            Tout dépend de votre profil et surtout du nombre de répétitions effectuées. Par exemple, si vous préferez faire des séries courtes
+            utilisez la méthode de Brzycki. Quand je dis des séries courtes c'est entre 1 et 10 maximum. Si vous préferez les séries longues 
+            (donc plus de 10 répétitions) utilisez la méthode d'Epley.
+        </p>
+
+    </div>
+    
+    <footer>
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Catégories</a>
+            <a class="a_footer" href="../../index.html">Accueil</a>
+            <a class="a_footer" href="../outils.html">Outils</a>
+            <a class="a_footer" href="../../Paramètres/parametres.html">Paramètres</a>
+            <a class="a_footer" href="../../Paramètres/Historique versions/historique versions.html">Historique des versions</a>
+            <a class="a_footer" href="../../Paramètres/Thèmes/themes.html">Thèmes</a>
+        </div>
+           
+        <div class="conteneur-lien-footer">             
+            <a class="a_title">Outils conseillés</a>
+            <a class="a_footer" href="../Charge d'entraînement/charge_entrainement.html">Charge d'entraînement</a>
+            <a class="a_footer" href="../Estimation VO2max/estimation_VO2max.html">Estimation VO₂max</a>
+            <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
+        </div>
+            
+        <div class="conteneur-lien-footer">
+            <a class="a_title">Autres</a>
+            <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
+            <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Pour le burger menu -->
+    <script src="../../Assets/base-js/base.js"></script>
+    <script src="script_outil.js"></script>
+</body>
+</html>
