@@ -109,7 +109,6 @@ function JrmCoach() {
     return
 }
 
-
 async function RegistrationWorkout() {
     // Recup du bouton
     let BoutonSauvegarde = document.getElementById("button-sauvegarder")
@@ -121,11 +120,10 @@ async function RegistrationWorkout() {
     let DureeWorkoutUser = parseInt(document.getElementById("duree-entrainement-user").value.trim())
     let ValueRpeUser = parseInt(document.querySelector(".slider progress").value)
 
-    // Recup en fonction du sport
-    if (SportWorkoutUser == "Course" || SportWorkoutUser == "Velo" || SportWorkoutUser == "Marche") {
-        let DistanceWorkoutUser = parseInt(document.getElementById("duree-entrainement-user").value.trim())
-        let DeniveleWorkoutUser = parseInt(document.getElementById("duree-entrainement-user").value.trim())
-    }
+    // Initialisation
+    let DistanceWorkoutUser = null
+    let DeniveleWorkoutUser = null
+    let MusclesWorkoutUser = null
 
     // Initialisation
     let ChargeWorkout = 0
@@ -139,9 +137,43 @@ async function RegistrationWorkout() {
         alert("Valeur non valide, la durée doit être un nombre supérieur à 0.")
         return
     }
-    if (NameWorkoutUser.lenght >= 80) {
+    if (NameWorkoutUser.length >= 80) {
         alert("Le champs sport ne doit pas dépasser 50 caractères.")
         return
+    }
+
+    // Recup en fonction du sport
+    if (SportWorkoutUser == "Course" || SportWorkoutUser == "Velo" || SportWorkoutUser == "Marche") {
+        // Recup champs
+        DistanceWorkoutUser = parseFloat(document.getElementById("distance-entrainement-user").value.trim())
+        DeniveleWorkoutUser = parseInt(document.getElementById("denivele-entrainement-user").value.trim())
+
+        // Vérifications
+        if (isNaN(DistanceWorkoutUser) || isNaN(DeniveleWorkoutUser)) {
+            alert("Veuillez remplir tous les champs du formulaire.")
+            return
+        }
+        if (DistanceWorkoutUser <= 0) {
+            alert("Valeur non valide, la distance doit être un nombre supérieur à 0.")
+            return
+        }
+        if (DeniveleWorkoutUser < 0) {
+            alert("Valeur non valide, le denivelé doit être un nombre positif.")
+            return
+        }
+    } else if (SportWorkoutUser == "Musculation") {
+        // Recup champs
+        MusclesWorkoutUser = document.getElementById("muscle-entrainement-user").value.trim()
+
+        // Verifications
+        if (!MusclesWorkoutUser) {
+            alert("Veuillez remplir tous les champs du formulaire.")
+            return
+        }
+        if (MusclesWorkoutUser.length > 150) {
+            messagebox.showerror("Les muscles travaillés ne doivent pas dépasser 150 caractères !")
+            return
+        }
     }
 
     // desactivation du bouton
@@ -158,9 +190,9 @@ async function RegistrationWorkout() {
         nom: NameWorkoutUser,
         duree: DureeWorkoutUser,
         rpe: ValueRpeUser,
-        distance: null,
-        denivele: null,
-        muscles_travailles: null,
+        distance: DistanceWorkoutUser,
+        denivele: DeniveleWorkoutUser,
+        muscles_travailles: MusclesWorkoutUser,
         charge_entrainement: ChargeWorkout
     })
 
@@ -168,6 +200,9 @@ async function RegistrationWorkout() {
     await new Promise(r => setTimeout(r, 1000))
     // Remise bouton etat normal
     BoutonSauvegarde.textContent = "Sauvegarder"
+
+    // Renvoie vers historique d'entraînement
+    window.location.href = "historique_entrainement.html"
 
     return
 }

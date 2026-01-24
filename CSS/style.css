@@ -510,7 +510,7 @@ header {
     padding: var(--ESPACE_XXS);    
     background-color: var(--COULEUR_BACKGROUND_CARD);
     /* Le z-index sert que les cartes ne passe pas devant lors d'un hover */
-    z-index: 1000;
+    z-index: 2000;
     box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
 }
 header div.navbar {
