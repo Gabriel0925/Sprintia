@@ -66,7 +66,7 @@ function afficher_plus(lieu) {
 function SprintiaBeta() {
     let Logo = document.querySelector("div.logo a")
 
-    Logo.textContent = "Sprintia Beta"
+    Logo.textContent = "Sprintia Alpha"
     return
 }
 
