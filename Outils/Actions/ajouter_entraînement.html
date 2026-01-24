@@ -90,7 +90,7 @@
 
             <div class="conteneur-champs-outil">
 
-                <select id="profil-user" onclick="SelectionSport(value)">
+                <select id="profil-sport" onclick="SelectionSport(value)">
                         <option value="Libre">Sport : Libre</option>
                         <option value="Course">Sport : Course</option>
                         <option value="Velo">Sport : Vélo</option>
@@ -105,8 +105,8 @@
                     </div>
                     
                     <div class="conteneur-input">
-                        <input type="number" id="sport-entrainement-user" class="small" placeholder="Sport">
-                        <div class="label-input">Sport</div>
+                        <input type="text" id="nom-entrainement-user" class="small" placeholder="Nom de l'entraî" autocomplete="off">
+                        <div class="label-input">Nom de l'entraî.</div>
                     </div>
                 </div>
                 
@@ -142,7 +142,7 @@
                 </div>
                 
 
-                <button onclick="">Sauvegarder</button>
+                <button id="button-sauvegarder" onclick="RegistrationWorkout()">Sauvegarder</button>
             </div>
 
         </div>
@@ -185,6 +185,10 @@
 
     <!-- Pour le burger menu -->
     <script src="../../Assets/base-js/base.js"></script>
+    
+    <!-- Import bibliothèque pour simplifier le code de indexed db -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
     <script src="script_ajout_entrainement.js"></script>
 
     <!-- Pour le RPE -->
@@ -204,7 +208,7 @@
         DateActuelle = DateActuelle.split("T") // ['2026-01-24', '13:57:55.505Z']
         DateActuelle = DateActuelle[0] // '2026-01-24'
 
-        ChampDate.max = DateActuelle
+        ChampDate.max = DateActuelle // bloque la saisi de date dans le futur
         ChampDate.value = DateActuelle
     </script>
 

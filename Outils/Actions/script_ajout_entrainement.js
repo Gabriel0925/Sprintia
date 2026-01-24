@@ -9,7 +9,7 @@ function SelectionSport(value) { // Pr cacher les champs en fonction du sport ch
     let LabelMucles = document.getElementById("invisible3")
 
     // Adaptation des champs en fonction du sport
-    if (value == "Libre" || value == "Initialisation") {
+    if (value == "Libre") {
         ChampsDistance.style.display = "none"
         ChampsDenivele.style.display = "none"
         ChampsMuscles.style.display = "none"
@@ -48,7 +48,7 @@ function GenererNbAleatoire() {
     return NombreAleatoire
 }
 
-function JrmCoach(Valeur) {
+function JrmCoach() {
     // Recup du champs coach
     let SectionCoach = document.getElementById("reponse-coach")
 
@@ -104,13 +104,75 @@ function JrmCoach(Valeur) {
         ParagrapheCoach += PhraseDico + " "
     }
 
-
     SectionCoach.textContent = ParagrapheCoach
 
     return
 }
 
+
+async function RegistrationWorkout() {
+    // Recup du bouton
+    let BoutonSauvegarde = document.getElementById("button-sauvegarder")
+
+    // Recup valeur des champs
+    let SportWorkoutUser = document.getElementById("profil-sport").value.trim()
+    let DateWorkoutUser = document.getElementById("date-entrainement-user").value
+    let NameWorkoutUser = document.getElementById("nom-entrainement-user").value.trim()
+    let DureeWorkoutUser = parseInt(document.getElementById("duree-entrainement-user").value.trim())
+    let ValueRpeUser = parseInt(document.querySelector(".slider progress").value)
+
+    // Recup en fonction du sport
+    if (SportWorkoutUser == "Course" || SportWorkoutUser == "Velo" || SportWorkoutUser == "Marche") {
+        let DistanceWorkoutUser = parseInt(document.getElementById("duree-entrainement-user").value.trim())
+        let DeniveleWorkoutUser = parseInt(document.getElementById("duree-entrainement-user").value.trim())
+    }
+
+    // Initialisation
+    let ChargeWorkout = 0
+
+    // Vérification
+    if (!DateWorkoutUser || !DureeWorkoutUser || !NameWorkoutUser) {
+        alert("Veuillez remplir tous les champs du formulaire.")
+        return
+    }
+    if (DureeWorkoutUser <= 0) {
+        alert("Valeur non valide, la durée doit être un nombre supérieur à 0.")
+        return
+    }
+    if (NameWorkoutUser.lenght >= 80) {
+        alert("Le champs sport ne doit pas dépasser 50 caractères.")
+        return
+    }
+
+    // desactivation du bouton
+    BoutonSauvegarde.disabled = true 
+    BoutonSauvegarde.textContent = "Sauvegarde..."
+
+    // Calcul Charge
+    ChargeWorkout = DureeWorkoutUser*ValueRpeUser
+
+    // Sauvegarde
+    await db.entrainement.add({
+        sport: SportWorkoutUser,
+        date: DateWorkoutUser,
+        nom: NameWorkoutUser,
+        duree: DureeWorkoutUser,
+        rpe: ValueRpeUser,
+        distance: null,
+        denivele: null,
+        muscles_travailles: null,
+        charge_entrainement: ChargeWorkout
+    })
+
+    // Pause
+    await new Promise(r => setTimeout(r, 1000))
+    // Remise bouton etat normal
+    BoutonSauvegarde.textContent = "Sauvegarder"
+
+    return
+}
+
 window.addEventListener("DOMContentLoaded", () => {
-    SelectionSport("Initialisation")
-    JrmCoach("Initialisation")
+    SelectionSport("Libre")
+    JrmCoach()
 })

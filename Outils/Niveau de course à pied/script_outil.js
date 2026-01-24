@@ -66,19 +66,6 @@ function StartNiveau() {
 }
 
 
-// BDD (Indexed DB)
-// Creation d'un objet
-const db = new Dexie("SprintiaDB")
-
-// Creation de la structure avec id autoincrement
-db.version(1).stores({
-    categories: "++id, niveau_course, date"
-})
-
-db.open().catch(function (){
-    console.log("Erreur bdd")
-})
-
 // Ajouter des datas
 async function SauvegardeNiveauCourse() {
     // Recup bouton
@@ -110,8 +97,8 @@ async function SauvegardeNiveauCourse() {
         })
 
     // Ajout datas
-    await db.categories.add({
-        niveau_course: NiveauCourseUser,
+    await db.niveau_course.add({
+        niveau_course_user: NiveauCourseUser,
         date: DateFormatee
     })
 
@@ -145,11 +132,11 @@ async function RecupValueNiveauCourseGraphique() {
     } 
 
     // Recup value Data
-    const ValeurDB = await db.categories.toArray()
+    const ValeurDB = await db.niveau_course.toArray()
 
     // map permet de retourner une nouvelle liste a partir d'une premiere liste et de prendre qu'une seule clé d'un objet
     // slice permet de découper un tableau pour en garder qu'une partie grace aux indices
-    const NiveauDatas = ValeurDB.slice(NbValeurRecup).map(dataBDD => dataBDD.niveau_course) // -10 pr prendre les 1à dernieres valeur
+    const NiveauDatas = ValeurDB.slice(NbValeurRecup).map(dataBDD => dataBDD.niveau_course_user) // -10 pr prendre les 1à dernieres valeur
     const DateDatas = ValeurDB.slice(NbValeurRecup).map(dataBDD => dataBDD.date)
     
     return {NiveauDatas, DateDatas}

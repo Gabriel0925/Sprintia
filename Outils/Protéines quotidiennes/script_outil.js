@@ -1,6 +1,6 @@
 function EstimationProteines() {
     // Recupération des datas des champs
-    let ObjectifUser = document.getElementById("objectif-user").value
+    let ObjectifUser = document.getElementById("statut-user").value
     let PoidsUser = parseFloat(document.getElementById("poids-user").value.trim().replace(",", "."))
 
     // Vérification des champs

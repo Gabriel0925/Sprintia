@@ -1,13 +1,13 @@
 async function RecupValueNiveauCourse() {
     // Recup value Data
-    const ValeurDB = await db.categories.toArray()
+    const ValeurDB = await db.niveau_course.toArray()
 
     // map permet de retourner une nouvelle liste a partir d'une premiere liste et de prendre qu'une seule clé d'un objet
     let DateDatas = ValeurDB.map(dataBDD => dataBDD.date)
     // Reverse pour mettre a lenvers les données pour que ds le tableau plus on descend plus c'est des valeurs ancienne
     DateDatas = DateDatas.reverse()
 
-    let NiveauDatas = ValeurDB.map(dataBDD => dataBDD.niveau_course)
+    let NiveauDatas = ValeurDB.map(dataBDD => dataBDD.niveau_course_user)
     NiveauDatas = NiveauDatas.reverse()
 
     let idDatas = ValeurDB.map(dataBDD => dataBDD.id)

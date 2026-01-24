@@ -1082,11 +1082,13 @@ div.conteneur-input {
     position: relative;
 }
 /* désactive le style de base */
-div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]::-webkit-inner-spin-button {
+div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]::-webkit-inner-spin-button,
+div.conteneur-de-outil div.conteneur-champs-outil input[type="text"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 /* styles des champs */
-div.conteneur-de-outil div.conteneur-champs-outil input[type="number"].small {
+div.conteneur-de-outil div.conteneur-champs-outil input[type="number"].small,
+div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     border: 0;
     margin: var(--ESPACE_XS); /* !!! Attention si je modifie le margin il faut le modifier aussi dans le responsive !!! */
@@ -1102,7 +1104,8 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="number"].small {
     appearance: none; /* désactive les styles systèmes */
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
-div.conteneur-de-outil div.conteneur-champs-outil input[type="number"] {
+div.conteneur-de-outil div.conteneur-champs-outil input[type="number"],
+div.conteneur-de-outil div.conteneur-champs-outil input[type="text"] {
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     border: 0;
 
@@ -1130,12 +1133,15 @@ div.conteneur-de-outil div.conteneur-champs-outil .label-input.invisible {
     display: none;
 }
 @media (hover: hover) and (pointer: fine) {
-    div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]:hover {
+    div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]:hover,
+div.conteneur-de-outil div.conteneur-champs-outil input[type="text"]:hover,
+div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]:hover  {
         box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
-div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]:focus {
+div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]:focus,
+div.conteneur-de-outil div.conteneur-champs-outil input[type="text"]:focus  {
     box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
@@ -1288,7 +1294,7 @@ div.conteneur-de-outil div.conteneur-champs-outil .slider-name {
 /* Pour les input date */
 div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]{
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    color: var(--COULEUR_TEXT_PRINCIPAL);
+    color: var(--COULEUR_ACCENT_CONTRASTER);
     border-radius: var(--BORDER);
 
     border: none;
@@ -1409,7 +1415,7 @@ div.conteneur-ensemble div.box-result-deux-small::after {
 }
 /* Pour le coach dans ajouté une activité */
 div.conteneur-ensemble div.box-result-deux#coach-ajoute-entrainement {
-    width: auto;
+    width: 100%;
     min-height: auto;
     margin: var(--ESPACE_S) 0;
     margin-bottom: var(--ESPACE_L);
@@ -2623,7 +2629,8 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
         display: block;
     }
     div.conteneur-de-outil div.conteneur-champs-outil input[type="number"].small,
-    div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]{
+    div.conteneur-de-outil div.conteneur-champs-outil input[type="date"],
+div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
         width: calc(100% - (var(--ESPACE_XS) * 2));
     }
 }
