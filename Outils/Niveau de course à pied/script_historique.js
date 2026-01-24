@@ -57,7 +57,7 @@ async function RemplirTableau() {
         const EtapeBoucle = compteur // Grâce a const la variable ne change jamais donc chaque bouton enregistre sa ligne en fonction de letape de la bouclz
         // Ajout de la logique pour la suppresion
         BoutonSupprTableau.addEventListener("click", async () => { // Ajout d'une "action" au bouton
-            await db.categories.delete(idDatas[EtapeBoucle]) // supprimer la data de la bdd
+            await db.niveau_course.delete(idDatas[EtapeBoucle]) // supprimer la data de la bdd
             await NouvelleLigne.remove() // supprimer la ligne
             location.reload()
         })
