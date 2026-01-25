@@ -73,3 +73,7 @@ function SprintiaBeta() {
 window.addEventListener("DOMContentLoaded", () => {
     SprintiaBeta()
 })
+
+window.addEventListener("unload", () => {
+    // Pour bloquer le BFCache genre eviter que le navigateur stocke la page precedente pour ne pas la recharger
+})

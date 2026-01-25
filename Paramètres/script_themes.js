@@ -1,6 +1,6 @@
 // Initialisation variable
-let ThemeActuel = localStorage.getItem("ThemeActuel") || "Sombre"
-let ColorActuelleUse = localStorage.getItem("ColorActuelleUse") || "theme_azur"
+let ThemeActuel = "Sombre"
+let ColorActuelleUse = "theme_azur"
 
 
 // Thèmes
