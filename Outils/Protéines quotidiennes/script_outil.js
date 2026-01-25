@@ -1,6 +1,6 @@
 function EstimationProteines() {
     // Recupération des datas des champs
-    let ObjectifUser = document.getElementById("statut-user").value
+    let ObjectifUser = document.getElementById("objectif-user").value
     let PoidsUser = parseFloat(document.getElementById("poids-user").value.trim().replace(",", "."))
 
     // Vérification des champs
@@ -25,6 +25,10 @@ function EstimationProteines() {
         Coefficient = 1
     } else if (ObjectifUser === "Maintien") {
         Coefficient = 1.7
+    } else if (ObjectifUser === "Minimum") {
+        Coefficient = 0.8
+    } else if (ObjectifUser === "Perte-poids") {
+        Coefficient = 2
     } else {
         // Objectif : Prise de masse
         Coefficient = 2
