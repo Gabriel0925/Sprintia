@@ -80,23 +80,23 @@
         <h1>Zones cardiaques</h1>
         <div class="conteneur-ensemble">
             <div class="conteneur-champs-outil">
-                <select id="methode-user" onchange="MethodeChoisie()">
+                <select id="methode-user" onchange="MethodeChoisie()" autocomplete="off">
                     <option value="Reserve">Méthode : RFC (recommandé)</option>
                     <option value="Max">Méthode : FC max</option>
                 </select>
                 
                 <div class="conteneur-input">
-                    <input type="number" id="age-user" placeholder="Âge">
+                    <input type="number" id="age-user" placeholder="Âge" autocomplete="off">
                     <div class="label-input">Âge</div>
                 </div>
                     
                 <div class="conteneur-input">
-                    <input type="number" id="fc-repos-user" placeholder="FC repos">
+                    <input type="number" id="fc-repos-user" placeholder="FC repos" autocomplete="off">
                     <div class="label-input" id="label-fc-user">FC repos</div>
                 </div>
                     
                 <div class="conteneur-input">
-                    <input type="number" id="fc-max-user" placeholder="FC max (optionnelle)">
+                    <input type="number" id="fc-max-user" placeholder="FC max (optionnelle)" autocomplete="off">
                     <div class="label-input">FC max (optionnelle)</div>
                 </div>
 

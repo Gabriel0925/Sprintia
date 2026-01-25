@@ -80,7 +80,7 @@
         <h1>Prédicteur de performance</h1>
         <div class="conteneur-ensemble">
             <div class="conteneur-champs-outil">
-                <select id="profil-user" onclick="AlgoPredicteur('select')">
+                <select id="profil-user" onclick="AlgoPredicteur('select')" autocomplete="off">
                         <option value="Sprint">Votre profil : Sprinteur·se</option>
                         <option value="Equilibre">Votre profil : Équilibré·e</option>
                         <option value="Endurant">Votre profil : Endurant·e</option>
@@ -88,12 +88,12 @@
                 
                 <div class="cote-cote">
                     <div class="conteneur-input">
-                        <input type="number" class="small" id="vma-user" placeholder="VMA (km/h)">
+                        <input type="number" class="small" id="vma-user" placeholder="VMA (km/h)" autocomplete="off">
                         <div class="label-input">VMA (km/h)</div>
                     </div>
                     
                     <div class="conteneur-input">
-                        <input type="number" class="small" id="distance-user" placeholder="Distance (km)">
+                        <input type="number" class="small" id="distance-user" placeholder="Distance (km)" autocomplete="off">
                         <div class="label-input">Distance (km)</div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
             <a class="a_footer" href="../Niveau de course à pied/niveau_course.html">Niveau de course à pied</a>
         </div>
             
-        <div class="conteneur-lien-footer">
+        <div class="conteneur-lien-footer">  
             <a class="a_title">Autres</a>
             <a class="a_footer" href="../../Paramètres/Licence/Licence.html">Licence (© 2026 Sprintia)</a>
             <a class="a_footer" href="../../Paramètres/Confidentialité/confidentialite.html">Politique de confidentialité</a>

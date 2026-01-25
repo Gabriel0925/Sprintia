@@ -194,7 +194,6 @@ i {
 }
 .fs-icon_modifier:before {
     content: "\e912";
-    color: var(--COULEUR_TEXT_PRINCIPAL);
 }
 .fs-icon_niveau_course:before {
     content: "\e913";
@@ -243,7 +242,6 @@ i {
 }
 .fs-icon_supprimer:before {
     content: "\e91f";
-    color: var(--COULEUR_TEXT_PRINCIPAL);
 }
 .fs-icon_telecharger:before {
     content: "\e920";
@@ -402,8 +400,6 @@ a.bouton-a-card {
     background-color: var(--COULEUR_ACCENT_CONTRASTER);
     text-align: center;
     transition: all ease-in-out var(--DUREE_TRANSITION);
-
-
 }
 @media (hover: hover) and (pointer: fine) {
     a.bouton-a-card:hover {
@@ -444,8 +440,6 @@ div.conteneur-code {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_S);
     border-radius: var(--BORDER);
-
-
 }
 code {
     color: var(--COULEUR_TEXT_PRINCIPAL);
@@ -462,8 +456,6 @@ footer {
     min-height: 70vh;
     /* margin-top: auto; */
     margin-top: var(--ESPACE_M);
-
-
 }
 footer div.conteneur-lien-footer {
     display: flex;
@@ -680,21 +672,15 @@ header .burger-menu li a.actif-burger-menu:active {
 div.conteneur-about-marge h1{
     font-size: var(--H2);
     color: var(--COULEUR_TEXT_PRINCIPAL);
-
-
 }
 div.conteneur-about-marge h2{
     font-size: var(--H3);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin-top: var(--ESPACE_M);
-
-
 }
 div.conteneur-about-marge p.txt_home{
     font-size: var(--P);
     color: var(--COULEUR_TEXT_PRINCIPAL);
-
-
 }
 div.conteneur-mise-avant {
     padding: var(--ESPACE_XS);
@@ -709,8 +695,6 @@ div.conteneur-mise-avant {
     position: relative;
     background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
     transition: all ease-in-out var(--DUREE_TRANSITION);
-
- 
 }
 /* Pour la marge du premier mise en avant */
 div.conteneur-mise-avant.first {
@@ -739,12 +723,11 @@ div.conteneur-mise-avant p{
     font-size: var(--H2);
     line-height: 2;
     text-align: left;
-    margin: var(--ESPACE_S) var(--ESPACE_XXS);
-    color: var(--COULEUR_BACKGROUND);    
+    margin: var(--ESPACE_XS);
+    color: var(--COULEUR_BACKGROUND);
     font-weight: 1000;
-    padding: var(--ESPACE_XS);
-    border-radius: var(--BORDER);
 }
+
 /* Bouton voir plus */
 div.conteneur-centrage {
     display: flex;
@@ -760,8 +743,6 @@ div.conteneur-centrage {
     border-radius: var(--BORDER);
     margin: var(--ESPACE_S) var(--ESPACE_XS) var(--ESPACE_L) var(--ESPACE_S);
     transition: all ease-in-out var(--DUREE_TRANSITION);
-
-
 }
 @media (hover: hover) and (pointer: fine) {
     .button-more:hover {
@@ -813,8 +794,6 @@ div.conteneur-outils div.card-outil.visible {
     display: flex;
     overflow: hidden; /* ça permet que tous ce qui dépasse sera invisible */
     transition: all ease-in-out var(--DUREE_TRANSITION);
-
-
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-outils div.card-outil.visible:hover {
@@ -879,8 +858,6 @@ div.conteneur-outils-marge h2 {
     font-size: var(--H3);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin: var(--ESPACE_XS) var(--ESPACE_S);
-
-
 }
 div.conteneur-outils1 select {
     background-color: var(--COULEUR_ACCENT);
@@ -996,23 +973,119 @@ div.conteneur-de-outil h1 {
     font-size: var(--H2);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin-bottom: var(--ESPACE_M);
-
-
 }
 div.conteneur-de-outil h2 {
     font-size: var(--H3);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin: var(--ESPACE_S) 0;
-
-
 }
 div.conteneur-de-outil p.text {
     font-size: var(--P);
     color: var(--COULEUR_TEXT_SECONDAIRE);
     margin: var(--ESPACE_S) 0;
-
-
 }
+
+
+/* Pour les cards workout history */
+div.conteneur-de-outil div.conteneur-cards-workout {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+div.conteneur-de-outil div.cards-history-workout {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    border-radius: var(--BORDER);
+    border: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    height: fit-content;
+
+    margin: var(--ESPACE_XS);
+    padding: var(--ESPACE_XS);
+
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-column{
+    display: flex;
+    flex-direction: column;
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-column p{
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    padding: var(--ESPACE_XXS);
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.name-workout{
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    font-size: var(--H3);
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.sport-date-workout{
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    font-size: var(--P);
+    margin-bottom: var(--ESPACE_XXS);
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-paire{
+    display: flex;
+    margin: var(--ESPACE_XXS) 0;
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p{
+    color: var(--COULEUR_BACKGROUND);
+    background-color: var(--COULEUR_ACCENT);
+    border-radius: var(--BORDER_SMALL);
+    padding: var(--ESPACE_XS);
+    font-size: var(--P);
+    text-align: center;
+    width: 160px;
+    margin: 1.5px 3px;
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p strong{
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    letter-spacing: 0.1px;
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p.muscles-workout{
+    width: auto;
+    max-width: 325px;
+    margin-top: var(--ESPACE_XXS);
+    flex-grow: 1;
+    text-align: left;
+}
+div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--ESPACE_S);
+}
+div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button{
+    font-weight: normal;
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    font-size: var(--P);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-grow: 1;
+    margin: 0 3px;
+    padding: var(--ESPACE_XS);
+
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button:hover{
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+    }
+}
+div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button:active{
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    box-shadow: none;
+}
+div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button i{
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    font-size: var(--P);
+    font-weight: normal;
+    margin-right: var(--ESPACE_XXS);
+}
+/* fin card workout */
+
+
 div.conteneur-de-outil div.conteneur-option {
     display: flex;
     align-items: center;
@@ -1058,8 +1131,6 @@ div.conteneur-de-outil div.conteneur-champs-outil {
     padding: var(--ESPACE_XXS);
     width: 420px;
     transition: all ease-in-out var(--DUREE_TRANSITION);
-
-
 }
 /* Pr le text de derniere sauvegarde */
 div.conteneur-de-outil div.conteneur-champs-outil p.text-info {
@@ -1474,8 +1545,6 @@ div.chart-container {
 div.chart-container.visible {
     display: block;
     margin: var(--ESPACE_L) var(--ESPACE_XXS);
-
-
 }
 
 
@@ -1498,16 +1567,12 @@ table.visible tr th {
     font-weight: var(--FONT_WEIGHT_BUTTON);
     font-size: var(--P);
     width: 33%;
-
-
 }
 table.visible tr td {
     padding: var(--ESPACE_XS);
     color: var(--COULEUR_TEXT_SECONDAIRE);
     font-size: var(--P_SMALL);
     text-align: center;
-
-
 }
 
 /* Pour outils Zones cardiaques */
@@ -1526,8 +1591,6 @@ div.conteneur-rep-zone div.zone-cardio {
     flex-direction: column;
     display: flex;
     transition: all ease-in-out var(--DUREE_TRANSITION);
-
-
 }
 /* Gestion des colors */
 div.conteneur-rep-zone div.zone-cardio:nth-child(1) {
@@ -1596,8 +1659,6 @@ div.conteneur-ensemble div.box-result {
     z-index: 1;
     position: relative;
     transition: all ease-in-out var(--DUREE_TRANSITION);
-
-
 }
 div.conteneur-ensemble div.box-result#niveau-course {
     height: 140px;
@@ -1658,16 +1719,12 @@ div.max-widht-title h1{
     font-size: var(--H2);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin-left: var(--ESPACE_S);
-
-
 }
 div.max-widht-title h2{
     font-size: var(--H3);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin-left: var(--ESPACE_S);
     margin-top: var(--ESPACE_M);
-
-
 }
 div.conteneur-derniere-nouveautes {
     max-width: var(--MAX_WIDTH);
@@ -1838,8 +1895,6 @@ div.conteneur-historique-versions {
     margin: var(--ESPACE_S);
     padding: var(--ESPACE_XS);
     transition: all var(--DUREE_TRANSITION) ease-in-out;
-
-
 }
 @media (hover: hover) and (pointer: fine) {
     .conteneur-historique-versions .box-last-maj:hover{
@@ -1916,8 +1971,6 @@ div.conteneur-historique-versions .card-nouveautes.visible {
     border-radius: var(--BORDER);
     margin: var(--ESPACE_S) var(--ESPACE_XS) var(--ESPACE_S) var(--ESPACE_S);
     transition: all ease-in-out var(--DUREE_TRANSITION);
-
-
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-historique-versions .card-nouveautes.visible:hover {
@@ -1973,9 +2026,8 @@ ul.liste-fonctionnalites li {
     font-size: var(--P);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin: var(--ESPACE_S) var(--ESPACE_L);
-    
+}    
 
-}
 /* Pour les images des versions */
 div.gallery-version {
     margin: var(--ESPACE_S) auto;
@@ -1987,9 +2039,8 @@ div.gallery-version img{
     width: 100%;
     margin-bottom: var(--ESPACE_S);
     border-radius: var(--BORDER_SMALL);
-    
+}    
 
-}
 
 
 
@@ -2024,8 +2075,6 @@ div.conteneur-mode {
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
     margin: var(--ESPACE_M) var(--ESPACE_XS);
-
-
 }
 div.conteneur-mode i{
     font-size: var(--H0);
@@ -2100,8 +2149,6 @@ li.option-color {
     border-radius: var(--BORDER);
     margin: var(--ESPACE_XS);
     transition: all ease-in-out var(--DUREE_TRANSITION);
-
-
 }
 @media (hover: hover) and (pointer: fine) {
     /* Changer la color du txt lors du survol donc quand il y a la couche du before egalement */
@@ -2194,29 +2241,21 @@ div.conteneur-centrage-marge {
 div.conteneur-about-marge h1 {
     font-size: var(--H2);
     color: var(--COULEUR_TEXT_PRINCIPAL);
-
-
 }
 div.conteneur-about-marge p.info-maj-politique {
     font-size: var(--P);
     color: var(--COULEUR_TEXT_SECONDAIRE);
     margin: var(--ESPACE_S) 0px;
-
-
 }
 div.conteneur-about-marge h2 {
     font-size: var(--H3);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin: var(--ESPACE_S) 0px;
-
-
 }
 div.conteneur-about-marge p.text {
     font-size: var(--P);
     color: var(--COULEUR_TEXT_SECONDAIRE);
     margin: var(--ESPACE_S) 0px;
-
-
 }
 
 
@@ -2237,29 +2276,21 @@ div.conteneur-about-marge div.about_container h1 {
     font-size: var(--H2);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin: var(--ESPACE_S) 0px;
-
-
 }
 div.conteneur-about-marge div.about_container h2 {
     font-size: var(--H3);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     margin: var(--ESPACE_S) 0px;
-
-
 }
 div.conteneur-about-marge div.about_container p.text-about {
     font-size: var(--P);
     color: var(--COULEUR_TEXT_SECONDAIRE);
     margin: var(--ESPACE_S) 0px;
-
-
 }
 /* Partie contribution pour amélioration Sprintia */
 div.conteneur-about-marge div.about_container div.container-contribue-amelioration {
     display: flex;
     justify-content: space-between;
-
-
 }
 div.conteneur-about-marge div.about_container div.container-contribue-amelioration p.remerciement{
     color: var(--COULEUR_TEXT_SECONDAIRE);
