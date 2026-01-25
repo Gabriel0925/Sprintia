@@ -75,7 +75,8 @@ window.addEventListener("DOMContentLoaded", () => {
 })
 
 window.addEventListener("pageshow", (event) => {
-  if (event.persisted) {
-    window.location.reload();
-  }
-});
+    // Pour contrer le BFCache parce qu'il mettait en cache mes anciennes pages pour éviter de les recharger mais ça causait probleme pour les thèmes
+    if (event.persisted) { // forcer un reload quand on fait un retour donc quand la page viens du BFCache
+        window.location.reload()
+    }
+})

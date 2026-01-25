@@ -171,7 +171,7 @@ async function RegistrationWorkout() {
             return
         }
         if (MusclesWorkoutUser.length > 150) {
-            messagebox.showerror("Les muscles travaillés ne doivent pas dépasser 150 caractères !")
+            alert("Les muscles travaillés ne doivent pas dépasser 150 caractères !")
             return
         }
     }

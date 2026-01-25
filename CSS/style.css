@@ -988,17 +988,20 @@ div.conteneur-de-outil p.text {
 
 /* Pour les cards workout history */
 div.conteneur-de-outil div.conteneur-cards-workout {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: block;
+    margin: 0 auto;
+    max-width: 800px;
+    margin-bottom: var(--ESPACE_XL);
 }
 div.conteneur-de-outil div.cards-history-workout {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     border-radius: var(--BORDER);
-    border: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     height: fit-content;
+    overflow: hidden;
 
-    margin: var(--ESPACE_XS);
+    margin: var(--ESPACE_M) 0;
     padding: var(--ESPACE_XS);
 
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -1014,12 +1017,27 @@ div.conteneur-de-outil div.cards-history-workout div.data-workout-column p{
 div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.name-workout{
     font-weight: var(--FONT_WEIGHT_BUTTON);
     font-size: var(--H3);
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 5;
+    line-clamp: 5; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden;
 }
 div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.sport-date-workout{
     font-weight: var(--FONT_WEIGHT_BUTTON);
     color: var(--COULEUR_TEXT_SECONDAIRE);
     font-size: var(--P);
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.charge-workout{
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+    font-size: var(--P);
     margin-bottom: var(--ESPACE_XXS);
+}
+div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.charge-workout strong{
+    font-weight: 1000;
+    color: var(--COULEUR_ACCENT_CONTRASTER);
 }
 div.conteneur-de-outil div.cards-history-workout div.data-workout-paire{
     display: flex;
@@ -1027,30 +1045,34 @@ div.conteneur-de-outil div.cards-history-workout div.data-workout-paire{
 }
 div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p{
     color: var(--COULEUR_BACKGROUND);
-    background-color: var(--COULEUR_ACCENT);
+    background-color: var(--COULEUR_ACCENT_CONTRASTER);
     border-radius: var(--BORDER_SMALL);
     padding: var(--ESPACE_XS);
     font-size: var(--P);
     text-align: center;
     width: 160px;
-    margin: 1.5px 3px;
+    margin: 1px 2px;
+    flex-grow: 1;
 }
 div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p strong{
     font-weight: var(--FONT_WEIGHT_BUTTON);
     letter-spacing: 0.1px;
 }
 div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p.muscles-workout{
-    width: auto;
-    max-width: 325px;
     margin-top: var(--ESPACE_XXS);
-    flex-grow: 1;
     text-align: left;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 6;
+    line-clamp: 6; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden;
 }
 div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: var(--ESPACE_S);
+    margin-top: var(--ESPACE_S_SMALL);
 }
 div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button{
     font-weight: normal;
@@ -1060,9 +1082,10 @@ div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout 
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 160px;
 
     flex-grow: 1;
-    margin: 0 3px;
+    margin: 2px;
     padding: var(--ESPACE_XS);
 
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -2422,6 +2445,11 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
 @media (max-width: 380px) {
     div.conteneur-historique-versions .card-nouveautes.visible{
         width: 330px;
+    }
+}
+@media (max-width: 350px) {
+    div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p.muscles-workout{  
+        padding: 0.3rem; /* !! Ne pas changer ou alors test en responsive avec 320 en width */
     }
 }
 
