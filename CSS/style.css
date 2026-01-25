@@ -440,6 +440,8 @@ div.conteneur-code {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_S);
     border-radius: var(--BORDER);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 code {
     color: var(--COULEUR_TEXT_PRINCIPAL);
@@ -453,8 +455,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-around;
     padding: var(--ESPACE_S);
-    min-height: 70vh;
-    /* margin-top: auto; */
+    min-height: 100vh;
     margin-top: var(--ESPACE_M);
 }
 footer div.conteneur-lien-footer {
@@ -789,6 +790,8 @@ div.conteneur-outils div.card-outil.visible {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     margin: var(--ESPACE_S);
     border-radius: var(--BORDER);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     width: 370px;
     flex-direction: column;
     display: flex;
@@ -938,12 +941,18 @@ div.shorcut div.img{
 }
 div.shorcut div.img#icone-add{
     background: linear-gradient(130deg, #28A745, #85D26B);
+    border-top: 2px solid #85D26B;
+    border-left: 2px solid #85D26B;
 }
 div.shorcut div.img#icone-historique{
     background: linear-gradient(130deg, #2F3F47, #577482);
+    border-top: 2px solid #577482;
+    border-left: 2px solid #577482;
 }
 div.shorcut div.img#icone-pause{
     background: linear-gradient(130deg, #e07c24, #ffa411);
+    border-top: 2px solid #ffa411;
+    border-left: 2px solid #ffa411;
 }
 div.shorcut div.img i{
     font-size: 4.5rem;
@@ -951,6 +960,7 @@ div.shorcut div.img i{
 }
 div.shorcut p.text-shorcut{
     padding: var(--ESPACE_XS);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     font-size: var(--P);
     font-weight: var(--FONT_WEIGHT_BUTTON);
     display: block;
@@ -1051,7 +1061,7 @@ div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p{
     font-size: var(--P);
     text-align: center;
     width: 160px;
-    margin: 1px 2px;
+    margin: 2px 4px;
     flex-grow: 1;
 }
 div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p strong{
@@ -1085,7 +1095,7 @@ div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout 
     width: 160px;
 
     flex-grow: 1;
-    margin: 2px;
+    margin: 4px;
     padding: var(--ESPACE_XS);
 
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -1127,6 +1137,8 @@ div.conteneur-de-outil div.conteneur-option h1 {
 div.conteneur-de-outil div.conteneur-option i {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     color: var(--COULEUR_TEXT_PRINCIPAL);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     padding: var(--ESPACE_XS);
     cursor: pointer;
     border-radius: 50%;
@@ -1147,6 +1159,8 @@ div.conteneur-de-outil div.conteneur-option i:active {
 div.conteneur-de-outil div.conteneur-champs-outil {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     overflow: hidden;
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     margin: 0 var(--ESPACE_S);
     display: flex;
     flex-direction: column;
@@ -1170,6 +1184,9 @@ div.conteneur-de-outil div.conteneur-champs-outil p.text-info.visible {
 div.cote-cote {
     display: flex;
     align-items: center;
+}
+div.cote-cote.invisible {
+    display: none;
 }
 /* Pour la div du/des inputs */
 div.conteneur-input {
@@ -1765,6 +1782,8 @@ div.conteneur_scrolling .card-nouveautes {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     margin: var(--ESPACE_XS);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 
@@ -1863,6 +1882,8 @@ div.conteneur-param div.acces-param2 {
     align-items: center;
     margin: var(--ESPACE_XXS) 0px;
     padding: var(--ESPACE_XS);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     background-color: var(--COULEUR_BACKGROUND_CARD);
 
 
@@ -1913,6 +1934,8 @@ div.conteneur-historique-versions {
 /* Card mise en avant derniere version */
 .conteneur-historique-versions .box-last-maj{
     background: var(--COULEUR_BACKGROUND_CARD);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     border-radius: var(--BORDER);
     max-width: 1150px;
     margin: var(--ESPACE_S);
@@ -1992,6 +2015,8 @@ div.conteneur-historique-versions .card-nouveautes.visible {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     margin: var(--ESPACE_S) var(--ESPACE_XS) var(--ESPACE_S) var(--ESPACE_S);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
@@ -2038,6 +2063,8 @@ ul.liste-fonctionnalites {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     
     animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
     animation-timeline: view();
@@ -2094,6 +2121,8 @@ div.conteneur-about-marge2 div.boite-ensemble-feature p.text-feature {
 div.conteneur-mode {
     display: flex;
     align-items: center;
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
@@ -2164,6 +2193,8 @@ li.option-color {
     overflow: hidden;
     cursor: pointer;
     position: relative;
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     z-index: 1;
     font-size: var(--H3);
     color: var(--COULEUR_TEXT_PRINCIPAL);
@@ -2208,6 +2239,7 @@ ol li.option-color::before{
 ol li.option-color.selected{
     color: var(--COULEUR_BACKGROUND); /* Changement couleur du texte */
     font-weight: var(--FONT_WEIGHT_BUTTON);
+    border: none;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 ol li.option-color.selected::before{
@@ -2323,6 +2355,8 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
 div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux {
     border-radius: var(--BORDER);
     background-color: var(--COULEUR_BACKGROUND_CARD);
+    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     cursor: pointer;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }

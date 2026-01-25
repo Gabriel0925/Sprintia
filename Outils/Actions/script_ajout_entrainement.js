@@ -1,40 +1,25 @@
 function SelectionSport(value) { // Pr cacher les champs en fonction du sport choisi
     // Recup des champs + label des champs
-    let ChampsDistance = document.getElementById("distance-entrainement-user")
-    let ChampsDenivele = document.getElementById("denivele-entrainement-user")
+    let DivCoteCote = document.getElementById("dynamique-div")
     let ChampsMuscles = document.getElementById("muscle-entrainement-user")
-
-    let LabelDistance = document.getElementById("invisible1")
-    let LabelDenivele = document.getElementById("invisible2")
-    let LabelMucles = document.getElementById("invisible3")
+    let LabelMuscles = document.getElementById("label-invisible")
 
     // Adaptation des champs en fonction du sport
     if (value == "Libre") {
-        ChampsDistance.style.display = "none"
-        ChampsDenivele.style.display = "none"
+        DivCoteCote.classList.add("invisible")
         ChampsMuscles.style.display = "none"
-        
-        LabelDistance.style.display = "none"
-        LabelDenivele.style.display = "none"
-        LabelMucles.style.display = "none"
+        LabelMuscles.style.display = "none"
 
     } else if (value == "Course" || value == "Velo" || value == "Marche") {
-        ChampsDistance.style.display = "block"
-        ChampsDenivele.style.display = "block"
+        DivCoteCote.classList.remove("invisible")
         ChampsMuscles.style.display = "none"
-        
-        LabelDistance.style.display = "block"
-        LabelDenivele.style.display = "block"
-        LabelMucles.style.display = "none"
+        LabelMuscles.style.display = "none"
 
     } else if (value == "Musculation") {
-        ChampsDistance.style.display = "none"
-        ChampsDenivele.style.display = "none"
+        DivCoteCote.classList.add("invisible")
         ChampsMuscles.style.display = "block"
-        
-        LabelDistance.style.display = "none"
-        LabelDenivele.style.display = "none"
-        LabelMucles.style.display = "block"
+        LabelMuscles.style.display = "block"
+
     }
 
     return
@@ -125,12 +110,20 @@ async function RegistrationWorkout() {
     let DeniveleWorkoutUser = null
     let MusclesWorkoutUser = null
 
+    // Prépa date pour comparer
+    const DateUserFormatee = new Date(DateWorkoutUser)
+    const DateActuelle = new Date()
+
     // Initialisation
     let ChargeWorkout = 0
 
     // Vérification
     if (!DateWorkoutUser || !DureeWorkoutUser || !NameWorkoutUser) {
         alert("Veuillez remplir tous les champs du formulaire.")
+        return
+    }
+    if (DateUserFormatee > DateActuelle) { // Comparaison de 2 dates
+        alert("La date ne peut pas être dans le future.")
         return
     }
     if (DureeWorkoutUser <= 0) {

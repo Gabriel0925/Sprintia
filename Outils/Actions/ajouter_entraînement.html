@@ -90,7 +90,7 @@
 
             <div class="conteneur-champs-outil">
 
-                <select id="profil-sport" onclick="SelectionSport(value)" autocomplete="off">
+                <select id="profil-sport" onchange="SelectionSport(value)" autocomplete="off">
                         <option value="Libre">Sport : Libre</option>
                         <option value="Course">Sport : Course</option>
                         <option value="Velo">Sport : Vélo</option>
@@ -124,21 +124,23 @@
                     <div class="slider-value">5</div>
                 </div>
 
-                <div class="cote-cote">                    
+                <div class="cote-cote invisible" id="dynamique-div">
                     <div class="conteneur-input">
-                        <input type="number" id="distance-entrainement-user" placeholder="Distance (km)" autocomplete="off">
-                        <div class="label-input" id="invisible1">Distance (km)</div>
+                        <input type="number" id="distance-entrainement-user" class="small" placeholder="Distance (km)" autocomplete="off">
+                        <div class="label-input">Distance (km)</div>
                     </div>
-
+                    
                     <div class="conteneur-input">
-                        <input type="number" id="denivele-entrainement-user" placeholder="Dénivelé (m)" autocomplete="off">
-                        <div class="label-input" id="invisible2">Dénivelé (m)</div>
+                        <input type="number" id="denivele-entrainement-user" class="small" placeholder="Dénivelé (m)" autocomplete="off">
+                        <div class="label-input">Dénivelé (m)</div>
                     </div>
                 </div>
+
+                
                 
                 <div class="conteneur-input">
                     <input type="text" id="muscle-entrainement-user" placeholder="Muscles travaillés" autocomplete="off">
-                    <div class="label-input" id="invisible3">Muscles travaillés</div>
+                    <div class="label-input" id="label-invisible">Muscles travaillés</div>
                 </div>
                 
 
@@ -189,7 +191,7 @@
     <!-- Import bibliothèque pour simplifier le code de indexed db -->
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
-    <script src="script_ajout_entrainement.js"></script>
+    <script src="script_ajout_entrainement.js"></script> 
 
     <!-- Pour le RPE -->
     <script>

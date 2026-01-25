@@ -2,6 +2,13 @@ async function AfficherData() {
     // Recup de l'historique
     let HistoriqueDB = await db.entrainement.toArray() // recup de toutes les datas
 
+    // Trier par date 
+    HistoriqueDB.sort((element1, element2) => { // En js on peut comparer 2 dates comme des maths
+        if (element1.date < element2.date) return 1
+        if (element1.date > element2.date) return -1
+    })
+
+    // Cacher le text comme quoi il n'y a pas dentrainement enregistrer
     if (HistoriqueDB.length > 0) {
         document.getElementById("text-informatif").style.display = "none"
     }
@@ -40,7 +47,7 @@ async function AfficherData() {
             </div>
         `
 
-        if (workout.sport == "Course") {
+        if (workout.sport == "Course" || workout.sport == "Velo" || workout.sport == "Marche") {
             StructureHTML += `
                 <div class="data-workout-paire">
                     <p class="duree-workout">
@@ -86,6 +93,7 @@ async function AfficherData() {
                 await db.entrainement.delete(workout.id) // supprimer la data de la bdd
                 CardWorkout.remove() // supprimer la ligne
             }
+            location.reload()
         })
 
         BoutonModifier.addEventListener("click", async () => { // Ajout d'une "action" au bouton

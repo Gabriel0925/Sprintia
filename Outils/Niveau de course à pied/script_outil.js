@@ -86,20 +86,15 @@ async function SauvegardeNiveauCourse() {
     BoutonLimite1Clic.textContent = "Chargement..."
 
     // Recup de la date
-    let DateNow = new Date()
-
-    // Formatage de la date
-    const DateFormatee = DateNow.toLocaleDateString("fr-FR",
-        {
-            day: "numeric",
-            month: "short", // short permet de recup jan. a la place de janvier
-            year: "2-digit" // Pr avoir que 26 au lieu de 2026
-        })
+    let DateActuelle = new Date().toISOString() // ça renvoie ça "2026-01-24T13:55:37.171Z"
+    // Enlever la partie qui nous interrese pas
+    DateActuelle = DateActuelle.split("T") // ['2026-01-24', '13:57:55.505Z']
+    DateActuelle = DateActuelle[0] // '2026-01-24'
 
     // Ajout datas
     await db.niveau_course.add({
         niveau_course_user: NiveauCourseUser,
-        date: DateFormatee
+        date: DateActuelle
     })
 
     // Pause
@@ -132,7 +127,13 @@ async function RecupValueNiveauCourseGraphique() {
     } 
 
     // Recup value Data
-    const ValeurDB = await db.niveau_course.toArray()
+    const ValeurDB = await db.niveau_course.toArray()    
+    
+    // Trier par date 
+    ValeurDB.sort((element1, element2) => { // En js on peut comparer 2 dates comme des maths
+        if (element1.date < element2.date) return -1
+        if (element1.date > element2.date) return 1
+    })
 
     // map permet de retourner une nouvelle liste a partir d'une premiere liste et de prendre qu'une seule clé d'un objet
     // slice permet de découper un tableau pour en garder qu'une partie grace aux indices
