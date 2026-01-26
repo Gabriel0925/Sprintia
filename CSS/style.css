@@ -2877,8 +2877,8 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
         margin-top: var(--ESPACE_S);
         background-color: transparent;
         box-shadow: none;
-        margin-left: var(--ESPACE_S);
-        margin-right: var(--ESPACE_S);
+        margin-left: var(--ESPACE_XS);
+        margin-right: var(--ESPACE_XS);
     }
     header div.navbar .logo a {
         background-color: var(--COULEUR_BACKGROUND_CARD);
