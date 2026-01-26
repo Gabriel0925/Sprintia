@@ -2874,6 +2874,7 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
 /* ----- Le menu Hamburger ----- */
 @media (max-width: 990px) {
     header {
+        margin-top: var(--ESPACE_S);
         background-color: transparent;
         box-shadow: none;
     }
