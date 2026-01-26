@@ -10,6 +10,8 @@
     --COULEUR_BACKGROUND_CARD: #232222;
     --COULEUR_BACKGROUND_CARD_HOVER: #373636; 
 
+    --COULEUR_LUMIERE_CARD: #292828;
+
     --COULEUR_TEXT_PRINCIPAL: #FFFFFF;
     --COULEUR_TEXT_SECONDAIRE: #BDBDBD;
 
@@ -439,8 +441,8 @@ div.conteneur-code {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_S);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
 }
 code {
     color: var(--COULEUR_TEXT_PRINCIPAL);
@@ -688,20 +690,15 @@ div.conteneur-mise-avant {
     height: 100%;
     border-radius: var(--BORDER);
     margin: var(--ESPACE_XS) 0px;
+    margin-top: var(--ESPACE_M);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1;
     position: relative;
     background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT);
     transition: all ease-in-out var(--DUREE_TRANSITION);
-}
-/* Pour la marge du premier mise en avant */
-div.conteneur-mise-avant.first {
-    margin-top: var(--ESPACE_M);
-}
-div.conteneur-mise-avant.last {
-    margin-bottom: var(--ESPACE_M);
 }
 div.conteneur-mise-avant::after {
     content: "";
@@ -711,6 +708,7 @@ div.conteneur-mise-avant::after {
     z-index: -1;
     border-radius: var(--BORDER);
     opacity: 0;
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
     transition: all var(--DUREE_TRANSITION) ease-in-out;
     background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
 }
@@ -789,8 +787,8 @@ div.conteneur-outils div.card-outil.visible {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     margin: var(--ESPACE_S);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     width: 370px;
     flex-direction: column;
     display: flex;
@@ -940,18 +938,12 @@ div.shorcut div.img{
 }
 div.shorcut div.img#icone-add{
     background: linear-gradient(130deg, #28A745, #85D26B);
-    border-top: 2px solid #85D26B;
-    border-left: 2px solid #85D26B;
 }
 div.shorcut div.img#icone-historique{
     background: linear-gradient(130deg, #2F3F47, #577482);
-    border-top: 2px solid #577482;
-    border-left: 2px solid #577482;
 }
 div.shorcut div.img#icone-pause{
     background: linear-gradient(130deg, #e07c24, #ffa411);
-    border-top: 2px solid #ffa411;
-    border-left: 2px solid #ffa411;
 }
 div.shorcut div.img i{
     font-size: 4.5rem;
@@ -959,7 +951,7 @@ div.shorcut div.img i{
 }
 div.shorcut p.text-shorcut{
     padding: var(--ESPACE_XS);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     font-size: var(--P);
     font-weight: var(--FONT_WEIGHT_BUTTON);
     display: block;
@@ -1005,8 +997,8 @@ div.conteneur-de-outil div.conteneur-cards-workout {
 div.conteneur-de-outil div.cards-history-workout {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     height: fit-content;
     overflow: hidden;
 
@@ -1136,8 +1128,8 @@ div.conteneur-de-outil div.conteneur-option h1 {
 div.conteneur-de-outil div.conteneur-option i {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     color: var(--COULEUR_TEXT_PRINCIPAL);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     padding: var(--ESPACE_XS);
     cursor: pointer;
     border-radius: 50%;
@@ -1158,8 +1150,8 @@ div.conteneur-de-outil div.conteneur-option i:active {
 div.conteneur-de-outil div.conteneur-champs-outil {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     overflow: hidden;
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     margin: 0 var(--ESPACE_S);
     display: flex;
     flex-direction: column;
@@ -1511,6 +1503,7 @@ div.conteneur-ensemble div.box-result-deux-small::after {
     bottom: 0;
     left: 0;
     right: 0;
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
 
     z-index: -1;
     opacity: 0;
@@ -1781,8 +1774,8 @@ div.conteneur_scrolling .card-nouveautes {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     margin: var(--ESPACE_S) var(--ESPACE_XS);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 
@@ -1881,7 +1874,7 @@ div.conteneur-param div.acces-param2 {
     align-items: center;
     margin: var(--ESPACE_XXS) 0px;
     padding: var(--ESPACE_XS);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     background-color: var(--COULEUR_BACKGROUND_CARD);
 
 
@@ -1890,7 +1883,7 @@ div.conteneur-param div.acces-param2 {
 div.conteneur-param div.acces-param1 {
     border-top-left-radius: var(--BORDER);
     border-top-right-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
 }
 div.conteneur-param div.acces-param2 {
     border-bottom-left-radius: var(--BORDER);
@@ -1933,8 +1926,8 @@ div.conteneur-historique-versions {
 /* Card mise en avant derniere version */
 .conteneur-historique-versions .box-last-maj{
     background: var(--COULEUR_BACKGROUND_CARD);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     border-radius: var(--BORDER);
     max-width: 1150px;
     margin: var(--ESPACE_S);
@@ -2014,8 +2007,8 @@ div.conteneur-historique-versions .card-nouveautes.visible {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     margin: var(--ESPACE_S) var(--ESPACE_XS) var(--ESPACE_S) var(--ESPACE_S);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
@@ -2062,8 +2055,8 @@ ul.liste-fonctionnalites {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     
     animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
     animation-timeline: view();
@@ -2120,8 +2113,8 @@ div.conteneur-about-marge2 div.boite-ensemble-feature p.text-feature {
 div.conteneur-mode {
     display: flex;
     align-items: center;
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
@@ -2209,8 +2202,8 @@ li.option-color {
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     z-index: 1;
     font-size: var(--H3);
     color: var(--COULEUR_TEXT_PRINCIPAL);
@@ -2371,8 +2364,8 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
 div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux {
     border-radius: var(--BORDER);
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     cursor: pointer;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
@@ -2786,6 +2779,25 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
     div.conteneur-rep-zone div.zone-cardio {
         margin: var(--ESPACE_S) 0;
         width: 100%;
+        height: fit-content;
+        padding: var(--ESPACE_S_SMALL);
+    }
+    div.conteneur-rep-zone div.zone-cardio div.ensemble-p {
+        display: flex;
+        align-items: center;
+    }
+    div.conteneur-rep-zone div.zone-cardio p.zone{
+        margin-bottom: 0;
+        font-size: var(--H3);
+    }
+    div.conteneur-rep-zone div.zone-cardio div.conteneur-tranche-unite {
+        margin-top: var(--ESPACE_XS);
+    }
+    div.conteneur-rep-zone div.zone-cardio p.fonction-zone{
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        font-size: var(--P);
     }
     div.conteneur-rep-zone div.zone-cardio p.tranche-zone{
         font-size: var(--H2);

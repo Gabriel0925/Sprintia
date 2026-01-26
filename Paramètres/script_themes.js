@@ -13,6 +13,8 @@ function mode(event) {
 
         document.documentElement.style.setProperty("--COULEUR_TEXT_PRINCIPAL", "#010101");
         document.documentElement.style.setProperty("--COULEUR_TEXT_SECONDAIRE", "#757479");
+
+        document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#f5f3f3");
  
         document.documentElement.style.setProperty("--COULEUR_PASTILLES_0", "#0f759d");
         document.documentElement.style.setProperty("--COULEUR_PASTILLES_1", "#e70e32");
@@ -44,6 +46,8 @@ function mode(event) {
         document.documentElement.style.removeProperty("--COULEUR_BACKGROUND");
         document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD");
         document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD_HOVER");
+
+        document.documentElement.style.removeProperty("--COULEUR_LUMIERE_CARD");
 
         document.documentElement.style.removeProperty("--COULEUR_TEXT_PRINCIPAL");
         document.documentElement.style.removeProperty("--COULEUR_TEXT_SECONDAIRE");
@@ -83,6 +87,8 @@ function dark_mode() {
     document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD");
     document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD_HOVER");
 
+    document.documentElement.style.removeProperty("--COULEUR_LUMIERE_CARD");
+
     document.documentElement.style.removeProperty("--COULEUR_TEXT_PRINCIPAL");
     document.documentElement.style.removeProperty("--COULEUR_TEXT_SECONDAIRE");
 
@@ -119,6 +125,8 @@ function light_mode() {
     document.documentElement.style.setProperty("--COULEUR_BACKGROUND", "#FFFFFF");
     document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD", "#e9e9e9ff");
     document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD_HOVER", "#d5d1d1");
+
+    document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#f5f3f3");
 
     document.documentElement.style.setProperty("--COULEUR_TEXT_PRINCIPAL", "#010101");
     document.documentElement.style.setProperty("--COULEUR_TEXT_SECONDAIRE", "#757479");
