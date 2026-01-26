@@ -538,7 +538,10 @@ header div.navbar div.burger-menu-button {
     font-size: var(--H0);
     border-radius: var(--BORDER);
     padding: var(--ESPACE_XS) var(--ESPACE_XXS);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
     color: var(--COULEUR_ACCENT_CONTRASTER);
     cursor: pointer;
     display: none;
@@ -615,12 +618,13 @@ header .burger-menu {
 header .burger-menu.open {
     max-height: 350px;
     transform: translate(0, 0) scale(1); /* On remet la taille normale */
-    box-shadow: 0px 0px 10px var(--COULEUR_ACCENT_CONTRASTER);
+    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
 }
 /* Pour que le bouton rétrécisse au moment du clic */
 header .burger-menu.open:active {
     transform: scale(0.95);
-    box-shadow: 0px 0px 10px var(--COULEUR_ACCENT_CONTRASTER_HOVER);
 }
 header .burger-menu li {
     color: var(--COULEUR_BACKGROUND);
@@ -2848,6 +2852,10 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
     div.conteneur-action-charge .txt_plus#bouton-action-charge{
         display: none;
     }
+    /* Autre */    
+    div.conteneur-mise-avant p{
+        font-size: var(--H3);
+    }
 }
 @media (max-width: 440px) {
     div.conteneur-ensemble div.box-result-deux-small {
@@ -2865,6 +2873,20 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
 
 /* ----- Le menu Hamburger ----- */
 @media (max-width: 990px) {
+    header {
+        background-color: transparent;
+        box-shadow: none;
+    }
+    header div.navbar .logo a {
+        background-color: var(--COULEUR_BACKGROUND_CARD);
+        border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+        border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+        box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+        font-size: var(--H2);
+    }
+    header div.navbar .logo a:active {
+        border-radius: var(--BORDER_SMALL);
+    }
     header div.navbar ul.links {
         display: none;
     }
