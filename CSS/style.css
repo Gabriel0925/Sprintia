@@ -218,7 +218,6 @@ i {
 }
 .fs-icon_plus:before {
     content: "\e919";
-    color: var(--COULEUR_BACKGROUND);
 }
 .fs-icon_predicteur_performance:before {
     content: "\e91a";
@@ -1784,7 +1783,7 @@ div.conteneur_scrolling .card-nouveautes {
     border-radius: var(--BORDER);
     border-top: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
     border-left: 2px solid var(--COULEUR_BACKGROUND_CARD_HOVER);
-    margin: var(--ESPACE_XS);
+    margin: var(--ESPACE_S) var(--ESPACE_XS);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 
     animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
@@ -1794,7 +1793,7 @@ div.conteneur_scrolling .card-nouveautes {
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur_scrolling .card-nouveautes:hover {
-        transform: translateY(-5px) scale(1.02);
+        transform: translateY(-5px);
         background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
@@ -2127,6 +2126,23 @@ div.conteneur-mode {
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
     margin: var(--ESPACE_M) var(--ESPACE_XS);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-mode.animation:hover {
+        transform: scale(1.01);
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-mode.animation:active {
+    transform: scale(0.98);
+}
+div.conteneur-mode.animation i.particulary {
+    transform: rotate(-90deg);
+    font-size: var(--H1);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    margin-left: var(--ESPACE_XS);
 }
 div.conteneur-mode i{
     font-size: var(--H0);

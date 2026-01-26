@@ -151,6 +151,14 @@
     
     <!-- Pour le burger menu -->
     <script src="Assets/base-js/base.js"></script>
+    <script>
+        const DisplayBanniere = localStorage.getItem("DisplayBanniere")
+        let MiseAvant = document.querySelector(".conteneur-mise-avant")
+
+        if (DisplayBanniere == "False") {
+            MiseAvant.style.display = "none"
+        }
+    </script>
 
     
     <!-- Pour avoir les statistiques de visite du site -->
