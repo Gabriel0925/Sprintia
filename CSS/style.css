@@ -795,7 +795,7 @@ div.conteneur-cards-outils {
 }
 div.conteneur-cards-outils div.card-outil {
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    margin: 0px var(--ESPACE_XS);
+    margin: var(--ESPACE_XXS) var(--ESPACE_XS);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
 
@@ -819,10 +819,10 @@ div.conteneur-cards-outils div.card-outil.first {
 div.conteneur-cards-outils div.card-outil:active {
     transform: scale(0.95);
 }
-div.conteneur-cards-outils div.card-outil div.icone i{
+div.conteneur-cards-outils div.card-outil div.icone{
     display: flex;
     justify-content: center;
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    background-color: var(--COULEUR_ACCENT);
     border-radius: var(--BORDER_SMALL);
     width: 100%;
 }
