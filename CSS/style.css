@@ -10,7 +10,7 @@
     --COULEUR_BACKGROUND_CARD: #232222;
     --COULEUR_BACKGROUND_CARD_HOVER: #373636; 
 
-    --COULEUR_LUMIERE_CARD: #292828;
+    --COULEUR_LUMIERE_CARD: #2c2b2b;
 
     --COULEUR_TEXT_PRINCIPAL: #FFFFFF;
     --COULEUR_TEXT_SECONDAIRE: #BDBDBD;
@@ -501,11 +501,9 @@ footer a.a_footer:active{
 header {
     position: sticky;
     top: 0;
-    padding: var(--ESPACE_XXS);    
-    background-color: var(--COULEUR_BACKGROUND_CARD);
+    background-color: transparent;
     /* Le z-index sert que les cartes ne passe pas devant lors d'un hover */
     z-index: 2000;
-    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
 }
 header div.navbar {
     width: 100%;
@@ -518,21 +516,33 @@ header div.navbar {
 header div.navbar .logo a {
     font-size: var(--H1);
     color: var(--COULEUR_TEXT_PRINCIPAL);
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    margin-top: var(--ESPACE_M);
+    margin-left: var(--ESPACE_M);
+
     font-weight: 1000;
     display: block;
-    margin: var(--ESPACE_XXS);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 header div.navbar .logo a:active {
     transform: scale(0.95);
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT_HOVER);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 header div.navbar ul.links {
     display: flex;
-    margin: var(--ESPACE_XXS);
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+    margin-top: var(--ESPACE_M);
+    margin-right: var(--ESPACE_M);
+    border-radius: var(--BORDER);
 }
 header div.navbar div.burger-menu-button {
     font-size: var(--H0);
@@ -550,7 +560,7 @@ header div.navbar div.burger-menu-button {
 }
 /* Pour que le bouton rétrécisse au moment du clic */
 header div.navbar div.burger-menu-button:active {
-    transform: scale(0.9);  
+    transform: scale(0.85);  
     border-radius: var(--BORDER_SMALL);
     color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -558,7 +568,7 @@ header div.navbar div.burger-menu-button:active {
 header div.navbar ul.links li a {
     color: var(--COULEUR_TEXT_PRINCIPAL); 
     font-size: var(--H3);
-    margin: var(--ESPACE_S) var(--ESPACE_XXS);
+    margin: var(--ESPACE_XS) var(--ESPACE_XXS);
     min-width: 175px;
     padding: var(--ESPACE_XS);
     font-weight: var(--FONT_WEIGHT_BUTTON);
@@ -576,7 +586,6 @@ header div.navbar ul.links li a i {
 @media (hover: hover) and (pointer: fine) {
     header div.navbar ul.links li a:hover {
         color: var(--COULEUR_ACCENT_CONTRASTER);
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
         transition: all ease-out var(--DUREE_TRANSITION);
     }
 }
@@ -588,7 +597,6 @@ header div.navbar ul.links li a:active {
 }
 header div.navbar ul.links li a.actif {
     color: var(--COULEUR_ACCENT_CONTRASTER);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 header div.navbar ul.links li a.actif:active {
@@ -1537,6 +1545,8 @@ div.conteneur-action-charge {
     justify-content: center;
     align-items: center;
     background-color: var(--COULEUR_BACKGROUND_CARD);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
     width: fit-content;
     margin: 0 auto;
     border-radius: var(--BORDER);
