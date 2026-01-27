@@ -79,8 +79,8 @@
     <div class="conteneur-about-marge">
         <h1>Actions rapides</h1>
 
-        <div class="conteneur-derniere-nouveautes">
-            <div class="conteneur_scrolling">
+        <div class="conteneur-content-scrolling">
+            <div class="conteneur-scrolling">
 
                 <a href="Actions/ajouter_entraînement.html">
                     <div class="shorcut first">
@@ -121,8 +121,8 @@
         <h1>Tous les outils</h1>
         <h2>Progression</h2>
 
-        <div class="conteneur-cards-outils">
-            <div class="conteneur_scrolling">
+        <div class="conteneur-content-scrolling">
+            <div class="conteneur-scrolling">
 
                 <a href="Charge d'entraînement/charge_entrainement.html">
                     <div class="card-outil first">
@@ -157,8 +157,8 @@
 
         <h2>Santé</h2>
 
-        <div class="conteneur-cards-outils">
-            <div class="conteneur_scrolling">
+        <div class="conteneur-content-scrolling">
+            <div class="conteneur-scrolling">
 
                 <a href="Zones cardiaques/zones_cardiaques.html">
                     <div class="card-outil first">
@@ -194,8 +194,8 @@
 
         <h2>Course à pied</h2>
 
-        <div class="conteneur-cards-outils">
-            <div class="conteneur_scrolling">
+        <div class="conteneur-content-scrolling">
+            <div class="conteneur-scrolling">
 
                 <a href="Niveau de course à pied/niveau_course.html">
                     <div class="card-outil first">
@@ -259,8 +259,8 @@
 
         <h2>Musculation</h2>
 
-        <div class="conteneur-cards-outils">
-            <div class="conteneur_scrolling">
+        <div class="conteneur-content-scrolling">
+            <div class="conteneur-scrolling">
 
                 <a href="Estimation 1RM/estimation_1RM.html">
                     <div class="card-outil first">
@@ -278,8 +278,8 @@
 
         <h2>Sport d'hiver</h2>
 
-        <div class="conteneur-cards-outils">
-            <div class="conteneur_scrolling">
+        <div class="conteneur-content-scrolling">
+            <div class="conteneur-scrolling">
 
                 <a href="Estimation puissance moy en ski/estimation_puissance_moy_en_ski.html">       
                     <div class="card-outil first">
@@ -297,8 +297,8 @@
 
         <h2>Autre</h2>
 
-        <div class="conteneur-cards-outils">
-            <div class="conteneur_scrolling">
+        <div class="conteneur-content-scrolling">
+            <div class="conteneur-scrolling">
 
                 <a href="Estimation de la transpiration/estimation_transpiration.html">
                     <div class="card-outil first">
@@ -350,68 +350,7 @@
 
     <!-- Pour le burger menu -->
     <script src="../Assets/base-js/base.js"></script>
-    
-    <script>
-        // Pour gérer le tri des cartes d'outils
-        // Recup des elements html
-        const Filter = document.getElementById("filter")
-        const CardOutil = document.querySelectorAll("#data-table div.card-outil")
-        const ButtonAfficherPlus = document.getElementById("button_afficher_plus") 
 
-
-        Filter.addEventListener('change', function() {
-            const CategorieSelect = this.value
-
-            if (CategorieSelect === "tous") {
-                CardOutil.forEach(element => element.classList.remove("visible"));
-                ButtonAfficherPlus.classList.remove("absent")
-
-                let NbCardSaveMaj1 = sessionStorage.getItem("NbCardOutilSave")
-
-                let Compteur = 0
-                if (NbCardSaveMaj1) {
-                    RestaurationNbCard()
-                    return
-                } else {
-                    // Affiche les 9ere si rien en memoire
-                    for (let i = 0; i < 9; i++) {
-                        if (CardOutil[i]) {
-                            CardOutil[i].classList.add("visible")
-                        }
-                    }
-                }
-            } else {
-                ButtonAfficherPlus.classList.add("absent")
-
-                CardOutil.forEach(card => {
-                    const Category = card.getAttribute("data-category")
-
-                    if (Category === CategorieSelect) {
-                        card.classList.add("visible")
-                    } else {
-                        card.classList.remove("visible")
-                    }
-                })
-            }
-        })
-
-        function RestaurationNbCard() {
-            // Rafraichissement des datas des nbcardsave
-            let NbCardSaveMaj2 = sessionStorage.getItem("NbCardOutilSave")
-            // Au lancement de la page
-            if (NbCardSaveMaj2) {
-                for (let i = 0; i < parseInt(NbCardSaveMaj2); i++) {
-                    CardOutil[i].classList.add("visible")
-                }
-                if (parseInt(NbCardSaveMaj2) >= CardOutil.length) {
-                    ButtonAfficherPlus.classList.add("absent")
-                }
-            }
-        }
-        RestaurationNbCard()
-    </script>
-
-    
     <!-- Pour avoir les statistiques de visite du site -->
     <script defer src="/_vercel/insights/script.js"></script>
 </body>
