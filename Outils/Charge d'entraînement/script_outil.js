@@ -75,11 +75,14 @@ async function CalculCharge() {
     let DateCharge = []
 
     // Date recup
-    const DateActuelle = new Date()
-    let DateMoins7J = new Date()
-    DateMoins7J = DateMoins7J.setDate(DateActuelle.getDate() - 7)
-    let DateMoins28J = new Date()
-    DateMoins28J = DateMoins28J.setDate(DateActuelle.getDate() - 7)
+    // const DateActuelle = new Date()
+    // let DateMoins7J = new Date()
+    // DateMoins7J = DateMoins7J.setDate(DateActuelle.getDate() - 7)
+    // let DateMoins28J = new Date()
+    // DateMoins28J = DateMoins28J.setDate(DateActuelle.getDate() - 7)
+
+    let DateMoins7J = "2026-01-21"
+    let DateMoins28J = "2026-01-01"
 
     let DateBoucle = ""
 
