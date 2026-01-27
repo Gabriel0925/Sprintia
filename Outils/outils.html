@@ -76,14 +76,14 @@
         </div>
     </header>
 
-    <div class="conteneur-outils-marge">
+    <div class="conteneur-about-marge">
         <h1>Actions rapides</h1>
 
         <div class="conteneur-derniere-nouveautes">
             <div class="conteneur_scrolling">
 
                 <a href="Actions/ajouter_entraînement.html">
-                    <div class="shorcut">
+                    <div class="shorcut first">
                         <div class="img" id="icone-add">
                             <i class="fs-icon_add"></i>
                         </div>
@@ -118,167 +118,208 @@
             </div>
         </div>
 
-        <div class="conteneur-outils1">
-            <h1>Outils</h1>
-            <select id="filter" autocomplete="off">
-                    <option value="tous">Tous</option>
-                    <option value="progression">Progression</option>
-                    <option value="sante">Santé</option>
-                    <option value="course">Course à pied</option>
-                    <option value="musculation">Musculation</option>
-                    <option value="hiver">Sports d'hiver</option>
-                    <option value="autre">Autre</option>
-            </select>
-        </div>
-        <div class="conteneur-outils" id="data-table">
+        <h1>Tous les outils</h1>
+        <h2>Progression</h2>
 
-            <div class="card-outil visible" data-category="progression">
-                <a class="lien-outils" href="Charge d'entraînement/charge_entrainement.html">
-                    <i class="fs-icon_charge_entrainement"></i>
-                    <h1>Charge d'entraînement</h1>
-                    <p>Découvrez la quantité de stress physique que vous imposez à votre corps de part vos entraînements.</p>
-                </a>
-                <a class="bouton-a-card" href="Charge d'entraînement/charge_entrainement.html">Essayer</a>
-            </div>
-            <div class="card-outil visible" data-category="progression">
-                <a class="lien-outils" href="Indulgence de course/indulgence_course.html">
-                    <i class="fs-icon_indulgence_course"></i>
-                    <h1>Indulgence de course</h1>
-                    <p>Découvrez une fourchette de distance hebdomadaire conseillé en fonction de tes dernières semaines de course.</p>
-                </a>
-                <a class="bouton-a-card" href="Indulgence de course/indulgence_course.html">Essayer</a>
-            </div>
-            <div class="card-outil visible" data-category="progression">
-                <a class="lien-outils" href="Estimation du temps de récupération/estimation_temps_recuperation.html">
-                    <i class="fs-icon_temps_recup"></i>
-                    <h1>Estimation du temps de récupération</h1>
-                    <p>Découvrez le temps de récupération optimal pour récupérer de votre dernier entraînement.</p>
-                </a>
-                <a class="bouton-a-card" href="Estimation du temps de récupération/estimation_temps_recuperation.html">Essayer</a>
-            </div>
+        <div class="conteneur-cards-outils">
+            <div class="conteneur_scrolling">
 
+                <a href="Charge d'entraînement/charge_entrainement.html">
+                    <div class="card-outil first">
+                        <div class="icone">
+                            <i class="fs-icon_charge_entrainement"></i>
+                        </div>
+                        <h1>Charge d'entraînement</h1>
+                        <p>Découvrez la quantité de stress physique que vous imposez à votre corps de part vos entraînements.</p>
+                    </div>
+                </a>     
+                <a href="Indulgence de course/indulgence_course.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_indulgence_course"></i>
+                        </div>
+                        <h1>Indulgence de course</h1>
+                        <p>Découvrez une fourchette de distance hebdomadaire conseillé en fonction de tes dernières semaines de course.</p>
+                    </div>
+                </a>    
+                <a href="Estimation du temps de récupération/estimation_temps_recuperation.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_temps_recup"></i>
+                        </div>
+                        <h1>Estimation du temps de récupération</h1>
+                        <p>Découvrez le temps de récupération optimal pour récupérer de votre dernier entraînement.</p>
+                    </div>
+                </a>
 
-            <div class="card-outil visible" data-category="sante">
-                <a class="lien-outils" href="Zones cardiaques/zones_cardiaques.html">
-                    <i class="fs-icon_zones_cardiaques"></i>
-                    <h1>Zones cardiaques</h1>
-                    <p>Découvrez vos zones de fréquence cardiaque pour adapter l’intensité de vos entraînements.</p>
-                </a>
-                <a class="bouton-a-card" href="Zones cardiaques/zones_cardiaques.html">Essayer</a>
             </div>
-            <div class="card-outil visible" data-category="sante">
-                <a class="lien-outils" href="Protéines quotidiennes/proteines_quotidienne.html">
-                    <i class="fs-icon_proteines"></i>
-                    <h1>Protéines quotidiennes</h1>
-                    <p>Découvrez la quantité de protéines à consommer par jour en fonction de votre objectif.</p>
-                </a>
-                <a class="bouton-a-card" href="Protéines quotidiennes/proteines_quotidienne.html">Essayer</a>
-            </div>
-            <div class="card-outil visible" data-category="sante">
-                <a class="lien-outils" href="Calculateur IMC/calculateur_imc.html">
-                    <i class="fs-icon_IMC"></i>
-                    <h1>Calculateur IMC</h1>
-                    <p>Calculez votre IMC et obtenez une interprétation de votre IMC. Parce que les chiffres, c’est bien, mais ça ne veut pas tout dire !</p>
-                </a>
-                <a class="bouton-a-card" href="Calculateur IMC/calculateur_imc.html">Essayer</a>
-            </div>
-
-
-            <div class="card-outil visible" data-category="course">
-                <a class="lien-outils" href="Niveau de course à pied/niveau_course.html">
-                    <i class="fs-icon_niveau_course"></i>
-                    <h1>Niveau course à pied</h1>
-                    <p>Évaluez votre niveau de course grâce à un test puis obtenez un score ainsi qu'une zone pour suivre vos progrès.</p>
-                </a>
-                <a class="bouton-a-card" href="Niveau de course à pied/niveau_course.html">Essayer</a>
-            </div>
-            <div class="card-outil visible" data-category="course">
-                <a class="lien-outils" href="Prédicteur de performance/predicteur_performance.html">
-                    <i class="fs-icon_predicteur_performance"></i>
-                    <h1>Prédicteur de performance</h1>
-                    <p>Découvrez votre temps au 10 km, semi-marathon, marathon,... Tout ça grâce à votre VMA.</p>
-                </a>
-                <a class="bouton-a-card" href="Prédicteur de performance/predicteur_performance.html">Essayer</a>
-            </div>
-            <div class="card-outil visible" data-category="course">
-                <a class="lien-outils" href="Estimation VMA/estimation_vma.html">
-                    <i class="fs-icon_VMA"></i>
-                    <h1>Estimation VMA</h1>
-                    <p>Estimez votre VMA et identifiez vos zones d’allure idéales pour structurer vos séances de fractionné,...</p>
-                </a>
-                <a class="bouton-a-card" href="Estimation VMA/estimation_vma.html">Essayer</a>
-            </div>
-
-
-            <div class="card-outil" data-category="course">
-                <a class="lien-outils" href="Estimation VO2max/estimation_VO2max.html">
-                    <i class="fs-icon_VO2MAX"></i>
-                    <h1>Estimation VO₂max</h1>
-                    <p>Estimez votre VO₂max et obtenez une analyse avec des zones adaptées à votre âge, le tout grâce à votre VMA.</p>
-                </a>
-                <a class="bouton-a-card" href="Estimation VO2max/estimation_VO2max.html">Essayer</a>
-            </div>            
-            <div class="card-outil" data-category="course">
-                <a class="lien-outils" href="Zones de vitesse/zones_vitesse.html">
-                    <i class="fs-icon_zones_vitesse"></i>
-                    <h1>Zones de vitesse</h1>
-                    <p>Découvrez vos zones de vitesse grâce à votre VMA pour optimiser vos entraînements.</p>
-                </a>
-                <a class="bouton-a-card" href="Zones d'allures/zones_allures.html">Essayer</a>
-            </div>
-            <div class="card-outil" data-category="course">
-                <a class="lien-outils" href="Estimation puissance max en course/estimation_puissance_max_course.html">
-                    <i class="fs-icon_puissance_max"></i>
-                    <h1>Estimation puissance max. en course</h1>
-                    <p>Estimez votre puissance max. en course (en watts) grâce à votre vitesse maximale sur une distance.</p>
-                </a>
-                <a class="bouton-a-card" href="Estimation puissance max en course/estimation_puissance_max_course.html">Essayer</a>
-            </div>
-
-
-            <div class="card-outil" data-category="musculation">
-                <a class="lien-outils" href="Estimation 1RM/estimation_1RM.html">
-                    <i class="fs-icon_1RM"></i>
-                    <h1>Estimation 1RM</h1>
-                    <p>Estimez la charge maximale que vous pouvez soulever en une seule répétition sur un exercice de musculation.</p>
-                </a>
-                <a class="bouton-a-card" href="Estimation 1RM/estimation_1RM.html">Essayer</a>
-            </div>
-            <div class="card-outil" data-category="hiver">
-                <a class="lien-outils" href="Estimation puissance moy en ski/estimation_puissance_moy_en_ski.html">
-                    <i class="fs-icon_puissance_moy_ski"></i>
-                    <h1>Estimation puissance moy. en ski</h1>
-                    <p>Estimez votre puissance moyenne en ski (en watts) sur une descente.</p>
-                </a>
-                <a class="bouton-a-card" href="Estimation puissance moy en ski/estimation_puissance_moy_en_ski.html">Essayer</a>
-            </div>             
-            <div class="card-outil" data-category="autre">
-                <a class="lien-outils" href="Estimation de la transpiration/estimation_transpiration.html">
-                    <i class="fs-icon_transpiration"></i>
-                    <h1>Estimation de la transpiration</h1>
-                    <p>Estimez votre transpiration sur un entraî. et découvrez la qté à boire pour une récupération optimale.</p>
-                </a>
-                <a class="bouton-a-card" href="Estimation de la transpiration/estimation_transpiration.html">Essayer</a>
-            </div>
-            
-            
-            <div class="card-outil" data-category="autre">
-                <a class="lien-outils" href="Convertisseur miles-km/convertisseur_miles_km.html">
-                    <i class="fs-icon_miles_km"></i>
-                    <h1>Convertisseur km/miles</h1>
-                    <p>Convertissez une distance des kilomètres en miles ou inversement.</p>
-                </a>
-                <a class="bouton-a-card" href="Convertisseur miles-km/convertisseur_miles_km.html">Essayer</a>
-            </div>
-
-            
         </div>
 
-        <div class="conteneur-centrage-marge">
-            <button id="button_afficher_plus" onclick="afficher_plus('outils')">
-                <i class="fs-icon_add"></i> 
-                Afficher plus
-            </button>
+        <h2>Santé</h2>
+
+        <div class="conteneur-cards-outils">
+            <div class="conteneur_scrolling">
+
+                <a href="Zones cardiaques/zones_cardiaques.html">
+                    <div class="card-outil first">
+                        <div class="icone">
+                            <i class="fs-icon_zones_cardiaques"></i>
+                        </div>
+                        <h1>Zones cardiaques</h1>
+                        <p>Découvrez vos zones de fréquence cardiaque pour adapter l’intensité de vos entraînements.</p>
+                    </div>
+                </a>     
+                <a href="Protéines quotidiennes/proteines_quotidienne.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_proteines"></i>
+                        </div>
+                        <h1>Protéines quotidiennes</h1>
+                        <p>Découvrez la quantité de protéines à consommer par jour en fonction de votre objectif.</p>
+                    </div>
+                </a>    
+                <a href="Calculateur IMC/calculateur_imc.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_IMC"></i>
+                        </div>
+                        <h1>Calculateur IMC</h1>
+                        <p>Calculez votre IMC et obtenez une interprétation de votre IMC. Parce que les chiffres, c’est bien, mais ça ne veut pas tout dire !</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+
+        <h2>Course à pied</h2>
+
+        <div class="conteneur-cards-outils">
+            <div class="conteneur_scrolling">
+
+                <a href="Niveau de course à pied/niveau_course.html">
+                    <div class="card-outil first">
+                        <div class="icone">
+                            <i class="fs-icon_niveau_course"></i>
+                        </div>
+                        <h1>Niveau course à pied</h1>
+                        <p>Évaluez votre niveau de course grâce à un test puis obtenez un score ainsi qu'une zone pour suivre vos progrès.</p>
+                    </div>
+                </a>     
+                <a href="Prédicteur de performance/predicteur_performance.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_predicteur_performance"></i>
+                        </div>
+                        <h1>Prédicteur de performance</h1>
+                        <p>Découvrez votre temps au 10 km, semi-marathon, marathon,... Tout ça grâce à votre VMA.</p>
+                    </div>
+                </a>    
+                <a href="Estimation VMA/estimation_vma.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_VMA"></i>
+                        </div>
+                        <h1>Estimation VMA</h1>
+                        <p>Estimez votre VMA et identifiez vos zones d’allure idéales pour structurer vos séances de fractionné,...</p>
+                    </div>
+                </a> 
+
+                <a href="Estimation VO2max/estimation_VO2max.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_VO2MAX"></i>
+                        </div>
+                        <h1>Estimation VO₂max</h1>
+                        <p>Estimez votre VO₂max et obtenez une analyse avec des zones adaptées à votre âge, le tout grâce à votre VMA.</p>
+                    </div>
+                </a>  
+                <a href="Zones de vitesse/zones_vitesse.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_zones_vitesse"></i>
+                        </div>
+                        <h1>Zones de vitesse</h1>
+                        <p>Découvrez vos zones de vitesse grâce à votre VMA pour optimiser vos entraînements.</p>
+                    </div>
+                </a>  
+                <a href="Estimation puissance max en course/estimation_puissance_max_course.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_puissance_max"></i>
+                        </div>
+                        <h1>Estimation puissance max. en course</h1>
+                        <p>Estimez votre puissance max. en course (en watts) grâce à votre vitesse maximale sur une distance.</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+
+        <h2>Musculation</h2>
+
+        <div class="conteneur-cards-outils">
+            <div class="conteneur_scrolling">
+
+                <a href="Estimation 1RM/estimation_1RM.html">
+                    <div class="card-outil first">
+                        <div class="icone">
+                            <i class="fs-icon_1RM"></i>
+                        </div>
+                        <h1>Estimation 1RM</h1>
+                        <p>Estimez la charge maximale que vous pouvez soulever en une seule répétition sur un exercice de musculation.</p>
+                    </div>
+                </a>     
+
+            </div>
+        </div>
+
+
+        <h2>Sport d'hiver</h2>
+
+        <div class="conteneur-cards-outils">
+            <div class="conteneur_scrolling">
+
+                <a href="Estimation puissance moy en ski/estimation_puissance_moy_en_ski.html">       
+                    <div class="card-outil first">
+                        <div class="icone">
+                            <i class="fs-icon_puissance_moy_ski"></i>
+                        </div>
+                        <h1>Estimation puissance moy. en ski</h1>
+                        <p>Estimez votre puissance moyenne en ski (en watts) sur une descente.</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+
+        <h2>Autre</h2>
+
+        <div class="conteneur-cards-outils">
+            <div class="conteneur_scrolling">
+
+                <a href="Estimation de la transpiration/estimation_transpiration.html">
+                    <div class="card-outil first">
+                        <div class="icone">
+                            <i class="fs-icon_transpiration"></i>
+                        </div>
+                        <h1>Estimation de la transpiration</h1>
+                        <p>Estimez votre transpiration sur un entraî. et découvrez la qté à boire pour une récupération optimale.</p>
+                    </div>
+                </a>     
+                <a href="Convertisseur miles-km/convertisseur_miles_km.html">       
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_miles_km"></i>
+                        </div>
+                        <h1>Convertisseur km/miles</h1>
+                        <p>Convertissez une distance des kilomètres en miles ou inversement.</p>
+                    </div>
+                </a> 
+
+            </div>
         </div>
         
     </div>

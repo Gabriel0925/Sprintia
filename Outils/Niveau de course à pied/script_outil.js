@@ -112,19 +112,17 @@ async function RecupValueNiveauCourseGraphique() {
     let NbValeurRecup = -13
 
     // Logique de nb datas en fonction du devices
-    if (TailleHardware <= 380) {
+    if (TailleHardware <= 520) {
         NbValeurRecup = -4
-    } else if (TailleHardware <= 520) {
-        NbValeurRecup = -5
     } else if (TailleHardware <= 640) {
-        NbValeurRecup = -7
+        NbValeurRecup = -6
     } else if (TailleHardware <= 720) {
-        NbValeurRecup = -9
+        NbValeurRecup = -7
     } else if (TailleHardware <= 790) {
-        NbValeurRecup = -10
+        NbValeurRecup = -8
     } else if (TailleHardware <= 1000) {
-        NbValeurRecup = -11
-    } 
+        NbValeurRecup = -10
+    }
 
     // Recup value Data
     const ValeurDB = await db.niveau_course.toArray()    

@@ -10,7 +10,7 @@
     --COULEUR_BACKGROUND_CARD: #232222;
     --COULEUR_BACKGROUND_CARD_HOVER: #373636; 
 
-    --COULEUR_LUMIERE_CARD: #2c2b2b;
+    --COULEUR_LUMIERE_CARD: #2b2a2a;
 
     --COULEUR_TEXT_PRINCIPAL: #FFFFFF;
     --COULEUR_TEXT_SECONDAIRE: #BDBDBD;
@@ -785,6 +785,77 @@ p.txt_plus{
 
 
 /* ----- Style page "Outils" ----- */
+div.conteneur-cards-outils {
+    max-width: var(--MAX_WIDTH);
+    display: flex;
+    margin: var(--ESPACE_S) auto;
+    overflow-x: auto;
+    height: fit-content;
+    padding: var(--ESPACE_XS);
+}
+div.conteneur-cards-outils div.card-outil {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    margin: 0px var(--ESPACE_XS);
+    padding: var(--ESPACE_XS);
+    border-radius: var(--BORDER);
+
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    width: 250px;
+    height: fit-content;
+    overflow: hidden;
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-cards-outils div.card-outil.first {
+    margin-left: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-cards-outils div.card-outil:hover {
+        transform: translateY(-5px);
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transition: all ease-in-out var(--DUREE_TRANSITION);
+    }
+}
+div.conteneur-cards-outils div.card-outil:active {
+    transform: scale(0.95);
+}
+div.conteneur-cards-outils div.card-outil div.icone i{
+    display: flex;
+    justify-content: center;
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-radius: var(--BORDER_SMALL);
+    width: 100%;
+}
+div.conteneur-cards-outils div.card-outil i{
+    font-size: 5rem;    
+    margin: 0 auto;
+}
+div.conteneur-cards-outils div.card-outil h1{
+    font-size: var(--H3);
+    margin-top: var(--ESPACE_XXS);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    min-height: 65px;
+    
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 2; /* Limite à 2 lignes */
+    line-clamp: 2; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden; /* Pour cacher ce qui dépasse */
+}
+div.conteneur-cards-outils div.card-outil p{
+    font-size: var(--P_SMALL);
+    margin-top: var(--ESPACE_XXS);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* On compte les lignes verticalement */
+    -webkit-line-clamp: 3; /* Limite à 3 lignes */
+    line-clamp: 3; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
+    overflow: hidden; /* Pour cacher ce qui dépasse */
+}
+
+
+
 div.conteneur-outils {
     margin: 0 auto;
     max-width: var(--MAX_WIDTH);
@@ -928,6 +999,9 @@ div.shorcut {
     border-radius: var(--BORDER_SMALL);
     overflow: hidden;
     transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.shorcut.first {
+    margin-left: 0;
 }
 @media (hover: hover) and (pointer: fine) {
     div.shorcut:hover{
@@ -1125,6 +1199,7 @@ div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout 
 div.conteneur-de-outil div.conteneur-option {
     display: flex;
     align-items: center;
+    margin-top: var(--ESPACE_S_SMALL);
 }
 div.conteneur-de-outil div.conteneur-option a {
     margin-left: auto;
@@ -1778,7 +1853,8 @@ div.conteneur-derniere-nouveautes {
     margin: var(--ESPACE_S) auto;
     overflow-x: auto;
 }
-div.conteneur-derniere-nouveautes div.conteneur_scrolling {
+div.conteneur_scrolling {
+    padding-left: var(--ESPACE_XS);
     display: inline-flex;
     align-items: center;
 }
@@ -1797,6 +1873,9 @@ div.conteneur_scrolling .card-nouveautes {
     animation-timeline: view();
     animation-range-start: cover 0%;
     animation-range-end: contain -10%;
+}
+div.conteneur_scrolling .card-nouveautes.first {
+    margin-left: 0;
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur_scrolling .card-nouveautes:hover {
@@ -2865,6 +2944,9 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
     /* Autre */    
     div.conteneur-mise-avant p{
         font-size: var(--H3);
+    }
+    div.conteneur-de-outil div.conteneur-option {
+        margin-top: var(--ESPACE_XS);
     }
 }
 @media (max-width: 440px) {

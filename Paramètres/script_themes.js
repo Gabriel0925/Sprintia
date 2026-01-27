@@ -14,7 +14,7 @@ function mode(event) {
         document.documentElement.style.setProperty("--COULEUR_TEXT_PRINCIPAL", "#010101");
         document.documentElement.style.setProperty("--COULEUR_TEXT_SECONDAIRE", "#757479");
 
-        document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#f5f3f3");
+        document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#efefef");
  
         document.documentElement.style.setProperty("--COULEUR_PASTILLES_0", "#0f759d");
         document.documentElement.style.setProperty("--COULEUR_PASTILLES_1", "#e70e32");
@@ -126,7 +126,7 @@ function light_mode() {
     document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD", "#e9e9e9ff");
     document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD_HOVER", "#d5d1d1");
 
-    document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#f4eeee");
+    document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#efefef");
 
     document.documentElement.style.setProperty("--COULEUR_TEXT_PRINCIPAL", "#010101");
     document.documentElement.style.setProperty("--COULEUR_TEXT_SECONDAIRE", "#757479");
