@@ -4,10 +4,10 @@ async function RecupValueGraphique() {
     let NbValeurRecup = -13
 
     // Logique de nb datas en fonction du devices
-    if (TailleHardware <= 380) {
+    if (TailleHardware <= 375) {
         NbValeurRecup = -4
     } else if (TailleHardware <= 520) {
-        NbValeurRecup = -5
+        NbValeurRecup = -4
     } else if (TailleHardware <= 640) {
         NbValeurRecup = -7
     } else if (TailleHardware <= 720) {
