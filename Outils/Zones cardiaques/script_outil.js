@@ -174,7 +174,7 @@ function MethodeChoisie() {
     const LabelFcRepos = document.getElementById("label-fc-user")
 
     if (Methode === "Max") {
-        // supression/ activation des champs
+        // supression/activation des champs
         ChampFcMax.classList.remove("invisible")
         ChampFcRepos.classList.add("invisible")
         LabelFcRepos.classList.add("invisible")
@@ -183,6 +183,8 @@ function MethodeChoisie() {
         ChampFcRepos.classList.remove("invisible")
         LabelFcRepos.classList.remove("invisible")
     }
+
+    ChoixFonction()
     return
 }
 

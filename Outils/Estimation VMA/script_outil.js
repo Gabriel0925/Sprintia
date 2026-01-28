@@ -58,7 +58,8 @@ function EstimationVMA() {
 
 function RemplirChamps() {
     // Recup datas des champs
-    let TestUsers = document.getElementById("test-user").value
+    let TestUsers = document.getElementById("test-user").value 
+    let ZonePourResult = document.querySelector(".temps-recup")
 
     // Maj des champs en fonction du test choisi
     if (TestUsers === "demi-cooper") {
@@ -71,6 +72,9 @@ function RemplirChamps() {
         ChampsDuree.value = 6
         ChampsDuree.readOnly = true 
 
+        // Remise à 0 de la vma pr eviter la confusion aux yeux du user
+        ZonePourResult.textContent = "0 km/h"
+
     } else if (TestUsers === "cooper") {
         let ChampsDistance = document.getElementById("distance-user")
         ChampsDistance.value = ""
@@ -79,6 +83,9 @@ function RemplirChamps() {
         let ChampsDuree = document.getElementById("duree-user")
         ChampsDuree.value = 12
         ChampsDuree.readOnly = true
+
+        // Remise à 0 de la vma pr eviter la confusion aux yeux du user
+        ZonePourResult.textContent = "0 km/h"
 
     } else if (TestUsers === "luc-leger") {
         let ChampsDistance = document.getElementById("distance-user")
@@ -89,6 +96,9 @@ function RemplirChamps() {
         ChampsDuree.value = ""
         ChampsDuree.readOnly = false
 
+        // Remise à 0 de la vma pr eviter la confusion aux yeux du user
+        ZonePourResult.textContent = "0 km/h"
+
     } else {
         let ChampsDistance = document.getElementById("distance-user")
         ChampsDistance.value = ""
@@ -97,6 +107,10 @@ function RemplirChamps() {
         let ChampsDuree = document.getElementById("duree-user")
         ChampsDuree.value = ""
         ChampsDuree.readOnly = false
+
+        // Remise à 0 de la vma pr eviter la confusion aux yeux du user
+        ZonePourResult.textContent = "0 km/h"
+        
     }
 
     return

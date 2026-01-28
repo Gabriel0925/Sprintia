@@ -1,3 +1,12 @@
+function ReturnDate(DateWorkout) {
+    let DateEuropeen = ""
+
+    DateWorkout = DateWorkout.split("-")
+    // Inversion de la date de "2026-01-12" à "12-01-2026"
+    DateEuropeen = DateWorkout[2] + "-" + DateWorkout[1] + "-" + DateWorkout[0]
+    return DateEuropeen
+}
+
 async function AfficherData() {
     // Recup de l'historique
     let HistoriqueDB = await db.entrainement.toArray() // recup de toutes les datas
@@ -24,6 +33,8 @@ async function AfficherData() {
 
         CardWorkout.classList.add("cards-history-workout")
 
+        // Inversion de la date de "2026-01-12" à "12-01-2026"
+        let DateEuropeen = ReturnDate(workout.date)
 
         let StructureHTML = `          
             <div class="data-workout-column">
@@ -31,7 +42,7 @@ async function AfficherData() {
                     ${workout.nom}
                 </p>
                 <p class="sport-date-workout">
-                    ${workout.sport} · ${workout.date}
+                    ${workout.sport} · ${DateEuropeen}
                 </p>
                 <p class="charge-workout">
                     Charge d'entraînement : <strong>${workout.charge_entrainement}</strong>

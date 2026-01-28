@@ -747,6 +747,7 @@ p.txt_plus{
 div.conteneur-content-scrolling {
     max-width: var(--MAX_WIDTH);
     padding-bottom: var(--ESPACE_XS);
+    margin: var(--ESPACE_XS) 0;
     display: flex;
     overflow-x: auto;
     height: fit-content;
@@ -819,7 +820,7 @@ div.conteneur-content-scrolling div.card-outil p{
 div.shorcut {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     margin: var(--ESPACE_XS);
-    width: 140px;
+    width: 130px;
     height: fit-content;
     border-radius: var(--BORDER_SMALL);
     overflow: hidden;
@@ -843,7 +844,7 @@ div.shorcut div.img{
     justify-content: center;
     
     width: 100%;
-    height: 100px;
+    height: 80px;
     border-top-left-radius: var(--BORDER_SMALL);
     border-top-right-radius: var(--BORDER_SMALL);
 }
@@ -857,7 +858,7 @@ div.shorcut div.img#icone-pause{
     background: linear-gradient(130deg, #e07c24, #ffa411);
 }
 div.shorcut div.img i{
-    font-size: 4.5rem;
+    font-size: 4rem;
     color: #FFFFFF;
 }
 div.shorcut p.text-shorcut{
@@ -1659,7 +1660,7 @@ div.conteneur-scrolling {
     align-items: center;
 }
 div.conteneur-scrolling .card-nouveautes {
-    width: 250px;
+    width: 230px;
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
@@ -1675,6 +1676,7 @@ div.conteneur-scrolling .card-nouveautes {
 }
 div.conteneur-scrolling .card-nouveautes.first {
     margin-left: 0;
+    width: 280px;
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-scrolling .card-nouveautes:hover {
@@ -1687,19 +1689,20 @@ div.conteneur-scrolling .card-nouveautes:active {
     transform: scale(0.95);
 }
 div.conteneur-scrolling .card-nouveautes-image p{
-    font-size: var(--H0);
+    font-size: var(--H1);
     text-align: left;
     background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
     font-family: "Anton", sans-serif;
     padding: var(--ESPACE_XXS);
     color: var(--COULEUR_BACKGROUND);
-    border-radius: var(--BORDER);
-    margin-bottom: var(--ESPACE_S);
-    padding-left: var(--ESPACE_S);
+    border-radius: var(--BORDER_SMALL);
+    margin-bottom: var(--ESPACE_XS);
+    padding-left: var(--ESPACE_S_SMALL);
 }
 div.conteneur-scrolling .card-nouveautes p.description-maj {
     font-size: var(--P);
     color: var(--COULEUR_TEXT_PRINCIPAL);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
     padding: var(--ESPACE_XXS);
     cursor: pointer;
 
@@ -1712,7 +1715,7 @@ div.conteneur-scrolling .card-nouveautes p.description-maj {
 div.conteneur-scrolling .card-nouveautes div.date-maj {
     color: var(--COULEUR_TEXT_SECONDAIRE);
     font-size: var(--P_SMALL);
-    margin-top: var(--ESPACE_S);
+    margin-top: var(--ESPACE_XS);
 }
 /* Button more */
 div.conteneur-content-scrolling div.conteneur-scrolling div.button-more {
@@ -1724,7 +1727,8 @@ div.conteneur-content-scrolling div.conteneur-scrolling div.button-more {
     background-color: var(--COULEUR_ACCENT);
     padding: var(--ESPACE_S_SMALL);
     border-radius: var(--BORDER);
-    margin: var(--ESPACE_S);
+    margin: 0;
+    margin-left: var(--ESPACE_S_SMALL);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -1742,7 +1746,7 @@ div.conteneur-content-scrolling div.conteneur-scrolling div.button-more:active {
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 div.conteneur-content-scrolling div.icon-more-in-button i{
-    font-size: var(--H3);
+    font-size: 1.3rem;
     color: var(--COULEUR_BACKGROUND);
     margin: 0 var(--ESPACE_XXS);
     vertical-align: middle; /* Aligne l'image au centre verticalement */
@@ -1766,15 +1770,14 @@ div.conteneur-param div.acces-param2 {
     margin: var(--ESPACE_XXS) 0px;
     padding: var(--ESPACE_XS);
     border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
     background-color: var(--COULEUR_BACKGROUND_CARD);
-
 
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 div.conteneur-param div.acces-param1 {
     border-top-left-radius: var(--BORDER);
     border-top-right-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
 }
 div.conteneur-param div.acces-param2 {
     border-bottom-left-radius: var(--BORDER);
@@ -1837,8 +1840,8 @@ div.conteneur-historique-versions {
 }
 /* Contenu supérieur */
 div.conteneur-historique-versions .box-last-maj div.content1 .card-nouveautes-image-last-maj {
-    font-size: var(--H0);
-    width: 250px;
+    font-size: var(--H1);
+    width: 205px;
     text-align: left;
     background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
     font-family: "Anton", sans-serif;
@@ -1893,13 +1896,15 @@ div.conteneur-historique-versions .card-nouveautes {
 }
 div.conteneur-historique-versions .card-nouveautes.visible {
     width: 370px;
+    flex-grow: 1;
     display: block;
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
     border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
-    margin: var(--ESPACE_S) var(--ESPACE_XS) var(--ESPACE_S) var(--ESPACE_S);
+
+    margin: var(--ESPACE_S_SMALL); /* !!! si changement de marge alors modifier dans le calcul pour le responsive à 620px */
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -1913,15 +1918,15 @@ div.conteneur-historique-versions .card-nouveautes.visible:active {
     transform: scale(0.95);
 }
 div.conteneur-historique-versions .card-nouveautes-image p {
-    font-size: var(--H0);
+    font-size: var(--H1);
     text-align: left;
     background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
     font-family: "Anton", sans-serif;
     padding: var(--ESPACE_XXS);
     color: var(--COULEUR_BACKGROUND);
-    border-radius: var(--BORDER);
-    margin-bottom: var(--ESPACE_S);
-    padding-left: var(--ESPACE_S);
+    border-radius: var(--BORDER_SMALL);
+    margin-bottom: var(--ESPACE_XS);
+    padding-left: var(--ESPACE_S_SMALL);
 }
 div.conteneur-historique-versions .card-nouveautes p.description-maj {
     font-size: var(--P);
@@ -2360,23 +2365,23 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
 }
 @media (max-width: 742px) {
     div.conteneur-historique-versions .card-nouveautes.visible{
-        width: 430px;
+        width: 300px;
     }
 }
-@media (max-width: 500px) {
+@media (max-width: 680px) {
     div.conteneur-historique-versions .card-nouveautes.visible{
-        margin: var(--ESPACE_S) 0px var(--ESPACE_S) 0px;
-        width: 400px;
+        width: 270px;
     }
 }
-@media (max-width: 420px) {
+@media (max-width: 620px) {
     div.conteneur-historique-versions .card-nouveautes.visible{
-        width: 355px;
+        width: calc(100% - (var(--ESPACE_S_SMALL) * 2));
     }
 }
-@media (max-width: 380px) {
-    div.conteneur-historique-versions .card-nouveautes.visible{
-        width: 330px;
+@media (max-width: 510px) {
+    div.conteneur-historique-versions .card-nouveautes.visible {
+        width: 100%;
+        margin: var(--ESPACE_S) 0px;
     }
 }
 @media (max-width: 350px) {
@@ -2431,7 +2436,7 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
 
 @media (max-width: 510px) {
     .conteneur-historique-versions .box-last-maj {
-        margin: var(--ESPACE_S) 0px var(--ESPACE_S) 0px;
+        margin: var(--ESPACE_S) 0px;
     }
 }
 
