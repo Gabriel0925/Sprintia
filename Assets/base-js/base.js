@@ -74,16 +74,11 @@ window.addEventListener("DOMContentLoaded", () => {
     SprintiaBeta()
 })
 
-// window.addEventListener("pageshow", (event) => {
-//     // Pour contrer le BFCache parce qu'il mettait en cache mes anciennes pages pour éviter de les recharger mais ça causait probleme pour les thèmes
-//     if (event.persisted) { // forcer un reload quand on fait un retour donc quand la page viens du BFCache
-//         window.location.reload()
-//     }
-// })
-
+// Pr gérer le BFCache
 window.addEventListener("pageshow", (event) => {
-    if (event.persisted) {
-        // Au lieu de reload(), on récupère le thème stocké (localStorage par ex)
+    // Pour contrer le BFCache parce qu'il mettait en cache mes anciennes pages pour éviter de les recharger mais ça causait probleme pour les thèmes
+    if (event.persisted) { // event.persisted = quand la page est dans le cache
+        // forcer de lancer la fonction qui charge le thème quand on fait un retour donc quand la page viens du BFCache
         user_preference()
     }
 });
