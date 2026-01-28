@@ -222,12 +222,12 @@ function color_theme(ColorActuelle, id_li) {
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#9cfdf0");
             ColorActuelleUse = "theme_menthe"
         
-        } else if (ColorActuelle === "theme_blue_rose") {
+        } else if (ColorActuelle === "Hortensia") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#3a91ff");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f782f0");  
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#85BBFF");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FBAEFA");  
-            ColorActuelleUse = "theme_blue_rose"
+            ColorActuelleUse = "Hortensia"
         
         } else if (ColorActuelle === "theme_plage") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#1498e4");
@@ -236,12 +236,12 @@ function color_theme(ColorActuelle, id_li) {
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FFD0A6"); 
             ColorActuelleUse = "theme_plage"
         
-        } else if (ColorActuelle === "theme_bleu_violet") {
+        } else if (ColorActuelle === "Aurore") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#a477fe");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#4ce58c");   
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#C9ADFF");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#82F2B2"); 
-            ColorActuelleUse = "theme_bleu_violet"
+            ColorActuelleUse = "Aurore"
         
         } else if (ColorActuelle === "theme_azur") {
             document.documentElement.style.removeProperty("--COULEUR_ACCENT");
@@ -308,12 +308,12 @@ function color_theme(ColorActuelle, id_li) {
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#21867f"); 
             ColorActuelleUse = "theme_menthe"
         
-        } else if (ColorActuelle === "theme_blue_rose") {
+        } else if (ColorActuelle === "Hortensia") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#146fdd");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f358e9");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#105dba");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#d14bc8");
-            ColorActuelleUse = "theme_blue_rose"
+            ColorActuelleUse = "Hortensia"
         
         } else if (ColorActuelle === "theme_plage") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#0077be");
@@ -322,12 +322,12 @@ function color_theme(ColorActuelle, id_li) {
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#d58b4f");
             ColorActuelleUse = "theme_plage"
         
-        } else if (ColorActuelle === "theme_bleu_violet") {
+        } else if (ColorActuelle === "Aurore") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#7746fd");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#00cf56");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#613cc7");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#02ab48");
-            ColorActuelleUse = "theme_bleu_violet"
+            ColorActuelleUse = "Aurore"
         
         } else if (ColorActuelle === "theme_azur") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#0f759d");
@@ -447,8 +447,8 @@ document.addEventListener("DOMContentLoaded", function() {
         "theme_pierre_lune": "elem8",
         "theme_framboise": "elem9",
         "theme_plage": "elem10",
-        "theme_blue_rose": "elem11",
-        "theme_bleu_violet": "elem12"
+        "Hortensia": "elem11",
+        "Aurore": "elem12"
     }
     let last_value_color = localStorage.getItem("ColorActuelleUse")
         

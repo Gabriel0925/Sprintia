@@ -35,19 +35,19 @@ async function RecupValueGraphique() {
 
 function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) {
     // Initialisation 
-    let Interpretation = "Sprintia n'a pas encore assez de données pour analyser votre charge d'entraînement. Pas de panique vous avez juste besoin d'ajouter 5 entraînements pour que Sprintia analyse vos entraînements."
+    let Interpretation = "Sprintia n'a pas assez de données pour analyser votre charge d'entraînement. Vous avez juste besoin d'ajouter au moins 3 entraînements sur les 28 derniers jours pour que Sprintia analyse vos charge d'entraînement."
     let Ratio = 0
 
-    // Vérif si possible d'analyser
+    // Si l'utilisateur a fait moins de 3 entrainements sur les 28 derniers jours on analyse pas
     if (AnalysePossible == false) {
-        return Interpretation
+        return Interpretation // on return l'analyse par défaut
     }
 
     // Dico des phrases
     const PhraseJRM = [
-        "Vous êtes en train de perdre du niveau, attention !<br>Vous pourriez augmenter l'intensité de vos entraînements si vous voulez basculer en mode progression optimale et améliorer vos performances.",
-        "Charge idéale pour améliorer vos performances !<br>Continuez comme ça pour progresser ! Gardez cette même régularité dans vos entraînements pour rester en mode progression optimale.",
-        "Risque élevé de blessure !<br>Prenez quelques jours de pause pour laisser votre corps récupérer et réduire les risques de blessure."
+        "Statut : <strong>Désentraînement</strong><br>Votre condition physique semble décliner ! Essayez d'augmenter l'intensité de vos entraînements pour basculer en statut productif et améliorer vos performances.",
+        "Statut : <strong>Productif</strong><br>Vous êtes entrain de progresser, bravo ! Vos entraînements portent leurs fruits, gardez cette régularité et cette discipline pour continuer de booster vos performances.",
+        "Statut : <strong>Surentraînement</strong><br>Votre charge d'entraînement est significativement plus élevée que d'habitude, votre corps a du mal à suivre. Votre corps a besoin de quelques jours de repos pour récupérer."
     ]
 
     // Calcul du ratio
@@ -75,46 +75,57 @@ async function CalculCharge() {
     let DateCharge = []
 
     // Date recup
-    // const DateActuelle = new Date()
-    // let DateMoins7J = new Date()
-    // DateMoins7J = DateMoins7J.setDate(DateActuelle.getDate() - 7)
-    // let DateMoins28J = new Date()
-    // DateMoins28J = DateMoins28J.setDate(DateActuelle.getDate() - 7)
+    const DateActuelle = new Date()
 
-    let DateMoins7J = "2026-01-21"
-    let DateMoins28J = "2026-01-01"
+    let DateMoins7J = new Date()
+    DateMoins7J = DateMoins7J.setDate(DateActuelle.getDate() - 7) // pour le calcul des dates il faut les mettre en timestamp enleve le nb de j ici, ça renvoie ex: 1769014250809
+    DateMoins7J = new Date(DateMoins7J).toISOString() // permet de recup "2026-01-21T17:13:53.151Z"
+    // On prend que ce qui nous interesse donc la premiere partie
+    DateMoins7J = DateMoins7J.split("T")[0] // on obtient "2026-01-21"
 
+    let DateMoins28J = new Date() // voir commentaire au dessus pr explication
+    DateMoins28J = DateMoins28J.setDate(DateActuelle.getDate() - 28) 
+    DateMoins28J = new Date(DateMoins28J).toISOString()
+    DateMoins28J = DateMoins28J.split("T")[0] 
+
+    // initialisation avt boucle
     let DateBoucle = ""
 
     // Recup data BDD
     let HistoriqueDB = await db.entrainement.toArray() // recup de toutes les datas
 
+    // recup des datas sous forme de liste
     let ChargeAigueLi = HistoriqueDB.map(data => data.charge_entrainement)
     let DateLi = HistoriqueDB.map(data => data.date)
 
-    ChargeAigueLi.forEach(DataCharge => {
+    ChargeAigueLi.forEach(DataCharge => { // parcour des datas de charge
         DateBoucle = DateLi[compteur]
 
-        if (DateBoucle >= DateMoins28J) {
+        if (DateBoucle >= DateMoins28J) { // on ajoute la charge et la date de la charge entrai. dans la liste (les 28 derniers jours)
             Charge.push(DataCharge)
             DateCharge.push(DateBoucle)
         }
 
-        compteur += 1
+        compteur += 1 // maj compteur pr l'index
     });
 
-    // A completer
-    let AnalysePossible = true
-    if (Charge.length < 4) {
+    // ajout d'une condition pour éviter que Sprintia analyse la charge alors que l'utilisateur n'a pas assez d'entraînement sur les 28 derniers j
+    // donc prepa de variable pour la fonction l'interpretationJRM()
+    let AnalysePossible = true // initialisation
+
+    if (Charge.length < 3) { // verif si on peut analyser
         AnalysePossible = false
     }
 
+    // parcours des dates pour faire une liste avec la charge des 7 derniers jours et une autre li avec la charge des 28 derniers jours
     DateCharge.forEach(DateEntrainement => {
-        if (DateEntrainement >= DateMoins7J) {
+        if (DateEntrainement >= DateMoins7J) { 
             ChargeAigue = ChargeAigue + parseFloat(Charge[compteur2])
             ChargeChronique = ChargeChronique + parseFloat(Charge[compteur2])
+
         } else if (DateEntrainement >= DateMoins28J) {
             ChargeChronique = ChargeChronique + parseFloat(Charge[compteur2])
+
         }
 
         compteur2 += 1
@@ -141,6 +152,8 @@ async function Initialisation() {
         document.getElementById("charge-28j").textContent = ChargeChronique
     }
 
+    // Recup + affichage de l'interpretation
+    // reconversion en int car c'est devenu un str quand j'ai fais toFixed(1)
     let Interpretation = InterpretationJRM(parseInt(ChargeAigue), parseInt(ChargeChronique), AnalysePossible)
 
     if (Interpretation && HTMLInterpretationJRM) {

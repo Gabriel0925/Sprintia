@@ -2088,7 +2088,8 @@ ol.conteneur-color-acuentation{
     width: 100%;
 }
 li.option-color {
-    width: 430px;
+    width: 40%;
+    flex-grow: 1;
     overflow: hidden;
     cursor: pointer;
     position: relative;
@@ -2137,7 +2138,6 @@ ol li.option-color::before{
 ol li.option-color.selected{
     color: var(--COULEUR_BACKGROUND); /* Changement couleur du texte */
     font-weight: var(--FONT_WEIGHT_BUTTON);
-    border: none;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 ol li.option-color.selected::before{
@@ -2435,56 +2435,8 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
     }
 }
 
-/* ----- Pour la section thèmes ----- */
-@media (max-width : 960px) {
-    li.option-color {
-        width: 410px;
-    }
-}
-@media (max-width : 920px) {
-    li.option-color {
-        width: 390px;
-    }
-}
-@media (max-width : 880px) {
-    li.option-color {
-        width: 370px;
-    }
-}
-@media (max-width : 840px) {
-    li.option-color {
-        width: 340px;
-    }
-}
-@media (max-width : 780px) {
-    li.option-color {
-        width: 320px;
-    }
-}
-@media (max-width : 739px) {
-    li.option-color {
-        width: 270px;
-    }
-}
-@media (max-width : 639px) {
-    li.option-color {
-        width: 240px;
-    }
-}
-@media (max-width : 580px) {
-    li.option-color {
-        width: 220px;
-    }
-}
-@media (max-width : 539px) {
-    li.option-color {
-        width: 100%;
-    }
-}
+/* Pour la page thèmes */
 @media (max-width : 400px) {
-    li.option-color {
-        margin: var(--ESPACE_XS) 0px;
-    }
     div.conteneur-mode{
         margin: var(--ESPACE_M) 0px;
     }
