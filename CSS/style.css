@@ -2008,7 +2008,7 @@ div.conteneur-mode {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
-    margin: var(--ESPACE_M) var(--ESPACE_XS);
+    margin: var(--ESPACE_M) var(--ESPACE_XXS);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -2101,7 +2101,7 @@ li.option-color {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS) var(--ESPACE_S);
     border-radius: var(--BORDER);
-    margin: var(--ESPACE_XS);
+    margin: var(--ESPACE_XS) var(--ESPACE_XXS);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -2432,13 +2432,6 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
 @media (max-width: 510px) {
     .conteneur-historique-versions .box-last-maj {
         margin: var(--ESPACE_S) 0px var(--ESPACE_S) 0px;
-    }
-}
-
-/* Pour la page thèmes */
-@media (max-width : 400px) {
-    div.conteneur-mode{
-        margin: var(--ESPACE_M) 0px;
     }
 }
 

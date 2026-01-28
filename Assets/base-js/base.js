@@ -80,3 +80,10 @@ window.addEventListener("DOMContentLoaded", () => {
 //         window.location.reload()
 //     }
 // })
+
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+        // Au lieu de reload(), on récupère le thème stocké (localStorage par ex)
+        user_preference()
+    }
+});
