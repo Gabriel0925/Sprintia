@@ -351,6 +351,43 @@
     <!-- Pour le burger menu -->
     <script src="../Assets/base-js/base.js"></script>
 
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
+            
+            if (PreferenceUser == "True") {
+                // Recup des champs
+                let ShortcutAdd = document.getElementById("icone-add")
+                let ShortcutHistorique = document.getElementById("icone-historique")
+                let ShortcutPause = document.getElementById("icone-pause")
+
+                // Recup des icones
+                let IconeShortcutAdd = document.querySelector(".fs-icon_add")
+                let IconeShortcutHistorique = document.querySelector(".fs-icon_historique")
+                let IconeShortcutPause = document.querySelector(".fs-icon_pause")
+
+                // Recup variable css
+                const Style = getComputedStyle(document.documentElement)
+
+                const CouleurAccent = Style.getPropertyValue("--COULEUR_ACCENT")
+                const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
+
+                if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
+                    // Mise des couleurs si l'élément est existant
+                    ShortcutAdd.style.background = CouleurAccent
+                    IconeShortcutAdd.style.color = CouleurBackground
+                    
+                    ShortcutHistorique.style.background = CouleurAccent
+                    IconeShortcutHistorique.style.color = CouleurBackground
+
+                    ShortcutPause.style.background = CouleurAccent
+                    IconeShortcutPause.style.color = CouleurBackground
+
+                }
+            }
+        })
+    </script>
+
     <!-- Pour avoir les statistiques de visite du site -->
     <script defer src="/_vercel/insights/script.js"></script>
 </body>

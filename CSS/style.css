@@ -1962,7 +1962,7 @@ ul.liste-fonctionnalites li {
     list-style: initial;
     font-size: var(--P);
     color: var(--COULEUR_TEXT_PRINCIPAL);
-    margin: var(--ESPACE_S) var(--ESPACE_L);
+    margin: var(--ESPACE_XS) var(--ESPACE_M);
 }    
 
 /* Pour les images des versions */
@@ -2004,6 +2004,9 @@ div.conteneur-about-marge2 div.boite-ensemble-feature {
 div.conteneur-about-marge2 div.boite-ensemble-feature p.text-feature {
     font-size: var(--P);
     color: var(--COULEUR_TEXT_SECONDAIRE);
+}
+div.conteneur-about-marge2 div.boite-ensemble-feature p.text-feature#margin {
+    margin-top: var(--ESPACE_M);
 }
 div.conteneur-mode {
     display: flex;

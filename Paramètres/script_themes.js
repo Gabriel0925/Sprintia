@@ -412,7 +412,6 @@ function user_preference() {
     const ColorUser = localStorage.getItem("ColorActuelleUse")
 
     if (ThemeUser === "Clair") {
-        console.log(ThemeUser)
         light_mode()
     } else {
         // Si rien n'est sauvegardé ou si c le mode sombre
@@ -457,4 +456,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     maj_li_selected(id_li)
 })
+
+function ThemeComplet(event) {
+    let ToggleThemeComplet = event.target
+
+    if (ToggleThemeComplet.checked) { // quand toggle est desactiver
+        localStorage.setItem("ToggleThemeComplet", "False")
+    } else { // quand toggle est activé
+        localStorage.setItem("ToggleThemeComplet", "True")
+    }
+
+    return
+}
+
+
 user_preference()

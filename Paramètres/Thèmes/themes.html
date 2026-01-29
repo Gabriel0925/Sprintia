@@ -138,6 +138,16 @@
                 </li>
                 
             </ol>
+
+            <p class="text-feature" id="margin">
+                La fonctionnalité ci-dessous permet d'activer les thèmes partout dans l'interface ce qui peut nuire à l'intuitivité
+                mais ça permet d'avoir une parfaite cohérence dans l'interface.
+            </p>
+
+            <div class="conteneur-mode">
+                <p class="mode-choisis" id="sans-icone">Icônes assorties</p>
+                <input class="toggle" id="toggle-theme-complet" type="checkbox" onclick="ThemeComplet(event)" />
+            </div>
         </div>
         <div class="conteneur-centrage-marge">
             <button onclick="theme_defaut('elem1')">Réinitialiser le thème</button>
@@ -170,6 +180,23 @@
     
     <!-- Pour le burger menu -->
     <script src="../../Assets/base-js/base.js"></script>
+    <script>
+        function RestaureToggleThemeComplet() { // pour restaurer la position de "Appliquer thème aux icones"
+            let ToggleThemeComplet = document.getElementById("toggle-theme-complet")
+            let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
+
+            if (PreferenceUser == "True") {
+                ToggleThemeComplet.checked = false
+            } else {
+                ToggleThemeComplet.checked = true
+            }
+            return
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            RestaureToggleThemeComplet()
+        })
+    </script>
 
     
     <!-- Pour avoir les statistiques de visite du site -->
