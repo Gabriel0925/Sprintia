@@ -357,53 +357,16 @@ function color_theme(ColorActuelle, id_li) {
 
 // Thème par défaut
 function theme_defaut(id_li) {
-    document.documentElement.style.removeProperty("--COULEUR_ACCENT");
-    document.documentElement.style.removeProperty("--COULEUR_ACCENT_HOVER");
-    document.documentElement.style.removeProperty("--COULEUR_ACCENT_CONTRASTER");
-    document.documentElement.style.removeProperty("--COULEUR_ACCENT_CONTRASTER_HOVER");
-
-    document.documentElement.style.removeProperty("--COULEUR_BACKGROUND");
-    document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD");
-    document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD_HOVER");
-
-    document.documentElement.style.removeProperty("--COULEUR_TEXT_PRINCIPAL");
-    document.documentElement.style.removeProperty("--COULEUR_TEXT_SECONDAIRE");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_0");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_1");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_2");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_3");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_4");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_5");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_6");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_7");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D1");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D2");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D3");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D4");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D5");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D6");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D7");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D8");
-
-    document.documentElement.style.removeProperty("--URL_FLECHE_ICON");
-    document.documentElement.style.removeProperty("--URL_FLECHE_ICON_REVERSE");
-
     ThemeActuel = "Sombre"
     localStorage.setItem("ThemeActuel", "Sombre");
     
     ColorActuelleUse = "theme_azur"
     localStorage.setItem("ColorActuelleUse", ColorActuelleUse);
+
+    // Remise du toogle sur desactiver
+    localStorage.setItem("ToggleThemeComplet", "False")
     
-    // Pr restaurer la position du toggle
-    let toggle_value = document.querySelector(".toggle")
-    toggle_value.checked = false
-    // Pour restaurer le li de base (azur)
-    maj_li_selected(id_li)
+    location.reload()
 }
 
 function user_preference() {

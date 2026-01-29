@@ -112,7 +112,7 @@
             <div class="conteneur-box-deux">
                 
                 <div class="box-result-deux" id="charge-entrainement">
-                    <p class="score-imc">JRM Coach</p>
+                    <p class="score-imc">JRM Coach :</p>
                     <p class="zone-imc" id="reponse-coach-indulgence">
                         Chargement...
                     </p> 
@@ -190,6 +190,54 @@
     <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
 
     <script src="script_outil.js"></script>
+
+    <script>
+        // pour le theme complet pour changer les couleurs des icones
+        window.addEventListener("DOMContentLoaded", () => {
+            let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
+            
+            if (PreferenceUser == "True") {
+                // Recup des champs
+                let ButtonAdd = document.getElementById("add")
+                let IconeAdd = document.querySelector(".fs-icon_add")
+
+                let ButtonHistorique = document.getElementById("historique")
+                let IconeHistorique = document.querySelector(".fs-icon_historique")
+
+                let ButtonPause = document.getElementById("statut")
+                let IconePause = document.querySelector(".fs-icon_pause")
+                                        
+                let TextInterieurButton = document.querySelectorAll(".txt_plus")
+
+                // Recup variable css
+                const Style = getComputedStyle(document.documentElement)
+
+                const CouleurAccent = Style.getPropertyValue("--COULEUR_ACCENT")
+                const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
+
+                if (ButtonAdd && ButtonHistorique && ButtonPause) {
+                    // changement couleur text in button
+                    TextInterieurButton.forEach(TextButton => {
+                        TextButton.style.color = CouleurBackground                    
+                    });
+
+                    // Mise des couleurs si l'élément est existant
+                    ButtonAdd.style.background = CouleurAccent
+                    ButtonAdd.style.boxShadow = "none"
+                    IconeAdd.style.color = CouleurBackground
+                    
+                    ButtonHistorique.style.background = CouleurAccent
+                    ButtonHistorique.style.boxShadow = "none"
+                    IconeHistorique.style.color = CouleurBackground
+
+                    ButtonPause.style.background = CouleurAccent
+                    ButtonPause.style.boxShadow = "none"
+                    IconePause.style.color = CouleurBackground
+
+                }
+            }
+        })
+    </script>
 
     
     <!-- Pour avoir les statistiques de visite du site -->
