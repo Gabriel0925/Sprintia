@@ -10,7 +10,7 @@
     --COULEUR_BACKGROUND_CARD: #232222;
     --COULEUR_BACKGROUND_CARD_HOVER: #373636; 
 
-    --COULEUR_LUMIERE_CARD: #2b2a2a;
+    --COULEUR_LUMIERE_CARD: #3D3B3B;
 
     --COULEUR_TEXT_PRINCIPAL: #FFFFFF;
     --COULEUR_TEXT_SECONDAIRE: #BDBDBD;
@@ -400,8 +400,8 @@ div.conteneur-code {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_S);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
 }
 code {
     color: var(--COULEUR_TEXT_PRINCIPAL);
@@ -477,8 +477,8 @@ header div.navbar .logo a {
     color: var(--COULEUR_TEXT_PRINCIPAL);
     background-color: var(--COULEUR_BACKGROUND_CARD);
     box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     margin-top: var(--ESPACE_M);
     margin-left: var(--ESPACE_M);
 
@@ -496,8 +496,8 @@ header div.navbar .logo a:active {
 header div.navbar ul.links {
     display: flex;
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
     margin-top: var(--ESPACE_M);
     margin-right: var(--ESPACE_M);
@@ -508,8 +508,8 @@ header div.navbar div.burger-menu-button {
     border-radius: var(--BORDER);
     padding: var(--ESPACE_XS) var(--ESPACE_XXS);
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
     color: var(--COULEUR_ACCENT_CONTRASTER);
     cursor: pointer;
@@ -586,8 +586,8 @@ header .burger-menu.open {
     max-height: 350px;
     transform: translate(0, 0) scale(1); /* On remet la taille normale */
     box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
 }
 /* Pour que le bouton rétrécisse au moment du clic */
 header .burger-menu.open:active {
@@ -758,8 +758,8 @@ div.conteneur-content-scrolling div.card-outil {
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
 
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     width: 250px;
     height: fit-content;
     overflow: hidden;
@@ -863,7 +863,7 @@ div.shorcut div.img i{
 }
 div.shorcut p.text-shorcut{
     padding: var(--ESPACE_XS);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     font-size: var(--P);
     font-weight: var(--FONT_WEIGHT_BUTTON);
     display: block;
@@ -909,8 +909,8 @@ div.conteneur-de-outil div.conteneur-cards-workout {
 div.conteneur-de-outil div.cards-history-workout {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     height: fit-content;
     overflow: hidden;
 
@@ -1041,8 +1041,8 @@ div.conteneur-de-outil div.conteneur-option h1 {
 div.conteneur-de-outil div.conteneur-option i {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     color: var(--COULEUR_TEXT_PRINCIPAL);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     padding: var(--ESPACE_XS);
     cursor: pointer;
     border-radius: 50%;
@@ -1063,8 +1063,8 @@ div.conteneur-de-outil div.conteneur-option i:active {
 div.conteneur-de-outil div.conteneur-champs-outil {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     overflow: hidden;
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     margin: 0 var(--ESPACE_S);
     display: flex;
     flex-direction: column;
@@ -1446,8 +1446,8 @@ div.conteneur-action-charge {
     justify-content: center;
     align-items: center;
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     width: fit-content;
     margin: 0 auto;
     border-radius: var(--BORDER);
@@ -1664,8 +1664,8 @@ div.conteneur-scrolling .card-nouveautes {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     margin: var(--ESPACE_XS);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 
@@ -1820,8 +1820,8 @@ div.conteneur-historique-versions {
 /* Card mise en avant derniere version */
 .conteneur-historique-versions .box-last-maj{
     background: var(--COULEUR_BACKGROUND_CARD);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-radius: var(--BORDER);
     max-width: 1150px;
     margin: var(--ESPACE_S);
@@ -1901,8 +1901,8 @@ div.conteneur-historique-versions .card-nouveautes.visible {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
 
     margin: var(--ESPACE_S_SMALL); /* !!! si changement de marge alors modifier dans le calcul pour le responsive à 620px */
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -1950,8 +1950,8 @@ ul.liste-fonctionnalites {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     
     animation: scroll_effect_card var(--DUREE_TRANSITION) ease-out;
     animation-timeline: view();
@@ -2011,8 +2011,8 @@ div.conteneur-about-marge2 div.boite-ensemble-feature p.text-feature#margin {
 div.conteneur-mode {
     display: flex;
     align-items: center;
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
@@ -2101,8 +2101,8 @@ li.option-color {
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     z-index: 1;
     font-size: var(--H3);
     color: var(--COULEUR_TEXT_PRINCIPAL);
@@ -2261,8 +2261,8 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
 div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux {
     border-radius: var(--BORDER);
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     cursor: pointer;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
