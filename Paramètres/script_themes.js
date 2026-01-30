@@ -403,7 +403,7 @@ function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shor
             }
         }
                 
-        // Recup des champs (pour la page de charge d'entraînement)
+        // Recup des champs (!!! pour la page de charge d'entraînement)
         let ButtonAdd = document.getElementById("add")
         let IconeAdd = document.querySelector(".fs-icon_add")
 
