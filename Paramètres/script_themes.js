@@ -401,7 +401,6 @@ function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shor
             IconeShortcutPause.style.color = CouleurBackground
 
             }
-        }
                 
         // Recup des champs (!!! pour la page de charge d'entraînement)
         let ButtonAdd = document.getElementById("add")
@@ -435,6 +434,7 @@ function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shor
             IconePause.style.color = CouleurBackground
 
         }
+    }
 
     return
 }
