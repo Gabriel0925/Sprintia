@@ -369,7 +369,7 @@ function theme_defaut(id_li) {
     location.reload()
 }
 
-function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shorcut quand le navigateur le stocke dans le BFCache
+function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shorcut quand le navigateur le stocke dans le BFCache (page outils)
     let PreferenceUser = localStorage.getItem("ToggleThemeComplet") // recup valeur dans le local storage
 
     if (PreferenceUser == "True") {
@@ -401,6 +401,39 @@ function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shor
             IconeShortcutPause.style.color = CouleurBackground
 
             }
+        }
+                
+        // Recup des champs (pour la page de charge d'entraînement)
+        let ButtonAdd = document.getElementById("add")
+        let IconeAdd = document.querySelector(".fs-icon_add")
+
+        let ButtonHistorique = document.getElementById("historique")
+        let IconeHistorique = document.querySelector(".fs-icon_historique")
+
+        let ButtonPause = document.getElementById("statut")
+        let IconePause = document.querySelector(".fs-icon_pause")
+                                        
+        let TextInterieurButton = document.querySelectorAll(".txt_plus")
+
+        if (ButtonAdd && ButtonHistorique && ButtonPause) {
+            // changement couleur text in button
+            TextInterieurButton.forEach(TextButton => {
+                TextButton.style.color = CouleurBackground                    
+            });
+
+            // Mise des couleurs si l'élément est existant
+            ButtonAdd.style.background = CouleurAccent
+            ButtonAdd.style.boxShadow = "none"
+            IconeAdd.style.color = CouleurBackground
+                    
+            ButtonHistorique.style.background = CouleurAccent
+            ButtonHistorique.style.boxShadow = "none"
+            IconeHistorique.style.color = CouleurBackground
+
+            ButtonPause.style.background = CouleurAccent
+            ButtonPause.style.boxShadow = "none"
+            IconePause.style.color = CouleurBackground
+
         }
 
     return
