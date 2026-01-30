@@ -7,9 +7,9 @@ let ColorActuelleUse = "theme_azur"
 function mode(event) {
     const toggle = event.target;
     if (toggle.checked) { 
-        document.documentElement.style.setProperty("--COULEUR_BACKGROUND", "#F5F7F8");
-        document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD", "#FFFFFF");
-        document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD_HOVER", "#F0F0F0");
+        document.documentElement.style.setProperty("--COULEUR_BACKGROUND", "#eeedf2");
+        document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD", "#fefefe");
+        document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD_HOVER", "#c8c8c8");
 
         document.documentElement.style.setProperty("--COULEUR_TEXT_PRINCIPAL", "#1A1A1A");
         document.documentElement.style.setProperty("--COULEUR_TEXT_SECONDAIRE", "#636366");
@@ -122,14 +122,14 @@ function dark_mode() {
     color_theme(ColorActuelleUse, "PasToucher")
 }
 function light_mode() {
-    document.documentElement.style.setProperty("--COULEUR_BACKGROUND", "#F5F7F8");
-    document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD", "#FFFFFF");
-    document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD_HOVER", "#F0F0F0");
+        document.documentElement.style.setProperty("--COULEUR_BACKGROUND", "#eeedf2");
+        document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD", "#fefefe");
+        document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD_HOVER", "#c8c8c8");
 
-    document.documentElement.style.setProperty("--COULEUR_TEXT_PRINCIPAL", "#1A1A1A");
-    document.documentElement.style.setProperty("--COULEUR_TEXT_SECONDAIRE", "#636366");
+        document.documentElement.style.setProperty("--COULEUR_TEXT_PRINCIPAL", "#1A1A1A");
+        document.documentElement.style.setProperty("--COULEUR_TEXT_SECONDAIRE", "#636366");
 
-    document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#E0E0E0");
+        document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#E0E0E0");
  
     document.documentElement.style.setProperty("--COULEUR_PASTILLES_0", "#0f759d");
     document.documentElement.style.setProperty("--COULEUR_PASTILLES_1", "#e70e32");

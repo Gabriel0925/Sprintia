@@ -476,7 +476,8 @@ header div.navbar .logo a {
     font-size: var(--H1);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+    
+        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     margin-top: var(--ESPACE_M);
@@ -498,7 +499,8 @@ header div.navbar ul.links {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
-    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+    
+        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     margin-top: var(--ESPACE_M);
     margin-right: var(--ESPACE_M);
     border-radius: var(--BORDER);
@@ -510,7 +512,8 @@ header div.navbar div.burger-menu-button {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
-    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+    
+        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     color: var(--COULEUR_ACCENT_CONTRASTER);
     cursor: pointer;
     display: none;
@@ -585,7 +588,8 @@ header .burger-menu {
 header .burger-menu.open {
     max-height: 350px;
     transform: translate(0, 0) scale(1); /* On remet la taille normale */
-    box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+    
+        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
 }
@@ -1769,8 +1773,8 @@ div.conteneur-param div.acces-param2 {
     align-items: center;
     margin: var(--ESPACE_XXS) 0px;
     padding: var(--ESPACE_XS);
-    border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
-    border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     background-color: var(--COULEUR_BACKGROUND_CARD);
 
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -2646,9 +2650,10 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
     }
     header div.navbar .logo a {
         background-color: var(--COULEUR_BACKGROUND_CARD);
-        border-top: 2px solid var(--COULEUR_LUMIERE_CARD);
-        border-left: 2px solid var(--COULEUR_LUMIERE_CARD);
-        box-shadow: 0px 2px 10px var(--COULEUR_BACKGROUND);
+        border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+        border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
+        
+        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
         margin: 0;
         margin-left: var(--ESPACE_S);
         margin-top: var(--ESPACE_S);
