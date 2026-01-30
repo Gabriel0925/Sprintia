@@ -1,3 +1,12 @@
+function ReturnDate(DateNiveauCourse) {
+    let DateEuropeen = ""
+
+    DateNiveauCourse = DateNiveauCourse.split("-")
+    // Inversion de la date de "2026-01-12" à "12-01-2026"
+    DateEuropeen = DateNiveauCourse[2] + "-" + DateNiveauCourse[1] + "-" + DateNiveauCourse[0]
+    return DateEuropeen
+}
+
 async function RecupValueNiveauCourse() {
     // Recup value Data
     const ValeurDB = await db.niveau_course.toArray()
@@ -13,18 +22,27 @@ async function RecupValueNiveauCourse() {
     // Reverse pour mettre a lenvers les données pour que ds le tableau plus on descend plus c'est des valeurs ancienne
     DateDatas = DateDatas.reverse()
 
+    // Initialisation d'une liste de date avec le format européen
+    let ListeDate = []
+    let DateEuropeen = ""
+
+    DateDatas.forEach(element => { // Parcours des dates
+        DateEuropeen = ReturnDate(element)
+        ListeDate.push(DateEuropeen) // Ajout à la liste des dates format européen
+    });
+
     let NiveauDatas = ValeurDB.map(dataBDD => dataBDD.niveau_course_user)
     NiveauDatas = NiveauDatas.reverse()
 
     let idDatas = ValeurDB.map(dataBDD => dataBDD.id)
     idDatas = idDatas.reverse()
     
-    return {idDatas, NiveauDatas, DateDatas}
+    return {idDatas, NiveauDatas, ListeDate}
 }
 
 async function RemplirTableau() {
     // Recup des valeur dans bdd
-    let {idDatas, NiveauDatas, DateDatas} = await RecupValueNiveauCourse()
+    let {idDatas, NiveauDatas, ListeDate} = await RecupValueNiveauCourse()
 
     // Recup du tableau
     let TableauHistorique = document.getElementById("tableau-historique")
@@ -39,7 +57,7 @@ async function RemplirTableau() {
     }
 
     let compteur = 0
-    DateDatas.forEach(Date => {
+    ListeDate.forEach(Date => {
         // Créer nouvelle ligne
         let NouvelleLigne = TableauHistorique.insertRow()
 

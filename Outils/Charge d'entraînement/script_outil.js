@@ -1,3 +1,12 @@
+function ReturnDate(DateWorkout) {
+    let DateEuropeen = ""
+
+    DateWorkout = DateWorkout.split("-")
+    // Inversion de la date de "2026-01-12" à "12-01-2026"
+    DateEuropeen = DateWorkout[2] + "-" + DateWorkout[1] + "-" + DateWorkout[0]
+    return DateEuropeen
+}
+
 async function RecupValueGraphique() {
     // Initialisation 
     let TailleHardware = window.innerWidth
@@ -29,8 +38,18 @@ async function RecupValueGraphique() {
     // slice permet de découper un tableau pour en garder qu'une partie grace aux indices
     const ChargeDatas = ValeurDB.slice(NbValeurRecup).map(dataBDD => dataBDD.charge_entrainement) // -10 pr prendre les 10 dernieres valeur
     const DateDatas = ValeurDB.slice(NbValeurRecup).map(dataBDD => dataBDD.date)
+
+    // initialisation d'une liste qui contiendra les dates pour le graphique
+    let ListeDate = []
+    let DateEuropeen = ""
+
+    // remise des dates au format français
+    DateDatas.forEach(element => {
+        DateEuropeen = ReturnDate(element)
+        ListeDate.push(DateEuropeen)
+    });
     
-    return {ChargeDatas, DateDatas}
+    return {ChargeDatas, ListeDate}
 }
 
 function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) {
@@ -143,7 +162,7 @@ async function Initialisation() {
     let HTMLInterpretationJRM  = document.getElementById("reponse-coach-indulgence")
 
     // recup des charges plus interpretation et affichage
-    let {ChargeDatas, DateDatas} = await RecupValueGraphique()
+    let {ChargeDatas, ListeDate} = await RecupValueGraphique()
     
     let {ChargeAigue, ChargeChronique, AnalysePossible} = await CalculCharge()
 
@@ -177,7 +196,7 @@ async function Initialisation() {
         const barChart = new Chart(barCanvas, {
                 type:"line",
                 data:{
-                    labels: DateDatas,
+                    labels: ListeDate,
                     datasets: [{
                         data: ChargeDatas,
                         borderColor : CouleurAccentContrastee, // Ligne des niveau couleur

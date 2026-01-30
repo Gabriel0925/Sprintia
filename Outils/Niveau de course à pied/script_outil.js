@@ -106,6 +106,15 @@ async function SauvegardeNiveauCourse() {
     location.reload()
 }
 
+function ReturnDate(DateNiveauCourse) {
+    let DateEuropeen = ""
+
+    DateNiveauCourse = DateNiveauCourse.split("-")
+    // Inversion de la date de "2026-01-12" à "12-01-2026"
+    DateEuropeen = DateNiveauCourse[2] + "-" + DateNiveauCourse[1] + "-" + DateNiveauCourse[0]
+    return DateEuropeen
+}
+
 async function RecupValueNiveauCourseGraphique() {
     // Initialisation 
     let TailleHardware = window.innerWidth
@@ -137,8 +146,17 @@ async function RecupValueNiveauCourseGraphique() {
     // slice permet de découper un tableau pour en garder qu'une partie grace aux indices
     const NiveauDatas = ValeurDB.slice(NbValeurRecup).map(dataBDD => dataBDD.niveau_course_user) // -10 pr prendre les 1à dernieres valeur
     const DateDatas = ValeurDB.slice(NbValeurRecup).map(dataBDD => dataBDD.date)
+
+    // Initialisation d'une liste de date avec le format européen
+    let ListeDate = []
+    let DateEuropeen = ""
+
+    DateDatas.forEach(element => { // Parcours des dates
+        DateEuropeen = ReturnDate(element)
+        ListeDate.push(DateEuropeen) // Ajout à la liste des dates format européen
+    });
     
-    return {NiveauDatas, DateDatas}
+    return {NiveauDatas, ListeDate}
 }
 
 // Récup les variables css
@@ -152,7 +170,7 @@ let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 // Pour le Graphique
 async function GenererGraphique() {
     // attendre la recup des datas
-    let {NiveauDatas, DateDatas} = await RecupValueNiveauCourseGraphique()
+    let {NiveauDatas, ListeDate} = await RecupValueNiveauCourseGraphique()
     
     if (NiveauDatas.length > 0) { // Si il y a niveau data il y a forcement date data
         // Ajout de la class pr le faire apparaitre
@@ -162,7 +180,7 @@ async function GenererGraphique() {
         const barChart = new Chart(barCanvas, {
             type:"line",
             data:{
-                labels: DateDatas,
+                labels: ListeDate,
                 datasets: [{
                     data: NiveauDatas,
                     borderColor : CouleurAccentContrastee, // Ligne des niveau couleur

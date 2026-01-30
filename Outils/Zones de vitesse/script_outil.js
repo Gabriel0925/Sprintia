@@ -70,6 +70,13 @@ function ZoneVitesse() {
     UnitTranche[2].textContent = "km/h";
     UnitTranche[3].textContent = "km/h";
     UnitTranche[4].textContent = "km/h";
+
+    // Changement bouton 
+    let ButtonConversion = document.getElementById("conversion")
+    ButtonConversion.textContent = "Convertir en allure"
+
+    ButtonConversion.onclick = ZoneAllure
+
     return
 }
 
@@ -190,5 +197,12 @@ function ZoneAllure() {
     UnitTranche[2].textContent = "/km";
     UnitTranche[3].textContent = "/km";
     UnitTranche[4].textContent = "/km";
+
+    // Changement bouton 
+    let ButtonConversion = document.getElementById("conversion")
+    ButtonConversion.textContent = "Convertir en vitesse"
+
+    ButtonConversion.onclick = ZoneVitesse
+
     return
 }

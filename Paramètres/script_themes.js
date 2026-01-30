@@ -369,13 +369,50 @@ function theme_defaut(id_li) {
     location.reload()
 }
 
+function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shorcut quand le navigateur le stocke dans le BFCache
+    let PreferenceUser = localStorage.getItem("ToggleThemeComplet") // recup valeur dans le local storage
+
+    if (PreferenceUser == "True") {
+        // Recup des champs 
+        let ShortcutAdd = document.getElementById("icone-add")
+        let ShortcutHistorique = document.getElementById("icone-historique")
+        let ShortcutPause = document.getElementById("icone-pause")
+
+        // Recup des icones
+        let IconeShortcutAdd = document.querySelector(".fs-icon_add")
+        let IconeShortcutHistorique = document.querySelector(".fs-icon_historique")
+        let IconeShortcutPause = document.querySelector(".fs-icon_pause")
+
+        // Recup variable css
+        const Style = getComputedStyle(document.documentElement)
+
+        const CouleurAccent = Style.getPropertyValue("--COULEUR_ACCENT")
+        const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
+
+        if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
+            // Mise des couleurs si l'élément est existant
+            ShortcutAdd.style.background = CouleurAccent
+            IconeShortcutAdd.style.color = CouleurBackground
+                    
+            ShortcutHistorique.style.background = CouleurAccent
+            IconeShortcutHistorique.style.color = CouleurBackground
+
+            ShortcutPause.style.background = CouleurAccent
+            IconeShortcutPause.style.color = CouleurBackground
+
+            }
+        }
+
+    return
+}
+
 function user_preference() {
     // Chercher les valeur dans la bdd
     const ThemeUser = localStorage.getItem("ThemeActuel")
     const ColorUser = localStorage.getItem("ColorActuelleUse")
 
     if (ThemeUser === "Clair") {
-        light_mode()
+        light_mode() 
     } else {
         // Si rien n'est sauvegardé ou si c le mode sombre
         dark_mode()
@@ -384,6 +421,9 @@ function user_preference() {
     if (ColorUser) {
         color_theme(ColorUser)
     }
+
+    // Appelle à la fonction pour restaurer le thème des shorcuts quand la page est stokée dans le BFCache
+    ReappliquerThemesForShortcut()
 }
 
 // ça permet de lancer la fonction une fois que la page est chargée

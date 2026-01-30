@@ -1434,7 +1434,7 @@ div.conteneur-ensemble div.box-result-deux#coach-ajoute-entrainement {
     width: 100%;
     min-height: auto;
     margin: var(--ESPACE_S) 0;
-    margin-bottom: var(--ESPACE_L);
+    margin-bottom: var(--ESPACE_M);
 }
 /* Pour la charge d'entraînement */
 div.conteneur-ensemble div.box-result-deux-small {
