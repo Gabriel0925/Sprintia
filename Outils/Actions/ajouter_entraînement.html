@@ -212,6 +212,38 @@
 
         ChampDate.max = DateActuelle // bloque la saisi de date dans le futur
         ChampDate.value = DateActuelle
+
+        async function MessagePrevention() {
+            // Check du statut du user
+            let HistoriqueDB = await db.statut_analyse.toArray()
+
+            let StatutData = HistoriqueDB.map(statutBDD => statutBDD.statut).reverse() // reverse pour inverser la liste pour l'ordre
+
+            // Unit 
+            let LastStatutUser = ""
+            if (StatutData.length > 0) {
+                // on prend l'index 0 pour avoir son dernier statut
+                LastStatutUser = StatutData[0]
+            } else {
+                // si il n'y a pas de statut on le met sur actif
+                LastStatutUser = "Actif·ve"
+            }
+
+            // Vérif + message de prévention
+            if (LastStatutUser == "Vacances") {
+                alert("Vous êtes en vacances et vous vous entraînez quand même ! Vous êtes très discipliné·e mais allez-y tranquille les vacances c'est fait pour ça aussi.")
+            } else if (LastStatutUser == "Blessure") {
+                alert("Attention ! Vous avez signalé une blessure. Faire un entraînement va aggraver votre blessure, privilégiez la récupuration pour pouvoir revenir plus fort·e.")
+            } else if (LastStatutUser == "Malade") {
+                alert("Vous êtes malade, ce n'est pas très mature de faire un entraînement, votre organisme a besoin de repos pour guérir. Si vous tenez à votre entraînement, essayer de faire un entraînement léger en intensité.")
+            }
+            
+            return
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            MessagePrevention()
+        })
     </script>
 
     

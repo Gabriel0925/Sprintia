@@ -52,7 +52,7 @@ async function RecupValueGraphique() {
     return {ChargeDatas, ListeDate}
 }
 
-function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) {
+async function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) {
     // Initialisation 
     let Interpretation = "Sprintia n'a pas assez de données pour analyser votre charge d'entraînement. Vous avez juste besoin d'ajouter au moins 3 entraînements sur les 28 derniers jours pour que Sprintia analyse vos charge d'entraînement."
     let Ratio = 0
@@ -69,17 +69,54 @@ function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) {
         "Statut : <strong>Surentraînement</strong><br>Votre charge d'entraînement est significativement plus élevée que d'habitude, votre corps a du mal à suivre. Votre corps a besoin de quelques jours de repos pour récupérer."
     ]
 
-    // Calcul du ratio
-    ChargeChronique = ChargeChronique/4 // on met charge chronique par semaine pr le ratio
-    Ratio = ChargeAigue/ChargeChronique
+    const PhraseJRMStatut = [
+        "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, apprécier en famille, de repos, et revenez encore plus motivé·e pour battre tous vos records !",
+        "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.",
+        "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.",
+        "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e·s !"
+    ]
 
-    if (Ratio <= 0.8) {
-        Interpretation = PhraseJRM[0]
-    } else if (Ratio <= 1.35) {
-        Interpretation = PhraseJRM[1]
-    } else if (Ratio >= 1.35) {
-        Interpretation = PhraseJRM[2]
+    // Check du statut du user
+    let HistoriqueDB = await db.statut_analyse.toArray()
+
+    let StatutData = HistoriqueDB.map(statutBDD => statutBDD.statut).reverse() // reverse pour inverser la liste pour l'ordre
+
+    // Unit 
+    let LastStatutUser = ""
+    if (StatutData.length > 0) {
+        // on prend l'index 0 pour avoir son dernier statut
+        LastStatutUser = StatutData[0]
+    } else {
+        // si il n'y a pas de statut on le met sur actif
+        LastStatutUser = "Actif·ve"
     }
+
+    if (LastStatutUser == "Vacances") {
+        Interpretation = PhraseJRMStatut[0]
+
+    } else if (LastStatutUser == "Blessure") {
+        Interpretation = PhraseJRMStatut[1]
+        
+    } else if (LastStatutUser == "Malade") {
+        Interpretation = PhraseJRMStatut[2]
+        
+    } else if (LastStatutUser == "Suspendre") {
+        Interpretation = PhraseJRMStatut[3]
+        
+    } else if (LastStatutUser == "Actif·ve") {
+        // Calcul du ratio
+        ChargeChronique = ChargeChronique/4 // on met charge chronique par semaine pr le ratio
+        Ratio = ChargeAigue/ChargeChronique
+
+        if (Ratio <= 0.8) {
+            Interpretation = PhraseJRM[0]
+        } else if (Ratio <= 1.35) {
+            Interpretation = PhraseJRM[1]
+        } else if (Ratio >= 1.35) {
+            Interpretation = PhraseJRM[2]
+        }
+    }
+
 
     return Interpretation
 }
@@ -173,7 +210,7 @@ async function Initialisation() {
 
     // Recup + affichage de l'interpretation
     // reconversion en int car c'est devenu un str quand j'ai fais toFixed(1)
-    let Interpretation = InterpretationJRM(parseInt(ChargeAigue), parseInt(ChargeChronique), AnalysePossible)
+    let Interpretation = await InterpretationJRM(parseInt(ChargeAigue), parseInt(ChargeChronique), AnalysePossible)
 
     if (Interpretation && HTMLInterpretationJRM) {
         HTMLInterpretationJRM.innerHTML = Interpretation

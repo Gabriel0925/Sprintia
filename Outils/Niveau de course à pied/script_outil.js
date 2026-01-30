@@ -204,6 +204,9 @@ async function GenererGraphique() {
                 
                 scales: {
                     y: { // COuleur + taille des txt sur axe des ordonnées
+                        grid: {
+                            display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
+                       },
                         ticks: {
                             color: CouleurTextPrincipal, 
                             font: {size: 13}
@@ -211,6 +214,9 @@ async function GenererGraphique() {
                         beginAtZero: true, // Pr commencer à 0
                     },
                     x: { // idem pour abscisse
+                        grid: {
+                            display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
+                       },
                         ticks: {
                             color: CouleurTextPrincipal,
                             font: {size: 13}

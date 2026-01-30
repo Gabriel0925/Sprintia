@@ -77,7 +77,36 @@
     </header>
 
     <div class="conteneur-de-outil">
-        <h1>Statut analyse</h1>
+        <div class="conteneur-option">
+            <h1>Statut analyse</h1>
+            <a href="historique_statut_analyses.html"><i class="fs-icon_historique"></i></a>
+        </div>
+        <p class="text">
+            Si vous avez besoin de souffler, ou que vous vous êtes blessé·e, définissez votre statut d'analyse sur Actif·ve, Vacances,
+            Blessure, Malade ou Suspendre.
+        </p>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">         
+                <p class="text-info visible" id="ancien-statut">
+                    Statut en cours : Actif·ve
+                </p>
+                <select id="statut-user" autocomplete="off">
+                        <option value="Actif·ve">Statut : Actif·ve</option>
+                        <option value="Vacances">Statut : Vacances</option>
+                        <option value="Blessure">Statut : Blessure</option>
+                        <option value="Malade">Statut : Malade</option>
+                        <option value="Suspendre">Statut : Suspendre</option>
+                </select>
+
+                <div class="conteneur-input">
+                    <input type="text" id="raison-user" placeholder="Raison (optionnelle)" autocomplete="off">
+                    <div class="label-input">Raison (optionnelle)</div>
+                </div>
+
+                <button onclick="Sauvegarde()" id="button-sauvegarde">Sauvegarder</button>
+            </div>
+        </div>
+
     </div>
     
     <footer>
@@ -106,6 +135,11 @@
 
     <!-- Pour le burger menu -->
     <script src="../../Assets/base-js/base.js"></script>
+    
+    <!-- Import bibliothèque pour simplifier le code de indexed db -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+    <script src="script_statut.js"></script>
 
     
     <!-- Pour avoir les statistiques de visite du site -->

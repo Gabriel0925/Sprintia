@@ -88,6 +88,14 @@
             <p class="mode-choisis" id="sans-icone">Bannière</p>
             <input class="toggle" type="checkbox" onclick="DesactiverBanniere(event)" id="toggle-banniere"/>
         </div> 
+        
+        <p class="text">
+            La fonctionnalité ci-dessous permet d'ajouter des petits tips sur Sprintia pour mieux l'utiliser (affichage sur l'écran d'accueil).
+        </p>
+        <div class="conteneur-mode">
+            <p class="mode-choisis" id="sans-icone">Astuce dans l'accueil</p>
+            <input class="toggle" type="checkbox" onclick="ActiverTips(event)" id="toggle-astuce"/>
+        </div> 
     </div>
     
     <footer>
@@ -128,6 +136,16 @@
             }
             return
         }
+        function ActiverTips(event) {
+            const ToggleConseil= event.target
+
+            if (ToggleConseil.checked) { // quand la banniere est desactiver (donc masquée)
+                localStorage.setItem("DisplayConseil", "False")
+            } else { // Quand la baniere est activé
+                localStorage.setItem("DisplayConseil", "True")
+            }
+            return
+        }
 
         function Initialisation() {
             let ToggleBanniere = document.getElementById("toggle-banniere")
@@ -135,6 +153,14 @@
 
             if (ValueBanniere == "False") {
                 ToggleBanniere.checked = true
+            }
+
+            let ToggleAstuce = document.getElementById("toggle-astuce")
+            let ValueAstuce = localStorage.getItem("DisplayConseil")
+
+            ToggleAstuce.checked = true // pr le désactiver au préalable
+            if (ValueAstuce == "True") {
+                ToggleAstuce.checked = false 
             }
 
             return

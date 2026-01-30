@@ -700,6 +700,14 @@ div.conteneur-mise-avant p{
     color: var(--COULEUR_BACKGROUND);
     font-weight: 1000;
 }
+div.conteneur-mise-avant p#tips{
+    font-size: var(--P);
+    line-height: 1.4;
+    text-align: left;
+    margin: var(--ESPACE_XS);
+    color: var(--COULEUR_BACKGROUND);
+    font-weight: normal;
+}
 
 /* Bouton voir plus */
 div.conteneur-centrage {

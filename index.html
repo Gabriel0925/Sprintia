@@ -83,9 +83,24 @@
             La page d'accueil est en cours de refonte pour qu'elle devienne plus utile.
         </p>
 
-        <div class="conteneur-mise-avant">
+        <div class="conteneur-mise-avant" id="banniere-accueil">
             <p>
                 Sprintia est conçu pour vous aider avant et après un entraînement grâce à des algorithmes 100% gratuits.
+            </p>
+        </div>
+
+        <h2>Activité récente (3 sem.)</h2>
+        <p class="text">
+            Ce graphique permet de suivre votre régularité : voici votre temps total d'activité par semaine.
+        </p>
+        <div class="chart-container" id="conteneur-graphique">
+            <!--"aria-label" pr l'accesssibilité pr decrire a ceux qui ne voit pas-->
+            <canvas id="barCanvas" aria-label="chart" role="img"></canvas>
+        </div>
+
+        <div class="conteneur-mise-avant" id="banniere-tips">
+            <p id="tips">
+                Petit tips pour tester
             </p>
         </div>
 
@@ -117,13 +132,216 @@
     
     <!-- Pour le burger menu -->
     <script src="Assets/base-js/base.js"></script>
+
+    <!-- Import de la bibliothèque pr le graphique -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>   
+    <!-- Import bibliothèque pour simplifier le code de indexed db -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+
     <script>
+        function GenererNbAleatoire() {
+            // Nb aléatoire (formule * 17 fais avec gemini car en js clc les nb aléatoire)
+            let NombreAleatoire = Math.random()*16 // renvoie aléatoirement entre 0 et 1 (ex : 0.5890953759539541) puis multiplication par 17
+            NombreAleatoire = Math.floor(NombreAleatoire) //nb arrondi pour avoir par exemple 5.8 puis 5 grace a l'arrondi
+
+            return NombreAleatoire
+        }
+
+        function TipsRandom() {
+            let ParaTips = document.getElementById("tips")
+            let NombreAleatoire = GenererNbAleatoire()
+
+            // liste des tips
+            const LiTips = [ // 16 Tips
+                "Faites un test VMA puis découvrez vos zones de vitesse pour optimiser vos entraînements d'endurance et de fractionné,... Et donc progresser en course à pied.",
+                "Saviez-vous que vous pouviez estimer votre VO2max sans avoir de montre connectée grâce à Sprintia.",
+                "L'indulgence de course est la fonction parfaite pour s'améliorer en course à pied !",
+                "Saviez-vous qu'il existe dans Sprintia un 'Prédicteur de performance' pour prédire vos performances sur votre prochaine course.",
+                "Si vous êtes fatigué·e vous pouvez mettre en pause les analyses de charge d'entraînement,... Sprintia s'adapte à votre état de forme.",
+                "Pour optimiser vos entraînements, vous pouvez calculer vos zones de fréquence cardiaque depuis Sprintia avec une eexcllente précision grâce à différentes méthodes de calcul.",
+                "Saviez-vous que vous pouviez renommer le coach de l'application, tu peux même choisir son style (Inshape, Copain, Strict & Motivant ou Bienveillant qui est le coach par défaut).",
+                "Calculez les protéines que vous devez manger par jour, c'est super pratique pour prendre en muscle et c'est disponible dans les outils de Sprintia.",
+                "Dans l'historique des versions de Sprintia, vous pouvez découvrir tous les moindres détails de la dernière mise à jour.",
+                "Vous pouvez personnaliser Sprintia à votre guise, par exemple vous pouvez choisir le thème 'feu' pour des couleurs éclatantes ou le thème 'lune' pour avoir quelque chose de très sobre.",
+                
+                "Après un gros entraînement, estimez votre temps de récupération grâce à Sprintia. Le tout sans avoir besoin de montre connectée.",
+                "Pour avoir un maximum de précision dans les outils, choisissez bien le RPE quand il est demandé ne mettez pas au pif !",
+                "Découvrez votre niveau de course en faisant un test Cooper. Après avoir fait ce test vous pourrez savoir si vous faites partie de l'élite !",
+                "Après une séance de sport, buvez, c'est important ! Pour savoir la quantité à boire après votre entraînement, je vous conseille de d'utiliser l'outil nommé : 'Estimation de la transpiration'.",
+                "Vous ne savez toujours pas la charge maximale que vous pouvez soulever pour une unique répétition ? Parfait, Sprintia le propose dans l'outil : 'Estimation 1RM'.",
+                "Vous avez peur de perdre vos données en supprimant le cache de votre navigateur ? Pas de problème, Sprintia vous propose de sauvegarder vos données dans les paramètres."
+            ]
+
+            let TipsAleatoire = LiTips[NombreAleatoire]
+            ParaTips.innerHTML = TipsAleatoire
+            return
+        }
+
         const DisplayBanniere = localStorage.getItem("DisplayBanniere")
-        let MiseAvant = document.querySelector(".conteneur-mise-avant")
+        let MiseAvant = document.getElementById("banniere-accueil")
 
         if (DisplayBanniere == "False") {
             MiseAvant.style.display = "none"
         }
+
+        const DisplayTips = localStorage.getItem("DisplayConseil")
+        let ZoneTips = document.getElementById("banniere-tips")
+
+        if (DisplayTips == "True") {
+            ZoneTips.style.display = "block"
+            TipsRandom()
+        } else {
+            ZoneTips.style.display = "none"
+        }
+    </script>
+
+    <!-- Pour le graphique -->
+    <script>
+        async function RecupData() {
+            // Initialisation
+            let DureeTotalSemaine = 0
+            let DureeTotalSemaine2 = 0
+            let DureeTotalSemaine3 = 0
+    
+            // Date recup
+            const DateActuelle = new Date()
+
+            let DateMoins7J = new Date()
+            DateMoins7J = DateMoins7J.setDate(DateActuelle.getDate() - 7) // pour le calcul des dates il faut les mettre en timestamp enleve le nb de j ici, ça renvoie ex: 1769014250809
+            DateMoins7J = new Date(DateMoins7J).toISOString() // permet de recup "2026-01-21T17:13:53.151Z"
+            // On prend que ce qui nous interesse donc la premiere partie
+            DateMoins7J = DateMoins7J.split("T")[0] // on obtient "2026-01-21"
+
+            let DateMoins14J = new Date() // voir commentaire au dessus pr explication
+            DateMoins14J = DateMoins14J.setDate(DateActuelle.getDate() - 14) 
+            DateMoins14J = new Date(DateMoins14J).toISOString()
+            DateMoins14J = DateMoins14J.split("T")[0] 
+
+            let DateMoins21J = new Date() // voir commentaire au dessus pr explication
+            DateMoins21J = DateMoins21J.setDate(DateActuelle.getDate() - 21) 
+            DateMoins21J = new Date(DateMoins21J).toISOString()
+            DateMoins21J = DateMoins21J.split("T")[0] 
+
+            // Recup data in BDD
+            const HistoriqueDB = await db.entrainement.toArray()
+
+            // Trier par date 
+            HistoriqueDB.sort((element1, element2) => { // En js on peut comparer 2 dates comme des maths
+                if (element1.date < element2.date) return 1
+                if (element1.date > element2.date) return -1
+            })
+
+            // Recup valeur qui nous interesse
+            let DureeDataSemaine = HistoriqueDB.map(data => data.duree)
+            let DateDataSemaine = HistoriqueDB.map(data => data.date)
+
+            // Unit
+            let TableauDureeSemaine = [] 
+            let TableauDureeSemaine2 = [] 
+            let TableauDureeSemaine3 = [] 
+            let compteur = 0
+
+            DateDataSemaine.forEach(element => { // Parcours des dates
+                if (element >= DateMoins7J) {
+                    TableauDureeSemaine.push(DureeDataSemaine[compteur]) // tableau pour la durée des 7 derniers jours
+                } else if (element >= DateMoins14J) {
+                    TableauDureeSemaine2.push(DureeDataSemaine[compteur]) // tableau pour la durée des 14 derniers jours (on ne compte pas les séances des 7 premiers jours) 
+                } else if (element >= DateMoins21J) {
+                    TableauDureeSemaine3.push(DureeDataSemaine[compteur]) // tableau pour la durée des 28 derniers jours (on ne compte pas les séances des 14 premiers jours)
+                }
+                
+                compteur += 1
+            });
+
+            // 3 boucles pour ajouter les durée pr savoir jai fais combien de temps de sport les 7 derniers jours,...
+            TableauDureeSemaine.forEach(element => { 
+                DureeTotalSemaine += element
+            })            
+            TableauDureeSemaine2.forEach(element => {
+                DureeTotalSemaine2 += element
+            })
+            TableauDureeSemaine3.forEach(element => {
+                DureeTotalSemaine3 += element
+            })
+
+            const TableauPourGraphique = [DureeTotalSemaine3, DureeTotalSemaine2, DureeTotalSemaine]
+
+            return TableauPourGraphique
+        }
+
+        async function GenererGraphique() {
+            // recup des datas
+            let TableauPourGraphique = await RecupData()
+
+            // Generation Graphique
+            if (TableauPourGraphique.length > 0) { 
+                // Ajout de la class pr le faire apparaitre
+                document.getElementById("conteneur-graphique").classList.add("visible") // ce graphique en particulier est tout le temps visible meme si pas de données
+
+                // Récup les variables css
+                let RootCSS = document.documentElement
+                let StyleCSS = getComputedStyle(RootCSS)
+                // Recup variable css
+                let CouleurAccentContrastee = StyleCSS.getPropertyValue("--COULEUR_ACCENT_CONTRASTER")
+                let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
+                let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
+
+                const barCanvas = document.getElementById("barCanvas")
+                const barChart = new Chart(barCanvas, {
+                        type:"line",
+                        data:{
+                            labels: ["S-3", "S-2", "S-1"],
+                            datasets: [{
+                                data: TableauPourGraphique,
+                                borderColor : CouleurAccentContrastee, // Ligne des niveau couleur
+                                backgroundColor: CouleurAccent,
+                                fill: true, // Pour remplir le graphique de la couleur background
+                                pointRadius: 7, // Taille du point
+                                pointHoverRadius: 10,
+                                pointBackgroundColor: CouleurAccentContrastee,
+                                pointBorderWidth: 0
+                            }]
+                        },
+                        options: {
+                            responsive: true, // Activation du responsive
+                            maintainAspectRatio: false, // Tres important pour responsive sur mobile
+                            
+                            plugins: {
+                                legend: {
+                                    display: false // Masque la legende qui sert a rien dans mon cas
+                                }
+                            },
+                            
+                            scales: {
+                                y: { // COuleur + taille des txt sur axe des ordonnées
+                                    grid: {
+                                        display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
+                                    },
+                                    ticks: {
+                                        color: CouleurTextPrincipal, 
+                                        font: {size: 13}
+                                    },
+                                    beginAtZero: true, // Pr commencer à 0
+                                },
+                                x: { // idem pour abscisse
+                                    grid: {
+                                        display: false
+                                    },
+                                    ticks: {
+                                        color: CouleurTextPrincipal,
+                                        font: {size: 13}
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            GenererGraphique()
+        })
     </script>
 
     

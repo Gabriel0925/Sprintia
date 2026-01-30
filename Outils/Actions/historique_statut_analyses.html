@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Sprintia - Indulgence de course</title>
+    <title>Sprintia - Historique Statut</title>
     <meta charset="utf-8">
     <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" href="../../Assets/icons-sprintia/icon-ios.png">
     
     <script src="../../Paramètres/script_themes.js"></script>
-</head>
+</head>  
 
 <body>
     <header>
@@ -77,63 +77,13 @@
     </header>
 
     <div class="conteneur-de-outil">
-        <div class="conteneur-option">
-            <h1>Indulgence de course</h1>
-            <a href="parametre_indulgence_course.html"><i class="fs-icon_parametres"></i></a>
-        </div>
-        <p class="text" id="text-info-sauvegarde">
-            Par défaut cet outil sauvegarde automatiquement les données saisies dans les champs (sur votre appareil) pour vous faciliter 
-            la vie. Mais, vous pouvez désactiver cette fonctionnalité dans les paramètres de l'outil.
-        </p>
-        <div class="conteneur-ensemble">
-            <div class="conteneur-champs-outil">                
-                <p class="text-info">
-                    Aucune sauvegarde
-                </p>
-                <div class="conteneur-input">
-                    <input autocomplete="off" type="number" id="distance28j-user" placeholder="Distance 28j (km)">
-                    <div class="label-input">Distance 28j (km)</div>
-                </div>
-                    
-                <div class="conteneur-input">
-                    <input autocomplete="off" type="number" id="distance7j-user" placeholder="Distance 7j (km)">
-                    <div class="label-input">Distance 7j (km)</div>
-                </div>
-
-                <button onclick="CalculIndulgence()">Valider</button>
-            </div>
-        </div>
-
-        <div class="conteneur-ensemble">
-            <div class="conteneur-box-deux">
-                <div class="box-result-deux">
-                    <p class="score-imc">JRM Coach :</p>
-                    <p class="zone-imc" id="reponse-coach-indulgence">
-                        Chargement...
-                    </p> 
-                </div>
-                <div class="box-result-deux">
-                    <p class="score-imc">Distance hebdo. conseillée</p>
-                    <p class="temps-recup" id="reponse-algo-indulgence">
-                        0 - 0 km
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <h2>C'est quoi l'Indulgence de course ?</h2>
-        <p class="text">
-            L’indulgence de course vous aide à ajuster votre kilométrage des 7 derniers jours pour rester dans une progression 
-            optimale, sans dépasser votre limite et ainsi éviter de vous blesser. <strong>Cet outil est conçu pour les débutants ou les 
-            personnes qui commencent la course à pied. Néanmoins, même un expert en course à pied peut utiliser cet algorithme pour optimiser 
-            son volume d'entraînement.</strong> N'oubliez jamais d'écouter les signaux de votre corps.
+        <h1>Historique Statut</h1>
+        <p class="text" id="text-informatif">
+            Sprintia n'a pas encore assez de données pour afficher votre historique de statut. Veuillez 
+            <a href="statut_analyses.html" class="lien">ajouter un statut</a>.
         </p>
 
-        <h2>Petit conseil</h2>
-        <p class="text">
-            Je vous recommande tous les dimanches de faire le calcul des kilomètres parcourus lors des 28 et 7 derniers jours et ensuite
-            de programmer votre semaine d'entraînement en fonction de la distance hebdomadaire conseillée.
-        </p>
+        <div class="conteneur-cards-workout" id="liste-statut"></div>
     </div>
     
     <footer>
@@ -162,13 +112,111 @@
 
     <!-- Pour le burger menu -->
     <script src="../../Assets/base-js/base.js"></script>
-
-    <!-- Import de la bibliothèque pr le graphique -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>    
+    
     <!-- Import bibliothèque pour simplifier le code de indexed db -->
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
-    <script src="script_outil.js"></script> 
+    <script>
+        function ReturnDate(DateStatut) {
+            let DateEuropeen = ""
+
+            DateStatut = DateStatut.split("-")
+            // Inversion de la date de "2026-01-12" à "12-01-2026"
+            DateEuropeen = DateStatut[2] + "-" + DateStatut[1] + "-" + DateStatut[0]
+            return DateEuropeen
+        }
+
+        async function Historique() {
+            // Recup de l'historique
+            let HistoriqueDB = await db.statut_analyse.toArray() // recup de toutes les datas
+
+            // Trier par date 
+            HistoriqueDB.sort((element1, element2) => { // En js on peut comparer 2 dates comme des maths
+                if (element1.date < element2.date) return 1
+                if (element1.date > element2.date) return -1
+            })
+
+            // Cacher le text comme quoi il n'y a pas de statut enregistrer
+            if (HistoriqueDB.length > 0) {
+                document.getElementById("text-informatif").style.display = "none"
+            }
+
+            const ConteneurCardsStatut = document.getElementById("liste-statut")
+            
+            // Remise à 0 du conteneur
+            ConteneurCardsStatut.innerHTML = ""
+
+            // Creation structure HTML
+            HistoriqueDB.forEach(elementBDD => {
+                const CardStatut = document.createElement("div")
+
+                CardStatut.classList.add("cards-history-workout")
+
+                // Inversion de la date de "2026-01-12" à "12-01-2026"
+                let DateEuropeen = ReturnDate(elementBDD.date)
+
+                let StructureHTML = `          
+                    <div class="data-workout-column">
+                        <p class="name-workout">
+                            Statut : ${elementBDD.statut}
+                        </p>
+                        <p class="sport-date-workout">
+                            ${DateEuropeen}
+                        </p>
+                    </div>
+                    `
+                
+                if (elementBDD.raison == null) {
+                    StructureHTML += `
+                    <div class="data-workout-paire">
+                        <p class="muscles-workout">
+                            Vous n'avez pas enregistré de raison.
+                        </p>
+                    </div>
+                    `
+                } else {
+                    StructureHTML += `
+                    <div class="data-workout-paire">
+                        <p class="muscles-workout">
+                            ${elementBDD.raison}
+                        </p>
+                    </div>
+                    `
+                }
+
+                StructureHTML += `
+                    <div class="action-button-card-workout">
+                        <button>
+                            <i class="fs-icon_supprimer"></i>
+                            Supprimer
+                        </button>
+                    </div>
+                    `
+
+                CardStatut.innerHTML = StructureHTML
+
+                let BoutonSupprimer = CardStatut.querySelector(".fs-icon_supprimer").parentElement // parent element pour ne pas prendre que l'icone
+                        
+                // Ajout de la logique pour la suppresion
+                BoutonSupprimer.addEventListener("click", async () => { // Ajout d'une "action" au bouton
+                    // Demande de confirmation avant
+                    if (confirm(`Supprimer ce statut "${elementBDD.statut}" ?`)) {
+                        await db.statut_analyse.delete(elementBDD.id) // supprimer la data de la bdd
+                        CardStatut.remove() // supprimer la ligne
+                    }
+                    location.reload()
+                })
+
+                ConteneurCardsStatut.appendChild(CardStatut)
+
+            });
+            return
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            Historique()
+        })
+    </script>
 
     
     <!-- Pour avoir les statistiques de visite du site -->

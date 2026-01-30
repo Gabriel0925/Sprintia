@@ -1,4 +1,4 @@
-function CalculIndulgence() {
+async function CalculIndulgence() {
     // Recup valeur des champs
     let Distance28JUser = parseFloat(document.getElementById("distance28j-user").value.trim().replace(",", "."))
     let Distance7JUser = parseFloat(document.getElementById("distance7j-user").value.trim().replace(",", "."))
@@ -50,13 +50,13 @@ function CalculIndulgence() {
 
     let ResultIndulgenceCourse = IndulgenceDeCourseDebut.toFixed(1).replace(".", ",") + " - " + IndulgenceDeCourseFin.toFixed(1).replace(".", ",") + " km"
 
-    document.getElementById("reponse-algo-indulgence").textContent = ResultIndulgenceCourse
+    document.getElementById("reponse-algo-indulgence").innerHTML = ResultIndulgenceCourse
 
     // direction sauvegarde
     SauvegardeRestauration("Sauvegarde", Distance7JUser, Distance28JUser, ResultIndulgenceCourse, "", "")
 
     // Go interpretation
-    InterpretationIDC(Distance7JUser, Distance28J, IndulgenceDeCourseFin, "Fonction")
+    await InterpretationIDC(Distance7JUser, Distance28J, IndulgenceDeCourseFin, "Fonction")
     return
 }
 
@@ -90,13 +90,13 @@ function SauvegardeRestauration(ChoseFaire, Distance7JUser, Distance28JUser, Res
         // Remplir la fourchette
         let RecentFourchette = localStorage.getItem("FourchetteDistance")
         if (RecentFourchette) {
-            document.getElementById("reponse-algo-indulgence").textContent = RecentFourchette
+            document.getElementById("reponse-algo-indulgence").innerHTML = RecentFourchette
         }
 
         // Remplir l'analyse du coach 
         let CoachAnalyse = localStorage.getItem("CoachInterpretation")
         if (CoachAnalyse) {
-            InterpretationParagraphe.textContent = Interpretation[CoachAnalyse]
+            InterpretationParagraphe.innerHTML = Interpretation[CoachAnalyse]
         }
 
         // Activation du text info sur sauvegarde
@@ -112,9 +112,9 @@ function SauvegardeRestauration(ChoseFaire, Distance7JUser, Distance28JUser, Res
 
             // Affichage
             if (DateSauvegardee == null) {
-                document.querySelector(".text-info").textContent = "Aucune sauvegarde"
+                document.querySelector(".text-info").innerHTML = "Aucune sauvegarde"
             } else {
-                document.querySelector(".text-info").textContent = "Sauvegardé le : " + DateSauvegardee
+                document.querySelector(".text-info").innerHTML = "Sauvegardé le : " + DateSauvegardee
             }
             
         } else if (SauvegardeDate == "False") {
@@ -146,14 +146,14 @@ function SauvegardeRestauration(ChoseFaire, Distance7JUser, Distance28JUser, Res
             localStorage.setItem("DateValueSauvegardeIDC", DateFormatee)
 
             // Affichage
-            document.querySelector(".text-info").textContent = "Sauvegardé le : " + DateFormatee
+            document.querySelector(".text-info").innerHTML = "Sauvegardé le : " + DateFormatee
         }
     }
 
     return
 }
 
-function InterpretationIDC(Distance7JUser, Distance28J, IndulgenceDeCourseFin, Lieu) {
+async function InterpretationIDC(Distance7JUser, Distance28J, IndulgenceDeCourseFin, Lieu) {
     // Recup du champs JRM
     let InterpretationParagraphe = document.getElementById("reponse-coach-indulgence")
     // si utilisateur a desctiver l'option de sauvegarde alors on ne sauvegarde rien
@@ -166,35 +166,89 @@ function InterpretationIDC(Distance7JUser, Distance28J, IndulgenceDeCourseFin, L
         "2": "Vous courez moins depuis 7 jours, c'est dommage ! Si c'est un choix profitez-en pour vous reposer ou travailler d'autre aspect de la course comme du renforcement ou de la mobilité.", 
         "3": "Parfait ! Vous progressez grâce à votre régularité ainsi qu'à votre discipline, continuez comme ça pour booster vos performances. Pour maximiser votre progression, pensez toujours à varier vos allures.", 
         "4": "Attention vous courez bien plus que d'habitude ! Si vous continuez sur ce rythme vous risquez de vous blesser. P'tit conseil, réduisez votre volume d'entraînement.", 
+        // Pour les statut
+        "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, apprécier en famille, de repos, et revenez encore plus motivé·e pour battre tous vos records !", 
+        "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
+        "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
+        "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e·s !", 
     }
 
     if (Lieu == "Initialisation") {
         // Initialisation du paragraphe
-        InterpretationParagraphe.textContent = Interpretation["1"]
+        InterpretationParagraphe.innerHTML = Interpretation["1"]
 
         // Remplissage des champs
         SauvegardeRestauration("Restauration", 0, 0, 0, Interpretation, InterpretationParagraphe)
     } else {
-        if (Distance28J <= Distance7JUser && Distance7JUser <= IndulgenceDeCourseFin) {
-            InterpretationParagraphe.textContent = Interpretation["3"]
+        // Check du statut du user
+        let HistoriqueDB = await db.statut_analyse.toArray()
 
-            // Regarder si l'utilisateur a autorisé la sauvegarde
-            if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                localStorage.setItem("CoachInterpretation", "3")
-            }
-        } else if (Distance7JUser > IndulgenceDeCourseFin) {
-            InterpretationParagraphe.textContent = Interpretation["4"]
+        let StatutData = HistoriqueDB.map(statutBDD => statutBDD.statut).reverse() // reverse pour inverser la liste pour l'ordre
 
-            // Regarder si l'utilisateur a autorisé la sauvegarde
-            if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                localStorage.setItem("CoachInterpretation", "4")
-            }
+        // Unit 
+        let LastStatutUser = ""
+        if (StatutData.length > 0) {
+            // on prend l'index 0 pour avoir son dernier statut
+            LastStatutUser = StatutData[0]
         } else {
-            InterpretationParagraphe.textContent = Interpretation["2"]
+            // si il n'y a pas de statut on le met sur actif
+            LastStatutUser = "Actif·ve"
+        }
+
+        if (LastStatutUser == "Vacances") {
+            InterpretationParagraphe.innerHTML = Interpretation["5"]
 
             // Regarder si l'utilisateur a autorisé la sauvegarde
             if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                localStorage.setItem("CoachInterpretation", "2")
+                localStorage.setItem("CoachInterpretation", "5")
+            }
+
+        } else if (LastStatutUser == "Blessure") {
+            InterpretationParagraphe.innerHTML = Interpretation["6"]
+
+            // Regarder si l'utilisateur a autorisé la sauvegarde
+            if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
+                localStorage.setItem("CoachInterpretation", "6")
+            }
+            
+        } else if (LastStatutUser == "Malade") {
+            InterpretationParagraphe.innerHTML = Interpretation["7"]
+
+            // Regarder si l'utilisateur a autorisé la sauvegarde
+            if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
+                localStorage.setItem("CoachInterpretation", "7")
+            }
+            
+        } else if (LastStatutUser == "Suspendre") {
+            InterpretationParagraphe.innerHTML = Interpretation["8"]
+
+            // Regarder si l'utilisateur a autorisé la sauvegarde
+            if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
+                localStorage.setItem("CoachInterpretation", "8")
+            }
+            
+        } else if (LastStatutUser == "Actif·ve") {
+            if (Distance28J <= Distance7JUser && Distance7JUser <= IndulgenceDeCourseFin) {
+                InterpretationParagraphe.innerHTML = Interpretation["3"]
+
+                // Regarder si l'utilisateur a autorisé la sauvegarde
+                if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
+                    localStorage.setItem("CoachInterpretation", "3")
+                }
+            } else if (Distance7JUser > IndulgenceDeCourseFin) {
+                InterpretationParagraphe.innerHTML = Interpretation["4"]
+
+                // Regarder si l'utilisateur a autorisé la sauvegarde
+                if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
+                    localStorage.setItem("CoachInterpretation", "4")
+                }
+            } else {
+                InterpretationParagraphe.innerHTML = Interpretation["2"]
+
+                // Regarder si l'utilisateur a autorisé la sauvegarde
+                if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
+                    localStorage.setItem("CoachInterpretation", "2")
+                }
             }
         }
     }
