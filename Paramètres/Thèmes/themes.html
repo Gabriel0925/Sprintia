@@ -184,17 +184,45 @@
         function RestaureToggleThemeComplet() { // pour restaurer la position de "Appliquer thème aux icones"
             let ToggleThemeComplet = document.getElementById("toggle-theme-complet")
             let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
+            let ColorActuelleUser = localStorage.getItem("ColorActuelleUse")
 
             if (PreferenceUser == "True") {
                 ToggleThemeComplet.checked = false
             } else {
                 ToggleThemeComplet.checked = true
             }
+
+            // Pr restaure le selected du li
+            let color_actuelle_id = {
+                "theme_azur": "elem1",
+                "theme_carmin": "elem2",
+                "theme_fuchsia": "elem3",
+                "theme_lavande": "elem4",
+                "theme_vegetation": "elem5",
+                "theme_feu": "elem6",
+                "theme_menthe": "elem7",
+                "theme_pierre_lune": "elem8",
+                "theme_framboise": "elem9",
+                "theme_plage": "elem10",
+                "Hortensia": "elem11",
+                "Aurore": "elem12"
+            }
+                
+            // on cherche ds le dico    
+            let id_li = color_actuelle_id[ColorActuelleUser]
+
+            maj_li_selected(id_li)
+
             return
         }
 
         window.addEventListener("DOMContentLoaded", () => {
             RestaureToggleThemeComplet()
+        })
+        window.addEventListener("pageshow", (event) => {
+            if (event.persisted) {
+                RestaureToggleThemeComplet()
+            }
         })
     </script>
 
