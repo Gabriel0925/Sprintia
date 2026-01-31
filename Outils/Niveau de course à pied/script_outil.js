@@ -163,7 +163,7 @@ async function RecupValueNiveauCourseGraphique() {
 let RootCSS = document.documentElement
 let StyleCSS = getComputedStyle(RootCSS)
 // Recup variable css
-let CouleurAccentContrastee = StyleCSS.getPropertyValue("--COULEUR_ACCENT_CONTRASTER")
+let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT_HOVER")
 let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
 let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
@@ -183,12 +183,12 @@ async function GenererGraphique() {
                 labels: ListeDate,
                 datasets: [{
                     data: NiveauDatas,
-                    borderColor : CouleurAccentContrastee, // Ligne des niveau couleur
+                    borderColor : CouleurAccentHover, // Ligne des niveau couleur
                     backgroundColor: CouleurAccent,
                     fill: true, // Pour remplir le graphique de la couleur background
                     pointRadius: 7, // Taille du point
                     pointHoverRadius: 10,
-                    pointBackgroundColor: CouleurAccentContrastee,
+                    pointBackgroundColor: CouleurAccentHover,
                     pointBorderWidth: 0
                 }]
             },
