@@ -63,15 +63,22 @@ function afficher_plus(lieu) {
     return
 }
 
-function SprintiaBeta() {
+function SprintiaVersion() {
     let Logo = document.querySelector("div.logo a")
 
-    Logo.textContent = "Sprintia Alpha"
+    Logo.textContent = "Sprintia Beta"
+
+    let VersionInSettings = document.querySelector(".version")
+
+    if (VersionInSettings) {
+        VersionInSettings.innerHTML = "Version : <strong>4 Beta 1</strong>"
+    }
+
     return
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    SprintiaBeta()
+    SprintiaVersion()
 })
 
 // Pr gérer le BFCache

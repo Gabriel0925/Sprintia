@@ -181,38 +181,38 @@ function color_theme(ColorActuelle, id_li) {
 
     if (ThemeActuel === "Sombre") {
         if (ColorActuelle === "theme_carmin") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#fe504a");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#ff7b77");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#FF6B66");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#fe3c35");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f9645e");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#fc746f");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FF9591");
             ColorActuelleUse = "theme_carmin"
 
         } else if (ColorActuelle === "theme_fuchsia") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ff6aff");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#ffa6ff");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#fe9afe");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FFC2FF");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#fa5bfa");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f779f7");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#ff95ff");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#ffb6ff");
             ColorActuelleUse = "theme_fuchsia"
 
         } else if (ColorActuelle === "theme_lavande") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ba6fff");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#cd97ff");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#D6A6FF");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#E6C7FF");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ae5ef9");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#bd84f3");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#d29eff");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#e0baff");
             ColorActuelleUse = "theme_lavande"
 
         } else if (ColorActuelle === "theme_vegetation") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#0CBB5BFF");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#60f3a2");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#6ef8ac");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#3DFF94");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#99fdc9");
             ColorActuelleUse = "theme_vegetation"
 
         } else if (ColorActuelle === "theme_feu") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ffb41f");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#e73f01");   
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#ffd170");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FF7547"); 
+            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ffb82b");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#fd4907");   
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#ffce64");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#ff7041"); 
             ColorActuelleUse = "theme_feu"
         
         } else if (ColorActuelle === "theme_menthe") {
@@ -251,16 +251,16 @@ function color_theme(ColorActuelle, id_li) {
             ColorActuelleUse = "theme_azur"
         
         } else if (ColorActuelle === "theme_pierre_lune") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#7bb8de");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#b5dff9");    
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#c4e8ff");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#D6EDFD"); 
+            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#6aabd3");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#91c8ea");    
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#a5d8f8");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#cbe9ff"); 
             ColorActuelleUse = "theme_pierre_lune" 
         
         } else if (ColorActuelle === "theme_framboise") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ea5084");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#f14981");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#ff80aa"); 
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#FF88B0");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#ff8fb4");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FFB3CC");      
             ColorActuelleUse = "theme_framboise" 
       
@@ -298,7 +298,7 @@ function color_theme(ColorActuelle, id_li) {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#f9a81c");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#e73f01");   
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#E07A00");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#C23501"); 
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#da3a00"); 
             ColorActuelleUse = "theme_feu"  
         
         } else if (ColorActuelle === "theme_menthe") {

@@ -354,6 +354,7 @@
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
+            let ModeUse = localStorage.getItem("ThemeActuel")
             
             if (PreferenceUser == "True") {
                 // Recup des champs
@@ -369,19 +370,32 @@
                 // Recup variable css
                 const Style = getComputedStyle(document.documentElement)
 
-                const CouleurAccent = Style.getPropertyValue("--COULEUR_ACCENT")
+                const CouleurAccentHover = Style.getPropertyValue("--COULEUR_ACCENT_HOVER")
+                const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
                 const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
 
                 if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
-                    // Mise des couleurs si l'élément est existant
-                    ShortcutAdd.style.background = CouleurAccent
-                    IconeShortcutAdd.style.color = CouleurBackground
-                    
-                    ShortcutHistorique.style.background = CouleurAccent
-                    IconeShortcutHistorique.style.color = CouleurBackground
+                        if (ModeUse == "Clair") {
+                            // Mise des couleurs si l'élément est existant
+                            ShortcutAdd.style.background = CouleurAccentContrasterHover
+                            IconeShortcutAdd.style.color = CouleurBackground
+                            
+                            ShortcutHistorique.style.background = CouleurAccentContrasterHover
+                            IconeShortcutHistorique.style.color = CouleurBackground
 
-                    ShortcutPause.style.background = CouleurAccent
-                    IconeShortcutPause.style.color = CouleurBackground
+                            ShortcutPause.style.background = CouleurAccentContrasterHover
+                            IconeShortcutPause.style.color = CouleurBackground
+                        } else {
+                            // Mise des couleurs si l'élément est existant
+                            ShortcutAdd.style.background = CouleurAccentHover
+                            IconeShortcutAdd.style.color = CouleurBackground
+                            
+                            ShortcutHistorique.style.background = CouleurAccentHover
+                            IconeShortcutHistorique.style.color = CouleurBackground
+
+                            ShortcutPause.style.background = CouleurAccentHover
+                            IconeShortcutPause.style.color = CouleurBackground
+                        }
 
                 }
             }

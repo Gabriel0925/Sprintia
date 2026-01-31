@@ -2,7 +2,7 @@
 :root {
     /* Couleurs */
     --COULEUR_ACCENT: #0D9BD3; 
-    --COULEUR_ACCENT_HOVER: #7ad6fa;
+    --COULEUR_ACCENT_HOVER: #77cced;
     --COULEUR_ACCENT_CONTRASTER: #51C4F0;
     --COULEUR_ACCENT_CONTRASTER_HOVER: #9CE1FD;
     
@@ -51,13 +51,13 @@
 
     /* Couleur pour le hover des pastilles */
     --COULEUR_PASTILLES_0: #0D9BD3; 
-    --COULEUR_PASTILLES_1: #fe504a; 
-    --COULEUR_PASTILLES_2: #ff6aff; 
-    --COULEUR_PASTILLES_3: #ba6fff; 
+    --COULEUR_PASTILLES_1: #fe3c35; 
+    --COULEUR_PASTILLES_2: #fa5bfa; 
+    --COULEUR_PASTILLES_3: #ae5ef9; 
     --COULEUR_PASTILLES_4: #0CBB5BFF; 
     --COULEUR_PASTILLES_5: #0ac3a7; 
-    --COULEUR_PASTILLES_6: #7bb8de;  
-    --COULEUR_PASTILLES_7: #ea5084; 
+    --COULEUR_PASTILLES_6: #6aabd3;  
+    --COULEUR_PASTILLES_7: #f14981; 
     
     --COULEUR_PASTILLES_D1: #3a91ff;  
     --COULEUR_PASTILLES_D2: #f782f0;  
@@ -68,7 +68,7 @@
     --COULEUR_PASTILLES_D5: #a477fe;  
     --COULEUR_PASTILLES_D6: #4ce58c; 
  
-    --COULEUR_PASTILLES_D7: #ffb423;  
+    --COULEUR_PASTILLES_D7: #ffb82b;  
     --COULEUR_PASTILLES_D8: #e73f01;  
 }
 /* Pour les icônes */
