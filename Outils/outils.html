@@ -77,47 +77,6 @@
     </header>
 
     <div class="conteneur-about-marge">
-        <h1>Actions rapides</h1>
-
-        <div class="conteneur-content-scrolling">
-            <div class="conteneur-scrolling">
-
-                <a href="Actions/ajouter_entraînement.html">
-                    <div class="shorcut first">
-                        <div class="img" id="icone-add">
-                            <i class="fs-icon_add"></i>
-                        </div>
-                        <p class="text-shorcut">
-                            Ajouter un entraînement
-                        </p>
-                    </div>
-                </a>
-
-                <a href="Actions/historique_entrainement.html">
-                    <div class="shorcut">
-                        <div class="img" id="icone-historique">
-                            <i class="fs-icon_historique"></i>
-                        </div>
-                        <p class="text-shorcut">
-                            Historique entraînement
-                        </p>
-                    </div>
-                </a>
-
-                <a href="Actions/statut_analyses.html">
-                    <div class="shorcut">
-                        <div class="img" id="icone-pause">
-                            <i class="fs-icon_pause"></i>
-                        </div>
-                        <p class="text-shorcut">
-                            Statut d'analyse
-                        </p>
-                    </div> 
-                </a>
-
-            </div>
-        </div>
-
         <h1>Tous les outils</h1>
         <h2>Progression</h2>
 
@@ -350,56 +309,6 @@
 
     <!-- Pour le burger menu -->
     <script src="../Assets/base-js/base.js"></script>
-
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
-            let ModeUse = localStorage.getItem("ThemeActuel")
-            
-            if (PreferenceUser == "True") {
-                // Recup des champs
-                let ShortcutAdd = document.getElementById("icone-add")
-                let ShortcutHistorique = document.getElementById("icone-historique")
-                let ShortcutPause = document.getElementById("icone-pause")
-
-                // Recup des icones
-                let IconeShortcutAdd = document.querySelector(".fs-icon_add")
-                let IconeShortcutHistorique = document.querySelector(".fs-icon_historique")
-                let IconeShortcutPause = document.querySelector(".fs-icon_pause")
-
-                // Recup variable css
-                const Style = getComputedStyle(document.documentElement)
-
-                const CouleurAccentHover = Style.getPropertyValue("--COULEUR_ACCENT_HOVER")
-                const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
-                const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
-
-                if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
-                        if (ModeUse == "Clair") {
-                            // Mise des couleurs si l'élément est existant
-                            ShortcutAdd.style.background = CouleurAccentContrasterHover
-                            IconeShortcutAdd.style.color = CouleurBackground
-                            
-                            ShortcutHistorique.style.background = CouleurAccentContrasterHover
-                            IconeShortcutHistorique.style.color = CouleurBackground
-
-                            ShortcutPause.style.background = CouleurAccentContrasterHover
-                            IconeShortcutPause.style.color = CouleurBackground
-                        } else {
-                            // Mise des couleurs si l'élément est existant
-                            ShortcutAdd.style.background = CouleurAccentHover
-                            IconeShortcutAdd.style.color = CouleurBackground
-                            
-                            ShortcutHistorique.style.background = CouleurAccentHover
-                            IconeShortcutHistorique.style.color = CouleurBackground
-
-                            ShortcutPause.style.background = CouleurAccentHover
-                            IconeShortcutPause.style.color = CouleurBackground
-                        }
-                }
-            }
-        })
-    </script>
 
     <!-- Pour avoir les statistiques de visite du site -->
     <script defer src="/_vercel/insights/script.js"></script>
