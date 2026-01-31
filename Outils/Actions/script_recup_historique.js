@@ -126,8 +126,8 @@ async function AfficherData() {
     const ConteneurCardsWorkout = document.getElementById("liste-workouts")
 
     // Coupage des datas pr le nb limite de cards
-    let HistoriqueNecessaire = HistoriqueComplet.slice(NbCardsWorkoutAfficher, NbCardsWorkoutAfficher+2)
-    NbCardsWorkoutAfficher += 2
+    let HistoriqueNecessaire = HistoriqueComplet.slice(NbCardsWorkoutAfficher, NbCardsWorkoutAfficher+12)
+    NbCardsWorkoutAfficher += 12
 
     // Creation structure HTML
     HistoriqueNecessaire.forEach(workout => {
