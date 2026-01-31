@@ -252,15 +252,15 @@ function color_theme(ColorActuelle, id_li) {
         
         } else if (ColorActuelle === "theme_pierre_lune") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#6aabd3");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#91c8ea");    
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#7ec9f8");    
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#a5d8f8");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#cbe9ff"); 
             ColorActuelleUse = "theme_pierre_lune" 
         
         } else if (ColorActuelle === "theme_framboise") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#f14981");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#ff80aa"); 
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#ff8fb4");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#f14d84");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#ff6e9e"); 
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#ff91b6");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FFB3CC");      
             ColorActuelleUse = "theme_framboise" 
       
@@ -275,9 +275,9 @@ function color_theme(ColorActuelle, id_li) {
         
         } else if (ColorActuelle === "theme_fuchsia") {
             document.documentElement.style.setProperty("--COULEUR_ACCENT", "#cc25cf");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f76ff9"); 
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#a520a7");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#d22ed5"); 
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f04df3"); 
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#b81fbb");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#d73ada"); 
             ColorActuelleUse = "theme_fuchsia"
         
         } else if (ColorActuelle === "theme_lavande") {
@@ -371,9 +371,10 @@ function theme_defaut(id_li) {
 
 function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shorcut quand le navigateur le stocke dans le BFCache (page outils)
     let PreferenceUser = localStorage.getItem("ToggleThemeComplet") // recup valeur dans le local storage
-
+    let ModeUse = localStorage.getItem("ThemeActuel")
+            
     if (PreferenceUser == "True") {
-        // Recup des champs 
+        // Recup des champs
         let ShortcutAdd = document.getElementById("icone-add")
         let ShortcutHistorique = document.getElementById("icone-historique")
         let ShortcutPause = document.getElementById("icone-pause")
@@ -386,20 +387,32 @@ function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shor
         // Recup variable css
         const Style = getComputedStyle(document.documentElement)
 
-        const CouleurAccent = Style.getPropertyValue("--COULEUR_ACCENT")
+        const CouleurAccentHover = Style.getPropertyValue("--COULEUR_ACCENT_HOVER")
+        const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
         const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
 
         if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
-            // Mise des couleurs si l'élément est existant
-            ShortcutAdd.style.background = CouleurAccent
-            IconeShortcutAdd.style.color = CouleurBackground
-                    
-            ShortcutHistorique.style.background = CouleurAccent
-            IconeShortcutHistorique.style.color = CouleurBackground
+            if (ModeUse == "Clair") {
+                // Mise des couleurs si l'élément est existant
+                ShortcutAdd.style.background = CouleurAccentContrasterHover
+                IconeShortcutAdd.style.color = CouleurBackground
+                            
+                ShortcutHistorique.style.background = CouleurAccentContrasterHover
+                IconeShortcutHistorique.style.color = CouleurBackground
 
-            ShortcutPause.style.background = CouleurAccent
-            IconeShortcutPause.style.color = CouleurBackground
+                ShortcutPause.style.background = CouleurAccentContrasterHover
+                IconeShortcutPause.style.color = CouleurBackground
+                } else {
+                    // Mise des couleurs si l'élément est existant
+                    ShortcutAdd.style.background = CouleurAccentHover
+                    IconeShortcutAdd.style.color = CouleurBackground
+                            
+                    ShortcutHistorique.style.background = CouleurAccentHover
+                    IconeShortcutHistorique.style.color = CouleurBackground
 
+                    ShortcutPause.style.background = CouleurAccentHover
+                    IconeShortcutPause.style.color = CouleurBackground
+                }
             }
                 
         // Recup des champs (!!! pour la page de charge d'entraînement)
@@ -415,24 +428,43 @@ function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shor
         let TextInterieurButton = document.querySelectorAll(".txt_plus")
 
         if (ButtonAdd && ButtonHistorique && ButtonPause) {
-            // changement couleur text in button
-            TextInterieurButton.forEach(TextButton => {
-                TextButton.style.color = CouleurBackground                    
-            });
+                if (ModeUse == "Clair") {                            
+                    // changement couleur text in button
+                    TextInterieurButton.forEach(TextButton => {
+                        TextButton.style.color = CouleurBackground                    
+                    });
 
-            // Mise des couleurs si l'élément est existant
-            ButtonAdd.style.background = CouleurAccent
-            ButtonAdd.style.boxShadow = "none"
-            IconeAdd.style.color = CouleurBackground
-                    
-            ButtonHistorique.style.background = CouleurAccent
-            ButtonHistorique.style.boxShadow = "none"
-            IconeHistorique.style.color = CouleurBackground
+                    // Mise des couleurs si l'élément est existant
+                    ButtonAdd.style.background = CouleurAccentContrasterHover
+                    ButtonAdd.style.boxShadow = "none"
+                    IconeAdd.style.color = CouleurBackground
+                            
+                    ButtonHistorique.style.background = CouleurAccentContrasterHover
+                    ButtonHistorique.style.boxShadow = "none"
+                    IconeHistorique.style.color = CouleurBackground
 
-            ButtonPause.style.background = CouleurAccent
-            ButtonPause.style.boxShadow = "none"
-            IconePause.style.color = CouleurBackground
+                    ButtonPause.style.background = CouleurAccentContrasterHover
+                    ButtonPause.style.boxShadow = "none"
+                    IconePause.style.color = CouleurBackground
+                } else {                            
+                    // changement couleur text in button
+                    TextInterieurButton.forEach(TextButton => {
+                        TextButton.style.color = CouleurBackground                    
+                    });
 
+                    // Mise des couleurs si l'élément est existant
+                    ButtonAdd.style.background = CouleurAccentHover
+                    ButtonAdd.style.boxShadow = "none"
+                    IconeAdd.style.color = CouleurBackground
+                            
+                    ButtonHistorique.style.background = CouleurAccentHover
+                    ButtonHistorique.style.boxShadow = "none"
+                    IconeHistorique.style.color = CouleurBackground
+
+                    ButtonPause.style.background = CouleurAccentHover
+                    ButtonPause.style.boxShadow = "none"
+                    IconePause.style.color = CouleurBackground
+                }
         }
     }
 

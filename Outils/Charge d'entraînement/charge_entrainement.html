@@ -195,6 +195,55 @@
         // pour le theme complet pour changer les couleurs des icones
         window.addEventListener("DOMContentLoaded", () => {
             let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
+            let ModeUse = localStorage.getItem("ThemeActuel")
+            
+            if (PreferenceUser == "True") {
+                // Recup des champs
+                let ShortcutAdd = document.getElementById("icone-add")
+                let ShortcutHistorique = document.getElementById("icone-historique")
+                let ShortcutPause = document.getElementById("icone-pause")
+
+                // Recup des icones
+                let IconeShortcutAdd = document.querySelector(".fs-icon_add")
+                let IconeShortcutHistorique = document.querySelector(".fs-icon_historique")
+                let IconeShortcutPause = document.querySelector(".fs-icon_pause")
+
+                // Recup variable css
+                const Style = getComputedStyle(document.documentElement)
+
+                const CouleurAccentHover = Style.getPropertyValue("--COULEUR_ACCENT_HOVER")
+                const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
+                const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
+
+                if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
+                        if (ModeUse == "Clair") {
+                            // Mise des couleurs si l'élément est existant
+                            ShortcutAdd.style.background = CouleurAccentContrasterHover
+                            IconeShortcutAdd.style.color = CouleurBackground
+                            
+                            ShortcutHistorique.style.background = CouleurAccentContrasterHover
+                            IconeShortcutHistorique.style.color = CouleurBackground
+
+                            ShortcutPause.style.background = CouleurAccentContrasterHover
+                            IconeShortcutPause.style.color = CouleurBackground
+                        } else {
+                            // Mise des couleurs si l'élément est existant
+                            ShortcutAdd.style.background = CouleurAccentHover
+                            IconeShortcutAdd.style.color = CouleurBackground
+                            
+                            ShortcutHistorique.style.background = CouleurAccentHover
+                            IconeShortcutHistorique.style.color = CouleurBackground
+
+                            ShortcutPause.style.background = CouleurAccentHover
+                            IconeShortcutPause.style.color = CouleurBackground
+                        }
+
+                }
+            }
+        })
+        window.addEventListener("DOMContentLoaded", () => {
+            let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
+            let ModeUse = localStorage.getItem("ThemeActuel")
             
             if (PreferenceUser == "True") {
                 // Recup des champs
@@ -212,28 +261,48 @@
                 // Recup variable css
                 const Style = getComputedStyle(document.documentElement)
 
-                const CouleurAccent = Style.getPropertyValue("--COULEUR_ACCENT")
+                const CouleurAccentHover = Style.getPropertyValue("--COULEUR_ACCENT_HOVER")
+                const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
                 const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
 
                 if (ButtonAdd && ButtonHistorique && ButtonPause) {
-                    // changement couleur text in button
-                    TextInterieurButton.forEach(TextButton => {
-                        TextButton.style.color = CouleurBackground                    
-                    });
+                        if (ModeUse == "Clair") {                            
+                            // changement couleur text in button
+                            TextInterieurButton.forEach(TextButton => {
+                                TextButton.style.color = CouleurBackground                    
+                            });
 
-                    // Mise des couleurs si l'élément est existant
-                    ButtonAdd.style.background = CouleurAccent
-                    ButtonAdd.style.boxShadow = "none"
-                    IconeAdd.style.color = CouleurBackground
-                    
-                    ButtonHistorique.style.background = CouleurAccent
-                    ButtonHistorique.style.boxShadow = "none"
-                    IconeHistorique.style.color = CouleurBackground
+                            // Mise des couleurs si l'élément est existant
+                            ButtonAdd.style.background = CouleurAccentContrasterHover
+                            ButtonAdd.style.boxShadow = "none"
+                            IconeAdd.style.color = CouleurBackground
+                            
+                            ButtonHistorique.style.background = CouleurAccentContrasterHover
+                            ButtonHistorique.style.boxShadow = "none"
+                            IconeHistorique.style.color = CouleurBackground
 
-                    ButtonPause.style.background = CouleurAccent
-                    ButtonPause.style.boxShadow = "none"
-                    IconePause.style.color = CouleurBackground
+                            ButtonPause.style.background = CouleurAccentContrasterHover
+                            ButtonPause.style.boxShadow = "none"
+                            IconePause.style.color = CouleurBackground
+                        } else {                            
+                            // changement couleur text in button
+                            TextInterieurButton.forEach(TextButton => {
+                                TextButton.style.color = CouleurBackground                    
+                            });
 
+                            // Mise des couleurs si l'élément est existant
+                            ButtonAdd.style.background = CouleurAccentHover
+                            ButtonAdd.style.boxShadow = "none"
+                            IconeAdd.style.color = CouleurBackground
+                            
+                            ButtonHistorique.style.background = CouleurAccentHover
+                            ButtonHistorique.style.boxShadow = "none"
+                            IconeHistorique.style.color = CouleurBackground
+
+                            ButtonPause.style.background = CouleurAccentHover
+                            ButtonPause.style.boxShadow = "none"
+                            IconePause.style.color = CouleurBackground
+                        }
                 }
             }
         })
