@@ -183,13 +183,22 @@
     <script>
         function RestaureToggleThemeComplet() { // pour restaurer la position de "Appliquer thème aux icones"
             let ToggleThemeComplet = document.getElementById("toggle-theme-complet")
+            let ToggleMode = document.getElementById("toggle-mode")
+
             let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
+            let ThemeUser = localStorage.getItem("ThemeActuel")
             let ColorActuelleUser = localStorage.getItem("ColorActuelleUse")
 
             if (PreferenceUser == "True") {
                 ToggleThemeComplet.checked = false
             } else {
                 ToggleThemeComplet.checked = true
+            }
+
+            if (ThemeUser == "Clair") {
+                ToggleMode.checked = true
+            } else {
+                ToggleMode.checked = false
             }
 
             // Pr restaure le selected du li

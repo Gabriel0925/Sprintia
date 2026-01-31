@@ -14,5 +14,7 @@ async function SupprimerDatas() {
 
     // remise etat normal
     ButtonReinitialiser.textContent = "Réinitialiser Sprintia"
+
+    location.reload()
     return
 }

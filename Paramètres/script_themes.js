@@ -494,14 +494,6 @@ function user_preference() {
 // ça permet de lancer la fonction une fois que la page est chargée
 // parce que si on enleves cela le javascript va modifier les buttons alors qu'ils ne sont pas encore créer
 document.addEventListener("DOMContentLoaded", function() {
-    // Pr restaurer la position du toggle
-    let toggle_value = document.getElementById("toggle-mode")
-    let last_value_theme = localStorage.getItem("ThemeActuel")
-    // Si il y a une valeur au toggle et que le theme est clair alors on met le toggle sur true avec mon css le toggle est en position desactiver
-    if (toggle_value && last_value_theme === "Clair") {
-        toggle_value.checked = true
-    }
-
     // Pr restaure le selected du li
     let color_actuelle_id = {
         "theme_azur": "elem1",
