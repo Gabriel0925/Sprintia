@@ -1,3 +1,7 @@
+// Initialisation de la variable du graphique pour que le code ce rappelle de l'ancien graphique "stockée" dans le BFCache 
+// Pr éviter de superposer un graphique
+let barChart = null
+
 function ReturnDate(DateWorkout) {
     let DateEuropeen = ""
 
@@ -54,7 +58,7 @@ async function RecupValueGraphique() {
 
 async function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) {
     // Initialisation 
-    let Interpretation = "Sprintia n'a pas assez de données pour analyser votre charge d'entraînement. Vous avez juste besoin d'ajouter au moins 3 entraînements sur les 28 derniers jours pour que Sprintia analyse vos charge d'entraînement."
+    let Interpretation = "Sprintia n'a pas assez de données pour analyser votre charge d'entraînement. Vous avez juste besoin d'ajouter au moins 3 entraînements sur les 28 derniers jours pour que Sprintia analyse votre charge d'entraînement."
     let Ratio = 0
 
     // Si l'utilisateur a fait moins de 3 entrainements sur les 28 derniers jours on analyse pas
@@ -230,7 +234,7 @@ async function Initialisation() {
         let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
         const barCanvas = document.getElementById("barCanvas")
-        const barChart = new Chart(barCanvas, {
+        barChart = new Chart(barCanvas, {
                 type:"line",
                 data:{
                     labels: ListeDate,
@@ -239,7 +243,7 @@ async function Initialisation() {
                         borderColor : CouleurAccentHover, // Ligne des niveau couleur
                         backgroundColor: CouleurAccent,
                         fill: true, // Pour remplir le graphique de la couleur background
-                        pointRadius: 7, // Taille du point
+                        pointRadius: 8, // Taille du point
                         pointHoverRadius: 10,
                         pointBackgroundColor: CouleurAccentHover,
                         pointBorderWidth: 0
@@ -284,4 +288,11 @@ async function Initialisation() {
 
 window.addEventListener("DOMContentLoaded", () => {
     Initialisation()
+})
+
+// Pour recharger le graphique si c'est dans le BFCache
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
+        GenererGraphique()
+    }
 })

@@ -295,7 +295,7 @@ function color_theme(ColorActuelle, id_li) {
             ColorActuelleUse = "theme_vegetation"
         
         } else if (ColorActuelle === "theme_feu") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#f9a81c");
+            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#e99c18");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#e73f01");   
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#E07A00");
             document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#da3a00"); 
@@ -356,17 +356,42 @@ function color_theme(ColorActuelle, id_li) {
 }
 
 // Thème par défaut
-function theme_defaut(id_li) {
-    ThemeActuel = "Sombre"
-    localStorage.setItem("ThemeActuel", "Sombre");
-    
-    ColorActuelleUse = "theme_azur"
-    localStorage.setItem("ColorActuelleUse", ColorActuelleUse);
+async function theme_defaut(id_li, value) {
+    // Demande de confirmation avant
+    if (confirm("Êtes-vous sur de vouloir réinitialiser le thème ?")) {
+        let Button = document.getElementById("reinitialiser") // Recup du bouton
+        // Desactivation du button
+        Button.disabled = true
+        Button.textContent = "Chargement..."
 
-    // Remise du toogle sur desactiver
-    localStorage.setItem("ToggleThemeComplet", "False")
-    
-    location.reload()
+        // Remise des valeurs par défaut dans la BDD
+        ThemeActuel = "Sombre"
+        localStorage.setItem("ThemeActuel", "Sombre");
+        
+        ColorActuelleUse = "theme_azur"
+        localStorage.setItem("ColorActuelleUse", ColorActuelleUse);
+
+        localStorage.setItem("ToggleThemeComplet", "False")
+
+        // Légère pause
+        await new Promise(r => setTimeout(r, 650))
+
+        // confirmation sauvegarde
+        Button.textContent = "Réinitialisé"
+
+        document.getElementById("toggle-mode").checked = false // on active/desactive les toggle pour les remttre par defaut
+        document.getElementById("toggle-theme-complet").checked = true // on active/desactive les toggle pour les remttre par defaut
+        user_preference() // relance de la fonction pour remettre le thème par defaut
+        maj_li_selected("elem1") // on remet le li correspondant
+
+        // Pause
+        await new Promise(r => setTimeout(r, 650))
+        
+        // Desactivation du button
+        Button.disabled = false
+        Button.textContent = "Réinitialiser le thème"
+    }
+    return
 }
 
 function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shorcut quand le navigateur le stocke dans le BFCache (page outils)

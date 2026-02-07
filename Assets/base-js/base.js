@@ -66,12 +66,12 @@ function afficher_plus(lieu) {
 function SprintiaVersion() {
     let Logo = document.querySelector("div.logo a")
 
-    Logo.textContent = "Sprintia Beta"
+    Logo.textContent = "Sprintia Beta2"
 
     let VersionInSettings = document.querySelector(".version")
 
     if (VersionInSettings) {
-        VersionInSettings.innerHTML = "Version : <strong>4 Beta 1</strong>"
+        VersionInSettings.innerHTML = "Version : <strong>4 Beta 2</strong>"
     }
 
     return

@@ -85,7 +85,26 @@ async function RemplirTableau() {
             if (confirm("Supprimer ce niveau de course ?")) {
                 await db.niveau_course.delete(idDatas[EtapeBoucle]) // supprimer la data de la bdd
                 await NouvelleLigne.remove() // supprimer la ligne
-                location.reload()
+                GenererGraphique()
+
+                let DataTableau = document.querySelectorAll("td") // Recup des lignes pour savoir quand il faut cacher le tableau
+                let Tableau = document.getElementById("tableau-historique") // recup du tableau
+                let h2elem1 = document.getElementById("cacher-title1") // pour cacher le titre "Graphique"
+                let h2elem2 = document.getElementById("cacher-title2") // pour cacher le titre "Votre historique"
+
+                if (DataTableau.length == 0) {
+                    // On cache tout
+                    Tableau.style.display = "none"
+                    h2elem1.style.display = "none"
+                    h2elem2.style.display = "none"
+                    // on fais apparaitre le message comme quoi sprintia n'a pas encore assez de données
+                    document.getElementById("text-informatif").style.display = "block"
+                    // destruction du graphique
+                    if (barChart) { // le graph est créer dans le !!-- script_outil.js --!!
+                        barChart.destroy() // destruction du graphique qu'il y a dans script_outil.js
+                        document.getElementById("conteneur-graphique").style.display = "none" // on cache le conteneur du graphique
+                    }    
+                }
             }
         })
 

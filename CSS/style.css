@@ -491,6 +491,7 @@ header div.navbar .logo a {
 }
 header div.navbar .logo a:active {
     transform: scale(0.95);
+    border-radius: var(--BORDER_SMALL);
     color: var(--COULEUR_ACCENT_HOVER);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
@@ -513,12 +514,12 @@ header div.navbar div.burger-menu-button {
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     
-        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
+    box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     color: var(--COULEUR_ACCENT_CONTRASTER);
     cursor: pointer;
     display: none;
     margin: var(--ESPACE_XXS);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    transition: all ease-in-out 0.3s;
 }
 /* Pour que le bouton rétrécisse au moment du clic */
 header div.navbar div.burger-menu-button:active {
@@ -582,16 +583,16 @@ header .burger-menu {
     border-radius: var(--BORDER);
     overflow: hidden; 
 
-    transform: translateY(-40px) translateX(80px) scale(0.2);
-    transition: all var(--DUREE_TRANSITION) ease-in-out;
+    transform: translateY(-20px) translateX(75px) scale(0.1, 0.75);
+    transition: all 0.11s ease-in-out;
 }
 header .burger-menu.open {
     max-height: 350px;
-    transform: translate(0, 0) scale(1); /* On remet la taille normale */
-    
-        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
+    transform: translate(0, 0) scale(1, 1); /* On remet la taille normale */
+    box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
+    transition: all 0.18s ease-in-out;
 }
 /* Pour que le bouton rétrécisse au moment du clic */
 header .burger-menu.open:active {
@@ -599,15 +600,15 @@ header .burger-menu.open:active {
 }
 header .burger-menu li {
     color: var(--COULEUR_BACKGROUND);
-    opacity: 0;
-    transform: translate(50px, 8px) scale(0.7);
-    transition: all 0.33s ease-in-out;
+    opacity: 0.5;
+    transform: translate(5px, 32px) scale(1.6);
+    transition: all 0.07s ease-in-out;
 }
 header .burger-menu.open li {
     color: var(--COULEUR_TEXT_PRINCIPAL);
     opacity: 1;
     transform: translate(0, 0) scale(1); /* on ramene transform à 0 */
-    transition: all 0.33s ease-in-out;
+    transition: all 0.28s ease-in-out;
 }
 header .burger-menu li a {
     color: var(--COULEUR_TEXT_PRINCIPAL); 
@@ -692,13 +693,39 @@ div.conteneur-mise-avant::after {
         opacity: 1;
     }
 }
+div.conteneur-mise-avant#section-jrm {
+    padding: var(--ESPACE_XXS);
+    margin-bottom: 0;
+}
+div.conteneur-mise-avant div.zone-jrm {
+    width: 100%;
+    height: 100%;
+}
 div.conteneur-mise-avant p{
     font-size: var(--H2);
-    line-height: 2;
+    line-height: 1.8;
     text-align: left;
     margin: var(--ESPACE_XS);
     color: var(--COULEUR_BACKGROUND);
     font-weight: 1000;
+}
+div.conteneur-mise-avant p.title-jrm{
+    font-size: var(--H3);
+    margin: var(--ESPACE_S);
+    margin-bottom: var(--ESPACE_XS);
+    line-height: normal;
+    text-align: left;
+    color: var(--COULEUR_BACKGROUND);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+}
+div.conteneur-mise-avant p.interpretation-jrm{
+    font-size: var(--P);
+    margin: var(--ESPACE_S);
+    margin-top: var(--ESPACE_XS);
+    text-align: left;
+    color: var(--COULEUR_BACKGROUND);
+    font-weight: normal;
+    line-height: 1.4;
 }
 div.conteneur-mise-avant p#tips{
     font-size: var(--P);
@@ -1630,6 +1657,7 @@ div.conteneur-ensemble div.box-result::after {
     bottom: 0;
     left: 0;
     right: 0;
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
 
     z-index: -1;
     opacity: 0;

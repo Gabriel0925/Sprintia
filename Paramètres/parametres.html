@@ -146,7 +146,7 @@
             <a href="JRM Coach/jrm_coach.html">
                 <div class="acces-param">
                     <i class="fs-icon_coach"></i>
-                    <p class="text-param">JRM Coach</p>
+                    <p class="text-param" id="nom-coach">JRM Coach</p>
                 </div>
             </a>
             <a href="Parametres Avances/parametres_avances.html">
@@ -204,6 +204,29 @@
     
     <!-- Pour le burger menu -->
     <script src="../Assets/base-js/base.js"></script>
+
+    <!-- Import bibliothèque pour simplifier le code de indexed db -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+    <script>
+        async function NomCoachInit() {
+            // Recup datas
+            let CoachUserDB = await db.JRM_Coach.toArray()
+
+            if (CoachUserDB.length > 0) { // Si il y a des datas
+                let NomCoach = CoachUserDB.map(elementDB => elementDB.nom)
+                let AvatarCoach = CoachUserDB.map(elementDB => elementDB.avatar)
+                
+                document.getElementById("nom-coach").textContent = NomCoach
+            }
+
+            return
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            NomCoachInit()
+        })
+    </script>
 
     
     <!-- Pour avoir les statistiques de visite du site -->

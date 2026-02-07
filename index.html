@@ -79,9 +79,6 @@
     
     <div class="conteneur-about-marge"> 
         <h1>Accueil</h1>
-        <p class="text">
-            La page d'accueil est en cours de refonte pour qu'elle devienne plus utile.
-        </p>
 
         <div class="conteneur-mise-avant" id="banniere-accueil">
             <p>
@@ -89,8 +86,18 @@
             </p>
         </div>
 
-        <br>
-        <h1>Actions rapides</h1>
+        <div class="conteneur-mise-avant" id="section-jrm">
+            <div class="zone-jrm">
+                <p class="title-jrm" id="nom-coach">
+                    JRM Coach :
+                </p>
+                <p class="interpretation-jrm">
+                    Chargement...
+                </p>
+            </div>
+        </div>
+
+        <h2>Actions rapides</h2>
 
         <div class="conteneur-content-scrolling">
             <div class="conteneur-scrolling">
@@ -131,6 +138,11 @@
             </div>
         </div>
 
+        <h2>Outils récemment utilisés</h2>
+        <p class="text">
+            Cette fonctionnalité sera disponible lors de la prochaine bêta.
+        </p>
+
         <h2>Activité récente (3 sem.)</h2>
         <p class="text">
             Ce graphique permet de suivre votre régularité en comparant votre temps total d'entraînement par semaine.
@@ -142,9 +154,9 @@
 
         <div class="conteneur-mise-avant" id="banniere-tips">
             <p id="tips">
-                Petit tips pour tester
+                Chargement...
             </p>
-        </div>
+        </div> 
 
     </div>
     
@@ -231,6 +243,197 @@
         })
     </script>
 
+    <!-- Pour le JRM Coach -->
+    <script>
+        function PassageHeure(minutes) {
+            let Heure = Math.floor(minutes/60) // Arrondi à l'entier inférieur
+            let MinutesRestante = minutes-60*Heure
+
+            // Initialisation
+            let Result = ""
+            if (Heure < 1) { // Si l'heure est inférieur à 1 on affiche que les minutes pour ne pas afficher 0h 23min
+                Result = minutes
+            } else { // Sinon on affiche tous
+                Result = Heure + "h " + MinutesRestante.toString().padStart(2, "0")
+            }
+            
+            return Result
+        }
+
+        async function JRMCoach() {
+            // Recup data
+            let HistoriqueDB = await db.entrainement.toArray()
+            let CoachUserDB = await db.JRM_Coach.toArray()
+
+            if (CoachUserDB.length > 0) { // Si il y a des datas on recup le nom et l'avatar et on l'affiche dans le coach JRM
+                let NomCoach = CoachUserDB.map(elementDB => elementDB.nom)
+                let AvatarCoach = CoachUserDB.map(elementDB => elementDB.avatar)
+                
+                document.getElementById("nom-coach").textContent = AvatarCoach + " " + NomCoach + " :"
+            }
+
+            if (HistoriqueDB.length > 0) { // Si il y a des datas
+                // Initialisation
+                let DureeTotale = 0
+
+                // Date moins 7 jours
+                let DateActuelle = new Date()
+                let DateMoins7J = new Date()
+
+                DateMoins7J = DateMoins7J.setDate(DateActuelle.getDate() - 7) // pour le calcul des dates il faut les mettre en timestamp enleve le nb de j ici, ça renvoie ex: 1769014250809
+                DateMoins7J = new Date(DateMoins7J).toISOString() // permet de recup "2026-01-21T17:13:53.151Z"
+                // On prend que ce qui nous interesse donc la premiere partie
+                DateMoins7J = DateMoins7J.split("T")[0] // on obtient "2026-01-21"
+
+                // Recup du temps
+                let TableauDate = HistoriqueDB.map(elementDB => elementDB.date)
+                let TableauSport = HistoriqueDB.map(elementDB => elementDB.sport)
+
+                let TableauDuree = HistoriqueDB.map(elementDB => elementDB.duree)
+                let TableauDistance = HistoriqueDB.map(elementDB => elementDB.distance)
+                let TableauDenivele = HistoriqueDB.map(elementDB => elementDB.denivele)
+
+                // Initialisation pour la boucle
+                let compteur = 0
+                let NbWorkout = 0
+                let NbWorkoutMuscu = 0
+
+                // Innitialisation pour les distances
+                let DistanceTotale = 0
+                let DistanceTotaleCourse = 0
+                let DistanceTotaleVelo = 0
+                let DistanceTotaleMarche = 0
+
+                let DeniveleTotale = 0
+
+                let ExistenDataDistance = false // cette variable sera sur true si il y a des datas de distance pour que le JRM Coach les affiche
+                // Prepa des variables pour recup les datas des différentes listes dans la boucle
+                let DateElement = ""
+                let DistanceElement = 0 
+                let SportElement = ""
+
+                // Parcour des données de la durée
+                TableauDuree.forEach(element => {
+                    // Mise en variable des elements de chaque tableau qui correspondant au data de l'entrainement 
+                    DateElement = TableauDate[compteur]
+                    DistanceElement = TableauDistance[compteur]
+                    DeniveleElement = TableauDenivele[compteur]
+                    SportElement = TableauSport[compteur]
+
+                    if (DateElement >= DateMoins7J) { // Si la date est plus lointaine que 7J on prend pas
+                        DureeTotale += element // Ajout de la durée qui est entrain d'être parcourue
+                        NbWorkout += 1 // Ajout de 1 pour calculer le nombre d'entraînement
+
+                        if (DistanceElement != null) { // Si il y a une distance dans cette séance
+                            ExistenDataDistance = true // Mise de la variable sur true pour que le coach affiche la distance dans son résumé
+                            DistanceTotale += DistanceElement // ajout de la distance de la séance
+                                                        
+                            // Ajout de la distance en fonction du sport
+                            if (SportElement == "Course") {
+                                DistanceTotaleCourse += DistanceElement // calcul distance totale en course
+                            } else if (SportElement == "Vélo") {
+                                DistanceTotaleVelo += DistanceElement // calcul distance totale en vélo
+                            } else if (SportElement == "Marche") {
+                                DistanceTotaleMarche += DistanceElement // calcul distance totale en marche
+                            }
+
+                            DeniveleTotale += DeniveleElement
+                        }
+
+                        if (SportElement == "Musculation") { // si le sport c'est un de muscu on compte
+                            NbWorkoutMuscu += 1 // Ajout de la séance dans le compteur
+                        }
+                    }
+
+                    compteur += 1 // incrémentation
+                });
+
+                const DureeTotaleHeure = PassageHeure(DureeTotale) // pour passer de 90 min à 1h 30min
+
+                // Début interpretation
+                let Interpretation = `Au cours des 7 derniers jours, vous avez fait :<br><br>
+                                <strong>⏱️ ${DureeTotaleHeure}min</strong> d'entraînement<br>`
+                
+                if (NbWorkout == 1 || NbWorkout == 0) {
+                    Interpretation += `<strong>💪 ${NbWorkout} séance</strong>`
+                } else {
+                    Interpretation += `<strong>💪 ${NbWorkout} séances</strong>`
+                }
+                
+                // Si il y a des datas de distance
+                if (ExistenDataDistance == true) {
+                    Interpretation += `<br><br><strong>↔️ ${DistanceTotale.toFixed(1)} km</strong>` // Ajout de la distance totale peut importe le sport dans l'interpretation
+
+                    // Tous ses if pour savoir quel est le sport que le user a le plus pratiqué cette semaine en fonction de la distance
+                    if (DistanceTotaleCourse >= DistanceTotaleVelo && DistanceTotaleCourse >= DistanceTotaleMarche) {
+                        if (DistanceTotaleCourse != 0) {
+                            if (DistanceTotaleCourse == DistanceTotale) { // Si la distance de course est la meme que la distance totale on ajoute le sport a la fin
+                                Interpretation += " de course à pied"
+                            } else {  
+                                // cette interpretation pour que le user sache que sur 600 km parcourue cette semaine il en a fait 30 en course par exemple
+                                Interpretation += `<br><strong>🏃 ${DistanceTotaleCourse.toFixed(1)} km de course à pied</strong>.` 
+                            }
+                          
+                        } 
+
+                    } else if (DistanceTotaleVelo >= DistanceTotaleMarche) {
+                        if (DistanceTotaleVelo != 0) {
+                            if (DistanceTotaleVelo == DistanceTotale) { // Si la distance de vélo est la meme que la distance totale on ajoute le sport a la fin
+                                Interpretation += " de vélo"
+                            } else {
+                                // cette interpretation pour que le user sache que sur 600 km parcourue cette semaine il en a fait 30 de vélo par exemple
+                                Interpretation += `<br><strong>🚴 ${DistanceTotaleVelo.toFixed(1)} km de vélo</strong>.`
+                            }
+
+                        }
+
+                    } else {
+                        if (DistanceTotaleMarche != 0) {
+                            if (DistanceTotaleMarche == DistanceTotale) { // Si la distance de marche est la meme que la distance totale on ajoute le sport a la fin
+                                Interpretation += " de marche"
+                            } else {
+                                // cette interpretation pour que le user sache que sur 600 km parcourue cette semaine il en a fait 30 en marche par exemple
+                                Interpretation += `<br><strong>🚶‍♂️ ${DistanceTotaleMarche.toFixed(1)} km de marche</strong>.`
+                            }
+                            
+                        }
+
+                    }
+                    
+                    if (DeniveleTotale > 0) { // Si le dénivelé est supérieur a 0 on l'affiche
+                        Interpretation += `<br><strong>🏔️ ${DeniveleTotale} m</strong> de dénivelé`
+                    }
+                }
+
+                if (NbWorkoutMuscu != 0) { // Si il y a au moins une seance de muscu le coach l'affiche
+                    if (NbWorkoutMuscu == 1) {
+                        Interpretation += `<br><br><strong>🏋️ ${NbWorkoutMuscu} séance de musculation</strong>`
+                    } else {
+                        Interpretation += `<br><br><strong>🏋️ ${NbWorkoutMuscu} séances de musculation</strong>`
+                    }
+                }
+                
+                // Si les datas de durée sont égale à 0 alors petit message d'encouragement
+                if (DureeTotale == 0) {
+                    Interpretation += "<br><br>Allez, essayez de prendre le temps de faire une séance de sport, votre corps vous remerciera plus tard. Si vous faites un entraînement, vous dormirez mieux ce soir !"
+                }
+
+                document.querySelector(".interpretation-jrm").innerHTML = Interpretation // affichage dans le champs
+
+            } else { // si il ny a pas de datas
+                let NotData = `Sprintia n'a pas encore assez de données pour que votre coach analyse votre semaine d'entraînement.`
+
+                document.querySelector(".interpretation-jrm").innerHTML = NotData
+            }
+
+            return
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            JRMCoach()
+        })
+    </script>
+
     <script>
         function GenererNbAleatoire() {
             // Nb aléatoire (formule * 17 fais avec gemini car en js clc les nb aléatoire)
@@ -281,7 +484,7 @@
         let ZoneTips = document.getElementById("banniere-tips")
 
         if (DisplayTips == "True") {
-            ZoneTips.style.display = "block"
+            ZoneTips.style.display = "flex"
             TipsRandom()
         } else {
             ZoneTips.style.display = "none"
@@ -290,9 +493,11 @@
 
     <!-- Pour le graphique -->
     <script>
+        let DureeTotalSemaine = 0
+
         async function RecupData() {
             // Initialisation
-            let DureeTotalSemaine = 0
+            DureeTotalSemaine = 0 // Variable deja défini en haut du script (remise à 0)
             let DureeTotalSemaine2 = 0
             let DureeTotalSemaine3 = 0
     
@@ -362,6 +567,10 @@
             return TableauPourGraphique
         }
 
+        // Initialisation de la variable du graphique pour que le code ce rappelle de l'ancien graphique "stockée" dans le BFCache 
+        // Pr éviter de superposer un graphique
+        let barChart = null
+
         async function GenererGraphique() {
             // recup des datas
             let TableauPourGraphique = await RecupData()
@@ -380,7 +589,13 @@
                 let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
                 const barCanvas = document.getElementById("barCanvas")
-                const barChart = new Chart(barCanvas, {
+
+                // Destruction de l'ancien graphique si il y en a un pour éviter une superposition de graphique
+                if (barChart) {
+                    barChart.destroy()
+                }
+
+                barChart = new Chart(barCanvas, {
                         type:"line",
                         data:{
                             labels: ["S-3", "S-2", "S-1"],
@@ -389,8 +604,8 @@
                                 borderColor : CouleurAccentHover, // Ligne des niveau couleur
                                 backgroundColor: CouleurAccent,
                                 fill: true, // Pour remplir le graphique de la couleur background
-                                pointRadius: 8.5, // Taille du point
-                                pointHoverRadius: 11.5,
+                                pointRadius: 8, // Taille du point
+                                pointHoverRadius: 10,
                                 pointBackgroundColor: CouleurAccentHover,
                                 pointBorderWidth: 0
                             }]
@@ -433,6 +648,13 @@
 
         window.addEventListener("DOMContentLoaded", () => {
             GenererGraphique()
+        })
+
+        // Pour recharger le graphique si c'est dans le BFCache
+        window.addEventListener("pageshow", (event) => {
+            if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
+                GenererGraphique()
+            }
         })
     </script>
 

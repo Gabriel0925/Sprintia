@@ -1,3 +1,7 @@
+// Initialisation de la variable du graphique pour que le code ce rappelle de l'ancien graphique "stockée" dans le BFCache 
+// Pr éviter de superposer un graphique
+let barChart = null
+
 function Score(DistanceUser) {
     // Calcul VMA + VO2max
     let DistanceM = DistanceUser*1000 // km en metres
@@ -43,7 +47,7 @@ function StartNiveau() {
 
     // Vérification
     if (isNaN(DistanceUser)) {
-        alert("Erreur de saisie : le champs distance doit être rempli.")
+        alert("Erreur de saisie : le champ distance doit être rempli.")
         return
     }
     if (DistanceUser <= 0) {
@@ -97,13 +101,19 @@ async function SauvegardeNiveauCourse() {
         date: DateActuelle
     })
 
+    // Légère pause
+    await new Promise(r => setTimeout(r, 650))
+
+    // confirmation sauvegarde
+    BoutonLimite1Clic.textContent = "Enregistré"
+
     // Pause
-    await new Promise(r => setTimeout(r, 1000))
+    await new Promise(r => setTimeout(r, 650))
     // remise etat normal
     BoutonLimite1Clic.textContent = "Sauvegarder mon niveau"
     BoutonLimite1Clic.disabled = false // Réactivation du bouton
 
-    location.reload()
+    GenererGraphique()
 }
 
 function ReturnDate(DateNiveauCourse) {
@@ -159,14 +169,6 @@ async function RecupValueNiveauCourseGraphique() {
     return {NiveauDatas, ListeDate}
 }
 
-// Récup les variables css
-let RootCSS = document.documentElement
-let StyleCSS = getComputedStyle(RootCSS)
-// Recup variable css
-let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT_HOVER")
-let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
-let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
-
 // Pour le Graphique
 async function GenererGraphique() {
     // attendre la recup des datas
@@ -175,9 +177,22 @@ async function GenererGraphique() {
     if (NiveauDatas.length > 0) { // Si il y a niveau data il y a forcement date data
         // Ajout de la class pr le faire apparaitre
         document.getElementById("conteneur-graphique").classList.add("visible")
+    
+        // Récup les variables css
+        let RootCSS = document.documentElement
+        let StyleCSS = getComputedStyle(RootCSS)
+        // Recup variable css
+        let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT_HOVER")
+        let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
+        let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
         const barCanvas = document.getElementById("barCanvas")
-        const barChart = new Chart(barCanvas, {
+        // Destruction de l'ancien graphique si il y en a un pour éviter une superposition de graphique
+        if (barChart) {
+            barChart.destroy()
+        }
+
+        barChart = new Chart(barCanvas, {
             type:"line",
             data:{
                 labels: ListeDate,
@@ -186,7 +201,7 @@ async function GenererGraphique() {
                     borderColor : CouleurAccentHover, // Ligne des niveau couleur
                     backgroundColor: CouleurAccent,
                     fill: true, // Pour remplir le graphique de la couleur background
-                    pointRadius: 7, // Taille du point
+                    pointRadius: 8, // Taille du point
                     pointHoverRadius: 10,
                     pointBackgroundColor: CouleurAccentHover,
                     pointBorderWidth: 0
@@ -229,4 +244,13 @@ async function GenererGraphique() {
 
 }
 
-GenererGraphique()
+// Pour recharger le graphique si c'est dans le BFCache
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
+        GenererGraphique()
+    }
+})
+
+window.addEventListener("DOMContentLoaded", () => {
+    GenererGraphique()
+})

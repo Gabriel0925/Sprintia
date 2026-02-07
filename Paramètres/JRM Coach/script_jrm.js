@@ -1,0 +1,208 @@
+// Initialisation
+const DicoPhraseExemple = {
+    "Bienveillant": `Vous commencez le sport, vous vous y remettez ou alors vous êtes un·e passionné·e de sport ?
+                    Dans tous les cas, je serai là pour vous aider à devenir meilleur·e et à vous apprendre de nouvelles choses, 
+                    sauf si vous connaissez déjà tout ! Mon objectif ? Vous motiver et toujours voir le positif même dans les moments difficiles.`,
+    "Strict-Motivant": `Je suis un coach sévère, juste mais surtout motivant. Je suis là pour vous pousser à vous dépasser. Comme on dit, c'est quand vous êtes dans le dur
+                    que vous progressez réellement ! Je vous challengerai au quotidien. Avec moi, vous pouvez être sûr·e·s que 
+                    je vous dirai les choses telles qu'elles sont ! Alors, vous êtes prêt·e·s à progresser ?`,
+    "Copain": `Alors, je dois vous prévenir tout de suite : mon but, c'est d'être votre pote ! Et franchement, j’ai l’impression qu’on va super bien s’entendre.
+                Je m’adapte peu importe votre niveau. Mon but ? Vous motiver  et vous faire voir que vous pouvez toujours aller un peu plus loin mais sans vous
+                prendre la tête, promis. Alors, prêt·e à vous lancer ?`,
+    "Go-muscu": `Que vous soyez là pour devenir énorme et sec·he ou juste pour ne plus avoir le souffle coupé en montant de simples escaliers. 
+                Avec moi, vous allez apprendre des choses sur la muscu ! Je suis votre coach qui a toujours de l'énergie sachez que
+                je vois toujours le positif. En revanche, j'ai une personnalité de Go-muscu mais bon je suis sympa !`
+    }
+
+async function SauvegardePreference() {
+    // Recup datas
+    let NameCoach = document.getElementById("nom-coach").value
+    let StyleCoach = document.getElementById("style-coach").value
+    let AvatarCoach = document.getElementById("avatar-coach").value
+
+    // recup bouton
+    let BoutonSauvegarde = document.getElementById("bouton-save")
+
+    // Vérification
+    if (NameCoach.length >= 20) {
+        alert("Erreur de saisie : le champ 'Nom' ne doit pas dépasser 20 caractères.")
+        return
+    }
+
+    // Desactivation du bouton pour éviter le double clic
+    BoutonSauvegarde.disabled = true
+    BoutonSauvegarde.textContent = "Sauvegarde..."
+
+
+    // Nettoyage des données
+    if (!NameCoach) {
+        NameCoach = "JRM Coach :"
+    }
+    
+    // Utilisation de put pr mettre a jour la ligne dans la BDD
+    await db.JRM_Coach.put({
+        id: 1,
+        nom: NameCoach,
+        style: StyleCoach,
+        avatar: AvatarCoach
+    })
+
+    // Légère pause
+    await new Promise(r => setTimeout(r, 650))
+
+    // confirmation sauvegarde
+    BoutonSauvegarde.textContent = "Enregistré"
+
+    // Légère pause
+    await new Promise(r => setTimeout(r, 650))
+
+    // Remise à l'état normal
+    BoutonSauvegarde.disabled = false
+    BoutonSauvegarde.textContent = "Sauvegarder"
+
+    // Changement du titre du h1
+    document.getElementById("title-h1").textContent = NameCoach
+
+    return
+}
+
+function ChangeStyle(value) {
+    let ZoneJRM = document.getElementById("JRM-coach")
+
+    if (value == "Bienveillant") {
+        ZoneJRM.innerHTML = DicoPhraseExemple["Bienveillant"]
+    } else if (value == "Strict-Motivant") {
+        ZoneJRM.innerHTML = DicoPhraseExemple["Strict-Motivant"]
+    } else if (value == "Copain") {
+        ZoneJRM.innerHTML = DicoPhraseExemple["Copain"]
+    } else {
+        ZoneJRM.innerHTML = DicoPhraseExemple["Go-muscu"]
+    }
+
+    return
+}
+
+function ChangeAvatar(value) {
+    // Recup de la zone du nom du coach
+    let ZoneNameJRM = document.getElementById("NomCoach")
+    let NameJRM = document.getElementById("nom-coach").value
+
+    if (!NameJRM) { // Si il y a rien dans le champs name alors on met en variable le nom de base pour que quand ça passera dans le else le nom de base sera mis
+        NameJRM = "JRM Coach"
+    }
+
+    if (value == "👨") {
+        ZoneNameJRM.innerHTML = "👨" + " " + NameJRM + " :"
+    } else if (value == "👧") {
+        ZoneNameJRM.innerHTML = "👧" + " " + NameJRM + " :"
+    } else if (value == "🥸") {
+        ZoneNameJRM.innerHTML = "🥸" + " " + NameJRM + " :"
+    } else if (value == "🤠") {
+        ZoneNameJRM.innerHTML = "🤠" + " " + NameJRM + " :"
+    } else if (value == "👴") {
+        ZoneNameJRM.innerHTML = "👴" + " " + NameJRM + " :"
+    } else if (value == "👵") {
+        ZoneNameJRM.innerHTML = "👵" + " " + NameJRM + " :"
+    } else if (value == "🤡") {
+        ZoneNameJRM.innerHTML = "🤡" + " " + NameJRM + " :"
+    } else if (value == "🤖") {
+        ZoneNameJRM.innerHTML = "🤖" + " " + NameJRM + " :"
+    } else if (value == "🥷") {
+        ZoneNameJRM.innerHTML = "🥷" + " " + NameJRM + " :"
+    } else if (value == "👻") {
+        ZoneNameJRM.innerHTML = "👻" + " " + NameJRM + " :"
+    } else if (value == "💀") {
+        ZoneNameJRM.innerHTML = "💀" + " " + NameJRM + " :"
+    } else if (value == "🦍") {
+        ZoneNameJRM.innerHTML = "🦍" + " " + NameJRM + " :"
+    } else if (value == "🦐") {
+        ZoneNameJRM.innerHTML = "🦐" + " " + NameJRM + " :"
+    } else if (value == "😺") {
+        ZoneNameJRM.innerHTML = "😺" + " " + NameJRM + " :"
+    } else if (value == "🐵") {
+        ZoneNameJRM.innerHTML = "🐵" + " " + NameJRM + " :"
+    } else if (value == "🐻") {
+        ZoneNameJRM.innerHTML = "🐻" + " " + NameJRM + " :"
+    } else {
+        ZoneNameJRM.innerHTML = NameJRM + " :"
+    }   
+
+    return
+}
+
+function MajName(value) {
+    let NameJRM = document.getElementById("NomCoach")
+    let AvatarCoach = document.getElementById("avatar-coach").value
+
+    NameJRM.innerHTML = AvatarCoach + " " + value + " :"
+
+    return
+}
+
+async function Initialisation() {
+    // Zone de message du JRM
+    let ZoneJRMBox = document.getElementById("JRM-coach")
+    let ZoneNameBox = document.getElementById("NomCoach")
+    // Input JRM Coach
+    let InputName = document.getElementById("nom-coach")
+    let InputStyle = document.getElementById("style-coach")
+    let InputAvatar = document.getElementById("avatar-coach")
+
+    // Remise à l'ancien coach
+    const JRMCoachDB = await db.JRM_Coach.toArray()
+    
+    if (JRMCoachDB.length > 0) {
+        // Recup des datas
+        let TableauName = JRMCoachDB.map(elementDB => elementDB.nom)
+        let TableauStyle = JRMCoachDB.map(elementDB => elementDB.style)
+        let TableauAvatar = JRMCoachDB.map(elementDB => elementDB.avatar)
+
+        // Remplissage des zones
+        ZoneNameBox.textContent = TableauAvatar[0] + " " + TableauName[0] // Le nom du coach
+        ZoneJRMBox.innerHTML = DicoPhraseExemple[TableauStyle[0]] // Le message du coach
+        
+        // Remplissage des inputs
+        InputName.value = TableauName[0]
+        InputStyle.value = TableauStyle[0]
+        InputAvatar.value = TableauAvatar[0]
+
+    } else {
+        ZoneJRMBox.innerHTML = DicoPhraseExemple["Bienveillant"]
+    }
+
+    return
+}
+
+async function Reinitialisation() {
+    // Demande de confirmation avant
+    if (confirm("Êtes-vous sur de vouloir réinitialiser votre coach ?")) {
+        let Button = document.getElementById("reinitialiser")
+        // Desactivation du button
+        Button.disabled = true
+        Button.textContent = "Chargement..."
+
+        // Recup data dans BDD
+        db.JRM_Coach.clear()
+
+        // Légère pause
+        await new Promise(r => setTimeout(r, 650))
+
+        // confirmation sauvegarde
+        Button.textContent = "Réinitialisé"
+
+        // Pause
+        await new Promise(r => setTimeout(r, 650))
+
+        // remise etat normal
+        Button.textContent = "Réinitialiser votre coach"
+        Button.disabled = false // Réactivation du bouton
+
+        location.reload()
+    }
+
+    return
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    Initialisation()
+})

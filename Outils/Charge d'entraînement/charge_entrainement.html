@@ -199,54 +199,6 @@
             
             if (PreferenceUser == "True") {
                 // Recup des champs
-                let ShortcutAdd = document.getElementById("icone-add")
-                let ShortcutHistorique = document.getElementById("icone-historique")
-                let ShortcutPause = document.getElementById("icone-pause")
-
-                // Recup des icones
-                let IconeShortcutAdd = document.querySelector(".fs-icon_add")
-                let IconeShortcutHistorique = document.querySelector(".fs-icon_historique")
-                let IconeShortcutPause = document.querySelector(".fs-icon_pause")
-
-                // Recup variable css
-                const Style = getComputedStyle(document.documentElement)
-
-                const CouleurAccentHover = Style.getPropertyValue("--COULEUR_ACCENT_HOVER")
-                const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
-                const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
-
-                if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
-                        if (ModeUse == "Clair") {
-                            // Mise des couleurs si l'élément est existant
-                            ShortcutAdd.style.background = CouleurAccentContrasterHover
-                            IconeShortcutAdd.style.color = CouleurBackground
-                            
-                            ShortcutHistorique.style.background = CouleurAccentContrasterHover
-                            IconeShortcutHistorique.style.color = CouleurBackground
-
-                            ShortcutPause.style.background = CouleurAccentContrasterHover
-                            IconeShortcutPause.style.color = CouleurBackground
-                        } else {
-                            // Mise des couleurs si l'élément est existant
-                            ShortcutAdd.style.background = CouleurAccentHover
-                            IconeShortcutAdd.style.color = CouleurBackground
-                            
-                            ShortcutHistorique.style.background = CouleurAccentHover
-                            IconeShortcutHistorique.style.color = CouleurBackground
-
-                            ShortcutPause.style.background = CouleurAccentHover
-                            IconeShortcutPause.style.color = CouleurBackground
-                        }
-
-                }
-            }
-        })
-        window.addEventListener("DOMContentLoaded", () => {
-            let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
-            let ModeUse = localStorage.getItem("ThemeActuel")
-            
-            if (PreferenceUser == "True") {
-                // Recup des champs
                 let ButtonAdd = document.getElementById("add")
                 let IconeAdd = document.querySelector(".fs-icon_add")
 

@@ -77,16 +77,65 @@
         </div>
     </header>
 
-    <div class="conteneur-about-marge">
-        <h1>JRM Coach</h1>
+    <div class="conteneur-de-outil">
+        <h1 id="title-h1">JRM Coach</h1>
         <p class="text">
             Un coach entièrement personnalisable. Créez votre propre coach : choisissez son nom, son style et même son avatar. 
             Votre coach, à votre image, pour vous motiver au quotidien !
         </p>
+        <div class="conteneur-ensemble">
+            <div class="conteneur-champs-outil">
+                <div class="conteneur-input">
+                    <input type="text" id="nom-coach" oninput="MajName(value)" placeholder="Nom" autocomplete="off">
+                    <div class="label-input">Nom</div>
+                </div>
 
+                <select id="style-coach" onchange="ChangeStyle(value)" autocomplete="off">
+                        <option value="Bienveillant">Style : Bienveillant</option>
+                        <option value="Strict-Motivant">Style : Strict & Motivant</option>
+                        <option value="Copain">Style : Copain</option>
+                        <option value="Go-muscu">Style : Go muscu</option>
+                </select>
+                <select id="avatar-coach" onchange="ChangeAvatar(value)" autocomplete="off">
+                        <option value="">Avatar : Rien</option>
+                        <option value="👨">Avatar : 👨</option>
+                        <option value="👧">Avatar : 👧</option>
+                        <option value="🥸">Avatar : 🥸</option>
+                        <option value="🤠">Avatar : 🤠</option>
+                        <option value="👴">Avatar : 👴</option>
+                        <option value="👵">Avatar : 👵</option>
+                        <option value="🤡">Avatar : 🤡</option>
+                        <option value="🤖">Avatar : 🤖</option>
+                        <option value="🥷">Avatar : 🥷</option>
+                        <option value="👻">Avatar : 👻</option>
+                        <option value="💀">Avatar : 💀</option>
+                        <option value="🦍">Avatar : 🦍</option>
+                        <option value="🦐">Avatar : 🦐</option>
+                        <option value="😺">Avatar : 😺</option>
+                        <option value="🐵">Avatar : 🐵</option>
+                        <option value="🐻">Avatar : 🐻</option>
+                </select>
+
+                <button onclick="SauvegardePreference()" id="bouton-save">Sauvegarder</button>
+            </div>
+
+            <div class="box-result">
+                <p class="score-imc" id="NomCoach">JRM Coach :</p>
+                <p class="zone-imc" id="JRM-coach">
+                    Chargement...
+                </p> 
+            </div>
+
+        </div>
+
+        
         <p class="text">
-            Cette fonctionnalité sera disponible lors de futures betas.
+             Attention, en réinitialisant votre coach, le coach par défaut sera rétabli.
         </p>
+        <div class="conteneur-centrage-marge">
+            <button id="reinitialiser" onclick="Reinitialisation()">Réinitialiser votre coach</button>
+        </div>
+        
     </div>
     
     <footer>
@@ -115,6 +164,29 @@
     
     <!-- Pour le burger menu -->
     <script src="../../Assets/base-js/base.js"></script>
+    <!-- Import bibliothèque pour simplifier le code de indexed db -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+    <script src="script_jrm.js"></script>
+    <script>
+        async function NomCoachInit() {
+            // Recup datas
+            let CoachUserDB = await db.JRM_Coach.toArray()
+
+            if (CoachUserDB.length > 0) { // Si il y a des datas
+                let NomCoach = CoachUserDB.map(elementDB => elementDB.nom)
+                let AvatarCoach = CoachUserDB.map(elementDB => elementDB.avatar)
+                
+                document.getElementById("title-h1").textContent = NomCoach
+            }
+
+            return
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            NomCoachInit()
+        })
+    </script>
 
     
     <!-- Pour avoir les statistiques de visite du site -->

@@ -10,7 +10,7 @@ function SelectionSport(value) { // Pr cacher les champs en fonction du sport ch
         ChampsMuscles.style.display = "none"
         LabelMuscles.style.display = "none"
 
-    } else if (value == "Course" || value == "Velo" || value == "Marche") {
+    } else if (value == "Course" || value == "Vélo" || value == "Marche") {
         DivCoteCote.classList.remove("invisible")
         ChampsMuscles.style.display = "none"
         LabelMuscles.style.display = "none"
@@ -130,13 +130,17 @@ async function RegistrationWorkout() {
         alert("Valeur non valide, la durée doit être un nombre supérieur à 0.")
         return
     }
+    if (DureeWorkoutUser > 1439) {
+        alert("La durée de votre entraînement ne doit pas dépasser 1439 minutes (23h 59min).")
+        return
+    }
     if (NameWorkoutUser.length >= 80) {
-        alert("Le champs sport ne doit pas dépasser 50 caractères.")
+        alert("Le champs sport ne doit pas dépasser 80 caractères.")
         return
     }
 
     // Recup en fonction du sport
-    if (SportWorkoutUser == "Course" || SportWorkoutUser == "Velo" || SportWorkoutUser == "Marche") {
+    if (SportWorkoutUser == "Course" || SportWorkoutUser == "Vélo" || SportWorkoutUser == "Marche") {
         // Recup champs
         DistanceWorkoutUser = parseFloat(document.getElementById("distance-entrainement-user").value.trim())
         DeniveleWorkoutUser = parseInt(document.getElementById("denivele-entrainement-user").value.trim())
@@ -150,8 +154,16 @@ async function RegistrationWorkout() {
             alert("Valeur non valide, la distance doit être un nombre supérieur à 0.")
             return
         }
+        if (DistanceWorkoutUser > 1000) {
+            alert("La distance de votre entraînement ne doit pas dépasser 1000 kilomètres.")
+            return
+        }
         if (DeniveleWorkoutUser < 0) {
             alert("Valeur non valide, le denivelé doit être un nombre positif.")
+            return
+        }
+        if (DeniveleWorkoutUser > 10000) {
+            alert("Le dénivelé de votre entraînement ne doit pas dépasser 10 000 m.")
             return
         }
     } else if (SportWorkoutUser == "Musculation") {

@@ -93,7 +93,12 @@ function HTMLCard(CardWorkout, workout, DateEuropeen) {
             await db.entrainement.delete(workout.id) // supprimer la data de la bdd
             CardWorkout.remove() // supprimer la ligne
         }
-        location.reload()
+        
+        const NbCardStatut = document.querySelectorAll(".cards-history-workout")
+        if (NbCardStatut.length == 0) { // si il n'y a pas de card alors on remet le message comme quoi il faut ajouter des datas et on enleve le bouton afficher plus
+            document.getElementById("text-informatif").style.display = "block"
+            document.getElementById("button_afficher_plus").style.display = "none"
+        }
     })
 
     BoutonModifier.addEventListener("click", async () => { // Ajout d'une "action" au bouton

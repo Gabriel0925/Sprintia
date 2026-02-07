@@ -203,8 +203,12 @@
                     if (confirm(`Supprimer ce statut "${elementBDD.statut}" ?`)) {
                         await db.statut_analyse.delete(elementBDD.id) // supprimer la data de la bdd
                         CardStatut.remove() // supprimer la ligne
+
+                        const NbCardStatut = document.querySelectorAll(".cards-history-workout")
+                        if (NbCardStatut.length == 0) { // si il n'y a pas de card alors on remet le message comme quoi il faut ajouter des datas
+                            document.getElementById("text-informatif").style.display = "block"
+                        }
                     }
-                    location.reload()
                 })
 
                 ConteneurCardsStatut.appendChild(CardStatut)

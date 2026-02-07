@@ -1,4 +1,9 @@
-function ReinitialisationOutil() {
+async function ReinitialisationOutil() {
+    // recup du bouton
+    let BoutonSauvegarde = document.getElementById("sauvegarde-button")
+    BoutonSauvegarde.disabled = true // désactivation du bouton
+    BoutonSauvegarde.textContent = "Chargement..."
+
     // Restauration des toggle par défaut
     localStorage.removeItem("SauvegardeIDC")
     localStorage.removeItem("DateSauvegardeIDC")
@@ -11,8 +16,25 @@ function ReinitialisationOutil() {
     localStorage.removeItem("FourchetteDistance")
     localStorage.removeItem("DateValueSauvegardeIDC")
 
-    // Rechargement de la page pour assurer un bon rétablissement
-    location.reload()
+    // Légère pause
+    await new Promise(r => setTimeout(r, 650))
+
+    // confirmation sauvegarde
+    BoutonSauvegarde.textContent = "Réinitialisé"
+
+    document.getElementById("toggle-sauvegarde-date").checked = false
+    document.getElementById("toggle-sauvegarde-auto").checked = false
+    document.getElementById("toggle-connexion").checked = true
+
+    // réaffichage de la date de sauvegarde
+    document.getElementById("explication-fonction-date-afficher").style.display = "flex"
+    document.getElementById("conteneur-fonction-date-afficher").style.display = "flex"
+
+    // Pause
+    await new Promise(r => setTimeout(r, 650))
+    // remise etat normal
+    BoutonSauvegarde.textContent = "Réinitialiser l'outil"
+    BoutonSauvegarde.disabled = false // Réactivation du bouton
     
     return
 }
