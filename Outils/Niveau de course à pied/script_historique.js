@@ -68,7 +68,7 @@ async function RemplirTableau() {
 
         // Remplir ligne
         ColonneDate.textContent = Date
-        ColonneNiveau.textContent = NiveauDatas[compteur]
+        ColonneNiveau.textContent = NiveauDatas[compteur].toString().replace(".", ",") // ne pas oublier de le mettre en str avant le replace
 
         // Create button
         let BoutonSupprTableau = document.createElement("button")

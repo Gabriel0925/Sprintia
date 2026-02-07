@@ -47,11 +47,11 @@ function HTMLCard(CardWorkout, workout, DateEuropeen) {
         </div>
     `
 
-    if (workout.sport == "Course" || workout.sport == "Velo" || workout.sport == "Marche") {
+    if (workout.sport == "Course" || workout.sport == "Vélo" || workout.sport == "Marche") {
         StructureHTML += `
             <div class="data-workout-paire">
                 <p class="duree-workout">
-                    Distance : <strong>${workout.distance} km</strong>
+                    Distance : <strong>${workout.distance.toString().replace(".", ",")} km</strong>
                 </p>
                 <p class="rpe-workout">
                     Dénivelé : <strong>${workout.denivele} m</strong>

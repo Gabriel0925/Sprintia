@@ -67,10 +67,25 @@ async function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) 
     }
 
     // Dico des phrases
-    const PhraseJRM = [
+    const PhraseJRMBienveillant = [
         "Statut : <strong>Désentraînement</strong><br>Votre condition physique semble décliner ! Essayez d'augmenter l'intensité de vos entraînements pour basculer en statut productif et améliorer vos performances.",
         "Statut : <strong>Productif</strong><br>Vous êtes entrain de progresser, bravo ! Vos entraînements portent leurs fruits, gardez cette régularité et cette discipline pour continuer de booster vos performances.",
         "Statut : <strong>Surentraînement</strong><br>Votre charge d'entraînement est significativement plus élevée que d'habitude, votre corps a du mal à suivre. Votre corps a besoin de quelques jours de repos pour récupérer."
+    ]
+    const PhraseJRMStrictMotivant = [
+        "Statut : <strong>Désentraînement</strong><br>Votre condition physique est entrain de diminuer ! Si vous souhaitez améliorer vos performances, il est plus que temps d'augmenter l'intensité de vos entraînements futurs.",
+        "Statut : <strong>Productif</strong><br>Vous progressez, félicitations ! Vos entraînements portent leurs fruits, continuez à mettre autant d'intensité qu'actuellement lors de vos entraînements futurs.",
+        "Statut : <strong>Surentraînement</strong><br>Vous risquez la blessure et blessure égale perte de niveau donc arrêtez de jouer avec le feu et reposez-vous pendant quelques jours."
+    ]
+    const PhraseJRMCopain = [
+        "Statut : <strong>Désentraînement</strong><br>Je suis désolé mais là vous abusez, vous devriez augmenter l'intensité de vos entraînements sinon tous vos efforts passés vont disparaître en quelques semaines.",
+        "Statut : <strong>Productif</strong><br>Bravo, vous progressez ! Tous vos efforts sont entrain de payer, continuez de vous entraîner de cette façon, ça semble être positif pour votre progression.",
+        "Statut : <strong>Surentraînement</strong><br>Vous vous entraînez plus que d'habitude, votre corps semble galérer à se régénérer. Petit conseil : 'faites une petite pause dans vos entraînements'."
+    ]
+    const PhraseJRGoMuscu = [
+        "Statut : <strong>Désentraînement</strong><br>Vous régressez là ! Il ne faut pas hésiter à faire 1 ou 2 répétitions en plus sur vos séries pour pouvoir augmenter votre RPE et par conséquent votre charge d'entraînement.",
+        "Statut : <strong>Productif</strong><br>GG, vous progressez, je vois que vous mettez la bonne intensité pendant vos séances, continuez comme ça. Vous n'avez presque plus besoin de moi.",
+        "Statut : <strong>Surentraînement</strong><br>Votre corps n'arrive pas à bien récupérer de vos entraînements récents, n'oubliez jamais que le muscle se construit au repos, pas à la salle, reposez-vous un peu avant d'aller à la salle."
     ]
 
     const PhraseJRMStatut = [
@@ -112,15 +127,31 @@ async function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) 
         ChargeChronique = ChargeChronique/4 // on met charge chronique par semaine pr le ratio
         Ratio = ChargeAigue/ChargeChronique
 
-        if (Ratio <= 0.8) {
-            Interpretation = PhraseJRM[0]
+        // Déterminer le coach choisis du user
+        let CoachUserDB = await db.JRM_Coach.toArray()
+        let StyleCoachUser = PhraseJRMBienveillant // attribution du style de coach a utilisé pour l'interpretation
+        if (CoachUserDB.length > 0) {  // si le user a enregistré qqch alors on met le style du coach qu'il a choisis
+            let TableauStyleCoach = CoachUserDB.map(elementDB => elementDB.style) // recup du style
+            // On check le style de coach que le user a choisi et on attribue le tableau correspondant
+            if (TableauStyleCoach[0] == "Bienveillant") {
+                StyleCoachUser = PhraseJRMBienveillant
+            } else if (TableauStyleCoach[0] == "Strict-Motivant") {
+                StyleCoachUser = PhraseJRMStrictMotivant
+            } else if (TableauStyleCoach[0] == "Copain") {
+                StyleCoachUser = PhraseJRMCopain
+            } else {
+                StyleCoachUser = PhraseJRGoMuscu
+            }
+        }
+
+        if (Ratio <= 0.8) { // Interpretation en fonction du ratio
+            Interpretation = StyleCoachUser[0]
         } else if (Ratio <= 1.35) {
-            Interpretation = PhraseJRM[1]
+            Interpretation = StyleCoachUser[1]
         } else if (Ratio >= 1.35) {
-            Interpretation = PhraseJRM[2]
+            Interpretation = StyleCoachUser[2]
         }
     }
-
 
     return Interpretation
 }

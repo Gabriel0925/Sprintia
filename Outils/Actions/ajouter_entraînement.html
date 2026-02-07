@@ -82,7 +82,7 @@
         <div class="conteneur-ensemble">
             
             <div class="box-result-deux" id="coach-ajoute-entrainement">
-                <p class="score-imc">JRM Coach :</p>
+                <p class="score-imc" id="nom-coach">JRM Coach :</p>
                 <p class="zone-imc" id="reponse-coach">
                     Chargement...
                 </p> 
@@ -106,7 +106,7 @@
                     
                     <div class="conteneur-input">
                         <input type="text" id="nom-entrainement-user" class="small" placeholder="Nom de l'entraî." autocomplete="off">
-                        <div class="label-input">Nom de l'entraî.</div>
+                        <div class="label-input">Nom de l'entraî.</div> 
                     </div>
                 </div>
                 
@@ -118,10 +118,10 @@
                 <div class="slider-cont">
                     <div class="slider-name">RPE</div>
                     <div class="slider">
-                        <input type="range" min="1" max="10" value="5" autocomplete="off">
-                        <progress min="1" max="10" value="5"></progress>
+                        <input type="range" min="1" max="10" value="1" autocomplete="off">
+                        <progress min="1" max="10" value="1"></progress>
                     </div>
-                    <div class="slider-value">5</div>
+                    <div class="slider-value">1</div>
                 </div>
 
                 <div class="cote-cote invisible" id="dynamique-div">
@@ -192,6 +192,24 @@
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
     <script src="script_ajout_entrainement.js"></script> 
+
+    <!-- Pour le JRM Coach -->
+    <script>
+        async function JRMCoachUser() {
+            let CoachUserDB = await db.JRM_Coach.toArray()
+
+            if (CoachUserDB.length > 0) { // Si il y a des datas on recup le nom et l'avatar et on l'affiche dans le coach JRM
+                let NomCoach = CoachUserDB.map(elementDB => elementDB.nom)
+                let AvatarCoach = CoachUserDB.map(elementDB => elementDB.avatar)
+                
+                document.getElementById("nom-coach").textContent = AvatarCoach + " " + NomCoach + " :"
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            JRMCoachUser()
+        })
+    </script>
 
     <!-- Pour le RPE -->
     <script>

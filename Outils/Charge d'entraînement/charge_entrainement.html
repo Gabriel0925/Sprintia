@@ -112,7 +112,7 @@
             <div class="conteneur-box-deux">
                 
                 <div class="box-result-deux" id="charge-entrainement">
-                    <p class="score-imc">JRM Coach :</p>
+                    <p class="score-imc" id="nom-coach">JRM Coach :</p>
                     <p class="zone-imc" id="reponse-coach-indulgence">
                         Chargement...
                     </p> 
@@ -188,6 +188,24 @@
     <!-- Import bibliothèque pour simplifier le code de indexed db -->
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+
+    <!-- Pour le JRM Coach -->
+    <script>
+        async function JRMCoachUser() {
+            let CoachUserDB = await db.JRM_Coach.toArray()
+
+            if (CoachUserDB.length > 0) { // Si il y a des datas on recup le nom et l'avatar et on l'affiche dans le coach JRM
+                let NomCoach = CoachUserDB.map(elementDB => elementDB.nom)
+                let AvatarCoach = CoachUserDB.map(elementDB => elementDB.avatar)
+                
+                document.getElementById("nom-coach").textContent = AvatarCoach + " " + NomCoach + " :"
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            JRMCoachUser()
+        })
+    </script>
 
     <script src="script_outil.js"></script>
 

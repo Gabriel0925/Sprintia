@@ -33,7 +33,7 @@ function GenererNbAleatoire() {
     return NombreAleatoire
 }
 
-function JrmCoach() {
+async function JrmCoach() {
     // Recup du champs coach
     let SectionCoach = document.getElementById("reponse-coach")
 
@@ -71,10 +71,144 @@ function JrmCoach() {
             "C'est quand vous êtes dans le dur que vous progressez vraiment !",
             "Si vous avez une douleur, ça sert à rien de forcer dessus ! Reposez-vous et revenez plus fort·e !",
             "Faites des étirements légers avant de vous coucher, ça permettra à votre corps de récupérer plus vite !",
-            "Quand vous avez la flemme de faire du sport, mettez-vous en tenue dès que vous vous levez",
+            "Quand vous avez la flemme de faire du sport, mettez-vous en tenue dès que vous vous levez.",
             "Donnez l'exemple sans rien attendre en retour ! Motivez vos amis·es,...",
             "Les progrès ça se construit séance après séance et aujourd'hui vous venez d'en ajouter une de plus à votre parcours ! Félicitations !"
         ]
+    }
+
+    const CoachStrictMotivant = {
+        0: [
+            "Enfin, vous avez terminé votre séance ! J'espère que vous en êtes satisfait.",
+            "J'espère que vous vous êtes donné·e à fond pendant cet entraînement !",
+            "Alors, d'après vous, vous trouvez que vous avez fait un bon entraînement ?",
+            "Bien joué pour cette séance, mais gardez cette même régularité dans vos entraînements.",
+            "Vous pensez avoir réussi votre entraînement ? Le plus important, c'est d'avoir pris du plaisir.",
+            "Cette séance vous a pas trop posé problème ?",
+            "J'espère que cette séance vous a fait du bien physiquement et mentalement.",
+            "Vous avez tout donné ? J'espère parce que c'est la base !",
+            "Vous ne vous êtes pas trop endormi·e·s pendant cette séance ? Je rigole bien sûr !",
+            "J'adore votre régularité, j'espère que vous resterez sur la bonne voie."
+        ],
+        1: [
+            "Vous savez qu'il vaut mieux faire des erreurs à l'entraînement plutôt qu'en compétition. Les erreurs font partie de la réussite.",
+            "Vous savez que faire des erreurs, c'est une chance et c'est souvent ça qui mène des athlètes à la réussite.",
+            "Vous regrettez vos dernières performances ? Sachez que vous êtes allé·e vous entraîner, c'est le plus important.",
+            "Regardez tout ce que vous avez accompli dans le passé et pensez au futur !",
+            "C'est dans le dur que vous progressez vraiment et c'est à ce moment là qu'on voit qui on est.",
+            "Ne vous comparez pas aux autres ! Comparez vous à la personne que vous étiez hier !",
+            "Si c’était facile, tout le monde le ferait. Mais vous, vous n’êtes pas tout le monde.",
+            "Ne regrettez jamais une séance, regrettez seulement celles que vous avez zappées.",
+            "La douleur est temporaire, mais la fierté de vous êtes dépassé·e, elle, reste à vie.",
+            "Quand vous croyez que vous n'avez plus rien à donner, vous avez encore 20% de réserve. C’est là que tout se joue. Alors, allez les chercher."
+        ],
+        2: [
+            "Avoir un objectif en tête permet de gagner en régularité et en discipline, si vous manquez de régularité vous savez ce qui vous reste à faire.",
+            "Votre corps s’ennuie vite, essayez de changer de séance toutes les semaines pour continuer à progresser.",
+            "Mangez des repas équilibrés, protéinés avec des glucides sains et des légumes et trust the process.",
+            "Si vous avez des courbatures, c'est bien, mais si vous avez une douleur faites une pause ! Par contre, si c'est juste la flemme, bougez-vous.",
+            "1 répétition de plus ? C’est une victoire. Fêtez ça, mais restez ·e sur vos objectifs.",
+            "Avant de commencer une séance, sautez, bougez, faites monter votre cardio pour éviter de vous blesser bêtement !",
+            "Buvez avant d’avoir soif, sinon c’est déjà trop tard. Votre corps est une machine, vous devez lui donner de l'essence pour la faire fonctionner.",
+            "Quand votre cerveau vous dit d'arrêter, c’est là qu’il faut pousser. La différence entre vous et les autres ? Eux écoutent cette voix, mais vous, vous la domptez.",
+            "Vous n’avez pas besoin d’être le/la plus fort·e ou le/la plus rapide aujourd’hui. Mais si vous êtes le/la plus régulier·e, vous les écraserez tous sur le long terme. Les performances ça se construit.",
+            "Rappelez-vous toujours où vous êtes et regardez où vous voulez aller."
+        ]
+    }
+
+    const CoachCopain = {
+        0: [
+            "Vous vous êtes bien entraîné·e ?",
+            "Alors cet entraînement ? Vous avez encore cartonné ?",
+            "Vous vous êtes donné à fond j'espère !",
+            "Hey, ça va ?! Pas trop fatigué·e !",
+            "Mais non !! Alors cette séance pas trop compliquée ?",
+            "Aujourd'hui, c'était entraînement !",
+            "Hello, encore un entraînement ! Bravo ! ",
+            "Je suis sûr que vous avez assuré !",
+            "Comment ça va ? Pas trop dur cette séance ?",
+            "Vous êtes épuisé·e ou alors vous vous êtes juste reposé·e sur vos acquis ?"
+        ],
+        1: [
+            "Pendant une séance si vous galèrez, pensez à une personne que vous aimez bien ça vous aidera à dépasser vos limites.",
+            "Pensez toujours à l'après entraînement quand vous galérez ! Imagine-vous entrain de bouffer un gros tacos.",
+            "J'espère que vous avez tout donné sur le terrain ! Vous êtes cap de faire 10 pompes après cette sortie ?",
+            "Tous les soirs au lieu d'être sur votre tel, faites 10 pompes, 10 abdos et 10 squats ! Vous verrez vos performances vont nettement s'améliorer.",
+            "Vous avez loupé votre séance ? Pas grave ! Après tout vous êtes quand même allé·e vous entraîner, bien joué.",
+            "En vrai, une séance de sport c'est quoi dans votre vie ? C'est pas grand chose donc prenez toujours ce temps.",
+            "Continuez à travailler, concentrez-vous et vous allez tous les choquer ! Dont moi !",
+            "Pour toujours être motivé et progresser, faites évoluer vos séances pour ne pas rentrer dans l'habitude.",
+            "La clé de la réussite c'est la concentration, la discipline et le dépassement de soi.",
+            "Comparez-vous toujours à la personne que vous étiez hier ! C'est votre rival !"
+        ],
+        2: [
+            "Le plus important dans le sport, c'est la régularité, la motivation c'est juste cool pour les premières semaines.",
+            "Après une séance comme celle-ci vous avez le droit à une récompense, vous le méritez, par contre je vous laisse choisir votre récompense. ",
+            "Si vous ne vous êtes pas donné·e à fond pour cet entraînement, bah pensez à vous donner à fond la prochaine fois !",
+            "Vous connaissez le 80/20 pour une prépa ? Vous devez faire 80% du temps de votre entraînement à faible intensité et 20% du temps en effort intense.",
+            "Je vous donne un défi pour votre prochain entraînement : testez la séance pyramide en course à pied. Renseignez-vous sur cette séance et testez si vous êtes cap.",
+            "La nutrition ça joue aussi dans vos performances. Donc, essayez toujours de manger des aliments non-transformés.",
+            "Essayez de boire 2 à 3 verres d'eau après cet entraînement, ça permettra à votre corps de récupérer plus vite.",
+            "J'espère qu'avant cet entraînement vous vous êtes échauffé·e parce que l'échauffement c'est crucial !",
+            "Gérez votre effort dès le début de votre entraînement : ne partez pas à fond sur les premières répétitions pour éviter de vous cramer dès le départ.",
+            "Laissez du temps à votre corps pour récupérer, ça lui fera du bien et vous serez moins fatigué·e."
+        ]
+    }
+
+    const CoachGoMuscu = {
+        0: [
+            "Vous avez senti une douleur quelque part ? Si oui, parlez-en à un médecin, ça sert à rien de forcer comme un bourrin·ne.",
+            "Vous êtes allé·e à l'échec ou alors vous vous êtes aidé de l'élan pour finir votre répétition ?",
+            "Vous avez battu votre PR ? Si oui : vous êtes une machine ! Si non : vous inquiétez pas, la prochaine fois, vous allez tout péter !",
+            "Vous avez bu assez d’eau pendant votre séance ? J'espère que oui sinon => buvez maintenant !",
+            "Vous avez écouté de la musique pendant votre séance ? Parce que moi, je sais qu'une bonne playlist, ça fait +20% de performance.",
+            "Vous avez fait vos étirements ? Non ? Vous êtes entrain de préparer vos courbatures pour demain. Allez vous étirer, ça prend 5 minutes.",
+            "Demain, n'oubliez pas, c'est le Leg Day. Pour les nuls en anglais ça veut dire : 'la séance consacrée aux jambes'",
+            "Vous avez fait un échauffement avant ou vous avez fait votre séance directement comme un bourrin ? Parce que moi, je sais que l’échauffement, c’est +50% de performance !",
+            "Vous êtes content·e de votre séance ou vous êtes déçu·e ?",
+            "Vous avez mangé des protéines après votre séance ? J'espère parce que c'est pas comme ça que vous allez devenir énorme et sec !"
+        ],
+        1: [
+            "La discipline, c’est la clé. Et vous, vous avez la clé pour tout exploser !",
+            "Le mental est plus important que les muscles, j'espère que vous n'écoutez pas cette voix dans votre tête qui vous dit d'arrêter.",
+            "Un effort de plus, c’est un pas de plus vers vos objectifs. Continuez comme ça !",
+            "100% d’efforts, 0% de regrets. Vous êtes sur la bonne voie, champion·ne !",
+            "La souffrance, c’est temporaire. Les résultats, eux, restent. Vous êtes très fort·e, pour continuer d'être au sommet, allez poussez de la fonte demain.",
+            "Vous faites de la muscu, alors prouvez-le ! Faites 20 pompes là maintenant ! Non, je ne rigole pas allez bougez-vous.",
+            "Je vous lance un petit défi : ce soir avant d'aller vous coucher vous faites 10 pompes, 10 squats et 10 dips et après vous pourrez aller dormir !",
+            "Chaque goutte de sueur perdue, c’est un pas de plus vers la version de vous énorme et sec.",
+            "Vous connaissez le '7-7-7' ? Non ? C'est un circuit à faire après une séance : 7 Burpees, 7 Pompes, 7 Squats sautés, je vous mets au défi de réussir ce circuit.",
+            "Ne comparez jamais votre physique aux autres, comparez-le à la version de votre corps d'hier !"
+        ],
+        2: [
+            "Vous savez ce que c'est d'avoir le pump ? C'est quand vous ressentez la congestion de votre muscle pendant une séance.",
+            "Vous connaissez le programme : 'Push, Pull, Legs' ? Non ? Bah demandez à Gemini peut être que vous allez comprendre.",
+            "Les protéines après l’entraînement, c'est le top ! Oeufs, poulet, fromage blanc... Vous avez l’embarras du choix !",
+            "Après un entraînement comme celui-ci je vous conseille de prendre une banane ou des amandes !",
+            "Les glucides, c’est votre carburant pour votre séance de muscu vous avez le choix entre : des pâtes complètes, du riz,...",
+            "La récupération c’est sacré. Dormez 7 à 8h par nuit, vos muscles vous diront merci.",
+            "Évitez les sucres rapides avant le sport, privilégiez des sucres lents. Un fruit, oui. Un soda, non.",
+            "Respirez bien pendant l’effort. Inspirez par le nez, expirez par la bouche. Vous êtes une machine !",
+            "Hydratez-vous avant, pendant et après l’effort. L’eau, c’est votre meilleur allié !",
+            "Les muscles ça se construit séance après séance et aujourd'hui vous venez d'en ajouter une de plus à votre parcours ! Félicitations !"
+        ]
+    }
+    
+    // Déterminer le coach choisis du user
+    let CoachUserDB = await db.JRM_Coach.toArray()
+    let StyleCoachUser = CoachBienveillant // attribution du style de coach a utilisé
+    if (CoachUserDB.length > 0) {  // si le user a enregistré qqch alors on met le style du coach qu'il a choisis
+        let TableauStyleCoach = CoachUserDB.map(elementDB => elementDB.style) // recup du style
+        // On check le style de coach que le user a choisi et on attribue le dico correspondant
+        if (TableauStyleCoach[0] == "Bienveillant") {
+            StyleCoachUser = CoachBienveillant
+        } else if (TableauStyleCoach[0] == "Strict-Motivant") {
+            StyleCoachUser = CoachStrictMotivant
+        } else if (TableauStyleCoach[0] == "Copain") {
+            StyleCoachUser = CoachCopain
+        } else {
+            StyleCoachUser = CoachGoMuscu
+        }
     }
 
     // générer le paragraphe
@@ -83,8 +217,8 @@ function JrmCoach() {
     let ParagrapheCoach = ""
 
     for (let i = 0; i <= 2; i++) {
-        NombreAleatoire = GenererNbAleatoire()
-        PhraseDico = CoachBienveillant[i][NombreAleatoire]
+        NombreAleatoire = GenererNbAleatoire() // nb aléatoire
+        PhraseDico = StyleCoachUser[i][NombreAleatoire] // recherche dans le dico
 
         ParagrapheCoach += PhraseDico + " "
     }

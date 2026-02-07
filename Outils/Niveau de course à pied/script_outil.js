@@ -77,8 +77,9 @@ async function SauvegardeNiveauCourse() {
 
 
     // Recup valeur niveau
-    let NiveauCourseUser = parseFloat(document.querySelector(".temps-recup").innerHTML.trim())
+    let NiveauCourseUser = document.querySelector(".temps-recup").innerHTML.trim().replace(",", ".")
 
+    NiveauCourseUser = parseFloat(NiveauCourseUser)
     // verification
     if (NiveauCourseUser <= 0) {
         alert("Veuillez d'abord calculer votre niveau de course avant de vouloir le sauvegarder.")
@@ -96,6 +97,7 @@ async function SauvegardeNiveauCourse() {
     DateActuelle = DateActuelle[0] // '2026-01-24'
 
     // Ajout datas
+    console.log(NiveauCourseUser)
     await db.niveau_course.add({
         niveau_course_user: NiveauCourseUser,
         date: DateActuelle

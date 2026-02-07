@@ -36,7 +36,7 @@ async function SauvegardePreference() {
 
     // Nettoyage des données
     if (!NameCoach) {
-        NameCoach = "JRM Coach :"
+        NameCoach = "JRM Coach"
     }
     
     // Utilisation de put pr mettre a jour la ligne dans la BDD
@@ -93,8 +93,8 @@ function ChangeAvatar(value) {
 
     if (value == "👨") {
         ZoneNameJRM.innerHTML = "👨" + " " + NameJRM + " :"
-    } else if (value == "👧") {
-        ZoneNameJRM.innerHTML = "👧" + " " + NameJRM + " :"
+    } else if (value == "👩") {
+        ZoneNameJRM.innerHTML = "👩" + " " + NameJRM + " :"
     } else if (value == "🥸") {
         ZoneNameJRM.innerHTML = "🥸" + " " + NameJRM + " :"
     } else if (value == "🤠") {
@@ -109,10 +109,12 @@ function ChangeAvatar(value) {
         ZoneNameJRM.innerHTML = "🤖" + " " + NameJRM + " :"
     } else if (value == "🥷") {
         ZoneNameJRM.innerHTML = "🥷" + " " + NameJRM + " :"
+    } else if (value == "🏋️") {
+        ZoneNameJRM.innerHTML = "🏋️" + " " + NameJRM + " :"
     } else if (value == "👻") {
         ZoneNameJRM.innerHTML = "👻" + " " + NameJRM + " :"
-    } else if (value == "💀") {
-        ZoneNameJRM.innerHTML = "💀" + " " + NameJRM + " :"
+    } else if (value == "🦆") {
+        ZoneNameJRM.innerHTML = "🦆" + " " + NameJRM + " :"
     } else if (value == "🦍") {
         ZoneNameJRM.innerHTML = "🦍" + " " + NameJRM + " :"
     } else if (value == "🦐") {
@@ -134,7 +136,11 @@ function MajName(value) {
     let NameJRM = document.getElementById("NomCoach")
     let AvatarCoach = document.getElementById("avatar-coach").value
 
-    NameJRM.innerHTML = AvatarCoach + " " + value + " :"
+    if (value == "" || value == " ") { // Si le champs est vide alors on met JRM coach dans la box JRM Coach
+        NameJRM.innerHTML = AvatarCoach + " " + "JRM Coach :"
+    } else {
+        NameJRM.innerHTML = AvatarCoach + " " + value + " :"
+    }
 
     return
 }
@@ -156,11 +162,21 @@ async function Initialisation() {
         let TableauName = JRMCoachDB.map(elementDB => elementDB.nom)
         let TableauStyle = JRMCoachDB.map(elementDB => elementDB.style)
         let TableauAvatar = JRMCoachDB.map(elementDB => elementDB.avatar)
+        
+        // vérification si c'est la valeur de base du coach alors on rajoute les ':' sinon dans la box du jrm ça affiche "JRM Coach" alors quil faudrait que ce soit écrit "JRM Coach :"
+        if (TableauName[0] == "JRM Coach") {
+            TableauName[0] = TableauName[0] + " :"
+        }
 
         // Remplissage des zones
         ZoneNameBox.textContent = TableauAvatar[0] + " " + TableauName[0] // Le nom du coach
         ZoneJRMBox.innerHTML = DicoPhraseExemple[TableauStyle[0]] // Le message du coach
         
+        // vérification si c'est la valeur de base on remplit pas le input donc str vide
+        if (TableauName[0] == "JRM Coach :") { // "JRM Coach :" car on a modifié TableauName[0] dans le if plus haut
+            TableauName[0] = ""
+        }
+ 
         // Remplissage des inputs
         InputName.value = TableauName[0]
         InputStyle.value = TableauStyle[0]
@@ -187,6 +203,14 @@ async function Reinitialisation() {
         // Légère pause
         await new Promise(r => setTimeout(r, 650))
 
+        // on remet tout de base sur la page premierement les input
+        document.getElementById("title-h1").value = "JRM Coach"
+        document.getElementById("nom-coach").value = ""
+        document.getElementById("style-coach").value = "Bienveillant"
+        document.getElementById("avatar-coach").value = ""
+        document.getElementById("NomCoach").innerHTML = "JRM Coach :"
+        document.getElementById("JRM-coach").innerHTML = DicoPhraseExemple["Bienveillant"]
+
         // confirmation sauvegarde
         Button.textContent = "Réinitialisé"
 
@@ -196,8 +220,6 @@ async function Reinitialisation() {
         // remise etat normal
         Button.textContent = "Réinitialiser votre coach"
         Button.disabled = false // Réactivation du bouton
-
-        location.reload()
     }
 
     return

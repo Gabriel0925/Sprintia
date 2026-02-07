@@ -1,26 +1,118 @@
+// dico des interpretation
+const InterpretationBienveillant = {
+    "1": "<strong>Sprintia n'a pas encore assez de données</strong> pour que votre coach puisse analyser votre indulgence de course. Vous avez juste besoin de compléter les champs pour que Sprintia vous donne des conseils pour progresser.", 
+    "2": "Vous courez <strong>moins depuis 7 jours</strong>, c'est dommage ! Si c'est un choix profitez-en pour vous reposer ou travailler d'autres aspects de la course comme le <strong>renforcement</strong> ou de la <strong>mobilité</strong>.", 
+    "3": "Parfait ! <strong>Vous progressez</strong> grâce à votre <strong>régularité</strong> ainsi qu'à votre discipline, continuez comme ça pour booster vos performances. Pour maximiser votre progression, pensez toujours à <strong>varier vos allures</strong>.", 
+    "4": "Attention, vous courez <strong>bien plus que d'habitude</strong> ! Si vous continuez sur ce rythme vous risquez de vous <strong>blesser</strong>. P'tit conseil, <strong>réduisez</strong> votre volume d'entraînement.", 
+    // Pour les statut
+    "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, vous reposer, et revenez encore plus motivé·e pour battre tous vos records !", 
+    "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
+    "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
+    "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e !"
+}
+const InterpretationStrictMotivant = {
+    "1": "<strong>Sprintia n'a pas encore assez de données</strong> pour que votre coach puisse analyser votre indulgence de course. Vous avez juste besoin de compléter les champs pour que Sprintia vous donne des conseils pour progresser.", 
+    "2": "Vous courez <strong>moins depuis 7 jours</strong>, faites attention si vous continuez dans cette voie, vous risquez de perdre du niveau rapidement ! Petit conseil pour limiter la casse, faites du <strong>renforcement</strong>.", 
+    "3": "Parfait ! <strong>Vous progressez</strong> grâce à votre <strong>régularité</strong>. La régularité c'est la clé de la réussite donc, continuez comme ça pour progresser. Mais attention, le plus dur n'est pas de progresser mais de continuer à progresser.", 
+    "4": "Vous courez <strong>bien plus que d'habitude</strong> ! Si vous voulez vous <strong>blesser</strong>, vous êtes sur la bonne voie, ne jouez pas avec le feu, arrêtez de courir pendant quelques jours, pour revenir plus fort.", 
+    // Pour les statut
+    "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, vous reposer, et revenez encore plus motivé·e pour battre tous vos records !", 
+    "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
+    "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
+    "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e !"
+}
+const InterpretationCopain = {
+    "1": "<strong>Sprintia n'a pas encore assez de données</strong> pour que votre coach puisse analyser votre indulgence de course. Vous avez juste besoin de compléter les champs pour que Sprintia vous donne des conseils pour progresser.", 
+    "2": "Vous courez <strong>moins depuis 7 jours</strong>. Allez, faites un effort, ne vous relâchez pas, sinon vous allez finir par perdre tout votre niveau et croyez moi, vous allez vous en vouloir une fois qu'il sera trop tard.", 
+    "3": "Bravo !<strong>Vous progressez</strong> grâce à votre sérieux, votre concentration et votre détermination à toujours donner le meilleur de vous-même. Pour continuer à progresser, pensez toujours à <strong>varier vos allures</strong>.", 
+    "4": "Attention, vous courez <strong>bien plus que d'habitude</strong> ! J'ai l'impression que vous aimez un peu trop courir en ce moment, c'est bien, mais attention : moins vous êtes régulier, plus vous risquez de vous blesser.", 
+    // Pour les statut
+    "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, vous reposer, et revenez encore plus motivé·e pour battre tous vos records !", 
+    "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
+    "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
+    "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e !"
+}
+const InterpretationGoMuscu = {
+    "1": "<strong>Sprintia n'a pas encore assez de données</strong> pour que votre coach puisse analyser votre indulgence de course. Vous avez juste besoin de compléter les champs pour que Sprintia vous donne des conseils pour progresser.", 
+    "2": "Vous courez <strong>moins depuis 7 jours</strong>, attention, la course à pied c'est comme la musculation ça demande de la <strong>régularité</strong>. Votre coeur, c'est un muscle, il faut le travailler pour qu'il devienne meilleur.", 
+    "3": "<strong>Vous progressez</strong>, parfait ! En plus de travailler vos muscles, vous travaillez votre coeur, bien joué ! Pour continuer à progresser, <strong>pensez toujours à varier vos allures</strong>.", 
+    "4": "Vous courez <strong>bien plus que d'habitude</strong> ! Faites attention, si vous continuez sur ce rythme vous risquez de vous <strong>blesser</strong> donc réduisez votre volume kilométriques.", 
+    // Pour les statut
+    "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, vous reposer, et revenez encore plus motivé·e pour battre tous vos records !", 
+    "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
+    "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
+    "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e !"
+}
+
+async function RecupData() {
+    // recup des datas d'entrainements
+    let HistoriqueWorkoutDB = await db.entrainement.toArray()
+
+    let TableauDate = HistoriqueWorkoutDB.map(elementDB => elementDB.date)
+    let TableauSport = HistoriqueWorkoutDB.map(elementDB => elementDB.sport)
+    let TableauDistance = HistoriqueWorkoutDB.map(elementDB => elementDB.distance)
+
+    // setting date
+    const DateActuelle = new Date()
+
+    let DateMoins7J = new Date()
+    DateMoins7J = DateMoins7J.setDate(DateActuelle.getDate() - 7) // pour le calcul des dates il faut les mettre en timestamp enleve le nb de j ici, ça renvoie ex: 1769014250809
+    DateMoins7J = new Date(DateMoins7J).toISOString() // permet de recup "2026-01-21T17:13:53.151Z"
+    // On prend que ce qui nous interesse donc la premiere partie
+    DateMoins7J = DateMoins7J.split("T")[0] // on obtient "2026-01-21"
+
+    let DateMoins28J = new Date() // voir commentaire au dessus pr explication
+    DateMoins28J = DateMoins28J.setDate(DateActuelle.getDate() - 28) 
+    DateMoins28J = new Date(DateMoins28J).toISOString()
+    DateMoins28J = DateMoins28J.split("T")[0] 
+
+    // Initialisation pour la boucle
+    let compteur = 0
+    let DistanceWorkout = 0
+    let Tableau7J = []
+    let Tableau28J = []
+
+    TableauDate.forEach(elementDate => {
+        // recup de la distance du workout
+        DistanceWorkout = TableauDistance[compteur]
+
+        if (elementDate >= DateMoins7J) {
+            if (TableauSport[compteur] == "Course") {
+                if (DistanceWorkout != null) {
+                    Tableau7J.push(DistanceWorkout)
+                    Tableau28J.push(DistanceWorkout)
+                }
+            }
+        } else if (elementDate >= DateMoins28J) {
+            if (TableauSport[compteur] == "Course") {
+                if (DistanceWorkout != null) {
+                    Tableau28J.push(DistanceWorkout)
+                }
+            }
+        }
+
+       compteur += 1 
+    });
+
+    // init pour la somme
+    let Distance7J = 0
+    let Distance28J = 0
+
+    // passons a la somme
+    Tableau7J.forEach(element => {
+        Distance7J += element
+    });
+    Tableau28J.forEach(element => {
+        Distance28J += element
+    });
+
+    // Affichage dans "Distance réel sur 7J"
+    document.getElementById("reponse-algo-allure").textContent = Distance7J.toFixed(1).replace(".", ",") + " km"
+
+    return {Distance7J, Distance28J}
+}
+
 async function CalculIndulgence() {
-    // Recup valeur des champs
-    let Distance28JUser = parseFloat(document.getElementById("distance28j-user").value.trim().replace(",", "."))
-    let Distance7JUser = parseFloat(document.getElementById("distance7j-user").value.trim().replace(",", "."))
-
-    // Vérif
-    if (isNaN(Distance28JUser) || isNaN(Distance7JUser)) {
-        alert("Erreur de saisie : tous les champs doivent être remplis.")
-        return
-    }
-    if (Distance28JUser <= 0) {
-        alert("Valeur non valide, le champs distance 28j doit être supérieur à 0.")
-        return
-    }
-    if (Distance28JUser >= 1500) {
-        alert("Valeur non valide, la distance (28j) doit être inférieur à 1500.")
-        return
-    }
-    if (Distance7JUser >= 375) {
-        alert("Valeur non valide, la distance (7j) doit être inférieur à 375.")
-        return
-    }
-
     // Initialisation coefficient
     const CoefFourchetteDebut = [1.18, 1.15, 1.12, 1.09, 1.06]
     const CoefFourchetteFin = [1.25, 1.2, 1.15, 1.12, 1.1]
@@ -29,8 +121,10 @@ async function CalculIndulgence() {
     let IndulgenceDeCourseFin = 0
 
     // Calibration par semaine
-    let Distance28J = Distance28JUser/4
+    let {Distance7J, Distance28J} = await RecupData()
+    Distance28J = Distance28J/4
 
+    // Analyse pour avoir la fouchette de distance conseillée (les coef sont diférent en fonction de la distance)
     if (Distance28J <= 10) {
         IndulgenceDeCourseDebut = Distance28J*CoefFourchetteDebut[0]
         IndulgenceDeCourseFin = Distance28J*CoefFourchetteFin[0]
@@ -50,213 +144,74 @@ async function CalculIndulgence() {
 
     let ResultIndulgenceCourse = IndulgenceDeCourseDebut.toFixed(1).replace(".", ",") + " - " + IndulgenceDeCourseFin.toFixed(1).replace(".", ",") + " km"
 
+    // Affichage du résultat
     document.getElementById("reponse-algo-indulgence").innerHTML = ResultIndulgenceCourse
 
-    // direction sauvegarde
-    SauvegardeRestauration("Sauvegarde", Distance7JUser, Distance28JUser, ResultIndulgenceCourse, "", "")
-
-    // Go interpretation
-    await InterpretationIDC(Distance7JUser, Distance28J, IndulgenceDeCourseFin, "Fonction")
-    return
+    return {Distance7J, Distance28J, IndulgenceDeCourseFin}
 }
 
-function SauvegardeRestauration(ChoseFaire, Distance7JUser, Distance28JUser, ResultIndulgenceCourse, Interpretation, InterpretationParagraphe) {
-    // Vérification si l'utilisateur a desactiver la fonction
-    let SauvegardeIDC = localStorage.getItem("SauvegardeIDC")
-
-    // On ne sauvegarde rien ou restaure rien si le user a desactiver l'option sauvegarde mais on cache le message d'aide du debut
-    if (SauvegardeIDC == "False") {
-        document.getElementById("text-info-sauvegarde").style.display = 'none'
-        return
-    }
-
-    // On cache le message d'aide si il y a qqch dans le local storage 
-    if (SauvegardeIDC != null) {
-        document.getElementById("text-info-sauvegarde").style.display = 'none'
-    }
-
-    if (ChoseFaire == "Restauration") {
-        // Remplir les 2 champs distance
-        let RecentDistance7J = localStorage.getItem("RecentDistance7J")
-        let RecentDistance28J = localStorage.getItem("RecentDistance28J")
-
-        if (RecentDistance7J) {
-            document.getElementById("distance7j-user").value = RecentDistance7J
-        }
-        if (RecentDistance28J) {
-            document.getElementById("distance28j-user").value = RecentDistance28J
-        }
-
-        // Remplir la fourchette
-        let RecentFourchette = localStorage.getItem("FourchetteDistance")
-        if (RecentFourchette) {
-            document.getElementById("reponse-algo-indulgence").innerHTML = RecentFourchette
-        }
-
-        // Remplir l'analyse du coach 
-        let CoachAnalyse = localStorage.getItem("CoachInterpretation")
-        if (CoachAnalyse) {
-            InterpretationParagraphe.innerHTML = Interpretation[CoachAnalyse]
-        }
-
-        // Activation du text info sur sauvegarde
-        let TextSauvegarde = document.querySelector(".text-info")
-        TextSauvegarde.classList.add("visible") 
-
-        // Restauration de la dernière sauvegarde de date
-        let SauvegardeDate = localStorage.getItem("DateSauvegardeIDC") // true or false
-
-        if (SauvegardeDate != "False"){ // Si le user n'a pas refusé alors on reaffiche la date de sauvegarde
-            // Recup de la date
-            let DateSauvegardee = localStorage.getItem("DateValueSauvegardeIDC") // value de la date
-
-            // Affichage
-            if (DateSauvegardee == null) {
-                document.querySelector(".text-info").innerHTML = "Aucune sauvegarde"
-            } else {
-                document.querySelector(".text-info").innerHTML = "Sauvegardé le : " + DateSauvegardee
-            }
-            
-        } else if (SauvegardeDate == "False") {
-            // Si l'utilisateur a desactiver alors on affiche pas le txt info
-            document.querySelector(".text-info").style.display = "none"
-        }
-    } else {
-        // Enregistrement des datas
-        localStorage.setItem("RecentDistance7J", Distance7JUser)
-        localStorage.setItem("RecentDistance28J", Distance28JUser)
-        localStorage.setItem("FourchetteDistance", ResultIndulgenceCourse)
-
-        // Enregistrement de la date
-        let SauvegardeDate = localStorage.getItem("DateSauvegardeIDC") // value true or false
-        if (SauvegardeDate != "False"){ // Si le user n'a pas refusé alors on enregistre
-            // Recup de la date
-            let DateNow = new Date()
-
-            // Formatage de la date
-            const DateFormatee = DateNow.toLocaleDateString("fr-FR",
-                {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric"
-                }
-            )
-
-            // Sauvegarde
-            localStorage.setItem("DateValueSauvegardeIDC", DateFormatee)
-
-            // Affichage
-            document.querySelector(".text-info").innerHTML = "Sauvegardé le : " + DateFormatee
-        }
-    }
-
-    return
-}
-
-async function InterpretationIDC(Distance7JUser, Distance28J, IndulgenceDeCourseFin, Lieu) {
+async function InterpretationJRM(Distance7J, Distance28J, IndulgenceDeCourseFin) {
     // Recup du champs JRM
     let InterpretationParagraphe = document.getElementById("reponse-coach-indulgence")
-    // si utilisateur a desctiver l'option de sauvegarde alors on ne sauvegarde rien
-    let SauvegardeIDC = localStorage.getItem("SauvegardeIDC")
 
+    // On regarde le statut du user
+    let HistoriqueDB = await db.statut_analyse.toArray()
+    let StatutData = HistoriqueDB.map(statutBDD => statutBDD.statut).reverse() // reverse pour inverser la liste pour l'ordre
 
-    // Interpretation initialisation
-    const Interpretation = {
-        "1": "Sprintia n'a pas encore assez de données pour analyser votre indulgence de course. Pas de panique vous avez juste besoin de compléter les champs pour que Sprintia vous donne des conseils pour progresser.", 
-        "2": "Vous courez moins depuis 7 jours, c'est dommage ! Si c'est un choix profitez-en pour vous reposer ou travailler d'autre aspect de la course comme du renforcement ou de la mobilité.", 
-        "3": "Parfait ! Vous progressez grâce à votre régularité ainsi qu'à votre discipline, continuez comme ça pour booster vos performances. Pour maximiser votre progression, pensez toujours à varier vos allures.", 
-        "4": "Attention vous courez bien plus que d'habitude ! Si vous continuez sur ce rythme vous risquez de vous blesser. P'tit conseil, réduisez votre volume d'entraînement.", 
-        // Pour les statut
-        "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, apprécier en famille, de repos, et revenez encore plus motivé·e pour battre tous vos records !", 
-        "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
-        "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
-        "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e·s !", 
-    }
-
-    if (Lieu == "Initialisation") {
-        // Initialisation du paragraphe
-        InterpretationParagraphe.innerHTML = Interpretation["1"]
-
-        // Remplissage des champs
-        SauvegardeRestauration("Restauration", 0, 0, 0, Interpretation, InterpretationParagraphe)
-    } else {
-        // Check du statut du user
-        let HistoriqueDB = await db.statut_analyse.toArray()
-
-        let StatutData = HistoriqueDB.map(statutBDD => statutBDD.statut).reverse() // reverse pour inverser la liste pour l'ordre
-
-        // Unit 
-        let LastStatutUser = ""
-        if (StatutData.length > 0) {
-            // on prend l'index 0 pour avoir son dernier statut
-            LastStatutUser = StatutData[0]
+    // Déterminer le coach choisis du user
+    let CoachUserDB = await db.JRM_Coach.toArray()
+    let Interpretation = InterpretationBienveillant // attribution du style de coach a utilisé
+    if (CoachUserDB.length > 0) {  // si le user a enregistré qqch alors on met le style du coach qu'il a choisis
+        let TableauStyleCoach = CoachUserDB.map(elementDB => elementDB.style) // recup du style
+        // On check le style de coach que le user a choisi et on attribue le dico correspondant
+        if (TableauStyleCoach[0] == "Bienveillant") {
+            Interpretation = InterpretationBienveillant
+        } else if (TableauStyleCoach[0] == "Strict-Motivant") {
+            Interpretation = InterpretationStrictMotivant
+        } else if (TableauStyleCoach[0] == "Copain") {
+            Interpretation = InterpretationCopain
         } else {
-            // si il n'y a pas de statut on le met sur actif
-            LastStatutUser = "Actif·ve"
-        }
-
-        if (LastStatutUser == "Vacances") {
-            InterpretationParagraphe.innerHTML = Interpretation["5"]
-
-            // Regarder si l'utilisateur a autorisé la sauvegarde
-            if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                localStorage.setItem("CoachInterpretation", "5")
-            }
-
-        } else if (LastStatutUser == "Blessure") {
-            InterpretationParagraphe.innerHTML = Interpretation["6"]
-
-            // Regarder si l'utilisateur a autorisé la sauvegarde
-            if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                localStorage.setItem("CoachInterpretation", "6")
-            }
-            
-        } else if (LastStatutUser == "Malade") {
-            InterpretationParagraphe.innerHTML = Interpretation["7"]
-
-            // Regarder si l'utilisateur a autorisé la sauvegarde
-            if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                localStorage.setItem("CoachInterpretation", "7")
-            }
-            
-        } else if (LastStatutUser == "Suspendre") {
-            InterpretationParagraphe.innerHTML = Interpretation["8"]
-
-            // Regarder si l'utilisateur a autorisé la sauvegarde
-            if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                localStorage.setItem("CoachInterpretation", "8")
-            }
-            
-        } else if (LastStatutUser == "Actif·ve") {
-            if (Distance28J <= Distance7JUser && Distance7JUser <= IndulgenceDeCourseFin) {
-                InterpretationParagraphe.innerHTML = Interpretation["3"]
-
-                // Regarder si l'utilisateur a autorisé la sauvegarde
-                if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                    localStorage.setItem("CoachInterpretation", "3")
-                }
-            } else if (Distance7JUser > IndulgenceDeCourseFin) {
-                InterpretationParagraphe.innerHTML = Interpretation["4"]
-
-                // Regarder si l'utilisateur a autorisé la sauvegarde
-                if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                    localStorage.setItem("CoachInterpretation", "4")
-                }
-            } else {
-                InterpretationParagraphe.innerHTML = Interpretation["2"]
-
-                // Regarder si l'utilisateur a autorisé la sauvegarde
-                if (SauvegardeIDC == "True" || SauvegardeIDC == null) {
-                    localStorage.setItem("CoachInterpretation", "2")
-                }
-            }
+            Interpretation = InterpretationGoMuscu
         }
     }
 
+    // Unit 
+    let LastStatutUser = ""
+    if (StatutData.length > 0) { // si il y a des datas
+        // on prend l'index 0 pour avoir son dernier statut
+        LastStatutUser = StatutData[0]
+    } else {
+        // si il n'y a pas de statut on le met sur actif
+        LastStatutUser = "Actif·ve"
+    }
+
+    // Attribution d'une interpretation et ajout direct dans le champs corespondant en fonction du statut 'actif' == mode normal, mode quotidien
+    if (LastStatutUser == "Vacances") {
+        InterpretationParagraphe.innerHTML = Interpretation["5"]
+    } else if (LastStatutUser == "Blessure") {
+        InterpretationParagraphe.innerHTML = Interpretation["6"]   
+    } else if (LastStatutUser == "Malade") {
+        InterpretationParagraphe.innerHTML = Interpretation["7"]
+    } else if (LastStatutUser == "Suspendre") {
+        InterpretationParagraphe.innerHTML = Interpretation["8"]
+    } else if (LastStatutUser == "Actif·ve") { // en mode normal
+        // en fonction du résultat des calculs, attribution d'une interpretation
+        if (Distance28J <= Distance7J && Distance7J <= IndulgenceDeCourseFin) {
+            InterpretationParagraphe.innerHTML = Interpretation["3"]
+        } else if (Distance7J > IndulgenceDeCourseFin) {
+            InterpretationParagraphe.innerHTML = Interpretation["4"]
+        } else {
+            InterpretationParagraphe.innerHTML = Interpretation["2"]
+        }
+    }
+}
+
+async function Initialisation() {
+    let {Distance7J, Distance28J, IndulgenceDeCourseFin} = CalculIndulgence()
+    InterpretationJRM(Distance7J, Distance28J, IndulgenceDeCourseFin)
     return
 }
 
-// Il faut attendre que la page soit chargé avant de modifier les sauvegarde,...
 window.addEventListener("DOMContentLoaded", () => {
-    InterpretationIDC(0, 0, 0, "Initialisation")
+    Initialisation()
 }) 

@@ -1427,6 +1427,9 @@ div.conteneur-ensemble {
     flex-wrap: wrap;
     margin: var(--ESPACE_M) 0px;
 }
+div.conteneur-ensemble#indulgence-course {
+    margin: 0;
+}
 div.conteneur-box-deux {
     display: flex;
     justify-content: center;
@@ -2009,11 +2012,18 @@ div.gallery-version {
     margin: var(--ESPACE_S) auto;
     align-items: center;
     column-count: 2;
-    column-gap: var(--ESPACE_S);
+    column-gap: var(--ESPACE_XS);
+    padding: var(--ESPACE_XS);
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-radius: var(--BORDER_SMALL);
+}
+div.gallery-version#img-smartphone{
+    display: none;
 }
 div.gallery-version img{    
     width: 100%;
-    margin-bottom: var(--ESPACE_S);
     border-radius: var(--BORDER_SMALL);
 }    
 
@@ -2458,6 +2468,20 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
 @media (max-width: 630px) {
     div.gallery-version {
         column-count: 1;
+        column-gap: var(--ESPACE_XXS);
+        padding: 0;
+        background-color: transparent;
+        border-top: none;
+        border-left: none;
+    }
+    div.gallery-version img{
+        margin-bottom: var(--ESPACE_S);
+    }
+    div.gallery-version#img-ordi{
+        display: none;
+    }
+    div.gallery-version#img-smartphone{
+        display: block;
     }
 }
 @media (max-width: 540px) {
