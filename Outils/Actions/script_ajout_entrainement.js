@@ -1,3 +1,52 @@
+let IdEditWorkout = null
+
+async function VerificationParam() {
+    const ParametreURL = window.location.search // on recherche si il y a un param dans l'URL (ex : ?edit=7)
+    let TableauSeparation = ParametreURL.split("=") // exemple ['?edit', '7']
+
+    if (TableauSeparation.length == 2) { // vérification si il y a bien 2 partie
+        // conversion de l'id en int
+        const ID = parseInt(TableauSeparation[1])
+
+        // Recup des datas du workout
+        if (ID) { 
+            // on change la variable globale
+            IdEditWorkout = ID
+            const WorkoutDB = await db.entrainement.get(ID) // la méthode .get permet de recup direct les datas de l'id coresspondant
+            // on commence par changer le H1 de la page
+            document.getElementById("title-page").textContent = "Modification de l'entraînement"
+            document.getElementById("coach-ajoute-entrainement").style.display = "none"
+
+            // remplissage des champs
+            document.getElementById("profil-sport").value = WorkoutDB.sport
+            document.getElementById("date-entrainement-user").value = WorkoutDB.date
+            document.getElementById("nom-entrainement-user").value = WorkoutDB.nom
+            document.getElementById("duree-entrainement-user").value = WorkoutDB.duree
+
+            // remettre le RPE sur bonne position
+            document.querySelector(".slider input").value = WorkoutDB.rpe
+            document.querySelector(".slider progress").value = WorkoutDB.rpe
+            document.querySelector(".slider-value").textContent = WorkoutDB.rpe
+
+            // Remettre les champs adaptée au sport
+            SelectionSport(WorkoutDB.sport)
+
+            // Remplissage des champs de sport particulier
+            if (WorkoutDB.distance) {
+                document.getElementById("distance-entrainement-user").value = WorkoutDB.distance
+                if (WorkoutDB.denivele) {
+                    document.getElementById("denivele-entrainement-user").value = WorkoutDB.denivele
+                }
+            } else if (WorkoutDB.muscles_travailles) {
+                document.getElementById("muscle-entrainement-user").value = WorkoutDB.muscles_travailles
+            }
+
+        }
+    }
+
+    return
+}
+
 function SelectionSport(value) { // Pr cacher les champs en fonction du sport choisi
     // Recup des champs + label des champs
     let DivCoteCote = document.getElementById("dynamique-div")
@@ -323,17 +372,33 @@ async function RegistrationWorkout() {
     ChargeWorkout = DureeWorkoutUser*ValueRpeUser
 
     // Sauvegarde
-    await db.entrainement.add({
-        sport: SportWorkoutUser,
-        date: DateWorkoutUser,
-        nom: NameWorkoutUser,
-        duree: DureeWorkoutUser,
-        rpe: ValueRpeUser,
-        distance: DistanceWorkoutUser,
-        denivele: DeniveleWorkoutUser,
-        muscles_travailles: MusclesWorkoutUser,
-        charge_entrainement: ChargeWorkout
-    })
+    if (IdEditWorkout != null) {
+        await db.entrainement.put({
+            id: IdEditWorkout,
+            sport: SportWorkoutUser,
+            date: DateWorkoutUser,
+            nom: NameWorkoutUser,
+            duree: DureeWorkoutUser,
+            rpe: ValueRpeUser,
+            distance: DistanceWorkoutUser,
+            denivele: DeniveleWorkoutUser,
+            muscles_travailles: MusclesWorkoutUser,
+            charge_entrainement: ChargeWorkout
+        })
+    }
+    else {
+        await db.entrainement.add({
+            sport: SportWorkoutUser,
+            date: DateWorkoutUser,
+            nom: NameWorkoutUser,
+            duree: DureeWorkoutUser,
+            rpe: ValueRpeUser,
+            distance: DistanceWorkoutUser,
+            denivele: DeniveleWorkoutUser,
+            muscles_travailles: MusclesWorkoutUser,
+            charge_entrainement: ChargeWorkout
+        })
+    }
 
     // Pause
     await new Promise(r => setTimeout(r, 1000))
@@ -347,6 +412,7 @@ async function RegistrationWorkout() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+    VerificationParam()
     SelectionSport("Libre")
     JrmCoach()
 })

@@ -81,7 +81,7 @@ function HTMLCard(CardWorkout, workout, DateEuropeen) {
         </div>
     `
 
-    CardWorkout.innerHTML = StructureHTML
+    CardWorkout.innerHTML = StructureHTML 
 
     let BoutonSupprimer = CardWorkout.querySelector(".fs-icon_supprimer").parentElement // parent element pour ne pas prendre que l'icone
     let BoutonModifier = CardWorkout.querySelector(".fs-icon_modifier").parentElement 
@@ -101,8 +101,8 @@ function HTMLCard(CardWorkout, workout, DateEuropeen) {
         }
     })
 
-    BoutonModifier.addEventListener("click", async () => { // Ajout d'une "action" au bouton
-        alert("Cette fonctionnalité sera disponible lors de futures betas.")
+    BoutonModifier.addEventListener("click", async () => { // Ajout d'une "action" au bouton edit
+        window.location.href = `ajouter_entraînement.html?edit=${workout.id}` // mettre un parametre dans l'URL
     })
 
     let CardWorkoutHTML = CardWorkout
@@ -115,6 +115,7 @@ async function SauvegardeHistorique(HistoriqueDB) {
         HistoriqueComplet.push(element)
     });
     await AfficherData()
+
     return
 }
 
@@ -125,6 +126,9 @@ async function AfficherData() {
     } 
     // Cacher le bouton si il n'y a plus d'element a charger
     if (HistoriqueComplet.length <= NbCardsWorkoutAfficher) {
+        document.getElementById("button_afficher_plus").style.display = "none"
+    }
+    if (HistoriqueComplet.length <= 12) {
         document.getElementById("button_afficher_plus").style.display = "none"
     }
 

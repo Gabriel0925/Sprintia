@@ -18,7 +18,7 @@ async function Sauvegarde() { // Ajouter datas
     // Vérification de l'ancien statut pr interdire la sauvegarde du même statut 2 fois d'affiler
     let HistoriqueDB = await db.statut_analyse.toArray()
     let StatutData = HistoriqueDB.map(statutBDD => statutBDD.statut).reverse() // reverse pour inverser la liste pour l'ordre
-    console.log(StatutData)
+    
     // Initialisation
     let LastStatutUser = "Actif·ve"
     if (StatutData.length > 0) {
