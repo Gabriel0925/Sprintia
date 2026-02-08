@@ -477,7 +477,7 @@ header div.navbar .logo a {
     color: var(--COULEUR_TEXT_PRINCIPAL);
     background-color: var(--COULEUR_BACKGROUND_CARD);
     
-        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
+    box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     margin-top: var(--ESPACE_M);
@@ -493,6 +493,7 @@ header div.navbar .logo a:active {
     transform: scale(0.95);
     border-radius: var(--BORDER_SMALL);
     color: var(--COULEUR_ACCENT_HOVER);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 header div.navbar ul.links {
@@ -501,7 +502,7 @@ header div.navbar ul.links {
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     
-        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
+    box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     margin-top: var(--ESPACE_M);
     margin-right: var(--ESPACE_M);
     border-radius: var(--BORDER);
@@ -525,6 +526,7 @@ header div.navbar div.burger-menu-button {
 header div.navbar div.burger-menu-button:active {
     transform: scale(0.85);  
     border-radius: var(--BORDER_SMALL);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
@@ -579,7 +581,7 @@ header .burger-menu {
     margin-top: var(--ESPACE_M);
     width: 200px;
     max-height: 0px;    
-    background-color: var(--COULEUR_BACKGROUND_CARD);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     border-radius: var(--BORDER);
     overflow: hidden; 
 
@@ -589,14 +591,12 @@ header .burger-menu {
 header .burger-menu.open {
     max-height: 350px;
     transform: translate(0, 0) scale(1, 1); /* On remet la taille normale */
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+
     box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     transition: all 0.18s ease-in-out;
-}
-/* Pour que le bouton rétrécisse au moment du clic */
-header .burger-menu.open:active {
-    transform: scale(0.95);
 }
 header .burger-menu li {
     color: var(--COULEUR_BACKGROUND);
@@ -631,6 +631,7 @@ header .burger-menu li a i {
 }
 header .burger-menu li a:active {
     color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    transform: scale(0.9);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-out var(--DUREE_TRANSITION);
 }
@@ -640,6 +641,7 @@ header .burger-menu li a.actif-burger-menu {
 }
 header .burger-menu li a.actif-burger-menu:active {
     color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    transform: scale(0.9);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-out var(--DUREE_TRANSITION);
 }
@@ -816,6 +818,7 @@ div.conteneur-content-scrolling div.card-outil.first {
 }
 div.conteneur-content-scrolling div.card-outil:active {
     transform: scale(0.95);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 div.conteneur-content-scrolling div.card-outil div.icone{
     display: flex;
@@ -876,6 +879,7 @@ div.shorcut.first {
 }
 div.shorcut:active {
     transform: scale(0.95); 
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 div.shorcut div.img{
     display: flex;
@@ -1729,6 +1733,7 @@ div.conteneur-scrolling .card-nouveautes.first {
 }
 div.conteneur-scrolling .card-nouveautes:active {
     transform: scale(0.95);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 div.conteneur-scrolling .card-nouveautes-image p{
     font-size: var(--H1);
@@ -1838,6 +1843,7 @@ div.conteneur-param div.acces-param:active,
 div.conteneur-param div.acces-param1:active,
 div.conteneur-param div.acces-param2:active{
     transform: scale(0.97);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 div.conteneur-param i{
@@ -1879,6 +1885,7 @@ div.conteneur-historique-versions {
 }
 .conteneur-historique-versions .box-last-maj:active{
     transform: scale(0.97);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 /* Contenu supérieur */
 div.conteneur-historique-versions .box-last-maj div.content1 .card-nouveautes-image-last-maj {
@@ -1958,6 +1965,7 @@ div.conteneur-historique-versions .card-nouveautes.visible {
 }
 div.conteneur-historique-versions .card-nouveautes.visible:active {
     transform: scale(0.95);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 div.conteneur-historique-versions .card-nouveautes-image p {
     font-size: var(--H1);
@@ -2077,6 +2085,7 @@ div.conteneur-mode {
 }
 div.conteneur-mode.animation:active {
     transform: scale(0.98);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 div.conteneur-mode.animation i.particulary {
     transform: rotate(-90deg);
@@ -2324,6 +2333,7 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
 }
 div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux:active {
     transform: scale(0.95);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 div.conteneur-about-marge div.about_container div.container-contribue-amelioration div.boite-du-reseaux i {
     color: var(--COULEUR_TEXT_PRINCIPAL);

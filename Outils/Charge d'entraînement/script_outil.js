@@ -324,6 +324,6 @@ window.addEventListener("DOMContentLoaded", () => {
 // Pour recharger le graphique si c'est dans le BFCache
 window.addEventListener("pageshow", (event) => {
     if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
-        GenererGraphique()
+        Initialisation()
     }
 })
