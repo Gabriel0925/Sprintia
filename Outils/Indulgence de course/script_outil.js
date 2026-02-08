@@ -207,7 +207,7 @@ async function InterpretationJRM(Distance7J, Distance28J, IndulgenceDeCourseFin)
 }
 
 async function Initialisation() {
-    let {Distance7J, Distance28J, IndulgenceDeCourseFin} = CalculIndulgence()
+    let {Distance7J, Distance28J, IndulgenceDeCourseFin} = await CalculIndulgence()
     InterpretationJRM(Distance7J, Distance28J, IndulgenceDeCourseFin)
     return
 }
