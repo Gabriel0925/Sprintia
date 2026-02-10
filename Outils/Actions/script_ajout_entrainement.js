@@ -1,4 +1,32 @@
-let IdEditWorkout = null
+let IdEditWorkout = null // init variable globale
+
+async function MessagePrevention() {
+    // Check du statut du user
+    let HistoriqueDB = await db.statut_analyse.toArray()
+
+    let StatutData = HistoriqueDB.map(statutBDD => statutBDD.statut).reverse() // reverse pour inverser la liste pour l'ordre
+
+    // Unit 
+    let LastStatutUser = ""
+    if (StatutData.length > 0) {
+        // on prend l'index 0 pour avoir son dernier statut
+        LastStatutUser = StatutData[0]
+    } else {
+        // si il n'y a pas de statut on le met sur actif
+        LastStatutUser = "Actif·ve"
+    }
+    
+    // Vérif + message de prévention
+    if (LastStatutUser == "Vacances") {
+        alert("Vous êtes en vacances et vous vous entraînez quand même ! Vous êtes très discipliné·e mais allez-y tranquille les vacances c'est fait pour ça aussi.")
+    } else if (LastStatutUser == "Blessure") {
+        alert("Attention ! Vous avez signalé une blessure. Faire un entraînement va aggraver votre blessure, privilégiez la récupuration pour pouvoir revenir plus fort·e.")
+    } else if (LastStatutUser == "Malade") {
+        alert("Vous êtes malade, ce n'est pas très mature de faire un entraînement, votre organisme a besoin de repos pour guérir. Si vous tenez à votre entraînement, essayer de faire un entraînement léger en intensité.")
+    }
+            
+    return
+}
 
 async function VerificationParam() {
     const ParametreURL = window.location.search // on recherche si il y a un param dans l'URL (ex : ?edit=7)
@@ -42,6 +70,10 @@ async function VerificationParam() {
             }
 
         }
+    } else {        
+        SelectionSport("Libre")
+        await JrmCoach()
+        await MessagePrevention()
     }
 
     return
@@ -68,7 +100,6 @@ function SelectionSport(value) { // Pr cacher les champs en fonction du sport ch
         DivCoteCote.classList.add("invisible")
         ChampsMuscles.style.display = "block"
         LabelMuscles.style.display = "block"
-
     }
 
     return
@@ -317,10 +348,6 @@ async function RegistrationWorkout() {
         alert("La durée de votre entraînement ne doit pas dépasser 1439 minutes (23h 59min).")
         return
     }
-    if (NameWorkoutUser.length >= 80) {
-        alert("Le champs sport ne doit pas dépasser 80 caractères.")
-        return
-    }
 
     // Recup en fonction du sport
     if (SportWorkoutUser == "Course" || SportWorkoutUser == "Vélo" || SportWorkoutUser == "Marche") {
@@ -356,10 +383,6 @@ async function RegistrationWorkout() {
         // Verifications
         if (!MusclesWorkoutUser) {
             alert("Veuillez remplir tous les champs du formulaire.")
-            return
-        }
-        if (MusclesWorkoutUser.length > 150) {
-            alert("Les muscles travaillés ne doivent pas dépasser 150 caractères !")
             return
         }
     }
@@ -413,6 +436,4 @@ async function RegistrationWorkout() {
 
 window.addEventListener("DOMContentLoaded", () => {
     VerificationParam()
-    SelectionSport("Libre")
-    JrmCoach()
 })

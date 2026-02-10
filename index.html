@@ -272,6 +272,36 @@
                 document.getElementById("nom-coach").textContent = AvatarCoach + " " + NomCoach + " :"
             }
 
+            // Pour les statuts
+            let StatutDB = await db.statut_analyse.toArray()
+
+            if (StatutDB.length > 0) {
+                let TableauStatut = StatutDB.map(elementDB => elementDB.statut).reverse()
+                 // si il ny a pas de datas
+                let TableauPhraseJRM = [
+                    "Vous avez signalé que vous êtes en vacances ! Profitez de ces jours de vacances pour vous reposer et passez du temps avec de votre famille,...",
+                    "Vous avez signalé que vous êtes blessé·e ! Dans ces moments là, c'est compliqué, je le sais, mais si vous continuez à faire du sport en étant blesser, vous risquez de retarder votre guérison.",
+                    "Vous avez signalé que vous êtes malade ! Je sais que c'est dur mais essayez de ne pas vous entraîner, car votre organisme a besoin de repos.",
+                    "Vous avez suspendu les analyses, je ne peux donc pas analyser votre semaine d'entraînement."
+                ]
+                let Interpretation = ""
+
+                if (TableauStatut[0] != "Actif·ve") { // si le statut n'est pas sur actif alors on met les interpretations
+                    if (TableauStatut[0] == "Vacances") { // Attribution d'une interpretation en fonction du statut
+                        Interpretation = TableauPhraseJRM[0]
+                    } else if (TableauStatut[0] == "Blessure") {
+                        Interpretation = TableauPhraseJRM[1]
+                    } else if (TableauStatut[0] == "Malade") {
+                        Interpretation = TableauPhraseJRM[2]
+                    } else if (TableauStatut[0] == "Suspendre") {
+                        Interpretation = TableauPhraseJRM[3]
+                    }
+                    // On affiche l'interpretation dans la zone du JRM
+                    document.querySelector(".interpretation-jrm").innerHTML = Interpretation
+                    return
+                }
+            }
+
             if (HistoriqueDB.length > 0) { // Si il y a des datas
                 // Initialisation
                 let DureeTotale = 0

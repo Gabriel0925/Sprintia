@@ -554,5 +554,6 @@ function ThemeComplet(event) {
     return
 }
 
-
-user_preference()
+window.addEventListener("DOMContentLoaded", () => {
+    user_preference()
+})

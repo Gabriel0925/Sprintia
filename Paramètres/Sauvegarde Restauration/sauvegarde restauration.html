@@ -80,9 +80,27 @@
     <div class="conteneur-about-marge">
         <h1>Sauvegarde & Restauration</h1>
 
+        <h2>Sauvegarde</h2>
         <p class="text">
-            Cette fonctionnalité sera disponible lors de futures betas.
+            Vous voulez changer de smartphone ou alors vous souhaitez transférer vos données vers un autre appareil informatique (ex: votre PC) ?
+            Vous êtes au bon endroit ! La fonctionnalité de sauvegarde permet de télécharger, exporter vos données au format CSV ce qui permettera par
+            la suite de restaurer vos données (voir plus bas dans la page) sur votre nouvel appareil,...
         </p>
+        <div class="conteneur-centrage">
+            <button onclick="DownloadDatas()" id="download-button">Télécharger mes données</button>
+        </div>
+
+        <h2>Restauration</h2>
+        <p class="text">
+            La fonctionnalité de restauration permet d'ingérer vos données (qui ont été téléchargée au format CSV au préalable) dans Sprintia. Cette fonction est utile
+            si vous changez d'appareil informatique. <strong>Attention, en important des données vous écraserez vos données actuelle</strong>.
+        </p>
+        <div class="conteneur-centrage">
+            <!-- On n' affiche pas le input file -->
+            <input type="file" id="file-input" accept=".json" style="display: none;" onchange="ReadFile(event)">
+            <!-- lors du click sur le bouton on simule un click sur le input file qui va appeller la fonction pour lire le fichier json -->
+            <button onclick="document.getElementById('file-input').click()" id="restoration-button">Restaurer mes données</button>
+        </div>
         
         <h2>Réinitialiser Sprintia</h2>
         <p class="text">
@@ -121,7 +139,11 @@
     
     <!-- Pour le burger menu -->
     <script src="../../Assets/base-js/base.js"></script>
-    <script src="script_suppresion_data.js"></script>
+
+    <!-- Import bibliothèque pour simplifier le code de indexed db -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+    <script src="script_save_restoration.js"></script>
 
     
     <!-- Pour avoir les statistiques de visite du site -->

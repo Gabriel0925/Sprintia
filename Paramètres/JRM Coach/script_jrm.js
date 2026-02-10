@@ -23,12 +23,6 @@ async function SauvegardePreference() {
     // recup bouton
     let BoutonSauvegarde = document.getElementById("bouton-save")
 
-    // Vérification
-    if (NameCoach.length >= 20) {
-        alert("Erreur de saisie : le champ 'Nom' ne doit pas dépasser 20 caractères.")
-        return
-    }
-
     // Desactivation du bouton pour éviter le double clic
     BoutonSauvegarde.disabled = true
     BoutonSauvegarde.textContent = "Sauvegarde..."

@@ -7,11 +7,7 @@ async function Sauvegarde() { // Ajouter datas
     let RaisonUser = document.getElementById("raison-user").value.trim()
 
     // Vérification
-    if (RaisonUser.length >= 130) {
-        alert("Erreur de saisie, le champ raison ne doit pas dépasser 130 caractères.")
-        return
-    }
-    if (!RaisonUser) { // cette vérification doit se faire après celle de length
+    if (!RaisonUser) {
         RaisonUser = null // ça evite de stocker une data en str = ""
     }
 
