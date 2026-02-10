@@ -44,18 +44,20 @@ function Zone(ScoreCourse) {
 function StartNiveau() {
     // Recup datas
     let DistanceUser = parseFloat(document.getElementById("distance-user").value.trim().replace(",", "."))
+    let ChampsErreur = document.getElementById("p-error")
 
     // Vérification
     if (isNaN(DistanceUser)) {
-        alert("Erreur de saisie : le champ distance doit être rempli.")
         return
     }
     if (DistanceUser <= 0) {
-        alert("Valeur non valide, la distance doit être supérieur à 0.")
+        ChampsErreur.textContent = "La distance doit être supérieure à 0."
+        ChampsErreur.style.color = "#ef2e2e"
         return
     }
     if (DistanceUser >= 7) {
-        alert("Valeur non valide, la distance doit être inférieur à 7.")
+        ChampsErreur.textContent = "La distance doit être inférieure à 7."
+        ChampsErreur.style.color = "#ef2e2e"
         return
     }
 
@@ -69,26 +71,15 @@ function StartNiveau() {
     return
 }
 
-
 // Ajouter des datas
 async function SauvegardeNiveauCourse() {
     // Recup bouton
     let BoutonLimite1Clic = document.getElementById("button-sauvegarde-niveau")
-
-
+    // recup inputs
+    let DateNiveauUser = document.getElementById("date-niveau-course").value
+    let DistanceUser = document.getElementById("distance-user").value
     // Recup valeur niveau
     let NiveauCourseUser = document.querySelector(".temps-recup").innerHTML.trim().replace(",", ".")
-
-    NiveauCourseUser = parseFloat(NiveauCourseUser)
-    // verification
-    if (NiveauCourseUser <= 0) {
-        alert("Veuillez d'abord calculer votre niveau de course avant de vouloir le sauvegarder.")
-        return
-    }
-
-    BoutonLimite1Clic.disabled = true // Pour empeche que le user clique 2 fois
-    // signe d'enregistrement pr le user
-    BoutonLimite1Clic.textContent = "Chargement..."
 
     // Recup de la date
     let DateActuelle = new Date().toISOString() // ça renvoie ça "2026-01-24T13:55:37.171Z"
@@ -96,19 +87,40 @@ async function SauvegardeNiveauCourse() {
     DateActuelle = DateActuelle.split("T") // ['2026-01-24', '13:57:55.505Z']
     DateActuelle = DateActuelle[0] // '2026-01-24'
 
+    NiveauCourseUser = parseFloat(NiveauCourseUser) // conversion
+    // verification
+    if (NiveauCourseUser <= 0) {
+        alert("Avant de vouloir sauvegarder votre niveau de course veuillez remplir le champ distance.")
+        return
+    }
+    if (DateNiveauUser > DateActuelle) {
+        alert("La date ne peut pas être dans le futur !")
+        return
+    }
+    if (DistanceUser <= 0) {
+        alert("Valeur non valide, la distance doit être supérieure à 0.")
+        return
+    }
+    if (DistanceUser >= 7) {
+        alert("Valeur non valide, la distance doit être inférieure à 7.")
+        return
+    }
+ 
+    BoutonLimite1Clic.disabled = true // Pour empeche que le user clique 2 fois
+    // signe d'enregistrement pr le user
+    BoutonLimite1Clic.textContent = "Sauvegarde..."
+
     // Ajout datas
-    console.log(NiveauCourseUser)
     await db.niveau_course.add({
         niveau_course_user: NiveauCourseUser,
-        date: DateActuelle
+        distance: DistanceUser,
+        date: DateNiveauUser
     })
 
     // Légère pause
     await new Promise(r => setTimeout(r, 650))
-
     // confirmation sauvegarde
-    BoutonLimite1Clic.textContent = "Enregistré"
-
+    BoutonLimite1Clic.textContent = "Sauvegardé"
     // Pause
     await new Promise(r => setTimeout(r, 650))
     // remise etat normal

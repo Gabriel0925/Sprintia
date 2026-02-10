@@ -81,7 +81,7 @@
             <h1>Niveau course à pied</h1>
             <a href="historique_niveau_course.html"><i class="fs-icon_historique"></i></a>
         </div>
-
+ 
         <h2>Test de course</h2>
         <p class="text">
             Déterminez votre niveau de course actuel en<strong> courant la plus longue distance possible en 12 minutes.</strong>
@@ -89,15 +89,21 @@
             Ne négligez pas l'échauffement : faîtes des gammes pendant 10 à 15 min et ensuite faîtes le test, ça améliorera votre performance.
         </p>
 
-        <div class="conteneur-ensemble">
-            <div class="conteneur-champs-outil">
+
+        <div class="conteneur-ensemble">    
+            <div class="conteneur-champs-outil">    
+                <p class="text-info visible" id="p-error"></p>
                 
                 <div class="conteneur-input">
-                    <input type="number" id="distance-user" placeholder="Distance (km)" autocomplete="off">
+                    <input type="date" class="long" id="date-niveau-course" autocomplete="off">
+                    <div class="label-input">Date</div>
+                </div>
+                <div class="conteneur-input">
+                    <input type="number" id="distance-user" placeholder="Distance (km)" autocomplete="off" oninput="StartNiveau()">
                     <div class="label-input">Distance (km)</div>
                 </div>
 
-                <button onclick="StartNiveau()">Valider</button>
+                <button onclick="SauvegardeNiveauCourse()" id="button-sauvegarde-niveau">Sauvegarder</button>
             </div>
 
             <div class="box-result" id="niveau-course">
@@ -106,10 +112,6 @@
                     0
                 </p>
             </div>
-        </div>
-
-        <div class="conteneur-centrage-marge">
-            <button onclick="SauvegardeNiveauCourse()" id="button-sauvegarde-niveau">Sauvegarder mon niveau</button>
         </div>
 
         <div class="chart-container" id="conteneur-graphique">
@@ -159,7 +161,18 @@
     <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
     
     <script src="script_outil.js" defer></script> <!-- defer permet d'obliger que le html sexecute completement et seulement ensuite il lance le script c'est pour le telechargement de la bibliotheque -->
+    
+    <!-- Remplissage du input date a la date now -->
+    <script>
+        let ChampDate = document.getElementById("date-niveau-course")
+        let DateActuelle = new Date().toISOString() // ça renvoie ça "2026-01-24T13:55:37.171Z"
+        // Enlever la partie qui nous interrese pas
+        DateActuelle = DateActuelle.split("T") // ['2026-01-24', '13:57:55.505Z']
+        DateActuelle = DateActuelle[0] // '2026-01-24'
 
+        ChampDate.max = DateActuelle // bloque la saisi de date dans le futur
+        ChampDate.value = DateActuelle
+    </script>
     
     <!-- Pour avoir les statistiques de visite du site -->
     <script defer src="/_vercel/insights/script.js"></script>

@@ -466,7 +466,6 @@ header {
 }
 header div.navbar {
     width: 100%;
-    height: 70px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -793,6 +792,9 @@ div.conteneur-content-scrolling {
     overflow-x: auto;
     height: fit-content;
 }
+div.conteneur-content-scrolling#historique-niveau-course {
+    display: block;
+}
 div.conteneur-content-scrolling div.card-outil {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     margin: var(--ESPACE_XS);
@@ -1068,7 +1070,6 @@ div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout 
 div.conteneur-de-outil div.conteneur-option {
     display: flex;
     align-items: center;
-    margin-top: var(--ESPACE_S_SMALL);
 }
 div.conteneur-de-outil div.conteneur-option a {
     margin-left: auto;
@@ -1368,6 +1369,25 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]{
     width: 190px;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
+/* Pour le niveau de course */
+div.conteneur-de-outil div.conteneur-champs-outil input[type="date"].long{
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    border-radius: var(--BORDER);
+
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--FONT_FAMILY);
+    font-size: var(--P);
+    padding: var(--ESPACE_S);
+    margin: var(--ESPACE_XS);
+    
+    width: calc(100% - (var(--ESPACE_XS) * 2));
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
 div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]:focus{
     box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
 }
@@ -1546,6 +1566,7 @@ table {
 }
 table.visible {
     display: table;
+    margin: var(--ESPACE_XS) auto;
     width: 100%;
     border-collapse: collapse; /* Pr eviter les doubles bordures */
 }
@@ -1558,7 +1579,7 @@ table.visible tr th {
     color: var(--COULEUR_TEXT_PRINCIPAL);
     font-weight: var(--FONT_WEIGHT_BUTTON);
     font-size: var(--P);
-    width: 33%;
+    min-width: 120px;
 }
 table.visible tr td {
     padding: var(--ESPACE_XS);
@@ -1652,9 +1673,6 @@ div.conteneur-ensemble div.box-result {
     position: relative;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
-div.conteneur-ensemble div.box-result#niveau-course {
-    height: 140px;
-}
 div.conteneur-ensemble div.box-result::after {
     content: "";
     position: absolute;
@@ -1704,6 +1722,9 @@ div.conteneur-ensemble p.temps-recup {
 div.conteneur-scrolling {
     display: inline-flex;
     align-items: center;
+}
+div.conteneur-scrolling#running-level {
+    display: block;
 }
 div.conteneur-scrolling .card-nouveautes {
     width: 230px;
@@ -2568,12 +2589,15 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
         width: 100%;
         margin: var(--ESPACE_S) 0px;
     }
+    div.conteneur-ensemble div.box-result#niveau-course {
+        height: 140px;
+    }
     div.cote-cote {
         display: block;
     }
     div.conteneur-de-outil div.conteneur-champs-outil input[type="number"].small,
     div.conteneur-de-outil div.conteneur-champs-outil input[type="date"],
-div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
+    div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
         width: calc(100% - (var(--ESPACE_XS) * 2));
     }
 }
@@ -2692,9 +2716,6 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
     /* Autre */    
     div.conteneur-mise-avant p{
         font-size: var(--H3);
-    }
-    div.conteneur-de-outil div.conteneur-option {
-        margin-top: var(--ESPACE_XS);
     }
 }
 @media (max-width: 440px) {

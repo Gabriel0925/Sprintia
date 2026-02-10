@@ -34,15 +34,18 @@ async function RecupValueNiveauCourse() {
     let NiveauDatas = ValeurDB.map(dataBDD => dataBDD.niveau_course_user)
     NiveauDatas = NiveauDatas.reverse()
 
+    let DistanceDatas = ValeurDB.map(dataBDD => dataBDD.distance)
+    DistanceDatas = DistanceDatas.reverse()
+
     let idDatas = ValeurDB.map(dataBDD => dataBDD.id)
     idDatas = idDatas.reverse()
     
-    return {idDatas, NiveauDatas, ListeDate}
+    return {idDatas, NiveauDatas, DistanceDatas, ListeDate}
 }
 
 async function RemplirTableau() {
     // Recup des valeur dans bdd
-    let {idDatas, NiveauDatas, ListeDate} = await RecupValueNiveauCourse()
+    let {idDatas, NiveauDatas, DistanceDatas, ListeDate} = await RecupValueNiveauCourse()
 
     // Recup du tableau
     let TableauHistorique = document.getElementById("tableau-historique")
@@ -64,11 +67,13 @@ async function RemplirTableau() {
         // Créer une nouvelle ligne
         let ColonneDate = NouvelleLigne.insertCell(0)
         let ColonneNiveau = NouvelleLigne.insertCell(1)
-        let ColonneButtonSupprimer = NouvelleLigne.insertCell(2)
+        let ColonneDistance = NouvelleLigne.insertCell(2)
+        let ColonneButtonSupprimer = NouvelleLigne.insertCell(3)
 
         // Remplir ligne
         ColonneDate.textContent = Date
         ColonneNiveau.textContent = NiveauDatas[compteur].toString().replace(".", ",") // ne pas oublier de le mettre en str avant le replace
+        ColonneDistance.textContent = DistanceDatas[compteur].toString().replace(".", ",")
 
         // Create button
         let BoutonSupprTableau = document.createElement("button")

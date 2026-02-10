@@ -554,6 +554,5 @@ function ThemeComplet(event) {
     return
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-    user_preference()
-})
+// ne pas mettre en addevenlister sinon on perd en perf
+user_preference()
