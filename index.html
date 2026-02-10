@@ -138,10 +138,31 @@
             </div>
         </div>
 
-        <h2>Outils récemment utilisés</h2>
-        <p class="text">
-            Cette fonctionnalité sera disponible lors de la prochaine bêta.
-        </p>
+        <h2 id="outils recent">Outils conseillés</h2>
+        <div class="conteneur-outil-recent">
+
+            <a href="Outils/Charge d'entraînement/charge_entrainement.html" class="L1">
+                <div class="card-outil-recent">
+                    <i class="fs-icon_charge_entrainement" id="I1"></i>
+                    <p class="text-outil-recent" id="P1">Charge d'entraînement</p>
+                </div>
+            </a>
+
+            <a href="Outils/Estimation VO2max/estimation_VO2max.html" class="L2">
+                <div class="card-outil-recent">
+                    <i class="fs-icon_VO2MAX" id="I2"></i>
+                    <p class="text-outil-recent" id="P2">Estimation VO²max</p>
+                </div>
+            </a>
+            
+            <a href="Outils/Niveau de course à pied/niveau_course.html" class="L3">
+                <div class="card-outil-recent">
+                    <i class="fs-icon_niveau_course" id="I3"></i>
+                    <p class="text-outil-recent" id="P3">Niveau de course à pied</p>
+                </div>
+            </a>
+
+        </div>
 
         <h2>Activité récente (3 sem.)</h2>
         <p class="text">
@@ -192,6 +213,92 @@
     <!-- Import bibliothèque pour simplifier le code de indexed db -->
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+
+    <!-- Pour les outils favoris -->
+    <script>
+        const DicoNameIcon = { // dico avec le nom des outils et le nom de la class de l'icone
+            "Charge d'entraînement": "fs-icon_charge_entrainement",
+            "Indulgence de course": "fs-icon_indulgence_course",
+            "Estimation du temps de récupération": "fs-icon_temps_recup",
+
+            "Zones cardiaques": "fs-icon_zones_cardiaques",
+            "Protéines quotidiennes": "fs-icon_proteines",
+            "Calculateur IMC": "fs-icon_IMC",
+
+            "Niveau course à pied": "fs-icon_niveau_course",
+            "Prédicteur de performance": "fs-icon_predicteur_performance",
+            "Estimation VMA": "fs-icon_VMA",
+            "Estimation VO₂max": "fs-icon_VO2MAX",
+            "Zones de vitesse": "fs-icon_zones_vitesse",
+            "Estimation puissance max. en course": "fs-icon_puissance_max",
+
+            "Estimation 1RM": "fs-icon_1RM",
+
+            "Estimation puissance moy. en ski": "fs-icon_puissance_moy_ski",
+
+            "Estimation de la transpiration": "fs-icon_transpiration",
+            "Convertisseur km/miles": "fs-icon_miles_km"
+        }
+
+        const DicoNameHref = { // dico avec le nom des outils et le nom de la class de l'icone
+            "Charge d'entraînement": "Outils/Charge d'entraînement/charge_entrainement.html",
+            "Indulgence de course": "Outils/Indulgence de course/indulgence_course.html",
+            "Estimation du temps de récupération": "Outils/Estimation du temps de récupération/estimation_temps_recuperation.html",
+
+            "Zones cardiaques": "Outils/Zones cardiaques/zones_cardiaques.html",
+            "Protéines quotidiennes": "Outils/Protéines quotidiennes/proteines_quotidienne.html",
+            "Calculateur IMC": "Outils/Calculateur IMC/calculateur_imc.html",
+
+            "Niveau course à pied": "Outils/Niveau de course à pied/niveau_course.html",
+            "Prédicteur de performance": "Outils/Prédicteur de performance/predicteur_performance.html",
+            "Estimation VMA": "Outils/Estimation VMA/estimation_vma.html",
+            "Estimation VO₂max": "Outils/Estimation VO2max/estimation_VO2max.html",
+            "Zones de vitesse": "Outils/Zones de vitesse/zones_vitesse.html",
+            "Estimation puissance max. en course": "Outils/Estimation puissance max en course/estimation_puissance_max_course.html",
+
+            "Estimation 1RM": "Outils/Estimation 1RM/estimation_1RM.html",
+
+            "Estimation puissance moy. en ski": "Outils/Estimation puissance moy en ski/estimation_puissance_moy_en_ski.html",
+
+            "Estimation de la transpiration": "Outils/Estimation de la transpiration/estimation_transpiration.html",
+            "Convertisseur km/miles": "Outils/Convertisseur miles-km/convertisseur_miles_km.html"
+        }
+
+        function FavoriteTools() {
+           let OutilFavorieUser = JSON.parse( localStorage.getItem("OutilsPin"))
+        
+           if (OutilFavorieUser.length > 0) {
+                // changement du titre quand il y a des datas le titre passe de "Outils conseillés" => "Outils épinglés"
+                document.getElementById("outils recent").textContent = "Outils épinglés"
+
+                // on isole les valeurs
+                let OutilFavoris1 = OutilFavorieUser[0]
+                let OutilFavoris2 = OutilFavorieUser[1]
+                let OutilFavoris3 = OutilFavorieUser[2]
+
+                // affichage des noms des outils favoris
+                document.getElementById("P1").textContent = OutilFavorieUser[0]
+                document.getElementById("P2").textContent = OutilFavorieUser[1]
+                document.getElementById("P3").textContent = OutilFavorieUser[2]
+
+                // Affichage de l'icone des outils favoris en cherchant dans le dico
+                document.getElementById("I1").classList.add(DicoNameIcon[OutilFavoris1])
+                document.getElementById("I2").classList.add(DicoNameIcon[OutilFavoris2])
+                document.getElementById("I3").classList.add(DicoNameIcon[OutilFavoris3])
+
+                // attribution des liens
+                document.getElementById("I1").parentElement.parentElement.href = DicoNameHref[OutilFavoris1]
+                document.getElementById("I2").parentElement.parentElement.href = DicoNameHref[OutilFavoris2]
+                document.getElementById("I3").parentElement.parentElement.href = DicoNameHref[OutilFavoris3]
+           }
+
+            return
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            FavoriteTools()
+        })
+    </script>
 
     <script>
         window.addEventListener("DOMContentLoaded", () => {
