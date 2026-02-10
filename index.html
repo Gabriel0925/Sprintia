@@ -139,6 +139,9 @@
         </div>
 
         <h2 id="outils recent">Outils conseillés</h2>
+        <p class="text" id="info-bulle">
+            Vous pouvez épingler vos 3 outils préférés sur la page d'accueil. Pour ce faire, rendez vous dans l'onglet 'Outils' et cliquez sur l'épingle de l'outil correspondant.
+        </p>
         <div class="conteneur-outil-recent">
 
             <a href="Outils/Charge d'entraînement/charge_entrainement.html" class="L1">
@@ -270,20 +273,27 @@
            if (OutilFavorieUser.length > 0) {
                 // changement du titre quand il y a des datas le titre passe de "Outils conseillés" => "Outils épinglés"
                 document.getElementById("outils recent").textContent = "Outils épinglés"
+                // on cache l'info bulle
+                document.getElementById("info-bulle").style.display = "none"
 
                 // on isole les valeurs
                 let OutilFavoris1 = OutilFavorieUser[0]
-                let OutilFavoris2 = OutilFavorieUser[1]
-                let OutilFavoris3 = OutilFavorieUser[2]
+                let OutilFavoris2 = OutilFavorieUser[1] || "Estimation VO₂max"
+                let OutilFavoris3 = OutilFavorieUser[2] || "Niveau course à pied"
 
                 // affichage des noms des outils favoris
-                document.getElementById("P1").textContent = OutilFavorieUser[0]
-                document.getElementById("P2").textContent = OutilFavorieUser[1]
-                document.getElementById("P3").textContent = OutilFavorieUser[2]
+                document.getElementById("P1").textContent = OutilFavoris1
+                document.getElementById("P2").textContent = OutilFavoris2
+                document.getElementById("P3").textContent = OutilFavoris3
 
                 // Affichage de l'icone des outils favoris en cherchant dans le dico
+                document.getElementById("I1").classList = ""
                 document.getElementById("I1").classList.add(DicoNameIcon[OutilFavoris1])
+
+                document.getElementById("I2").classList = ""
                 document.getElementById("I2").classList.add(DicoNameIcon[OutilFavoris2])
+
+                document.getElementById("I3").classList = ""
                 document.getElementById("I3").classList.add(DicoNameIcon[OutilFavoris3])
 
                 // attribution des liens

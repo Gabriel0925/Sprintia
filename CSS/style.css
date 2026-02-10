@@ -153,7 +153,6 @@ i {
 }
 .fs-icon_epingler:before {
     content: "\e907";
-    color: var(--COULEUR_TEXT_PRINCIPAL);
 }
 .fs-icon_fermer:before {
     content: "\e908";
@@ -486,14 +485,14 @@ header div.navbar .logo a {
     display: block;
     padding: var(--ESPACE_XS);
     border-radius: var(--BORDER);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    transition: all ease-out var(--DUREE_TRANSITION);
 }
 header div.navbar .logo a:active {
-    transform: scale(0.95);
+    transform: scale(0.9);
     border-radius: var(--BORDER_SMALL);
     color: var(--COULEUR_ACCENT_HOVER);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    transition: all ease-out var(--DUREE_TRANSITION);
 }
 header div.navbar ul.links {
     display: flex;
@@ -519,7 +518,6 @@ header div.navbar div.burger-menu-button {
     cursor: pointer;
     display: none;
     margin: var(--ESPACE_XXS);
-    transition: all ease-in-out 0.3s;
 }
 /* Pour que le bouton rétrécisse au moment du clic */
 header div.navbar div.burger-menu-button:active {
@@ -527,7 +525,6 @@ header div.navbar div.burger-menu-button:active {
     border-radius: var(--BORDER_SMALL);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 header div.navbar ul.links li a {
     color: var(--COULEUR_TEXT_PRINCIPAL); 
@@ -584,8 +581,8 @@ header .burger-menu {
     border-radius: var(--BORDER);
     overflow: hidden; 
 
-    transform: translateY(-20px) translateX(75px) scale(0.1, 0.75);
-    transition: all 0.11s ease-in-out;
+    transform: translateY(-20px) translateX(75px) scale(0.05, 0.4);
+    transition: all 0.15s ease-out;
 }
 header .burger-menu.open {
     max-height: 350px;
@@ -595,19 +592,19 @@ header .burger-menu.open {
     box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
-    transition: all 0.18s ease-in-out;
+    transition: all 0.18s ease;
 }
 header .burger-menu li {
     color: var(--COULEUR_BACKGROUND);
-    opacity: 0.5;
-    transform: translate(5px, 32px) scale(1.6);
-    transition: all 0.07s ease-in-out;
+}
+@keyframes rebond_icon_burger_open {
+    0% { transform: translate(16px, -18px) scale(1)}
+    43% { transform: translate(-16px, 18px) scale(0.75)}
+    100% { transform: translate(0px, 0px) scale(1)}
 }
 header .burger-menu.open li {
     color: var(--COULEUR_TEXT_PRINCIPAL);
-    opacity: 1;
-    transform: translate(0, 0) scale(1); /* on ramene transform à 0 */
-    transition: all 0.28s ease-in-out;
+    animation: rebond_icon_burger_open 0.5s ease;
 }
 header .burger-menu li a {
     color: var(--COULEUR_TEXT_PRINCIPAL); 
@@ -630,6 +627,7 @@ header .burger-menu li a i {
 }
 header .burger-menu li a:active {
     color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    border-radius: var(--BORDER_SMALL);
     transform: scale(0.9);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-out var(--DUREE_TRANSITION);
@@ -801,7 +799,7 @@ div.conteneur-outil-recent div.card-outil-recent{
 
     display: flex;
     align-items: center;
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    transition: all ease-in var(--DUREE_TRANSITION);
 }
 @media (max-width : 480px) {
     div.conteneur-outil-recent div.card-outil-recent{
@@ -811,12 +809,12 @@ div.conteneur-outil-recent div.card-outil-recent{
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-outil-recent div.card-outil-recent:hover{
         background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-        transform: scale(1.02);
+        transform: scale(1.01);
     }
 }
 div.conteneur-outil-recent div.card-outil-recent:active{
     transform: scale(0.98);
-    border-radius: var(--BORDER_SMALL);
+    border-radius: 50px;
 }
 div.conteneur-outil-recent div.card-outil-recent i{
     font-size: var(--H2);
@@ -890,7 +888,7 @@ div.conteneur-content-scrolling div.card-outil div.icone i{
 }
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler{
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    opacity: 0.7;
+    opacity: 0.8;
     border-radius: var(--BORDER);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
@@ -904,9 +902,11 @@ div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler{
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    transition: all linear var(--DUREE_TRANSITION);
 }
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler.actif{
+    width: 55px;
+    height: 40px;
     opacity: 1;
 }
 @media (hover: hover) and (pointer: fine) {
@@ -917,8 +917,20 @@ div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler.act
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler:active{
     border-radius: var(--BORDER_SMALL);
 }
+@keyframes rebond {
+    0% { transform: scale(1)}
+    50% { transform: scale(1.32)}
+    100% { transform: scale(1)}
+}
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler i{
+    font-size: var(--H3);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
+}
+div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler.actif i{
     font-size: var(--H2);
+    color: var(--COULEUR_ACCENT_CONTRASTER);
+    animation: rebond 0.35s;
 }
 div.conteneur-content-scrolling div.card-outil h1{
     font-size: var(--H3);
@@ -1946,8 +1958,9 @@ div.conteneur-param div.acces-param2 {
 div.conteneur-param div.acces-param:active,
 div.conteneur-param div.acces-param1:active,
 div.conteneur-param div.acces-param2:active{
-    transform: scale(0.97);
+    transform: scale(0.98);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border-radius: 50px;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 div.conteneur-param i{
@@ -1982,13 +1995,14 @@ div.conteneur-historique-versions {
 }
 @media (hover: hover) and (pointer: fine) {
     .conteneur-historique-versions .box-last-maj:hover{
-        transform: translateY(-5px) scale(1.02);
+        transform: scale(1.015);
         background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 .conteneur-historique-versions .box-last-maj:active{
-    transform: scale(0.97);
+    transform: scale(0.985);
+    border-radius: var(--BORDER_SMALL);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 /* Contenu supérieur */
@@ -2062,13 +2076,14 @@ div.conteneur-historique-versions .card-nouveautes.visible {
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-historique-versions .card-nouveautes.visible:hover {
-        transform: translateY(-5px) scale(1.02);
+        transform: scale(1.015);
         background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 div.conteneur-historique-versions .card-nouveautes.visible:active {
-    transform: scale(0.95);
+    transform: scale(0.985);
+    border-radius: var(--BORDER_SMALL);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 div.conteneur-historique-versions .card-nouveautes-image p {
@@ -2189,6 +2204,7 @@ div.conteneur-mode {
 }
 div.conteneur-mode.animation:active {
     transform: scale(0.98);
+    border-radius: 50px;
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 div.conteneur-mode.animation i.particulary {
@@ -2218,6 +2234,9 @@ div.conteneur-mode input[type="checkbox"].toggle{
     width: 60px;
     height: 32px;
     background-color: var(--COULEUR_ACCENT);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
+
     cursor: pointer;
     border-radius: 5rem;
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -2232,22 +2251,22 @@ div.conteneur-mode input[type="checkbox"].toggle::after{
     content: "";
     position: absolute;
     top: 50%;
-    left: 72%;
+    left: 68%;
     transform: translate(-50%, -50%);
-    height: 24px;
-    width: 24px;
-    background-color: var(--COULEUR_BACKGROUND);
+    height: 25px;
+    width: 30px;
+    background-color: #f3f3f3;
     border-radius: 5rem;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 /* Style mode off */
 div.conteneur-mode input[type="checkbox"].toggle:checked{
-    background-color: var(--COULEUR_TEXT_SECONDAIRE);
+    background-color: #636366;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 /* Pour que le rond glisse */
 div.conteneur-mode input[type="checkbox"].toggle:checked:after{
-    left: 28%;
+    left: 32%;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 /* Section pour la couleur accentuation */
@@ -2272,7 +2291,7 @@ li.option-color {
     padding: var(--ESPACE_XS) var(--ESPACE_S);
     border-radius: var(--BORDER);
     margin: var(--ESPACE_XS) var(--ESPACE_XXS);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    transition: all ease-in-out 0.3s;
 }
 @media (hover: hover) and (pointer: fine) {
     /* Changer la color du txt lors du survol donc quand il y a la couche du before egalement */
@@ -2281,8 +2300,9 @@ li.option-color {
     }
 }
 ol li.option-color:active{
-    transform: scale(0.95);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    transform: scale(0.96);
+    border-radius: 50px;
+    transition: all ease-in-out 0.3s;
 }
 /* 2ème couche du li lors du hover */
 ol li.option-color::before{
@@ -2534,12 +2554,12 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
         width: 300px;
     }
 }
-@media (max-width: 680px) {
+@media (max-width: 690px) {
     div.conteneur-historique-versions .card-nouveautes.visible{
         width: 270px;
     }
 }
-@media (max-width: 620px) {
+@media (max-width: 640px) {
     div.conteneur-historique-versions .card-nouveautes.visible{
         width: calc(100% - (var(--ESPACE_S_SMALL) * 2));
     }
