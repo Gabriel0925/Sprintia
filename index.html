@@ -176,6 +176,18 @@
             <canvas id="barCanvas" aria-label="chart" role="img"></canvas>
         </div>
 
+        <h2>Derniers entraînements</h2>
+
+        <div class="container-recent-workout"></div> <!-- Remplis en JS -->
+
+        <div class="conteneur-centrage-marge">
+            <button id="button_afficher_plus" onclick="location.href='Outils/Actions/historique_entrainement.html'">
+                <i class="fs-icon_add"></i>
+                Afficher plus
+            </button>
+        </div>
+
+
         <div class="conteneur-mise-avant" id="banniere-tips">
             <p id="tips">
                 Chargement...
@@ -216,6 +228,92 @@
     <!-- Import bibliothèque pour simplifier le code de indexed db -->
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+
+    <!-- Pour les 3 derniers entrainements -->
+    <script>
+function ReturnDate(DateWorkout) {
+    let DateEuropeen = ""
+
+    DateWorkout = DateWorkout.split("-")
+    // Inversion de la date de "2026-01-12" à "12-01-2026"
+    DateEuropeen = DateWorkout[2] + "-" + DateWorkout[1] + "-" + DateWorkout[0]
+    return DateEuropeen
+}
+
+function HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) {
+    let StructureHTML = `          
+        <a href="Outils/Actions/historique_entrainement.html">
+                <p class="name-workout">
+                    ${NameWorkout}
+                </p>
+                <p class="sport-date-workout">
+                    ${SportWorkout} · ${DateWorkout}
+                </p>
+                <p class="duree">
+                    Durée : <strong>${DureeWorkout}</strong>
+                </p>
+        </a>
+    `
+
+    CardWorkout.innerHTML = StructureHTML 
+
+    let CardWorkoutHTML = CardWorkout
+
+    return CardWorkoutHTML
+}
+
+async function AfficherData() {
+    // on recup les datas
+    let HistoriqueDB = await db.entrainement.toArray()
+
+    // Trier par date 
+    HistoriqueDB.sort((element1, element2) => { // En js on peut comparer 2 dates comme des maths
+        if (element1.date < element2.date) return 1
+        if (element1.date > element2.date) return -1
+    })
+
+    // on recup les datas necessaire
+    let TableauNameWorkout = HistoriqueDB.map(elementDB => elementDB.nom).slice(0, 3)
+    let TableauSport = HistoriqueDB.map(elementDB => elementDB.sport).slice(0, 3)
+    let TableauDateWorkout = HistoriqueDB.map(elementDB => elementDB.date).slice(0, 3)
+    let TableauDureeWorkout = HistoriqueDB.map(elementDB => elementDB.duree).slice(0, 3)
+
+    if (TableauNameWorkout.length <= 0) {
+        // on cache la secction si il y a pas de datas
+        document.querySelector(".container-recent-workout").style.display = "none"
+    } else { // si il y a des datas
+        // initialisation pour la boucle
+        let compteur = 0
+        let SportWorkout = 0
+        let DateWorkout = 0
+        let DureeWorkout = 0
+        const ConteneurCardsWorkout = document.querySelector(".container-recent-workout") // recupération du conteneur des cards
+
+        TableauNameWorkout.forEach(NameWorkout => {
+            // maj des variables en fonction de l'entrainement
+            SportWorkout = TableauSport[compteur]
+            DateWorkout = ReturnDate(TableauDateWorkout[compteur])
+            DureeWorkout = TableauDureeWorkout[compteur]
+
+            // on créer la card html
+            const CardWorkout = document.createElement("div")
+            CardWorkout.classList.add("card-recent-workout")
+
+            let CardWorkoutHTML = HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) // appelle a la fonction
+            ConteneurCardsWorkout.appendChild(CardWorkoutHTML)
+
+            compteur += 1 // incrementation
+        });
+    } 
+
+    return
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    AfficherData()
+})
+    </script>
+
 
     <!-- Pour les outils favoris -->
     <script>
@@ -386,7 +484,7 @@
                 let NomCoach = CoachUserDB.map(elementDB => elementDB.nom)
                 let AvatarCoach = CoachUserDB.map(elementDB => elementDB.avatar)
                 
-                document.getElementById("nom-coach").textContent = AvatarCoach + " " + NomCoach + " :"
+                document.getElementById("nom-coach").innerHTML =  AvatarCoach + " " + NomCoach + " :"
             }
 
             // Pour les statuts
@@ -396,10 +494,10 @@
                 let TableauStatut = StatutDB.map(elementDB => elementDB.statut).reverse()
                  // si il ny a pas de datas
                 let TableauPhraseJRM = [
-                    "Vous avez signalé que vous êtes en vacances ! Profitez de ces jours de vacances pour vous reposer et passez du temps avec de votre famille,...",
-                    "Vous avez signalé que vous êtes blessé·e ! Dans ces moments là, c'est compliqué, je le sais, mais si vous continuez à faire du sport en étant blesser, vous risquez de retarder votre guérison.",
-                    "Vous avez signalé que vous êtes malade ! Je sais que c'est dur mais essayez de ne pas vous entraîner, car votre organisme a besoin de repos.",
-                    "Vous avez suspendu les analyses, je ne peux donc pas analyser votre semaine d'entraînement."
+                    "Tu as signalé que tu es en vacances ! Profite de ces jours de vacances pour te reposer et passer du temps avec ta famille,...",
+                    "Tu as signalé que tu es blessé·e ! Dans ces moments là, c'est compliqué, je le sais, mais si tu continues à faire du sport en étant blessé·e, tu risques de retarder ta guérison.",
+                    "Tu as signalé que tu es malade ! Je sais que c'est dur mais essaie de ne pas t'entraîner, car ton organisme a besoin de repos.",
+                    "Tu as suspendu les analyses. Je ne peux donc pas analyser ta semaine d'entraînement."
                 ]
                 let Interpretation = ""
 
@@ -498,7 +596,7 @@
                 const DureeTotaleHeure = PassageHeure(DureeTotale) // pour passer de 90 min à 1h 30min
 
                 // Début interpretation
-                let Interpretation = `Au cours des 7 derniers jours, vous avez fait :<br><br>
+                let Interpretation = `Au cours des 7 derniers jours, t'as fait :<br><br>
                                 <strong>⏱️ ${DureeTotaleHeure}min</strong> d'entraînement<br>`
                 
                 if (NbWorkout == 1 || NbWorkout == 0) {
@@ -562,13 +660,13 @@
                 
                 // Si les datas de durée sont égale à 0 alors petit message d'encouragement
                 if (DureeTotale == 0) {
-                    Interpretation += "<br><br>Allez, essayez de prendre le temps de faire une séance de sport, votre corps vous remerciera plus tard. Si vous faites un entraînement, vous dormirez mieux ce soir !"
+                    Interpretation += "<br><br>Essaie de prendre le temps de faire une séance de sport, ton corps te remerciera plus tard. Si tu fais un entraînement, tu dormiras mieux ce soir !"
                 }
 
                 document.querySelector(".interpretation-jrm").innerHTML = Interpretation // affichage dans le champs
 
             } else { // si il ny a pas de datas
-                let NotData = `Sprintia n'a pas encore assez de données pour que votre coach analyse votre semaine d'entraînement.`
+                let NotData = `Je n'ai pas encore assez de données pour analyser ta semaine d'entraînement. Continue tes efforts, j'ai hâte de voir tes premieres séances !`
 
                 document.querySelector(".interpretation-jrm").innerHTML = NotData
             }

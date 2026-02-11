@@ -46,6 +46,9 @@ function StartNiveau() {
     let DistanceUser = parseFloat(document.getElementById("distance-user").value.trim().replace(",", "."))
     let ChampsErreur = document.getElementById("p-error")
 
+    // on vide le champs erreur au moins si le user change 7 pour 4 bah ça enleve l'erreur
+    ChampsErreur.textContent =""
+
     // Vérification
     if (isNaN(DistanceUser)) {
         return

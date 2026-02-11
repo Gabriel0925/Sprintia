@@ -68,31 +68,31 @@ async function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) 
 
     // Dico des phrases
     const PhraseJRMBienveillant = [
-        "Statut : <strong>Désentraînement</strong><br>Votre condition physique semble décliner ! Essayez d'augmenter l'intensité de vos entraînements pour basculer en statut productif et améliorer vos performances.",
-        "Statut : <strong>Productif</strong><br>Vous êtes entrain de progresser, bravo ! Vos entraînements portent leurs fruits, gardez cette régularité et cette discipline pour continuer de booster vos performances.",
-        "Statut : <strong>Surentraînement</strong><br>Votre charge d'entraînement est significativement plus élevée que d'habitude, votre corps a du mal à suivre. Votre corps a besoin de quelques jours de repos pour récupérer."
+        "Statut : <strong>Désentraînement</strong><br>Ta condition physique semble décliner ! Essaie d'augmenter l'intensité de tes entraînements pour basculer en statut productif et améliorer tes performances.",
+        "Statut : <strong>Productif</strong><br>Tu es en train de progresser, bravo ! Tes entraînements portent leurs fruits, garde cette régularité et cette discipline pour continuer de booster tes performances.",
+        "Statut : <strong>Surentraînement</strong><br>Ta charge d'entraînement est significativement plus élevée que d'habitude, ton corps a du mal à suivre, il a besoin de quelques jours de repos pour récupérer."
     ]
     const PhraseJRMStrictMotivant = [
-        "Statut : <strong>Désentraînement</strong><br>Votre condition physique est entrain de diminuer ! Si vous souhaitez améliorer vos performances, il est plus que temps d'augmenter l'intensité de vos entraînements futurs.",
-        "Statut : <strong>Productif</strong><br>Vous progressez, félicitations ! Vos entraînements portent leurs fruits, continuez à mettre autant d'intensité qu'actuellement lors de vos entraînements futurs.",
-        "Statut : <strong>Surentraînement</strong><br>Vous risquez la blessure et blessure égale perte de niveau donc arrêtez de jouer avec le feu et reposez-vous pendant quelques jours."
+        "Statut : <strong>Désentraînement</strong><br>Ta condition physique est en train de diminuer ! Si tu souhaites améliorer tes performances, il est plus que temps d'augmenter l'intensité de tes futurs entraînements.",
+        "Statut : <strong>Productif</strong><br>Tu progresses, félicitations ! Tes entraînements portent leurs fruits, continue à mettre autant d'intensité qu'actuellement lors de tes futurs entraînements.",
+        "Statut : <strong>Surentraînement</strong><br>Tu risques la blessure et blessure égale perte de niveau donc arrête de jouer avec le feu et repose-toi pendant quelques jours."
     ]
     const PhraseJRMCopain = [
-        "Statut : <strong>Désentraînement</strong><br>Je suis désolé mais là vous abusez, vous devriez augmenter l'intensité de vos entraînements sinon tous vos efforts passés vont disparaître en quelques semaines.",
-        "Statut : <strong>Productif</strong><br>Bravo, vous progressez ! Tous vos efforts sont entrain de payer, continuez de vous entraîner de cette façon, ça semble être positif pour votre progression.",
-        "Statut : <strong>Surentraînement</strong><br>Vous vous entraînez plus que d'habitude, votre corps semble galérer à se régénérer. Petit conseil : 'faites une petite pause dans vos entraînements'."
+        "Statut : <strong>Désentraînement</strong><br>Je suis désolé mais là tu abuses, tu devrais augmenter l'intensité de tes entraînements sinon tous tes efforts passés vont disparaître en quelques semaines.",
+        "Statut : <strong>Productif</strong><br>Bravo, tu progresses ! Tous tes efforts sont en train de payer, continue de t'entraîner de cette façon, ça semble être positif pour ta progression.",
+        "Statut : <strong>Surentraînement</strong><br>Tu t'entraînes plus que d'habitude, ton corps semble galérer à se régénérer. Petit conseil, fais une pause de quelques jours."
     ]
     const PhraseJRGoMuscu = [
-        "Statut : <strong>Désentraînement</strong><br>Vous régressez là ! Il ne faut pas hésiter à faire 1 ou 2 répétitions en plus sur vos séries pour pouvoir augmenter votre RPE et par conséquent votre charge d'entraînement.",
-        "Statut : <strong>Productif</strong><br>GG, vous progressez, je vois que vous mettez la bonne intensité pendant vos séances, continuez comme ça. Vous n'avez presque plus besoin de moi.",
-        "Statut : <strong>Surentraînement</strong><br>Votre corps n'arrive pas à bien récupérer de vos entraînements récents, n'oubliez jamais que le muscle se construit au repos, pas à la salle, reposez-vous un peu avant d'aller à la salle."
-    ]
+        "Statut : <strong>Désentraînement</strong><br>Tu régresses là ! Il ne faut pas hésiter à faire 1 ou 2 répétitions en plus sur tes séries pour pouvoir augmenter ton RPE et par conséquent ta charge d'entraînement.",
+        "Statut : <strong>Productif</strong><br>GG, tu progresses, je vois que tu mets une bonne intensité pendant tes séances, continue comme ça. Tu n'as presque plus besoin de moi.",
+        "Statut : <strong>Surentraînement</strong><br>Ton corps n'arrive pas à bien récupérer de tes entraînements récents, n'oublie jamais que le muscle se construit au repos, pas à la salle, repose-toi un peu avant d'aller à la salle."
+    ] 
 
     const PhraseJRMStatut = [
-        "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, apprécier en famille, de repos, et revenez encore plus motivé·e pour battre tous vos records !",
-        "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.",
-        "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.",
-        "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e·s !"
+        "Statut : <strong>Vacances</strong><br>Profite de cette pause pour te ressourcer, apprécier les moments en famille, te reposer. Mais n'oublie pas de revenir encore plus motivé·e pour battre tous tes records !",
+        "Statut : <strong>Blessure</strong><br>Prends vraiment le temps de laisser ton corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.",
+        "Statut : <strong>Malade</strong><br>Ne va pas t'entraîner, ton organisme a besoin de récupérer pour le moment, mais dès que tu seras guéri·e tu pourras reprendre tes entraînements.",
+        "Statut : <strong>Suspension</strong><br>Profite-en pour te reposer, j'analyserai tes entraînements seulement quand tu seras prêt·e !"
     ]
 
     // Check du statut du user

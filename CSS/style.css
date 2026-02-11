@@ -598,8 +598,8 @@ header .burger-menu li {
     color: var(--COULEUR_BACKGROUND);
 }
 @keyframes rebond_icon_burger_open {
-    0% { transform: translate(16px, -18px) scale(1)}
-    43% { transform: translate(-16px, 18px) scale(0.75)}
+    0% { transform: translate(18px, -18px) scale(1)}
+    40% { transform: translate(-18px, 18px) scale(0.75)}
     100% { transform: translate(0px, 0px) scale(1)}
 }
 header .burger-menu.open li {
@@ -788,23 +788,18 @@ div.conteneur-outil-recent {
 }
 div.conteneur-outil-recent a{
     flex-grow: 1;
-    width: fit-content;
+    width: 400px;
 }
 div.conteneur-outil-recent div.card-outil-recent{
     background-color: var(--COULEUR_BACKGROUND_CARD);
     border-radius: var(--BORDER);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
-    margin: var(--ESPACE_XS) var(--ESPACE_XS);
+    margin: var(--ESPACE_XS);
 
     display: flex;
     align-items: center;
     transition: all ease-in var(--DUREE_TRANSITION);
-}
-@media (max-width : 480px) {
-    div.conteneur-outil-recent div.card-outil-recent{
-        margin: var(--ESPACE_XS) 0;
-    }
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-outil-recent div.card-outil-recent:hover{
@@ -813,22 +808,66 @@ div.conteneur-outil-recent div.card-outil-recent{
     }
 }
 div.conteneur-outil-recent div.card-outil-recent:active{
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transform: scale(0.98);
     border-radius: 50px;
 }
 div.conteneur-outil-recent div.card-outil-recent i{
-    font-size: var(--H2);
-    margin: var(--ESPACE_XXS) 0;
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    padding: var(--ESPACE_XS);
+    background-color: transparent;
+    font-size: var(--H1);
     margin: var(--ESPACE_XS);
     border-radius: var(--BORDER_SMALL);
 }
 div.conteneur-outil-recent div.card-outil-recent p{
-    font-size: var(--H3);
     font-weight: var(--FONT_WEIGHT_BUTTON);
+    margin: var(--ESPACE_XS) 0;
     margin-left: var(--ESPACE_XXS);
     margin-right: var(--ESPACE_S);
+    font-size: var(--P);
+}
+/* Pour les 3 derniers entrainements in home */
+div.container-recent-workout div.card-recent-workout {
+    background-color: var(--COULEUR_BACKGROUND_CARD);
+    border-radius: var(--BORDER);
+    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
+    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
+
+    padding: var(--ESPACE_S_SMALL);
+    margin: var(--ESPACE_S) 0;
+    transition: all ease-in var(--DUREE_TRANSITION);
+}
+@media (hover: hover) and (pointer: fine) {
+    div.container-recent-workout div.card-recent-workout:hover {
+        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transform: scale(1.01);
+    }
+}
+div.container-recent-workout div.card-recent-workout:active {
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    transform: scale(0.98);
+    border-radius: 50px;
+}
+div.container-recent-workout div.card-recent-workout p.name-workout{
+    font-size: var(--H3);
+    font-weight: var(--FONT_WEIGHT_BUTTON);
+    color: var(--COULEUR_TEXT_PRINCIPAL);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    overflow: hidden;
+}
+div.container-recent-workout div.card-recent-workout p.sport-date-workout{
+    font-size: var(--P);
+    margin: var(--ESPACE_XXS) 0;
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+}
+div.container-recent-workout div.card-recent-workout p.duree{
+    font-size: var(--P);
+    color: var(--COULEUR_TEXT_SECONDAIRE);
+}
+div.container-recent-workout div.card-recent-workout p.duree strong{
+    color: var(--COULEUR_ACCENT);
 }
 
 
@@ -1000,7 +1039,7 @@ div.shorcut div.img#icone-pause{
     background: linear-gradient(130deg, #e07c24, #ffa411);
 }
 div.shorcut div.img i{
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: #FFFFFF;
 }
 div.shorcut p.text-shorcut{
@@ -1092,7 +1131,7 @@ div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.charg
 }
 div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.charge-workout strong{
     font-weight: 1000;
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT);
 }
 div.conteneur-de-outil div.cards-history-workout div.data-workout-paire{
     display: flex;
@@ -2508,7 +2547,14 @@ div.conteneur-about-marge div.about_container div.container-contribue-ameliorati
     }
 }
 
-/* Card Outils page "Accueil" */
+/* page accueil */
+@media (max-width : 480px) {
+    div.conteneur-outil-recent div.card-outil-recent {
+        margin: var(--ESPACE_XS) 0;
+    }
+}
+
+/* card hisotrique versions */
 @media (max-width: 1245px) {
     div.conteneur-historique-versions .card-nouveautes.visible{
         width: 360px;
