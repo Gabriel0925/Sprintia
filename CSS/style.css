@@ -369,6 +369,17 @@ button.notif {
     margin-top: var(--ESPACE_M);
 }
 
+/* pour les boutons dynamique */
+button#download-button,
+button#restoration-button,
+button#reinitialiser-sprintia,
+button#reinitialiser { /* telecharger/restaurer mes données + Réinitialiser Sprintia + Réinitialiser votre coach */
+    width: 250px;
+}
+button#conversion { /* convertir en allure */
+    width: 200px;
+}
+
 body {
     font-family: var(--FONT_FAMILY); 
     line-height: var(--LINE_HEIGHT);
@@ -467,43 +478,56 @@ header div.navbar {
     align-items: center;
     justify-content: space-between;
 }
+header div.navbar .logo {
+    width: 100%;
+    margin-top: var(--ESPACE_M);
+    margin-left: var(--ESPACE_S);
+    margin-right: var(--ESPACE_S);
+}
 header div.navbar .logo a {
-    font-size: var(--H1);
+    font-size: var(--H2);
     color: var(--COULEUR_TEXT_PRINCIPAL);
     background-color: var(--COULEUR_BACKGROUND_CARD);
     
     box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
-    margin-top: var(--ESPACE_M);
-    margin-left: var(--ESPACE_M);
-    width: 127px; /* width quand s'est écrit Sprintia */
-    max-height: 55px;
+    width: 150px; /* width quand s'est écrit Sprintia */
+    max-height: 55px; /* pour sécuriser lanimation */
     overflow: hidden; /* pour sécuriser lanimation */
+    text-align: center;
+    white-space: nowrap; /* empecher le retour à la ligne (pr l'animation) */
 
     font-weight: 1000;
-    display: block;
     padding: var(--ESPACE_XS);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: var(--BORDER);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    transition: all ease-in-out 0.3s;
 }
 @keyframes dynamic_logo {
-    0% {width: 127px; transform: scale(1);} 
-    25% {width: 127px; transform: scale(1.15);} 
-    50% {width: 280px; transform: scale(0.85);} 
-    100% {width: 252px; transform: scale(1);} 
+    0% {transform: scale(1);} 
+    25% {transform: scale(1.15);} 
+    50% {transform: scale(0.85);} 
+    100% {transform: scale(1);} 
 }
 header div.navbar .logo a.pin-message { /* pour le 'dynamic island' */
+    background: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    border: 2px solid var(--COULEUR_ACCENT);
+    width: 100%;
     /* forcards permet de forcer de garder létat de l'élement a la fin de l'animation */
     animation: dynamic_logo 0.6s forwards;
 }
 @keyframes reverse_dynamic_logo { /* animation pour le retour à l'etat normal de "Ajouté à l'accueil" vers "Sprintia" */
-    0% {width: 252px; transform: scale(1);} 
-    25% {width: 280px; transform: scale(0.85);} 
-    50% {width: 127px; transform: scale(1.15);} 
-    100% {width: 127px; transform: scale(1);} 
+    0% {transform: scale(1);} 
+    25% {transform: scale(0.85);} 
+    50% {transform: scale(1.15);} 
+    100% { transform: scale(1);} 
 }
 header div.navbar .logo a.pin-message.return { /* pour le retour à l'état initial 'dynamic island' */
+    width: 150px;
+    border: 1px solid var(--COULEUR_ACCENT);
     /* forcards permet de forcer de garder létat de l'élement a la fin de l'animation */
     animation: reverse_dynamic_logo 0.6s forwards;
 }
@@ -522,7 +546,7 @@ header div.navbar ul.links {
     
     box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     margin-top: var(--ESPACE_M);
-    margin-right: var(--ESPACE_M);
+    margin-right: var(--ESPACE_S);
     border-radius: var(--BORDER);
 }
 header div.navbar div.burger-menu-button {
@@ -538,6 +562,7 @@ header div.navbar div.burger-menu-button {
     cursor: pointer;
     display: none;
     margin: var(--ESPACE_XXS);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 /* Pour que le bouton rétrécisse au moment du clic */
 header div.navbar div.burger-menu-button:active {
@@ -549,7 +574,7 @@ header div.navbar div.burger-menu-button:active {
 header div.navbar ul.links li a {
     color: var(--COULEUR_TEXT_PRINCIPAL); 
     font-size: var(--H3);
-    margin: var(--ESPACE_XS) var(--ESPACE_XXS);
+    margin: var(--ESPACE_XXS);
     min-width: 175px;
     padding: var(--ESPACE_XS);
     font-weight: var(--FONT_WEIGHT_BUTTON);
@@ -2365,21 +2390,21 @@ li.option-color {
 }
 /* on gere les margin de chacun */
 li.option-color:nth-child(1) {
-    margin-right: var(--ESPACE_XS);
+    margin-right: var(--ESPACE_S_SMALL);
 }
 li.option-color:nth-child(3) {
-    margin-right: var(--ESPACE_XS);
+    margin-right: var(--ESPACE_S_SMALL);
 }
 li.option-color:nth-child(5) {
-    margin-right: var(--ESPACE_XS);
+    margin-right: var(--ESPACE_S_SMALL);
 }li.option-color:nth-child(7) {
-    margin-right: var(--ESPACE_XS);
+    margin-right: var(--ESPACE_S_SMALL);
 }
 li.option-color:nth-child(9) {
-    margin-right: var(--ESPACE_XS);
+    margin-right: var(--ESPACE_S_SMALL);
 }
 li.option-color:nth-child(11) {
-    margin-right: var(--ESPACE_XS);
+    margin-right: var(--ESPACE_S_SMALL);
 }
 @media (hover: hover) and (pointer: fine) {
     /* Changer la color du txt lors du survol donc quand il y a la couche du before egalement */
@@ -2389,7 +2414,6 @@ li.option-color:nth-child(11) {
 }
 ol li.option-color:active{
     transform: scale(0.96);
-    border-radius: 50px;
     transition: all ease-in-out 0.3s;
 }
 /* 2ème couche du li lors du hover */
@@ -2815,23 +2839,9 @@ div.conteneur-about-marge {
 
 /* ----- Le menu Hamburger ----- */
 @media (max-width: 990px) {
-    header {
-        background-color: transparent;
-        box-shadow: none;
-    }
-    header div.navbar .logo a {
-        background-color: var(--COULEUR_BACKGROUND_CARD);
-        border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
-        border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
-        
-        box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
-        margin: 0;
-        margin-left: var(--ESPACE_S);
+    header div.navbar .logo {
         margin-top: var(--ESPACE_S);
         font-size: var(--H2);
-    }
-    header div.navbar .logo a:active {
-        border-radius: var(--BORDER_SMALL);
     }
     header div.navbar ul.links {
         display: none;
@@ -2840,10 +2850,9 @@ div.conteneur-about-marge {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0;
+        margin: 0; /* reinitialisation avant de mettre de nouvelle margin */
         margin-right: var(--ESPACE_S);
         margin-top: var(--ESPACE_S);
-        transition: all ease-in-out var(--DUREE_TRANSITION);
     }
     header .burger-menu {
         display: block;

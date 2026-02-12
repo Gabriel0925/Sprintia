@@ -384,6 +384,14 @@
                 let OutilFavoris2 = OutilFavorieUser[1] || "Estimation VO₂max"
                 let OutilFavoris3 = OutilFavorieUser[2] || "Niveau course à pied"
 
+                // si l'outil favoris 1 est estimation VO2max alors on met la charge d'entrainement (c pr éviter d'avoir des doublons)
+                if (OutilFavoris1 == OutilFavoris2) {
+                    OutilFavoris2 = "Charge d'entraînement"
+                }
+                if (OutilFavoris1 == OutilFavoris3) { // si l'outil favoris 2 est niveau course alors on met la charge d'entrainement (c pr éviter d'avoir des doublons)
+                    OutilFavoris3 = "Charge d'entraînement"
+                }
+
                 // affichage des noms des outils favoris
                 document.getElementById("P1").textContent = OutilFavoris1
                 document.getElementById("P2").textContent = OutilFavoris2

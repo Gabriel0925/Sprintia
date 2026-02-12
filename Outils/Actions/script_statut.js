@@ -49,7 +49,7 @@ async function Sauvegarde() { // Ajouter datas
     BoutonLimite1Clic.textContent = "Sauvegarder"
     BoutonLimite1Clic.disabled = false // Réactivation du bouton
 
-    window.location.href = "historique_statut_analyses.html"
+    window.location.href = `historique_statut_analyses.html?${StatutUser}`
 
     return
 }

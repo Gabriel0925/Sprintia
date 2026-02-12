@@ -389,12 +389,34 @@
         // initialisation pour les setTimeout
         let Timer1 = 0
         let Timer2 = 0
-        let Timer3 = 0
 
         function PinOutil(elementHTML, TitleOutil) {
+            // on annule les timer, on les remet à 0
+            clearTimeout(Timer1)
+            clearTimeout(Timer2)
+            clearTimeout(Timer3)
+            document.getElementById("a-logo").classList.remove("return", "pin-message") // on reset les class avant de commencer la fonction
+
             // si l'élément a deja la class actif (ça veut dire qu'il est "cocher") alors on enleve le actif pour le "decocher"
             if (elementHTML.classList.contains("actif")) {
+                // transmet l'info au user
+                document.getElementById("a-logo").classList.add("pin-message")
+
                 elementHTML.classList.remove("actif")
+
+                document.getElementById("a-logo").textContent = "Désépinglé";
+
+                Timer1 = setTimeout(() => { 
+                    document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+                    document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+                }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+                Timer2 = setTimeout(() => {
+                    // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+                    document.getElementById("a-logo").classList.remove("return")
+                    document.getElementById("a-logo").classList.remove("pin-message")
+                }, 3100) // durée choisis à la main
+                        
                 
                 if (OutilEpingler.includes(TitleOutil)) { // si le nom de l'outil est dans la liste
                     let index = OutilEpingler.indexOf(TitleOutil) // on repere a quelle position il est dans la liste
@@ -415,11 +437,6 @@
                         // transmet l'info au user
                         document.getElementById("a-logo").classList.add("pin-message")
 
-                        // on annule les timer, on les remet à 0
-                        clearTimeout(Timer1)
-                        clearTimeout(Timer2)
-                        clearTimeout(Timer3)
-
                         elementHTML.classList.add("actif") // on "coche le pin" avant la pause sinon bah lanimation est en retard
 
                         Timer1 = setTimeout(() => { // on execute les instructions après 300ms, en gros on laisse l'animation se develloper/commencer et ensuite on change le text sinon ça fait un décalage
@@ -427,8 +444,8 @@
                         }, 300); // 300ms car la durée de l'animation dans le css est 0.6s et à partir de 50% de l'animation la width de l'élément est adapté à la longueur du message donc on met le text
 
                         Timer2 = setTimeout(() => { 
-                            document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
                             document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+                            document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
                         }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
 
                         Timer3 = setTimeout(() => {

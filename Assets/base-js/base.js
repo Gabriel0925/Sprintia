@@ -9,6 +9,17 @@ burgerMenuButton.onclick = function() {
     burgerMenuButtonIcon.classList = isOpen ? 'fs-icon_fermer' : 'fs-icon_menu'
 }
 
+window.onclick = function (event) { // on track les click sur la page complete
+    let TrackClickBurgerMenuButton = burgerMenuButton.contains(event.target) // pour tracker si il y a un click sur le bouton si oui = true sinon = false
+    let TrackClickBurgerMenuOpen = burgerMenu.contains(event.target)
+    
+    if (TrackClickBurgerMenuButton == false && TrackClickBurgerMenuOpen == false) { // si tu as cliqué autre part que sur le bouton fermer ou sur/dans le burger-menu
+        // on referme le burgermenu
+        burgerMenu.classList.remove("open")
+        burgerMenuButtonIcon.classList.add("fs-icon_menu")
+    }
+}
+
 
 function afficher_plus(lieu) {
     // Pour le nb de card a ajouter

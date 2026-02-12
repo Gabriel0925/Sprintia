@@ -43,6 +43,11 @@ async function RecupValueNiveauCourse() {
     return {idDatas, NiveauDatas, DistanceDatas, ListeDate}
 }
 
+
+// init pour le logo dynamique
+let Timer1Historique = 0
+let Timer2Historique = 0
+
 async function RemplirTableau() {
     // Recup des valeur dans bdd
     let {idDatas, NiveauDatas, DistanceDatas, ListeDate} = await RecupValueNiveauCourse()
@@ -124,7 +129,28 @@ async function RemplirTableau() {
                         barChart.destroy() // destruction du graphique qu'il y a dans script_outil.js
                         document.getElementById("conteneur-graphique").style.display = "none" // on cache le conteneur du graphique
                     }    
-                }
+                } 
+
+                // timeout remis a 0 (suppresion plutot)
+                clearTimeout(Timer1)
+                clearTimeout(Timer2)
+                document.getElementById("a-logo").classList.remove("return", "pin-message")
+            
+                // petite récompense pour le user
+                document.getElementById("a-logo").classList.add("pin-message")
+
+                document.getElementById("a-logo").textContent = "Supprimé 🗑️";
+
+                Timer1Historique =setTimeout(() => { 
+                    document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+                    document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+                }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+                Timer2Historique = setTimeout(() => {
+                    // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+                    document.getElementById("a-logo").classList.remove("return")
+                    document.getElementById("a-logo").classList.remove("pin-message")
+                }, 3100) // durée choisis à la main
             }
         })
 

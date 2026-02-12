@@ -24,6 +24,10 @@ function ReturnDate(DateWorkout) {
     return DateEuropeen
 }
 
+// init pour le logo dynamique
+let Timer1 = 0
+let Timer2 = 0
+
 function HTMLCard(CardWorkout, workout, DateEuropeen) {
     let StructureHTML = `          
         <div class="data-workout-column">
@@ -92,6 +96,27 @@ function HTMLCard(CardWorkout, workout, DateEuropeen) {
         if (confirm(`Supprimer l'entraînement "${workout.nom}" ?`)) {
             await db.entrainement.delete(workout.id) // supprimer la data de la bdd
             CardWorkout.remove() // supprimer la ligne
+
+            // timeout remis a 0 (suppresion plutot)
+            clearTimeout(Timer1)
+            clearTimeout(Timer2)
+            document.getElementById("a-logo").classList.remove("return", "pin-message")
+            
+            // petite récompense pour le user
+            document.getElementById("a-logo").classList.add("pin-message")
+
+            document.getElementById("a-logo").textContent = "Supprimé 🗑️";
+
+            Timer1 = setTimeout(() => { 
+                document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+                document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+            }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+            Timer2 = setTimeout(() => {
+                // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+                document.getElementById("a-logo").classList.remove("return")
+                document.getElementById("a-logo").classList.remove("pin-message")
+            }, 3100) // durée choisis à la main
         }
         
         const NbCardStatut = document.querySelectorAll(".cards-history-workout")
@@ -149,8 +174,29 @@ async function AfficherData() {
 
         let CardWorkoutHTML = HTMLCard(CardWorkout, workout, DateEuropeen)
         ConteneurCardsWorkout.appendChild(CardWorkoutHTML)
-
     });
+
+    // animation du dynamic logo pour féliciter le user
+    const ParamURL = window.location.search
+    const TableauSeparation = ParamURL.split("?")
+    
+    if (TableauSeparation.length > 1 && TableauSeparation[1] == "workoutregister") {
+        // petite récompense pour le user
+        document.getElementById("a-logo").classList.add("pin-message")
+
+        document.getElementById("a-logo").textContent = "Bien joué·e 🔥";
+
+        setTimeout(() => { 
+            document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+            document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+        }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+        setTimeout(() => {
+            // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+            document.getElementById("a-logo").classList.remove("return")
+            document.getElementById("a-logo").classList.remove("pin-message")
+        }, 3100) // durée choisis à la main
+    }
 
     return
 }

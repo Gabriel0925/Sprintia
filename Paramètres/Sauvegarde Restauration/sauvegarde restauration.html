@@ -86,7 +86,7 @@
             Vous êtes au bon endroit ! La fonctionnalité de sauvegarde permet de télécharger, exporter vos données au format CSV ce qui permettera par
             la suite de restaurer vos données (voir plus bas dans la page) sur votre nouvel appareil,...
         </p>
-        <div class="conteneur-centrage">
+        <div class="conteneur-centrage-marge">
             <button onclick="DownloadDatas()" id="download-button">Télécharger mes données</button>
         </div>
 
@@ -95,7 +95,7 @@
             La fonctionnalité de restauration permet d'ingérer vos données (qui ont été téléchargée au format CSV au préalable) dans Sprintia. Cette fonction est utile
             si vous changez d'appareil informatique. <strong>Attention, en important des données vous écraserez vos données actuelle</strong>.
         </p>
-        <div class="conteneur-centrage">
+        <div class="conteneur-centrage-marge">
             <!-- On n' affiche pas le input file -->
             <input type="file" id="file-input" accept=".json" style="display: none;" onchange="ReadFile(event)">
             <!-- lors du click sur le bouton on simule un click sur le input file qui va appeller la fonction pour lire le fichier json -->
@@ -107,7 +107,7 @@
             Si vous avez envie de supprimer l'entièreté de vos données, cliquez sur le bouton ci-dessous.
             <strong>Attention, en réinitialisant Sprintia vous ne pourrez pas restaurer vos données.</strong>
         </p>
-        <div class="conteneur-centrage">
+        <div class="conteneur-centrage-marge">
             <button onclick="SupprimerDatas()" id="reinitialiser-sprintia">Réinitialiser Sprintia</button>
         </div>
 

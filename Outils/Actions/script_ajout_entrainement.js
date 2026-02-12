@@ -429,7 +429,7 @@ async function RegistrationWorkout() {
     BoutonSauvegarde.textContent = "Sauvegarder"
 
     // Renvoie vers historique d'entraînement
-    window.location.href = "historique_entrainement.html"
+    window.location.href = "historique_entrainement.html?workoutregister" // on met un param dans l'URL
 
     return
 }
