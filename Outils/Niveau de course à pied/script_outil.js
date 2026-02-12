@@ -48,19 +48,35 @@ function StartNiveau() {
 
     // on vide le champs erreur au moins si le user change 7 pour 4 bah ça enleve l'erreur
     ChampsErreur.textContent =""
+            
+    // recup variable css
+    let RootCSS = document.documentElement
+    let StyleCSS = getComputedStyle(RootCSS)
 
     // Vérification
     if (isNaN(DistanceUser)) {
         return
     }
     if (DistanceUser <= 0) {
-        ChampsErreur.textContent = "La distance doit être supérieure à 0."
-        ChampsErreur.style.color = "#ef2e2e"
+        // si le user a coché la case theme complet alors on met la couleur accent
+        if (localStorage.getItem("ToggleThemeComplet") == "True") {
+            ChampsErreur.textContent = "La distance doit être supérieure à 0."
+            ChampsErreur.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT") // ajout de la couleur
+        } else {
+            ChampsErreur.textContent = "La distance doit être supérieure à 0."
+            ChampsErreur.style.color = "#ef2e2e"
+        }
         return
     }
     if (DistanceUser >= 7) {
-        ChampsErreur.textContent = "La distance doit être inférieure à 7."
-        ChampsErreur.style.color = "#ef2e2e"
+        // si le user a coché la case theme complet alors on met la couleur accent
+        if (localStorage.getItem("ToggleThemeComplet") == "True") {
+            ChampsErreur.textContent = "La distance doit être inférieure à 7."
+            ChampsErreur.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT") // ajout de la couleur
+        } else {
+            ChampsErreur.textContent = "La distance doit être inférieure à 7."
+            ChampsErreur.style.color = "#ef2e2e"
+        }
         return
     }
 

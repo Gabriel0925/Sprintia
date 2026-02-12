@@ -73,7 +73,6 @@ async function RemplirTableau() {
         // Remplir ligne
         ColonneDate.textContent = Date
         ColonneNiveau.textContent = NiveauDatas[compteur].toString().replace(".", ",") // ne pas oublier de le mettre en str avant le replace
-        console.log(DistanceDatas[compteur])
         if (DistanceDatas[compteur] != undefined) {
             ColonneDistance.textContent = DistanceDatas[compteur].toString().replace(".", ",")
         } else {
@@ -87,6 +86,17 @@ async function RemplirTableau() {
 
         // Ajout de la class
         BoutonSupprTableau.classList.add("tableau")
+
+        // si le user a coché la case theme complet alors on met la couleur accent
+        if (localStorage.getItem("ToggleThemeComplet") == "True") {
+            // recup variable css
+            let RootCSS = document.documentElement
+            let StyleCSS = getComputedStyle(RootCSS)
+
+            BoutonSupprTableau.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT") // ajout de la couleur
+        } else {
+            BoutonSupprTableau.style.color = "#ef2e2e" // ajout de la couleur
+        }
 
         const EtapeBoucle = compteur // Grâce a const la variable ne change jamais donc chaque bouton enregistre sa ligne en fonction de letape de la bouclz
         // Ajout de la logique pour la suppresion

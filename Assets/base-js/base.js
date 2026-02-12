@@ -63,24 +63,6 @@ function afficher_plus(lieu) {
     return
 }
 
-function SprintiaVersion() {
-    let Logo = document.querySelector("div.logo a")
-
-    Logo.textContent = "Sprintia"
-
-    let VersionInSettings = document.querySelector(".version")
-
-    if (VersionInSettings) {
-        VersionInSettings.innerHTML = "Version : <strong>4</strong>"
-    }
-
-    return
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-    SprintiaVersion()
-})
-
 // Pr gérer le BFCache
 window.addEventListener("pageshow", (event) => {
     // Pour contrer le BFCache parce qu'il mettait en cache mes anciennes pages pour éviter de les recharger mais ça causait probleme pour les thèmes

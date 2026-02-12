@@ -177,6 +177,9 @@
         </div>
 
         <h2>Derniers entraînements</h2>
+        <p class="text" id="text-pas-entrainement">
+            Vous n'avez pas encore enregistré d'entraînement
+        </p>
 
         <div class="container-recent-workout"></div> <!-- Remplis en JS -->
 
@@ -231,87 +234,89 @@
 
     <!-- Pour les 3 derniers entrainements -->
     <script>
-function ReturnDate(DateWorkout) {
-    let DateEuropeen = ""
+        function ReturnDate(DateWorkout) {
+            let DateEuropeen = ""
 
-    DateWorkout = DateWorkout.split("-")
-    // Inversion de la date de "2026-01-12" à "12-01-2026"
-    DateEuropeen = DateWorkout[2] + "-" + DateWorkout[1] + "-" + DateWorkout[0]
-    return DateEuropeen
-}
+            DateWorkout = DateWorkout.split("-")
+            // Inversion de la date de "2026-01-12" à "12-01-2026"
+            DateEuropeen = DateWorkout[2] + "-" + DateWorkout[1] + "-" + DateWorkout[0]
+            return DateEuropeen
+        }
 
-function HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) {
-    let StructureHTML = `          
-        <a href="Outils/Actions/historique_entrainement.html">
-                <p class="name-workout">
-                    ${NameWorkout}
-                </p>
-                <p class="sport-date-workout">
-                    ${SportWorkout} · ${DateWorkout}
-                </p>
-                <p class="duree">
-                    Durée : <strong>${DureeWorkout}</strong>
-                </p>
-        </a>
-    `
+        function HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) {
+            let StructureHTML = `          
+                <a href="Outils/Actions/historique_entrainement.html">
+                        <p class="name-workout">
+                            ${NameWorkout}
+                        </p>
+                        <p class="sport-date-workout">
+                            ${SportWorkout} · ${DateWorkout}
+                        </p>
+                        <p class="duree">
+                            Durée : <strong>${DureeWorkout}</strong>
+                        </p>
+                </a>
+            `
 
-    CardWorkout.innerHTML = StructureHTML 
+            CardWorkout.innerHTML = StructureHTML 
 
-    let CardWorkoutHTML = CardWorkout
+            let CardWorkoutHTML = CardWorkout
 
-    return CardWorkoutHTML
-}
+            return CardWorkoutHTML
+        }
 
-async function AfficherData() {
-    // on recup les datas
-    let HistoriqueDB = await db.entrainement.toArray()
+        async function AfficherData() {
+            // on recup les datas
+            let HistoriqueDB = await db.entrainement.toArray()
 
-    // Trier par date 
-    HistoriqueDB.sort((element1, element2) => { // En js on peut comparer 2 dates comme des maths
-        if (element1.date < element2.date) return 1
-        if (element1.date > element2.date) return -1
-    })
+            // Trier par date 
+            HistoriqueDB.sort((element1, element2) => { // En js on peut comparer 2 dates comme des maths
+                if (element1.date < element2.date) return 1
+                if (element1.date > element2.date) return -1
+            })
 
-    // on recup les datas necessaire
-    let TableauNameWorkout = HistoriqueDB.map(elementDB => elementDB.nom).slice(0, 3)
-    let TableauSport = HistoriqueDB.map(elementDB => elementDB.sport).slice(0, 3)
-    let TableauDateWorkout = HistoriqueDB.map(elementDB => elementDB.date).slice(0, 3)
-    let TableauDureeWorkout = HistoriqueDB.map(elementDB => elementDB.duree).slice(0, 3)
+            // on recup les datas necessaire
+            let TableauNameWorkout = HistoriqueDB.map(elementDB => elementDB.nom).slice(0, 3) 
+            let TableauSport = HistoriqueDB.map(elementDB => elementDB.sport).slice(0, 3)
+            let TableauDateWorkout = HistoriqueDB.map(elementDB => elementDB.date).slice(0, 3)
+            let TableauDureeWorkout = HistoriqueDB.map(elementDB => elementDB.duree).slice(0, 3)
 
-    if (TableauNameWorkout.length <= 0) {
-        // on cache la secction si il y a pas de datas
-        document.querySelector(".container-recent-workout").style.display = "none"
-    } else { // si il y a des datas
-        // initialisation pour la boucle
-        let compteur = 0
-        let SportWorkout = 0
-        let DateWorkout = 0
-        let DureeWorkout = 0
-        const ConteneurCardsWorkout = document.querySelector(".container-recent-workout") // recupération du conteneur des cards
+            if (TableauNameWorkout.length <= 0) {
+                // on cache la secction si il y a pas de datas
+                document.querySelector(".container-recent-workout").style.display = "none"
+                document.getElementById("button_afficher_plus").style.display = "none" // on cache le bouton
+            } else { // si il y a des datas
+                document.getElementById("text-pas-entrainement").style.display = "none" // on cache le text comme quoi il n'y a pas d'entrainement
+                // initialisation pour la boucle
+                let compteur = 0
+                let SportWorkout = 0
+                let DateWorkout = 0
+                let DureeWorkout = 0
+                const ConteneurCardsWorkout = document.querySelector(".container-recent-workout") // recupération du conteneur des cards
 
-        TableauNameWorkout.forEach(NameWorkout => {
-            // maj des variables en fonction de l'entrainement
-            SportWorkout = TableauSport[compteur]
-            DateWorkout = ReturnDate(TableauDateWorkout[compteur])
-            DureeWorkout = TableauDureeWorkout[compteur]
+                TableauNameWorkout.forEach(NameWorkout => {
+                    // maj des variables en fonction de l'entrainement
+                    SportWorkout = TableauSport[compteur]
+                    DateWorkout = ReturnDate(TableauDateWorkout[compteur])
+                    DureeWorkout = TableauDureeWorkout[compteur]
 
-            // on créer la card html
-            const CardWorkout = document.createElement("div")
-            CardWorkout.classList.add("card-recent-workout")
+                    // on créer la card html
+                    const CardWorkout = document.createElement("div")
+                    CardWorkout.classList.add("card-recent-workout")
 
-            let CardWorkoutHTML = HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) // appelle a la fonction
-            ConteneurCardsWorkout.appendChild(CardWorkoutHTML)
+                    let CardWorkoutHTML = HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) // appelle a la fonction
+                    ConteneurCardsWorkout.appendChild(CardWorkoutHTML)
 
-            compteur += 1 // incrementation
-        });
-    } 
+                    compteur += 1 // incrementation
+                });
+            } 
 
-    return
-}
+            return
+        }
 
-window.addEventListener("DOMContentLoaded", () => {
-    AfficherData()
-})
+        window.addEventListener("DOMContentLoaded", () => {
+            AfficherData()
+        })
     </script>
 
 
