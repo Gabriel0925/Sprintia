@@ -1,18 +1,22 @@
 // Initialisation
 const DicoPhraseExemple = {
-    "Bienveillant": `Vous commencez le sport, vous vous y remettez ou alors vous êtes un·e passionné·e de sport ?
-                    Dans tous les cas, je serai là pour vous aider à devenir meilleur·e et à vous apprendre de nouvelles choses, 
-                    sauf si vous connaissez déjà tout ! Mon objectif ? Vous motiver et toujours voir le positif même dans les moments difficiles.`,
-    "Strict-Motivant": `Je suis un coach sévère, juste mais surtout motivant. Je suis là pour vous pousser à vous dépasser. Comme on dit, c'est quand vous êtes dans le dur
-                    que vous progressez réellement ! Je vous challengerai au quotidien. Avec moi, vous pouvez être sûr·e·s que 
-                    je vous dirai les choses telles qu'elles sont ! Alors, vous êtes prêt·e·s à progresser ?`,
-    "Copain": `Alors, je dois vous prévenir tout de suite : mon but, c'est d'être votre pote ! Et franchement, j’ai l’impression qu’on va super bien s’entendre.
-                Je m’adapte peu importe votre niveau. Mon but ? Vous motiver  et vous faire voir que vous pouvez toujours aller un peu plus loin mais sans vous
-                prendre la tête, promis. Alors, prêt·e à vous lancer ?`,
-    "Go-muscu": `Que vous soyez là pour devenir énorme et sec·he ou juste pour ne plus avoir le souffle coupé en montant de simples escaliers. 
-                Avec moi, vous allez apprendre des choses sur la muscu ! Je suis votre coach qui a toujours de l'énergie sachez que
-                je vois toujours le positif. En revanche, j'ai une personnalité de Go-muscu mais bon je suis sympa !`
+    "Bienveillant": `Tu commences le sport, tu t'y remets ou alors tu es un·e passionné·e de sport ?
+                    Dans tous les cas, je serai là pour t'aider à devenir meilleur·e et à t'apprendre de nouvelles choses, 
+                    sauf si tu connais déjà tout ! Mon objectif ? Te motiver et toujours voir le positif même dans les moments difficiles.`,
+    "Strict-Motivant": `Je suis un coach sévère, juste, mais surtout motivant. Je suis là pour te pousser à te dépasser. Comme on dit, c'est quand on est dans le dur
+                    qu'on progresse réellement ! Je te challengerai au quotidien. Avec moi, tu peux être sûr·e que 
+                    je te dirai les choses telles qu'elles sont ! Alors, tu es prêt·e à progresser ?`,
+    "Copain": `Alors, je dois te prévenir tout de suite : mon but, c'est d'être ton pote ! Et franchement, j’ai l’impression qu’on va super bien s’entendre.
+                Je m’adapte peu importe ton niveau. Mon but ? Te motiver, te dire les choses clairement et te faire voir que tu peux toujours aller un peu plus loin mais sans te
+                prendre la tête, promis. Alors, prêt·e à me choisir ?!`,
+    "Go-muscu": `Que tu sois là pour devenir énorme et sec·he ou juste pour ne plus avoir le souffle coupé en montant de simples escaliers. 
+                Avec moi, tu vas apprendre des choses sur la muscu ! Je suis ton coach qui a toujours de l'énergie sache que
+                je vois toujours le positif. En revanche, j'ai une personnalité de go-muscu comme on dit, mais bon je suis sympa !`
     }
+
+// init pour le logo dynamique
+let Timer1 = 0
+let Timer2 = 0
 
 async function SauvegardePreference() {
     // Recup datas
@@ -22,12 +26,6 @@ async function SauvegardePreference() {
 
     // recup bouton
     let BoutonSauvegarde = document.getElementById("bouton-save")
-
-    // Vérification
-    if (NameCoach.length >= 20) {
-        alert("Erreur de saisie : le champ 'Nom' ne doit pas dépasser 20 caractères.")
-        return
-    }
 
     // Desactivation du bouton pour éviter le double clic
     BoutonSauvegarde.disabled = true
@@ -62,6 +60,27 @@ async function SauvegardePreference() {
 
     // Changement du titre du h1
     document.getElementById("title-h1").textContent = NameCoach
+    
+    // timeout remis a 0 (suppresion plutot)
+    clearTimeout(Timer1)
+    clearTimeout(Timer2)
+    document.getElementById("a-logo").classList.remove("return", "pin-message")
+
+    // animation du dynamic logo pour message au user
+    document.getElementById("a-logo").classList.add("pin-message")
+
+    document.getElementById("a-logo").textContent = `${AvatarCoach} C'est parti 🔥`;
+
+    Timer1 = setTimeout(() => { 
+        document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+        document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+    }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+    Timer2 = setTimeout(() => {
+        // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+        document.getElementById("a-logo").classList.remove("return")
+        document.getElementById("a-logo").classList.remove("pin-message")
+    }, 3100) // durée choisis à la main
 
     return
 }
@@ -162,6 +181,7 @@ async function Initialisation() {
         let TableauName = JRMCoachDB.map(elementDB => elementDB.nom)
         let TableauStyle = JRMCoachDB.map(elementDB => elementDB.style)
         let TableauAvatar = JRMCoachDB.map(elementDB => elementDB.avatar)
+        console.log(TableauName[0])
         
         // vérification si c'est la valeur de base du coach alors on rajoute les ':' sinon dans la box du jrm ça affiche "JRM Coach" alors quil faudrait que ce soit écrit "JRM Coach :"
         if (TableauName[0] == "JRM Coach") {
@@ -169,7 +189,7 @@ async function Initialisation() {
         }
 
         // Remplissage des zones
-        ZoneNameBox.textContent = TableauAvatar[0] + " " + TableauName[0] // Le nom du coach
+        ZoneNameBox.textContent = TableauAvatar[0] + " " + TableauName[0] + " :" // Le nom du coach
         ZoneJRMBox.innerHTML = DicoPhraseExemple[TableauStyle[0]] // Le message du coach
         
         // vérification si c'est la valeur de base on remplit pas le input donc str vide
@@ -204,7 +224,7 @@ async function Reinitialisation() {
         await new Promise(r => setTimeout(r, 650))
 
         // on remet tout de base sur la page premierement les input
-        document.getElementById("title-h1").value = "JRM Coach"
+        document.getElementById("title-h1").textContent = "JRM Coach"
         document.getElementById("nom-coach").value = ""
         document.getElementById("style-coach").value = "Bienveillant"
         document.getElementById("avatar-coach").value = ""

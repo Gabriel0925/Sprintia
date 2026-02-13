@@ -26,7 +26,7 @@
     <header>
         <div class="navbar">
             <div class="logo">
-                <a href="../../index.html">Sprintia</a>
+                <a href="../../index.html" id="a-logo">Sprintia</a>
             </div>
             <ul class="links">
                 <li>
@@ -80,13 +80,13 @@
     <div class="conteneur-de-outil">
         <h1 id="title-h1">JRM Coach</h1>
         <p class="text">
-            Un coach entièrement personnalisable. Créez votre propre coach : choisissez son nom, son style et même son avatar. 
-            Votre coach, à votre image, pour vous motiver au quotidien !
+            Créez votre propre coach : choisissez son nom, son style et même son avatar. 
+            Votre coach, à votre image ! Votre coach vous tutoiera pour créer une meilleure proximité entre vous et le coach.
         </p>
         <div class="conteneur-ensemble">
             <div class="conteneur-champs-outil">
                 <div class="conteneur-input">
-                    <input type="text" id="nom-coach" oninput="MajName(value)" placeholder="Nom" autocomplete="off">
+                    <input type="text" id="nom-coach" oninput="MajName(value)" placeholder="Nom" autocomplete="off" maxlength="20">
                     <div class="label-input">Nom</div>
                 </div>
 
@@ -99,7 +99,7 @@
                 <select id="avatar-coach" onchange="ChangeAvatar(value)" autocomplete="off">
                         <option value="">Avatar : Rien</option>
                         <option value="👨">Avatar : 👨</option>
-                        <option value="👩">Avatar : 👩</option>
+                        <option value="👩">Avatar : 👩</option> 
                         <option value="🥸">Avatar : 🥸</option>
                         <option value="🤠">Avatar : 🤠</option>
                         <option value="👴">Avatar : 👴</option>

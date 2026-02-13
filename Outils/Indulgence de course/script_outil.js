@@ -1,47 +1,47 @@
 // dico des interpretation
 const InterpretationBienveillant = {
-    "1": "<strong>Sprintia n'a pas encore assez de données</strong> pour que votre coach puisse analyser votre indulgence de course. Vous avez juste besoin de compléter les champs pour que Sprintia vous donne des conseils pour progresser.", 
-    "2": "Vous courez <strong>moins depuis 7 jours</strong>, c'est dommage ! Si c'est un choix profitez-en pour vous reposer ou travailler d'autres aspects de la course comme le <strong>renforcement</strong> ou de la <strong>mobilité</strong>.", 
-    "3": "Parfait ! <strong>Vous progressez</strong> grâce à votre <strong>régularité</strong> ainsi qu'à votre discipline, continuez comme ça pour booster vos performances. Pour maximiser votre progression, pensez toujours à <strong>varier vos allures</strong>.", 
-    "4": "Attention, vous courez <strong>bien plus que d'habitude</strong> ! Si vous continuez sur ce rythme vous risquez de vous <strong>blesser</strong>. P'tit conseil, <strong>réduisez</strong> votre volume d'entraînement.", 
+    "1": "Je n'ai <strong>pas encore assez de données</strong> pour calculer ton indulgence de course. J'ai hâte que tu enregistres ton premier entraînement de course dans Sprintia pour qu'on analyse ça ensemble.", 
+    "2": "Tu cours <strong>moins depuis 7 jours</strong>, c'est dommage ! Si c'est un choix profite-en pour te reposer ou travailler d'autres aspects de la course comme le <strong>renforcement</strong> ou de la <strong>mobilité</strong>.", 
+    "3": "Parfait ! <strong>Tu progresses</strong> grâce à ta <strong>régularité</strong> ainsi qu'à ta discipline, continue comme ça pour booster tes performances. Pour maximiser ta progression, pense toujours à <strong>varier tes allures</strong> d'entraînement.", 
+    "4": "Attention, tu cours <strong>bien plus que d'habitude</strong> ! Si tu continues sur ce rythme tu risques de te <strong>blesser</strong>. P'tit conseil, <strong>réduis</strong> ton volume d'entraînement.", 
     // Pour les statut
-    "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, vous reposer, et revenez encore plus motivé·e pour battre tous vos records !", 
-    "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
-    "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
-    "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e !"
+    "5": "Statut : <strong>Vacances</strong><br>Profite de cette pause pour te ressourcer, te reposer, et reviens encore plus motivé·e pour battre tous tes records !", 
+    "6": "Statut : <strong>Blessure</strong><br>Prends vraiment le temps de laisser ton corps se régénérer complètement, afin de revenir encore plus fort·e.", 
+    "7": "Statut : <strong>Malade</strong><br>Ne va pas t'entraîner, ton organisme a besoin de récupérer pour le moment, mais dès que tu seras guéri·e tu pourras reprendre les entraînements.", 
+    "8": "Statut : <strong>Suspension</strong><br>Profite-en pour te reposer, j'analyserai tes entraînements seulement quand tu seras prêt·e !"
 }
 const InterpretationStrictMotivant = {
-    "1": "<strong>Sprintia n'a pas encore assez de données</strong> pour que votre coach puisse analyser votre indulgence de course. Vous avez juste besoin de compléter les champs pour que Sprintia vous donne des conseils pour progresser.", 
-    "2": "Vous courez <strong>moins depuis 7 jours</strong>, faites attention si vous continuez dans cette voie, vous risquez de perdre du niveau rapidement ! Petit conseil pour limiter la casse, faites du <strong>renforcement</strong>.", 
-    "3": "Parfait ! <strong>Vous progressez</strong> grâce à votre <strong>régularité</strong>. La régularité c'est la clé de la réussite donc, continuez comme ça pour progresser. Mais attention, le plus dur n'est pas de progresser mais de continuer à progresser.", 
-    "4": "Vous courez <strong>bien plus que d'habitude</strong> ! Si vous voulez vous <strong>blesser</strong>, vous êtes sur la bonne voie, ne jouez pas avec le feu, arrêtez de courir pendant quelques jours, pour revenir plus fort.", 
+    "1": "Je n'ai <strong>pas encore assez de données</strong> pour calculer ton indulgence de course. J'ai hâte que tu rentres ton premier entraînement de course dans Sprintia pour qu'on analyse ça ensemble.", 
+    "2": "Tu cours <strong>moins depuis 7 jours</strong>. Fais attention si tu continues sur cette voie, tu risques de perdre du niveau rapidement ! Petit conseil pour limiter la casse, fais du <strong>renforcement</strong>.", 
+    "3": "Parfait ! <strong>Tu progresses</strong> grâce à ta <strong>régularité</strong>. La régularité c'est la clé de la réussite donc, continue comme ça pour progresser. Mais attention, le plus dur n'est pas de progresser mais de continuer à progresser.", 
+    "4": "Tu cours <strong>bien plus que d'habitude</strong> ! Si tu veux te <strong>blesser</strong>, tu es sur la bonne voie, ne joue pas avec le feu, arrête de courir pendant quelques jours, pour revenir plus fort.", 
     // Pour les statut
-    "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, vous reposer, et revenez encore plus motivé·e pour battre tous vos records !", 
-    "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
-    "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
-    "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e !"
+    "5": "Statut : <strong>Vacances</strong><br>Profite de cette pause pour te ressourcer, te reposer, et reviens encore plus motivé·e pour battre tous tes records !", 
+    "6": "Statut : <strong>Blessure</strong><br>Prends vraiment le temps de laisser ton corps se régénérer complètement, afin de revenir encore plus fort·e.", 
+    "7": "Statut : <strong>Malade</strong><br>Ne va pas t'entraîner, ton organisme a besoin de récupérer pour le moment, mais dès que tu seras guéri·e tu pourras reprendre les entraînements.", 
+    "8": "Statut : <strong>Suspension</strong><br>Profite-en pour te reposer, j'analyserai tes entraînements seulement quand tu seras prêt·e !"
 }
 const InterpretationCopain = {
-    "1": "<strong>Sprintia n'a pas encore assez de données</strong> pour que votre coach puisse analyser votre indulgence de course. Vous avez juste besoin de compléter les champs pour que Sprintia vous donne des conseils pour progresser.", 
-    "2": "Vous courez <strong>moins depuis 7 jours</strong>. Allez, faites un effort, ne vous relâchez pas, sinon vous allez finir par perdre tout votre niveau et croyez moi, vous allez vous en vouloir une fois qu'il sera trop tard.", 
-    "3": "Bravo !<strong>Vous progressez</strong> grâce à votre sérieux, votre concentration et votre détermination à toujours donner le meilleur de vous-même. Pour continuer à progresser, pensez toujours à <strong>varier vos allures</strong>.", 
-    "4": "Attention, vous courez <strong>bien plus que d'habitude</strong> ! J'ai l'impression que vous aimez un peu trop courir en ce moment, c'est bien, mais attention : moins vous êtes régulier, plus vous risquez de vous blesser.", 
+    "1": "Je n'ai <strong>pas encore assez de données</strong> pour calculer ton indulgence de course. J'ai hâte que tu rentres ton premier entraînement de course dans Sprintia pour qu'on analyse ça ensemble.", 
+    "2": "Tu cours <strong>moins depuis 7 jours</strong>. Essaie de courir un peu plus, ne te relâche pas, sinon tu vas finir par perdre tout ton niveau et crois moi, tu vas t'en vouloir une fois qu'il sera trop tard.", 
+    "3": "Bravo ! <strong>Tu progresses</strong> grâce à ton sérieux, ta concentration et ta détermination à toujours donner le meilleur de toi-même. Pour continuer à progresser, pense toujours à <strong>varier tes allures</strong> d'entraînement.", 
+    "4": "Attention, tu cours <strong>bien plus que d'habitude</strong> ! J'ai l'impression que tu aimes un peu trop courir en ce moment, c'est bien, mais attention : moins tu es progressif·ve, plus tu risques de te blesser.", 
     // Pour les statut
-    "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, vous reposer, et revenez encore plus motivé·e pour battre tous vos records !", 
-    "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
-    "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
-    "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e !"
+    "5": "Statut : <strong>Vacances</strong><br>Profite de cette pause pour te ressourcer, te reposer, et reviens encore plus motivé·e pour battre tous tes records !", 
+    "6": "Statut : <strong>Blessure</strong><br>Prends vraiment le temps de laisser ton corps se régénérer complètement, afin de revenir encore plus fort·e.", 
+    "7": "Statut : <strong>Malade</strong><br>Ne va pas t'entraîner, ton organisme a besoin de récupérer pour le moment, mais dès que tu seras guéri·e tu pourras reprendre les entraînements.", 
+    "8": "Statut : <strong>Suspension</strong><br>Profite-en pour te reposer, j'analyserai tes entraînements seulement quand tu seras prêt·e !"
 }
 const InterpretationGoMuscu = {
-    "1": "<strong>Sprintia n'a pas encore assez de données</strong> pour que votre coach puisse analyser votre indulgence de course. Vous avez juste besoin de compléter les champs pour que Sprintia vous donne des conseils pour progresser.", 
-    "2": "Vous courez <strong>moins depuis 7 jours</strong>, attention, la course à pied c'est comme la musculation ça demande de la <strong>régularité</strong>. Votre coeur, c'est un muscle, il faut le travailler pour qu'il devienne meilleur.", 
-    "3": "<strong>Vous progressez</strong>, parfait ! En plus de travailler vos muscles, vous travaillez votre coeur, bien joué ! Pour continuer à progresser, <strong>pensez toujours à varier vos allures</strong>.", 
-    "4": "Vous courez <strong>bien plus que d'habitude</strong> ! Faites attention, si vous continuez sur ce rythme vous risquez de vous <strong>blesser</strong> donc réduisez votre volume kilométriques.", 
+    "1": "Je n'ai <strong>pas encore assez de données</strong> pour calculer ton indulgence de course. J'ai hâte que tu rentres ton premier entraînement de course dans Sprintia pour qu'on analyse ça ensemble.", 
+    "2": "Tu cours <strong>moins depuis 7 jours</strong>, attention, la course à pied c'est comme la musculation ça demande de la <strong>régularité</strong>. Ton coeur, c'est un muscle, il faut le travailler pour qu'il devienne meilleur.", 
+    "3": "<strong>Tu progresses</strong>, parfait ! En plus de travailler tes muscles, tu travailles ton coeur, bien joué ! Pour continuer à progresser, pense toujours à <strong>varier tes allures</strong> d'entraînement.", 
+    "4": "Tu cours <strong>bien plus que d'habitude</strong> ! Fais attention, si tu continues sur ce rythme tu risques de te <strong>blesser</strong> donc réduis ton volume kilométrique.", 
     // Pour les statut
-    "5": "Statut : <strong>Vacances</strong><br>Profitez de cette pause pour vous ressourcer, vous reposer, et revenez encore plus motivé·e pour battre tous vos records !", 
-    "6": "Statut : <strong>Blessure</strong><br>Prenez vraiment le temps de laisser votre corps se régénérer complètement, afin de revenir encore plus fort·e que jamais.", 
-    "7": "Statut : <strong>Malade</strong><br>N'allez pas vous entraîner votre organisme a besoin de récupérer pour le moment, mais dès que cette maladie sera partie vous pourrez reprendre vos entraînements.", 
-    "8": "Statut : <strong>Suspension</strong><br>Profitez-en pour vous reposer, Sprintia analysera vos entraînements seulement quand vous serez prêt·e !"
+    "5": "Statut : <strong>Vacances</strong><br>Profite de cette pause pour te ressourcer, te reposer, et reviens encore plus motivé·e pour battre tous tes records !", 
+    "6": "Statut : <strong>Blessure</strong><br>Prends vraiment le temps de laisser ton corps se régénérer complètement, afin de revenir encore plus fort·e.", 
+    "7": "Statut : <strong>Malade</strong><br>Ne va pas t'entraîner, ton organisme a besoin de récupérer pour le moment, mais dès que tu seras guéri·e tu pourras reprendre les entraînements.", 
+    "8": "Statut : <strong>Suspension</strong><br>Profite-en pour te reposer, j'analyserai tes entraînements seulement quand tu seras prêt·e !"
 }
 
 async function RecupData() {

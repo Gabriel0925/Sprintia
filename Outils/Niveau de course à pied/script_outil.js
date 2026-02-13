@@ -44,18 +44,39 @@ function Zone(ScoreCourse) {
 function StartNiveau() {
     // Recup datas
     let DistanceUser = parseFloat(document.getElementById("distance-user").value.trim().replace(",", "."))
+    let ChampsErreur = document.getElementById("p-error")
+
+    // on vide le champs erreur au moins si le user change 7 pour 4 bah ça enleve l'erreur
+    ChampsErreur.textContent =""
+            
+    // recup variable css
+    let RootCSS = document.documentElement
+    let StyleCSS = getComputedStyle(RootCSS)
 
     // Vérification
     if (isNaN(DistanceUser)) {
-        alert("Erreur de saisie : le champ distance doit être rempli.")
         return
     }
     if (DistanceUser <= 0) {
-        alert("Valeur non valide, la distance doit être supérieur à 0.")
+        // si le user a coché la case theme complet alors on met la couleur accent
+        if (localStorage.getItem("ToggleThemeComplet") == "True") {
+            ChampsErreur.textContent = "La distance doit être supérieure à 0."
+            ChampsErreur.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT") // ajout de la couleur
+        } else {
+            ChampsErreur.textContent = "La distance doit être supérieure à 0."
+            ChampsErreur.style.color = "#ef2e2e"
+        }
         return
     }
     if (DistanceUser >= 7) {
-        alert("Valeur non valide, la distance doit être inférieur à 7.")
+        // si le user a coché la case theme complet alors on met la couleur accent
+        if (localStorage.getItem("ToggleThemeComplet") == "True") {
+            ChampsErreur.textContent = "La distance doit être inférieure à 7."
+            ChampsErreur.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT") // ajout de la couleur
+        } else {
+            ChampsErreur.textContent = "La distance doit être inférieure à 7."
+            ChampsErreur.style.color = "#ef2e2e"
+        }
         return
     }
 
@@ -69,26 +90,19 @@ function StartNiveau() {
     return
 }
 
+// init pour le logo dynamique
+let Timer1 = 0
+let Timer2 = 0
 
 // Ajouter des datas
 async function SauvegardeNiveauCourse() {
     // Recup bouton
     let BoutonLimite1Clic = document.getElementById("button-sauvegarde-niveau")
-
-
+    // recup inputs
+    let DateNiveauUser = document.getElementById("date-niveau-course").value
+    let DistanceUser = document.getElementById("distance-user").value
     // Recup valeur niveau
     let NiveauCourseUser = document.querySelector(".temps-recup").innerHTML.trim().replace(",", ".")
-
-    NiveauCourseUser = parseFloat(NiveauCourseUser)
-    // verification
-    if (NiveauCourseUser <= 0) {
-        alert("Veuillez d'abord calculer votre niveau de course avant de vouloir le sauvegarder.")
-        return
-    }
-
-    BoutonLimite1Clic.disabled = true // Pour empeche que le user clique 2 fois
-    // signe d'enregistrement pr le user
-    BoutonLimite1Clic.textContent = "Chargement..."
 
     // Recup de la date
     let DateActuelle = new Date().toISOString() // ça renvoie ça "2026-01-24T13:55:37.171Z"
@@ -96,19 +110,40 @@ async function SauvegardeNiveauCourse() {
     DateActuelle = DateActuelle.split("T") // ['2026-01-24', '13:57:55.505Z']
     DateActuelle = DateActuelle[0] // '2026-01-24'
 
+    NiveauCourseUser = parseFloat(NiveauCourseUser) // conversion
+    // verification
+    if (NiveauCourseUser <= 0) {
+        alert("Avant de vouloir sauvegarder votre niveau de course veuillez remplir le champ distance.")
+        return
+    }
+    if (DateNiveauUser > DateActuelle) {
+        alert("La date ne peut pas être dans le futur !")
+        return
+    }
+    if (DistanceUser <= 0) {
+        alert("Valeur non valide, la distance doit être supérieure à 0.")
+        return
+    }
+    if (DistanceUser >= 7) {
+        alert("Valeur non valide, la distance doit être inférieure à 7.")
+        return
+    }
+ 
+    BoutonLimite1Clic.disabled = true // Pour empeche que le user clique 2 fois
+    // signe d'enregistrement pr le user
+    BoutonLimite1Clic.textContent = "Sauvegarde..."
+
     // Ajout datas
-    console.log(NiveauCourseUser)
     await db.niveau_course.add({
         niveau_course_user: NiveauCourseUser,
-        date: DateActuelle
+        distance: DistanceUser,
+        date: DateNiveauUser
     })
 
     // Légère pause
     await new Promise(r => setTimeout(r, 650))
-
     // confirmation sauvegarde
-    BoutonLimite1Clic.textContent = "Enregistré"
-
+    BoutonLimite1Clic.textContent = "Sauvegardé"
     // Pause
     await new Promise(r => setTimeout(r, 650))
     // remise etat normal
@@ -116,6 +151,27 @@ async function SauvegardeNiveauCourse() {
     BoutonLimite1Clic.disabled = false // Réactivation du bouton
 
     GenererGraphique()
+
+    // timeout remis a 0 (suppresion plutot)
+    clearTimeout(Timer1)
+    clearTimeout(Timer2)
+    document.getElementById("a-logo").classList.remove("return", "pin-message")
+    
+    // animation du dynamic logo pour message au user
+    document.getElementById("a-logo").classList.add("pin-message")
+
+    document.getElementById("a-logo").textContent = `${NiveauCourseUser.toString().replace(".", ",")} ! Bravo 🔥`;
+
+    Timer1 = setTimeout(() => { 
+        document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+        document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+    }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+    Timer2 = setTimeout(() => {
+        // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+        document.getElementById("a-logo").classList.remove("return")
+        document.getElementById("a-logo").classList.remove("pin-message")
+    }, 3100) // durée choisis à la main
 }
 
 function ReturnDate(DateNiveauCourse) {

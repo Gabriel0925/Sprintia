@@ -25,7 +25,7 @@
     <header>
         <div class="navbar">
             <div class="logo">
-                <a href="../../index.html">Sprintia</a>
+                <a href="../../index.html" id="a-logo">Sprintia</a>
             </div>
             <ul class="links">
                 <li>
@@ -126,6 +126,10 @@
             return DateEuropeen
         }
 
+        // init pour le logo dynamique
+        let Timer1 = 0
+        let Timer2 = 0
+
         async function Historique() {
             // Recup de l'historique
             let HistoriqueDB = await db.statut_analyse.toArray() // recup de toutes les datas
@@ -203,17 +207,80 @@
                     if (confirm(`Supprimer ce statut "${elementBDD.statut}" ?`)) {
                         await db.statut_analyse.delete(elementBDD.id) // supprimer la data de la bdd
                         CardStatut.remove() // supprimer la ligne
+                        // on réinitialise le dynamique logo
+                        clearTimeout(Timer1)
+                        clearTimeout(Timer2)
+                        document.getElementById("a-logo").classList.remove("return", "pin-message")
+
+                        // petite récompense pour le user
+                        document.getElementById("a-logo").classList.add("pin-message")
+
+                        document.getElementById("a-logo").textContent = "Supprimé 🗑️";
+
+                        Timer1 = setTimeout(() => { 
+                            document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+                            document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+                        }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+                        Timer2 = setTimeout(() => {
+                            // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+                            document.getElementById("a-logo").classList.remove("return")
+                            document.getElementById("a-logo").classList.remove("pin-message")
+                        }, 3100) // durée choisis à la main
 
                         const NbCardStatut = document.querySelectorAll(".cards-history-workout")
+                        
                         if (NbCardStatut.length == 0) { // si il n'y a pas de card alors on remet le message comme quoi il faut ajouter des datas
                             document.getElementById("text-informatif").style.display = "block"
                         }
+
                     }
                 })
 
                 ConteneurCardsStatut.appendChild(CardStatut)
 
             });
+
+            // animation du dynamic logo pour message au user
+            const ParamURL = window.location.search
+            const TableauSeparation = ParamURL.split("?")
+            
+            if (TableauSeparation.length > 1) {
+                let MessageDynamicLogo = ""
+                if (TableauSeparation[1] == "Vacances") {
+                    MessageDynamicLogo = "Profitez bien 🌴"
+                } else if (TableauSeparation[1] == "Blessure") {
+                    MessageDynamicLogo = "Bon repos 🤕"
+                } else if (TableauSeparation[1] == "Malade") {
+                    MessageDynamicLogo = "Bon courage 😷"
+                } else if (TableauSeparation[1] == "Suspendre") {
+                    MessageDynamicLogo = "Pause activée ⏸️"
+                } else{
+                    MessageDynamicLogo = "C'est reparti 🔥"
+                }
+                    
+                // timeout remis a 0 (suppresion plutot)
+                clearTimeout(Timer1)
+                clearTimeout(Timer2)
+                document.getElementById("a-logo").classList.remove("return", "pin-message")
+                
+                // petite récompense pour le user
+                document.getElementById("a-logo").classList.add("pin-message")
+
+                document.getElementById("a-logo").textContent = MessageDynamicLogo;
+
+                Timer1 = setTimeout(() => { 
+                    document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+                    document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+                }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+                Timer2 = setTimeout(() => {
+                    // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+                    document.getElementById("a-logo").classList.remove("return")
+                    document.getElementById("a-logo").classList.remove("pin-message")
+                }, 3100) // durée choisis à la main
+            }
+
             return
         }
 

@@ -138,10 +138,34 @@
             </div>
         </div>
 
-        <h2>Outils récemment utilisés</h2>
-        <p class="text">
-            Cette fonctionnalité sera disponible lors de la prochaine bêta.
+        <h2 id="outils recent">Outils conseillés</h2>
+        <p class="text" id="info-bulle">
+            Vous pouvez épingler vos 3 outils préférés sur la page d'accueil. Pour ce faire, rendez vous dans l'onglet 'Outils' et cliquez sur l'épingle de l'outil correspondant.
         </p>
+        <div class="conteneur-outil-recent">
+
+            <a href="Outils/Charge d'entraînement/charge_entrainement.html" class="L1">
+                <div class="card-outil-recent">
+                    <i class="fs-icon_charge_entrainement" id="I1"></i>
+                    <p class="text-outil-recent" id="P1">Charge d'entraînement</p>
+                </div>
+            </a>
+
+            <a href="Outils/Estimation VO2max/estimation_VO2max.html" class="L2">
+                <div class="card-outil-recent">
+                    <i class="fs-icon_VO2MAX" id="I2"></i>
+                    <p class="text-outil-recent" id="P2">Estimation VO²max</p>
+                </div>
+            </a>
+            
+            <a href="Outils/Niveau de course à pied/niveau_course.html" class="L3">
+                <div class="card-outil-recent">
+                    <i class="fs-icon_niveau_course" id="I3"></i>
+                    <p class="text-outil-recent" id="P3">Niveau de course à pied</p>
+                </div>
+            </a>
+
+        </div>
 
         <h2>Activité récente (3 sem.)</h2>
         <p class="text">
@@ -151,6 +175,21 @@
             <!--"aria-label" pr l'accesssibilité pr decrire a ceux qui ne voit pas-->
             <canvas id="barCanvas" aria-label="chart" role="img"></canvas>
         </div>
+
+        <h2>Derniers entraînements</h2>
+        <p class="text" id="text-pas-entrainement">
+            Vous n'avez pas encore enregistré d'entraînement
+        </p>
+
+        <div class="container-recent-workout"></div> <!-- Remplis en JS -->
+
+        <div class="conteneur-centrage-marge">
+            <button id="button_afficher_plus" onclick="location.href='Outils/Actions/historique_entrainement.html'">
+                <i class="fs-icon_add"></i>
+                Afficher plus
+            </button>
+        </div>
+
 
         <div class="conteneur-mise-avant" id="banniere-tips">
             <p id="tips">
@@ -192,6 +231,195 @@
     <!-- Import bibliothèque pour simplifier le code de indexed db -->
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+
+    <!-- Pour les 3 derniers entrainements -->
+    <script>
+        function ReturnDate(DateWorkout) {
+            let DateEuropeen = ""
+
+            DateWorkout = DateWorkout.split("-")
+            // Inversion de la date de "2026-01-12" à "12-01-2026"
+            DateEuropeen = DateWorkout[2] + "-" + DateWorkout[1] + "-" + DateWorkout[0]
+            return DateEuropeen
+        }
+
+        function HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) {
+            let StructureHTML = `          
+                <a href="Outils/Actions/historique_entrainement.html">
+                        <p class="name-workout">
+                            ${NameWorkout}
+                        </p>
+                        <p class="sport-date-workout">
+                            ${SportWorkout} · ${DateWorkout}
+                        </p>
+                        <p class="duree">
+                            Durée : <strong>${DureeWorkout}</strong>
+                        </p>
+                </a>
+            `
+
+            CardWorkout.innerHTML = StructureHTML 
+
+            let CardWorkoutHTML = CardWorkout
+
+            return CardWorkoutHTML
+        }
+
+        async function AfficherData() {
+            // on recup les datas
+            let HistoriqueDB = await db.entrainement.toArray()
+
+            // Trier par date 
+            HistoriqueDB.sort((element1, element2) => { // En js on peut comparer 2 dates comme des maths
+                if (element1.date < element2.date) return 1
+                if (element1.date > element2.date) return -1
+            })
+
+            // on recup les datas necessaire
+            let TableauNameWorkout = HistoriqueDB.map(elementDB => elementDB.nom).slice(0, 3) 
+            let TableauSport = HistoriqueDB.map(elementDB => elementDB.sport).slice(0, 3)
+            let TableauDateWorkout = HistoriqueDB.map(elementDB => elementDB.date).slice(0, 3)
+            let TableauDureeWorkout = HistoriqueDB.map(elementDB => elementDB.duree).slice(0, 3)
+
+            if (TableauNameWorkout.length <= 0) {
+                // on cache la secction si il y a pas de datas
+                document.querySelector(".container-recent-workout").style.display = "none"
+                document.getElementById("button_afficher_plus").style.display = "none" // on cache le bouton
+            } else { // si il y a des datas
+                document.getElementById("text-pas-entrainement").style.display = "none" // on cache le text comme quoi il n'y a pas d'entrainement
+                // initialisation pour la boucle
+                let compteur = 0
+                let SportWorkout = 0
+                let DateWorkout = 0
+                let DureeWorkout = 0
+                const ConteneurCardsWorkout = document.querySelector(".container-recent-workout") // recupération du conteneur des cards
+
+                TableauNameWorkout.forEach(NameWorkout => {
+                    // maj des variables en fonction de l'entrainement
+                    SportWorkout = TableauSport[compteur]
+                    DateWorkout = ReturnDate(TableauDateWorkout[compteur])
+                    DureeWorkout = TableauDureeWorkout[compteur]
+
+                    // on créer la card html
+                    const CardWorkout = document.createElement("div")
+                    CardWorkout.classList.add("card-recent-workout")
+
+                    let CardWorkoutHTML = HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) // appelle a la fonction
+                    ConteneurCardsWorkout.appendChild(CardWorkoutHTML)
+
+                    compteur += 1 // incrementation
+                });
+            } 
+
+            return
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            AfficherData()
+        })
+    </script>
+
+
+    <!-- Pour les outils favoris -->
+    <script>
+        const DicoNameIcon = { // dico avec le nom des outils et le nom de la class de l'icone
+            "Charge d'entraînement": "fs-icon_charge_entrainement",
+            "Indulgence de course": "fs-icon_indulgence_course",
+            "Estimation du temps de récupération": "fs-icon_temps_recup",
+
+            "Zones cardiaques": "fs-icon_zones_cardiaques",
+            "Protéines quotidiennes": "fs-icon_proteines",
+            "Calculateur IMC": "fs-icon_IMC",
+
+            "Niveau course à pied": "fs-icon_niveau_course",
+            "Prédicteur de performance": "fs-icon_predicteur_performance",
+            "Estimation VMA": "fs-icon_VMA",
+            "Estimation VO₂max": "fs-icon_VO2MAX",
+            "Zones de vitesse": "fs-icon_zones_vitesse",
+            "Estimation puissance max. en course": "fs-icon_puissance_max",
+
+            "Estimation 1RM": "fs-icon_1RM",
+
+            "Estimation puissance moy. en ski": "fs-icon_puissance_moy_ski",
+
+            "Estimation de la transpiration": "fs-icon_transpiration",
+            "Convertisseur km/miles": "fs-icon_miles_km"
+        }
+
+        const DicoNameHref = { // dico avec le nom des outils et le nom de la class de l'icone
+            "Charge d'entraînement": "Outils/Charge d'entraînement/charge_entrainement.html",
+            "Indulgence de course": "Outils/Indulgence de course/indulgence_course.html",
+            "Estimation du temps de récupération": "Outils/Estimation du temps de récupération/estimation_temps_recuperation.html",
+
+            "Zones cardiaques": "Outils/Zones cardiaques/zones_cardiaques.html",
+            "Protéines quotidiennes": "Outils/Protéines quotidiennes/proteines_quotidienne.html",
+            "Calculateur IMC": "Outils/Calculateur IMC/calculateur_imc.html",
+
+            "Niveau course à pied": "Outils/Niveau de course à pied/niveau_course.html",
+            "Prédicteur de performance": "Outils/Prédicteur de performance/predicteur_performance.html",
+            "Estimation VMA": "Outils/Estimation VMA/estimation_vma.html",
+            "Estimation VO₂max": "Outils/Estimation VO2max/estimation_VO2max.html",
+            "Zones de vitesse": "Outils/Zones de vitesse/zones_vitesse.html",
+            "Estimation puissance max. en course": "Outils/Estimation puissance max en course/estimation_puissance_max_course.html",
+
+            "Estimation 1RM": "Outils/Estimation 1RM/estimation_1RM.html",
+
+            "Estimation puissance moy. en ski": "Outils/Estimation puissance moy en ski/estimation_puissance_moy_en_ski.html",
+
+            "Estimation de la transpiration": "Outils/Estimation de la transpiration/estimation_transpiration.html",
+            "Convertisseur km/miles": "Outils/Convertisseur miles-km/convertisseur_miles_km.html"
+        }
+
+        function FavoriteTools() {
+           let OutilFavorieUser = JSON.parse( localStorage.getItem("OutilsPin"))
+        
+           if (OutilFavorieUser.length > 0) {
+                // changement du titre quand il y a des datas le titre passe de "Outils conseillés" => "Outils épinglés"
+                document.getElementById("outils recent").textContent = "Outils épinglés"
+                // on cache l'info bulle
+                document.getElementById("info-bulle").style.display = "none"
+
+                // on isole les valeurs
+                let OutilFavoris1 = OutilFavorieUser[0]
+                let OutilFavoris2 = OutilFavorieUser[1] || "Estimation VO₂max"
+                let OutilFavoris3 = OutilFavorieUser[2] || "Niveau course à pied"
+
+                // si l'outil favoris 1 est estimation VO2max alors on met la charge d'entrainement (c pr éviter d'avoir des doublons)
+                if (OutilFavoris1 == OutilFavoris2) {
+                    OutilFavoris2 = "Charge d'entraînement"
+                }
+                if (OutilFavoris1 == OutilFavoris3) { // si l'outil favoris 2 est niveau course alors on met la charge d'entrainement (c pr éviter d'avoir des doublons)
+                    OutilFavoris3 = "Charge d'entraînement"
+                }
+
+                // affichage des noms des outils favoris
+                document.getElementById("P1").textContent = OutilFavoris1
+                document.getElementById("P2").textContent = OutilFavoris2
+                document.getElementById("P3").textContent = OutilFavoris3
+
+                // Affichage de l'icone des outils favoris en cherchant dans le dico
+                document.getElementById("I1").classList = ""
+                document.getElementById("I1").classList.add(DicoNameIcon[OutilFavoris1])
+
+                document.getElementById("I2").classList = ""
+                document.getElementById("I2").classList.add(DicoNameIcon[OutilFavoris2])
+
+                document.getElementById("I3").classList = ""
+                document.getElementById("I3").classList.add(DicoNameIcon[OutilFavoris3])
+
+                // attribution des liens
+                document.getElementById("I1").parentElement.parentElement.href = DicoNameHref[OutilFavoris1]
+                document.getElementById("I2").parentElement.parentElement.href = DicoNameHref[OutilFavoris2]
+                document.getElementById("I3").parentElement.parentElement.href = DicoNameHref[OutilFavoris3]
+           }
+
+            return
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            FavoriteTools()
+        })
+    </script>
 
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -269,7 +497,37 @@
                 let NomCoach = CoachUserDB.map(elementDB => elementDB.nom)
                 let AvatarCoach = CoachUserDB.map(elementDB => elementDB.avatar)
                 
-                document.getElementById("nom-coach").textContent = AvatarCoach + " " + NomCoach + " :"
+                document.getElementById("nom-coach").innerHTML =  AvatarCoach + " " + NomCoach + " :"
+            }
+
+            // Pour les statuts
+            let StatutDB = await db.statut_analyse.toArray()
+
+            if (StatutDB.length > 0) {
+                let TableauStatut = StatutDB.map(elementDB => elementDB.statut).reverse()
+                 // si il ny a pas de datas
+                let TableauPhraseJRM = [
+                    "Tu as signalé que tu es en vacances ! Profite de ces jours de vacances pour te reposer et passer du temps avec ta famille,...",
+                    "Tu as signalé que tu es blessé·e ! Dans ces moments là, c'est compliqué, je le sais, mais si tu continues à faire du sport en étant blessé·e, tu risques de retarder ta guérison.",
+                    "Tu as signalé que tu es malade ! Je sais que c'est dur mais essaie de ne pas t'entraîner, car ton organisme a besoin de repos.",
+                    "Tu as suspendu les analyses. Je ne peux donc pas analyser ta semaine d'entraînement."
+                ]
+                let Interpretation = ""
+
+                if (TableauStatut[0] != "Actif·ve") { // si le statut n'est pas sur actif alors on met les interpretations
+                    if (TableauStatut[0] == "Vacances") { // Attribution d'une interpretation en fonction du statut
+                        Interpretation = TableauPhraseJRM[0]
+                    } else if (TableauStatut[0] == "Blessure") {
+                        Interpretation = TableauPhraseJRM[1]
+                    } else if (TableauStatut[0] == "Malade") {
+                        Interpretation = TableauPhraseJRM[2]
+                    } else if (TableauStatut[0] == "Suspendre") {
+                        Interpretation = TableauPhraseJRM[3]
+                    }
+                    // On affiche l'interpretation dans la zone du JRM
+                    document.querySelector(".interpretation-jrm").innerHTML = Interpretation
+                    return
+                }
             }
 
             if (HistoriqueDB.length > 0) { // Si il y a des datas
@@ -351,7 +609,7 @@
                 const DureeTotaleHeure = PassageHeure(DureeTotale) // pour passer de 90 min à 1h 30min
 
                 // Début interpretation
-                let Interpretation = `Au cours des 7 derniers jours, vous avez fait :<br><br>
+                let Interpretation = `Au cours des 7 derniers jours, t'as fait :<br><br>
                                 <strong>⏱️ ${DureeTotaleHeure}min</strong> d'entraînement<br>`
                 
                 if (NbWorkout == 1 || NbWorkout == 0) {
@@ -415,13 +673,13 @@
                 
                 // Si les datas de durée sont égale à 0 alors petit message d'encouragement
                 if (DureeTotale == 0) {
-                    Interpretation += "<br><br>Allez, essayez de prendre le temps de faire une séance de sport, votre corps vous remerciera plus tard. Si vous faites un entraînement, vous dormirez mieux ce soir !"
+                    Interpretation += "<br><br>Essaie de prendre le temps de faire une séance de sport, ton corps te remerciera plus tard. Si tu fais un entraînement, même léger, tu dormiras mieux ce soir !"
                 }
 
                 document.querySelector(".interpretation-jrm").innerHTML = Interpretation // affichage dans le champs
 
             } else { // si il ny a pas de datas
-                let NotData = `Sprintia n'a pas encore assez de données pour que votre coach analyse votre semaine d'entraînement.`
+                let NotData = `Je n'ai pas encore assez de données pour analyser ta semaine d'entraînement. Continue tes efforts, j'ai hâte de voir tes premieres séances !`
 
                 document.querySelector(".interpretation-jrm").innerHTML = NotData
             }

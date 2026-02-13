@@ -34,15 +34,25 @@ async function RecupValueNiveauCourse() {
     let NiveauDatas = ValeurDB.map(dataBDD => dataBDD.niveau_course_user)
     NiveauDatas = NiveauDatas.reverse()
 
+    let DistanceDatas = ValeurDB.map(dataBDD => dataBDD.distance)
+    DistanceDatas = DistanceDatas.reverse()
+
     let idDatas = ValeurDB.map(dataBDD => dataBDD.id)
     idDatas = idDatas.reverse()
     
-    return {idDatas, NiveauDatas, ListeDate}
+    return {idDatas, NiveauDatas, DistanceDatas, ListeDate}
 }
+
+
+// init pour le logo dynamique
+// !!! attention ne pas mettre le meme nom de timer car ce fichier js est connecté à script outil, sinon erreur car =>
+// on fait let timer1 dans le fichiers script_outil et dans le fichier script_historique on fait aussi let Timer1 donc il faut donner un nom différent
+let Timer1Historique = 0
+let Timer2Historique = 0
 
 async function RemplirTableau() {
     // Recup des valeur dans bdd
-    let {idDatas, NiveauDatas, ListeDate} = await RecupValueNiveauCourse()
+    let {idDatas, NiveauDatas, DistanceDatas, ListeDate} = await RecupValueNiveauCourse()
 
     // Recup du tableau
     let TableauHistorique = document.getElementById("tableau-historique")
@@ -64,11 +74,17 @@ async function RemplirTableau() {
         // Créer une nouvelle ligne
         let ColonneDate = NouvelleLigne.insertCell(0)
         let ColonneNiveau = NouvelleLigne.insertCell(1)
-        let ColonneButtonSupprimer = NouvelleLigne.insertCell(2)
+        let ColonneDistance = NouvelleLigne.insertCell(2)
+        let ColonneButtonSupprimer = NouvelleLigne.insertCell(3)
 
         // Remplir ligne
         ColonneDate.textContent = Date
         ColonneNiveau.textContent = NiveauDatas[compteur].toString().replace(".", ",") // ne pas oublier de le mettre en str avant le replace
+        if (DistanceDatas[compteur] != undefined) {
+            ColonneDistance.textContent = DistanceDatas[compteur].toString().replace(".", ",")
+        } else {
+            ColonneDistance.textContent = "-"
+        }
 
         // Create button
         let BoutonSupprTableau = document.createElement("button")
@@ -77,6 +93,17 @@ async function RemplirTableau() {
 
         // Ajout de la class
         BoutonSupprTableau.classList.add("tableau")
+
+        // si le user a coché la case theme complet alors on met la couleur accent
+        if (localStorage.getItem("ToggleThemeComplet") == "True") {
+            // recup variable css
+            let RootCSS = document.documentElement
+            let StyleCSS = getComputedStyle(RootCSS)
+
+            BoutonSupprTableau.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT") // ajout de la couleur
+        } else {
+            BoutonSupprTableau.style.color = "#ef2e2e" // ajout de la couleur
+        }
 
         const EtapeBoucle = compteur // Grâce a const la variable ne change jamais donc chaque bouton enregistre sa ligne en fonction de letape de la bouclz
         // Ajout de la logique pour la suppresion
@@ -104,7 +131,28 @@ async function RemplirTableau() {
                         barChart.destroy() // destruction du graphique qu'il y a dans script_outil.js
                         document.getElementById("conteneur-graphique").style.display = "none" // on cache le conteneur du graphique
                     }    
-                }
+                } 
+
+                // timeout remis a 0 (suppresion plutot)
+                clearTimeout(Timer1Historique)
+                clearTimeout(Timer2Historique)
+                document.getElementById("a-logo").classList.remove("return", "pin-message")
+            
+                // petite récompense pour le user
+                document.getElementById("a-logo").classList.add("pin-message")
+
+                document.getElementById("a-logo").textContent = "Supprimé 🗑️";
+
+                Timer1Historique =setTimeout(() => { 
+                    document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+                    document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+                }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+                Timer2Historique = setTimeout(() => {
+                    // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+                    document.getElementById("a-logo").classList.remove("return")
+                    document.getElementById("a-logo").classList.remove("pin-message")
+                }, 3100) // durée choisis à la main
             }
         })
 

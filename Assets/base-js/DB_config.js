@@ -2,9 +2,10 @@
 const db = new Dexie("SprintiaDB")
 
 // Creation de la structure
-db.version(2).stores({ // ++ pour autoincrement
+db.version(3).stores({ // ++ pour autoincrement
+    // !!! si modification il faut adapté le code complet de la page sauvegarde et restauration
     entrainement: "++id, sport, date, nom, duree, rpe, distance, denivele, muscles_travailles, charge_entrainement",
-    niveau_course: "++id, niveau_course_user, date",
+    niveau_course: "++id, niveau_course_user, distance, date",
     statut_analyse: "++id, statut, date, raison",
     JRM_Coach: "id, nom, style, avatar"
 })
