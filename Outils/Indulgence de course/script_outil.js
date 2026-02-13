@@ -186,7 +186,7 @@ async function InterpretationJRM(Distance7J, Distance28J, IndulgenceDeCourseFin)
     }
 
     // quand il y a pas de données
-    if (Distance7J.length > 0 || Distance28J.length > 0) {
+    if (Distance7J > 0 || Distance28J > 0) {
         // Attribution d'une interpretation et ajout direct dans le champs corespondant en fonction du statut 'actif' == mode normal, mode quotidien
         if (LastStatutUser == "Vacances") {
             InterpretationParagraphe.innerHTML = Interpretation["5"]
