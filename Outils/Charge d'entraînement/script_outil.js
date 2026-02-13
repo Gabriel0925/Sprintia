@@ -58,7 +58,7 @@ async function RecupValueGraphique() {
 
 async function InterpretationJRM(ChargeAigue, ChargeChronique, AnalysePossible) {
     // Initialisation 
-    let Interpretation = "Sprintia n'a pas assez de données pour analyser votre charge d'entraînement. Vous avez juste besoin d'ajouter au moins 3 entraînements sur les 28 derniers jours pour que Sprintia analyse votre charge d'entraînement."
+    let Interpretation = "Je n'ai pas assez de données pour analyser ta charge d'entraînement. Tu as juste besoin d'ajouter au moins 3 entraînements sur les 28 derniers jours. J'attends avec impatience tes premiers entraînements."
     let Ratio = 0
 
     // Si l'utilisateur a fait moins de 3 entrainements sur les 28 derniers jours on analyse pas
