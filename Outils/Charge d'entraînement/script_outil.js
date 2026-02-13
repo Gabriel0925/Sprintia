@@ -265,6 +265,11 @@ async function Initialisation() {
         let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
         const barCanvas = document.getElementById("barCanvas")
+
+        if (barChart) { // si il y a deja un graphique on le suppr
+            barChart.destroy();
+        }
+
         barChart = new Chart(barCanvas, {
                 type:"line",
                 data:{

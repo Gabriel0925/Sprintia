@@ -185,25 +185,31 @@ async function InterpretationJRM(Distance7J, Distance28J, IndulgenceDeCourseFin)
         LastStatutUser = "Actif·ve"
     }
 
-    // Attribution d'une interpretation et ajout direct dans le champs corespondant en fonction du statut 'actif' == mode normal, mode quotidien
-    if (LastStatutUser == "Vacances") {
-        InterpretationParagraphe.innerHTML = Interpretation["5"]
-    } else if (LastStatutUser == "Blessure") {
-        InterpretationParagraphe.innerHTML = Interpretation["6"]   
-    } else if (LastStatutUser == "Malade") {
-        InterpretationParagraphe.innerHTML = Interpretation["7"]
-    } else if (LastStatutUser == "Suspendre") {
-        InterpretationParagraphe.innerHTML = Interpretation["8"]
-    } else if (LastStatutUser == "Actif·ve") { // en mode normal
-        // en fonction du résultat des calculs, attribution d'une interpretation
-        if (Distance28J <= Distance7J && Distance7J <= IndulgenceDeCourseFin) {
-            InterpretationParagraphe.innerHTML = Interpretation["3"]
-        } else if (Distance7J > IndulgenceDeCourseFin) {
-            InterpretationParagraphe.innerHTML = Interpretation["4"]
-        } else {
-            InterpretationParagraphe.innerHTML = Interpretation["2"]
+    // quand il y a pas de données
+    if (Distance7J.length > 0 || Distance28J.length > 0) {
+        // Attribution d'une interpretation et ajout direct dans le champs corespondant en fonction du statut 'actif' == mode normal, mode quotidien
+        if (LastStatutUser == "Vacances") {
+            InterpretationParagraphe.innerHTML = Interpretation["5"]
+        } else if (LastStatutUser == "Blessure") {
+            InterpretationParagraphe.innerHTML = Interpretation["6"]   
+        } else if (LastStatutUser == "Malade") {
+            InterpretationParagraphe.innerHTML = Interpretation["7"]
+        } else if (LastStatutUser == "Suspendre") {
+            InterpretationParagraphe.innerHTML = Interpretation["8"]
+        } else if (LastStatutUser == "Actif·ve") { // en mode normal
+            // en fonction du résultat des calculs, attribution d'une interpretation
+            if (Distance28J <= Distance7J && Distance7J <= IndulgenceDeCourseFin) {
+                InterpretationParagraphe.innerHTML = Interpretation["3"]
+            } else if (Distance7J > IndulgenceDeCourseFin) {
+                InterpretationParagraphe.innerHTML = Interpretation["4"]
+            } else {
+                InterpretationParagraphe.innerHTML = Interpretation["2"]
+            }
         }
+    } else {
+        InterpretationParagraphe.innerHTML = Interpretation["1"]
     }
+
 }
 
 async function Initialisation() {
