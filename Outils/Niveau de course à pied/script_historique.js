@@ -45,6 +45,8 @@ async function RecupValueNiveauCourse() {
 
 
 // init pour le logo dynamique
+// !!! attention ne pas mettre le meme nom de timer car ce fichier js est connecté à script outil, sinon erreur car =>
+// on fait let timer1 dans le fichiers script_outil et dans le fichier script_historique on fait aussi let Timer1 donc il faut donner un nom différent
 let Timer1Historique = 0
 let Timer2Historique = 0
 
@@ -132,8 +134,8 @@ async function RemplirTableau() {
                 } 
 
                 // timeout remis a 0 (suppresion plutot)
-                clearTimeout(Timer1)
-                clearTimeout(Timer2)
+                clearTimeout(Timer1Historique)
+                clearTimeout(Timer2Historique)
                 document.getElementById("a-logo").classList.remove("return", "pin-message")
             
                 // petite récompense pour le user

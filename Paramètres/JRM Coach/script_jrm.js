@@ -14,6 +14,10 @@ const DicoPhraseExemple = {
                 je vois toujours le positif. En revanche, j'ai une personnalité de go-muscu comme on dit, mais bon je suis sympa !`
     }
 
+// init pour le logo dynamique
+let Timer1 = 0
+let Timer2 = 0
+
 async function SauvegardePreference() {
     // Recup datas
     let NameCoach = document.getElementById("nom-coach").value
@@ -57,17 +61,22 @@ async function SauvegardePreference() {
     // Changement du titre du h1
     document.getElementById("title-h1").textContent = NameCoach
     
+    // timeout remis a 0 (suppresion plutot)
+    clearTimeout(Timer1)
+    clearTimeout(Timer2)
+    document.getElementById("a-logo").classList.remove("return", "pin-message")
+
     // animation du dynamic logo pour message au user
     document.getElementById("a-logo").classList.add("pin-message")
 
     document.getElementById("a-logo").textContent = `${AvatarCoach} C'est parti 🔥`;
 
-    setTimeout(() => { 
+    Timer1 = setTimeout(() => { 
         document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
         document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
     }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
 
-    setTimeout(() => {
+    Timer2 = setTimeout(() => {
         // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
         document.getElementById("a-logo").classList.remove("return")
         document.getElementById("a-logo").classList.remove("pin-message")

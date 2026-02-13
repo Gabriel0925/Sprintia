@@ -160,7 +160,7 @@ async function SauvegardeNiveauCourse() {
     // animation du dynamic logo pour message au user
     document.getElementById("a-logo").classList.add("pin-message")
 
-    document.getElementById("a-logo").textContent = `${NiveauCourseUser.toString().replace(".", ",")}, Bravo 🔥`;
+    document.getElementById("a-logo").textContent = `${NiveauCourseUser.toString().replace(".", ",")} ! Bravo 🔥`;
 
     Timer1 = setTimeout(() => { 
         document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour

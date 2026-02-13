@@ -493,6 +493,7 @@ header div.navbar .logo a {
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     width: 150px; /* width quand s'est écrit Sprintia */
+    max-width: 350px;
     max-height: 55px; /* pour sécuriser lanimation */
     overflow: hidden; /* pour sécuriser lanimation */
     text-align: center;
