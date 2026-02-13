@@ -374,7 +374,7 @@ button#download-button,
 button#restoration-button,
 button#reinitialiser-sprintia,
 button#reinitialiser { /* telecharger/restaurer mes données + Réinitialiser Sprintia + Réinitialiser votre coach */
-    width: 250px;
+    width: 270px;
 }
 button#conversion { /* convertir en allure */
     width: 200px;
