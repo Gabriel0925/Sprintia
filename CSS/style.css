@@ -2103,7 +2103,7 @@ div.conteneur-historique-versions {
 /* Contenu supérieur */
 div.conteneur-historique-versions .box-last-maj div.content1 .card-nouveautes-image-last-maj {
     font-size: var(--H1);
-    width: 205px;
+    width: fit-content;
     text-align: left;
     background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
     font-family: "Anton", sans-serif;
