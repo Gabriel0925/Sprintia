@@ -1056,7 +1056,7 @@ div.conteneur-content-scrolling div.card-outil p{
 div.shorcut {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     margin: var(--ESPACE_XS);
-    width: 130px;
+    width: 145px;
     height: fit-content;
     border-radius: var(--BORDER_SMALL);
     overflow: hidden;
