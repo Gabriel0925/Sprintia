@@ -35,20 +35,20 @@ function CalculIMC() {
     IMC = PoidsUser / (TailleUser**2)
 
     if (IMC <= 18.5) {
-        InterpretationZoneImc = "Zone maigreur :<br>D'après l'IMC vous êtes super actif·ve mais si vous vous sentez mal le mieux serait de consulter un médecin !"
+        InterpretationZoneImc = "<strong>Zone maigreur :</strong><br>D'après l'IMC vous êtes super actif·ve mais si vous vous sentez mal le mieux serait de consulter un médecin !"
     } else if (IMC <= 25) {
-        InterpretationZoneImc = "Zone de corpulence normale :<br>Parfait, d'après l'IMC vous êtes équilibré·e, continuez comme ça !"
+        InterpretationZoneImc = "<strong>Zone de corpulence normale :</strong><br>Parfait, d'après l'IMC vous êtes équilibré·e, continuez comme ça !"
     } else if (IMC <= 30) {
-        InterpretationZoneImc = "Zone de surpoids :<br>D'après l'IMC vous êtes en surpoids mais je suis sûr que vous avez juste trop de muscles et ça l'IMC ne peut pas le savoir !"
+        InterpretationZoneImc = "<strong>Zone de surpoids :</strong><br>D'après l'IMC vous êtes en surpoids mais je suis sûr que vous avez juste trop de muscles et ça l'IMC ne peut pas le savoir !"
     } else if (IMC <= 35) {
-        InterpretationZoneImc = "Zone obésité modérée :<br> Un petit changement d'habitude aujourd'hui fera une grande différence demain ! Si vous vous sentez mal le mieux serait de consulter un médecin !"
+        InterpretationZoneImc = "<strong>Zone obésité modérée :</strong><br> Un petit changement d'habitude aujourd'hui fera une grande différence demain ! Si vous vous sentez mal le mieux serait de consulter un médecin !"
     } else if (IMC <= 40) {
-        InterpretationZoneImc = "Zone d’obésité sévère :<br>Si vous vous sentez bien c'est le plus important, ne vous comparez pas aux autres comparez-vous à la personne que vous étiez hier !"
+        InterpretationZoneImc = "<strong>Zone d’obésité sévère :</strong><br>Si vous vous sentez bien c'est le plus important, ne vous comparez pas aux autres comparez-vous à la personne que vous étiez hier !"
     } else {
-        InterpretationZoneImc = "Zone d’obésité morbide :<br>Vous vous améliorez de jour en jour mais si vous vous sentez mal le mieux serait de consulter un médecin !"
+        InterpretationZoneImc = "<strong>Zone d’obésité morbide :</strong><br>Vous vous améliorez de jour en jour mais si vous vous sentez mal le mieux serait de consulter un médecin !"
     }
 
-    IMC = "Votre IMC : " + IMC.toFixed(1).replace(".", ",")
+    IMC = "Votre IMC : " + "<strong>" + IMC.toFixed(1).replace(".", ",") + "</strong>"
     document.querySelector(".score-imc").innerHTML = IMC;
     document.querySelector(".zone-imc").innerHTML = InterpretationZoneImc;
     return

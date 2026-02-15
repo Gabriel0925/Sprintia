@@ -31,7 +31,7 @@ function EstimationPuissanceSki() {
     let PoidsEquipement = 3+(TailleUser*0.04) // le 3 vient des poids fixe comme les gants, casque, baton,...
     
     let PuissanceMoy = ((PoidsUser+PoidsEquipement)*9.81*DeniveleUser)/(DureeUser*60)
-    let ResultPuissance = "Puissance moy. : " + Math.round(PuissanceMoy) + " W"
+    let ResultPuissance = "Puissance moy. : " + "<strong>" + Math.round(PuissanceMoy) + " W" + "</strong>"
     // utilisation d'un rapport, donc l'unité est Watts/kg
     let NbZone = PuissanceMoy/PoidsUser
 
@@ -40,16 +40,16 @@ function EstimationPuissanceSki() {
 
     // Attribution des zones
     if (NbZone < 4) {
-        Zone = "Découverte :<br>Rythme tranquille vous préférez être prudent·e et vous avez raison ou alors vous admirez les paysages (ou les 2) !"
+        Zone = "<strong>Découverte :</strong><br>Rythme tranquille vous préférez être prudent·e et vous avez raison ou alors vous admirez les paysages (ou les 2) !"
     } else if (NbZone <= 8) {
-        Zone = "Niveau moyen :<br>Rythme intermédiaire, vous êtes dans la moyenne. Vous maîtrisez vos virages,..."
+        Zone = "<strong>Niveau moyen :</strong><br>Rythme intermédiaire, vous êtes dans la moyenne. Vous maîtrisez vos virages,..."
     }  else if (NbZone <= 12) {
-        Zone = "Supérieur·e :<br>Vous vous engagez réellement, vous coupez vos virages,... Je suis sûr que vous n'avez même pas admiré le paysage. Mais vous avez un très bon niveau, bravo !"
+        Zone = "<strong>Supérieur·e :</strong><br>Vous vous engagez réellement, vous coupez vos virages,... Je suis sûr que vous n'avez même pas admiré le paysage. Mais vous avez un très bon niveau, bravo !"
     } else {
-        Zone = "Élite :<br>Vous avez optimisé·e tous les moindres petits détails pour vous améliorer et gagner quelques centièmes de secondes, bravo !"
+        Zone = "<strong>Élite :</strong><br>Vous avez optimisé·e tous les moindres petits détails pour vous améliorer et gagner quelques centièmes de secondes, bravo !"
     } 
 
-    document.querySelector(".score-imc").textContent = ResultPuissance
+    document.querySelector(".score-imc").innerHTML = ResultPuissance
     document.querySelector(".zone-imc").innerHTML = Zone
 
     return

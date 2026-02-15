@@ -29,7 +29,7 @@ function EstimationPuissanceMax() {
 
     // Calcul
     let Puissance = PoidsUser*(Coefficient*VitesseMS)
-    let ResultPuissance = "Puissance max. : "+ Math.round(Puissance) + " W"
+    let ResultPuissance = "Puissance max. : " + "<strong>" + Math.round(Puissance) + " W"  + "</strong>"
     // utilisation d'un rapport, donc l'unité est Watts/kg
     let NbZone = Puissance/PoidsUser
 
@@ -38,17 +38,17 @@ function EstimationPuissanceMax() {
 
     // Attribution des zones
     if (NbZone < 10) {
-        Zone = "Correct :<br>Vous avez une bonne base, mais je suis sûr que vous pouvez encore vous améliorer."
+        Zone = "<strong>Correct :</strong><br>Vous avez une bonne base, mais je suis sûr que vous pouvez encore vous améliorer."
     } else if (NbZone <= 15) {
-        Zone = "Bon :<br>Vous avez une foulée très dynamique et vous dépassez la moyenne des coureurs et coureuses, bravo !"
+        Zone = "<strong>Bon :</strong><br>Vous avez une foulée très dynamique et vous dépassez la moyenne des coureurs et coureuses, bravo !"
     }  else if (NbZone <= 20) {
-        Zone = "Excellent :<br>Vous avez développé une très grosse puissance ce qui indique que vous êtes très explosif·ve sur un sprint, bravo !"
+        Zone = "<strong>Excellent :</strong><br>Vous avez développé une très grosse puissance ce qui indique que vous êtes très explosif·ve sur un sprint, bravo !"
     } else {
-        Zone = "Supérieur·e :<br>Vous avez un niveau hors-norme, votre puissance est impressionnante !"
+        Zone = "<strong>Supérieur·e :</strong><br>Vous avez un niveau hors-norme, votre puissance est impressionnante !"
     } 
 
     // Affichage
-    document.querySelector(".score-imc").textContent = ResultPuissance
+    document.querySelector(".score-imc").innerHTML = ResultPuissance
     document.querySelector(".zone-imc").innerHTML = Zone
 
     return

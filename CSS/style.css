@@ -127,6 +127,12 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.fs-icon_estimation_hydratation:before {
+    content: "\e928";
+}
+.fs-icon_zones_puissance:before {
+    content: "\e929";
+}
 .fs-icon_1RM:before {
     content: "\e900";
 }
@@ -377,7 +383,7 @@ button#reinitialiser { /* telecharger/restaurer mes données + Réinitialiser Sp
     width: 270px;
 }
 button#conversion { /* convertir en allure */
-    width: 200px;
+    width: 230px;
 }
 
 body {
@@ -486,9 +492,8 @@ header div.navbar .logo {
 }
 header div.navbar .logo a {
     font-size: var(--H2);
-    color: var(--COULEUR_TEXT_PRINCIPAL);
+    color: var(--COULEUR_TEXT_PRINCIPAL); 
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    
     box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);

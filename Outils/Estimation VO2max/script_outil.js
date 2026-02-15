@@ -1,10 +1,10 @@
 function InterpretationVO2max(ResultVO2max, GenreUser, AgeUser){
     let Interpretation = [
-        "Zone supérieure :<br>Votre VO₂max est supérieur à la moyenne pour votre tranche d'âge, ce qui indique une excellente capacité cardiovasculaire.",
-        "Zone excellente :<br>Vous avez une VO₂max excellente pour votre âge, signe d'un très bon niveau de forme physique.",
-        "Zone bonne :<br>Votre VO₂max est bonne pour votre âge, témoignant d'une condition physique solide.",
-        "Zone moyenne :<br>Votre VO₂max se situe dans la moyenne pour votre tranche d'âge. Il y a de la marge pour progresser.",
-        "Zone faible :<br>Votre VO₂max est faible pour votre âge. Essayez d'être moins sédentaire au quotidien."
+        "<strong>Zone supérieure :</strong><br>Votre VO₂max est supérieur à la moyenne pour votre tranche d'âge, ce qui indique une excellente capacité cardiovasculaire.",
+        "<strong>Zone excellente :</strong><br>Vous avez une VO₂max excellente pour votre âge, signe d'un très bon niveau de forme physique.",
+        "<strong>Zone bonne :</strong><br>Votre VO₂max est bonne pour votre âge, témoignant d'une condition physique solide.",
+        "<strong>Zone moyenne :</strong><br>Votre VO₂max se situe dans la moyenne pour votre tranche d'âge. Il y a de la marge pour progresser.",
+        "<strong>Zone faible :</strong><br>Votre VO₂max est faible pour votre âge. Essayez d'être moins sédentaire au quotidien."
     ]
 
     if (GenreUser == "homme") {
@@ -163,10 +163,10 @@ function CalculVO2max() {
 
     // Calcul
     let ResultVO2max = VmaUser*3.5
-    let VO2maxEstime = "VO₂max estimé : " + ResultVO2max.toFixed(1).replace(".", ",")
+    let VO2maxEstime = "VO₂max estimé : " + "<strong>" + ResultVO2max.toFixed(1).replace(".", ",") + "</strong>"
 
     // Affichage
-    document.querySelector(".score-imc").textContent = VO2maxEstime
+    document.querySelector(".score-imc").innerHTML = VO2maxEstime
 
     let ZoneInterpretationVO2max = InterpretationVO2max(ResultVO2max, GenreUser, AgeUser)
     document.querySelector(".zone-imc").innerHTML = ZoneInterpretationVO2max

@@ -52,16 +52,16 @@ function CalculGeneral() {
     let ValueTranspirationEstimeeMl = ValueTranspirationEstimee*1000
 
     // Mise en variable pour passez à l'affichage
-    let TranspirationEstimee = "Transpiration : " + Math.round(ValueTranspirationEstimeeMl) + " mL"
-    let HydratationEstimee = "Qté à boire : " + Math.round(CalculHydratation(ValueTranspirationEstimeeMl)) + " mL"
-    let Interpretation = "Petit conseil : ne buvez pas tout d'un coup, essayer de boire un verre toutes les 10-20 minutes."
+    let TranspirationEstimee = "Transpiration : " + "<strong>" + Math.round(ValueTranspirationEstimeeMl) + " mL"  + "</strong>"
+    let HydratationEstimee = "Qté à boire : " + "<strong>" + Math.round(CalculHydratation(ValueTranspirationEstimeeMl)) + " mL" + "</strong>"
+    let Interpretation = "<strong>Petit conseil :</strong> ne buvez pas tout d'un coup, essayer de boire un verre toutes les 10-20 minutes."
 
     // Affichage des champs
     let ChampResult = document.querySelectorAll(".score-imc")
     // Maj de l'interpretation
-    document.querySelector(".zone-imc").textContent = Interpretation
+    document.querySelector(".zone-imc").innerHTML = Interpretation
 
-    ChampResult[0].textContent = TranspirationEstimee
-    ChampResult[1].textContent = HydratationEstimee
+    ChampResult[0].innerHTML = TranspirationEstimee
+    ChampResult[1].innerHTML = HydratationEstimee
     return
 }
