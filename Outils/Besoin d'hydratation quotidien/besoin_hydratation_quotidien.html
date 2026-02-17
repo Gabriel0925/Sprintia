@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Sprintia - Estimation de la transpiration</title>
+    <title>Sprintia - Besoin d'hydratation quotidien</title>
     <meta charset="utf-8">
     <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,60 +77,45 @@
     </header>
 
     <div class="conteneur-de-outil">
-        <h1>Estimation de la transpiration</h1>
+        <h1>Besoin d'hydratation quotidien</h1>
         <div class="conteneur-ensemble">
             <div class="conteneur-champs-outil">
+
+                <div class="conteneur-input">
+                    <input type="number" id="age-user" placeholder="Âge" autocomplete="off">
+                    <div class="label-input">Âge</div>
+                </div>
                 
                 <div class="conteneur-input">
                     <input type="number" id="poids-user" placeholder="Poids (kg)" autocomplete="off">
                     <div class="label-input">Poids (kg)</div>
                 </div>
-                    
-                <div class="conteneur-input">
-                    <input type="number" id="duree-entrainement-user" placeholder="Durée de l'entraî. (min)" autocomplete="off">
-                    <div class="label-input" id="label-fc-user">Durée de l'entraî. (min)</div>
-                </div>
-                
-                <div class="slider-cont">
-                    <div class="slider-name">RPE</div>
-                    <div class="slider">
-                        <input type="range" min="1" max="10" value="1" autocomplete="off">
-                        <progress min="1" max="10" value="1"></progress>
-                    </div>
-                    <div class="slider-value">1</div>
-                </div>
 
-                <button onclick="CalculGeneral()">Estimer</button>
+                <button onclick="Calcul()">Calculer</button>
             </div>
 
             <div class="box-result">
-                <p class="score-imc">Transpiration : <strong>0 mL</strong></p>
-                <p class="score-imc">Qté à boire : <strong>0 mL</strong></p>
-                <p class="zone-imc">
-                    Veuillez rentrer votre poids, la durée de votre entraînement ainsi que le RPE pour avoir une interprétation.
+                <p class="score-imc">Hydratation recommandée</p>
+                <p class="temps-recup">
+                    0 mL/jour
                 </p>
             </div>
         </div>
 
-        <h2>C'est quoi le RPE ?</h2>
+        <h2>Utilité de l'outil</h2>
         <p class="text">
-            Le RPE (Rated Perceived Exertion) c'est une échelle permettant de mesurer l'effort perçu de votre entraînement.
-            <ul class="liste-fonctionnalites">
-                <li>RPE de 1 à 3 : Facile</li>
-                <li>RPE de 4 à 6 : Modéré</li>
-                <li>RPE de 7 à 8 : Difficile</li>
-                <li>RPE de 9 à 10 : Effort maximal</li>
-            </ul>
+            Cet outil est fait pour tout le monde, même une personne sédentaire car votre cerveau et vos reins ont tout de même besoin d'eau au cours
+            d'une journée. En revanche, il faut être régulier au cours de la journée, il faut mieux boire par petites gorgées que de grandes quantités d'un coup.
         </p>
-        <h2>Pourquoi boire plus que la transpiration estimée ?</h2>
+        
+        <h2>Formule de calcul</h2>
         <p class="text">
-            Le corps ne retient pas 100% de l'eau bue, une partie est évacuée par les reins,... Il est donc conseillé de boire environ 
-            120% à 150% de la quantité de transpiration estimée pour compenser les pertes.
+            La règle de référence pour un adulte sédentaire est de 30 à 35 ml d'eau par kilo de poids de corps. Sprintia fait la moyenne des deux pour lisser le résultat.
+            Sprintia s'appuie sur des recommandations d'organismes de santé reconnus, comme l'EFSA (Autorité européenne de sécurité des aliments) et l'OMS.
         </p>
-        <h2>À quoi sert cette estimation ?</h2>
+        <h2>Petite information</h2>
         <p class="text">
-            Cette estimation permet de mieux gérer son hydratation pendant les entraînements, afin d'éviter la déshydratation et 
-            d'optimiser les performances.
+            Sprintia enlève 20% de l'estimation car environ 20 % de cette eau provient de vos repas (fruits, légumes).
         </p>
 
     </div>
@@ -162,18 +147,6 @@
     <!-- Pour le burger menu -->
     <script src="../../Assets/base-js/base.js"></script>
     <script src="script_outil.js"></script>
-
-    <!-- Pour le RPE -->
-    <script>
-        let Slider = document.querySelector(".slider input")
-        let Progress = document.querySelector(".slider progress")
-        let Display = document.querySelector(".slider-value")
-
-        Slider.addEventListener("input", function() {
-            Progress.value = this.value
-            Display.textContent = this.value
-        })
-    </script>
 
     
     <!-- Pour avoir les statistiques de visite du site -->

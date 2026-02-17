@@ -127,7 +127,7 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.fs-icon_estimation_hydratation:before {
+.fs-icon_besoin_hydratation:before {
     content: "\e928";
 }
 .fs-icon_zones_puissance:before {
@@ -473,6 +473,8 @@ footer a.a_footer:active{
 header {
     position: sticky;
     top: 0;
+    max-width: 1600px;
+    margin: 0 auto;
     background-color: transparent;
     /* Le z-index sert que les cartes ne passe pas devant lors d'un hover */
     z-index: 2000;
@@ -480,6 +482,7 @@ header {
 header div.navbar {
     width: 100%;
     margin: 0 auto;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -580,11 +583,10 @@ header div.navbar div.burger-menu-button:active {
 header div.navbar ul.links li a {
     color: var(--COULEUR_TEXT_PRINCIPAL); 
     font-size: var(--H3);
+    width: 180px;
     margin: var(--ESPACE_XXS);
-    min-width: 175px;
-    padding: var(--ESPACE_XS);
+    padding: 9px 0px;
     font-weight: var(--FONT_WEIGHT_BUTTON);
-    border-radius: var(--BORDER);
     transition: all ease-out var(--DUREE_TRANSITION);
     display: flex;
     align-items: center;
@@ -592,7 +594,7 @@ header div.navbar ul.links li a {
 }
 header div.navbar ul.links li a i {
     font-size: var(--H2);
-    margin-right: var(--ESPACE_XS);
+    margin-right: var(--ESPACE_S_SMALL);
     transition: all ease-out var(--DUREE_TRANSITION);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -953,7 +955,7 @@ div.conteneur-content-scrolling div.card-outil {
 
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
-    width: 250px;
+    width: 235px;
     height: fit-content;
     overflow: hidden;
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -988,49 +990,46 @@ div.conteneur-content-scrolling div.card-outil div.icone i{
 }
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler{
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    opacity: 0.5;
+    opacity: 0.4;
     border-radius: var(--BORDER);
     border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     position: absolute;
     overflow: hidden;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     right: var(--ESPACE_XS);
     top: var(--ESPACE_XS);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all linear var(--DUREE_TRANSITION);
-}
-div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler.actif{
-    width: 55px;
-    height: 40px;
-    opacity: 1;
+    transition: all ease-in var(--DUREE_TRANSITION);
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler:hover{
-        opacity: 0.9;
+        opacity: 0.8;
     }
+}
+@keyframes rebond {
+    0% { transform: scale(1)}
+    40% { transform: scale(1.2)}
+    100% { transform: scale(1)}
+}
+div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler.actif{
+    opacity: 1;
+    animation: rebond 0.5s;
 }
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler:active{
     border-radius: var(--BORDER_SMALL);
 }
-@keyframes rebond {
-    0% { transform: scale(1)}
-    50% { transform: scale(1.32)}
-    100% { transform: scale(1)}
-}
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler i{
-    font-size: var(--H3);
+    font-size: 1.2rem;
     color: var(--COULEUR_TEXT_PRINCIPAL);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler.actif i{
-    font-size: var(--H2);
     color: var(--COULEUR_ACCENT_CONTRASTER);
-    animation: rebond 0.35s;
 }
 div.conteneur-content-scrolling div.card-outil h1{
     font-size: var(--H3);
@@ -2102,7 +2101,6 @@ div.conteneur-historique-versions {
 }
 .conteneur-historique-versions .box-last-maj:active{
     transform: scale(0.985);
-    border-radius: var(--BORDER_SMALL);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 /* Contenu supérieur */
@@ -2183,7 +2181,6 @@ div.conteneur-historique-versions .card-nouveautes.visible {
 }
 div.conteneur-historique-versions .card-nouveautes.visible:active {
     transform: scale(0.985);
-    border-radius: var(--BORDER_SMALL);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 div.conteneur-historique-versions .card-nouveautes-image p {
@@ -2236,22 +2233,22 @@ ul.liste-fonctionnalites li {
 
 /* Pour les images des versions */
 div.gallery-version {
-    margin: var(--ESPACE_S) auto;
-    align-items: center;
-    column-count: 2;
-    column-gap: var(--ESPACE_XS);
-    padding: var(--ESPACE_XS);
+    display: flex;
+    flex-wrap: wrap;
     background-color: var(--COULEUR_BACKGROUND_CARD);
-    border-top: 1px solid var(--COULEUR_LUMIERE_CARD);
-    border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
-    border-radius: var(--BORDER_SMALL);
+    border-radius: var(--BORDER);
+    padding: var(--ESPACE_S_SMALL);
 }
 div.gallery-version#img-smartphone{
     display: none;
 }
 div.gallery-version img{    
     width: 100%;
-    border-radius: var(--BORDER_SMALL);
+    border-radius: var(--BORDER);
+    margin-top: var(--ESPACE_S_SMALL);
+}    
+div.gallery-version img:nth-child(1){    
+    margin: 0;
 }    
 
 
@@ -2619,15 +2616,15 @@ div.conteneur-about-marge {
 /* ----- Pour la section Historique des versions ----- */
 @media (max-width: 630px) {
     div.gallery-version {
-        column-count: 1;
-        column-gap: var(--ESPACE_XXS);
-        padding: 0;
+        border: none;
         background-color: transparent;
-        border-top: none;
-        border-left: none;
+        padding: 0;
+    }
+    div.gallery-version img:nth-child(1){
+        margin: var(--ESPACE_XS) 0;
     }
     div.gallery-version img{
-        margin-bottom: var(--ESPACE_S);
+        margin: var(--ESPACE_XS) 0;
     }
     div.gallery-version#img-ordi{
         display: none;
