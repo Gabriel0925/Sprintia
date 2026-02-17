@@ -260,7 +260,7 @@ async function Initialisation() {
         let RootCSS = document.documentElement
         let StyleCSS = getComputedStyle(RootCSS)
         // Recup variable css
-        let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT_HOVER")
+        let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
         let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
         let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 

@@ -1,165 +1,5 @@
 // Initialisation variable
-let ThemeActuel = "Sombre"
 let ColorActuelleUse = "theme_azur"
-
-
-// Thèmes
-function mode(event) {
-    const toggle = event.target;
-    if (toggle.checked) { 
-        document.documentElement.style.setProperty("--COULEUR_BACKGROUND", "#eeedf2");
-        document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD", "#fefefe");
-        document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD_HOVER", "#e2e2e2");
-
-        document.documentElement.style.setProperty("--COULEUR_TEXT_PRINCIPAL", "#1A1A1A");
-        document.documentElement.style.setProperty("--COULEUR_TEXT_SECONDAIRE", "#636366");
-
-        document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#E0E0E0");
- 
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_0", "#0f759d");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_1", "#e70e32");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_2", "#cc25cf");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_3", "#8e29e1ff");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_4", "#197b41");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_5", "#1f7c76");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_6", "#5b7286");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_7", "#fa2d72");
-
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_D1", "#146fdd");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_D2", "#f358e9");
-
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_D3", "#0077be");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_D4", "#f4a460");
-
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_D5", "#8153ff");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_D6", "#00cf56");
-
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_D7", "#f9a81c");
-        document.documentElement.style.setProperty("--COULEUR_PASTILLES_D8", "#e73f01");
-        
-        document.documentElement.style.setProperty("--URL_FLECHE_ICON", 'url("../Outils/Icons/icon_fleche_clair.svg")');
-        document.documentElement.style.setProperty("--URL_FLECHE_ICON_REVERSE", 'url("../Outils/Icons/icon_fleche_sombre.svg")');
-        
-        ThemeActuel = "Clair"
-        localStorage.setItem("ThemeActuel", "Clair");   
-    } else {
-        document.documentElement.style.removeProperty("--COULEUR_BACKGROUND");
-        document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD");
-        document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD_HOVER");
-
-        document.documentElement.style.removeProperty("--COULEUR_LUMIERE_CARD");
-
-        document.documentElement.style.removeProperty("--COULEUR_TEXT_PRINCIPAL");
-        document.documentElement.style.removeProperty("--COULEUR_TEXT_SECONDAIRE");
-
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_0");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_1");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_2");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_3");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_4");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_5");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_6");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_7");
-
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D1");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D2");
-
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D3");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D4");
-
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D5");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D6");
-
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D7");
-        document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D8");
-
-        document.documentElement.style.removeProperty("--URL_FLECHE_ICON");
-        document.documentElement.style.removeProperty("--URL_FLECHE_ICON_REVERSE");
-
-        ThemeActuel = "Sombre"
-        localStorage.setItem("ThemeActuel", "Sombre");
-    }
-        
-    color_theme(ColorActuelleUse, "PasToucher")
-}
-function dark_mode() {
-    document.documentElement.style.removeProperty("--COULEUR_BACKGROUND");
-    document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD");
-    document.documentElement.style.removeProperty("--COULEUR_BACKGROUND_CARD_HOVER");
-
-    document.documentElement.style.removeProperty("--COULEUR_LUMIERE_CARD");
-
-    document.documentElement.style.removeProperty("--COULEUR_TEXT_PRINCIPAL");
-    document.documentElement.style.removeProperty("--COULEUR_TEXT_SECONDAIRE");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_0");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_1");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_2");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_3");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_4");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_5");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_6");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_7");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D1");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D2");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D3");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D4");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D5");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D6");
-
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D7");
-    document.documentElement.style.removeProperty("--COULEUR_PASTILLES_D8");
-
-    document.documentElement.style.removeProperty("--URL_FLECHE_ICON");
-    document.documentElement.style.removeProperty("--URL_FLECHE_ICON_REVERSE");
-
-    ThemeActuel = "Sombre"
-    localStorage.setItem("ThemeActuel", "Sombre");
-    
-    color_theme(ColorActuelleUse, "PasToucher")
-}
-function light_mode() {
-    document.documentElement.style.setProperty("--COULEUR_BACKGROUND", "#eeedf2");
-    document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD", "#fefefe");
-    document.documentElement.style.setProperty("--COULEUR_BACKGROUND_CARD_HOVER", "#e2e2e2");
-
-    document.documentElement.style.setProperty("--COULEUR_TEXT_PRINCIPAL", "#1A1A1A");
-    document.documentElement.style.setProperty("--COULEUR_TEXT_SECONDAIRE", "#636366");
-
-    document.documentElement.style.setProperty("--COULEUR_LUMIERE_CARD", "#E0E0E0");
- 
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_0", "#0f759d");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_1", "#e70e32");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_2", "#cc25cf");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_3", "#8e29e1ff");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_4", "#197b41");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_5", "#1f7c76");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_6", "#5b7286");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_7", "#fa2d72");
-
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_D1", "#146fdd");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_D2", "#f358e9");
-
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_D3", "#0077be");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_D4", "#f4a460");
-
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_D5", "#8153ff");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_D6", "#00cf56");
-
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_D7", "#f9a81c");
-    document.documentElement.style.setProperty("--COULEUR_PASTILLES_D8", "#e73f01");
-        
-    document.documentElement.style.setProperty("--URL_FLECHE_ICON", 'url("../Outils/Icons/icon_fleche_clair.svg")');
-    document.documentElement.style.setProperty("--URL_FLECHE_ICON_REVERSE", 'url("../Outils/Icons/icon_fleche_sombre.svg")');
-        
-    ThemeActuel = "Clair"
-    localStorage.setItem("ThemeActuel", "Clair");
-    
-    color_theme(ColorActuelleUse, "PasToucher")
-}
 
 function maj_li_selected(id_li) {
     const old_selected_li = document.querySelector(".option-color.selected")
@@ -174,199 +14,80 @@ function maj_li_selected(id_li) {
 
 // Couleur d'acentuation
 function color_theme(ColorActuelle, id_li) {
-    // si il ne faut pas toucher à l'id par exemple quand on switch du mode clair au sombre
-    if (id_li !== "PasToucher") {
-        maj_li_selected(id_li)
-    }
+    if (ColorActuelle === "theme_carmin") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#fe3c35");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#f9645e");
+        ColorActuelleUse = "theme_carmin"
 
-    if (ThemeActuel === "Sombre") {
-        if (ColorActuelle === "theme_carmin") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#fe3c35");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f9645e");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#fc746f");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FF9591");
-            ColorActuelleUse = "theme_carmin"
+    } else if (ColorActuelle === "theme_fuchsia") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#fa5bfa");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#ffa0ff");
+        ColorActuelleUse = "theme_fuchsia"
 
-        } else if (ColorActuelle === "theme_fuchsia") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#fa5bfa");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f779f7");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#ff95ff");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#ffb6ff");
-            ColorActuelleUse = "theme_fuchsia"
+    } else if (ColorActuelle === "theme_lavande") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ae5ef9");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#d29eff");
+        ColorActuelleUse = "theme_lavande"
 
-        } else if (ColorActuelle === "theme_lavande") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ae5ef9");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#bd84f3");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#d29eff");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#e0baff");
-            ColorActuelleUse = "theme_lavande"
+    } else if (ColorActuelle === "theme_vegetation") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#0CBB5BFF");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#45ff99");
+        ColorActuelleUse = "theme_vegetation"
 
-        } else if (ColorActuelle === "theme_vegetation") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#0CBB5BFF");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#6ef8ac");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#3DFF94");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#99fdc9");
-            ColorActuelleUse = "theme_vegetation"
-
-        } else if (ColorActuelle === "theme_feu") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ffb82b");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#fd4907");   
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#ffce64");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#ff7041"); 
-            ColorActuelleUse = "theme_feu"
+    } else if (ColorActuelle === "theme_feu") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#ffb82b");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#ff5b1f");   
+        ColorActuelleUse = "theme_feu"
         
-        } else if (ColorActuelle === "theme_menthe") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#0ac3a7");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#68e8d4");    
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#42f7dc");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#9cfdf0");
-            ColorActuelleUse = "theme_menthe"
+    } else if (ColorActuelle === "theme_menthe") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#0ac3a7");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#4af6dc");
+        ColorActuelleUse = "theme_menthe"
         
-        } else if (ColorActuelle === "Hortensia") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#3a91ff");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f782f0");  
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#85BBFF");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FBAEFA");  
-            ColorActuelleUse = "Hortensia"
+    } else if (ColorActuelle === "Hortensia") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#3a91ff");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#f782f0");  
+        ColorActuelleUse = "Hortensia"
         
-        } else if (ColorActuelle === "theme_plage") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#1498e4");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#fcaf6b");   
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#65C0F5");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FFD0A6"); 
-            ColorActuelleUse = "theme_plage"
+    } else if (ColorActuelle === "theme_plage") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#1498e4");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#fcaf6b");   
+        ColorActuelleUse = "theme_plage"
         
-        } else if (ColorActuelle === "Aurore") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#a477fe");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#4ce58c");   
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#C9ADFF");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#82F2B2"); 
-            ColorActuelleUse = "Aurore"
+    } else if (ColorActuelle === "Aurore") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#a477fe");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#4ce58c");   
+        ColorActuelleUse = "Aurore"
         
-        } else if (ColorActuelle === "theme_azur") {
-            document.documentElement.style.removeProperty("--COULEUR_ACCENT");
-            document.documentElement.style.removeProperty("--COULEUR_ACCENT_HOVER");    
-            document.documentElement.style.removeProperty("--COULEUR_ACCENT_CONTRASTER");    
-            document.documentElement.style.removeProperty("--COULEUR_ACCENT_CONTRASTER_HOVER");    
-            ColorActuelleUse = "theme_azur"
+    } else if (ColorActuelle === "theme_azur") {
+        document.documentElement.style.removeProperty("--COULEUR_ACCENT");
+        document.documentElement.style.removeProperty("--COULEUR_ACCENT2");        
+        ColorActuelleUse = "theme_azur"
         
-        } else if (ColorActuelle === "theme_pierre_lune") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#6aabd3");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#7ec9f8");    
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#a5d8f8");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#cbe9ff"); 
-            ColorActuelleUse = "theme_pierre_lune" 
+    } else if (ColorActuelle === "theme_pierre_lune") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#6aabd3");  
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#acdefd");
+        ColorActuelleUse = "theme_pierre_lune" 
         
-        } else if (ColorActuelle === "theme_framboise") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#f14d84");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#ff6e9e"); 
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#ff91b6");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FFB3CC");      
-            ColorActuelleUse = "theme_framboise" 
+    } else if (ColorActuelle === "theme_framboise") {
+        document.documentElement.style.setProperty("--COULEUR_ACCENT", "#f14d84");
+        document.documentElement.style.setProperty("--COULEUR_ACCENT2", "#ff91b6");     
+        ColorActuelleUse = "theme_framboise" 
       
-        }
-    } else {
-        if (ColorActuelle === "theme_carmin") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#e70e32");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f6455f"); 
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#bb102d");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#e61b3d");
-            ColorActuelleUse = "theme_carmin" 
-        
-        } else if (ColorActuelle === "theme_fuchsia") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#cc25cf");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f04df3"); 
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#b81fbb");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#d73ada"); 
-            ColorActuelleUse = "theme_fuchsia"
-        
-        } else if (ColorActuelle === "theme_lavande") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#8e29e1ff");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#bc73f8");  
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#7122b2");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#8f2fdf");
-            ColorActuelleUse = "theme_lavande"
-        
-        } else if (ColorActuelle === "theme_vegetation") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#197b41");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#19bc5d");  
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#156736");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#1d8a48");
-            ColorActuelleUse = "theme_vegetation"
-        
-        } else if (ColorActuelle === "theme_feu") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#e99c18");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#e73f01");   
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#E07A00");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#da3a00"); 
-            ColorActuelleUse = "theme_feu"  
-        
-        } else if (ColorActuelle === "theme_menthe") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#1f7c76");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#32bbb2");  
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#1B6C67");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#21867f"); 
-            ColorActuelleUse = "theme_menthe"
-        
-        } else if (ColorActuelle === "Hortensia") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#146fdd");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f358e9");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#105dba");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#d14bc8");
-            ColorActuelleUse = "Hortensia"
-        
-        } else if (ColorActuelle === "theme_plage") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#0077be");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#f4a460");    
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#005f96");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#d58b4f");
-            ColorActuelleUse = "theme_plage"
-        
-        } else if (ColorActuelle === "Aurore") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#7746fd");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#00cf56");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#613cc7");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#02ab48");
-            ColorActuelleUse = "Aurore"
-        
-        } else if (ColorActuelle === "theme_azur") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#0f759d");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#1d9ed0"); 
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#0a5979");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#0F759D");
-            ColorActuelleUse = "theme_azur" 
-        
-        } else if (ColorActuelle === "theme_pierre_lune") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#5b7286");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#739cbd"); 
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#485b6b");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#607a91");
-            ColorActuelleUse = "theme_pierre_lune" 
-        
-        } else if (ColorActuelle === "theme_framboise") {
-            document.documentElement.style.setProperty("--COULEUR_ACCENT", "#fe1e69"); 
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_HOVER", "#fc6b9b");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER", "#DF1A5C");
-            document.documentElement.style.setProperty("--COULEUR_ACCENT_CONTRASTER_HOVER", "#FE1E69");  
-            ColorActuelleUse = "theme_framboise" 
-        
-        } 
     }
+    
     localStorage.setItem("ColorActuelleUse", ColorActuelleUse);
+    maj_li_selected(id_li)
 }
 
 // Thème par défaut
-async function theme_defaut(id_li, value) {
+async function ReinitialiserTheme(id_li, value) {
     // Demande de confirmation avant
     if (confirm("Êtes-vous sur de vouloir réinitialiser le thème ?")) {
         let Button = document.getElementById("reinitialiser") // Recup du bouton
         // Desactivation du button
         Button.disabled = true
-        Button.textContent = "Chargement..."
-
-        // Remise des valeurs par défaut dans la BDD
-        ThemeActuel = "Sombre"
-        localStorage.setItem("ThemeActuel", "Sombre");
+        Button.textContent = "Réinitialisation..."
         
         ColorActuelleUse = "theme_azur"
         localStorage.setItem("ColorActuelleUse", ColorActuelleUse);
@@ -379,7 +100,6 @@ async function theme_defaut(id_li, value) {
         // confirmation sauvegarde
         Button.textContent = "Réinitialisé"
 
-        document.getElementById("toggle-mode").checked = false // on active/desactive les toggle pour les remttre par defaut
         document.getElementById("toggle-theme-complet").checked = true // on active/desactive les toggle pour les remttre par defaut
         user_preference() // relance de la fonction pour remettre le thème par defaut
         maj_li_selected("elem1") // on remet le li correspondant
@@ -396,7 +116,6 @@ async function theme_defaut(id_li, value) {
 
 function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shorcut quand le navigateur le stocke dans le BFCache (page outils)
     let PreferenceUser = localStorage.getItem("ToggleThemeComplet") // recup valeur dans le local storage
-    let ModeUse = localStorage.getItem("ThemeActuel")
             
     if (PreferenceUser == "True") {
         // Recup des champs
@@ -413,31 +132,18 @@ function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shor
         const Style = getComputedStyle(document.documentElement)
 
         const CouleurAccentHover = Style.getPropertyValue("--COULEUR_ACCENT_HOVER")
-        const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
         const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
 
         if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
-            if (ModeUse == "Clair") {
                 // Mise des couleurs si l'élément est existant
-                ShortcutAdd.style.background = CouleurAccentContrasterHover
+                ShortcutAdd.style.background = CouleurAccentHover
                 IconeShortcutAdd.style.color = CouleurBackground
                             
-                ShortcutHistorique.style.background = CouleurAccentContrasterHover
+                ShortcutHistorique.style.background = CouleurAccentHover
                 IconeShortcutHistorique.style.color = CouleurBackground
 
-                ShortcutPause.style.background = CouleurAccentContrasterHover
+                ShortcutPause.style.background = CouleurAccentHover
                 IconeShortcutPause.style.color = CouleurBackground
-                } else {
-                    // Mise des couleurs si l'élément est existant
-                    ShortcutAdd.style.background = CouleurAccentHover
-                    IconeShortcutAdd.style.color = CouleurBackground
-                            
-                    ShortcutHistorique.style.background = CouleurAccentHover
-                    IconeShortcutHistorique.style.color = CouleurBackground
-
-                    ShortcutPause.style.background = CouleurAccentHover
-                    IconeShortcutPause.style.color = CouleurBackground
-                }
             }
                 
         // Recup des champs (!!! pour la page de charge d'entraînement)
@@ -452,44 +158,24 @@ function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shor
                                         
         let TextInterieurButton = document.querySelectorAll(".txt_plus")
 
-        if (ButtonAdd && ButtonHistorique && ButtonPause) {
-                if (ModeUse == "Clair") {                            
-                    // changement couleur text in button
-                    TextInterieurButton.forEach(TextButton => {
-                        TextButton.style.color = CouleurBackground                    
-                    });
+        if (ButtonAdd && ButtonHistorique && ButtonPause) {                         
+            // changement couleur text in button
+            TextInterieurButton.forEach(TextButton => {
+                TextButton.style.color = CouleurBackground                    
+            });
 
-                    // Mise des couleurs si l'élément est existant
-                    ButtonAdd.style.background = CouleurAccentContrasterHover
-                    ButtonAdd.style.boxShadow = "none"
-                    IconeAdd.style.color = CouleurBackground
+            // Mise des couleurs si l'élément est existant
+            ButtonAdd.style.background = CouleurAccentHover
+            ButtonAdd.style.boxShadow = "none"
+            IconeAdd.style.color = CouleurBackground
                             
-                    ButtonHistorique.style.background = CouleurAccentContrasterHover
-                    ButtonHistorique.style.boxShadow = "none"
-                    IconeHistorique.style.color = CouleurBackground
+            ButtonHistorique.style.background = CouleurAccentHover
+            ButtonHistorique.style.boxShadow = "none"
+            IconeHistorique.style.color = CouleurBackground
 
-                    ButtonPause.style.background = CouleurAccentContrasterHover
-                    ButtonPause.style.boxShadow = "none"
-                    IconePause.style.color = CouleurBackground
-                } else {                            
-                    // changement couleur text in button
-                    TextInterieurButton.forEach(TextButton => {
-                        TextButton.style.color = CouleurBackground                    
-                    });
-
-                    // Mise des couleurs si l'élément est existant
-                    ButtonAdd.style.background = CouleurAccentHover
-                    ButtonAdd.style.boxShadow = "none"
-                    IconeAdd.style.color = CouleurBackground
-                            
-                    ButtonHistorique.style.background = CouleurAccentHover
-                    ButtonHistorique.style.boxShadow = "none"
-                    IconeHistorique.style.color = CouleurBackground
-
-                    ButtonPause.style.background = CouleurAccentHover
-                    ButtonPause.style.boxShadow = "none"
-                    IconePause.style.color = CouleurBackground
-                }
+            ButtonPause.style.background = CouleurAccentHover
+            ButtonPause.style.boxShadow = "none"
+            IconePause.style.color = CouleurBackground
         }
     }
 
@@ -497,16 +183,10 @@ function ReappliquerThemesForShortcut() { // pour réappliquer le thème au shor
 }
 
 function user_preference() {
-    // Chercher les valeur dans la bdd
-    const ThemeUser = localStorage.getItem("ThemeActuel")
-    const ColorUser = localStorage.getItem("ColorActuelleUse")
+    localStorage.removeItem("ThemeActuel") // pour la maj Sprintia 4.0.1 car le theme clair est nerf
 
-    if (ThemeUser === "Clair") {
-        light_mode() 
-    } else {
-        // Si rien n'est sauvegardé ou si c le mode sombre
-        dark_mode()
-    }
+    // Chercher les valeur dans la bdd
+    const ColorUser = localStorage.getItem("ColorActuelleUse")
 
     if (ColorUser) {
         color_theme(ColorUser)

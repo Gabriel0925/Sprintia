@@ -100,7 +100,7 @@ async function RemplirTableau() {
             let RootCSS = document.documentElement
             let StyleCSS = getComputedStyle(RootCSS)
 
-            BoutonSupprTableau.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT") // ajout de la couleur
+            BoutonSupprTableau.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT2") // ajout de la couleur
         } else {
             BoutonSupprTableau.style.color = "#ef2e2e" // ajout de la couleur
         }

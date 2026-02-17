@@ -2,9 +2,9 @@
 :root {
     /* Couleurs */
     --COULEUR_ACCENT: #0D9BD3; 
-    --COULEUR_ACCENT_HOVER: #77cced;
-    --COULEUR_ACCENT_CONTRASTER: #51C4F0;
-    --COULEUR_ACCENT_CONTRASTER_HOVER: #9CE1FD;
+    --COULEUR_ACCENT2: #77cced; 
+
+    --HOVER: 1.3; 
     
     --COULEUR_BACKGROUND: #000000;       
     --COULEUR_BACKGROUND_CARD: #232222;
@@ -69,7 +69,7 @@
     --COULEUR_PASTILLES_D6: #4ce58c; 
  
     --COULEUR_PASTILLES_D7: #ffb82b;  
-    --COULEUR_PASTILLES_D8: #e73f01;  
+    --COULEUR_PASTILLES_D8: #ff5b1f;  
 }
 /* Pour les icônes */
 @font-face {
@@ -307,29 +307,13 @@ button{
 }
 @media (hover: hover) and (pointer: fine) {
     button:hover{
-        background-color: var(--COULEUR_ACCENT);
-        box-shadow: 0px 0px 15px var(--COULEUR_ACCENT);
+        filter: brightness(var(--HOVER));
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 button:active{
-    transform: scale(0.9);  
-    border-radius: var(--BORDER_SMALL);
-    background-color: var(--COULEUR_ACCENT_HOVER);
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
+    filter: brightness(var(--HOVER));
     transition: all ease-in-out var(--DUREE_TRANSITION);
-}
-/* Bouton avec les icônes */
-button#button_afficher_plus,
-button.animate-icon{
-    display: flex;
-    align-items: center;
-}
-button#button_afficher_plus i{
-    margin: 0 var(--ESPACE_XXS);
-    font-weight: var(--FONT_WEIGHT_BUTTON);
-    color: var(--COULEUR_BACKGROUND);
-    font-size: var(--H3);
 }
 
 /* pr button dans tableau */
@@ -355,15 +339,12 @@ button.tableau {
 }
 @media (hover: hover) and (pointer: fine) {
     button.tableau:hover{
-        background-color: #ef2e2e;
-        color: #FFFFFF;
-        box-shadow: 0px 0px 0px #ef2e2e;
+    filter: brightness(var(--HOVER));
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 button.tableau:active{
-    transform: scale(0.95);
-    box-shadow: 0px 0px 0px #ef2e2e; /* sinon parfois il prend le style du bouton sans class*/
+    filter: brightness(var(--HOVER));
     border-radius: var(--BORDER_SMALL);
 }
 
@@ -396,7 +377,7 @@ body {
 
 /* Lien text vers adresse */
 a.lien {
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     font-weight: var(--FONT_WEIGHT_BUTTON);
     text-decoration: underline;
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -404,8 +385,8 @@ a.lien {
 @media (hover: hover) and (pointer: fine) {
     a.lien:hover{
         letter-spacing: 1px;
+        filter: brightness(var(--HOVER));
         transition: all ease-in-out var(--DUREE_TRANSITION);
-        color: var(--COULEUR_ACCENT_HOVER);
     }
 }
 /* Balise code avec son conteneur */
@@ -455,15 +436,16 @@ footer a.a_footer{
 @media (hover: hover) and (pointer: fine) {
     footer a.a_footer:hover{
         background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-        color: var(--COULEUR_ACCENT_CONTRASTER);
+        color: var(--COULEUR_ACCENT2);
         transform: translateX(5px);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 footer a.a_footer:active{
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    color: var(--COULEUR_ACCENT_CONTRASTER);
-    transform: scale(0.95);
+    color: var(--COULEUR_ACCENT2);
+    filter: brightness(var(--HOVER));
+    transform: scale(0.85);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 
@@ -482,7 +464,6 @@ header {
 header div.navbar {
     width: 100%;
     margin: 0 auto;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -540,11 +521,16 @@ header div.navbar .logo a.pin-message.return { /* pour le retour à l'état init
     /* forcards permet de forcer de garder létat de l'élement a la fin de l'animation */
     animation: reverse_dynamic_logo 0.6s forwards;
 }
+@media (hover: hover) and (pointer: fine) {
+    header div.navbar .logo a:hover {
+        color: var(--COULEUR_ACCENT2);
+        transition: all ease-out var(--DUREE_TRANSITION);
+    }
+}
 header div.navbar .logo a:active {
     transform: scale(0.9);
-    border-radius: var(--BORDER_SMALL);
-    color: var(--COULEUR_ACCENT_HOVER);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    color: var(--COULEUR_ACCENT2);
+    filter: brightness(var(--HOVER));
     transition: all ease-out var(--DUREE_TRANSITION);
 }
 header div.navbar ul.links {
@@ -567,7 +553,7 @@ header div.navbar div.burger-menu-button {
     border-left: 1px solid var(--COULEUR_LUMIERE_CARD);
     
     box-shadow: 0px 5px 20px var(--COULEUR_BACKGROUND);
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     cursor: pointer;
     display: none;
     margin: var(--ESPACE_XXS);
@@ -575,10 +561,9 @@ header div.navbar div.burger-menu-button {
 }
 /* Pour que le bouton rétrécisse au moment du clic */
 header div.navbar div.burger-menu-button:active {
-    transform: scale(0.85);  
-    border-radius: var(--BORDER_SMALL);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    transform: scale(0.85);
+    color: var(--COULEUR_ACCENT2);
+    filter: brightness(var(--HOVER));
 }
 header div.navbar ul.links li a {
     color: var(--COULEUR_TEXT_PRINCIPAL); 
@@ -599,24 +584,22 @@ header div.navbar ul.links li a i {
 }
 @media (hover: hover) and (pointer: fine) {
     header div.navbar ul.links li a:hover {
-        color: var(--COULEUR_ACCENT_CONTRASTER);
+        color: var(--COULEUR_ACCENT2);
         transition: all ease-out var(--DUREE_TRANSITION);
     }
 }
 header div.navbar ul.links li a:active {
-    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
-    transform: scale(0.9);
-    border-radius: var(--BORDER_SMALL);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    color: var(--COULEUR_ACCENT2);
+    transform: scale(0.85);
+    filter: brightness(var(--HOVER));
 }
 header div.navbar ul.links li a.actif {
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 header div.navbar ul.links li a.actif:active {
-    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
-    transform: scale(0.9);
-    border-radius: var(--BORDER_SMALL);
+    filter: brightness(var(--HOVER));
+    transform: scale(0.85);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 
@@ -689,18 +672,18 @@ header .burger-menu li a i {
     transition: all ease-out var(--DUREE_TRANSITION);
 }
 header .burger-menu li a:active {
-    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    color: var(--COULEUR_ACCENT2);
     border-radius: var(--BORDER_SMALL);
     transform: scale(0.9);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-out var(--DUREE_TRANSITION);
 }
 header .burger-menu li a.actif-burger-menu {
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
 }
 header .burger-menu li a.actif-burger-menu:active {
-    color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    color: var(--COULEUR_ACCENT2);
     transform: scale(0.9);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-out var(--DUREE_TRANSITION);
@@ -734,8 +717,7 @@ div.conteneur-mise-avant {
     align-items: center;
     z-index: 1;
     position: relative;
-    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT);
+    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 div.conteneur-mise-avant::after {
@@ -746,9 +728,8 @@ div.conteneur-mise-avant::after {
     z-index: -1;
     border-radius: var(--BORDER);
     opacity: 0;
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
     transition: all var(--DUREE_TRANSITION) ease-in-out;
-    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-mise-avant:hover::after {
@@ -817,17 +798,11 @@ div.conteneur-centrage {
 }
 @media (hover: hover) and (pointer: fine) {
     .button-more:hover {
-        background-color: var(--COULEUR_ACCENT_HOVER);
-        box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
-        transition: all ease-in-out var(--DUREE_TRANSITION);
+        transform: translateY(-5px);
     }
 }
 .button-more:active {
-    transform: scale(0.9);  
-    border-radius: var(--BORDER_SMALL);
-    background-color: var(--COULEUR_ACCENT_HOVER);
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
+    filter: brightness(var(--HOVER));
 }
 .icon-more i{
     font-size: var(--H3);
@@ -866,14 +841,11 @@ div.conteneur-outil-recent div.card-outil-recent{
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-outil-recent div.card-outil-recent:hover{
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-        transform: scale(1.01);
+        transform: translateY(-5px);
     }
 }
 div.conteneur-outil-recent div.card-outil-recent:active{
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    transform: scale(0.98);
-    border-radius: var(--BORDER_SMALL);
+    filter: brightness(var(--HOVER));
 }
 div.conteneur-outil-recent div.card-outil-recent i{
     background-color: transparent;
@@ -901,14 +873,11 @@ div.container-recent-workout div.card-recent-workout {
 }
 @media (hover: hover) and (pointer: fine) {
     div.container-recent-workout div.card-recent-workout:hover {
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-        transform: scale(1.01);
+        transform: translateX(10px);
     }
 }
 div.container-recent-workout div.card-recent-workout:active {
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    transform: scale(0.98);
-    border-radius: var(--BORDER_SMALL);
+    filter: brightness(var(--HOVER));
 }
 div.container-recent-workout div.card-recent-workout p.name-workout{
     font-size: var(--H3);
@@ -966,22 +935,28 @@ div.conteneur-content-scrolling div.card-outil.first {
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-content-scrolling div.card-outil:hover {
         transform: translateY(-5px);
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 div.conteneur-content-scrolling div.card-outil:active {
-    transform: scale(0.95);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    filter: brightness(var(--HOVER));
 }
 div.conteneur-content-scrolling div.card-outil div.icone{
     display: flex;
     justify-content: center;
-    background-color: var(--COULEUR_ACCENT_CONTRASTER);
+    background-color: var(--COULEUR_ACCENT2);
     padding: var(--ESPACE_XXS);
     border-radius: var(--BORDER_SMALL);
     width: 100%;
     position: relative;
+}
+div.conteneur-content-scrolling:nth-of-type(1) div.card-outil div.icone{
+    background-color: var(--COULEUR_ACCENT);
+}
+div.conteneur-content-scrolling:nth-of-type(3) div.card-outil div.icone{
+    background-color: var(--COULEUR_ACCENT);
+}div.conteneur-content-scrolling:nth-of-type(5) div.card-outil div.icone{
+    background-color: var(--COULEUR_ACCENT);
 }
 div.conteneur-content-scrolling div.card-outil div.icone i{
     font-size: 5rem;    
@@ -1020,16 +995,13 @@ div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler.act
     opacity: 1;
     animation: rebond 0.5s;
 }
-div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler:active{
-    border-radius: var(--BORDER_SMALL);
-}
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler i{
     font-size: 1.2rem;
     color: var(--COULEUR_TEXT_PRINCIPAL);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler.actif i{
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
 }
 div.conteneur-content-scrolling div.card-outil h1{
     font-size: var(--H3);
@@ -1071,13 +1043,11 @@ div.shorcut.first {
 }
 @media (hover: hover) and (pointer: fine) {
     div.shorcut:hover{
-        transform: translateY(-3px);
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        transform: translateY(-5px);
     }
 }
 div.shorcut:active {
-    transform: scale(0.95); 
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    filter: brightness(var(--HOVER));
 }
 div.shorcut div.img{
     display: flex;
@@ -1090,13 +1060,13 @@ div.shorcut div.img{
     border-top-right-radius: var(--BORDER_SMALL);
 }
 div.shorcut div.img#icone-add{
-    background: linear-gradient(130deg, #28A745, #85D26B);
+    background-color: #28A745;
 }
 div.shorcut div.img#icone-historique{
-    background: linear-gradient(130deg, #2F3F47, #577482);
+    background-color: #577482;
 }
 div.shorcut div.img#icone-pause{
-    background: linear-gradient(130deg, #e07c24, #ffa411);
+    background-color: #e07c24;
 }
 div.shorcut div.img i{
     font-size: 3.5rem;
@@ -1199,7 +1169,7 @@ div.conteneur-de-outil div.cards-history-workout div.data-workout-paire{
 }
 div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p{
     color: var(--COULEUR_BACKGROUND);
-    background-color: var(--COULEUR_ACCENT_CONTRASTER);
+    background-color: var(--COULEUR_ACCENT2);
     border-radius: var(--BORDER_SMALL);
     padding: var(--ESPACE_XS);
     font-size: var(--P);
@@ -1231,7 +1201,7 @@ div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout{
 div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button{
     font-weight: normal;
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     font-size: var(--P);
     display: flex;
     justify-content: center;
@@ -1246,16 +1216,14 @@ div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout 
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button:hover{
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+        filter: brightness(var(--HOVER));
     }
 }
 div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button:active{
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    box-shadow: none;
+    filter: brightness(var(--HOVER));
 }
 div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button i{
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     font-size: var(--P);
     font-weight: normal;
     margin-right: var(--ESPACE_XXS);
@@ -1290,12 +1258,12 @@ div.conteneur-de-outil div.conteneur-option i {
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-de-outil div.conteneur-option i:hover {
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+        background-color: var(--COULEUR_ACCENT);
+        color: var(--COULEUR_BACKGROUND);
     }
 }
 div.conteneur-de-outil div.conteneur-option i:active {
-    border-radius: var(--BORDER_SMALL);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    filter: brightness(var(--HOVER));
 }
 /* conteneur des input + button */
 div.conteneur-de-outil div.conteneur-champs-outil {
@@ -1350,7 +1318,7 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"].small {
     width: 190px;
     outline: none;
     
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     font-family: var(--FONT_FAMILY);
     font-size: var(--P);
 
@@ -1372,7 +1340,7 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="text"] {
     -moz-appearance: textfield; /* desactive les styles de base de firefox */
     appearance: text-field;
     
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     font-family: var(--FONT_FAMILY);
     font-size: var(--P);
     
@@ -1389,13 +1357,13 @@ div.conteneur-de-outil div.conteneur-champs-outil .label-input.invisible {
     div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]:hover,
 div.conteneur-de-outil div.conteneur-champs-outil input[type="text"]:hover,
 div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]:hover  {
-        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT2);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 div.conteneur-de-outil div.conteneur-champs-outil input[type="number"]:focus,
 div.conteneur-de-outil div.conteneur-champs-outil input[type="text"]:focus  {
-    box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+    box-shadow: 0px 0px 5px var(--COULEUR_ACCENT2);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 /* Pr rendre le placeholder invisible lors du label actif */
@@ -1419,11 +1387,11 @@ div.conteneur-de-outil div.conteneur-champs-outil .label-input {
 }
 div.conteneur-de-outil div.conteneur-champs-outil input:focus,
 div.conteneur-de-outil div.conteneur-champs-outil input:valid {
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
 }
 div.conteneur-de-outil div.conteneur-champs-outil input:focus + .label-input,
 div.conteneur-de-outil div.conteneur-champs-outil input:not(:placeholder-shown) + .label-input {
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     margin-left: 0;
     padding: var(--ESPACE_XXS);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
@@ -1461,7 +1429,7 @@ div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-
     width: 33px;
     height: 23px;
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border: 2px solid var(--COULEUR_ACCENT_CONTRASTER);
+    border: 2px solid var(--COULEUR_ACCENT2);
     border-radius: var(--BORDER);
     cursor: pointer;
     transform: scale(1.15);
@@ -1469,16 +1437,16 @@ div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-thumb:hover{
-        background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
-        transform: scale(1.3);
-        border: 2px solid var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        background-color: var(--COULEUR_ACCENT);
+        transform: scale(1.4);
+        border: 2px solid var(--COULEUR_ACCENT2);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 } 
 div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-thumb:active{
-    background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    background-color: var(--COULEUR_ACCENT);
     transform: scale(1.4);
-    border: 2px solid var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+    border: 2px solid var(--COULEUR_ACCENT2);
     transition: all ease-in-out 0.05s;
 }
 div.conteneur-de-outil div.conteneur-champs-outil .slider progress {
@@ -1494,7 +1462,7 @@ div.conteneur-de-outil div.conteneur-champs-outil .slider progress::-webkit-prog
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);  
 }
 div.conteneur-de-outil div.conteneur-champs-outil .slider progress::-webkit-progress-value {
-    background-color: var(--COULEUR_ACCENT_CONTRASTER); 
+    background-color: var(--COULEUR_ACCENT2); 
     border-radius: var(--BORDER);
     border: 0px;
 }
@@ -1506,7 +1474,7 @@ div.conteneur-de-outil div.conteneur-champs-outil .slider input::-moz-range-thum
     width: 33px;
     height: 23px;
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    border: 2px solid var(--COULEUR_ACCENT_CONTRASTER);
+    border: 2px solid var(--COULEUR_ACCENT2);
     border-radius: var(--BORDER);
     cursor: pointer;
     transform: scale(1.15);
@@ -1514,7 +1482,7 @@ div.conteneur-de-outil div.conteneur-champs-outil .slider input::-moz-range-thum
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-de-outil div.conteneur-champs-outil .slider input::-moz-range-thumb:hover{
-        background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
+        background-color: var(--COULEUR_ACCENT2);
         transform: scale(1.3);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
@@ -1530,7 +1498,7 @@ div.conteneur-de-outil div.conteneur-champs-outil .slider progress {
 }
 /* la partie couleur rempli */
 div.conteneur-de-outil div.conteneur-champs-outil .slider progress::-moz-progress-bar{
-    background-color: var(--COULEUR_ACCENT_CONTRASTER);
+    background-color: var(--COULEUR_ACCENT2);
     border-radius: var(--BORDER);
 }
 /* !!! fin de la partie firefox */
@@ -1547,7 +1515,7 @@ div.conteneur-de-outil div.conteneur-champs-outil .slider-name {
 /* Pour les input date */
 div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]{
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     border-radius: var(--BORDER);
 
     border: none;
@@ -1566,7 +1534,7 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]{
 /* Pour le niveau de course */
 div.conteneur-de-outil div.conteneur-champs-outil input[type="date"].long{
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    color: var(--COULEUR_ACCENT_CONTRASTER);
+    color: var(--COULEUR_ACCENT2);
     border-radius: var(--BORDER);
 
     border: none;
@@ -1583,7 +1551,7 @@ div.conteneur-de-outil div.conteneur-champs-outil input[type="date"].long{
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]:focus{
-    box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+    box-shadow: 0px 0px 5px var(--COULEUR_ACCENT2);
 }
 /* Pour chrome, safari */
 div.conteneur-de-outil div.conteneur-champs-outil input[type="date"]::-webkit-calendar-picker-indicator{ /*pour cacher l'icone */
@@ -1619,7 +1587,7 @@ div.conteneur-de-outil div.conteneur-champs-outil select {
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-de-outil div.conteneur-champs-outil select:hover {
-        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT2);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
@@ -1632,7 +1600,7 @@ div.conteneur-de-outil div.conteneur-champs-outil select:focus {
     outline: none;
     border: none;
     /* Style */
-    box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER);
+    box-shadow: 0px 0px 5px var(--COULEUR_ACCENT2);
 }
 
 
@@ -1656,8 +1624,7 @@ div.conteneur-box-deux {
 div.conteneur-ensemble div.box-result-deux,
 div.conteneur-ensemble div.box-result-deux-small {
     border-radius: var(--BORDER);
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT);
-    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
     width: 420px;
     min-height: 200px;
     padding: var(--ESPACE_S);
@@ -1676,12 +1643,11 @@ div.conteneur-ensemble div.box-result-deux-small::after {
     bottom: 0;
     left: 0;
     right: 0;
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
 
     z-index: -1;
     opacity: 0;
     transition: opacity var(--DUREE_TRANSITION) ease-in-out;
-    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-ensemble div.box-result-deux:hover::after,
@@ -1725,17 +1691,6 @@ div.conteneur-action-charge div.button-more#historique{
 }
 div.conteneur-action-charge div.button-more#statut{
     background-color: #e07c24;
-}
-@media (hover: hover) and (pointer: fine) {
-    div.conteneur-action-charge div.button-more#add:hover{
-        box-shadow: 0px 0px 10px #28A745;
-    }
-    div.conteneur-action-charge div.button-more#historique:hover{
-        box-shadow: 0px 0px 10px #2F3F47;
-    }
-    div.conteneur-action-charge div.button-more#statut:hover{
-        box-shadow: 0px 0px 10px #e07c24;
-    }
 }
 div.conteneur-action-charge div.button-more p.txt_plus#bouton-action-charge{
     color: #FFFFFF;
@@ -1802,23 +1757,18 @@ div.conteneur-rep-zone div.zone-cardio {
 /* Gestion des colors */
 div.conteneur-rep-zone div.zone-cardio:nth-child(1) {
     background-color: #3dbaf9;
-    box-shadow: 0px 0px 10px #3dbaf9;
 }
 div.conteneur-rep-zone div.zone-cardio:nth-child(2) {
     background-color: #1fff80;
-    box-shadow: 0px 0px 10px #1fff80;
 }
 div.conteneur-rep-zone div.zone-cardio:nth-child(3) {
     background-color: #e7e625;
-    box-shadow: 0px 0px 10px #e7e625;
 }
 div.conteneur-rep-zone div.zone-cardio:nth-child(4) {
     background-color: #ff781e;
-    box-shadow: 0px 0px 10px #ff781e;
 }
 div.conteneur-rep-zone div.zone-cardio:nth-child(5) {
     background-color: #ff4b4c;
-    box-shadow: 0px 0px 10px #ff4b4c;
 }
 /* Pour les txt des boite */
 div.conteneur-rep-zone div.zone-cardio p{
@@ -1859,8 +1809,7 @@ div.conteneur-rep-zone div.zone-cardio p.unite-zone{
 /* Pour outils calculateur IMC */
 div.conteneur-ensemble div.box-result {
     border-radius: var(--BORDER);
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT);
-    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
     width: 420px;
     padding: var(--ESPACE_S);
     z-index: 1;
@@ -1876,12 +1825,11 @@ div.conteneur-ensemble div.box-result::after {
     bottom: 0;
     left: 0;
     right: 0;
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
 
     z-index: -1;
     opacity: 0;
     transition: opacity var(--DUREE_TRANSITION) ease-in-out;
-    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-ensemble div.box-result:hover::after {
@@ -1942,24 +1890,25 @@ div.conteneur-scrolling .card-nouveautes.first {
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-scrolling .card-nouveautes:hover {
         transform: translateY(-5px);
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 div.conteneur-scrolling .card-nouveautes:active {
-    transform: scale(0.95);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    filter: brightness(var(--HOVER));
 }
 div.conteneur-scrolling .card-nouveautes-image p{
     font-size: var(--H1);
     text-align: left;
-    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    background-color: var(--COULEUR_ACCENT2);
     font-family: "Anton", sans-serif;
     padding: var(--ESPACE_XXS);
     color: var(--COULEUR_BACKGROUND);
     border-radius: var(--BORDER_SMALL);
     margin-bottom: var(--ESPACE_XS);
     padding-left: var(--ESPACE_S_SMALL);
+}
+div.conteneur-scrolling .card-nouveautes.first .card-nouveautes-image p{
+    background-color: var(--COULEUR_ACCENT);
 }
 div.conteneur-scrolling .card-nouveautes p.description-maj {
     font-size: var(--P);
@@ -1995,16 +1944,16 @@ div.conteneur-content-scrolling div.conteneur-scrolling div.button-more {
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-content-scrolling div.conteneur-scrolling div.button-more:hover {
-        background-color: var(--COULEUR_ACCENT_HOVER);
-        box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
+        background-color: var(--COULEUR_ACCENT2);
+        box-shadow: 0px 0px 15px var(--COULEUR_ACCENT2);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 div.conteneur-content-scrolling div.conteneur-scrolling div.button-more:active {
     transform: scale(0.9);  
     border-radius: var(--BORDER_SMALL);
-    background-color: var(--COULEUR_ACCENT_HOVER);
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT_HOVER);
+    background-color: var(--COULEUR_ACCENT2);
+    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT2);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 div.conteneur-content-scrolling div.icon-more-in-button i{
@@ -2049,16 +1998,13 @@ div.conteneur-param div.acces-param2 {
     div.conteneur-param div.acces-param:hover,
     div.conteneur-param div.acces-param1:hover,
     div.conteneur-param div.acces-param2:hover{
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
         transform: scale(1.01);
-        transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 div.conteneur-param div.acces-param:active,
 div.conteneur-param div.acces-param1:active,
 div.conteneur-param div.acces-param2:active{
-    transform: scale(0.98);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    filter: brightness(var(--HOVER));
     border-radius: 50px;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
@@ -2095,20 +2041,18 @@ div.conteneur-historique-versions {
 @media (hover: hover) and (pointer: fine) {
     .conteneur-historique-versions .box-last-maj:hover{
         transform: scale(1.015);
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 .conteneur-historique-versions .box-last-maj:active{
-    transform: scale(0.985);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    filter: brightness(var(--HOVER));
 }
 /* Contenu supérieur */
 div.conteneur-historique-versions .box-last-maj div.content1 .card-nouveautes-image-last-maj {
     font-size: var(--H1);
     width: fit-content;
     text-align: left;
-    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    background-color: var(--COULEUR_ACCENT);
     font-family: "Anton", sans-serif;
     letter-spacing: 1px;
     padding: var(--ESPACE_XS) var(--ESPACE_S);
@@ -2144,15 +2088,16 @@ div.conteneur-historique-versions .box-last-maj div.content1 .card-nouveautes-im
     border: 0px transparent;
 
     border-radius: var(--BORDER);
-    background-color: var(--COULEUR_ACCENT_CONTRASTER);
+    background-color: var(--COULEUR_ACCENT);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 @media (hover: hover) and (pointer: fine) {
     .conteneur-historique-versions .box-last-maj div.content2 button:hover {
-        background-color: var(--COULEUR_ACCENT_CONTRASTER_HOVER);
-        box-shadow: 0px 0px 5px var(--COULEUR_ACCENT_CONTRASTER_HOVER);
-        transition: all ease-in-out var(--DUREE_TRANSITION);
+        background-color: var(--COULEUR_ACCENT2);
     }
+}
+.conteneur-historique-versions .box-last-maj div.content2 button:active{
+    filter: brightness(var(--HOVER));
 }
 /* Card Historique versions */
 /* Les cards sont invisible de base */
@@ -2175,18 +2120,16 @@ div.conteneur-historique-versions .card-nouveautes.visible {
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-historique-versions .card-nouveautes.visible:hover {
         transform: scale(1.015);
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 div.conteneur-historique-versions .card-nouveautes.visible:active {
-    transform: scale(0.985);
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    filter: brightness(var(--HOVER));
 }
 div.conteneur-historique-versions .card-nouveautes-image p {
     font-size: var(--H1);
     text-align: left;
-    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT_HOVER));
+    background-color: var(--COULEUR_ACCENT2);
     font-family: "Anton", sans-serif;
     padding: var(--ESPACE_XXS);
     color: var(--COULEUR_BACKGROUND);
@@ -2295,14 +2238,10 @@ div.conteneur-mode {
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-mode.animation:hover {
         transform: scale(1.01);
-        background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-        transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 }
 div.conteneur-mode.animation:active {
-    transform: scale(0.98);
-    border-radius: 50px;
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
+    filter: brightness(var(--HOVER));
 }
 div.conteneur-mode.animation i.particulary {
     transform: rotate(-90deg);
@@ -2339,11 +2278,6 @@ div.conteneur-mode input[type="checkbox"].toggle{
     border-radius: 5rem;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
-div.conteneur-mode input[type="checkbox"].toggle:active{
-    background-color: var(--COULEUR_ACCENT_HOVER);
-    transform: scale(0.9);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
-}
 /* C pr le rond du toggle */
 div.conteneur-mode input[type="checkbox"].toggle::after{
     content: "";
@@ -2365,7 +2299,6 @@ div.conteneur-mode input[type="checkbox"].toggle:checked{
 /* Pour que le rond glisse */
 div.conteneur-mode input[type="checkbox"].toggle:checked:after{
     left: 32%;
-    transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 /* Section pour la couleur accentuation */
 ol.conteneur-color-acuentation{

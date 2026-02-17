@@ -184,8 +184,7 @@
         <div class="container-recent-workout"></div> <!-- Remplis en JS -->
 
         <div class="conteneur-centrage-marge">
-            <button id="button_afficher_plus" onclick="location.href='Outils/Actions/historique_entrainement.html'">
-                <i class="fs-icon_add"></i>
+            <button onclick="location.href='Outils/Actions/historique_entrainement.html'">
                 Afficher plus
             </button>
         </div>
@@ -342,7 +341,7 @@
             "Estimation 1RM": "fs-icon_1RM",
 
             "Estimation de la transpiration": "fs-icon_transpiration",
-            "Estimation besoin d'hydratation": "fs-icon_besoin_hydratation",
+            "Besoin d'hydratation quotidien": "fs-icon_besoin_hydratation", 
             "Estimation puissance moy. en ski": "fs-icon_puissance_moy_ski",
             "Convertisseur km/miles": "fs-icon_miles_km"
         }
@@ -367,7 +366,7 @@
             "Estimation 1RM": "Outils/Estimation 1RM/estimation_1RM.html",
 
             "Estimation de la transpiration": "Outils/Estimation de la transpiration/estimation_transpiration.html",
-            "Estimation besoin d'hydratation": "Outils/Besoin d'hydratation quotidien/besoin_hydratation_quotidien.html",
+            "Besoin d'hydratation quotidien": "Outils/Besoin d'hydratation quotidien/besoin_hydratation_quotidien.html",
             "Estimation puissance moy. en ski": "Outils/Estimation puissance moy en ski/estimation_puissance_moy_en_ski.html",
             "Convertisseur km/miles": "Outils/Convertisseur miles-km/convertisseur_miles_km.html"
         }
@@ -442,32 +441,20 @@
                 // Recup variable css
                 const Style = getComputedStyle(document.documentElement)
 
-                const CouleurAccentHover = Style.getPropertyValue("--COULEUR_ACCENT_HOVER")
+                const CouleurAccent2 = Style.getPropertyValue("--COULEUR_ACCENT2")
                 const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
                 const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
 
                 if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
-                        if (ModeUse == "Clair") {
-                            // Mise des couleurs si l'élément est existant
-                            ShortcutAdd.style.background = CouleurAccentContrasterHover
-                            IconeShortcutAdd.style.color = CouleurBackground
+                    // Mise des couleurs si l'élément est existant
+                    ShortcutAdd.style.background = CouleurAccent2
+                    IconeShortcutAdd.style.color = CouleurBackground
                             
-                            ShortcutHistorique.style.background = CouleurAccentContrasterHover
-                            IconeShortcutHistorique.style.color = CouleurBackground
+                    ShortcutHistorique.style.background = CouleurAccent2
+                    IconeShortcutHistorique.style.color = CouleurBackground
 
-                            ShortcutPause.style.background = CouleurAccentContrasterHover
-                            IconeShortcutPause.style.color = CouleurBackground
-                        } else {
-                            // Mise des couleurs si l'élément est existant
-                            ShortcutAdd.style.background = CouleurAccentHover
-                            IconeShortcutAdd.style.color = CouleurBackground
-                            
-                            ShortcutHistorique.style.background = CouleurAccentHover
-                            IconeShortcutHistorique.style.color = CouleurBackground
-
-                            ShortcutPause.style.background = CouleurAccentHover
-                            IconeShortcutPause.style.color = CouleurBackground
-                        }
+                    ShortcutPause.style.background = CouleurAccent2
+                    IconeShortcutPause.style.color = CouleurBackground
                 }
             }
         })
@@ -844,7 +831,7 @@
                 let RootCSS = document.documentElement
                 let StyleCSS = getComputedStyle(RootCSS)
                 // Recup variable css
-                let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT_HOVER")
+                let CouleurAccent2 = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
                 let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
                 let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
@@ -861,12 +848,12 @@
                             labels: ["S-3", "S-2", "S-1"],
                             datasets: [{
                                 data: TableauPourGraphique,
-                                borderColor : CouleurAccentHover, // Ligne des niveau couleur
+                                borderColor : CouleurAccent2, // Ligne des niveau couleur
                                 backgroundColor: CouleurAccent,
                                 fill: true, // Pour remplir le graphique de la couleur background
                                 pointRadius: 8, // Taille du point
                                 pointHoverRadius: 10,
-                                pointBackgroundColor: CouleurAccentHover,
+                                pointBackgroundColor: CouleurAccent2,
                                 pointBorderWidth: 0
                             }]
                         },

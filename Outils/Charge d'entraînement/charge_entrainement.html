@@ -231,48 +231,27 @@
                 // Recup variable css
                 const Style = getComputedStyle(document.documentElement)
 
-                const CouleurAccentHover = Style.getPropertyValue("--COULEUR_ACCENT_HOVER")
-                const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
+                const CouleurAccent2 = Style.getPropertyValue("--COULEUR_ACCENT2")
                 const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
 
                 if (ButtonAdd && ButtonHistorique && ButtonPause) {
-                        if (ModeUse == "Clair") {                            
-                            // changement couleur text in button
-                            TextInterieurButton.forEach(TextButton => {
-                                TextButton.style.color = CouleurBackground                    
-                            });
+                    // changement couleur text in button
+                    TextInterieurButton.forEach(TextButton => {
+                        TextButton.style.color = CouleurBackground                    
+                    });
 
-                            // Mise des couleurs si l'élément est existant
-                            ButtonAdd.style.background = CouleurAccentContrasterHover
-                            ButtonAdd.style.boxShadow = "none"
-                            IconeAdd.style.color = CouleurBackground
+                    // Mise des couleurs si l'élément est existant
+                    ButtonAdd.style.background = CouleurAccent2
+                    ButtonAdd.style.boxShadow = "none"
+                    IconeAdd.style.color = CouleurBackground
                             
-                            ButtonHistorique.style.background = CouleurAccentContrasterHover
-                            ButtonHistorique.style.boxShadow = "none"
-                            IconeHistorique.style.color = CouleurBackground
+                    ButtonHistorique.style.background = CouleurAccent2
+                    ButtonHistorique.style.boxShadow = "none"
+                    IconeHistorique.style.color = CouleurBackground
 
-                            ButtonPause.style.background = CouleurAccentContrasterHover
-                            ButtonPause.style.boxShadow = "none"
-                            IconePause.style.color = CouleurBackground
-                        } else {                            
-                            // changement couleur text in button
-                            TextInterieurButton.forEach(TextButton => {
-                                TextButton.style.color = CouleurBackground                    
-                            });
-
-                            // Mise des couleurs si l'élément est existant
-                            ButtonAdd.style.background = CouleurAccentHover
-                            ButtonAdd.style.boxShadow = "none"
-                            IconeAdd.style.color = CouleurBackground
-                            
-                            ButtonHistorique.style.background = CouleurAccentHover
-                            ButtonHistorique.style.boxShadow = "none"
-                            IconeHistorique.style.color = CouleurBackground
-
-                            ButtonPause.style.background = CouleurAccentHover
-                            ButtonPause.style.boxShadow = "none"
-                            IconePause.style.color = CouleurBackground
-                        }
+                    ButtonPause.style.background = CouleurAccent2
+                    ButtonPause.style.boxShadow = "none"
+                    IconePause.style.color = CouleurBackground
                 }
             }
         })
