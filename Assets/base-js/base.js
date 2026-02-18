@@ -20,60 +20,6 @@ window.onclick = function (event) { // on track les click sur la page complete
     }
 }
 
-
-function afficher_plus(lieu) {
-    // Pour le nb de card a ajouter
-    let NbCardAjoutee = 9
-    let NbCardBase = 9
-    let NbCardTotal = 0
-
-    // la fonction gère plusieur lieu ds le site
-    const CardNouveautes = document.querySelectorAll(".card-nouveautes:not(.visible)")
-    const CardOutils = document.querySelectorAll(".card-outil:not(.visible)")
-
-    const ButtonAfficherPlus = document.getElementById("button_afficher_plus") 
-
-    // Initialisation
-    const Lieu = [CardNouveautes, CardOutils]
-    let CardLieu = ""
-    // Attribution en fonction du lieu
-    if (lieu === "nouveautes") {CardLieu = Lieu[0]} else if (lieu === "outils") {CardLieu = Lieu[1]}
-
-    // tant que i est inférieur à NbCardAjoutee la boucle ne s'arrete pas. "i++" permet de faire plus 1 à chaque fois
-    for (let i = 0; i < NbCardAjoutee; i++) {
-        // CardOutils est une liste
-        if (CardLieu[i]) {
-            CardLieu[i].classList.add("visible")
-        } else {
-            ButtonAfficherPlus.classList.add("absent")
-            break
-        }
-
-        // mise à jour du compteur
-        NbCardTotal += 1
-    }
-
-    if (lieu === "outils") {
-        const NbCardLastSession = sessionStorage.getItem("NbCardOutilSave")
-        if (NbCardLastSession) {
-            NbCardTotal = parseInt(NbCardLastSession) + NbCardBase
-        } else {
-            NbCardTotal = NbCardTotal + NbCardBase
-        }
-        sessionStorage.setItem("NbCardOutilSave", NbCardTotal)
-    } else {
-        const NbCardLastSession = sessionStorage.getItem("NbCardNouveauteSave")
-        if (NbCardLastSession) {
-            NbCardTotal = parseInt(NbCardLastSession) + NbCardBase
-        } else {
-            NbCardTotal = NbCardTotal + NbCardBase
-        }
-        sessionStorage.setItem("NbCardNouveauteSave", NbCardTotal)
-    }
-
-    return
-}
-
 // Pr gérer le BFCache
 window.addEventListener("pageshow", (event) => {
     // Pour contrer le BFCache parce qu'il mettait en cache mes anciennes pages pour éviter de les recharger mais ça causait probleme pour les thèmes
@@ -82,3 +28,7 @@ window.addEventListener("pageshow", (event) => {
         user_preference()
     }
 });
+
+
+// maj local storage de Sprintia 4.0 à 4.0.1
+localStorage.removeItem("ThemeActuel") // car le choix de thème clair ou sombre a été nerf

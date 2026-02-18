@@ -81,51 +81,51 @@
         <h1>Thèmes</h1>
         <div class="boite-ensemble-feature">
             <ol class="conteneur-color-acuentation">
-                <li class="option-color selected" onclick="color_theme('theme_azur', id)" id="elem1">
+                <li class="option-color selected" onclick="colorTheme('theme_azur', id)" id="elem1">
                     Azur
                 </li>
                 
-                <li class="option-color" onclick="color_theme('theme_carmin', id)"  id="elem2">
+                <li class="option-color" onclick="colorTheme('theme_carmin', id)"  id="elem2">
                     Carmin
                 </li>
 
-                <li class="option-color" onclick="color_theme('theme_fuchsia', id)"  id="elem3">
+                <li class="option-color" onclick="colorTheme('theme_fuchsia', id)"  id="elem3">
                     Fuchsia
                 </li>
 
-                <li class="option-color" onclick="color_theme('theme_lavande', id)" id="elem4">
+                <li class="option-color" onclick="colorTheme('theme_lavande', id)" id="elem4">
                     Lavande
                 </li>
 
-                <li class="option-color" onclick="color_theme('theme_vegetation', id)" id="elem5">
+                <li class="option-color" onclick="colorTheme('theme_vegetation', id)" id="elem5">
                     Végétation
                 </li>
                 
-                <li class="option-color" onclick="color_theme('theme_feu', id)"  id="elem6">
+                <li class="option-color" onclick="colorTheme('theme_feu', id)"  id="elem6">
                     Feu
                 </li> 
 
-                <li class="option-color" onclick="color_theme('theme_menthe', id)" id="elem7">
+                <li class="option-color" onclick="colorTheme('theme_menthe', id)" id="elem7">
                     Menthe
                 </li>
 
-                <li class="option-color" onclick="color_theme('theme_pierre_lune', id)" id="elem8">
+                <li class="option-color" onclick="colorTheme('theme_lune', id)" id="elem8">
                     Lune
                 </li>
 
-                <li class="option-color" onclick="color_theme('theme_framboise', id)" id="elem9">
+                <li class="option-color" onclick="colorTheme('theme_framboise', id)" id="elem9">
                     Framboise
                 </li>
 
-                <li class="option-color" onclick="color_theme('theme_plage', id)"  id="elem10">
+                <li class="option-color" onclick="colorTheme('theme_plage', id)"  id="elem10">
                     Plage
                 </li>
 
-                <li class="option-color" onclick="color_theme('Hortensia', id)"  id="elem11">
+                <li class="option-color" onclick="colorTheme('theme_hortensia', id)"  id="elem11">
                     Hortensia
                 </li>
 
-                <li class="option-color" onclick="color_theme('Aurore', id)"  id="elem12">
+                <li class="option-color" onclick="colorTheme('theme_aurore', id)"  id="elem12">
                     Aurore
                 </li>
                 
@@ -139,12 +139,12 @@
             <div class="conteneur-mode">
                 <i class="fs-icon_themes"></i>
                 <p class="mode-choisis">Harmonie</p>
-                <input class="toggle" id="toggle-theme-complet" type="checkbox" onclick="ThemeComplet(event)" />
+                <input class="toggle" id="toggle-theme-complet" type="checkbox" onclick="themeHarmonie(event)" />
             </div>
         </div>
         
         <div class="conteneur-centrage-marge">
-            <button id="reinitialiser" onclick="ReinitialiserTheme('elem1')">Réinitialiser le thème</button>
+            <button id="reinitialiser" onclick="reinitialiserTheme('elem1')">Réinitialiser le thème</button>
         </div>
     </div>
     
@@ -175,21 +175,9 @@
     <!-- Pour le burger menu -->
     <script src="../../Assets/base-js/base.js"></script>
     <script>
-        function RestaureToggleThemeComplet() { // pour restaurer la position de "Appliquer thème aux icones"
-            let ToggleThemeComplet = document.getElementById("toggle-theme-complet")
-
-            let PreferenceUser = localStorage.getItem("ToggleThemeComplet")
-            let ThemeUser = localStorage.getItem("ThemeActuel")
-            let ColorActuelleUser = localStorage.getItem("ColorActuelleUse")
-
-            if (PreferenceUser == "True") {
-                ToggleThemeComplet.checked = false
-            } else {
-                ToggleThemeComplet.checked = true
-            }
-
+        document.addEventListener("DOMContentLoaded", function() {
             // Pr restaure le selected du li
-            let color_actuelle_id = {
+            let idElementTheme = {
                 "theme_azur": "elem1",
                 "theme_carmin": "elem2",
                 "theme_fuchsia": "elem3",
@@ -197,17 +185,47 @@
                 "theme_vegetation": "elem5",
                 "theme_feu": "elem6",
                 "theme_menthe": "elem7",
-                "theme_pierre_lune": "elem8",
+                "theme_lune": "elem8",
                 "theme_framboise": "elem9",
                 "theme_plage": "elem10",
-                "Hortensia": "elem11",
-                "Aurore": "elem12"
+                "theme_hortensia": "elem11",
+                "theme_aurore": "elem12"
             }
-                
-            // on cherche ds le dico    
-            let id_li = color_actuelle_id[ColorActuelleUser]
+            let themeUse = localStorage.getItem("ColorActuelleUse")
 
-            maj_li_selected(id_li)
+            if (themeUse == null) {
+                themeUse = "theme_azur"
+            }
+            // on cherche l'id du li du thème correspondant dans le dico    
+            let idElement = idElementTheme[themeUse]
+
+            if (idElement) {
+                SelectedElement(idElement)
+            }
+        })
+
+        function themeHarmonie(event) {
+            let ToggleHarmonie = event.target
+
+            if (ToggleHarmonie.checked) { // quand toggle est desactiver
+                localStorage.setItem("ToggleThemeComplet", "False")
+            } else { // quand toggle est activé
+                localStorage.setItem("ToggleThemeComplet", "True")
+            }
+
+            return
+        }
+
+        function RestaureToggleThemeComplet() { // pour restaurer la position de "Appliquer thème aux icones"
+            let ToggleHarmonie = document.getElementById("toggle-theme-complet")
+
+            let lastPositionToggleHarmonie = localStorage.getItem("ToggleThemeComplet")
+
+            if (lastPositionToggleHarmonie == "True") {
+                ToggleHarmonie.checked = false
+            } else {
+                ToggleHarmonie.checked = true
+            }
 
             return
         }

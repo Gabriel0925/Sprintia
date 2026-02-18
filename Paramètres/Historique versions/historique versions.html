@@ -243,7 +243,7 @@
 
         </div>
         <div class="conteneur-centrage-marge">
-            <button onclick="afficher_plus('nouveautes')">
+            <button id="bouton" onclick="AfficherPlus()">
                 Afficher plus
             </button>
         </div> 
@@ -278,7 +278,7 @@
     <script>
         // Recup des elements html
         const CardNouveaute = document.querySelectorAll("div.card-nouveautes")
-        const ButtonAfficherPlus = document.getElementById("button_afficher_plus") 
+        const ButtonAfficherPlus = document.getElementById("bouton") 
 
         function RestaurationNbCard() {
             // Rafraichissement des datas des nbcardsave
@@ -289,11 +289,46 @@
                     CardNouveaute[i].classList.add("visible")
                 }
                 if (parseInt(NbCardSave) >= CardNouveaute.length) {
-                    ButtonAfficherPlus.classList.add("absent")
+                    ButtonAfficherPlus.style.display = "none"
                 }
             }
         }
-        RestaurationNbCard()
+
+        window.addEventListener("DOMContentLoaded", () => {
+            RestaurationNbCard()
+        })
+    </script>
+    <script>
+        function AfficherPlus() { 
+            // Pour le nb de card a ajouter
+            let NbCardAjoutee = 9
+            let NbCardBase = 9
+            let NbCardTotal = 0
+
+            // on recup les cards et le bouton
+            const CardNouveautes = document.querySelectorAll(".card-nouveautes:not(.visible)")
+            const ButtonAfficherPlus = document.getElementById("bouton") 
+
+            // tant que i est inférieur à NbCardAjoutee la boucle ne s'arrete pas. "i++" permet de faire plus 1 à chaque fois
+            for (let i = 0; i < NbCardAjoutee; i++) {
+                // CardOutils est une liste
+                if (CardNouveautes[i]) {
+                    CardNouveautes[i].classList.add("visible")
+                } else {
+                    ButtonAfficherPlus.style.display = "none"
+                    break
+                }
+
+                // mise à jour du compteur
+                NbCardTotal += 1
+            }
+            
+            // on compte le nb de cartes a afficher
+            const TotalCardAfficher = document.querySelectorAll(".card-nouveautes.visible").length
+            sessionStorage.setItem("NbCardNouveauteSave", TotalCardAfficher)
+
+            return
+        }
     </script>
 
     

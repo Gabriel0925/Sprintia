@@ -184,7 +184,7 @@
         <div class="container-recent-workout"></div> <!-- Remplis en JS -->
 
         <div class="conteneur-centrage-marge">
-            <button onclick="location.href='Outils/Actions/historique_entrainement.html'">
+            <button id="button-plus" onclick="location.href='Outils/Actions/historique_entrainement.html'">
                 Afficher plus
             </button>
         </div>
@@ -283,7 +283,7 @@
             if (TableauNameWorkout.length <= 0) {
                 // on cache la secction si il y a pas de datas
                 document.querySelector(".container-recent-workout").style.display = "none"
-                document.getElementById("button_afficher_plus").style.display = "none" // on cache le bouton
+                document.getElementById("button-plus").style.display = "none" // on cache le bouton
             } else { // si il y a des datas
                 document.getElementById("text-pas-entrainement").style.display = "none" // on cache le text comme quoi il n'y a pas d'entrainement
                 // initialisation pour la boucle
