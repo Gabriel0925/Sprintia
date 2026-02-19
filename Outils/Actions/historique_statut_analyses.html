@@ -84,6 +84,12 @@
         </p>
 
         <div class="conteneur-cards-workout" id="liste-statut"></div>
+        <div class="conteneur-centrage-marge">
+            <button id="button_afficher_plus" onclick="Historique()">
+                Afficher plus
+            </button>
+        </div> 
+
     </div>
     
     <footer>
@@ -116,6 +122,7 @@
     <!-- Import bibliothèque pour simplifier le code de indexed db -->
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="../../Assets/base-js/DB_config.js"></script> <!-- Connexion bdd -->
+
     <script>
         function ReturnDate(DateStatut) {
             let DateEuropeen = ""
@@ -130,7 +137,55 @@
         let Timer1 = 0
         let Timer2 = 0
 
-        async function Historique() {
+        async function Init() {
+            // animation du dynamic logo pour message au user
+            const ParamURL = window.location.search
+            const TableauSeparation = ParamURL.split("?")
+            
+            if (TableauSeparation.length > 1) {
+                let MessageDynamicLogo = ""
+                if (TableauSeparation[1] == "Vacances") {
+                    MessageDynamicLogo = "Profitez bien 🌴"
+                } else if (TableauSeparation[1] == "Blessure") {
+                    MessageDynamicLogo = "Bon repos 🤕"
+                } else if (TableauSeparation[1] == "Malade") {
+                    MessageDynamicLogo = "Bon courage 😷"
+                } else if (TableauSeparation[1] == "Suspendre") {
+                    MessageDynamicLogo = "Pause activée ⏸️"
+                } else{
+                    MessageDynamicLogo = "C'est reparti 🔥"
+                }
+                    
+                // timeout remis a 0 (suppresion plutot)
+                clearTimeout(Timer1)
+                clearTimeout(Timer2)
+                document.getElementById("a-logo").classList.remove("return", "pin-message")
+                
+                // petite récompense pour le user
+                document.getElementById("a-logo").classList.add("pin-message")
+
+                document.getElementById("a-logo").textContent = MessageDynamicLogo;
+
+                Timer1 = setTimeout(() => { 
+                    document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
+                    document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
+                }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
+
+                Timer2 = setTimeout(() => {
+                    // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
+                    document.getElementById("a-logo").classList.remove("return")
+                    document.getElementById("a-logo").classList.remove("pin-message")
+                }, 3100) // durée choisis à la main
+            }
+            
+            return
+        }
+
+        // on stocke les datas dans un tableau
+        let HistoriqueComplet = []
+        let NbCardsWorkoutAfficher = 0
+
+        async function recupData() {
             // Recup de l'historique
             let HistoriqueDB = await db.statut_analyse.toArray() // recup de toutes les datas
 
@@ -140,18 +195,41 @@
                 if (element1.date > element2.date) return -1
             })
 
+            HistoriqueDB.forEach(element => {
+                HistoriqueComplet.push(element)
+            });
+
             // Cacher le text comme quoi il n'y a pas de statut enregistrer
-            if (HistoriqueDB.length > 0) {
+            if (HistoriqueComplet.length > 0) {
                 document.getElementById("text-informatif").style.display = "none"
+            }
+            if (HistoriqueComplet.length <= 12) {
+                document.getElementById("button_afficher_plus").style.display = "none"
+            }
+
+            await Historique()
+
+            return
+        }
+
+        async function Historique() {
+            // Cacher le text comme quoi il n'y a pas de statut enregistrer
+            if (HistoriqueComplet.length <= 0) {
+                document.getElementById("button_afficher_plus").style.display = "none"
+            }
+            // Cacher le bouton si il n'y a plus d'element a charger
+            if (HistoriqueComplet.length <= NbCardsWorkoutAfficher) {
+                document.getElementById("button_afficher_plus").style.display = "none"
             }
 
             const ConteneurCardsStatut = document.getElementById("liste-statut")
-            
-            // Remise à 0 du conteneur
-            ConteneurCardsStatut.innerHTML = ""
+    
+            // Coupage des datas pr le nb limite de cards
+            let HistoriqueNecessaire = HistoriqueComplet.slice(NbCardsWorkoutAfficher, NbCardsWorkoutAfficher+12)
+            NbCardsWorkoutAfficher += 12
 
             // Creation structure HTML
-            HistoriqueDB.forEach(elementBDD => {
+            HistoriqueNecessaire.forEach(elementBDD => {
                 const CardStatut = document.createElement("div")
 
                 CardStatut.classList.add("cards-history-workout")
@@ -240,52 +318,12 @@
                 ConteneurCardsStatut.appendChild(CardStatut)
 
             });
-
-            // animation du dynamic logo pour message au user
-            const ParamURL = window.location.search
-            const TableauSeparation = ParamURL.split("?")
-            
-            if (TableauSeparation.length > 1) {
-                let MessageDynamicLogo = ""
-                if (TableauSeparation[1] == "Vacances") {
-                    MessageDynamicLogo = "Profitez bien 🌴"
-                } else if (TableauSeparation[1] == "Blessure") {
-                    MessageDynamicLogo = "Bon repos 🤕"
-                } else if (TableauSeparation[1] == "Malade") {
-                    MessageDynamicLogo = "Bon courage 😷"
-                } else if (TableauSeparation[1] == "Suspendre") {
-                    MessageDynamicLogo = "Pause activée ⏸️"
-                } else{
-                    MessageDynamicLogo = "C'est reparti 🔥"
-                }
-                    
-                // timeout remis a 0 (suppresion plutot)
-                clearTimeout(Timer1)
-                clearTimeout(Timer2)
-                document.getElementById("a-logo").classList.remove("return", "pin-message")
-                
-                // petite récompense pour le user
-                document.getElementById("a-logo").classList.add("pin-message")
-
-                document.getElementById("a-logo").textContent = MessageDynamicLogo;
-
-                Timer1 = setTimeout(() => { 
-                    document.getElementById("a-logo").classList.add("return") // a ré-ajoute une class pour qu'il y est une animation de retour
-                    document.getElementById("a-logo").textContent = "Sprintia"; // on raffiche Sprintia
-                }, 2500); // on laisse le message pendant 2,5s pour que le user est le temps de le lire
-
-                Timer2 = setTimeout(() => {
-                    // remise à l'état initial, on supprime les 2 class qu'on a mis dès la fin du setTimeout au dessus
-                    document.getElementById("a-logo").classList.remove("return")
-                    document.getElementById("a-logo").classList.remove("pin-message")
-                }, 3100) // durée choisis à la main
-            }
-
             return
         }
 
         window.addEventListener("DOMContentLoaded", () => {
-            Historique()
+            Init()
+            recupData()
         })
     </script>
 

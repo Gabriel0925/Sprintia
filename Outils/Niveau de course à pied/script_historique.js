@@ -61,7 +61,6 @@ async function RemplirTableau() {
         TableauHistorique.classList.add("visible")
         document.getElementById("text-informatif").style.display = "none"
     } else {
-        document.getElementById("cacher-title1").style.display = "none"
         document.getElementById("cacher-title2").style.display = "none"
         return
     }

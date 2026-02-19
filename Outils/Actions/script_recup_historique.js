@@ -24,11 +24,26 @@ function ReturnDate(DateWorkout) {
     return DateEuropeen
 }
 
+function PassageHeure(minutes) {
+    let Heure = Math.floor(minutes/60) // Arrondi à l'entier inférieur
+    let MinutesRestante = minutes-60*Heure
+
+    // Initialisation
+    let Result = ""
+    if (Heure < 1) { // Si l'heure est inférieur à 1 on affiche que les minutes pour ne pas afficher 0h 23min
+        Result = minutes + "min"
+    } else { // Sinon on affiche tous
+        Result = Heure + "h " + MinutesRestante.toString().padStart(1, "0") + "m"
+    }
+            
+    return Result
+}
+
 // init pour le logo dynamique
 let Timer1 = 0
 let Timer2 = 0
 
-function HTMLCard(CardWorkout, workout, DateEuropeen) {
+function HTMLCard(CardWorkout, workout, DateEuropeen, DureeFormatee) {
     let StructureHTML = `          
         <div class="data-workout-column">
             <p class="name-workout">
@@ -43,7 +58,7 @@ function HTMLCard(CardWorkout, workout, DateEuropeen) {
         </div>
         <div class="data-workout-paire">
             <p class="duree-workout">
-                Duree : <strong>${workout.duree} min</strong>
+                Duree : <strong>${DureeFormatee}</strong>
             </p>
             <p class="rpe-workout">
                 RPE : <strong>${workout.rpe}</strong>
@@ -171,8 +186,9 @@ async function AfficherData() {
 
         // Inversion de la date de "2026-01-12" à "12-01-2026"
         let DateEuropeen = ReturnDate(workout.date)
+        let DureeFormatee = PassageHeure(workout.duree)
 
-        let CardWorkoutHTML = HTMLCard(CardWorkout, workout, DateEuropeen)
+        let CardWorkoutHTML = HTMLCard(CardWorkout, workout, DateEuropeen, DureeFormatee)
         ConteneurCardsWorkout.appendChild(CardWorkoutHTML)
     });
 

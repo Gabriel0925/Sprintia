@@ -189,13 +189,6 @@
             </button>
         </div>
 
-
-        <div class="conteneur-mise-avant" id="banniere-tips">
-            <p id="tips">
-                Chargement...
-            </p>
-        </div> 
-
     </div>
     
     <footer>
@@ -297,7 +290,7 @@
                     // maj des variables en fonction de l'entrainement
                     SportWorkout = TableauSport[compteur]
                     DateWorkout = ReturnDate(TableauDateWorkout[compteur])
-                    DureeWorkout = TableauDureeWorkout[compteur]
+                    DureeWorkout = PassageHeure(TableauDureeWorkout[compteur])
 
                     // on créer la card html
                     const CardWorkout = document.createElement("div")
@@ -392,6 +385,9 @@
                 if (OutilFavoris1 == OutilFavoris3) { // si l'outil favoris 2 est niveau course alors on met la charge d'entrainement (c pr éviter d'avoir des doublons)
                     OutilFavoris3 = "Charge d'entraînement"
                 }
+                if (OutilFavoris2 == OutilFavoris3) {
+                    OutilFavoris3 = "Estimation VO₂max"
+                }
 
                 // affichage des noms des outils favoris
                 document.getElementById("P1").textContent = OutilFavoris1
@@ -469,9 +465,9 @@
             // Initialisation
             let Result = ""
             if (Heure < 1) { // Si l'heure est inférieur à 1 on affiche que les minutes pour ne pas afficher 0h 23min
-                Result = minutes
+                Result = minutes + "min"
             } else { // Sinon on affiche tous
-                Result = Heure + "h " + MinutesRestante.toString().padStart(2, "0")
+                Result = Heure + "h " + MinutesRestante.toString().padStart(1, "0") + "m"
             }
             
             return Result
@@ -599,7 +595,7 @@
 
                 // Début interpretation
                 let Interpretation = `Au cours des 7 derniers jours, t'as fait :<br><br>
-                                <strong>⏱️ ${DureeTotaleHeure}min</strong> d'entraînement<br>`
+                                <strong>⏱️ ${DureeTotaleHeure}</strong> d'entraînement<br>`
                 
                 if (NbWorkout == 1 || NbWorkout == 0) {
                     Interpretation += `<strong>💪 ${NbWorkout} séance</strong>`
@@ -609,7 +605,7 @@
                 
                 // Si il y a des datas de distance
                 if (ExistenDataDistance == true) {
-                    Interpretation += `<br><br><strong>↔️ ${DistanceTotale.toFixed(1)} km</strong>` // Ajout de la distance totale peut importe le sport dans l'interpretation
+                    Interpretation += `<br><br><strong>↔️ ${DistanceTotale.toFixed(1).replace(".", ",")} km</strong>` // Ajout de la distance totale peut importe le sport dans l'interpretation
 
                     // Tous ses if pour savoir quel est le sport que le user a le plus pratiqué cette semaine en fonction de la distance
                     if (DistanceTotaleCourse >= DistanceTotaleVelo && DistanceTotaleCourse >= DistanceTotaleMarche) {
@@ -618,7 +614,7 @@
                                 Interpretation += " de course à pied"
                             } else {  
                                 // cette interpretation pour que le user sache que sur 600 km parcourue cette semaine il en a fait 30 en course par exemple
-                                Interpretation += `<br><strong>🏃 ${DistanceTotaleCourse.toFixed(1)} km de course à pied</strong>` 
+                                Interpretation += `<br><strong>🏃 ${DistanceTotaleCourse.toFixed(1).replace(".", ",")} km de course à pied</strong>` 
                             }
                           
                         } 
@@ -629,7 +625,7 @@
                                 Interpretation += " de vélo" 
                             } else {
                                 // cette interpretation pour que le user sache que sur 600 km parcourue cette semaine il en a fait 30 de vélo par exemple
-                                Interpretation += `<br><strong>🚴 ${DistanceTotaleVelo.toFixed(1)} km de vélo</strong>`
+                                Interpretation += `<br><strong>🚴 ${DistanceTotaleVelo.toFixed(1).replace(".", ",")} km de vélo</strong>`
                             }
 
                         }
@@ -640,7 +636,7 @@
                                 Interpretation += " de marche"
                             } else {
                                 // cette interpretation pour que le user sache que sur 600 km parcourue cette semaine il en a fait 30 en marche par exemple
-                                Interpretation += `<br><strong>🚶‍♂️ ${DistanceTotaleMarche.toFixed(1)} km de marche</strong>`
+                                Interpretation += `<br><strong>🚶‍♂️ ${DistanceTotaleMarche.toFixed(1).replace(".", ",")} km de marche</strong>`
                             }
                             
                         }
@@ -682,59 +678,11 @@
     </script>
 
     <script>
-        function GenererNbAleatoire() {
-            // Nb aléatoire (formule * 17 fais avec gemini car en js clc les nb aléatoire)
-            let NombreAleatoire = Math.random()*16 // renvoie aléatoirement entre 0 et 1 (ex : 0.5890953759539541) puis multiplication par 17
-            NombreAleatoire = Math.floor(NombreAleatoire) //nb arrondi pour avoir par exemple 5.8 puis 5 grace a l'arrondi
-
-            return NombreAleatoire
-        }
-
-        function TipsRandom() {
-            let ParaTips = document.getElementById("tips")
-            let NombreAleatoire = GenererNbAleatoire()
-
-            // liste des tips
-            const LiTips = [ // 16 Tips
-                "Faites un test VMA puis découvrez vos zones de vitesse pour optimiser vos entraînements d'endurance et de fractionné,... Et donc progresser en course à pied.",
-                "Saviez-vous que vous pouviez estimer votre VO2max sans avoir de montre connectée grâce à Sprintia.",
-                "L'indulgence de course est la fonction parfaite pour s'améliorer en course à pied !",
-                "Saviez-vous qu'il existe dans Sprintia un 'Prédicteur de performance' pour prédire vos performances sur votre prochaine course.",
-                "Si vous êtes fatigué·e vous pouvez mettre en pause les analyses de charge d'entraînement,... Sprintia s'adapte à votre état de forme.",
-                "Pour optimiser vos entraînements, vous pouvez calculer vos zones de fréquence cardiaque depuis Sprintia avec une eexcllente précision grâce à différentes méthodes de calcul.",
-                "Saviez-vous que vous pouviez renommer le coach de l'application, tu peux même choisir son style (Inshape, Copain, Strict & Motivant ou Bienveillant qui est le coach par défaut).",
-                "Calculez les protéines que vous devez manger par jour, c'est super pratique pour prendre en muscle et c'est disponible dans les outils de Sprintia.",
-                "Dans l'historique des versions de Sprintia, vous pouvez découvrir tous les moindres détails de la dernière mise à jour.",
-                "Vous pouvez personnaliser Sprintia à votre guise, par exemple vous pouvez choisir le thème 'feu' pour des couleurs éclatantes ou le thème 'lune' pour avoir quelque chose de très sobre.",
-                
-                "Après un gros entraînement, estimez votre temps de récupération grâce à Sprintia. Le tout sans avoir besoin de montre connectée.",
-                "Pour avoir un maximum de précision dans les outils, choisissez bien le RPE quand il est demandé ne mettez pas au pif !",
-                "Découvrez votre niveau de course en faisant un test Cooper. Après avoir fait ce test vous pourrez savoir si vous faites partie de l'élite !",
-                "Après une séance de sport, buvez, c'est important ! Pour savoir la quantité à boire après votre entraînement, je vous conseille de d'utiliser l'outil nommé : 'Estimation de la transpiration'.",
-                "Vous ne savez toujours pas la charge maximale que vous pouvez soulever pour une unique répétition ? Parfait, Sprintia le propose dans l'outil : 'Estimation 1RM'.",
-                "Vous avez peur de perdre vos données en supprimant le cache de votre navigateur ? Pas de problème, Sprintia vous propose de sauvegarder vos données dans les paramètres."
-            ]
-
-            let TipsAleatoire = LiTips[NombreAleatoire]
-            ParaTips.innerHTML = TipsAleatoire
-            return
-        }
-
         const DisplayBanniere = localStorage.getItem("DisplayBanniere")
         let MiseAvant = document.getElementById("banniere-accueil")
 
         if (DisplayBanniere == "False") {
             MiseAvant.style.display = "none"
-        }
-
-        const DisplayTips = localStorage.getItem("DisplayConseil")
-        let ZoneTips = document.getElementById("banniere-tips")
-
-        if (DisplayTips == "True") {
-            ZoneTips.style.display = "flex"
-            TipsRandom()
-        } else {
-            ZoneTips.style.display = "none"
         }
     </script>
 
@@ -822,75 +770,69 @@
             // recup des datas
             let TableauPourGraphique = await RecupData()
 
-            // Generation Graphique
-            if (TableauPourGraphique.length > 0) { 
-                // Ajout de la class pr le faire apparaitre
-                document.getElementById("conteneur-graphique").classList.add("visible") // ce graphique en particulier est tout le temps visible meme si pas de données
+            // Récup les variables css
+            let RootCSS = document.documentElement
+            let StyleCSS = getComputedStyle(RootCSS)
+            // Recup variable css
+            let CouleurAccent2 = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
+            let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
+            let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
-                // Récup les variables css
-                let RootCSS = document.documentElement
-                let StyleCSS = getComputedStyle(RootCSS)
-                // Recup variable css
-                let CouleurAccent2 = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
-                let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
-                let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
+            const barCanvas = document.getElementById("barCanvas")
 
-                const barCanvas = document.getElementById("barCanvas")
+            // Destruction de l'ancien graphique si il y en a un pour éviter une superposition de graphique
+            if (barChart) {
+                barChart.destroy()
+            }
 
-                // Destruction de l'ancien graphique si il y en a un pour éviter une superposition de graphique
-                if (barChart) {
-                    barChart.destroy()
-                }
-
-                barChart = new Chart(barCanvas, {
-                        type:"line",
-                        data:{
-                            labels: ["S-3", "S-2", "S-1"],
-                            datasets: [{
-                                data: TableauPourGraphique,
-                                borderColor : CouleurAccent2, // Ligne des niveau couleur
-                                backgroundColor: CouleurAccent,
-                                fill: true, // Pour remplir le graphique de la couleur background
-                                pointRadius: 8, // Taille du point
-                                pointHoverRadius: 10,
-                                pointBackgroundColor: CouleurAccent2,
-                                pointBorderWidth: 0
-                            }]
+            barChart = new Chart(barCanvas, {
+                type:"line",
+                    data:{
+                        labels: ["S-3", "S-2", "S-1"],
+                        datasets: [{
+                            data: TableauPourGraphique,
+                            borderColor : CouleurAccent2, // Ligne des niveau couleur
+                            backgroundColor: CouleurAccent,
+                            fill: true, // Pour remplir le graphique de la couleur background
+                            pointRadius: 8, // Taille du point
+                            pointHoverRadius: 10,
+                            pointBackgroundColor: CouleurAccent2,
+                            pointBorderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true, // Activation du responsive
+                        maintainAspectRatio: false, // Tres important pour responsive sur mobile
+                        
+                        plugins: {
+                            legend: {
+                                display: false // Masque la legende qui sert a rien dans mon cas
+                            }
                         },
-                        options: {
-                            responsive: true, // Activation du responsive
-                            maintainAspectRatio: false, // Tres important pour responsive sur mobile
                             
-                            plugins: {
-                                legend: {
-                                    display: false // Masque la legende qui sert a rien dans mon cas
-                                }
-                            },
-                            
-                            scales: {
-                                y: { // COuleur + taille des txt sur axe des ordonnées
-                                    grid: {
-                                        display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
-                                    },
-                                    ticks: {
-                                        color: CouleurTextPrincipal, 
-                                        font: {size: 13}
-                                    },
-                                    beginAtZero: true, // Pr commencer à 0
+                        scales: {
+                            y: { // COuleur + taille des txt sur axe des ordonnées
+                                grid: {
+                                    display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
                                 },
-                                x: { // idem pour abscisse
-                                    grid: {
-                                        display: false
-                                    },
-                                    ticks: {
-                                        color: CouleurTextPrincipal,
-                                        font: {size: 13}
-                                    }
+                                ticks: {
+                                    color: CouleurTextPrincipal, 
+                                    font: {size: 13}
+                                },
+                                beginAtZero: true, // Pr commencer à 0
+                            },
+                            x: { // idem pour abscisse
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: CouleurTextPrincipal,
+                                    font: {size: 13}
                                 }
                             }
                         }
-                    })
-                }
+                    }
+            })
         }
 
         window.addEventListener("DOMContentLoaded", () => {

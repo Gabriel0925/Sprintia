@@ -129,7 +129,7 @@
             </div>
         </div>
 
-        <h2>Santé</h2>
+        <h2>Santé & Musculation</h2>
 
         <div class="conteneur-content-scrolling">
             <div class="conteneur-scrolling">
@@ -162,6 +162,21 @@
                         <p>Découvrez la quantité de protéines à consommer par jour en fonction de votre objectif.</p>
                     </div>
                 </a>    
+                <a href="Estimation 1RM/estimation_1RM.html">
+                    <div class="card-outil">
+                        <div class="icone">
+                            <i class="fs-icon_1RM"></i>
+                </a>
+                            <div class="button-epingler" id="Estimation 1RM" onclick="PinOutil(this, 'Estimation 1RM')">
+                                <i class="fs-icon_epingler"></i>
+                            </div>
+                        </div>
+                <a href="Estimation 1RM/estimation_1RM.html">    
+                        <h1>Estimation 1RM</h1>
+                        <p>Estimez la charge maximale que vous pouvez soulever en une seule répétition sur un exercice de musculation.</p>
+                    </div>
+                </a> 
+                   
                 <a href="Calculateur IMC/calculateur_imc.html">       
                     <div class="card-outil">
                         <div class="icone">
@@ -285,30 +300,6 @@
                         <p>Estimez votre puissance max. en course (en watts) grâce à votre vitesse maximale sur une distance.</p>
                     </div>
                 </a>
-
-            </div>
-        </div>
-
-
-        <h2>Musculation</h2>
-
-        <div class="conteneur-content-scrolling">
-            <div class="conteneur-scrolling">
-
-                <a href="Estimation 1RM/estimation_1RM.html">
-                    <div class="card-outil first">
-                        <div class="icone">
-                            <i class="fs-icon_1RM"></i>
-                </a>
-                            <div class="button-epingler" id="Estimation 1RM" onclick="PinOutil(this, 'Estimation 1RM')">
-                                <i class="fs-icon_epingler"></i>
-                            </div>
-                        </div>
-                <a href="Estimation 1RM/estimation_1RM.html">    
-                        <h1>Estimation 1RM</h1>
-                        <p>Estimez la charge maximale que vous pouvez soulever en une seule répétition sur un exercice de musculation.</p>
-                    </div>
-                </a>     
 
             </div>
         </div>
@@ -504,8 +495,10 @@
         }
 
         function InitPin() {
-            let OutilPin = JSON.parse( localStorage.getItem("OutilsPin"))
+            let OutilPin = JSON.parse(localStorage.getItem("OutilsPin"))
             
+            if (OutilPin == null) { return } // quand c'est la premiere fois que le user va sur la page d'accueil pour eviter une erreur.
+
             if (OutilPin.length > 0) {
                 OutilPin.forEach(element => {
                     document.getElementById(element).classList.add("actif")

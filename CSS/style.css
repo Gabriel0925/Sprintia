@@ -49,12 +49,12 @@
 
     /* Couleur pour le hover des pastilles */
     --COULEUR_PASTILLES_0: #0D9BD3; 
-    --COULEUR_PASTILLES_1: #fe3c35; 
-    --COULEUR_PASTILLES_2: #fa5bfa; 
-    --COULEUR_PASTILLES_3: #ae5ef9; 
+    --COULEUR_PASTILLES_1: #FF5257; 
+    --COULEUR_PASTILLES_2: #FA6BFA; 
+    --COULEUR_PASTILLES_3: #B266F9; 
     --COULEUR_PASTILLES_4: #0CBB5BFF; 
     --COULEUR_PASTILLES_5: #0ac3a7; 
-    --COULEUR_PASTILLES_6: #6aabd3;  
+    --COULEUR_PASTILLES_6: #42a5f5;  
     --COULEUR_PASTILLES_7: #f14d84; 
     
     --COULEUR_PASTILLES_D1: #3a91ff;  
@@ -67,7 +67,7 @@
     --COULEUR_PASTILLES_D6: #4ce58c; 
  
     --COULEUR_PASTILLES_D7: #ffb82b;  
-    --COULEUR_PASTILLES_D8: #ff5b1f;  
+    --COULEUR_PASTILLES_D8: #ff782f;  
 }
 /* Pour les icônes */
 @font-face {
@@ -80,14 +80,6 @@
     font-weight: normal;
     font-style: normal;
     font-display: block;
-}
-/* Police Anton */
-@font-face {
-    font-display: swap;
-    font-family: 'Anton';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../Assets/fonts/anton-v27-latin-regular.woff2') format('woff2'); 
 }
 /* Police Zalando-sans-semiexpanded-regular */
 @font-face {
@@ -316,7 +308,7 @@ button:active{
 
 /* Pr le bouton tout voir dans le conteneur scrolling des dernieres nouveautes dans les parametres */
 button#param-dernieres-nouveautes {
-    width: 100px;
+    width: 110px;
 }
 
 /* pr button dans tableau */
@@ -393,7 +385,7 @@ a.lien {
     }
 }
 /* Balise code avec son conteneur */
-div.conteneur-code {
+div.conteneur-code { 
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_S);
     border-radius: var(--BORDER);
@@ -446,7 +438,7 @@ footer a.a_footer:active{
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     color: var(--COULEUR_ACCENT2);
     filter: brightness(var(--HOVER));
-    transform: scale(0.85);
+    transform: scale(0.95);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 
@@ -527,7 +519,7 @@ header div.navbar .logo a.pin-message.return { /* pour le retour à l'état init
     }
 }
 header div.navbar .logo a:active {
-    transform: scale(0.9);
+    transform: scale(0.95);
     color: var(--COULEUR_ACCENT2);
     filter: brightness(var(--HOVER));
     transition: all ease-out var(--DUREE_TRANSITION);
@@ -556,7 +548,7 @@ header div.navbar div.burger-menu-button {
 }
 /* Pour que le bouton rétrécisse au moment du clic */
 header div.navbar div.burger-menu-button:active {
-    transform: scale(0.85);
+    transform: scale(0.95);
     color: var(--COULEUR_ACCENT2);
     filter: brightness(var(--HOVER));
 }
@@ -585,7 +577,7 @@ header div.navbar ul.links li a i {
 }
 header div.navbar ul.links li a:active {
     color: var(--COULEUR_ACCENT2);
-    transform: scale(0.85);
+    transform: scale(0.95);
     filter: brightness(var(--HOVER));
 }
 header div.navbar ul.links li a.actif {
@@ -594,7 +586,7 @@ header div.navbar ul.links li a.actif {
 }
 header div.navbar ul.links li a.actif:active {
     filter: brightness(var(--HOVER));
-    transform: scale(0.85);
+    transform: scale(0.95);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 
@@ -627,8 +619,8 @@ header .burger-menu li {
     color: var(--COULEUR_BACKGROUND);
 }
 @keyframes rebond_icon_burger_open {
-    0% { transform: translate(18px, -18px) scale(1)}
-    40% { transform: translate(-18px, 18px) scale(0.75)}
+    0% { transform: translate(22px, -22px) scale(1)}
+    40% { transform: translate(-22px, 22px) scale(0.7)}
     100% { transform: translate(0px, 0px) scale(1)}
 }
 header .burger-menu.open li {
@@ -666,7 +658,7 @@ header .burger-menu li a i {
 }
 header .burger-menu li a:active {
     color: var(--COULEUR_ACCENT2);
-    transform: scale(0.8);
+    transform: scale(0.95);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-out var(--DUREE_TRANSITION);
 }
@@ -676,7 +668,7 @@ header .burger-menu li a.actif-burger-menu {
 }
 header .burger-menu li a.actif-burger-menu:active {
     color: var(--COULEUR_ACCENT2);
-    transform: scale(0.8);
+    transform: scale(0.95);
     background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     transition: all ease-out var(--DUREE_TRANSITION);
 }
@@ -762,15 +754,6 @@ div.conteneur-mise-avant p.interpretation-jrm{
     font-weight: normal;
     line-height: 1.4;
 }
-div.conteneur-mise-avant p#tips{
-    font-size: var(--P);
-    line-height: 1.4;
-    width: 100%;
-    text-align: left;
-    margin: var(--ESPACE_XS);
-    color: var(--COULEUR_BACKGROUND);
-    font-weight: normal;
-}
 
 /* Bouton voir plus */
 div.conteneur-centrage {
@@ -790,7 +773,7 @@ div.conteneur-centrage {
 }
 @media (hover: hover) and (pointer: fine) {
     .button-more:hover {
-        transform: translateY(-5px);
+        transform: scale(1.05);
     }
 }
 .button-more:active {
@@ -984,6 +967,15 @@ div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler i{
     color: var(--COULEUR_TEXT_PRINCIPAL);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
+div.conteneur-content-scrolling:nth-of-type(1) div.card-outil div.icone div.button-epingler.actif i{
+    color: var(--COULEUR_ACCENT);
+}
+div.conteneur-content-scrolling:nth-of-type(3) div.card-outil div.icone div.button-epingler.actif i{
+    color: var(--COULEUR_ACCENT);
+}div.conteneur-content-scrolling:nth-of-type(5) div.card-outil div.icone div.button-epingler.actif i{
+    color: var(--COULEUR_ACCENT);
+}
+
 div.conteneur-content-scrolling div.card-outil div.icone div.button-epingler.actif i{
     color: var(--COULEUR_ACCENT2);
 }
@@ -1647,11 +1639,14 @@ div.conteneur-action-charge {
     align-items: center;
     background-color: var(--COULEUR_BACKGROUND_CARD);
     width: fit-content;
-    margin: 0 auto;
+    margin: var(--ESPACE_M) auto;
     border-radius: var(--BORDER);
+
+    gap: var(--ESPACE_XS); /* on utilise gap pour pas doublée les marges, la marge ne s'applique que entre les éléments */
+    padding: var(--ESPACE_XS);
 }
 div.conteneur-action-charge div.button-more{
-    margin: var(--ESPACE_XS);
+    margin: 0; /* grace au gap plus besoin de mettre de marge */
 }
 div.conteneur-action-charge div.button-more:active{
     box-shadow: none;
@@ -1674,9 +1669,6 @@ div.conteneur-action-charge div.button-more i#icone-action-charge{
 
 /* Pour graphique outil niveau de course */
 div.chart-container {
-    display: none;
-}
-div.chart-container.visible {
     display: block;
     margin: var(--ESPACE_L) var(--ESPACE_XXS);
 }
@@ -1742,6 +1734,12 @@ div.conteneur-rep-zone div.zone-cardio:nth-child(4) {
 }
 div.conteneur-rep-zone div.zone-cardio:nth-child(5) {
     background-color: #ff4b4c;
+}
+div.conteneur-rep-zone div.zone-cardio:nth-child(6) {
+    background-color: #d672ff;
+}
+div.conteneur-rep-zone div.zone-cardio:nth-child(7) {
+    background-color: #7b68ee;
 }
 /* Pour les txt des boite */
 div.conteneur-rep-zone div.zone-cardio p{
@@ -1819,15 +1817,15 @@ div.conteneur-ensemble p.score-imc {
     margin-bottom: var(--ESPACE_XS);
 }
 div.conteneur-ensemble p.temps-recup {
-    font-family: Anton;
-    letter-spacing: 1px;
+    font-weight: 1000;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: var(--H0);
+    font-size: var(--H1);
+    width: 100%;
     height: calc(100% - (var(--ESPACE_M) * 2));;
-    margin: var(--ESPACE_S) var(--ESPACE_M) var(--ESPACE_M) var(--ESPACE_M);
+    margin: var(--ESPACE_S) 0;
 }
 
 
@@ -1871,7 +1869,7 @@ div.conteneur-scrolling .card-nouveautes-image p{
     font-size: var(--H1);
     text-align: left;
     background-color: var(--COULEUR_ACCENT2);
-    font-family: "Anton", sans-serif;
+    font-weight: 1000;
     padding: var(--ESPACE_XXS);
     color: var(--COULEUR_BACKGROUND);
     border-radius: var(--BORDER_SMALL);
@@ -1898,46 +1896,6 @@ div.conteneur-scrolling .card-nouveautes div.date-maj {
     color: var(--COULEUR_TEXT_SECONDAIRE);
     font-size: var(--P_SMALL);
     margin-top: var(--ESPACE_XS);
-}
-/* Button more */
-div.conteneur-content-scrolling div.conteneur-scrolling div.button-more {
-    display: flex;
-    min-width: 150px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: var(--COULEUR_ACCENT);
-    padding: var(--ESPACE_S_SMALL);
-    border-radius: var(--BORDER);
-    margin: 0;
-    margin-left: var(--ESPACE_S_SMALL);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
-}
-@media (hover: hover) and (pointer: fine) {
-    div.conteneur-content-scrolling div.conteneur-scrolling div.button-more:hover {
-        background-color: var(--COULEUR_ACCENT2);
-        box-shadow: 0px 0px 15px var(--COULEUR_ACCENT2);
-        transition: all ease-in-out var(--DUREE_TRANSITION);
-    }
-}
-div.conteneur-content-scrolling div.conteneur-scrolling div.button-more:active {
-    transform: scale(0.9);  
-    border-radius: var(--BORDER_SMALL);
-    background-color: var(--COULEUR_ACCENT2);
-    box-shadow: 0px 0px 15px var(--COULEUR_ACCENT2);
-    transition: all ease-in-out var(--DUREE_TRANSITION);
-}
-div.conteneur-content-scrolling div.icon-more-in-button i{
-    font-size: 1.3rem;
-    color: var(--COULEUR_BACKGROUND);
-    margin: 0 var(--ESPACE_XXS);
-    vertical-align: middle; /* Aligne l'image au centre verticalement */
-}
-div.conteneur-content-scrolling p.txt_plus{
-    font-size: var(--P);
-    font-weight: var(--FONT_WEIGHT_BUTTON);
-    margin: 0 var(--ESPACE_XXS);
-    color: var(--COULEUR_BACKGROUND);
 }
 /* Section choix param */
 div.conteneur-param {
@@ -2020,8 +1978,7 @@ div.conteneur-historique-versions .box-last-maj div.content1 .card-nouveautes-im
     width: fit-content;
     text-align: left;
     background-color: var(--COULEUR_ACCENT);
-    font-family: "Anton", sans-serif;
-    letter-spacing: 1px;
+    font-weight: 1000;
     padding: var(--ESPACE_XS) var(--ESPACE_S);
     color: var(--COULEUR_BACKGROUND);
     border-radius: var(--BORDER);
@@ -2095,7 +2052,7 @@ div.conteneur-historique-versions .card-nouveautes-image p {
     font-size: var(--H1);
     text-align: left;
     background-color: var(--COULEUR_ACCENT2);
-    font-family: "Anton", sans-serif;
+    font-weight: 1000;
     padding: var(--ESPACE_XXS);
     color: var(--COULEUR_BACKGROUND);
     border-radius: var(--BORDER_SMALL);
@@ -2242,10 +2199,10 @@ div.conteneur-mode input[type="checkbox"].toggle::after{
     content: "";
     position: absolute;
     top: 50%;
-    left: 68%;
+    left: 67%;
     transform: translate(-50%, -50%);
-    height: 25px;
-    width: 30px;
+    height: 28px;
+    width: 35px;
     background-color: #f3f3f3;
     border-radius: 5rem;
     transition: all ease-in-out var(--DUREE_TRANSITION);
@@ -2257,7 +2214,7 @@ div.conteneur-mode input[type="checkbox"].toggle:checked{
 }
 /* Pour que le rond glisse */
 div.conteneur-mode input[type="checkbox"].toggle:checked:after{
-    left: 32%;
+    left: 33%;
 }
 /* Section pour la couleur accentuation */
 ol.conteneur-color-acuentation{
@@ -2306,7 +2263,7 @@ li.option-color:nth-child(11) {
     }
 }
 ol li.option-color:active{
-    transform: scale(0.9);
+    transform: scale(0.95);
     transition: all ease-in-out 0.3s;
 }
 /* 2ème couche du li lors du hover */
@@ -2691,25 +2648,18 @@ div.conteneur-about-marge {
         padding: var(--ESPACE_S);
         margin: var(--ESPACE_S);
     }
-    div.conteneur-ensemble p.score-imc#charge-entrainement-score {
-        font-size: var(--H3);
-        margin: 0;
-    }
-    div.conteneur-ensemble p.temps-recup.charge{
-        font-family: Anton;
-        letter-spacing: 1px;
-        font-size: var(--H2);
-        height: 100%;
-        vertical-align: middle;
-        margin: 0;
-        margin-left: var(--ESPACE_S_SMALL);
-    }
 }
 
 @media (max-width: 545px) {
     /* Pr l'ensemble des boutons ajouter,... */
     div.conteneur-action-charge .txt_plus#bouton-action-charge{
         display: none;
+    }
+    div.conteneur-action-charge{
+        border-radius: 50px;
+    }
+    div.conteneur-action-charge div.button-more{
+        border-radius: 50%;
     }
     /* Autre */    
     div.conteneur-mise-avant p{
@@ -2722,9 +2672,6 @@ div.conteneur-about-marge {
         width: fit-content;
         padding: var(--ESPACE_S);
         margin: var(--ESPACE_S) var(--ESPACE_XXS);
-    }
-    div.conteneur-ensemble p.temps-recup.charge{
-        margin-left: auto;
     }
 }
 

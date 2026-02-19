@@ -252,73 +252,73 @@ async function Initialisation() {
     }
 
     // Generation Graphique
-    if (ChargeDatas.length > 0) { // Si il y a chargedata data il y a forcement date data
-        // Ajout de la class pr le faire apparaitre
-        document.getElementById("conteneur-graphique").classList.add("visible")
+    if (ChargeDatas.length <= 0) {
+        ChargeDatas = [0, 0, 0]
+        ListeDate = ["Lundi", "Mercredi", "Samedi"]
+    }
 
-        // Récup les variables css
-        let RootCSS = document.documentElement
-        let StyleCSS = getComputedStyle(RootCSS)
-        // Recup variable css
-        let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
-        let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
-        let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
+    // Récup les variables css
+    let RootCSS = document.documentElement
+    let StyleCSS = getComputedStyle(RootCSS)
+    // Recup variable css
+    let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
+    let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
+    let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
-        const barCanvas = document.getElementById("barCanvas")
+    const barCanvas = document.getElementById("barCanvas")
 
-        if (barChart) { // si il y a deja un graphique on le suppr
-            barChart.destroy();
-        }
+    if (barChart) { // si il y a deja un graphique on le suppr
+        barChart.destroy();
+    }
 
-        barChart = new Chart(barCanvas, {
-                type:"line",
-                data:{
-                    labels: ListeDate,
-                    datasets: [{
-                        data: ChargeDatas,
-                        borderColor : CouleurAccentHover, // Ligne des niveau couleur
-                        backgroundColor: CouleurAccent,
-                        fill: true, // Pour remplir le graphique de la couleur background
-                        pointRadius: 8, // Taille du point
-                        pointHoverRadius: 10,
-                        pointBackgroundColor: CouleurAccentHover,
-                        pointBorderWidth: 0
-                    }]
+    barChart = new Chart(barCanvas, {
+        type:"line",
+            data:{
+                labels: ListeDate,
+                datasets: [{
+                    data: ChargeDatas,
+                    borderColor : CouleurAccentHover, // Ligne des niveau couleur
+                    backgroundColor: CouleurAccent,
+                    fill: true, // Pour remplir le graphique de la couleur background
+                    pointRadius: 8, // Taille du point
+                    pointHoverRadius: 10,
+                    pointBackgroundColor: CouleurAccentHover,
+                    pointBorderWidth: 0
+                }]
                 },
-                options: {
-                    responsive: true, // Activation du responsive
-                    maintainAspectRatio: false, // Tres important pour responsive sur mobile
+            options: {
+                responsive: true, // Activation du responsive
+                maintainAspectRatio: false, // Tres important pour responsive sur mobile
                     
-                    plugins: {
-                        legend: {
-                            display: false // Masque la legende qui sert a rien dans mon cas
-                        }
-                    },
+                plugins: {
+                    legend: {
+                        display: false // Masque la legende qui sert a rien dans mon cas
+                    }
+                },
                     
-                    scales: {
-                        y: { // COuleur + taille des txt sur axe des ordonnées
-                            grid: {
-                                display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
-                            },
-                            ticks: {
-                                color: CouleurTextPrincipal, 
-                                font: {size: 13}
-                            },
-                            beginAtZero: true, // Pr commencer à 0
+                scales: {
+                    y: { // COuleur + taille des txt sur axe des ordonnées
+                        grid: {
+                            display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
                         },
-                        x: { // idem pour abscisse
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: CouleurTextPrincipal,
-                                font: {size: 13}
-                            }
+                        ticks: {
+                            color: CouleurTextPrincipal, 
+                            font: {size: 13}
+                        },
+                        beginAtZero: true, // Pr commencer à 0
+                    },
+                    x: { // idem pour abscisse
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: CouleurTextPrincipal,
+                            font: {size: 13}
                         }
                     }
                 }
-            })
-        }
+            }
+    })
 }
 
 

@@ -50,7 +50,6 @@ function ZoneFcMAX() {
     }
 
     // Calcul
-
     DebutZone1 = Math.round(FcMax*0.5)
     FinZone1 = Math.round(FcMax*0.6)
 
@@ -64,7 +63,12 @@ function ZoneFcMAX() {
     ResultAlgoBox2 =  (FinZone1+1) + " - " + FinZone2
     ResultAlgoBox3 =  (FinZone2+1) + " - " + FinZone3
     ResultAlgoBox4 =  (FinZone3+1) + " - " + FinZone4
-    ResultAlgoBox5 =  (FinZone4+1) + " - " + FcMax
+
+    if (FcMaxUser) {
+        ResultAlgoBox5 = (FinZone4+1) + " - " + FcMax
+    } else {
+        ResultAlgoBox5 =   "> " + FinZone4
+    }
 
 
     const BaliseTranche = document.querySelectorAll(".tranche-zone")
@@ -155,7 +159,12 @@ function ZoneFcReserve() {
     ResultAlgoBox2 =  (FinZone1+1) + " - " + FinZone2
     ResultAlgoBox3 =  (FinZone2+1) + " - " + FinZone3
     ResultAlgoBox4 =  (FinZone3+1) + " - " + FinZone4
-    ResultAlgoBox5 =  (FinZone4+1) + " - " + FcMax
+
+    if (FcMaxUser) {
+        ResultAlgoBox5 =   (FinZone4+1) + " - " + FcMax
+    } else {
+        ResultAlgoBox5 =   "> " + FinZone4
+    }
 
 
     const BaliseTranche = document.querySelectorAll(".tranche-zone")
@@ -184,17 +193,18 @@ function MethodeChoisie() {
         LabelFcRepos.classList.remove("invisible")
     }
 
-    ChoixFonction()
+    ChoixFonction(Methode)
     return
 }
 
-function ChoixFonction() {
-    const Methode = document.getElementById("methode-user").value
+function ChoixFonction(Methode) {
+    if (!document.getElementById("age-user").value) {return}
 
     // Choix de la fonction en fonction de la méthode
     if (Methode === "Max") {
         ZoneFcMAX()
     } else {
+        if (!document.getElementById("fc-repos-user").value) {return}
         ZoneFcReserve()
     }
     return

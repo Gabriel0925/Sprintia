@@ -78,29 +78,19 @@
 
     <div class="conteneur-de-outil">
         <h1>Zones de puissance</h1>
+        <p class="text">
+            Cet outil nécessite de <strong>réaliser un test</strong> (qui demande une <strong>certaine expérience</strong> en course à pied) et de <strong>posséder un appareil compatible</strong> pour calculer votre puissance de course pendant
+            un entraînement.
+        </p>
+
         <div class="conteneur-ensemble">
             <div class="conteneur-champs-outil">
-                <select id="methode-user" onchange="MethodeChoisie()" autocomplete="off">
-                    <option value="Reserve">Méthode : RFC (recommandé)</option>
-                    <option value="Max">Méthode : FC max</option>
-                </select>
-                
                 <div class="conteneur-input">
-                    <input type="number" id="age-user" placeholder="Âge" autocomplete="off">
-                    <div class="label-input">Âge</div>
-                </div>
-                    
-                <div class="conteneur-input">
-                    <input type="number" id="fc-repos-user" placeholder="FC repos" autocomplete="off">
-                    <div class="label-input" id="label-fc-user">FC repos</div>
-                </div>
-                    
-                <div class="conteneur-input">
-                    <input type="number" id="fc-max-user" placeholder="FC max (optionnelle)" autocomplete="off">
-                    <div class="label-input">FC max (optionnelle)</div>
+                    <input type="number" id="rFTPw-user" placeholder="rFTPw" autocomplete="off">
+                    <div class="label-input">rFTPw</div>
                 </div>
 
-                <button onclick="ChoixFonction()">Calculer</button>
+                <button onclick="zonePuissance()">Calculer</button>
             </div>
         </div>
 
@@ -113,51 +103,73 @@
                 </div>
                 <div class="conteneur-tranche-unite">
                     <p class="tranche-zone">0 - 0</p>
-                    <p class="unite-zone">bpm</p>
+                    <p class="unite-zone">W</p>
                 </div>
             </div>
 
             <div class="zone-cardio">
                 <div class="ensemble-p">
                     <p class="zone">Zone 2</p>
-                    <p class="fonction-zone">Endurance fondamentale</p>
+                    <p class="fonction-zone">Endurance</p>
                 </div>
                 <div class="conteneur-tranche-unite">
                     <p class="tranche-zone">0 - 0</p>
-                    <p class="unite-zone">bpm</p>
+                    <p class="unite-zone">W</p>
                 </div>
             </div>
 
             <div class="zone-cardio">
                 <div class="ensemble-p">
                     <p class="zone">Zone 3</p>
-                    <p class="fonction-zone">Seuil aérobie</p>
+                    <p class="fonction-zone">Tempo</p>
                 </div>
                 <div class="conteneur-tranche-unite">
                     <p class="tranche-zone">0 - 0</p>
-                    <p class="unite-zone">bpm</p>
+                    <p class="unite-zone">W</p>
                 </div>
             </div>
             
             <div class="zone-cardio">
                 <div class="ensemble-p">
                     <p class="zone">Zone 4</p>
-                    <p class="fonction-zone">Seuil anaérobie</p>
+                    <p class="fonction-zone">Seuil</p>
                 </div>
                 <div class="conteneur-tranche-unite">
                     <p class="tranche-zone">0 - 0</p>
-                    <p class="unite-zone">bpm</p>
+                    <p class="unite-zone">W</p>
                 </div>
             </div>
 
             <div class="zone-cardio">
                 <div class="ensemble-p">
                     <p class="zone">Zone 5</p>
-                    <p class="fonction-zone">Puissance maximale</p>
+                    <p class="fonction-zone">Haute intensité</p>
                 </div>
                 <div class="conteneur-tranche-unite">
                     <p class="tranche-zone">0 - 0</p>
-                    <p class="unite-zone">bpm</p>
+                    <p class="unite-zone">W</p>
+                </div>
+            </div>
+
+            <div class="zone-cardio">
+                <div class="ensemble-p">
+                    <p class="zone">Zone 6</p>
+                    <p class="fonction-zone">VO2</p>
+                </div>
+                <div class="conteneur-tranche-unite">
+                    <p class="tranche-zone">0 - 0</p>
+                    <p class="unite-zone">W</p>
+                </div>
+            </div>
+
+            <div class="zone-cardio">
+                <div class="ensemble-p">
+                    <p class="zone">Zone 7</p>
+                    <p class="fonction-zone">Sprint</p>
+                </div>
+                <div class="conteneur-tranche-unite">
+                    <p class="tranche-zone">0 - 0</p>
+                    <p class="unite-zone">W</p>
                 </div>
             </div>
         </div>
@@ -166,23 +178,118 @@
             <h2>Quand les utiliser ?</h2>
             <ul class="liste-fonctionnalites">
                 <li>
-                    Zone 1 : Vous pouvez l'utiliser lors d'un effort très léger ou encore lors d'un retour au calme pendant une séance de fractionné.
+                    Zone 1 : Vous pouvez l'utiliser pour améliorer votre endurance fondamentale. Cette zone favorisera le renforcement cardiovasculaire, la perte de poids. Il y aura un faible
+                    risque de blessure. Néanmoins, cette zone est utile surtout pour de la récupération.
                 </li>
                 <li>
-                    Zone 2 : C'est la zone d'endurance, elle est à utiliser lors de vos sorties longues. Si vous êtes dans cette zone vous pouvez tenir une 
-                    conversation sans être essouflé·e.
+                    Zone 2 : Vous pouvez l'utiliser pour améliorer votre endurance. Cette zone favorisera le renforcement cardiovasculaire, la perte de poids. Il y aura un faible
+                    risque de blessure.
                 </li>
                 <li>
-                    Zone 3 : Cette zone est utile pour travailler votre endurance active. C'est de l'endurance mais avec plus d'effort.
+                    Zone 3 : Vous pouvez l'utiliser pour travailler votre résistance à l'effort, donc pendant un entraînement d'endurance.
+                    Cette zone est souvent utilisée pour faire un semi-marathon.
                 </li>
                 <li>
-                    Zone 4 : Cette zone est utile pour faire progresser votre vitesse, elle améliore votre cardio.
+                    Zone 4 : Cette zone va améliorer votre seuil. Cette zone est souvent utilisée pour faire un 10km ou du travail spécifique pendant vos répétitions sur 
+                    1000m à 2000m.
                 </li>
                 <li>
-                    Zone 5 : Cette zone doit être utilisée pour les sprints, le fractionné court ou en compétition. Elle challenge votre
-                    organisme.
+                    Zone 5 : Cette zone permet à votre corps de travailler la résistance au lactate. Cette zone est souvent utilisée pour faire un 5km.
+                </li>
+                <li>
+                    Zone 6 : Cette zone permet d'améliorer votre V0²max. Elle peut être utilisée lors du fractionné 30"/30" ou lors de répétitions courtes.
+                </li>
+                <li>
+                    Zone 7 : Cette zone vous permet de travailler votre puissance de sprint. Elle est à utiliser lors de répétitions entre 100m et 200m.
                 </li>
             </ul>
+
+            <h2>Quelles métriques utiliser en course ?</h2>
+            <p class="text">
+                Vous le savez en course à pied, il existe différentes métriques pour faire vos séances (fractionné, endurance,...).
+                <br>
+                Il existe :
+            </p>
+            <ul class="liste-fonctionnalites">
+                <li>
+                    La fréquence cardiaque
+                </li>
+                <li>
+                    L'allure
+                </li>
+                <li>
+                    La puissance
+                </li>
+            </ul>
+            
+            <h2>Le problème de la fréquence cardiaque ?</h2>
+            <p class="text">
+                La fréquence cardiaque n'augmente pas en temps réel. Par exemple, si vous accélérez instantanément, votre fréquence cardiaque
+                n'augmente pas immédiatement ! Pareil, quand vous vous arrêtez, votre fréquence cardiaque ne redescend pas immédiatement.
+                La fréquence cardiaque prend du temps pour varier elle ne peut pas passer de 140 bpm à 160 bpm en 1 seconde.
+                <br><br>
+                De plus, votre fréquence cardiaque est impactée par votre repos, si vous êtes malade ou pas, s'il fait chaud, s'il fait froid,
+                si vous êtes en altitude,... Tout ça fait varier votre fréquence cardiaque pendant votre entraînement.
+            </p>
+
+            <h2>Le problème de l'allure ?</h2>
+            <p class="text">
+                L'allure pourrait être une bonne méthode, mais l'allure est influencée par le dénivelé, par le vent, par
+                le type de terrain (sable, trail).
+            </p>
+
+            <h2>La puissance</h2>
+            <p class="text">
+                C'est ici que la puissance intervient. La puissance n'est pas influencée par le vent, par le type de terrain ni par
+                la météo (chaud ou froid). C'est pour ça que la puissance est juste parfaite pour la course à pied.
+                <br><br>
+                Néanmoins le problème de la puissance, c'est qu'il n'est pas accesible sur toutes les montres. De plus, il faut faire 
+                un test régulièrement pour savoir quel est son rFTPW (running Functional Threshold Power).
+            </p>
+
+            <h2>Comment calculer son rFTPw ?</h2>
+            <p class="text">
+                Il existe différents tests pour calculer son rFTPw. Je vous recommande de faire le test suivant sur une piste d'athlétisme
+                ou un terrain plat et un jour où il y a très peu de vent. 
+                <strong>Attention, il vous faut un capteur Stryd ou une montre de sport qui sait calculer votre puissance de course</strong>.
+            </p>
+            <ul class="liste-fonctionnalites">
+                <li>
+                    Échauffement intense de 15 min.
+                </li>
+                <li>
+                    Effort maximum pendant 3 min.
+                </li>
+                <li>
+                    5 min de récupération (de marche).
+                </li>
+                <li>
+                    10 min de course à allure légère.
+                </li>
+                <li>
+                    5 min de récupération (de marche).
+                </li>
+                <li>
+                    5 min de course à allure légère.
+                </li>
+                <li>
+                    5 min de récupération (de marche).
+                </li>
+                <li>
+                    Effort maximum pendant 9 min.
+                </li>
+                <li>
+                    10 min de récupération.
+                </li>
+            </ul>
+            <p class="text">
+                Après avoir fait ce test, il ne reste plus qu'à calculer votre rFTPw. Pour le calculer, vous devez faire la moyenne
+                de la puissance sur le bloc de 3 min et sur le bloc de 9 min. Ensuite, on prend 90% de la moyenne et vous obtenez votre
+                rFTPw.
+            </p>
+
+
+
         </div>
 
     </div>

@@ -1,16 +1,17 @@
 // Initialisation de la configuration de chaque thème
 const ThemeConfig = {
-    "theme_carmin": ["#fe3c35", "#f9645e"],
-    "theme_fuchsia": ["#fa5bfa", "#ffa0ff"],
-    "theme_lavande": ["#ae5ef9", "#d29eff"],
-    "theme_vegetation": ["#0CBB5BFF", "#45ff99"],
-    "theme_feu": ["#ffb82b", "#ff5b1f"],
-    "theme_menthe": ["#0ac3a7", "#4af6dc"],
+    "theme_carmin": ["#FF5257", "#FF8A8E"],
+    "theme_fuchsia": ["#FA6BFA", "#FFA8FF"],
+    "theme_lavande": ["#B266F9", "#D7A8FF"],
+    "theme_vegetation": ["#0CBB5BFF", "#76E082"],
+    "theme_menthe": ["#0ac3a7", "#76e8d6"],
+    "theme_lune": ["#42a5f5", "#90caf9"], 
+    "theme_framboise": ["#f14d84", "#ff80ab"],
+
     "theme_hortensia": ["#3a91ff", "#f782f0"], 
     "theme_plage": ["#1498e4", "#fcaf6b"],
-    "theme_aurore": ["#a477fe", "#4ce58c"], 
-    "theme_lune": ["#6aabd3", "#acdefd"], 
-    "theme_framboise": ["#f14d84", "#ff91b6"],
+    "theme_aurore": ["#a477fe", "#4ce58c"],
+    "theme_feu": ["#ffb82b", "#ff782f"]
 }
 // init variable
 let theme = "theme_azur"

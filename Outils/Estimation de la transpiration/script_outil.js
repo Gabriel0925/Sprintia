@@ -24,7 +24,7 @@ function CalculHydratation(TranspirationEstimee) {
     // Conversion 
     TranspirationEstimee = parseFloat(TranspirationEstimee)
     // Calcul
-    let HydratationEstimee = TranspirationEstimee*0.7
+    let HydratationEstimee = TranspirationEstimee*1.2
     return HydratationEstimee
 }
 

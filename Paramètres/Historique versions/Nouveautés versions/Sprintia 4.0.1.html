@@ -113,7 +113,7 @@
                 de tout le temps mettre "Valider".
             </li>
             <li>
-                Les thèmes ont été perfectionnés pour un meilleur design dans l'entièreté de Sprintia.
+                Les couleurs des thèmes ont été perfectionnés pour un meilleur design dans l'entièreté de Sprintia.
             </li>
             <li>
                 C'est la fin du thème clair, cette décision a été prise pour vous faire économiser de la batterie sur votre appareil et pour simplifier la maintenabilité du code.
@@ -122,10 +122,34 @@
                 Les ombres de couleur ont été supprimée.
             </li>
             <li>
-                Mise à jour légère des couleurs du thème feu.
+                Une grande majorité des animations au survol (lors du passage de la souris) et des animations lors d'un clic ont été modifiées.
             </li>
             <li>
-                Une grande majorité des animations au survol et des animations lors d'un clic ont été modifiées.
+                Dans l'outil Zones cardiaques, si vous ne remplissez pas le champ FC max alors Sprintia n'estimera plus votre FC max car ça 
+                manquait de précision, désormais il affichera par exemple : '> 185 bpm'.
+            </li>
+            <li>
+                Dans l'outil Zones cardiaques, l'interet des zones ont été mieux choisis (idem dans l'outil Zones de vitesse).
+            </li>
+            <li>
+                Dans l'outil Zones de vitesse, si vous ne remplissez pas le champ vitesse max alors Sprintia n'estimera plus votre vitesse max car ça 
+                manquait de précision, désormais il affichera par exemple : '> 20 km/h'.
+            </li>
+            <li>
+                Sprintia peut afficher la durée en heure pour votre historique d'entraînement. Par exemple, au lieu d'avoir 90 min vous aurez 1h 30m.
+                Même chamgement pour les derniers entraînements sur la page d'accueil.
+            </li>
+            <li>
+                Ajout d'un bouton "Afficher plus" pour l'historique des status.
+            </li>
+            <li>
+                Désormais, les graphiques s'afficheront même si l'utilisateur n'a pas enregistré de données. Cette décision a été prise car le
+                problème de cacher un graphique si il y a pas datas c'est que l'utilisateur ne sait pas qu'un graphique est disponible si il 
+                enregistre des données.
+            </li>
+            <li>
+                La police d'écriture 'Anton' a été supprimé car elle n'est pas assez moderne, trop expressive et trop éloigné du style de la police
+                d'écriture principale.
             </li>
         </ul>
 
@@ -166,6 +190,47 @@
             </li>
             <li>
                 Optimisation du code des thèmes pour une meilleur maintenabilité et pour éviter la répétition de if/else.
+            </li>
+            <li>
+                Les bords lumineux des boutons, cartes,... ont été supprimée pour un meilleur équilibre visuel.
+            </li>
+            <li>
+                Correction d'un bug des boutons épingler lors de la première visite du site.
+            </li>
+            <li>
+                Correction d'une erreur UI pour le conteneur des boutons : ajouter, historique et statut dans la charge d'entraînement.
+            </li>
+            <li>
+                Reformulation du texte : 'C'est quoi la charge d'entraînement ?'.
+            </li>
+            <li>
+                Correction d'un bug (dans l'outil zones cardiques) lors du changement de la méthode entre RFC et FC max ce qui démarrais la
+                le calcul alors que les champs n'était même pas remplis.
+            </li>
+            <li>
+                Sur la page d'accueil, désormais votre coach affiche (par exemple) : 33,3 km alors qu'avant il affichait 33.3 km.
+            </li>
+            <li>
+                Correction d'un bug qui permettait d'épingler 2 même outils sur la page d'accueil.
+            </li>
+            <li>
+                Les icones dans les boutons ont été supprimée.
+            </li>
+            <li>
+                Les performances lors du chargement de l'historique de statut a été amélioré.
+            </li>
+            <li>
+                Correction d'un bug de calcul de la qté à boire après un entraînement dans l'outil 'Estimation de la transpiration'.
+            </li>
+            <li>
+                Mise à jour du style des toggle Activer/Désactiver
+            </li>
+        </ul>
+
+        <h2>🗑️ Fonctionnalités supprimées</h2>
+        <ul class="liste-fonctionnalites">
+            <li>
+                Les conseils/tips sur l'écran d'accueil ont été supprimés et ils ne sont plus activable dans les paramètres avancées.
             </li>
         </ul>
     </div>

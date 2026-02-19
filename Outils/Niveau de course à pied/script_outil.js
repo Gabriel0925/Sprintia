@@ -231,75 +231,75 @@ async function RecupValueNiveauCourseGraphique() {
 async function GenererGraphique() {
     // attendre la recup des datas
     let {NiveauDatas, ListeDate} = await RecupValueNiveauCourseGraphique()
-    
-    if (NiveauDatas.length > 0) { // Si il y a niveau data il y a forcement date data
-        // Ajout de la class pr le faire apparaitre
-        document.getElementById("conteneur-graphique").classList.add("visible")
-    
-        // Récup les variables css
-        let RootCSS = document.documentElement
-        let StyleCSS = getComputedStyle(RootCSS)
-        // Recup variable css
-        let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
-        let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
-        let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
-        const barCanvas = document.getElementById("barCanvas")
-        // Destruction de l'ancien graphique si il y en a un pour éviter une superposition de graphique
-        if (barChart) {
-            barChart.destroy()
-        }
+    if (NiveauDatas.length <= 0) {
+        NiveauDatas = [0, 0, 0]
+        ListeDate = ["Janvier", "Février", "Mars"]
+    }
+    
+    // Récup les variables css
+    let RootCSS = document.documentElement
+    let StyleCSS = getComputedStyle(RootCSS)
+    // Recup variable css
+    let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
+    let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
+    let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
-        barChart = new Chart(barCanvas, {
-            type:"line",
-            data:{
-                labels: ListeDate,
-                datasets: [{
-                    data: NiveauDatas,
-                    borderColor : CouleurAccentHover, // Ligne des niveau couleur
-                    backgroundColor: CouleurAccent,
-                    fill: true, // Pour remplir le graphique de la couleur background
-                    pointRadius: 8, // Taille du point
-                    pointHoverRadius: 10,
-                    pointBackgroundColor: CouleurAccentHover,
-                    pointBorderWidth: 0
-                }]
+    const barCanvas = document.getElementById("barCanvas")
+    // Destruction de l'ancien graphique si il y en a un pour éviter une superposition de graphique
+    if (barChart) {
+        barChart.destroy()
+    }
+
+    barChart = new Chart(barCanvas, {
+        type:"line",
+        data:{
+            labels: ListeDate,
+            datasets: [{
+                data: NiveauDatas,
+                borderColor : CouleurAccentHover, // Ligne des niveau couleur
+                backgroundColor: CouleurAccent,
+                fill: true, // Pour remplir le graphique de la couleur background
+                pointRadius: 8, // Taille du point
+                pointHoverRadius: 10,
+                pointBackgroundColor: CouleurAccentHover,
+                pointBorderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true, // Activation du responsive
+            maintainAspectRatio: false, // Tres important pour responsive sur mobile
+               
+            plugins: {
+                legend: {
+                    display: false // Masque la legende qui sert a rien dans mon cas
+                }
             },
-            options: {
-                responsive: true, // Activation du responsive
-                maintainAspectRatio: false, // Tres important pour responsive sur mobile
                 
-                plugins: {
-                    legend: {
-                        display: false // Masque la legende qui sert a rien dans mon cas
-                    }
-                },
-                
-                scales: {
-                    y: { // COuleur + taille des txt sur axe des ordonnées
-                        grid: {
-                            display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
-                       },
-                        ticks: {
-                            color: CouleurTextPrincipal, 
-                            font: {size: 13}
-                        },
-                        beginAtZero: true, // Pr commencer à 0
+            scales: {
+                y: { // COuleur + taille des txt sur axe des ordonnées
+                    grid: {
+                        display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
                     },
-                    x: { // idem pour abscisse
-                        grid: {
-                            display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
-                       },
-                        ticks: {
-                            color: CouleurTextPrincipal,
-                            font: {size: 13}
-                        }
+                    ticks: {
+                        color: CouleurTextPrincipal, 
+                        font: {size: 13}
+                    },
+                    beginAtZero: true, // Pr commencer à 0
+                },
+                x: { // idem pour abscisse
+                    grid: {
+                        display: false // pr enlever la grille sur l'axe y (et x voir plus bas)
+                    },
+                    ticks: {
+                        color: CouleurTextPrincipal,
+                        font: {size: 13}
                     }
                 }
             }
-        })
-    }
-
+        }
+    })
+    return
 }
 
 // Pour recharger le graphique si c'est dans le BFCache

@@ -54,7 +54,12 @@ function ZoneVitesse() {
     ResultAlgoBox2 =  (FinZone1+0.1).toFixed(1).replace(".", ",") + " - " + FinZone2.toFixed(1).replace(".", ",")
     ResultAlgoBox3 =  (FinZone2+0.1).toFixed(1).replace(".", ",") + " - " + FinZone3.toFixed(1).replace(".", ",")
     ResultAlgoBox4 =  (FinZone3+0.1).toFixed(1).replace(".", ",") + " - " + FinZone4.toFixed(1).replace(".", ",")
-    ResultAlgoBox5 =  (FinZone4+0.1).toFixed(1).replace(".", ",") + " - " + VitesseMax.toFixed(1).replace(".", ",")
+
+    if (VitesseMaxUser) {
+        ResultAlgoBox5 =  (FinZone4+0.1).toFixed(1).replace(".", ",") + " - " + VitesseMax.toFixed(1).replace(".", ",")
+    } else {
+        ResultAlgoBox5 =   "> " + FinZone4.toString().replace(".", ",")
+    }
 
     const BaliseTranche = document.querySelectorAll(".tranche-zone")
     BaliseTranche[0].innerHTML = ResultAlgoBox1;
@@ -181,6 +186,12 @@ function ZoneAllure() {
     ResultAlgoBox3 =  MinutesZone2 + ":" + SecondesZone2.toString().padStart(2, "0") + " - " + MinutesZone3 + ":" + SecondesZone3.toString().padStart(2, "0")
     ResultAlgoBox4 =  MinutesZone3 + ":" + SecondesZone3.toString().padStart(2, "0") + " - " + MinutesZone4 + ":" + SecondesZone4.toString().padStart(2, "0")
     ResultAlgoBox5 =  MinutesZone4 + ":" + SecondesZone4.toString().padStart(2, "0") + " - " + MinutesZone5 + ":" + SecondesZone5.toString().padStart(2, "0")
+
+    if (VitesseMaxUser) {
+        ResultAlgoBox5 =  MinutesZone4 + ":" + SecondesZone4.toString().padStart(2, "0") + " - " + MinutesZone5 + ":" + SecondesZone5.toString().padStart(2, "0")
+    } else {
+        ResultAlgoBox5 =   "> " + MinutesZone4 + ":" + SecondesZone4.toString().padStart(2, "0")
+    }
 
     // On affiche les resultats
     const BaliseTranche = document.querySelectorAll(".tranche-zone")
