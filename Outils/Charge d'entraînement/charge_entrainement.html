@@ -108,7 +108,7 @@
 
         </div>
 
-        <div class="conteneur-ensemble" id="indulgence-course">
+        <div class="conteneur-ensemble first" id="indulgence-course">
             <div class="conteneur-box-deux">
 
                 <div class="box-result-deux">
@@ -235,7 +235,7 @@
                 // Recup variable css
                 const Style = getComputedStyle(document.documentElement)
 
-                const CouleurAccent2 = Style.getPropertyValue("--COULEUR_ACCENT2")
+                const CouleurAccent = Style.getPropertyValue("--COULEUR_ACCENT")
                 const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
 
                 if (ButtonAdd && ButtonHistorique && ButtonPause) {
@@ -245,15 +245,15 @@
                     });
 
                     // Mise des couleurs si l'élément est existant
-                    ButtonAdd.style.background = CouleurAccent2
+                    ButtonAdd.style.background = CouleurAccent
                     ButtonAdd.style.boxShadow = "none"
                     IconeAdd.style.color = CouleurBackground
                             
-                    ButtonHistorique.style.background = CouleurAccent2
+                    ButtonHistorique.style.background = CouleurAccent
                     ButtonHistorique.style.boxShadow = "none"
                     IconeHistorique.style.color = CouleurBackground
 
-                    ButtonPause.style.background = CouleurAccent2
+                    ButtonPause.style.background = CouleurAccent
                     ButtonPause.style.boxShadow = "none"
                     IconePause.style.color = CouleurBackground
                 }

@@ -37,7 +37,7 @@ function EstimationProteines() {
     // Calcul
     let ResultProteines = PoidsUser*Coefficient
 
-    let Result = ResultProteines.toFixed(1).replace(".", ",") + " g/jour"
+    let Result = Math.floor(ResultProteines) + " g/jour"
 
     document.querySelector(".temps-recup").textContent = Result
     return

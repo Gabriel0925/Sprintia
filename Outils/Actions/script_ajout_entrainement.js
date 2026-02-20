@@ -308,6 +308,46 @@ async function JrmCoach() {
     return
 }
 
+function conversionMinutes(DureeWorkoutUser) {
+    if (DureeWorkoutUser.includes(":")) {
+        let FormatDuree = DureeWorkoutUser.split(":")
+        if (FormatDuree.length == 3) {
+            if (FormatDuree[0].length == 2 && FormatDuree[1].length == 2 && FormatDuree[2].length == 2) {
+                // Extraction des heures minutes et secondes
+                let heures = parseInt(FormatDuree[0])
+                let minutes = parseInt(FormatDuree[1])
+                let secondes = parseInt(FormatDuree[2])
+
+                // Vérification que le user a bien saisis les infos
+                if (heures > 59 || minutes > 59 || secondes > 59) {
+                    alert("Le format de la durée doit être hh:mm:ss avec hh, mm et ss inférieur à 60.")
+                    DureeWorkoutUser = null // on met sur null pour pouvoir savoir qu'il y a eu une erreur et qu'il faut arreter la fonction RegistrationWorkout
+                    return DureeWorkoutUser
+                }
+
+                // Conversion de la durée en minutes
+                DureeWorkoutUser = (heures*60) + minutes + (secondes/60)
+                // La vérification de la durée maximum/minimum se fait dans la fonction RegistrationWorkout
+                return DureeWorkoutUser
+                
+            } else {
+                alert("Le format de la durée doit être hh:mm:ss avec hh, mm et ss avec 2 chiffres.")
+                DureeWorkoutUser = null // on met sur null pour pouvoir savoir qu'il y a eu une erreur et qu'il faut arreter la fonction RegistrationWorkout
+                return DureeWorkoutUser
+            }
+        } else {
+            alert("Veuillez respecter le format 'Heure:Minute:Seconde' (hh:mm:ss) pour le champ durée.")
+            DureeWorkoutUser = null // on met sur null pour pouvoir savoir qu'il y a eu une erreur et qu'il faut arreter la fonction RegistrationWorkout
+            return DureeWorkoutUser
+        }
+    } else {
+        alert("Veuillez respecter le format 'Heure:Minute:Seconde' (hh:mm:ss) pour le champ durée.")
+        DureeWorkoutUser = null // on met sur null pour pouvoir savoir qu'il y a eu une erreur et qu'il faut arreter la fonction RegistrationWorkout
+        return DureeWorkoutUser
+    }
+
+}
+
 async function RegistrationWorkout() {
     // Recup du bouton
     let BoutonSauvegarde = document.getElementById("button-sauvegarder")
@@ -316,7 +356,7 @@ async function RegistrationWorkout() {
     let SportWorkoutUser = document.getElementById("profil-sport").value.trim()
     let DateWorkoutUser = document.getElementById("date-entrainement-user").value
     let NameWorkoutUser = document.getElementById("nom-entrainement-user").value.trim()
-    let DureeWorkoutUser = parseInt(document.getElementById("duree-entrainement-user").value.trim())
+    let DureeWorkoutUser = document.getElementById("duree-entrainement-user").value.trim()
     let ValueRpeUser = parseInt(document.querySelector(".slider progress").value)
 
     // Initialisation
@@ -340,12 +380,16 @@ async function RegistrationWorkout() {
         alert("La date ne peut pas être dans le future.")
         return
     }
+    DureeWorkoutUser = conversionMinutes(DureeWorkoutUser)
+    if (DureeWorkoutUser == null) {
+        return
+    }
     if (DureeWorkoutUser <= 0) {
         alert("Valeur non valide, la durée doit être un nombre supérieur à 0.")
         return
     }
     if (DureeWorkoutUser > 1439) {
-        alert("La durée de votre entraînement ne doit pas dépasser 1439 minutes (23h 59min).")
+        alert("La durée de votre entraînement doit être inférieur à 23h59m.")
         return
     }
 
@@ -392,7 +436,7 @@ async function RegistrationWorkout() {
     BoutonSauvegarde.textContent = "Sauvegarde..."
 
     // Calcul Charge
-    ChargeWorkout = DureeWorkoutUser*ValueRpeUser
+    ChargeWorkout = Math.floor(DureeWorkoutUser*ValueRpeUser)
 
     // Sauvegarde
     if (IdEditWorkout != null) {

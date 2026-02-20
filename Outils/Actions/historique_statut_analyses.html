@@ -309,7 +309,10 @@
                         const NbCardStatut = document.querySelectorAll(".cards-history-workout")
                         
                         if (NbCardStatut.length == 0) { // si il n'y a pas de card alors on remet le message comme quoi il faut ajouter des datas
+                            document.getElementById("text-informatif").textContent = "Chargement..." // on précise que la page va se recharger par la suite
                             document.getElementById("text-informatif").style.display = "block"
+                            document.getElementById("button_afficher_plus").style.display = "none"
+                            location.reload()
                         }
 
                     }

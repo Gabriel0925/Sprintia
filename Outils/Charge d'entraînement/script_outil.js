@@ -223,8 +223,8 @@ async function CalculCharge() {
     });
 
     // Arrondi
-    ChargeAigue = ChargeAigue.toFixed(1).replace(".", ",")
-    ChargeChronique = ChargeChronique.toFixed(1).replace(".", ",")
+    ChargeAigue = Math.floor(ChargeAigue)
+    ChargeChronique = Math.floor(ChargeChronique)
 
     return {ChargeAigue, ChargeChronique, AnalysePossible}
 }
@@ -261,8 +261,8 @@ async function Initialisation() {
     let RootCSS = document.documentElement
     let StyleCSS = getComputedStyle(RootCSS)
     // Recup variable css
-    let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
     let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
+    let CouleurAccent2 = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
     let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
     const barCanvas = document.getElementById("barCanvas")
@@ -277,12 +277,12 @@ async function Initialisation() {
                 labels: ListeDate,
                 datasets: [{
                     data: ChargeDatas,
-                    borderColor : CouleurAccentHover, // Ligne des niveau couleur
-                    backgroundColor: CouleurAccent,
+                    borderColor : CouleurAccent, // Ligne des niveau couleur
+                    backgroundColor: CouleurAccent2,
                     fill: true, // Pour remplir le graphique de la couleur background
                     pointRadius: 8, // Taille du point
                     pointHoverRadius: 10,
-                    pointBackgroundColor: CouleurAccentHover,
+                    pointBackgroundColor: CouleurAccent,
                     pointBorderWidth: 0
                 }]
                 },

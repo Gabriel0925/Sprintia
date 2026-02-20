@@ -303,6 +303,7 @@ button{
 }
 button:active{
     filter: brightness(var(--HOVER));
+    transform: scale(0.95);
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 
@@ -701,27 +702,12 @@ div.conteneur-mise-avant {
     align-items: center;
     z-index: 1;
     position: relative;
-    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
+    background-color: var(--COULEUR_ACCENT);
     transition: all ease-in-out var(--DUREE_TRANSITION);
-}
-div.conteneur-mise-avant::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    border-radius: var(--BORDER);
-    opacity: 0;
-    transition: all var(--DUREE_TRANSITION) ease-in-out;
-    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
-}
-@media (hover: hover) and (pointer: fine) {
-    div.conteneur-mise-avant:hover::after {
-        opacity: 1;
-    }
 }
 div.conteneur-mise-avant#section-jrm {
     padding: var(--ESPACE_XXS);
+    background-color: var(--COULEUR_ACCENT2);
     margin-bottom: 0;
 }
 div.conteneur-mise-avant div.zone-jrm {
@@ -832,45 +818,6 @@ div.conteneur-outil-recent div.card-outil-recent p{
     margin-left: var(--ESPACE_XXS);
     margin-right: var(--ESPACE_S);
     font-size: var(--P);
-}
-/* Pour les 3 derniers entrainements in home */
-div.container-recent-workout div.card-recent-workout {
-    background-color: var(--COULEUR_BACKGROUND_CARD);
-    border-radius: var(--BORDER);
-
-    padding: var(--ESPACE_S_SMALL);
-    margin: var(--ESPACE_S) 0;
-    transition: all ease-in-out var(--DUREE_TRANSITION);
-}
-@media (hover: hover) and (pointer: fine) {
-    div.container-recent-workout div.card-recent-workout:hover {
-        transform: scale(1.01);
-    }
-}
-div.container-recent-workout div.card-recent-workout:active {
-    filter: brightness(var(--HOVER));
-}
-div.container-recent-workout div.card-recent-workout p.name-workout{
-    font-size: var(--H3);
-    font-weight: var(--FONT_WEIGHT_BUTTON);
-    color: var(--COULEUR_TEXT_PRINCIPAL);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    line-clamp: 5;
-    overflow: hidden;
-}
-div.container-recent-workout div.card-recent-workout p.sport-date-workout{
-    font-size: var(--P);
-    margin: var(--ESPACE_XXS) 0;
-    color: var(--COULEUR_TEXT_SECONDAIRE);
-}
-div.container-recent-workout div.card-recent-workout p.duree{
-    font-size: var(--P);
-    color: var(--COULEUR_TEXT_SECONDAIRE);
-}
-div.container-recent-workout div.card-recent-workout p.duree strong{
-    color: var(--COULEUR_ACCENT);
 }
 
 
@@ -983,7 +930,7 @@ div.conteneur-content-scrolling div.card-outil h1{
     font-size: var(--H3);
     margin-top: var(--ESPACE_XS);
     color: var(--COULEUR_TEXT_PRINCIPAL);
-    min-height: 65px;
+    min-height: 60px;
     
     display: -webkit-box;
     -webkit-box-orient: vertical; /* On compte les lignes verticalement */
@@ -1086,32 +1033,51 @@ div.conteneur-de-outil p.text {
 
 
 /* Pour les cards workout history */
-div.conteneur-de-outil div.conteneur-cards-workout {
+div.conteneur-cards-workout {
     display: block;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 900px;
     margin-bottom: var(--ESPACE_XL);
 }
-div.conteneur-de-outil div.cards-history-workout {
+div.conteneur-cards-workout div.cards-history-workout {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     border-radius: var(--BORDER);
     height: fit-content;
     overflow: hidden;
 
-    margin: var(--ESPACE_M) 0;
+    margin: var(--ESPACE_L) 0;
     padding: var(--ESPACE_XS);
 
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-column{
+
+/* pour adapter légèrement les cards et les animations des cards de derniers entraînement sur la page d'accueil */
+div.conteneur-cards-workout.home { 
+    margin-bottom: var(--ESPACE_L);
+    max-width: none;
+}
+div.conteneur-cards-workout div.cards-history-workout.home { 
+    margin: var(--ESPACE_M) 0;
+}
+@media (hover: hover) and (pointer: fine) {
+    div.conteneur-cards-workout div.cards-history-workout.home:hover{
+        transform: scale(1.01);
+    }
+}
+div.conteneur-cards-workout div.cards-history-workout.home:active{
+    filter: brightness(var(--HOVER));
+}
+/* fin de la partie derniers entrainement home */
+
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-column{
     display: flex;
     flex-direction: column;
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-column p{
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-column p{
     color: var(--COULEUR_TEXT_PRINCIPAL);
     padding: var(--ESPACE_XXS);
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.name-workout{
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-column p.name-workout{
     font-weight: var(--FONT_WEIGHT_BUTTON);
     font-size: var(--H3);
 
@@ -1121,41 +1087,41 @@ div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.name-
     line-clamp: 5; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
     overflow: hidden;
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.sport-date-workout{
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-column p.sport-date-workout{
     font-weight: var(--FONT_WEIGHT_BUTTON);
     color: var(--COULEUR_TEXT_SECONDAIRE);
     font-size: var(--P);
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.charge-workout{
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-column p.charge-workout{
     font-weight: var(--FONT_WEIGHT_BUTTON);
     color: var(--COULEUR_TEXT_SECONDAIRE);
     font-size: var(--P);
     margin-bottom: var(--ESPACE_XXS);
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-column p.charge-workout strong{
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-column p.charge-workout strong{
     font-weight: 1000;
     color: var(--COULEUR_ACCENT);
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-paire{
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-paire{
     display: flex;
     margin: var(--ESPACE_XXS) 0;
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p{
-    color: var(--COULEUR_BACKGROUND);
-    background-color: var(--COULEUR_ACCENT2);
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-paire p{
+    color: var(--COULEUR_TEXT_PRINCIPALE);
+    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
     border-radius: var(--BORDER_SMALL);
     padding: var(--ESPACE_XS);
     font-size: var(--P);
-    text-align: center;
+    text-align: left;
     width: 160px;
     margin: 2px 4px;
     flex-grow: 1;
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p strong{
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-paire p strong{
     font-weight: var(--FONT_WEIGHT_BUTTON);
     letter-spacing: 0.1px;
 }
-div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p.muscles-workout{
+div.conteneur-cards-workout div.cards-history-workout div.data-workout-paire p.muscles-workout{
     margin-top: var(--ESPACE_XXS);
     text-align: left;
 
@@ -1165,16 +1131,16 @@ div.conteneur-de-outil div.cards-history-workout div.data-workout-paire p.muscle
     line-clamp: 6; /* Je met egalement ça pour que ça assure la compatibilité avec tous les navigateurs */
     overflow: hidden;
 }
-div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout{
+div.conteneur-cards-workout div.cards-history-workout div.action-button-card-workout{
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: var(--ESPACE_S_SMALL);
 }
-div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button{
+div.conteneur-cards-workout div.cards-history-workout div.action-button-card-workout button{
     font-weight: normal;
-    background-color: var(--COULEUR_BACKGROUND_CARD_HOVER);
-    color: var(--COULEUR_ACCENT2);
+    background-color: var(--COULEUR_ACCENT);
+    color: var(--COULEUR_BACKGROUND);
     font-size: var(--P);
     display: flex;
     justify-content: center;
@@ -1188,15 +1154,16 @@ div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout 
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 @media (hover: hover) and (pointer: fine) {
-    div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button:hover{
+    div.conteneur-cards-workout div.cards-history-workout div.action-button-card-workout button:hover{
         filter: brightness(var(--HOVER));
     }
 }
-div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button:active{
+div.conteneur-cards-workout div.cards-history-workout div.action-button-card-workout button:active{
     filter: brightness(var(--HOVER));
+    transform: scale(0.95);
 }
-div.conteneur-de-outil div.cards-history-workout div.action-button-card-workout button i{
-    color: var(--COULEUR_ACCENT2);
+div.conteneur-cards-workout div.cards-history-workout div.action-button-card-workout button i{
+    color: var(--COULEUR_BACKGROUND);
     font-size: var(--P);
     font-weight: normal;
     margin-right: var(--ESPACE_XXS);
@@ -1407,14 +1374,14 @@ div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-thumb:hover{
-        background-color: var(--COULEUR_ACCENT);
+        background-color: var(--COULEUR_ACCENT2);
         transform: scale(1.4);
         border: 2px solid var(--COULEUR_ACCENT2);
         transition: all ease-in-out var(--DUREE_TRANSITION);
     }
 } 
 div.conteneur-de-outil div.conteneur-champs-outil .slider input::-webkit-slider-thumb:active{
-    background-color: var(--COULEUR_ACCENT);
+    background-color: var(--COULEUR_ACCENT2);
     transform: scale(1.4);
     border: 2px solid var(--COULEUR_ACCENT2);
     transition: all ease-in-out 0.05s;
@@ -1591,7 +1558,7 @@ div.conteneur-box-deux {
 div.conteneur-ensemble div.box-result-deux,
 div.conteneur-ensemble div.box-result-deux-small {
     border-radius: var(--BORDER);
-    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
+    background-color: var(--COULEUR_ACCENT);
     width: 420px;
     min-height: 200px;
     padding: var(--ESPACE_S);
@@ -1600,27 +1567,9 @@ div.conteneur-ensemble div.box-result-deux-small {
     position: relative;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
-div.conteneur-ensemble div.box-result-deux::after,
-div.conteneur-ensemble div.box-result-deux-small::after {
-    content: "";
-    position: absolute;
-    border-radius: var(--BORDER);
-    /* Il prend tout l'espace disponible */
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    z-index: -1;
-    opacity: 0;
-    transition: opacity var(--DUREE_TRANSITION) ease-in-out;
-    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
-}
-@media (hover: hover) and (pointer: fine) {
-    div.conteneur-ensemble div.box-result-deux:hover::after,
-    div.conteneur-ensemble div.box-result-deux-small:hover::after  {
-        opacity: 1;
-    }
+div.conteneur-ensemble.first div.box-result-deux,
+div.conteneur-ensemble.first div.box-result-deux-small {
+    background-color: var(--COULEUR_ACCENT2);
 }
 /* Pour le coach dans ajouté une activité */
 div.conteneur-ensemble div.box-result-deux#coach-ajoute-entrainement {
@@ -1780,32 +1729,15 @@ div.conteneur-rep-zone div.zone-cardio p.unite-zone{
 /* Pour outils calculateur IMC */
 div.conteneur-ensemble div.box-result {
     border-radius: var(--BORDER);
-    background: linear-gradient(130deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
+    background-color: var(--COULEUR_ACCENT);
     width: 420px;
     padding: var(--ESPACE_S);
     z-index: 1;
     position: relative;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
-div.conteneur-ensemble div.box-result::after {
-    content: "";
-    position: absolute;
-    border-radius: var(--BORDER);
-    /* Il prend tout l'espace disponible */
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    z-index: -1;
-    opacity: 0;
-    transition: opacity var(--DUREE_TRANSITION) ease-in-out;
-    background: linear-gradient(240deg, var(--COULEUR_ACCENT), var(--COULEUR_ACCENT2));
-}
-@media (hover: hover) and (pointer: fine) {
-    div.conteneur-ensemble div.box-result:hover::after {
-        opacity: 1;
-    }
+div.conteneur-ensemble div.box-result.jrm-coach {
+    background-color: var(--COULEUR_ACCENT2);
 }
 div.conteneur-ensemble p {
     color: var(--COULEUR_BACKGROUND);

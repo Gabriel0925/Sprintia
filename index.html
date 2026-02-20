@@ -180,12 +180,11 @@
         <p class="text" id="text-pas-entrainement">
             Vous n'avez pas encore enregistré d'entraînement.
         </p>
-
-        <div class="container-recent-workout"></div> <!-- Remplis en JS -->
+        <div class="conteneur-cards-workout home" id="liste-workouts"></div> <!-- Remplis en JS -->
 
         <div class="conteneur-centrage-marge">
-            <button id="button-plus" onclick="location.href='Outils/Actions/historique_entrainement.html'">
-                Afficher plus
+            <button id="afficher-historique" onclick="location.href='Outils/Actions/historique_entrainement.html'">
+                Afficher l'historique
             </button>
         </div>
 
@@ -235,18 +234,20 @@
             return DateEuropeen
         }
 
-        function HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) {
-            let StructureHTML = `          
+        function HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, ChargeWorkout) {
+            let StructureHTML = `
                 <a href="Outils/Actions/historique_entrainement.html">
+                    <div class="data-workout-column">
                         <p class="name-workout">
                             ${NameWorkout}
                         </p>
                         <p class="sport-date-workout">
                             ${SportWorkout} · ${DateWorkout}
                         </p>
-                        <p class="duree">
-                            Durée : <strong>${DureeWorkout}</strong>
+                        <p class="charge-workout">
+                            Charge d'entraînement : <strong>${ChargeWorkout}</strong>
                         </p>
+                    </div>
                 </a>
             `
 
@@ -271,32 +272,33 @@
             let TableauNameWorkout = HistoriqueDB.map(elementDB => elementDB.nom).slice(0, 3) 
             let TableauSport = HistoriqueDB.map(elementDB => elementDB.sport).slice(0, 3)
             let TableauDateWorkout = HistoriqueDB.map(elementDB => elementDB.date).slice(0, 3)
-            let TableauDureeWorkout = HistoriqueDB.map(elementDB => elementDB.duree).slice(0, 3)
+            let TableauChargeWorkout = HistoriqueDB.map(elementDB => elementDB.charge_entrainement).slice(0, 3)
 
             if (TableauNameWorkout.length <= 0) {
                 // on cache la secction si il y a pas de datas
-                document.querySelector(".container-recent-workout").style.display = "none"
-                document.getElementById("button-plus").style.display = "none" // on cache le bouton
+                document.getElementById("liste-workouts").style.display = "none"
+                document.getElementById("afficher-historique").style.display = "none" // on cache le bouton
             } else { // si il y a des datas
                 document.getElementById("text-pas-entrainement").style.display = "none" // on cache le text comme quoi il n'y a pas d'entrainement
                 // initialisation pour la boucle
                 let compteur = 0
                 let SportWorkout = 0
                 let DateWorkout = 0
-                let DureeWorkout = 0
-                const ConteneurCardsWorkout = document.querySelector(".container-recent-workout") // recupération du conteneur des cards
+                let ChargeWorkout = 0
+                const ConteneurCardsWorkout = document.getElementById("liste-workouts") // recupération du conteneur des cards
 
                 TableauNameWorkout.forEach(NameWorkout => {
                     // maj des variables en fonction de l'entrainement
                     SportWorkout = TableauSport[compteur]
                     DateWorkout = ReturnDate(TableauDateWorkout[compteur])
-                    DureeWorkout = PassageHeure(TableauDureeWorkout[compteur])
+                    ChargeWorkout = TableauChargeWorkout[compteur]
 
                     // on créer la card html
                     const CardWorkout = document.createElement("div")
-                    CardWorkout.classList.add("card-recent-workout")
+                    CardWorkout.classList.add("cards-history-workout")
+                    CardWorkout.classList.add("home")
 
-                    let CardWorkoutHTML = HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, DureeWorkout) // appelle a la fonction
+                    let CardWorkoutHTML = HTMLCard(CardWorkout, NameWorkout, SportWorkout, DateWorkout, ChargeWorkout) // appelle a la fonction
                     ConteneurCardsWorkout.appendChild(CardWorkoutHTML)
 
                     compteur += 1 // incrementation
@@ -437,19 +439,19 @@
                 // Recup variable css
                 const Style = getComputedStyle(document.documentElement)
 
-                const CouleurAccent2 = Style.getPropertyValue("--COULEUR_ACCENT2")
+                const CouleurAccent = Style.getPropertyValue("--COULEUR_ACCENT")
                 const CouleurAccentContrasterHover = Style.getPropertyValue("--COULEUR_ACCENT_CONTRASTER_HOVER")
                 const CouleurBackground = Style.getPropertyValue("--COULEUR_BACKGROUND")
 
                 if (ShortcutAdd && ShortcutHistorique && ShortcutPause) {
                     // Mise des couleurs si l'élément est existant
-                    ShortcutAdd.style.background = CouleurAccent2
+                    ShortcutAdd.style.background = CouleurAccent
                     IconeShortcutAdd.style.color = CouleurBackground
                             
-                    ShortcutHistorique.style.background = CouleurAccent2
+                    ShortcutHistorique.style.background = CouleurAccent
                     IconeShortcutHistorique.style.color = CouleurBackground
 
-                    ShortcutPause.style.background = CouleurAccent2
+                    ShortcutPause.style.background = CouleurAccent
                     IconeShortcutPause.style.color = CouleurBackground
                 }
             }
@@ -458,9 +460,9 @@
 
     <!-- Pour le JRM Coach -->
     <script>
-        function PassageHeure(minutes) {
+        function PassageHeureJRMCoach(minutes) {
             let Heure = Math.floor(minutes/60) // Arrondi à l'entier inférieur
-            let MinutesRestante = minutes-60*Heure
+            let MinutesRestante = Math.floor(minutes-60*Heure) // floor car on arrondi vers le bas
 
             // Initialisation
             let Result = ""
@@ -591,7 +593,7 @@
                     compteur += 1 // incrémentation
                 });
 
-                const DureeTotaleHeure = PassageHeure(DureeTotale) // pour passer de 90 min à 1h 30min
+                const DureeTotaleHeure = PassageHeureJRMCoach(DureeTotale) // pour passer de 90 min à 1h 30min
 
                 // Début interpretation
                 let Interpretation = `Au cours des 7 derniers jours, t'as fait :<br><br>
@@ -774,8 +776,8 @@
             let RootCSS = document.documentElement
             let StyleCSS = getComputedStyle(RootCSS)
             // Recup variable css
-            let CouleurAccent2 = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
             let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
+            let CouleurAccent2 = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
             let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
             const barCanvas = document.getElementById("barCanvas")
@@ -791,12 +793,12 @@
                         labels: ["S-3", "S-2", "S-1"],
                         datasets: [{
                             data: TableauPourGraphique,
-                            borderColor : CouleurAccent2, // Ligne des niveau couleur
-                            backgroundColor: CouleurAccent,
+                            borderColor : CouleurAccent, // Ligne des niveau couleur
+                            backgroundColor: CouleurAccent2,
                             fill: true, // Pour remplir le graphique de la couleur background
                             pointRadius: 8, // Taille du point
                             pointHoverRadius: 10,
-                            pointBackgroundColor: CouleurAccent2,
+                            pointBackgroundColor: CouleurAccent,
                             pointBorderWidth: 0
                         }]
                     },

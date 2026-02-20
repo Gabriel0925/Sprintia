@@ -26,14 +26,15 @@ function ReturnDate(DateWorkout) {
 
 function PassageHeure(minutes) {
     let Heure = Math.floor(minutes/60) // Arrondi à l'entier inférieur
-    let MinutesRestante = minutes-60*Heure
+    let MinutesRestante = Math.floor(minutes-60*Heure)
+    let SecondeRestante = Math.floor((minutes- (Heure*60) -MinutesRestante)*60) // pr obtenir le reste
 
     // Initialisation
     let Result = ""
     if (Heure < 1) { // Si l'heure est inférieur à 1 on affiche que les minutes pour ne pas afficher 0h 23min
-        Result = minutes + "min"
+        Result = MinutesRestante.toString().padStart(2, "0") + "m " + SecondeRestante.toString().padStart(2, "0") + "s"
     } else { // Sinon on affiche tous
-        Result = Heure + "h " + MinutesRestante.toString().padStart(1, "0") + "m"
+        Result = Heure.toString().padStart(2, "0") + "h " + MinutesRestante.toString().padStart(2, "0") + "m " + SecondeRestante.toString().padStart(2, "0") + "s"
     }
             
     return Result
@@ -58,7 +59,7 @@ function HTMLCard(CardWorkout, workout, DateEuropeen, DureeFormatee) {
         </div>
         <div class="data-workout-paire">
             <p class="duree-workout">
-                Duree : <strong>${DureeFormatee}</strong>
+                <strong>${DureeFormatee}</strong>
             </p>
             <p class="rpe-workout">
                 RPE : <strong>${workout.rpe}</strong>
@@ -70,10 +71,10 @@ function HTMLCard(CardWorkout, workout, DateEuropeen, DureeFormatee) {
         StructureHTML += `
             <div class="data-workout-paire">
                 <p class="duree-workout">
-                    Distance : <strong>${workout.distance.toString().replace(".", ",")} km</strong>
+                    <strong>${workout.distance.toString().replace(".", ",")} km</strong>
                 </p>
                 <p class="rpe-workout">
-                    Dénivelé : <strong>${workout.denivele} m</strong>
+                    <strong>${workout.denivele} m</strong>
                 </p>
             </div>
         `
@@ -136,8 +137,10 @@ function HTMLCard(CardWorkout, workout, DateEuropeen, DureeFormatee) {
         
         const NbCardStatut = document.querySelectorAll(".cards-history-workout")
         if (NbCardStatut.length == 0) { // si il n'y a pas de card alors on remet le message comme quoi il faut ajouter des datas et on enleve le bouton afficher plus
+            document.getElementById("text-informatif").textContent = "Chargement..." // on précise que la page va se recharger par la suite
             document.getElementById("text-informatif").style.display = "block"
             document.getElementById("button_afficher_plus").style.display = "none"
+            location.reload()
         }
     })
 

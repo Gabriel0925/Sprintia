@@ -241,8 +241,8 @@ async function GenererGraphique() {
     let RootCSS = document.documentElement
     let StyleCSS = getComputedStyle(RootCSS)
     // Recup variable css
-    let CouleurAccentHover = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
     let CouleurAccent = StyleCSS.getPropertyValue("--COULEUR_ACCENT")
+    let CouleurAccent2 = StyleCSS.getPropertyValue("--COULEUR_ACCENT2")
     let CouleurTextPrincipal = StyleCSS.getPropertyValue("--COULEUR_TEXT_PRINCIPAL")
 
     const barCanvas = document.getElementById("barCanvas")
@@ -257,12 +257,12 @@ async function GenererGraphique() {
             labels: ListeDate,
             datasets: [{
                 data: NiveauDatas,
-                borderColor : CouleurAccentHover, // Ligne des niveau couleur
-                backgroundColor: CouleurAccent,
+                borderColor : CouleurAccent, // Ligne des niveau couleur
+                backgroundColor: CouleurAccent2,
                 fill: true, // Pour remplir le graphique de la couleur background
                 pointRadius: 8, // Taille du point
                 pointHoverRadius: 10,
-                pointBackgroundColor: CouleurAccentHover,
+                pointBackgroundColor: CouleurAccent,
                 pointBorderWidth: 0
             }]
         },

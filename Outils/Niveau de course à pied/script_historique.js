@@ -60,9 +60,6 @@ async function RemplirTableau() {
     if (NiveauDatas.length > 0) {
         TableauHistorique.classList.add("visible")
         document.getElementById("text-informatif").style.display = "none"
-    } else {
-        document.getElementById("cacher-title2").style.display = "none"
-        return
     }
 
     let compteur = 0
@@ -99,7 +96,7 @@ async function RemplirTableau() {
             let RootCSS = document.documentElement
             let StyleCSS = getComputedStyle(RootCSS)
 
-            BoutonSupprTableau.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT2") // ajout de la couleur
+            BoutonSupprTableau.style.color = StyleCSS.getPropertyValue("--COULEUR_ACCENT") // ajout de la couleur
         } else {
             BoutonSupprTableau.style.color = "#ef2e2e" // ajout de la couleur
         }
@@ -115,21 +112,13 @@ async function RemplirTableau() {
 
                 let DataTableau = document.querySelectorAll("td") // Recup des lignes pour savoir quand il faut cacher le tableau
                 let Tableau = document.getElementById("tableau-historique") // recup du tableau
-                let h2elem1 = document.getElementById("cacher-title1") // pour cacher le titre "Graphique"
-                let h2elem2 = document.getElementById("cacher-title2") // pour cacher le titre "Votre historique"
+                console.log(DataTableau)
 
-                if (DataTableau.length == 0) {
+                if (DataTableau.length <= 0) {
                     // On cache tout
                     Tableau.style.display = "none"
-                    h2elem1.style.display = "none"
-                    h2elem2.style.display = "none"
                     // on fais apparaitre le message comme quoi sprintia n'a pas encore assez de données
                     document.getElementById("text-informatif").style.display = "block"
-                    // destruction du graphique
-                    if (barChart) { // le graph est créer dans le !!-- script_outil.js --!!
-                        barChart.destroy() // destruction du graphique qu'il y a dans script_outil.js
-                        document.getElementById("conteneur-graphique").style.display = "none" // on cache le conteneur du graphique
-                    }    
                 } 
 
                 // timeout remis a 0 (suppresion plutot)

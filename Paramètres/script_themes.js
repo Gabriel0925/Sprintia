@@ -5,12 +5,12 @@ const ThemeConfig = {
     "theme_lavande": ["#B266F9", "#D7A8FF"],
     "theme_vegetation": ["#0CBB5BFF", "#76E082"],
     "theme_menthe": ["#0ac3a7", "#76e8d6"],
-    "theme_lune": ["#42a5f5", "#90caf9"], 
+    "theme_pierre_lune": ["#42a5f5", "#90caf9"], 
     "theme_framboise": ["#f14d84", "#ff80ab"],
 
-    "theme_hortensia": ["#3a91ff", "#f782f0"], 
+    "Hortensia": ["#3a91ff", "#f782f0"], 
     "theme_plage": ["#1498e4", "#fcaf6b"],
-    "theme_aurore": ["#a477fe", "#4ce58c"],
+    "Aurore": ["#a477fe", "#4ce58c"],
     "theme_feu": ["#ffb82b", "#ff782f"]
 }
 // init variable

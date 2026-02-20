@@ -32,3 +32,4 @@ window.addEventListener("pageshow", (event) => {
 
 // maj local storage de Sprintia 4.0 à 4.0.1
 localStorage.removeItem("ThemeActuel") // car le choix de thème clair ou sombre a été nerf
+localStorage.removeItem("DisplayConseil") // car les astuces sur la page d'accueil ont été supprimé
