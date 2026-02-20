@@ -58,7 +58,7 @@ function ZoneVitesse() {
     if (VitesseMaxUser) {
         ResultAlgoBox5 =  (FinZone4+0.1).toFixed(1).replace(".", ",") + " - " + VitesseMax.toFixed(1).replace(".", ",")
     } else {
-        ResultAlgoBox5 =   "> " + FinZone4.toString().replace(".", ",")
+        ResultAlgoBox5 =   "> " + FinZone4.toFixed(1).replace(".", ",")
     }
 
     const BaliseTranche = document.querySelectorAll(".tranche-zone")

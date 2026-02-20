@@ -34,7 +34,7 @@ function zonePuissance() {
     ResultAlgoBox4 = (FinZone3+1) + " - " + FinZone4
     ResultAlgoBox5 = (FinZone4+1) + " - " + FinZone5
     ResultAlgoBox6 = (FinZone5+1) + " - " + FinZone6
-    ResultAlgoBox7 = "> " + (FinZone6+1)
+    ResultAlgoBox7 = "> " + FinZone6
 
     // affichage
     const BaliseTranche = document.querySelectorAll(".tranche-zone")

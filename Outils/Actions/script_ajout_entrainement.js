@@ -312,7 +312,7 @@ function conversionMinutes(DureeWorkoutUser) {
     if (DureeWorkoutUser.includes(":")) {
         let FormatDuree = DureeWorkoutUser.split(":")
         if (FormatDuree.length == 3) {
-            if (FormatDuree[0].length == 2 && FormatDuree[1].length == 2 && FormatDuree[2].length == 2) {
+            if (FormatDuree[0].length <= 2 && FormatDuree[1].length <= 2 && FormatDuree[2].length <= 2) {
                 // Extraction des heures minutes et secondes
                 let heures = parseInt(FormatDuree[0])
                 let minutes = parseInt(FormatDuree[1])
@@ -331,7 +331,7 @@ function conversionMinutes(DureeWorkoutUser) {
                 return DureeWorkoutUser
                 
             } else {
-                alert("Le format de la durée doit être hh:mm:ss avec hh, mm et ss avec 2 chiffres.")
+                alert("Le format de la durée doit être hh:mm:ss avec hh, mm et ss avec 2 chiffres maximum.")
                 DureeWorkoutUser = null // on met sur null pour pouvoir savoir qu'il y a eu une erreur et qu'il faut arreter la fonction RegistrationWorkout
                 return DureeWorkoutUser
             }
