@@ -2245,25 +2245,25 @@ ol li.option-color:nth-child(5)::before{
     background-color: var(--COULEUR_PASTILLES_4);
 }
 ol li.option-color:nth-child(6)::before{
-    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D7), var(--COULEUR_PASTILLES_D8));
-}
-ol li.option-color:nth-child(7)::before{
     background-color: var(--COULEUR_PASTILLES_5);
 }
-ol li.option-color:nth-child(8)::before{
+ol li.option-color:nth-child(7)::before{
     background-color: var(--COULEUR_PASTILLES_6);
 }
-ol li.option-color:nth-child(9)::before{
+ol li.option-color:nth-child(8)::before{
     background-color: var(--COULEUR_PASTILLES_7);
 }
+ol li.option-color:nth-child(9)::before{
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D7) 50%, var(--COULEUR_PASTILLES_D8) 50%);
+}
 ol li.option-color:nth-child(10)::before{
-    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D3), var(--COULEUR_PASTILLES_D4));
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D3) 50%, var(--COULEUR_PASTILLES_D4) 50%);
 }
 ol li.option-color:nth-child(11)::before{
-    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D1), var(--COULEUR_PASTILLES_D2));
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D1) 50%, var(--COULEUR_PASTILLES_D2) 50%);
 }
 ol li.option-color:nth-child(12)::before{
-    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D5), var(--COULEUR_PASTILLES_D6));
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D5) 50%, var(--COULEUR_PASTILLES_D6) 50%);
 }
 /* Style du bouton réinitialiser */
 div.conteneur-centrage-marge {

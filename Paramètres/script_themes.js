@@ -8,10 +8,10 @@ const ThemeConfig = {
     "theme_pierre_lune": ["#42a5f5", "#90caf9"], 
     "theme_framboise": ["#f14d84", "#ff80ab"],
 
-    "Hortensia": ["#3a91ff", "#f782f0"], 
+    "theme_feu": ["#ffb82b", "#ff782f"],
     "theme_plage": ["#1498e4", "#fcaf6b"],
-    "Aurore": ["#a477fe", "#4ce58c"],
-    "theme_feu": ["#ffb82b", "#ff782f"]
+    "Hortensia": ["#3a91ff", "#f782f0"], 
+    "Aurore": ["#a477fe", "#4ce58c"]
 }
 // init variable
 let theme = "theme_azur"
