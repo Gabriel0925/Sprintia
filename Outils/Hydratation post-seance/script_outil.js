@@ -28,6 +28,22 @@ function CalculHydratation(TranspirationEstimee) {
     return HydratationEstimee
 }
 
+function CalculHydratationTotale(PoidsUser, rehydratation) {
+    // Fourchette pour un adulte sédentaire
+    let ReferenceMin = 30 // 30 mL d'eau par kilo de poids de corps
+    let ReferenceMax = 35
+
+    // Application formule
+    let HydratationMin = (PoidsUser*ReferenceMin)*0.8 // fois 0.8 car "Environ 20 % d'eau provient de vos repas"
+    let HydratationMax = (PoidsUser*ReferenceMax)*0.8
+    let HydratationRecommandee = (HydratationMin+HydratationMax)/2 // moyenne de la fourchette minimum, maximum
+
+    // on ajoute la réhydratation
+    HydratationRecommandee = HydratationRecommandee+rehydratation
+
+    return HydratationRecommandee
+}
+
 function CalculGeneral() {
     let PoidsUser = parseFloat(document.getElementById("poids-user").value.trim().replace(",", "."))
     let DureeUser = parseInt(document.getElementById("duree-entrainement-user").value.trim())
@@ -38,8 +54,8 @@ function CalculGeneral() {
         alert("Erreur de saisie : tous les champs doivent être remplis.");
         return
     }
-    if (PoidsUser <= 0 || DureeUser <= 0) {
-        alert("Valeur non valide, le poids et la durée votre entraî. doivent être un nombre supérieur à 0.")
+    if (PoidsUser <= 0) {
+        alert("Valeur non valide, le poids doit être un nombre supérieur à 0.")
         return
     }
     if (PoidsUser >= 1000) {
@@ -50,10 +66,12 @@ function CalculGeneral() {
     // Appelle aux fonctions
     let ValueTranspirationEstimee = CalculTranspiration(PoidsUser, DureeUser, ValueRpeUser)
     let ValueTranspirationEstimeeMl = ValueTranspirationEstimee*1000
+    let rehydratation = CalculHydratation(ValueTranspirationEstimeeMl)
 
     // Mise en variable pour passez à l'affichage
     let TranspirationEstimee = "Transpiration : " + "<strong>" + Math.round(ValueTranspirationEstimeeMl) + " mL"  + "</strong>"
-    let HydratationEstimee = "Qté à boire : " + "<strong>" + Math.round(CalculHydratation(ValueTranspirationEstimeeMl)) + " mL" + "</strong>"
+    let Rehydratation = "Réhydratation : " + "<strong>" + Math.round(rehydratation) + " mL" + "</strong>"
+    let HydratationToday = "Hydratation du jour : " + "<strong>" + Math.round(CalculHydratationTotale(PoidsUser, rehydratation)) + " mL" + "</strong>"
     let Interpretation = "<strong>Petit conseil :</strong> ne buvez pas tout d'un coup, essayer de boire un verre toutes les 10-20 minutes."
 
     // Affichage des champs
@@ -62,6 +80,7 @@ function CalculGeneral() {
     document.querySelector(".zone-imc").innerHTML = Interpretation
 
     ChampResult[0].innerHTML = TranspirationEstimee
-    ChampResult[1].innerHTML = HydratationEstimee
+    ChampResult[1].innerHTML = Rehydratation
+    ChampResult[2].innerHTML = HydratationToday
     return
 }

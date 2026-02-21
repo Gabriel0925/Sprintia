@@ -1,8 +1,8 @@
 /* Initialisation des variables */
 :root {
     /* Couleurs */
-    --COULEUR_ACCENT: #0D9BD3; 
-    --COULEUR_ACCENT2: #77cced; 
+    --COULEUR_ACCENT: #42a5f5; 
+    --COULEUR_ACCENT2: #90caf9; 
 
     --HOVER: 1.3; 
     
@@ -48,14 +48,29 @@
     --URL_FLECHE_ICON_REVERSE: url("../Outils/Icons/icon_fleche_clair.svg");
 
     /* Couleur pour le hover des pastilles */
-    --COULEUR_PASTILLES_0: #0D9BD3; 
+    --COULEUR_PASTILLES_0: #42a5f5; 
+    --COULEUR_PASTILLES_0_HOVER: #90caf9; 
+
     --COULEUR_PASTILLES_1: #FF5257; 
+    --COULEUR_PASTILLES_1_HOVER: #FF8A8E; 
+
     --COULEUR_PASTILLES_2: #FA6BFA; 
+    --COULEUR_PASTILLES_2_HOVER: #FFA8FF; 
+
     --COULEUR_PASTILLES_3: #B266F9; 
+    --COULEUR_PASTILLES_3_HOVER: #D7A8FF; 
+
     --COULEUR_PASTILLES_4: #0CBB5BFF; 
+    --COULEUR_PASTILLES_4_HOVER: #76E082; 
+
     --COULEUR_PASTILLES_5: #0ac3a7; 
-    --COULEUR_PASTILLES_6: #42a5f5;  
+    --COULEUR_PASTILLES_5_HOVER: #76e8d6; 
+    
+    --COULEUR_PASTILLES_6: #6aabd3;  
+    --COULEUR_PASTILLES_6_HOVER: #acdefd;  
+
     --COULEUR_PASTILLES_7: #f14d84; 
+    --COULEUR_PASTILLES_7_HOVER: #ff80ab; 
     
     --COULEUR_PASTILLES_D1: #3a91ff;  
     --COULEUR_PASTILLES_D2: #f782f0;  
@@ -810,7 +825,6 @@ div.conteneur-outil-recent div.card-outil-recent i{
     background-color: transparent;
     font-size: var(--H1);
     margin: var(--ESPACE_XS);
-    border-radius: var(--BORDER_SMALL);
 }
 div.conteneur-outil-recent div.card-outil-recent p{
     font-weight: var(--FONT_WEIGHT_BUTTON);
@@ -862,7 +876,7 @@ div.conteneur-content-scrolling div.card-outil div.icone{
     justify-content: center;
     background-color: var(--COULEUR_ACCENT2);
     padding: var(--ESPACE_XXS);
-    border-radius: var(--BORDER_SMALL);
+    border-radius: var(--BORDER);
     width: 100%;
     position: relative;
 }
@@ -957,7 +971,7 @@ div.shorcut {
     margin: var(--ESPACE_XS);
     width: 145px;
     height: fit-content;
-    border-radius: var(--BORDER_SMALL);
+    border-radius: var(--BORDER);
     overflow: hidden;
     transition: all ease-in-out var(--DUREE_TRANSITION);
 }
@@ -979,8 +993,6 @@ div.shorcut div.img{
     
     width: 100%;
     height: 80px;
-    border-top-left-radius: var(--BORDER_SMALL);
-    border-top-right-radius: var(--BORDER_SMALL);
 }
 div.shorcut div.img#icone-add{
     background-color: #28A745;
@@ -1197,12 +1209,12 @@ div.conteneur-de-outil div.conteneur-option i {
 }
 @media (hover: hover) and (pointer: fine) {
     div.conteneur-de-outil div.conteneur-option i:hover {
-        transform: scale(1.1);
         color: var(--COULEUR_ACCENT2);
     }
 }
 div.conteneur-de-outil div.conteneur-option i:active {
     filter: brightness(var(--HOVER));
+    transform: scale(0.95);
 }
 /* conteneur des input + button */
 div.conteneur-de-outil div.conteneur-champs-outil {
@@ -1804,7 +1816,7 @@ div.conteneur-scrolling .card-nouveautes-image p{
     font-weight: 1000;
     padding: var(--ESPACE_XXS);
     color: var(--COULEUR_BACKGROUND);
-    border-radius: var(--BORDER_SMALL);
+    border-radius: var(--BORDER);
     margin-bottom: var(--ESPACE_XS);
     padding-left: var(--ESPACE_S_SMALL);
 }
@@ -1987,7 +1999,7 @@ div.conteneur-historique-versions .card-nouveautes-image p {
     font-weight: 1000;
     padding: var(--ESPACE_XXS);
     color: var(--COULEUR_BACKGROUND);
-    border-radius: var(--BORDER_SMALL);
+    border-radius: var(--BORDER);
     margin-bottom: var(--ESPACE_XS);
     padding-left: var(--ESPACE_S_SMALL);
 }
@@ -2154,6 +2166,7 @@ ol.conteneur-color-acuentation{
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+    gap: var(--ESPACE_M);
 }
 li.option-color {
     width: 40%;
@@ -2167,26 +2180,7 @@ li.option-color {
     background-color: var(--COULEUR_BACKGROUND_CARD);
     padding: var(--ESPACE_XS) var(--ESPACE_S);
     border-radius: var(--BORDER);
-    margin: var(--ESPACE_XS) 0;
-    transition: all ease-in-out 0.3s;
-}
-/* on gere les margin de chacun */
-li.option-color:nth-child(1) {
-    margin-right: var(--ESPACE_S_SMALL);
-}
-li.option-color:nth-child(3) {
-    margin-right: var(--ESPACE_S_SMALL);
-}
-li.option-color:nth-child(5) {
-    margin-right: var(--ESPACE_S_SMALL);
-}li.option-color:nth-child(7) {
-    margin-right: var(--ESPACE_S_SMALL);
-}
-li.option-color:nth-child(9) {
-    margin-right: var(--ESPACE_S_SMALL);
-}
-li.option-color:nth-child(11) {
-    margin-right: var(--ESPACE_S_SMALL);
+    transition: all ease-in-out var(--DUREE_TRANSITION);
 }
 @media (hover: hover) and (pointer: fine) {
     /* Changer la color du txt lors du survol donc quand il y a la couche du before egalement */
@@ -2195,8 +2189,7 @@ li.option-color:nth-child(11) {
     }
 }
 ol li.option-color:active{
-    transform: scale(0.95);
-    transition: all ease-in-out 0.3s;
+    filter: brightness(var(--HOVER));
 }
 /* 2ème couche du li lors du hover */
 ol li.option-color::before{
@@ -2230,28 +2223,28 @@ ol li.option-color.selected::before{
 }
 /* Couleur individuel en fonction de l'ordre des li */
 ol li.option-color.option-color:nth-child(1)::before{ /* ça prend le premier li ds le code */
-    background-color: var(--COULEUR_PASTILLES_0);
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_0) 50%, var(--COULEUR_PASTILLES_0_HOVER) 50%);
 }
 ol li.option-color:nth-child(2)::before{
-    background-color: var(--COULEUR_PASTILLES_1);
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_1) 50%, var(--COULEUR_PASTILLES_1_HOVER) 50%);
 }
 ol li.option-color:nth-child(3)::before{
-    background-color: var(--COULEUR_PASTILLES_2);
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_2) 50%, var(--COULEUR_PASTILLES_2_HOVER) 50%);
 }
 ol li.option-color:nth-child(4)::before{
-    background-color: var(--COULEUR_PASTILLES_3);
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_3) 50%, var(--COULEUR_PASTILLES_3_HOVER) 50%);
 }
 ol li.option-color:nth-child(5)::before{
-    background-color: var(--COULEUR_PASTILLES_4);
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_4) 50%, var(--COULEUR_PASTILLES_4_HOVER) 50%);
 }
 ol li.option-color:nth-child(6)::before{
-    background-color: var(--COULEUR_PASTILLES_5);
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_5) 50%, var(--COULEUR_PASTILLES_5_HOVER) 50%);
 }
 ol li.option-color:nth-child(7)::before{
-    background-color: var(--COULEUR_PASTILLES_6);
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_6) 50%, var(--COULEUR_PASTILLES_6_HOVER) 50%);
 }
 ol li.option-color:nth-child(8)::before{
-    background-color: var(--COULEUR_PASTILLES_7);
+    background: linear-gradient(130deg, var(--COULEUR_PASTILLES_7) 50%, var(--COULEUR_PASTILLES_7_HOVER) 50%);
 }
 ol li.option-color:nth-child(9)::before{
     background: linear-gradient(130deg, var(--COULEUR_PASTILLES_D7) 50%, var(--COULEUR_PASTILLES_D8) 50%);

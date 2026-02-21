@@ -5,7 +5,7 @@ const ThemeConfig = {
     "theme_lavande": ["#B266F9", "#D7A8FF"],
     "theme_vegetation": ["#0CBB5BFF", "#76E082"],
     "theme_menthe": ["#0ac3a7", "#76e8d6"],
-    "theme_pierre_lune": ["#42a5f5", "#90caf9"], 
+    "theme_pierre_lune": ["#6aabd3", "#acdefd"], 
     "theme_framboise": ["#f14d84", "#ff80ab"],
 
     "theme_feu": ["#ffb82b", "#ff782f"],

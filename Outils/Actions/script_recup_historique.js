@@ -27,7 +27,7 @@ function ReturnDate(DateWorkout) {
 function PassageHeure(minutes) {
     let Heure = Math.floor(minutes/60) // Arrondi à l'entier inférieur
     let MinutesRestante = Math.floor(minutes-60*Heure)
-    let SecondeRestante = Math.floor((minutes- (Heure*60) -MinutesRestante)*60) // pr obtenir le reste
+    let SecondeRestante = Math.floor((minutes- (Heure*60) -MinutesRestante)*60+0.001) // pr obtenir le reste
 
     // Initialisation
     let Result = ""

@@ -28,6 +28,16 @@ async function MessagePrevention() {
     return
 }
 
+function passageFormat(minutes) {
+    let Heure = Math.floor(minutes/60) // Arrondi à l'entier inférieur
+    let MinutesRestante = Math.floor(minutes-60*Heure)
+    let SecondeRestante = Math.floor((minutes- (Heure*60) -MinutesRestante)*60+0.001) // pr obtenir le reste
+
+    let Result = Heure.toString().padStart(2, "0") + ":" + MinutesRestante.toString().padStart(2, "0") + ":" + SecondeRestante.toString().padStart(2, "0")
+            
+    return Result
+}
+
 async function VerificationParam() {
     const ParametreURL = window.location.search // on recherche si il y a un param dans l'URL (ex : ?edit=7)
     let TableauSeparation = ParametreURL.split("=") // exemple ['?edit', '7']
@@ -49,7 +59,7 @@ async function VerificationParam() {
             document.getElementById("profil-sport").value = WorkoutDB.sport
             document.getElementById("date-entrainement-user").value = WorkoutDB.date
             document.getElementById("nom-entrainement-user").value = WorkoutDB.nom
-            document.getElementById("duree-entrainement-user").value = WorkoutDB.duree
+            document.getElementById("duree-entrainement-user").value = passageFormat(WorkoutDB.duree)
 
             // remettre le RPE sur bonne position
             document.querySelector(".slider input").value = WorkoutDB.rpe

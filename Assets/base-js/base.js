@@ -30,6 +30,39 @@ window.addEventListener("pageshow", (event) => {
 });
 
 
-// maj local storage de Sprintia 4.0 à 4.0.1
-localStorage.removeItem("ThemeActuel") // car le choix de thème clair ou sombre a été nerf
-localStorage.removeItem("DisplayConseil") // car les astuces sur la page d'accueil ont été supprimé
+// Pour la mise à jour du local storage
+function majLocalStorage(versionStockee) {
+    // migration de 4.0.0 à 4.0.1
+    if (versionStockee == "4.0.0") {
+        localStorage.removeItem("ThemeActuel") // car le choix de thème clair ou sombre a été nerf
+        localStorage.removeItem("DisplayConseil") // car les astuces sur la page d'accueil ont été supprimé
+
+        let tableauOutilPin = localStorage.getItem("OutilsPin")
+
+        if (tableauOutilPin != null) { // si il y a rien dans le local storage (=null) on ne fait rien
+            tableauOutilPin = JSON.parse(tableauOutilPin) // transformation en objet js
+
+            tableauOutilPin.forEach(element => {
+                if (element == "Estimation de la transpiration") { // si dans le local storge des outil pin il y a estimation de la transpi alors on le remplace par le nouveau nom de l'outil
+                    let indexElement = tableauOutilPin.indexOf(element)
+                    tableauOutilPin[indexElement] = "Hydratation post-séance" // nouveau nom de l'outil
+                    localStorage.setItem("OutilsPin", JSON.stringify(tableauOutilPin))
+                }
+            });
+        }
+
+        localStorage.setItem("VersionLocalStorage", "4.0.1")
+        versionStockee = "4.0.1" // maj de la variable pour enchaine avec les futures if de nouvelle version
+    }
+    
+    // écrire les futures maj dans un if en dessous 
+
+    return
+}
+
+const versionActuelle = "4.0.1"
+let versionStockee = localStorage.getItem("VersionLocalStorage") || "4.0.0"
+
+if (versionStockee != versionActuelle) {
+    majLocalStorage(versionStockee)
+}

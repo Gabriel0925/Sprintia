@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Sprintia - Estimation de la transpiration</title>
+    <title>Sprintia - Hydratation post-séance</title>
     <meta charset="utf-8">
     <meta name="description" content="Sprintia : Des outils gratuits pour analyser et optimiser vos entraînements.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,7 +77,7 @@
     </header>
 
     <div class="conteneur-de-outil">
-        <h1>Estimation de la transpiration</h1>
+        <h1>Hydratation post-séance</h1>
         <div class="conteneur-ensemble">
             <div class="conteneur-champs-outil">
                 
@@ -87,8 +87,8 @@
                 </div>
                     
                 <div class="conteneur-input">
-                    <input type="number" id="duree-entrainement-user" placeholder="Durée de l'entraî. (min)" autocomplete="off">
-                    <div class="label-input" id="label-fc-user">Durée de l'entraî. (min)</div>
+                    <input type="number" id="duree-entrainement-user" placeholder="Durée d'entraî. aujourd'hui (min)" autocomplete="off">
+                    <div class="label-input" id="label-fc-user">Durée d'entraî. aujourd'hui (min)</div>
                 </div>
                 
                 <div class="slider-cont">
@@ -105,7 +105,8 @@
 
             <div class="box-result">
                 <p class="score-imc">Transpiration : <strong>0 mL</strong></p>
-                <p class="score-imc">Qté à boire : <strong>0 mL</strong></p>
+                <p class="score-imc">Réhydratation : <strong>0 mL</strong></p>
+                <p class="score-imc">Hydratation du jour : <strong>0 mL</strong></p>
                 <p class="zone-imc">
                     Veuillez rentrer votre poids, la durée de votre entraînement ainsi que le RPE pour avoir une interprétation.
                 </p>
@@ -122,6 +123,12 @@
                 <li>RPE de 9 à 10 : Effort maximal</li>
             </ul>
         </p>
+
+        <h2>Utilité de l'outil</h2>
+        <p class="text">
+            Cet outil est conçu pour vous donner une idée de la quantité d'eau à boire par jour mais également de vous montrer votre transpiration après votre séance de sport.
+            En revanche, il faut être régulier au cours de la journée, il faut mieux boire par petites gorgées que de grandes quantités d'un coup.
+        </p>
         <h2>Pourquoi boire plus que la transpiration estimée ?</h2>
         <p class="text">
             Le corps ne retient pas 100% de l'eau bue, une partie est évacuée par les reins,... Il est donc conseillé de boire environ 
@@ -131,6 +138,10 @@
         <p class="text">
             Cette estimation permet de vous aider à mieux gérer son hydratation après votre entraînement, afin d'éviter la déshydratation et 
             d'optimiser vos performances.
+        </p>
+        <h2>Petite information</h2>
+        <p class="text">
+            Sprintia enlève 20% de l'estimation de l'hydratation du jour car environ 20 % de cette eau provient de vos repas (fruits, légumes,...).
         </p>
 
     </div>
