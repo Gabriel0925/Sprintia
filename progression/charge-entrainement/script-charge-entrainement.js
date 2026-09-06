@@ -243,3 +243,17 @@ async function displayOnScreen() {
     document.getElementById("charge-28j").innerHTML = parseInt(chargeTotale28j)
 
 };
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const buttonBriefing = document.getElementById("button-SPRINTIA-briefing")
+    if (buttonBriefing) {buttonBriefing.addEventListener("click", () => {windowsBriefing("Analyser ma CE")})}
+
+    displayOnScreen()
+})
+// Pour recharger le graphique si c'est dans le BFCache
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
+        displayOnScreen()
+    }
+})

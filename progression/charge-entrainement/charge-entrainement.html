@@ -4,6 +4,7 @@
     <title>SPRINTIA - Charge d'entraînement</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
 
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" type="image/png" href="../../assets/icons-SPRINTIA/icon-navigateur.png">
@@ -77,8 +78,12 @@
         <div class="toolbar">
             <h1>Charge d'entraînement</h1>
             <div class="container-command">
-                <i class="icon_add" onclick="window.location.href = '../../entrainement/ajouter-entrainement.html'"></i>
-                <i class="icon_info" onclick="window.location.href = 'a-propos.html'"></i>
+                <a href="/entrainement/ajouter-entrainement.html">
+                    <i class="icon_add"></i>
+                </a>
+                <a href="a-propos.html">
+                    <i class="icon_info"></i>
+                </a>
             </div>
         </div>
 
@@ -89,7 +94,7 @@
                 <p class="zone-coach-interpretation" id="reponse-coach-indulgence">
                     Chargement...
                 </p>
-                <button id="button-SPRINTIA-briefing" onclick="windowsBriefing('Analyser ma CE')">Analyser ma CE</button>
+                <button id="button-SPRINTIA-briefing">Analyser ma CE</button>
             </div>
 
         </section>
@@ -156,23 +161,8 @@
     <script src="../../assets/base-js/db-config.js"></script> <!-- Connexion bdd -->
 
     <script src="script-charge-entrainement.js"></script>
-    <!-- On y lance dans le fichier HTML car le fichier progression.html est liés au script de la charge d'entrai. mais il n'a pas les meme composants -->
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            displayOnScreen()
-        })
-
-        // Pour recharger le graphique si c'est dans le BFCache
-        window.addEventListener("pageshow", (event) => {
-            if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
-                displayOnScreen()
-            }
-        })
-    </script>
     <!-- SPRINTIA Briefing -->
     <script src="../../assets/base-js/SPRINTIA-briefing.js"></script>
 
-    
-    
 </body>
 </html>

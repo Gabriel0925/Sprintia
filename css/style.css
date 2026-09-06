@@ -1209,6 +1209,12 @@ section.container-widget-progression {
     gap: var(--SPACE_L);
     margin-top: var(--SPACE_L);
 }
+section.container-widget-progression a {
+    display: block;
+    max-width: 450px;
+    width: 295px;
+    flex-grow: 1;
+}
 section.container-widget-progression section.widget-charge-entrainement {
     background-color: var(--COLOR_BACKGROUND_CARD);
     border-radius: var(--BORDER_BIG);
@@ -1218,9 +1224,6 @@ section.container-widget-progression section.widget-charge-entrainement {
     -moz-user-select: none;
     user-select: none;
 
-    max-width: 450px;
-    width: 295px;
-    flex-grow: 1;
     cursor: pointer;
     overflow: hidden;
 
@@ -2797,6 +2800,11 @@ select#conserver-datas{
     width: 100%; 
     margin: 0px; 
     margin-top: var(--SPACE_S); 
+    max-width: 450px;
+}
+select#type-coureur-user{
+    width: 100%; 
+    margin: 0px; 
     max-width: 450px;
 }
 @media (hover: hover) and (pointer: fine) {

@@ -4,6 +4,7 @@
     <title>SPRINTIA - Paramètres</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
 
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" type="image/png" href="../../assets/icons-SPRINTIA/icon-navigateur.png">
@@ -78,7 +79,7 @@
     </div>
 
     <h2>Type de coureur·euse</h2>
-    <select style="width: 100%; margin: 0px; max-width: 450px;" id="type-coureur-user" onchange="typeRunner(value)" autocomplete="off">
+    <select id="type-coureur-user" autocomplete="off">
         <option value="occasionnel">Occasionnel·le</option>
         <option value="regulier">Régulier·ère</option>
         <option value="confirme">Confirmé·e</option>
@@ -112,23 +113,8 @@
     <!-- Import bibliothèque pour simplifier le code de indexed db -->
     <script src="../../assets/bibliotheques/dexie.js"></script>
     <script src="../../assets/base-js/db-config.js"></script> <!-- Connexion bdd -->
-    <script>
-        function typeRunner(value) {
-            // enregistrement du type de coureur
-            localStorage.setItem("typeCoureur", value)
-            return
-        }
 
-        window.onload = function() {
-            // Affichage du type de coureur enregistré
-            const typeCoureur = localStorage.getItem("typeCoureur")
-            if (typeCoureur) {
-                document.getElementById("type-coureur-user").value = typeCoureur
-            }
-        }
-    </script>
-    
-    
+    <script src="script-parametres.js"></script>
 
 </body>
 </html>

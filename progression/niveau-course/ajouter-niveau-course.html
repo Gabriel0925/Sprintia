@@ -4,6 +4,7 @@
     <title>SPRINTIA - Ajouter un niveau de course</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
 
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" type="image/png" href="../../assets/icons-SPRINTIA/icon-navigateur.png">
@@ -109,7 +110,7 @@
 
     </section>
     <div class="container-center-marge">
-        <button class="size-block" id="button-sauvegarde-niveau" onclick="saveNiveauCourse()">
+        <button class="size-block" id="button-sauvegarde-niveau">
             Sauvegarder
         </button>
     </div>
@@ -123,30 +124,6 @@
     
     <script src="script-niveau-course-analyse.js"></script>
     <script src="script-sauvegarder-niveau.js"></script>
-    
-    <!-- Remplissage du input date a la date now -->
-    <script> 
-        let ChampDate = document.getElementById("date-niveau-course")
-        let DateActuelle = new Date().toISOString() // ça renvoie ça "2026-01-24T13:55:37.171Z"
-        // Enlever la partie qui nous interrese pas
-        DateActuelle = DateActuelle.split("T") // ['2026-01-24', '13:57:55.505Z']
-        DateActuelle = DateActuelle[0] // '2026-01-24'
-
-        ChampDate.max = DateActuelle // bloque la saisi de date dans le futur
-        ChampDate.value = DateActuelle
-
-        // pour détecter si lorsqu'on est dans le formulaire il y a un appuie sur la touche entrée
-        let formKeyEntry = document.querySelector(".form")
-        formKeyEntry.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                saveNiveauCourse() 
-            }
-        })
-
-        window.addEventListener("DOMContentLoaded", editNiveauCourse)
-    </script>
-    
-    
 
 </body>
 </html>

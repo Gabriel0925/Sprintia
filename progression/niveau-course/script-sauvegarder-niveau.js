@@ -142,3 +142,27 @@ async function editNiveauCourse() {
     }
 
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const buttonAddNiveau = document.getElementById("button-sauvegarde-niveau")
+    if (buttonAddNiveau) {buttonAddNiveau.addEventListener("click", saveNiveauCourse)}
+
+    let ChampDate = document.getElementById("date-niveau-course")
+    let DateActuelle = new Date().toISOString() // ça renvoie ça "2026-01-24T13:55:37.171Z"
+    // Enlever la partie qui nous interrese pas
+    DateActuelle = DateActuelle.split("T") // ['2026-01-24', '13:57:55.505Z']
+    DateActuelle = DateActuelle[0] // '2026-01-24'
+
+    ChampDate.max = DateActuelle // bloque la saisi de date dans le futur
+    ChampDate.value = DateActuelle
+
+    // pour détecter si lorsqu'on est dans le formulaire il y a un appuie sur la touche entrée
+    let formKeyEntry = document.querySelector(".form")
+    formKeyEntry.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            saveNiveauCourse() 
+        }
+    })
+
+    editNiveauCourse()
+})

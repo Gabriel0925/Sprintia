@@ -4,6 +4,7 @@
     <title>SPRINTIA - Indulgence de course</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
 
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" type="image/png" href="../../assets/icons-SPRINTIA/icon-navigateur.png">
@@ -77,8 +78,12 @@
         <div class="toolbar">
             <h1>Indulgence de course</h1>
             <div class="container-command">
-                <i class="icon_info" onclick="window.location.href = 'a-propos.html'"></i>
-                <i class="icon_parametres" onclick="window.location.href = 'parametres.html'"></i>
+                <a href="a-propos.html">
+                    <i class="icon_info"></i>
+                </a>
+                <a href="parametres.html">
+                    <i class="icon_parametres"></i>
+                </a>
             </div>
         </div>
 
@@ -89,7 +94,7 @@
                 <p class="zone-coach-interpretation" id="reponse-coach-indulgence">
                     Chargement...
                 </p>
-                <button id="button-SPRINTIA-briefing" onclick="windowsBriefing('Analyser mon indulgence')">Analyser mon indulgence</button>
+                <button id="button-SPRINTIA-briefing">Analyser mon indulgence</button>
             </div>
 
         </section>
@@ -161,26 +166,6 @@
     <script src="../../assets/bibliotheques/dexie.js"></script>
     <script src="../../assets/base-js/db-config.js"></script> <!-- Connexion bdd -->
     <script src="script-outil.js"></script> 
-
-    <!-- Pour le JRM Coach -->
-    <script>
-        async function JRMCoachUser() {
-            // Recup data
-            let HistoriqueDB = await db.entrainement.toArray()
-            let CoachUserDB = await db.JRM_Coach.toArray()
-
-            if (CoachUserDB.length > 0) { // Si il y a des datas on recup le nom et l'avatar et on l'affiche dans le coach JRM
-                let NomCoach = CoachUserDB.map(elementDB => elementDB.nom)
-                let AvatarCoach = CoachUserDB.map(elementDB => elementDB.avatar)
-                
-                document.getElementById("nom-coach").innerHTML =  AvatarCoach + " " + "<strong>" + NomCoach + "</strong>"
-            }
-        }
-
-        window.addEventListener("DOMContentLoaded", () => {
-            JRMCoachUser()
-        })
-    </script>
     <!-- SPRINTIA Briefing -->
     <script src="../../assets/base-js/SPRINTIA-briefing.js"></script>
     

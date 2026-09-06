@@ -260,8 +260,25 @@ async function Initialisation() {
     return
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+async function JRMCoachUser() {
+    // Recup data
+    let HistoriqueDB = await db.entrainement.toArray()
+    let CoachUserDB = await db.JRM_Coach.toArray()
+
+    if (CoachUserDB.length > 0) { // Si il y a des datas on recup le nom et l'avatar et on l'affiche dans le coach JRM
+        let NomCoach = CoachUserDB.map(elementDB => elementDB.nom)
+        let AvatarCoach = CoachUserDB.map(elementDB => elementDB.avatar)
+                
+        document.getElementById("nom-coach").innerHTML =  AvatarCoach + " " + "<strong>" + NomCoach + "</strong>"
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const buttonBriefing = document.getElementById("button-SPRINTIA-briefing")
+    if (buttonBriefing) {buttonBriefing.addEventListener("click", () => {windowsBriefing("Analyser mon indulgence")})}
+
     Initialisation()
+    JRMCoachUser()
 })
 
 // Pour recharger le graphique si c'est dans le BFCache
