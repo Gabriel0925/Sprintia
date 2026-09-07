@@ -830,6 +830,9 @@ section.segmented-button {
     gap: var(--SPACE_XXS);
     transition: transform ease-out var(--TIME_TRANSITION_FAST);
 }
+section.segmented-button#segmented-button-niveau-course {
+    margin-top: var(--SPACE_L);
+}
 section.segmented-button div.segmented-button-button {
     padding: var(--SPACE_S);
     border-radius: var(--BORDER_BIG);
@@ -843,6 +846,14 @@ section.segmented-button div.segmented-button-button {
                 color ease-out var(--TIME_TRANSITION_FAST),
                 font-weight ease-out var(--TIME_TRANSITION),
                 transform ease-out var(--TIME_TRANSITION_FAST);
+}
+section.segmented-button div.segmented-button-button#segmented-button-analyse,
+section.segmented-button div.segmented-button-button#segmented-button-evolution {
+    width: 110px;
+}
+section.segmented-button div.segmented-button-button#segmented-button-allure,
+section.segmented-button div.segmented-button-button#segmented-button-watts {
+    width: 120px;
 }
 @media (hover: hover) and (pointer: fine) {
     section.segmented-button div.segmented-button-button:hover {

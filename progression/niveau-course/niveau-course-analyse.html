@@ -88,8 +88,8 @@
 
     <section class="segmented-button">
 
-        <div class="segmented-button-button actif" id="segmented-button-analyse" style="width: 110px;">Analyse</div>
-        <div class="segmented-button-button" id="segmented-button-evolution" style="width: 110px;"
+        <div class="segmented-button-button actif" id="segmented-button-analyse">Analyse</div>
+        <div class="segmented-button-button" id="segmented-button-evolution"
         onclick="window.location.href = 'niveau-course-evolution.html'">Évolution</div>
 
     </section>
@@ -168,15 +168,15 @@
 
     </section>
   
-    <section class="segmented-button" style="margin-top: var(--SPACE_L);">
+    <section class="segmented-button" id="segmented-button-niveau-course">
 
-        <div class="segmented-button-button actif" id="segmented-button-allure" style="width: 120px;"
+        <div class="segmented-button-button actif" id="segmented-button-allure"
         onclick="
             document.getElementById('segmented-button-watts').classList.remove('actif')
             document.getElementById('segmented-button-allure').classList.add('actif')
             zonesAllure('--')
         ">Allure</div>
-        <div class="segmented-button-button" id="segmented-button-watts" style="width: 120px;"
+        <div class="segmented-button-button" id="segmented-button-watts"
         onclick="
             document.getElementById('segmented-button-watts').classList.add('actif')
             document.getElementById('segmented-button-allure').classList.remove('actif')
