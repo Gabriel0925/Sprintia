@@ -315,3 +315,23 @@ async function init(role) {
 
     return
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const visuelInformation = document.getElementById("aucune-data")
+    if (visuelInformation) {visuelInformation.style.display="none"}
+
+    const buttonPlus = document.getElementById("button_plus")
+    if (buttonPlus) {buttonPlus.addEventListener("click", () => {window.location.href = 'historique-recuperation.html'})}
+
+    const buttonBriefing = document.getElementById("button-SPRINTIA-briefing")
+    if (buttonBriefing){buttonBriefing.addEventListener("click", () => {windowsBriefing('Analyser ma récupération')})}
+
+    init("init")
+})
+// Pour recharger le graphique si c'est dans le BFCache
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
+        init("bfcache")
+    }
+})

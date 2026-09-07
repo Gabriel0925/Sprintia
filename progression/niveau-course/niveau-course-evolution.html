@@ -4,6 +4,7 @@
     <title>SPRINTIA - Niveau de course (Évolution)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
 
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" type="image/png" href="../../assets/icons-SPRINTIA/icon-navigateur.png">
@@ -76,7 +77,9 @@
     <div class="toolbar">
         <h1>Niveau de course</h1>
         <div class="container-command">
-            <i class="icon_add" onclick="window.location.href = 'ajouter-niveau-course.html'"></i>
+            <a href="ajouter-niveau-course.html">
+                <i class="icon_add"></i>
+            </a>
             <a href="a-propos.html">
                 <i class="icon_info"></i>
             </a>
@@ -85,9 +88,8 @@
 
     <section class="segmented-button duree">
 
-        <div class="segmented-button-button" id="segmented-button-analyse" style="width: 110px;"
-        onclick="window.location.href = 'niveau-course-analyse.html'">Analyse</div>
-        <div class="segmented-button-button actif" id="segmented-button-evolution" style="width: 110px;">Évolution</div>
+        <div class="segmented-button-button">Analyse</div>
+        <div class="segmented-button-button actif" id="segmented-button-evolution">Évolution</div>
 
     </section>
     
@@ -147,29 +149,6 @@
     
     <script src="script-niveau-course-analyse.js"></script>
     <script src="script-historique-niveau-course.js"></script>
-    <script>
-        // Pour recharger le graphique si c'est dans le BFCache
-        window.addEventListener("pageshow", (event) => {
-            if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
-                graph()
-            }
-        })
-        window.addEventListener("DOMContentLoaded", async () => {
-
-            // on recup les datas et on les affiche pour la zone pour le dernier niveau de course
-            const lastLevelUser = await lastLevel()
-            const zoneLevelUser = zoneLevel(lastLevelUser)
-
-            // affichage du dernier niveau de course et de la zone
-            document.getElementById("last-level-run").innerHTML = lastLevelUser.toString().replace(".", ",")
-            document.getElementById("zone-last-level-run").innerHTML = zoneLevelUser
-
-            graph()
-            await remplirTableau()
-        })
-    </script>
-    
-    
 
 </body>
 </html>

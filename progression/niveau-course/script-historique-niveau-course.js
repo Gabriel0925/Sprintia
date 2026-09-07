@@ -149,3 +149,25 @@ async function remplirTableau() {
         })
     }
 }
+
+// Pour recharger le graphique si c'est dans le BFCache
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
+        graph()
+    }
+})
+document.addEventListener("DOMContentLoaded", async () => {
+    const segmentedButtonEvolution = document.getElementById("segmented-button-analyse")
+    if (segmentedButtonEvolution) {segmentedButtonEvolution.addEventListener("click", () =>{window.location.href = 'niveau-course-analyse.html'})}
+    
+    // on recup les datas et on les affiche pour la zone pour le dernier niveau de course
+    const lastLevelUser = await lastLevel()
+    const zoneLevelUser = zoneLevel(lastLevelUser)
+
+    // affichage du dernier niveau de course et de la zone
+    document.getElementById("last-level-run").innerHTML = lastLevelUser.toString().replace(".", ",")
+    document.getElementById("zone-last-level-run").innerHTML = zoneLevelUser
+
+    graph()
+    await remplirTableau()
+})

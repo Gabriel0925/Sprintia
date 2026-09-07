@@ -284,3 +284,32 @@ async function displayOnScreen() {
     }
 
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const containerBoxAllure = document.querySelector(".container-box zone-allure")
+    if (containerBoxAllure) {containerBoxAllure.style.display='none'}
+
+    const segmentedButtonPuissance = document.getElementById("segmented-button-watts")
+    if (segmentedButtonPuissance) {
+        segmentedButtonPuissance.addEventListener("click", () =>{
+            document.getElementById('segmented-button-watts').classList.add('actif')
+            document.getElementById('segmented-button-allure').classList.remove('actif')
+            zonesPuissance('--')
+        })
+    }
+        
+    const segmentedButtonAllure = document.getElementById("segmented-button-allure")
+    if (segmentedButtonAllure) {
+        segmentedButtonAllure.addEventListener("click", () =>{
+            document.getElementById('segmented-button-watts').classList.remove('actif')
+            document.getElementById('segmented-button-allure').classList.add('actif')
+            zonesAllure('--')
+        })
+    }
+
+    const segmentedButtonEvolution = document.getElementById("segmented-button-evolution")
+    if (segmentedButtonEvolution) {segmentedButtonEvolution.addEventListener("click", () =>{window.location.href = 'niveau-course-evolution.html'})}
+    
+    verificationURL() // pour lancer le logo dynamique quand le user a enregistré un niveau de course
+    displayOnScreen()
+})

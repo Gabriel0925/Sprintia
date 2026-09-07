@@ -89,8 +89,7 @@
     <section class="segmented-button">
 
         <div class="segmented-button-button actif" id="segmented-button-analyse">Analyse</div>
-        <div class="segmented-button-button" id="segmented-button-evolution"
-        onclick="window.location.href = 'niveau-course-evolution.html'">Évolution</div>
+        <div class="segmented-button-button" id="segmented-button-evolution">Évolution</div>
 
     </section>
     
@@ -170,23 +169,12 @@
   
     <section class="segmented-button" id="segmented-button-niveau-course">
 
-        <div class="segmented-button-button actif" id="segmented-button-allure"
-        onclick="
-            document.getElementById('segmented-button-watts').classList.remove('actif')
-            document.getElementById('segmented-button-allure').classList.add('actif')
-            zonesAllure('--')
-        ">Allure</div>
-        <div class="segmented-button-button" id="segmented-button-watts"
-        onclick="
-            document.getElementById('segmented-button-watts').classList.add('actif')
-            document.getElementById('segmented-button-allure').classList.remove('actif')
-            zonesPuissance('--')
-        "
-        >Puissance</div>
+        <div class="segmented-button-button actif" id="segmented-button-allure">Allure</div>
+        <div class="segmented-button-button" id="segmented-button-watts">Puissance</div>
 
     </section>
 
-    <section class="container-box zone-allure" style="display: none;"><!-- la class zone allure en plus permet juste au JS pour la boucle for de ne pas prendre
+    <section class="container-box zone-allure"><!-- la class zone allure en plus permet juste au JS pour la boucle for de ne pas prendre
                                                     en compte la box pour le dernier niveau de course -->
 
         <div class="small-zone-result color-zone">
@@ -340,15 +328,6 @@
     <script src="../../assets/bibliotheques/dexie.js"></script>
     <script src="../../assets/base-js/db-config.js"></script> <!-- Connexion bdd -->
     <script src="script-niveau-course-analyse.js"></script>
-    <!-- On y lance dans le fichier HTML car le fichier progression.html est liés au script du niveau de course mais il n'a pas les meme composants -->
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            verificationURL() // pour lancer le logo dynamique quand le user a enregistré un niveau de course
-            displayOnScreen()
-        })
-    </script>
-    
-    
 
 </body>
 </html>

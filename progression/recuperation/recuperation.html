@@ -4,6 +4,7 @@
     <title>SPRINTIA - Récupération</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
 
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" type="image/png" href="../../assets/icons-SPRINTIA/icon-navigateur.png">
@@ -77,8 +78,12 @@
         <div class="toolbar">
             <h1>Récupération</h1>
             <div class="container-command">
-                <i class="icon_add" onclick="window.location.href = 'ajouter-recuperation.html'"></i>
-                <i class="icon_info" onclick="window.location.href = 'a-propos.html'"></i>
+                <a href="ajouter-recuperation.html">
+                    <i class="icon_add"></i>
+                </a>
+                <a href="a-propos.html">
+                    <i class="icon_info"></i>
+                </a>
             </div>
         </div>
 
@@ -89,7 +94,7 @@
                 <p class="zone-coach-interpretation" id="reponse-coach">
                     Chargement...
                 </p>
-                <button id="button-SPRINTIA-briefing" onclick="windowsBriefing('Analyser ma récupération')">Analyser ma récupération</button>
+                <button id="button-SPRINTIA-briefing">Analyser ma récupération</button>
             </div>
 
         </section>
@@ -113,7 +118,7 @@
         </div>
 
         <h2>Historique (7J)</h2>    
-        <div class="visuel-information" id="aucune-data" style="display: none;">
+        <div class="visuel-information" id="aucune-data">
             <i class="icon_folder_open"></i>
             <h3>Aucune donnée de récupération (7J)</h3>
             <p>
@@ -137,7 +142,7 @@
             </div>
         </div>
         <div class="container-center-marge">
-            <button id="button_plus" onclick="location.href = 'historique-recuperation.html'">
+            <button id="button_plus">
                 Voir l'historique complet
             </button>
         </div>
@@ -173,17 +178,6 @@
     <script src="../../assets/bibliotheques/dexie.js"></script>
     <script src="../../assets/base-js/db-config.js"></script> <!-- Connexion bdd -->
     <script src="script-recuperation.js"></script>
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            init("init")
-        })
-        // Pour recharger le graphique si c'est dans le BFCache
-        window.addEventListener("pageshow", (event) => {
-            if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
-                init("bfcache")
-            }
-        })
-    </script>
     <!-- SPRINTIA Briefing -->
     <script src="../../assets/base-js/SPRINTIA-briefing.js"></script>
 
