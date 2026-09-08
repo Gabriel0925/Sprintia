@@ -2336,8 +2336,8 @@ div.container-chargement.finish {
 div.container-chargement div.chargement {
     width: 45px;
     height: 45px;
-    border: 5px solid var(--COLOR_BACKGROUND_CARD_ACTIVE);
-    border-top-color: var(--COLOR_ACCENT_TEXT);
+    border: 5px solid rgba(255, 255, 255, 0.35);
+    border-top-color: var(--COLOR_ACCENT);
     border-radius: 50%;
     animation: tourner_en_rond 0.8s infinite;
 }
