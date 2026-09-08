@@ -346,6 +346,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (intensiterModere) {intensiterModere.addEventListener("click", function() {selectItem(this, '.round-input-item.intensity')})}
     let intensiterDifficile = document.getElementById("difficile")
     if (intensiterDifficile) {intensiterDifficile.addEventListener("click", function() {selectItem(this, '.round-input-item.intensity')})}
+
+    let iconRefreshToolbar = document.querySelector(".icon_refresh")
+    if (iconRefreshToolbar) {
+        iconRefreshToolbar.addEventListener("click", () => {
+            if(confirm('En générant un nouvel entraînement, celui-ci ne sera plus accessible. Êtes-vous sûr de vouloir continuer ?')){
+                generationWorkout()
+            }
+        })
+    }
     
     let buttonGeneration = document.getElementById("button-generation-entrainements")
     if (buttonGeneration) {buttonGeneration.addEventListener("click", generationWorkout)}
