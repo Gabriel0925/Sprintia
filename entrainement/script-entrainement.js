@@ -518,16 +518,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const infoRehydratation = document.getElementById("rehydratation")
     if (infoRehydratation) {
-        infoRehydratation.addEventListener("click", (event) => {
-            if (this.textContent == '-- mL') {
+        infoRehydratation.addEventListener("click", function() {
+            if (infoRehydratation.textContent == '-- mL') {
                 alert('Pour obtenir une estimation de réhydratation conseillée veuillez configurer votre profil.')
             }
         })
     }
-    const infoTranspiration = document.getElementById("rehydratation")
+    const infoTranspiration = document.getElementById("transpiration")
     if (infoTranspiration) {
-        infoTranspiration.addEventListener("click", () => {
-            if (this.textContent == '-- mL') {
+        infoTranspiration.addEventListener("click", function() {
+            if (infoTranspiration.textContent == '-- mL') {
                 alert('Pour obtenir une estimation de votre transpiration veuillez configurer votre profil.')
             }
         })
