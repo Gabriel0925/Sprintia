@@ -171,7 +171,7 @@ function stopLogo() {
         // On supprime les deux class qu'on a rajouté pour le remettre totalement à 0
         divLogo.classList.remove("return")
         divLogo.classList.remove("message")
-    }, 200) 
+    }, 400) 
 }
 function logoDynamique(message) {
     clearTimeout(timer1)
