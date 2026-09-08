@@ -147,6 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonAddNiveau = document.getElementById("button-sauvegarde-niveau")
     if (buttonAddNiveau) {buttonAddNiveau.addEventListener("click", saveNiveauCourse)}
 
+    const inputDistanceNiveauCourse = document.getElementById("distance-user")
+    if (inputDistanceNiveauCourse) {inputDistanceNiveauCourse.addEventListener("input", liveResultViaInput)}
+
     let ChampDate = document.getElementById("date-niveau-course")
     let DateActuelle = new Date().toISOString() // ça renvoie ça "2026-01-24T13:55:37.171Z"
     // Enlever la partie qui nous interrese pas
