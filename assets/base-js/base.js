@@ -158,12 +158,20 @@ window.addEventListener("scroll", () => {
 // --- Pour le logo dynamique ---
 let timer1 = 0
 let timer2 = 0
+let timer3 = 0
 function stopLogo() {
     clearTimeout(timer1)
     clearTimeout(timer2)
+    clearTimeout(timer3)
 
     const divLogo = document.querySelector(".logo-dynamique")
     divLogo.classList.add("return")
+
+    timer3 = setTimeout(() => {
+        // On supprime les deux class qu'on a rajouté pour le remettre totalement à 0
+        divLogo.classList.remove("return")
+        divLogo.classList.remove("message")
+    }, 200) 
 }
 function logoDynamique(message) {
     clearTimeout(timer1)
