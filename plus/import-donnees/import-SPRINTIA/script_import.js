@@ -107,5 +107,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (inputFileInvisible) {inputFileInvisible.addEventListener("change", (event) => {uploadFileSPRINTIA(event)})}
     
     const inputFile = document.getElementById("button-import-SPRINTIA")
-    if (inputFile) {inputFile.addEventListener("change", () => {document.getElementById('file-input-json').click()})}
+    if (inputFile) {inputFile.addEventListener("click", () => {document.getElementById('file-input-json').click()})}
 })

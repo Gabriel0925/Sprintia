@@ -200,5 +200,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (inputFileInvisible) {inputFileInvisible.addEventListener("change", (event) => {uploadFileTP(event)})}
     
     const inputFile = document.getElementById("button-import-TP")
-    if (inputFile) {inputFile.addEventListener("change", () => {document.getElementById('file-input-TP').click()})}
+    if (inputFile) {inputFile.addEventListener("click", () => {document.getElementById('file-input-TP').click()})}
 })

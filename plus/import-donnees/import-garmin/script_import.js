@@ -289,5 +289,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (inputFileInvisible) {inputFileInvisible.addEventListener("change", (event) => {uploadFileGarmin(event)})}
     
     const inputFile = document.getElementById("button-import-garmin")
-    if (inputFile) {inputFile.addEventListener("change", () => {document.getElementById('file-input-garmin').click()})}
+    if (inputFile) {inputFile.addEventListener("click", () => {document.getElementById('file-input-garmin').click()})}
 })
