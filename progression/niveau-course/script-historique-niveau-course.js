@@ -79,6 +79,7 @@ async function remplirTableau() {
     if (dataDB.length > 0) {
         document.getElementById("aucune-data").style.display = "none"
     } else {
+        document.getElementById("aucune-data").style.display = "flex"
         tableauHistorique.style.display = 'none'
     }
 
