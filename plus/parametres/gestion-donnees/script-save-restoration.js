@@ -274,8 +274,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonReinitialisationEvent = document.getElementById("reinitialiser-SPRINTIA")
     if (buttonReinitialisationEvent) {buttonReinitialisationEvent.addEventListener("click", suppressionDonnees)}
     
-    const buttonRestaurationEvent = document.getElementById("restoration-button")
+    const buttonRestaurationEvent = document.getElementById("restoration-button") 
     if (buttonRestaurationEvent) {buttonRestaurationEvent.addEventListener("click", () => {document.getElementById('file-input').click()})}
+
+    const inputFileRestoration = document.getElementById("file-input")
+    if (inputFileRestoration) {inputFileRestoration.addEventListener("change", (event) => {restaurationDatas(event)})}
     
     const buttonNettoyageEvent = document.getElementById("button-nettoyer")
     if (buttonNettoyageEvent) {buttonNettoyageEvent.addEventListener("click", () => {nettoyerDatas(Number(document.getElementById('conserver-datas').value))})}
