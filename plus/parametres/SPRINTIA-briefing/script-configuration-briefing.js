@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (buttonReinitialiser) {buttonReinitialiser.addEventListener("click", function() {reinitialiserBriefing(this)})}
 
     const selectNiveauxAnalyse = document.getElementById("niveaux-analyse-user")
-    if (selectNiveauxAnalyse) {selectNiveauxAnalyse.addEventListener("change", () => {localStorage.setItem('niveauAnalyseIA', value)})}
+    if (selectNiveauxAnalyse) {selectNiveauxAnalyse.addEventListener("change", (event) => {localStorage.setItem('niveauAnalyseIA', event.target.value)})}
 
     restaureSettings()
 })
