@@ -890,6 +890,7 @@ div.carousel {
 }
 div.carousel.table {
     display: block;
+    scroll-snap-type: none; /* on le désactive car dans les carrousels des tableaux il n'y a pas de a */
 }
 div.carousel div.carousel-content a {
     display: block;
