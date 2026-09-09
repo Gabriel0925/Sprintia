@@ -233,8 +233,8 @@ async function suppressionDonnees() {
             let nbOperation = 0
             for (const tableElt of db.tables) { // on parcourt chaque table de la bdd
                 const dataTable = await tableElt.toArray()
-                if (dataTable.length < 1) {
-                    nbOperation+=dataTable
+                if (dataTable.length >= 1) {
+                    nbOperation+=1
                 }
             }
 

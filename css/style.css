@@ -811,6 +811,9 @@ div.visuel-information {
 div.visuel-information i{
     font-size: 5rem;
 }
+div.visuel-information h3{
+    text-align: center;
+}
 div.visuel-information p{
     color: var(--COLOR_TEXT_SECONDARY);
     text-align: center;

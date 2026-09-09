@@ -88,7 +88,7 @@ function nameFavoriteIA() {
             document.getElementById("button-open-ia").textContent = "Copier & Ouvrir " + dicoIA[favoriteIA]
 
         }
-        document.getElementById("button-open-ia").onclick = () => openIA(favoriteIA)
+        document.getElementById("button-open-ia").addEventListener("click", () => {openIA(favoriteIA)})
 
         // le bouton dans discuter avec le coach
         let buttonEnDessousTextarea = document.getElementById("button-SPRINTIA-briefing-ask")
