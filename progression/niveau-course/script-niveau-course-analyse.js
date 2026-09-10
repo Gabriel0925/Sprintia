@@ -124,6 +124,8 @@ function conversionAllure(zone){
 }
 
 const containerBaliseTranchePuissance = document.querySelector(".container-box.zone-puissance")
+if (containerBaliseTranchePuissance) {containerBaliseTranchePuissance.style.display="none"}
+
 const baliseTranchePuissance = document.querySelectorAll(".container-box.zone-puissance .small-zone-result-result")
 
 const containerBaliseTrancheAllure = document.querySelector(".container-box.zone-allure")
@@ -131,7 +133,7 @@ const baliseTrancheAllure = document.querySelectorAll(".container-box.zone-allur
 function zonesAllure(vmaEstimee) {
     containerBaliseTranchePuissance.style.display = "none"
     containerBaliseTrancheAllure.style.display = "flex"
-
+ 
     if (vmaEstimee == "--") {
         // renvoie ça si il ya des datas : '16 km/h' si ya pas de datas (et donc que le user n'a pas config son profil) "--"
         vmaEstimee = document.getElementById("vma-estimee").textContent // '16 km/h'
@@ -246,14 +248,17 @@ async function manageAnalyse() {
     const [temps400m, temps800m, temps1km, temps5km, temps10km, 
         tempsSemiMarathon, tempsMarathon] = predicteurCourse(vmaEstimee)
 
-    // calcul et affichage des zones d'allure pour gagner en perf et éviter de refaire une boucle for par la suite
-    zonesAllure(vmaEstimee)
+    // si on est dans la page de niveau de course (et donc pas dans la page de progression) on ajoute les addEvenLister
+    if (window.location.pathname == "/progression/niveau-course/niveau-course-analyse.html") {
+        // calcul et affichage des zones d'allure pour gagner en perf et éviter de refaire une boucle for par la suite
+        zonesAllure(vmaEstimee)
+    }
 
     return [lastLevelUser, zoneLevelUser, distancelastLeverUser, vmaEstimee, vo2maxEstimee, rFTPwEstimee, allureSeuilEstimee, 
         temps400m, temps800m, temps1km, temps5km, temps10km, tempsSemiMarathon, tempsMarathon]
 }
 
-async function displayOnScreen() {
+async function displayOnScreenLevelRun () {
     // recup des datas
     const [lastLevelUser, zoneLevelUser, distancelastLeverUser, vmaEstimee, vo2maxEstimee, rFTPwEstimee, allureSeuilEstimee, 
         temps400m, temps800m, temps1km, temps5km, temps10km, tempsSemiMarathon, tempsMarathon] = await manageAnalyse()
@@ -286,30 +291,33 @@ async function displayOnScreen() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const containerBoxAllure = document.querySelector(".container-box zone-allure")
-    if (containerBoxAllure) {containerBoxAllure.style.display='none'}
+    // si on est dans la page de niveau de course (et donc pas dans la page de progression) on ajoute les addEvenLister
+    if (window.location.pathname == "/progression/niveau-course/niveau-course-analyse.html") {
+        const containerBoxAllure = document.querySelector(".container-box zone-allure")
+        if (containerBoxAllure) {containerBoxAllure.style.display='none'}
 
-    const segmentedButtonPuissance = document.getElementById("segmented-button-watts")
-    if (segmentedButtonPuissance) {
-        segmentedButtonPuissance.addEventListener("click", () =>{
-            document.getElementById('segmented-button-watts').classList.add('actif')
-            document.getElementById('segmented-button-allure').classList.remove('actif')
-            zonesPuissance('--')
-        })
-    }
+        const segmentedButtonPuissance = document.getElementById("segmented-button-watts")
+        if (segmentedButtonPuissance) {
+            segmentedButtonPuissance.addEventListener("click", () =>{
+                document.getElementById('segmented-button-watts').classList.add('actif')
+                document.getElementById('segmented-button-allure').classList.remove('actif')
+                zonesPuissance('--')
+            })
+        }
+            
+        const segmentedButtonAllure = document.getElementById("segmented-button-allure")
+        if (segmentedButtonAllure) {
+            segmentedButtonAllure.addEventListener("click", () =>{
+                document.getElementById('segmented-button-watts').classList.remove('actif')
+                document.getElementById('segmented-button-allure').classList.add('actif')
+                zonesAllure('--')
+            })
+        }
+
+        const segmentedButtonEvolution = document.getElementById("segmented-button-evolution")
+        if (segmentedButtonEvolution) {segmentedButtonEvolution.addEventListener("click", () =>{window.location.href = 'niveau-course-evolution.html'})}
         
-    const segmentedButtonAllure = document.getElementById("segmented-button-allure")
-    if (segmentedButtonAllure) {
-        segmentedButtonAllure.addEventListener("click", () =>{
-            document.getElementById('segmented-button-watts').classList.remove('actif')
-            document.getElementById('segmented-button-allure').classList.add('actif')
-            zonesAllure('--')
-        })
+        verificationURL() // pour lancer le logo dynamique quand le user a enregistré un niveau de course
+        displayOnScreenLevelRun ()
     }
-
-    const segmentedButtonEvolution = document.getElementById("segmented-button-evolution")
-    if (segmentedButtonEvolution) {segmentedButtonEvolution.addEventListener("click", () =>{window.location.href = 'niveau-course-evolution.html'})}
-    
-    verificationURL() // pour lancer le logo dynamique quand le user a enregistré un niveau de course
-    displayOnScreen()
 })

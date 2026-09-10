@@ -216,14 +216,13 @@ async function manageCalcul(graphique) {
 };
 
 
-async function displayOnScreen() {
+async function displayOnScreenCE() {
     // recup de toutes les données
     const [chargeTotale7j, chargeTotale28j, nbEntrainement28j, nombreWeekLissage, cibleUserMin, cibleUserMax, 
         ratioChargeUser, statutUser, analyse, avatarCoach, nameCoach] = await manageCalcul(true); // true pour dire que ça lance la fonction pour le graphique
 
     // affichage du nom et de l'avatar du coach
     document.getElementById("nom-coach").innerHTML = avatarCoach + " " + "<strong>" + nameCoach + "</strong>"
-
 
     if (nbEntrainement28j < 3) {
         // affichage + mise en forme de l'analyse
@@ -246,14 +245,18 @@ async function displayOnScreen() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const buttonBriefing = document.getElementById("button-SPRINTIA-briefing")
-    if (buttonBriefing) {buttonBriefing.addEventListener("click", () => {windowsBriefing("Analyser ma CE")})}
+    // si on est dans la page de charge d'entrainement (et donc pas dans la page de progression) on ajoute les addEvenLister
+    if (window.location.pathname == "/progression/charge-entrainement/charge-entrainement.html") {
+        const buttonBriefing = document.getElementById("button-SPRINTIA-briefing")
+        if (buttonBriefing) {buttonBriefing.addEventListener("click", () => {windowsBriefing("Analyser ma CE")})}
 
-    displayOnScreen()
+        displayOnScreenCE()
+    }
 })
 // Pour recharger le graphique si c'est dans le BFCache
 window.addEventListener("pageshow", (event) => {
-    if (event.persisted) { // Si la page est dans le BFCache alors on relance le graphique
-        displayOnScreen()
+    // si on est dans la page de charge d'entrainement (et donc pas dans la page de progression) on ajoute les addEvenLister
+    if (event.persisted && window.location.pathname == "/progression/charge-entrainement/charge-entrainement.html") { // Si la page est dans le BFCache alors on relance le graphique
+        displayOnScreenCE()
     }
 })

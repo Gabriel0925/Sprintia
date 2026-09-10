@@ -54,6 +54,7 @@ function openIA(favoriteIA) {
         })
 
     } else {
+        console.log("ici")
         alert("Aucun prompt n'a été créé car SPRINTIA n'a pas assez de données pour en générer un !")
         return
     }

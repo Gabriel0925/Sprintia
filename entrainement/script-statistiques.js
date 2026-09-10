@@ -205,5 +205,9 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+    // on cache le message comme quoi il n'y a pas de données
+    const messagePasDatas = document.getElementById("message-not-datas")
+    if (messagePasDatas) {messagePasDatas.style.display="none"}
+
     init(dateMoins7J)
 })

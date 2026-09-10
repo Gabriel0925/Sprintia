@@ -854,6 +854,11 @@ section.segmented-button div.segmented-button-button#segmented-button-analyse,
 section.segmented-button div.segmented-button-button#segmented-button-evolution {
     width: 110px;
 }
+section.segmented-button div.segmented-button-button#sport-course,
+section.segmented-button div.segmented-button-button#sport-velo,
+section.segmented-button div.segmented-button-button#sport-natation {
+    width: 100px;
+}
 section.segmented-button div.segmented-button-button#segmented-button-allure,
 section.segmented-button div.segmented-button-button#segmented-button-watts {
     width: 120px;
